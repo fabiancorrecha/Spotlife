@@ -1,0 +1,5 @@
+NSCameraUsageDescription = "La aplicacion necesita acceso a su microfono para poder capturar imagenes que ud desee publicar";
+NSMicrophoneUsageDescription = "La aplicacion necesita acceso a su microfono para poder grabar videos que ud desee publicar";
+NSPhotoLibraryUsageDescription = "La aplicacion necesita acceso a la galeria de fotos  para poder publicar imagenes y videos que ud desee publicar";
+NSLocationWhenInUseUsageDescription = "La aplicación solicita acceso a la información de ubicación del usuario mientras la aplicación se ejecuta en primer plano para mostrarle contenido generado en base a su uvicacion actual";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Nuestra aplicación necesita acceso a su ubicación para brindarle servicios y notificaciones basados en la ubicación, incluso cuando la aplicación se ejecuta en segundo plano.";
