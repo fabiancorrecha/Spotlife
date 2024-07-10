@@ -75,6 +75,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
         }
         List<CollectionsRecord> miperfilColecionesCollectionsRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -97,7 +98,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                   wrapWithModel(
                     model: _model.navBar2Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar2Widget(
+                    child: const NavBar2Widget(
                       tab: 2,
                     ),
                   ),
@@ -112,7 +113,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                   ),
                   Expanded(
                     child: Stack(
-                      alignment: AlignmentDirectional(0.0, 1.0),
+                      alignment: const AlignmentDirectional(0.0, 1.0),
                       children: [
                         wrapWithModel(
                           model: _model.gridColeccionesModel,
@@ -128,7 +129,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 3,
                     ),
                   ),

@@ -68,9 +68,9 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: StreamBuilder<List<UserPostsRecord>>(
           stream: queryUserPostsRecord(
             queryBuilder: (userPostsRecord) => userPostsRecord
@@ -96,9 +96,10 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
               );
             }
             List<UserPostsRecord> gridViewUserPostsRecordList = snapshot.data!;
+
             return GridView.builder(
               padding: EdgeInsets.zero,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
@@ -127,7 +128,9 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                         ),
                       );
                     }
+
                     final stackUserPostsRecord = snapshot.data!;
+
                     return Stack(
                       children: [
                         if (!gridViewUserPostsRecord.esVideo)
@@ -136,6 +139,7 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                               final listaImagenes = gridViewUserPostsRecord
                                   .postPhotolist
                                   .toList();
+
                               return SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -150,7 +154,7 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                                       height:
                                           MediaQuery.sizeOf(context).height *
                                               0.361,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Visibility(
                                         visible:
                                             !gridViewUserPostsRecord.esVideo,
@@ -200,9 +204,9 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                                                 child:
                                                     FlutterFlowExpandedImageView(
                                                   image: CachedNetworkImage(
-                                                    fadeInDuration: Duration(
+                                                    fadeInDuration: const Duration(
                                                         milliseconds: 500),
-                                                    fadeOutDuration: Duration(
+                                                    fadeOutDuration: const Duration(
                                                         milliseconds: 500),
                                                     imageUrl: listaImagenesItem,
                                                     fit: BoxFit.contain,
@@ -222,9 +226,9 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                                                   BorderRadius.circular(20.0),
                                               child: CachedNetworkImage(
                                                 fadeInDuration:
-                                                    Duration(milliseconds: 500),
+                                                    const Duration(milliseconds: 500),
                                                 fadeOutDuration:
-                                                    Duration(milliseconds: 500),
+                                                    const Duration(milliseconds: 500),
                                                 imageUrl: listaImagenesItem,
                                                 width: double.infinity,
                                                 height: double.infinity,

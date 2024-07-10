@@ -6,8 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'post_grid_mapa_amigos_model.dart';
 export 'post_grid_mapa_amigos_model.dart';
@@ -87,27 +85,29 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
           );
         }
         List<UserPostsRecord> containerUserPostsRecordList = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child:
               // debo agregar el formato videos
               Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Builder(
               builder: (context) {
                 final post = containerUserPostsRecordList
                     .map((e) => e.reference)
                     .toList();
                 if (post.isEmpty) {
-                  return Center(
+                  return const Center(
                     child: ComponenteVacioWidget(),
                   );
                 }
+
                 return GridView.builder(
                   padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
@@ -118,7 +118,7 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                   itemBuilder: (context, postIndex) {
                     final postItem = post[postIndex];
                     return Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: StreamBuilder<UserPostsRecord>(
                         stream: UserPostsRecord.getDocument(postItem),
                         builder: (context, snapshot) {
@@ -137,8 +137,10 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                               ),
                             );
                           }
+
                           final stackUserPostsRecord = snapshot.data!;
-                          return Container(
+
+                          return SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: Stack(
@@ -148,6 +150,7 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                                     final listaImagenes = stackUserPostsRecord
                                         .postPhotolist
                                         .toList();
+
                                     return SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
@@ -164,7 +167,7 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.32,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Visibility(
                                               visible: !stackUserPostsRecord
                                                       .esVideo &&
@@ -208,9 +211,9 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                                                       BorderRadius.circular(
                                                           20.0),
                                                   child: CachedNetworkImage(
-                                                    fadeInDuration: Duration(
+                                                    fadeInDuration: const Duration(
                                                         milliseconds: 500),
-                                                    fadeOutDuration: Duration(
+                                                    fadeOutDuration: const Duration(
                                                         milliseconds: 500),
                                                     imageUrl: listaImagenesItem,
                                                     width: double.infinity,

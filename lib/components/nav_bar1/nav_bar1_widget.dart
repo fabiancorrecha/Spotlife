@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'nav_bar1_model.dart';
 export 'nav_bar1_model.dart';
@@ -52,13 +53,13 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
         color: FlutterFlowTheme.of(context).primaryBackground,
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(48.0, 0.0, 48.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(48.0, 0.0, 48.0, 0.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -72,7 +73,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                     context.pushNamed(
                       'mapaPrincipal',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -82,12 +83,12 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tabActiva != 2)
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 0.0, 0.0),
                         child: Icon(
                           FFIcons.kspotlife,
                           color: FlutterFlowTheme.of(context).icono,
@@ -118,7 +119,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                   context.pushNamed(
                     'Feed',
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),
@@ -146,7 +147,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -160,7 +161,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                     context.pushNamed(
                       'buscarSpots',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -170,12 +171,12 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tabActiva != 4)
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           FFIcons.ksearch,
                           color: FlutterFlowTheme.of(context).icono,
@@ -185,7 +186,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                     if (widget.tabActiva == 4)
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
                         child: Image.asset(
                           'assets/images/search_(2)_2_(1).png',
                           width: 42.0,
@@ -210,7 +211,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                   context.pushNamed(
                     'perfilPropio',
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),
@@ -232,14 +233,14 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                             FlutterFlowTheme.of(context).secondary,
                             FlutterFlowTheme.of(context).customSeleccion
                           ],
-                          stops: [0.0, 0.8, 1.0],
-                          begin: AlignmentDirectional(0.0, -1.0),
-                          end: AlignmentDirectional(0, 1.0),
+                          stops: const [0.0, 0.8, 1.0],
+                          begin: const AlignmentDirectional(0.0, -1.0),
+                          end: const AlignmentDirectional(0, 1.0),
                         ),
                         borderRadius: BorderRadius.circular(40.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(3.0),
+                        padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: 100.0,
                           height: 100.0,
@@ -249,19 +250,18 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                                 FlutterFlowTheme.of(context).primary,
                                 FlutterFlowTheme.of(context).secondary
                               ],
-                              stops: [0.0, 1.0],
-                              begin: AlignmentDirectional(0.0, -1.0),
-                              end: AlignmentDirectional(0, 1.0),
+                              stops: const [0.0, 1.0],
+                              begin: const AlignmentDirectional(0.0, -1.0),
+                              end: const AlignmentDirectional(0, 1.0),
                             ),
                             borderRadius: BorderRadius.circular(100.0),
                           ),
                           child: Visibility(
-                            visible: currentUserPhoto != null &&
-                                currentUserPhoto != '',
+                            visible: currentUserPhoto != '',
                             child: AuthUserStreamWidget(
                               builder: (context) => Container(
                                 clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.network(
@@ -283,11 +283,13 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                         width: 40.0,
                         height: 40.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
-                        child: Image.network(
-                          valueOrDefault<String>(
+                        child: CachedNetworkImage(
+                          fadeInDuration: const Duration(milliseconds: 500),
+                          fadeOutDuration: const Duration(milliseconds: 500),
+                          imageUrl: valueOrDefault<String>(
                             currentUserPhoto,
                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                           ),

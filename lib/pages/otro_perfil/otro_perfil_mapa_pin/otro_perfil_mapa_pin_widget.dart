@@ -59,7 +59,7 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
               wrapWithModel(
                 model: _model.appBar2Model,
                 updateCallback: () => setState(() {}),
-                child: AppBar2Widget(),
+                child: const AppBar2Widget(),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -75,12 +75,12 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
                                     'postUser',
                                     functions.usuariosConcatenados(
                                         (currentUserDocument?.listaSeguidos
-                                                    ?.toList() ??
+                                                    .toList() ??
                                                 [])
                                             .toList(),
                                         currentUserReference,
                                         (currentUserDocument?.listaBloqueados
-                                                    ?.toList() ??
+                                                    .toList() ??
                                                 [])
                                             .toList()))
                                 .orderBy('timePosted', descending: true),
@@ -118,7 +118,7 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
                                 ),
                               ),
                             ),
-                            noItemsFoundIndicatorBuilder: (_) => Center(
+                            noItemsFoundIndicatorBuilder: (_) => const Center(
                               child: ComponenteVacioWidget(),
                             ),
                             itemBuilder: (context, _, listViewIndex) {
@@ -142,7 +142,7 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 0,
                 ),
               ),

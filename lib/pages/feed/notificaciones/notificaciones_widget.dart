@@ -74,6 +74,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
         }
         List<ActividadRecord> notificacionesActividadRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -89,11 +90,11 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 48.0),
                     child: wrapWithModel(
                       model: _model.appBar6Model,
                       updateCallback: () => setState(() {}),
-                      child: AppBar6Widget(),
+                      child: const AppBar6Widget(),
                     ),
                   ),
                   Expanded(
@@ -124,6 +125,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                         .languageCode,
                                               ))
                                           .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -138,7 +140,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                         children: [
                                           if (actividadesHoyIndex == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 32.0, 0.0, 0.0),
                                               child: Row(
@@ -146,7 +148,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -176,7 +178,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -199,7 +201,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                             ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 8.0, 16.0, 8.0),
                                             child: NotificacionPostWidget(
                                               key: Key(
@@ -238,6 +240,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                         .languageCode,
                                               ))
                                           .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -252,7 +255,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                         children: [
                                           if (actividadesAyerIndex == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 32.0, 0.0, 0.0),
                                               child: Row(
@@ -260,7 +263,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -290,7 +293,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -313,7 +316,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                             ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 8.0, 16.0, 8.0),
                                             child: NotificacionPostWidget(
                                               key: Key(
@@ -346,6 +349,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                       .end >=
                                                   e.fechaCreacion!))
                                           .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -361,7 +365,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                         children: [
                                           if (actividadesSemanaIndex == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 32.0, 0.0, 0.0),
                                               child: Row(
@@ -369,7 +373,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -399,7 +403,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -422,7 +426,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                             ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 8.0, 16.0, 8.0),
                                             child: NotificacionPostWidget(
                                               key: Key(
@@ -455,6 +459,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                       .end >=
                                                   e.fechaCreacion!))
                                           .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -469,7 +474,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                         children: [
                                           if (actividadesMesIndex == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 32.0, 0.0, 0.0),
                                               child: Row(
@@ -477,7 +482,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -507,7 +512,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -530,7 +535,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                             ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 8.0, 16.0, 8.0),
                                             child: NotificacionPostWidget(
                                               key: Key(
@@ -547,7 +552,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 32.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -562,6 +567,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                     .start >
                                                 e.fechaCreacion!)
                                             .toList();
+
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -577,7 +583,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                           children: [
                                             if (actividadeAntesDeMesIndex == 0)
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 32.0, 0.0, 0.0),
                                                 child: Row(
@@ -586,7 +592,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   0.0,
@@ -619,7 +625,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -641,7 +647,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                                 ),
                                               ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 8.0, 16.0, 8.0),
                                               child: NotificacionPostWidget(
@@ -674,7 +680,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                     wrapWithModel(
                       model: _model.navBar1Model,
                       updateCallback: () => setState(() {}),
-                      child: NavBar1Widget(
+                      child: const NavBar1Widget(
                         tabActiva: 1,
                       ),
                     ),

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'serialization_util.dart';
 import '../backend.dart';
@@ -12,8 +11,7 @@ import 'package:flutter/material.dart';
 final _handledMessageIds = <String?>{};
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({Key? key, required this.child})
-      : super(key: key);
+  const PushNotificationsHandler({super.key, required this.child});
 
   final Widget child;
 
@@ -105,7 +103,7 @@ class ParameterData {
       );
 
   static Future<ParameterData> Function(Map<String, dynamic>) none() =>
-      (data) async => ParameterData();
+      (data) async => const ParameterData();
 }
 
 final parametersBuilderMap =
@@ -149,7 +147,7 @@ final parametersBuilderMap =
           'index': getParameter<int>(data, 'index'),
         },
       ),
-  'mapa_ir_lugar': (data) async => ParameterData(
+  'mapa_ir_lugar': (data) async => const ParameterData(
         allParams: {},
       ),
   'seguidoresYSeguidos': (data) async => ParameterData(
@@ -277,6 +275,7 @@ final parametersBuilderMap =
           'receiveChat': getParameter<DocumentReference>(data, 'receiveChat'),
         },
       ),
+  'HerramientasPromocion': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

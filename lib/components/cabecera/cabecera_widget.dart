@@ -9,7 +9,7 @@ class CabeceraWidget extends StatefulWidget {
   const CabeceraWidget({
     super.key,
     int? seccion,
-  }) : this.seccion = seccion ?? 0;
+  }) : seccion = seccion ?? 0;
 
   final int seccion;
 
@@ -44,12 +44,12 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +71,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Icon(
                         Icons.arrow_back_rounded,
                         color: FlutterFlowTheme.of(context).icono,
@@ -106,7 +106,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
             desktop: false,
           ))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -115,7 +115,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                     children: [
                       if (widget.seccion == 0)
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -132,7 +132,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                                 context.pushNamed(
                                   'ajustes_Favoritos',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -150,7 +150,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                         ),
                       if (widget.seccion != 0)
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -167,7 +167,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                                 context.pushNamed(
                                   'ajustes_Favoritos',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -189,7 +189,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                     children: [
                       if (widget.seccion != 1)
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 0.0),
                           child: Icon(
                             FFIcons.kpageO,
@@ -199,7 +199,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                         ),
                       if (widget.seccion == 1)
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 0.0),
                           child: Icon(
                             FFIcons.kpageFill,

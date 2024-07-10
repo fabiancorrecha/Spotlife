@@ -48,13 +48,13 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +77,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -109,10 +109,10 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'jakfw2n2' /* Privacidad cuenta */,
@@ -130,17 +130,17 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Stack(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: wrapWithModel(
                                 model: _model.botonQuintoModel1,
                                 updateCallback: () => setState(() {}),
@@ -153,12 +153,12 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(0.83, 0.53),
+                              alignment: const AlignmentDirectional(0.83, 0.53),
                               child: Switch.adaptive(
                                 value: _model.switchValue!,
                                 onChanged: (newValue) async {
                                   setState(
-                                      () => _model.switchValue = newValue!);
+                                      () => _model.switchValue = newValue);
                                 },
                                 activeColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -193,14 +193,14 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                           accion: () async {},
                         ),
                       ),
-                    ].divide(SizedBox(height: 8.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'epc9midk' /* Conexiones */,
@@ -236,7 +236,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                         },
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ],
             ),

@@ -65,7 +65,7 @@ class _IngresoOlvidoContrasenaWidgetState
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.chevron_left,
               color: Colors.white,
               size: 30.0,
@@ -87,9 +87,9 @@ class _IngresoOlvidoContrasenaWidgetState
                       FlutterFlowTheme.of(context).headlineMediumFamily),
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: Form(
           key: _model.formKey,
@@ -101,7 +101,7 @@ class _IngresoOlvidoContrasenaWidgetState
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -110,38 +110,45 @@ class _IngresoOlvidoContrasenaWidgetState
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FlutterFlowIconButton(
-                        borderColor: Color(0x00F4F176),
+                        borderColor: const Color(0x00F4F176),
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: Color(0x00EEEEEE),
+                        fillColor: const Color(0x00EEEEEE),
                         icon: Icon(
                           Icons.help,
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'INGRESO_OLVIDO_CONTRASENA_help_ICN_ON_TA');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() =>
+                              _model.olvidarContrasenaController =
+                                  createPageWalkthrough(context));
+                          _model.olvidarContrasenaController
+                              ?.show(context: context);
                         },
                       ),
                     ],
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 8.0),
                             child: TextFormField(
                               controller: _model.emailTextController,
                               focusNode: _model.textFieldFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.emailTextController',
-                                Duration(milliseconds: 200),
+                                const Duration(milliseconds: 200),
                                 () => setState(() {}),
                               ),
                               autofocus: true,
@@ -162,35 +169,35 @@ class _IngresoOlvidoContrasenaWidgetState
                                                   .bodyMediumFamily),
                                     ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Color(0xFF333333),
+                                fillColor: const Color(0xFF333333),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -219,7 +226,7 @@ class _IngresoOlvidoContrasenaWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -250,8 +257,7 @@ class _IngresoOlvidoContrasenaWidgetState
                     updateCallback: () => setState(() {}),
                     child: Boton1Widget(
                       texto: 'Enviar link',
-                      desabilitado: _model.emailTextController.text == null ||
-                          _model.emailTextController.text == '',
+                      desabilitado: _model.emailTextController.text == '',
                       accion: () async {
                         logFirebaseEvent(
                             'INGRESO_OLVIDO_CONTRASENA_Container_kn6r');
@@ -263,7 +269,7 @@ class _IngresoOlvidoContrasenaWidgetState
                         logFirebaseEvent('boton1_auth');
                         if (_model.emailTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text(
                                 'Email required!',
                               ),
@@ -284,7 +290,7 @@ class _IngresoOlvidoContrasenaWidgetState
                         await showModalBottomSheet(
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
-                          barrierColor: Color(0x00000000),
+                          barrierColor: const Color(0x00000000),
                           enableDrag: false,
                           context: context,
                           builder: (context) {
@@ -296,7 +302,7 @@ class _IngresoOlvidoContrasenaWidgetState
                                     : FocusScope.of(context).unfocus(),
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 82.0,
                                     child: NotificacionBoxWidget(
                                       mensaje:

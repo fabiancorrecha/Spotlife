@@ -51,13 +51,13 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +80,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -132,7 +132,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                   color: FlutterFlowTheme.of(context).secondary,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 1500),
+                              duration: const Duration(milliseconds: 1500),
                               backgroundColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
@@ -140,7 +140,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                           logFirebaseEvent('botonQuinto_copy_to_clipboard');
                           await Clipboard.setData(ClipboardData(
                               text:
-                                  'https://spolifeapp-15z0hb.flutterflow.app?userRef=${currentUserUid}'));
+                                  'https://spolifeapp-15z0hb.flutterflow.app?userRef=$currentUserUid'));
                         },
                       ),
                     ),
@@ -157,7 +157,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                 'INVITAR_AMIGOS_PAGINA_Container_38j5tf3n');
                             logFirebaseEvent('botonQuinto_share');
                             await Share.share(
-                              'https://spolifeapp-15z0hb.flutterflow.app?userRef=${currentUserUid}',
+                              'https://spolifeapp-15z0hb.flutterflow.app?userRef=$currentUserUid',
                               sharePositionOrigin:
                                   getWidgetBoundingBox(context),
                             );
@@ -171,7 +171,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                         FlutterFlowTheme.of(context).secondary,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 1500),
+                                duration: const Duration(milliseconds: 1500),
                                 backgroundColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
@@ -180,7 +180,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ],
             ),

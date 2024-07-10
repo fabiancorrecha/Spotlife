@@ -70,13 +70,13 @@ class _GridPostsFiltradrPorUbicacionWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: StreamBuilder<List<UserPostsRecord>>(
         stream: queryUserPostsRecord(
           queryBuilder: (userPostsRecord) => userPostsRecord
               .where(
                 'placeInfo.city',
-                isEqualTo: widget.post?.placeInfo?.city,
+                isEqualTo: widget.post?.placeInfo.city,
               )
               .orderBy('timePosted', descending: true),
         ),
@@ -96,9 +96,10 @@ class _GridPostsFiltradrPorUbicacionWidgetState
             );
           }
           List<UserPostsRecord> gridViewUserPostsRecordList = snapshot.data!;
+
           return GridView.builder(
             padding: EdgeInsets.zero,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16.0,
               mainAxisSpacing: 16.0,
@@ -127,7 +128,9 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                       ),
                     );
                   }
+
                   final stackUserPostsRecord = snapshot.data!;
+
                   return InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -161,6 +164,7 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                           builder: (context) {
                             final listaImagenes =
                                 stackUserPostsRecord.postPhotolist.toList();
+
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -174,7 +178,7 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                                         0.449,
                                     height: MediaQuery.sizeOf(context).height *
                                         0.32,
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Visibility(
                                       visible: !gridViewUserPostsRecord.esVideo,
                                       child: InkWell(
@@ -201,9 +205,9 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                                               child:
                                                   FlutterFlowExpandedImageView(
                                                 image: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
+                                                  fadeInDuration: const Duration(
                                                       milliseconds: 500),
-                                                  fadeOutDuration: Duration(
+                                                  fadeOutDuration: const Duration(
                                                       milliseconds: 500),
                                                   imageUrl: listaImagenesItem,
                                                   fit: BoxFit.contain,
@@ -223,9 +227,9 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                                                 BorderRadius.circular(20.0),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               imageUrl: listaImagenesItem,
                                               width: double.infinity,
                                               height: double.infinity,

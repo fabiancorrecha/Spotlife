@@ -1,10 +1,8 @@
-import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'intereses_widget.dart' show InteresesWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class InteresesModel extends FlutterFlowModel<InteresesWidget> {

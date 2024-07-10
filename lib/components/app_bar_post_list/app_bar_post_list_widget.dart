@@ -46,13 +46,13 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 100.0,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -70,7 +70,7 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Icon(
                     Icons.arrow_back_rounded,
                     color: FlutterFlowTheme.of(context).icono,
@@ -84,7 +84,7 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
             width: 40.0,
             height: 40.0,
             clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
             child: Image.network(
@@ -93,12 +93,12 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                   child: Icon(
                     FFIcons.kpinLines,
                     color: FlutterFlowTheme.of(context).icono,

@@ -47,14 +47,14 @@ class _ChipGrandeWidgetState extends State<ChipGrandeWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
       child: Container(
         width: 200.0,
         height: 56.0,
         decoration: BoxDecoration(
           color: FFAppState().listaIntereses.contains('${widget.valor}')
-              ? Color(0xB15C52E2)
-              : Color(0xFF333333),
+              ? const Color(0xB15C52E2)
+              : const Color(0xFF333333),
           borderRadius: BorderRadius.circular(1000.0),
         ),
         child: InkWell(
@@ -79,7 +79,7 @@ class _ChipGrandeWidgetState extends State<ChipGrandeWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   widget.valor!,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(

@@ -2,11 +2,7 @@ import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,25 +78,25 @@ class _InicioWidgetState extends State<InicioWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Spacer(),
+              const Spacer(),
               Image.asset(
                 'assets/images/icono_principal.png',
                 width: 176.0,
                 height: 201.0,
                 fit: BoxFit.cover,
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 0.0),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -125,7 +121,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -183,7 +179,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                         child: FlutterFlowLanguageSelector(
                           width: 150.0,
                           height: 40.0,
@@ -192,7 +188,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                           borderColor: Colors.transparent,
                           dropdownIconColor: Colors.white,
                           borderRadius: 8.0,
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.normal,
                             fontSize: 13.0,
@@ -232,7 +228,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -278,7 +274,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

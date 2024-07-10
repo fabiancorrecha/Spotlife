@@ -258,7 +258,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_low', value);
   }
 
-  LatLng? _centro = LatLng(40.4149599, -3.7107405);
+  LatLng? _centro = const LatLng(40.4149599, -3.7107405);
   LatLng? get centro => _centro;
   set centro(LatLng? value) {
     _centro = value;

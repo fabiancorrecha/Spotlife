@@ -5,14 +5,11 @@ import '/components/solicitud_de_permiso_ubicacion/solicitud_de_permiso_ubicacio
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/fecha_de_nacimiento.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +57,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                   : FocusScope.of(context).unfocus(),
               child: Padding(
                 padding: MediaQuery.viewInsetsOf(context),
-                child: SolicitudDePermisoUbicacionWidget(),
+                child: const SolicitudDePermisoUbicacionWidget(),
               ),
             ),
           );
@@ -97,7 +94,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               size: 30.0,
@@ -119,7 +116,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                       FlutterFlowTheme.of(context).displaySmallFamily),
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -133,7 +130,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
             key: _model.formKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -142,25 +139,32 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FlutterFlowIconButton(
-                        borderColor: Color(0x00F4F176),
+                        borderColor: const Color(0x00F4F176),
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: Color(0x00EEEEEE),
+                        fillColor: const Color(0x00EEEEEE),
                         icon: Icon(
                           Icons.help,
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'FECHADE_NACIMIENTO_PAGE_help_ICN_ON_TAP');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() =>
+                              _model.fechaDeNacimientoController =
+                                  createPageWalkthrough(context));
+                          _model.fechaDeNacimientoController
+                              ?.show(context: context);
                         },
                       ),
                     ],
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +182,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                               await showModalBottomSheet<bool>(
                                   context: context,
                                   builder: (context) {
-                                    final _datePickedCupertinoTheme =
+                                    final datePickedCupertinoTheme =
                                         CupertinoTheme.of(context);
                                     return ScrollConfiguration(
                                       behavior: const MaterialScrollBehavior()
@@ -199,9 +203,9 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                         child: CupertinoTheme(
-                                          data: _datePickedCupertinoTheme
+                                          data: datePickedCupertinoTheme
                                               .copyWith(
-                                            textTheme: _datePickedCupertinoTheme
+                                            textTheme: datePickedCupertinoTheme
                                                 .textTheme
                                                 .copyWith(
                                               dateTimePickerTextStyle:
@@ -248,16 +252,16 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                             },
                             child: Container(
                               height: 50.0,
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 minWidth: 250.0,
                                 maxWidth: 300.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Color(0xFF333333),
+                                color: const Color(0xFF333333),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -266,7 +270,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                                   children: [
                                     if (_model.datePicked != null)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -307,7 +311,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                                         Expanded(
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 5.0),
                                             child: Text(
                                               valueOrDefault<String>(
@@ -355,7 +359,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 9.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 9.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -426,7 +430,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                         context.goNamed(
                           'Intereses',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),

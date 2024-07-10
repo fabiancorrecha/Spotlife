@@ -6,8 +6,6 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'post_grid_mapa_global_model.dart';
 export 'post_grid_mapa_global_model.dart';
@@ -39,7 +37,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     super.initState();
     _model = createModel(context, () => PostGridMapaGlobalModel());
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
@@ -108,14 +106,15 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
           );
         }
         List<UserPostsRecord> containerUserPostsRecordList = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child:
               // debo agregar el formato videos
               Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Builder(
               builder: (context) {
                 final listaUserPost = functions
@@ -124,9 +123,10 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                         currentUserLocationValue!,
                         5000.0)
                     .toList();
+
                 return GridView.builder(
                   padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
@@ -137,7 +137,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                   itemBuilder: (context, listaUserPostIndex) {
                     final listaUserPostItem = listaUserPost[listaUserPostIndex];
                     return Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: StreamBuilder<UserPostsRecord>(
                         stream: UserPostsRecord.getDocument(
                             listaUserPostItem.reference),
@@ -157,8 +157,10 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                               ),
                             );
                           }
+
                           final stackUserPostsRecord = snapshot.data!;
-                          return Container(
+
+                          return SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: Stack(
@@ -168,6 +170,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                     final listaImagenes = stackUserPostsRecord
                                         .postPhotolist
                                         .toList();
+
                                     return SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
@@ -184,7 +187,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.323,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Visibility(
                                               visible: !stackUserPostsRecord
                                                       .esVideo &&
@@ -228,9 +231,9 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                                       BorderRadius.circular(
                                                           20.0),
                                                   child: CachedNetworkImage(
-                                                    fadeInDuration: Duration(
+                                                    fadeInDuration: const Duration(
                                                         milliseconds: 500),
-                                                    fadeOutDuration: Duration(
+                                                    fadeOutDuration: const Duration(
                                                         milliseconds: 500),
                                                     imageUrl: listaImagenesItem,
                                                     width: double.infinity,

@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unnecessary_import
-import 'package:page_transition/page_transition.dart';
 import 'buscar_spots_model.dart';
 export 'buscar_spots_model.dart';
 
@@ -41,7 +39,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
     _model = createModel(context, () => BuscarSpotsModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'buscarSpots'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
@@ -104,17 +102,17 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
             children: [
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 32.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 32.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -132,7 +130,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                               shape: BoxShape.circle,
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Icon(
                                 FFIcons.karrowBack,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -144,14 +142,14 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 16.0, 0.0),
                           child: TextFormField(
                             controller: _model.textFieldBuscarTextController,
                             focusNode: _model.textFieldBuscarFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textFieldBuscarTextController',
-                              Duration(milliseconds: 1500),
+                              const Duration(milliseconds: 1500),
                               () async {
                                 logFirebaseEvent(
                                     'BUSCAR_SPOTS_TextFieldBuscar_ON_TEXTFIEL');
@@ -189,28 +187,28 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                                 .bodySmallFamily),
                                   ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -219,7 +217,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                               filled: true,
                               fillColor:
                                   FlutterFlowTheme.of(context).fondoIcono,
-                              suffixIcon: Icon(
+                              suffixIcon: const Icon(
                                 FFIcons.ksearch,
                                 color: Color(0xFF757575),
                                 size: 22.0,
@@ -262,7 +260,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                             children: [
                               if (_model.verLista)
                                 Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Icon(
                                     FFIcons.kgrid,
                                     color: FlutterFlowTheme.of(context).icono,
@@ -271,7 +269,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                 ),
                               if (!_model.verLista)
                                 Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Icon(
                                     FFIcons.kframe169,
                                     color: FlutterFlowTheme.of(context).icono,
@@ -289,7 +287,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
               wrapWithModel(
                 model: _model.menu02Model,
                 updateCallback: () => setState(() {}),
-                child: Menu02Widget(
+                child: const Menu02Widget(
                   seccion: 1,
                 ),
               ),
@@ -298,7 +296,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                   children: [
                     if (_model.verLista)
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Builder(
                           builder: (context) {
@@ -319,14 +317,15 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                             final postResultado =
                                 _model.algoliaSearchResults?.toList() ?? [];
                             if (postResultado.isEmpty) {
-                              return Center(
+                              return const Center(
                                 child: ComponenteVacioWidget(),
                               );
                             }
+
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 16.0,
                                 mainAxisSpacing: 16.0,
@@ -357,7 +356,9 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                         ),
                                       );
                                     }
+
                                     final stackUserPostsRecord = snapshot.data!;
+
                                     return Stack(
                                       children: [
                                         if (stackUserPostsRecord.esVideo)
@@ -379,6 +380,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                                   postResultadoItem
                                                       .postPhotolist
                                                       .toList();
+
                                               return SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
@@ -393,7 +395,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                                             listaImagenesIndex];
                                                     return Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -536,7 +538,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                         ),
                       ),
                     if (!_model.verLista)
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: custom_widgets.MapaPerzonalizado(
@@ -562,7 +564,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 4,
                 ),
               ),

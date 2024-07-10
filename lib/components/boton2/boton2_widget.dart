@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton2_model.dart';
 export 'boton2_model.dart';
 
@@ -49,10 +47,10 @@ class _Boton2WidgetState extends State<Boton2Widget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 24.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 24.0),
           child: FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('BOTON2_COMP_INICIAR_BTN_ON_TAP');
@@ -63,8 +61,8 @@ class _Boton2WidgetState extends State<Boton2Widget> {
             options: FFButtonOptions(
               width: 316.0,
               height: 64.0,
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               color: FlutterFlowTheme.of(context).fondoIcono,
               textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -75,7 +73,7 @@ class _Boton2WidgetState extends State<Boton2Widget> {
                         FlutterFlowTheme.of(context).bodyMediumFamily),
                   ),
               elevation: 2.0,
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.transparent,
                 width: 1.0,
               ),

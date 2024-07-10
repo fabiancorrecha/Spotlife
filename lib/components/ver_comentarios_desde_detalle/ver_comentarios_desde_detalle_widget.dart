@@ -7,8 +7,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -90,13 +88,15 @@ class _VerComentariosDesdeDetalleWidgetState
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(20.0),
@@ -107,18 +107,18 @@ class _VerComentariosDesdeDetalleWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FlutterFlowIconButton(
-                      borderColor: Color(0x000F1316),
+                      borderColor: const Color(0x000F1316),
                       borderRadius: 20.0,
                       borderWidth: 1.0,
                       buttonSize: 40.0,
-                      fillColor: Color(0x005E6367),
-                      icon: Icon(
+                      fillColor: const Color(0x005E6367),
+                      icon: const Icon(
                         Icons.close_rounded,
                         color: Color(0x00925192),
                         size: 24.0,
@@ -129,7 +129,7 @@ class _VerComentariosDesdeDetalleWidgetState
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                       child: Container(
                         width: 52.0,
                         height: 5.0,
@@ -191,19 +191,19 @@ class _VerComentariosDesdeDetalleWidgetState
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Container(
                           height: 220.0,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: FutureBuilder<List<PostCommentRecord>>(
                               future: (_model.firestoreRequestCompleter ??=
@@ -236,9 +236,10 @@ class _VerComentariosDesdeDetalleWidgetState
                                 List<PostCommentRecord>
                                     listViewComentariosPostCommentRecordList =
                                     snapshot.data!;
+
                                 if (listViewComentariosPostCommentRecordList
                                     .isEmpty) {
-                                  return SinComentariosWidget();
+                                  return const SinComentariosWidget();
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
@@ -253,7 +254,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                         listViewComentariosPostCommentRecordList[
                                             listViewComentariosIndex];
                                     return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 24.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -268,7 +269,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
-                                            barrierColor: Color(0x00000000),
+                                            barrierColor: const Color(0x00000000),
                                             enableDrag: false,
                                             context: context,
                                             builder: (context) {
@@ -277,7 +278,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: 151.0,
                                                     child: MenuComentarioWidget(
                                                       comentario:
@@ -295,7 +296,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 4.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -307,7 +308,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                     height: 20.0,
                                                     clipBehavior:
                                                         Clip.antiAlias,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Image.network(
@@ -322,7 +323,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   5.0,
                                                                   0.0,
@@ -504,6 +505,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                             List<ActividadRecord>
                                                                 iconSIActividadRecordList =
                                                                 snapshot.data!;
+
                                                             final iconSIActividadRecord =
                                                                 iconSIActividadRecordList
                                                                         .isNotEmpty
@@ -568,7 +570,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 4.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -672,7 +674,7 @@ class _VerComentariosDesdeDetalleWidgetState
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 31.0),
                         child: Container(
                           width: double.infinity,
@@ -689,7 +691,7 @@ class _VerComentariosDesdeDetalleWidgetState
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 0.0, 0.0),
                                     child: TextFormField(
                                       controller:
@@ -697,7 +699,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                       focusNode: _model.commentFieldFocusNode,
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.commentFieldTextController',
-                                        Duration(milliseconds: 300),
+                                        const Duration(milliseconds: 300),
                                         () => setState(() {}),
                                       ),
                                       autofocus: true,
@@ -724,43 +726,43 @@ class _VerComentariosDesdeDetalleWidgetState
                                                               context)
                                                           .bodyMediumFamily),
                                             ),
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        errorBorder: UnderlineInputBorder(
+                                        errorBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
                                         focusedErrorBorder:
-                                            UnderlineInputBorder(
+                                            const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
@@ -787,9 +789,6 @@ class _VerComentariosDesdeDetalleWidgetState
                                 ),
                                 FFButtonWidget(
                                   onPressed: (_model.commentFieldTextController
-                                                  .text ==
-                                              null ||
-                                          _model.commentFieldTextController
                                                   .text ==
                                               '')
                                       ? null
@@ -868,9 +867,9 @@ class _VerComentariosDesdeDetalleWidgetState
                                   options: FFButtonOptions(
                                     width: 80.0,
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color:
                                         FlutterFlowTheme.of(context).fondoIcono,
@@ -881,9 +880,6 @@ class _VerComentariosDesdeDetalleWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .titleSmallFamily,
                                           color: _model.commentFieldTextController
-                                                          .text ==
-                                                      null ||
-                                                  _model.commentFieldTextController
                                                           .text ==
                                                       ''
                                               ? FlutterFlowTheme.of(context)
@@ -898,7 +894,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                       .titleSmallFamily),
                                         ),
                                     elevation: 0.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),

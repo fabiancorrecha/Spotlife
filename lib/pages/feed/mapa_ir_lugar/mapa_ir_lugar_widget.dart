@@ -8,8 +8,6 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'mapa_ir_lugar_model.dart';
 export 'mapa_ir_lugar_model.dart';
 
@@ -38,7 +36,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapa_ir_lugar'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -87,7 +85,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       height: double.infinity,
                       child: custom_widgets.MapaPerzonalizado(
@@ -106,14 +104,14 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                     children: [
                       Container(
                         height: 100.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 40.0, 0.0, 0.0),
                           child: wrapWithModel(
                             model: _model.buscador01Model,
                             updateCallback: () => setState(() {}),
-                            child: Buscador01Widget(
+                            child: const Buscador01Widget(
                               dosIconos: false,
                             ),
                           ),
@@ -134,7 +132,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                         child: Container(
                           width: double.infinity,
                           height: 100.0,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                         ),
                       ),
                     ],
@@ -149,7 +147,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                 color: FlutterFlowTheme.of(context).fondoIcono,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -184,7 +182,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 4.0, 0.0),
                                 child: Icon(
                                   FFIcons.kpinLines,
@@ -224,9 +222,9 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                         width: 75.0,
                         height: 54.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle: FlutterFlowTheme.of(context)
                             .titleSmall
@@ -241,7 +239,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                                       .titleSmallFamily),
                             ),
                         elevation: 2.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -255,7 +253,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
             wrapWithModel(
               model: _model.navBar1Model,
               updateCallback: () => setState(() {}),
-              child: NavBar1Widget(
+              child: const NavBar1Widget(
                 tabActiva: 2,
               ),
             ),

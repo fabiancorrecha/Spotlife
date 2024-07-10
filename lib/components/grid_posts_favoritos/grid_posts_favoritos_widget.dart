@@ -69,15 +69,17 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Builder(
           builder: (context) {
-            final listadoPost = widget.coleccion?.postuUserList?.toList() ?? [];
+            final listadoPost =
+                widget.coleccion?.postuUserList.toList() ?? [];
+
             return GridView.builder(
               padding: EdgeInsets.zero,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
@@ -104,7 +106,9 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                         ),
                       );
                     }
+
                     final stackUserPostsRecord = snapshot.data!;
+
                     return Stack(
                       children: [
                         if (!stackUserPostsRecord.esVideo)
@@ -112,6 +116,7 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                             builder: (context) {
                               final listaImagenes =
                                   stackUserPostsRecord.postPhotolist.toList();
+
                               return SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -126,7 +131,7 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                                       height:
                                           MediaQuery.sizeOf(context).height *
                                               0.32,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
@@ -172,9 +177,9 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                                               child:
                                                   FlutterFlowExpandedImageView(
                                                 image: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
+                                                  fadeInDuration: const Duration(
                                                       milliseconds: 500),
-                                                  fadeOutDuration: Duration(
+                                                  fadeOutDuration: const Duration(
                                                       milliseconds: 500),
                                                   imageUrl: listaImagenesItem,
                                                   fit: BoxFit.contain,
@@ -194,9 +199,9 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                                                 BorderRadius.circular(20.0),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               imageUrl: listaImagenesItem,
                                               width: double.infinity,
                                               height: double.infinity,

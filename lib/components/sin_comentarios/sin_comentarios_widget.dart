@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'sin_comentarios_model.dart';
 export 'sin_comentarios_model.dart';
 
@@ -45,7 +43,7 @@ class _SinComentariosWidgetState extends State<SinComentariosWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Icon(
+        const Icon(
           Icons.comment_rounded,
           color: Color(0x4195A1AC),
           size: 50.0,
@@ -57,13 +55,13 @@ class _SinComentariosWidgetState extends State<SinComentariosWidget> {
           textAlign: TextAlign.center,
           style: FlutterFlowTheme.of(context).bodySmall.override(
                 fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                color: Color(0x5695A1AC),
+                color: const Color(0x5695A1AC),
                 letterSpacing: 0.0,
                 useGoogleFonts: GoogleFonts.asMap()
                     .containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
               ),
         ),
-      ].divide(SizedBox(height: 8.0)),
+      ].divide(const SizedBox(height: 8.0)),
     );
   }
 }

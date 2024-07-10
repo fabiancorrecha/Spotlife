@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
 import 'buscador_colecciones_model.dart';
 export 'buscador_colecciones_model.dart';
@@ -61,20 +59,20 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
       constraints: BoxConstraints(
         maxWidth: MediaQuery.sizeOf(context).width * 1.0,
       ),
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
               child: TextFormField(
                 controller: _model.textFieldBuscarTextController,
                 focusNode: _model.textFieldBuscarFocusNode,
                 onChanged: (_) => EasyDebounce.debounce(
                   '_model.textFieldBuscarTextController',
-                  Duration(milliseconds: 200),
+                  const Duration(milliseconds: 200),
                   () => setState(() {}),
                 ),
                 onFieldSubmitted: (_) async {
@@ -85,14 +83,13 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
                       widget.coleccionesLista!
                           .map(
                             (record) => TextSearchItem.fromTerms(
-                                record, [record.nombre!]),
+                                record, [record.nombre]),
                           )
                           .toList(),
                     )
                         .search(_model.textFieldBuscarTextController.text)
                         .map((r) => r.object)
                         .toList();
-                    ;
                   });
                 },
                 autofocus: false,
@@ -110,28 +107,28 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
                             FlutterFlowTheme.of(context).bodySmallFamily),
                       ),
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   errorBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   focusedErrorBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1.0,
                     ),
@@ -139,7 +136,7 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
                   ),
                   filled: true,
                   fillColor: FlutterFlowTheme.of(context).fondoIcono,
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     FFIcons.ksearch,
                     color: Color(0xFF757575),
                     size: 22.0,
@@ -158,7 +155,7 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
           ),
           if (widget.puedeCrearColeccion ?? true)
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [

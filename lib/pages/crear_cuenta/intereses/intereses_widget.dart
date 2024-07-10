@@ -55,7 +55,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 9.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 9.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +81,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +89,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'k52awe9z' /* Elige los temas que te interes... */,
@@ -112,25 +112,29 @@ class _InteresesWidgetState extends State<InteresesWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, -0.74),
+              alignment: const AlignmentDirectional(0.0, -0.74),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     FlutterFlowIconButton(
-                      borderColor: Color(0x00F4F176),
+                      borderColor: const Color(0x00F4F176),
                       borderRadius: 20.0,
                       borderWidth: 1.0,
                       buttonSize: 40.0,
-                      fillColor: Color(0x00EEEEEE),
+                      fillColor: const Color(0x00EEEEEE),
                       icon: Icon(
                         Icons.help,
                         color: FlutterFlowTheme.of(context).primary,
                         size: 24.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent('INTERESES_PAGE_help_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_start_walkthrough');
+                        safeSetState(() => _model.interesesController =
+                            createPageWalkthrough(context));
+                        _model.interesesController?.show(context: context);
                       },
                     ),
                   ],
@@ -139,7 +143,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
             ),
             Container(
               width: double.infinity,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: 400.0,
               ),
               decoration: BoxDecoration(
@@ -169,6 +173,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
                         }
                         List<InteresesRecord> wrapInteresesRecordList =
                             snapshot.data!;
+
                         return Wrap(
                           spacing: 12.0,
                           runSpacing: 12.0,
@@ -201,23 +206,23 @@ class _InteresesWidgetState extends State<InteresesWidget> {
                                 }
                               },
                               text: wrapInteresesRecord.interes,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.add,
                                 size: 20.0,
                               ),
                               options: FFButtonOptions(
                                 height: 30.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: valueOrDefault<Color>(
                                   _model.intereses.contains(
                                               wrapInteresesRecord.reference) ==
                                           true
                                       ? FlutterFlowTheme.of(context).secondary
-                                      : Color(0xFF333333),
-                                  Color(0xFF333333),
+                                      : const Color(0xFF333333),
+                                  const Color(0xFF333333),
                                 ),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
@@ -234,7 +239,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
                                                   .titleSmallFamily),
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -254,7 +259,7 @@ class _InteresesWidgetState extends State<InteresesWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: wrapWithModel(
                 model: _model.boton1Model,
                 updateCallback: () => setState(() {}),

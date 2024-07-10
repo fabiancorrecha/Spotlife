@@ -1,9 +1,6 @@
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import 'editar_post_widget.dart' show EditarPostWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
@@ -34,7 +31,7 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
   String? Function(BuildContext, String?)?
       descreipcionPostTextControllerValidator;
   // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
+  FFPlace placePickerValue = const FFPlace();
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController;
   // State field(s) for Switch widget.

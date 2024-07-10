@@ -118,7 +118,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
             ),
           );
         }
+
         final stackUserPostsRecord = snapshot.data!;
+
         return Stack(
           children: [
             Container(
@@ -126,7 +128,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
               height: double.infinity,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(0.0),
                   topLeft: Radius.circular(20.0),
@@ -138,7 +140,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       width: 52.0,
                       height: 5.0,
@@ -152,9 +154,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                     child: Container(
                       width: double.infinity,
                       height: 100.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -201,7 +203,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -256,7 +258,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         FlutterFlowTheme.of(context).fondoIcono,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -288,14 +290,14 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
+                                        barrierColor: const Color(0x00000000),
                                         context: context,
                                         builder: (context) {
                                           return WebViewAware(
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: Container(
+                                              child: const SizedBox(
                                                 height: 82.0,
                                                 child: NotificacionBoxWidget(
                                                   mensaje:
@@ -374,7 +376,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         FlutterFlowTheme.of(context).fondoIcono,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -389,14 +391,14 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
+                                        barrierColor: const Color(0x00000000),
                                         context: context,
                                         builder: (context) {
                                           return WebViewAware(
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: Container(
+                                              child: const SizedBox(
                                                 height: 589.0,
                                                 child: MenuReportarWidget(),
                                               ),
@@ -531,7 +533,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
               animationsMap['containerOnActionTriggerAnimation']!,
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.2),
+              alignment: const AlignmentDirectional(0.0, 0.2),
               child: wrapWithModel(
                 model: _model.notificacioneModel,
                 updateCallback: () => setState(() {}),

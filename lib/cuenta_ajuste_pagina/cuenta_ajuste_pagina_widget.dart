@@ -1,9 +1,12 @@
 import '/components/boton_quinto/boton_quinto_widget.dart';
+import '/components/cambiara_unacuenta_profesional_intro/cambiara_unacuenta_profesional_intro_widget.dart';
+import '/components/configuracion_cuenta/configuracion_cuenta_widget.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'cuenta_ajuste_pagina_model.dart';
 export 'cuenta_ajuste_pagina_model.dart';
 
@@ -49,7 +52,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -57,7 +60,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +83,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -113,10 +116,10 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'xuel7xhu' /* Información usuario */,
@@ -136,7 +139,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -166,14 +169,130 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                             accion: () async {},
                           ),
                         ),
-                      ].divide(SizedBox(height: 8.0)),
+                      ].divide(const SizedBox(height: 8.0)),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'mpvymhzi' /* Herramientas cuenta profesiona... */,
+                        ),
+                        style:
+                            FlutterFlowTheme.of(context).displaySmall.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                    child: wrapWithModel(
+                      model: _model.botonQuintoModel3,
+                      updateCallback: () => setState(() {}),
+                      child: BotonQuintoWidget(
+                        texto: FFLocalizations.of(context).getText(
+                          'j415er89' /* Herramientas promoción */,
+                        ),
+                        accion: () async {
+                          logFirebaseEvent(
+                              'CUENTA_AJUSTE_PAGINA_Container_r2imfndc_');
+                          logFirebaseEvent('botonQuinto_navigate_to');
+
+                          context.pushNamed('HerramientasPromocion');
+                        },
+                      ),
+                    ),
+                  ),
+                  wrapWithModel(
+                    model: _model.botonQuintoModel4,
+                    updateCallback: () => setState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        'djmcpi98' /* Solicitar verificación */,
+                      ),
+                      accion: () async {
+                        logFirebaseEvent(
+                            'CUENTA_AJUSTE_PAGINA_Container_eq4xz41j_');
+                        logFirebaseEvent('botonQuinto_bottom_sheet');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return WebViewAware(
+                              child: GestureDetector(
+                                onTap: () => _model.unfocusNode.canRequestFocus
+                                    ? FocusScope.of(context)
+                                        .requestFocus(_model.unfocusNode)
+                                    : FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: const ConfiguracionCuentaWidget(),
+                                ),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: wrapWithModel(
+                      model: _model.botonQuintoModel5,
+                      updateCallback: () => setState(() {}),
+                      child: BotonQuintoWidget(
+                        texto: FFLocalizations.of(context).getText(
+                          'rha6ba9z' /* Cambiar a cuenta Pro/Empresa */,
+                        ),
+                        accion: () async {
+                          logFirebaseEvent(
+                              'CUENTA_AJUSTE_PAGINA_Container_6ygqvz57_');
+                          logFirebaseEvent('botonQuinto_bottom_sheet');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child:
+                                        const CambiaraUnacuentaProfesionalIntroWidget(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'gp0ejsaa' /* Idioma */,
@@ -193,7 +312,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: FlutterFlowLanguageSelector(
                       width: 319.0,
                       height: 55.0,
@@ -202,7 +321,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       dropdownIconColor: Colors.white,
                       borderRadius: 8.0,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 13.0,

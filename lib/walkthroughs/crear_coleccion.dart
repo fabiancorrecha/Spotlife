@@ -25,7 +25,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Escribe el titulo de tu coleccion',
             ),
           ),
@@ -42,7 +42,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Presiona aquí si deseas cambiar la imagen de portada de tu coleccion',
             ),
@@ -60,7 +60,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Escribe en esta seccion una descripcion para tu coleccion',
             ),
@@ -78,7 +78,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Selecciona la privacidad que deseas darle a tu coleccion entre las diferentes opciones',
             ),
@@ -96,7 +96,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Ahora presione aqui para indicar la ubicacion de tu post',
             ),
           ),
@@ -113,7 +113,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Presiona aqui para crear tu coleccion',
             ),
           ),

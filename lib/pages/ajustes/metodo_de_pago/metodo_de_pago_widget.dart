@@ -49,13 +49,13 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
+                      const EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -110,7 +110,7 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.boton5Model,
                     updateCallback: () => setState(() {}),
@@ -135,7 +135,7 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
                                     : FocusScope.of(context).unfocus(),
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 309.0,
                                     child: AnadirMetodoPagoWidget(),
                                   ),
@@ -148,7 +148,7 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
                     ),
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ),
         ),

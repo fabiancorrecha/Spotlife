@@ -56,7 +56,7 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
             children: [
               Container(
                 height: 100.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: AuthUserStreamWidget(
                   builder: (context) => wrapWithModel(
                     model: _model.appBar4Model,
@@ -77,12 +77,13 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
                           builder: (context) {
                             final bloquados = (currentUserDocument
                                         ?.listaBloqueados
-                                        ?.toList() ??
+                                        .toList() ??
                                     [])
                                 .toList();
                             if (bloquados.isEmpty) {
-                              return ComponenteVacioWidget();
+                              return const ComponenteVacioWidget();
                             }
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -109,7 +110,7 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 3,
                 ),
               ),

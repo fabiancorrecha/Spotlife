@@ -47,14 +47,14 @@ class _ChipPequenoWidgetState extends State<ChipPequenoWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
       child: Container(
         width: 120.0,
         height: 56.0,
         decoration: BoxDecoration(
           color: FFAppState().listaIntereses.contains(widget.valor)
-              ? Color(0xFFF4F176)
-              : Color(0xFF333333),
+              ? const Color(0xFFF4F176)
+              : const Color(0xFF333333),
           borderRadius: BorderRadius.circular(1000.0),
         ),
         child: InkWell(
@@ -79,7 +79,7 @@ class _ChipPequenoWidgetState extends State<ChipPequenoWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   widget.valor!,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(

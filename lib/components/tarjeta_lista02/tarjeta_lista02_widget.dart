@@ -3,12 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'tarjeta_lista02_model.dart';
 export 'tarjeta_lista02_model.dart';
 
@@ -55,7 +51,7 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
     return Visibility(
       visible: widget.isVisible ?? true,
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
         child: StreamBuilder<UsersRecord>(
           stream: UsersRecord.getDocument(widget.usuario!),
           builder: (context, snapshot) {
@@ -73,11 +69,13 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                 ),
               );
             }
+
             final containerUsersRecord = snapshot.data!;
+
             return Container(
               width: double.infinity,
               height: 42.0,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -102,12 +100,12 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: Container(
                         width: 40.0,
                         height: 40.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
@@ -173,14 +171,14 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                       child: AuthUserStreamWidget(
                         builder: (context) => FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
                                 'TARJETA_LISTA02_COMP_SEGUIR_BTN_ON_TAP');
                             if (!(currentUserDocument?.listaSeguidos
-                                        ?.toList() ??
+                                        .toList() ??
                                     [])
                                 .contains(widget.usuario)) {
                               logFirebaseEvent('Button_backend_call');
@@ -188,8 +186,8 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                               await currentUserReference!.update({
                                 ...mapToFirestore(
                                   {
-                                    'listaSeguidos':
-                                        FieldValue.arrayUnion([widget.usuario]),
+                                    'listaSeguidos': FieldValue.arrayUnion(
+                                        [widget.usuario]),
                                   },
                                 ),
                               });
@@ -200,7 +198,7 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                                   .update(createUsersRecordData());
                             }
 
-                            if ((currentUserDocument?.listaSeguidos?.toList() ??
+                            if ((currentUserDocument?.listaSeguidos.toList() ??
                                     [])
                                 .contains(widget.usuario)) {
                               logFirebaseEvent('Button_backend_call');
@@ -240,7 +238,7 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                               }.withoutNulls,
                             );
                           },
-                          text: (currentUserDocument?.listaSeguidos?.toList() ??
+                          text: (currentUserDocument?.listaSeguidos.toList() ??
                                       [])
                                   .contains(widget.usuario)
                               ? 'Siguiendo'
@@ -248,12 +246,12 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                           options: FFButtonOptions(
                             width: 93.0,
                             height: 28.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: valueOrDefault<Color>(
-                              (currentUserDocument?.listaSeguidos?.toList() ??
+                              (currentUserDocument?.listaSeguidos.toList() ??
                                           [])
                                       .contains(widget.usuario)
                                   ? FlutterFlowTheme.of(context).fondoIcono
@@ -271,7 +269,7 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
                                           .bodySmallFamily),
                                 ),
                             elevation: 2.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),

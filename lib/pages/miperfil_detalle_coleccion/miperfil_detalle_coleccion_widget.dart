@@ -51,7 +51,7 @@ class _MiperfilDetalleColeccionWidgetState
       setState(() {});
     });
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -130,7 +130,7 @@ class _MiperfilDetalleColeccionWidgetState
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           height: double.infinity,
                           child: custom_widgets.MapaPerzonalizadoCopy(
@@ -151,7 +151,7 @@ class _MiperfilDetalleColeccionWidgetState
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 3,
                 ),
               ),

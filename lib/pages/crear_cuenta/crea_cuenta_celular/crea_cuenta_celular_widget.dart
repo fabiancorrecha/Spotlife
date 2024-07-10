@@ -3,8 +3,6 @@ import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +84,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
               child: Icon(
                 Icons.settings_outlined,
                 color: FlutterFlowTheme.of(context).primaryBackground,
@@ -103,13 +101,13 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -118,10 +116,10 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 8.0),
                               child: Autocomplete<String>(
-                                initialValue: TextEditingValue(),
+                                initialValue: const TextEditingValue(),
                                 optionsBuilder: (textEditingValue) {
                                   if (textEditingValue.text == '') {
                                     return const Iterable<String>.empty();
@@ -154,7 +152,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily),
                                         ),
-                                    textHighlightStyle: TextStyle(),
+                                    textHighlightStyle: const TextStyle(),
                                     elevation: 4.0,
                                     optionBackgroundColor:
                                         FlutterFlowTheme.of(context)
@@ -187,7 +185,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                     onEditingComplete: onEditingComplete,
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.textController1',
-                                      Duration(milliseconds: 200),
+                                      const Duration(milliseconds: 200),
                                       () => setState(() {}),
                                     ),
                                     autofocus: true,
@@ -210,7 +208,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                                         .bodyMediumFamily),
                                           ),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -218,7 +216,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                             BorderRadius.circular(10.0),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -226,7 +224,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                             BorderRadius.circular(10.0),
                                       ),
                                       errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -234,7 +232,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                             BorderRadius.circular(10.0),
                                       ),
                                       focusedErrorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -242,7 +240,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                             BorderRadius.circular(10.0),
                                       ),
                                       filled: true,
-                                      fillColor: Color(0xFF333333),
+                                      fillColor: const Color(0xFF333333),
                                       suffixIcon: _model
                                               .textController1!.text.isNotEmpty
                                           ? InkWell(
@@ -285,11 +283,11 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Color(0xFF333333),
+                            color: const Color(0xFF333333),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Row(
@@ -297,9 +295,9 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, -0.05),
+                                alignment: const AlignmentDirectional(0.0, -0.05),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       8.0, 15.0, 0.0, 0.0),
                                   child: Text(
                                     valueOrDefault<String>(
@@ -347,35 +345,35 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                                       .bodyMediumFamily),
                                         ),
                                     enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     filled: true,
-                                    fillColor: Color(0xFF333333),
+                                    fillColor: const Color(0xFF333333),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -421,10 +419,8 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                   updateCallback: () => setState(() {}),
                   child: Boton1Widget(
                     texto: 'Siguiente',
-                    desabilitado: (_model.textController1.text == null ||
-                            _model.textController1.text == '') &&
-                        (_model.textController2.text == null ||
-                            _model.textController2.text == ''),
+                    desabilitado: (_model.textController1.text == '') &&
+                        (_model.textController2.text == ''),
                     accion: () async {
                       logFirebaseEvent(
                           'CREA_CUENTA_CELULAR_Container_ebigzsnb_C');
@@ -436,11 +432,10 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                       FFAppState().update(() {});
                       logFirebaseEvent('boton1_auth');
                       final phoneNumberVal = FFAppState().phoneNumber;
-                      if (phoneNumberVal == null ||
-                          phoneNumberVal.isEmpty ||
+                      if (phoneNumberVal.isEmpty ||
                           !phoneNumberVal.startsWith('+')) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text(
                                 'Phone Number is required and has to start with +.'),
                           ),

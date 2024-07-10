@@ -47,7 +47,7 @@ class _SelectorMotivoWidgetState extends State<SelectorMotivoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,13 +65,13 @@ class _SelectorMotivoWidgetState extends State<SelectorMotivoWidget> {
                 await showModalBottomSheet(
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
-                  barrierColor: Color(0x00000000),
+                  barrierColor: const Color(0x00000000),
                   context: context,
                   builder: (context) {
                     return WebViewAware(
                       child: Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: Container(
+                        child: const SizedBox(
                           height: 560.0,
                           child: MenuReportar2Widget(),
                         ),
@@ -84,8 +84,8 @@ class _SelectorMotivoWidgetState extends State<SelectorMotivoWidget> {
               options: FFButtonOptions(
                 width: 130.0,
                 height: 50.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).fondoIcono,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
@@ -96,7 +96,7 @@ class _SelectorMotivoWidgetState extends State<SelectorMotivoWidget> {
                           FlutterFlowTheme.of(context).titleSmallFamily),
                     ),
                 elevation: 2.0,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),

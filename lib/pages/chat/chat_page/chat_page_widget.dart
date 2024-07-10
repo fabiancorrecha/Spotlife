@@ -6,14 +6,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'chat_page_model.dart';
 export 'chat_page_model.dart';
 
@@ -85,7 +81,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
             ),
           );
         }
+
         final chatPageChatsRecord = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -97,7 +95,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 30.0, 8.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 30.0, 8.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +143,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 0.0, 0.0),
                                 child: StreamBuilder<UsersRecord>(
                                   stream: UsersRecord.getDocument(
@@ -169,7 +167,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                         ),
                                       );
                                     }
+
                                     final rowUsersRecord = snapshot.data!;
+
                                     return Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -198,15 +198,18 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                             width: 40.0,
                                             height: 40.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
-                                              imageUrl: rowUsersRecord.photoUrl,
+                                                  const Duration(milliseconds: 500),
+                                              imageUrl: valueOrDefault<String>(
+                                                rowUsersRecord.photoUrl,
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                              ),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -215,7 +218,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 0.0, 0.0),
                                               child: Text(
@@ -345,6 +348,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                       }
                       List<ChatMessagessRecord>
                           listViewChatMessagessRecordList = snapshot.data!;
+
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         reverse: true,
@@ -357,10 +361,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                             children: [
                               if ((listViewChatMessagessRecord.uidOfSender !=
                                       currentUserReference) &&
-                                  (chatPageChatsRecord.lastMessage != null &&
-                                      chatPageChatsRecord.lastMessage != ''))
+                                  (chatPageChatsRecord.lastMessage != ''))
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 10.0, 10.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -391,35 +394,39 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                               ),
                                             );
                                           }
+
                                           final circleImageUsersRecord =
                                               snapshot.data!;
+
                                           return Container(
                                             width: 40.0,
                                             height: 40.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
-                                              imageUrl: circleImageUsersRecord
-                                                  .photoUrl,
+                                                  const Duration(milliseconds: 500),
+                                              imageUrl: valueOrDefault<String>(
+                                                circleImageUsersRecord.photoUrl,
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                              ),
                                               fit: BoxFit.cover,
                                             ),
                                           );
                                         },
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Container(
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             maxWidth: 280.0,
                                           ),
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color(0xFF11221B),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(0.0),
@@ -430,7 +437,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                             ),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -457,7 +464,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                       ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 8.0, 0.0, 0.0),
                                                   child: Text(
@@ -499,10 +506,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                 ),
                               if ((listViewChatMessagessRecord.uidOfSender ==
                                       currentUserReference) &&
-                                  (chatPageChatsRecord.lastMessage != null &&
-                                      chatPageChatsRecord.lastMessage != ''))
+                                  (chatPageChatsRecord.lastMessage != ''))
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 10.0, 10.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -510,13 +516,13 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 12.0, 0.0),
                                         child: Container(
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             maxWidth: 280.0,
                                           ),
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color(0xFF316550),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(12.0),
@@ -526,7 +532,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                             ),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -553,7 +559,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                       ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 8.0, 0.0, 0.0),
                                                   child: Text(
@@ -618,21 +624,27 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                 ),
                                               );
                                             }
+
                                             final circleImageUsersRecord =
                                                 snapshot.data!;
+
                                             return Container(
                                               width: 40.0,
                                               height: 40.0,
                                               clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                               ),
                                               child: CachedNetworkImage(
                                                 fadeInDuration:
-                                                    Duration(milliseconds: 500),
+                                                    const Duration(milliseconds: 500),
                                                 fadeOutDuration:
-                                                    Duration(milliseconds: 500),
-                                                imageUrl: currentUserPhoto,
+                                                    const Duration(milliseconds: 500),
+                                                imageUrl:
+                                                    valueOrDefault<String>(
+                                                  currentUserPhoto,
+                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                                ),
                                                 fit: BoxFit.cover,
                                               ),
                                             );
@@ -651,7 +663,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 30.0),
+                      const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 30.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -659,7 +671,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Color(0xFF333333),
+                            color: const Color(0xFF333333),
                             borderRadius: BorderRadius.circular(28.0),
                           ),
                           child: Row(
@@ -671,7 +683,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                   focusNode: _model.textFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.textController',
-                                    Duration(milliseconds: 0),
+                                    const Duration(milliseconds: 0),
                                     () => setState(() {}),
                                   ),
                                   autofocus: true,
@@ -710,14 +722,14 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                       .labelMediumFamily),
                                         ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0xFF333333),
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(28.0),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 2.0,
                                       ),
@@ -740,7 +752,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                       borderRadius: BorderRadius.circular(28.0),
                                     ),
                                     filled: true,
-                                    fillColor: Color(0xFF333333),
+                                    fillColor: const Color(0xFF333333),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -760,12 +772,10 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
-                                  onPressed: (_model.textController.text ==
-                                              null ||
-                                          _model.textController.text == '')
+                                  onPressed: (_model.textController.text == '')
                                       ? null
                                       : () async {
                                           logFirebaseEvent(
@@ -822,18 +832,18 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                   ),
                                   options: FFButtonOptions(
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFF333333),
+                                    color: const Color(0xFF333333),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmallFamily,
-                                          color: Color(0xFFBBAACC),
+                                          color: const Color(0xFFBBAACC),
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
@@ -842,7 +852,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                       .titleSmallFamily),
                                         ),
                                     elevation: 0.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),

@@ -7,12 +7,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'otro_perfil_mapa_model.dart';
 export 'otro_perfil_mapa_model.dart';
 
@@ -41,7 +37,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'otroPerfilMapa'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -104,6 +100,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
         }
         List<UserPostsRecord> otroPerfilMapaUserPostsRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -125,7 +122,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -133,7 +130,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                           child: Stack(
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 4.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () {
@@ -145,9 +142,9 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 35.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -163,7 +160,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                                       .bodyMediumFamily),
                                         ),
                                     elevation: 2.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -172,7 +169,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 4.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () {
@@ -184,9 +181,9 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 35.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color:
                                         FlutterFlowTheme.of(context).fondoIcono,
@@ -205,7 +202,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                                       .bodyMediumFamily),
                                         ),
                                     elevation: 2.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -217,7 +214,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               4.0, 0.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () {
@@ -229,9 +226,9 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                             options: FFButtonOptions(
                               width: 150.0,
                               height: 35.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).fondoIcono,
                               textStyle: FlutterFlowTheme.of(context)
@@ -246,7 +243,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                                 .bodyMediumFamily),
                                   ),
                               elevation: 2.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -269,7 +266,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: custom_widgets.MapaPerzonalizado(
@@ -289,7 +286,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 0,
                     ),
                   ),

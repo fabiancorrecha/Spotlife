@@ -3,8 +3,6 @@ import '/components/boton1/boton1_widget.dart';
 import '/components/mas_opciones/mas_opciones_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,7 +75,7 @@ class _IngresaTelefonoValidacionWidgetState
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -88,13 +86,13 @@ class _IngresaTelefonoValidacionWidgetState
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -142,7 +140,7 @@ class _IngresaTelefonoValidacionWidgetState
                     fieldHeight: 50.0,
                     fieldWidth: 40.0,
                     borderWidth: 2.0,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(12.0),
                       bottomRight: Radius.circular(12.0),
                       topLeft: Radius.circular(12.0),
@@ -150,10 +148,10 @@ class _IngresaTelefonoValidacionWidgetState
                     ),
                     shape: PinCodeFieldShape.box,
                     activeColor: FlutterFlowTheme.of(context).primary,
-                    inactiveColor: Color(0xFF333333),
+                    inactiveColor: const Color(0xFF333333),
                     selectedColor: FlutterFlowTheme.of(context).secondaryText,
                     activeFillColor: FlutterFlowTheme.of(context).primary,
-                    inactiveFillColor: Color(0xFF333333),
+                    inactiveFillColor: const Color(0xFF333333),
                     selectedFillColor:
                         FlutterFlowTheme.of(context).secondaryText,
                   ),
@@ -164,14 +162,14 @@ class _IngresaTelefonoValidacionWidgetState
                       _model.pinCodeControllerValidator.asValidator(context),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'p57n7wgb' /* ¿No recibiste un SMS? */,
@@ -200,11 +198,10 @@ class _IngresaTelefonoValidacionWidgetState
                               'INGRESA_TELEFONO_VALIDACION_Text_l8a0a12');
                           logFirebaseEvent('Text_auth');
                           final phoneNumberVal = FFAppState().phoneNumber;
-                          if (phoneNumberVal == null ||
-                              phoneNumberVal.isEmpty ||
+                          if (phoneNumberVal.isEmpty ||
                               !phoneNumberVal.startsWith('+')) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                     'Phone Number is required and has to start with +.'),
                               ),
@@ -246,7 +243,7 @@ class _IngresaTelefonoValidacionWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -262,7 +259,7 @@ class _IngresaTelefonoValidacionWidgetState
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
-                            barrierColor: Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             context: context,
                             builder: (context) {
                               return WebViewAware(
@@ -274,7 +271,7 @@ class _IngresaTelefonoValidacionWidgetState
                                           : FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: Container(
+                                    child: const SizedBox(
                                       height: 420.0,
                                       child: MasOpcionesWidget(),
                                     ),
@@ -313,17 +310,16 @@ class _IngresaTelefonoValidacionWidgetState
                     texto: FFLocalizations.of(context).getText(
                       '1v15ehuq' /* Continuar */,
                     ),
-                    desabilitado: _model.pinCodeController!.text == null ||
-                        _model.pinCodeController!.text == '',
+                    desabilitado: _model.pinCodeController!.text == '',
                     accion: () async {
                       logFirebaseEvent(
                           'INGRESA_TELEFONO_VALIDACION_Container_xm');
                       logFirebaseEvent('boton1_auth');
                       GoRouter.of(context).prepareAuthEvent();
                       final smsCodeVal = _model.pinCodeController!.text;
-                      if (smsCodeVal == null || smsCodeVal.isEmpty) {
+                      if (smsCodeVal.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Enter SMS verification code.'),
                           ),
                         );
