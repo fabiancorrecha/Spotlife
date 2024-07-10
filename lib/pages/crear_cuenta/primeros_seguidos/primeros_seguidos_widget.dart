@@ -56,18 +56,18 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Container(
                         width: 118.0,
                         height: 42.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Image.asset(
                           'assets/images/Spotlife_logo_white.png',
                           width: 100.0,
@@ -85,12 +85,12 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                       ),
                       wrapWithModel(
                         model: _model.usuariosRecomendadosModel,
                         updateCallback: () => setState(() {}),
-                        child: UsuariosRecomendadosWidget(),
+                        child: const UsuariosRecomendadosWidget(),
                       ),
                       if (FFAppState().indexTabFollow == '0')
                         AuthUserStreamWidget(
@@ -98,13 +98,14 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
                             builder: (context) {
                               final usuariosSegudos = (currentUserDocument
                                           ?.listaSeguidos
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .map((e) => e)
                                   .toList();
                               if (usuariosSegudos.isEmpty) {
-                                return ComponenteVacioWidget();
+                                return const ComponenteVacioWidget();
                               }
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,

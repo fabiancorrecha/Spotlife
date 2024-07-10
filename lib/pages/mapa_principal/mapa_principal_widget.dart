@@ -7,8 +7,6 @@ import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/mapa_principal.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -42,7 +40,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapaPrincipal'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
@@ -103,6 +101,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
           );
         }
         List<UserPostsRecord> mapaPrincipalUserPostsRecordList = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -116,23 +115,23 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: Stack(
                           children: [
                             if (FFAppState().PostAmigo == true)
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 100.0, 0.0, 0.0),
                                 child: wrapWithModel(
                                   model: _model.postGridAmigosModel,
                                   updateCallback: () => setState(() {}),
-                                  child: PostGridMapaAmigosWidget(),
+                                  child: const PostGridMapaAmigosWidget(),
                                 ),
                               ),
                             if (FFAppState().MapaAmigo == true)
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
                                 child: custom_widgets.MapaPerzonalizado(
@@ -153,7 +152,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                 ),
                               ),
                             if (FFAppState().MapaGlobal == true)
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
                                 child: custom_widgets.MapaPerzonalizado(
@@ -174,12 +173,12 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                               ),
                             if (FFAppState().PostGlobal == true)
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 100.0, 0.0, 0.0),
                                 child: wrapWithModel(
                                   model: _model.postGridGlobalModel,
                                   updateCallback: () => setState(() {}),
-                                  child: PostGridMapaGlobalWidget(),
+                                  child: const PostGridMapaGlobalWidget(),
                                 ),
                               ),
                           ],
@@ -189,11 +188,11 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                   ],
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   child: wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 2,
                     ),
                   ),
@@ -203,10 +202,10 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     (FFAppState().PostGlobal == false) &&
                     (FFAppState().PostAmigo == false))
                   Align(
-                    alignment: AlignmentDirectional(-0.04, 0.75),
+                    alignment: const AlignmentDirectional(-0.04, 0.75),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -231,7 +230,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                           : FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: Container(
+                                    child: const SizedBox(
                                       height: 225.0,
                                       child: TipoDePostWidget(),
                                     ),
@@ -248,7 +247,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                             borderRadius: BorderRadius.circular(100.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Icon(
                               FFIcons.kadd,
                               color: FlutterFlowTheme.of(context).icono,
@@ -263,13 +262,13 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     ),
                   ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
+                  alignment: const AlignmentDirectional(0.0, -1.0),
                   child: Container(
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -277,12 +276,12 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 0.0, 0.0),
                               child: Stack(
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: TextFormField(
                                       controller:
                                           _model.textFieldBuscarTextController,
@@ -314,7 +313,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                                               .bodySmallFamily),
                                             ),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -322,7 +321,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -330,7 +329,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -339,7 +338,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                         ),
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -348,7 +347,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                         ),
                                         filled: true,
                                         fillColor: Colors.black,
-                                        suffixIcon: Icon(
+                                        suffixIcon: const Icon(
                                           Icons.search_rounded,
                                           color: Color(0xFF757575),
                                           size: 22.0,
@@ -389,7 +388,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                       child: Container(
                                         width: 300.0,
                                         height: 50.0,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                     ),
                                   ).addWalkthrough(
@@ -401,7 +400,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -415,7 +414,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
-                                  barrierColor: Color(0x00000000),
+                                  barrierColor: const Color(0x00000000),
                                   enableDrag: false,
                                   context: context,
                                   builder: (context) {
@@ -430,7 +429,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 480.0,
                                             child: FiltrarSpotsWidget(),
                                           ),
@@ -447,13 +446,13 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       4.0, 8.0, 4.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: FaIcon(
                                           FontAwesomeIcons.chevronDown,
                                           color: FlutterFlowTheme.of(context)
@@ -462,7 +461,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Icon(
                                           FFIcons.kframe169,
                                           color: FlutterFlowTheme.of(context)
@@ -471,7 +470,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Icon(
                                           FFIcons.kusers,
                                           color: FlutterFlowTheme.of(context)
@@ -494,26 +493,32 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, -0.77),
+                  alignment: const AlignmentDirectional(0.0, -0.77),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         FlutterFlowIconButton(
-                          borderColor: Color(0x00F4F176),
+                          borderColor: const Color(0x00F4F176),
                           borderRadius: 20.0,
                           borderWidth: 1.0,
                           buttonSize: 40.0,
-                          fillColor: Color(0x00EEEEEE),
+                          fillColor: const Color(0x00EEEEEE),
                           icon: Icon(
                             Icons.help,
                             color: FlutterFlowTheme.of(context).primary,
                             size: 24.0,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'MAPA_PRINCIPAL_PAGE_help_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_start_walkthrough');
+                            safeSetState(() => _model.mapaPrincipalController =
+                                createPageWalkthrough(context));
+                            _model.mapaPrincipalController
+                                ?.show(context: context);
                           },
                         ),
                       ],

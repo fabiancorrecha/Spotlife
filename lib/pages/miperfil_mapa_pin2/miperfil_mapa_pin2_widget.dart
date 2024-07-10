@@ -35,7 +35,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilMapaPin2'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -93,6 +93,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
         }
         List<UserPostsRecord> miperfilMapaPin2UserPostsRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -118,7 +119,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: custom_widgets.MapaPerzonalizado(
@@ -142,7 +143,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 1,
                     ),
                   ),

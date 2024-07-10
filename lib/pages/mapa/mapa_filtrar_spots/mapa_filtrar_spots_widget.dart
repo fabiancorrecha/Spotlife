@@ -51,11 +51,11 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
                 child: wrapWithModel(
                   model: _model.buscador01Model,
                   updateCallback: () => setState(() {}),
-                  child: Buscador01Widget(
+                  child: const Buscador01Widget(
                     dosIconos: false,
                   ),
                 ),
@@ -69,7 +69,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
                     wrapWithModel(
                       model: _model.contentList02Model,
                       updateCallback: () => setState(() {}),
-                      child: ContentList02Widget(),
+                      child: const ContentList02Widget(),
                     ),
                   ],
                 ),
@@ -77,7 +77,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 0,
                 ),
               ),

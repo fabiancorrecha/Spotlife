@@ -8,7 +8,7 @@ class Menu02Widget extends StatefulWidget {
   const Menu02Widget({
     super.key,
     int? seccion,
-  }) : this.seccion = seccion ?? 0;
+  }) : seccion = seccion ?? 0;
 
   final int seccion;
 
@@ -43,9 +43,9 @@ class _Menu02WidgetState extends State<Menu02Widget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 32.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 32.0),
       child: Container(
-        decoration: BoxDecoration(),
+        decoration: const BoxDecoration(),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -69,7 +69,7 @@ class _Menu02WidgetState extends State<Menu02Widget> {
                         context.pushNamed(
                           'buscarSpots',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -104,7 +104,7 @@ class _Menu02WidgetState extends State<Menu02Widget> {
                         context.pushNamed(
                           'buscarPerfil',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),

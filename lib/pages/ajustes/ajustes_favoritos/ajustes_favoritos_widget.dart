@@ -91,6 +91,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                 }
                 List<CollectionsRecord> containerCollectionsRecordList =
                     snapshot.data!;
+
                 return Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -103,7 +104,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                           wrapWithModel(
                             model: _model.cabeceraModel,
                             updateCallback: () => setState(() {}),
-                            child: CabeceraWidget(
+                            child: const CabeceraWidget(
                               seccion: 0,
                             ),
                           ),
@@ -111,7 +112,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                             child: Column(
                               children: [
                                 Align(
-                                  alignment: Alignment(0.0, 0),
+                                  alignment: const Alignment(0.0, 0),
                                   child: TabBar(
                                     labelColor: FlutterFlowTheme.of(context)
                                         .primaryText,
@@ -131,12 +132,12 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .titleMediumFamily),
                                         ),
-                                    unselectedLabelStyle: TextStyle(),
+                                    unselectedLabelStyle: const TextStyle(),
                                     indicatorColor:
                                         FlutterFlowTheme.of(context).primary,
-                                    padding: EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(4.0),
                                     tabs: [
-                                      Tab(
+                                      const Tab(
                                         icon: Icon(
                                           FFIcons.kcollection,
                                           size: 32.0,
@@ -145,7 +146,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                         tabY38cfb8b,
                                         _model.misFavoritosController,
                                       ),
-                                      Tab(
+                                      const Tab(
                                         icon: Icon(
                                           FFIcons.kpageFill,
                                           size: 32.0,
@@ -177,16 +178,17 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                                       final listadoPostFavoritos =
                                                           (currentUserDocument
                                                                       ?.listaPostFavoritos
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .toList();
                                                       if (listadoPostFavoritos
                                                           .isEmpty) {
-                                                        return Center(
+                                                        return const Center(
                                                           child:
                                                               ComponenteVacioWidget(),
                                                         );
                                                       }
+
                                                       return ListView.builder(
                                                         padding:
                                                             EdgeInsets.zero,
@@ -230,12 +232,14 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                                                   ),
                                                                 );
                                                               }
+
                                                               final containerUserPostsRecord =
                                                                   snapshot
                                                                       .data!;
+
                                                               return Container(
                                                                 decoration:
-                                                                    BoxDecoration(),
+                                                                    const BoxDecoration(),
                                                                 child:
                                                                     wrapWithModel(
                                                                   model: _model
@@ -313,11 +317,11 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                                 ))
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
+                                                        const AlignmentDirectional(
                                                             0.0, 1.0),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -336,7 +340,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   10.0),
                                                           child: Icon(
                                                             FFIcons.kadd,
@@ -368,20 +372,24 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
               },
             ),
             Align(
-              alignment: AlignmentDirectional(0.87, -0.92),
+              alignment: const AlignmentDirectional(0.87, -0.92),
               child: FlutterFlowIconButton(
-                borderColor: Color(0x00F4F176),
+                borderColor: const Color(0x00F4F176),
                 borderRadius: 20.0,
                 borderWidth: 1.0,
                 buttonSize: 40.0,
-                fillColor: Color(0x00EEEEEE),
+                fillColor: const Color(0x00EEEEEE),
                 icon: Icon(
                   Icons.help,
                   color: FlutterFlowTheme.of(context).primary,
                   size: 24.0,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
+                onPressed: () async {
+                  logFirebaseEvent('AJUSTES_FAVORITOS_PAGE_help_ICN_ON_TAP');
+                  logFirebaseEvent('IconButton_start_walkthrough');
+                  safeSetState(() => _model.misFavoritosController =
+                      createPageWalkthrough(context));
+                  _model.misFavoritosController?.show(context: context);
                 },
               ),
             ),

@@ -52,7 +52,7 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.chevron_left,
               color: Colors.white,
               size: 30.0,
@@ -76,7 +76,7 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
                       FlutterFlowTheme.of(context).headlineMediumFamily),
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -90,7 +90,7 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,

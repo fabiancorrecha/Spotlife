@@ -47,7 +47,7 @@ class _DatosWidgetState extends State<DatosWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -55,13 +55,13 @@ class _DatosWidgetState extends State<DatosWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +83,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -133,7 +133,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: PoliticasDePrivacidadWidget(),
+                              child: const PoliticasDePrivacidadWidget(),
                             ),
                           );
                         },
@@ -159,7 +159,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: CondicionesDeUsoWidget(),
+                              child: const CondicionesDeUsoWidget(),
                             ),
                           );
                         },
@@ -181,7 +181,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                     },
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

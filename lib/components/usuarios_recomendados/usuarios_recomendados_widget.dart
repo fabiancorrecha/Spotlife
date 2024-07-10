@@ -7,12 +7,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'usuarios_recomendados_model.dart';
 export 'usuarios_recomendados_model.dart';
 
@@ -73,13 +70,14 @@ class _UsuariosRecomendadosWidgetState
         }
         List<UsersRecord> containerUsersRecordList =
             snapshot.data!.where((u) => u.uid != currentUserUid).toList();
+
         return Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 26.0, 16.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 26.0, 16.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -106,15 +104,16 @@ class _UsuariosRecomendadosWidgetState
                             containerUsersRecordList
                                 .map((e) => e.reference)
                                 .toList(),
-                            (currentUserDocument?.listaBloqueados?.toList() ??
+                            (currentUserDocument?.listaBloqueados.toList() ??
                                     [])
                                 .toList(),
-                            (currentUserDocument?.listaSeguidos?.toList() ?? [])
+                            (currentUserDocument?.listaSeguidos.toList() ?? [])
                                 .toList())
                         .toList();
                     if (usuarios.isEmpty) {
-                      return ComponenteVacioWidget();
+                      return const ComponenteVacioWidget();
                     }
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -127,22 +126,24 @@ class _UsuariosRecomendadosWidgetState
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
-                              return Center(
-                                child: Container(
+                              return const Center(
+                                child: SizedBox(
                                   width: 1.0,
                                   height: 1.0,
                                   child: EmptyComponentWidget(),
                                 ),
                               );
                             }
+
                             final containerUsersRecord = snapshot.data!;
+
                             return Container(
                               width: double.infinity,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Visibility(
                                 visible: containerUsersRecord != null,
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -169,17 +170,21 @@ class _UsuariosRecomendadosWidgetState
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Container(
                                             width: 40.0,
                                             height: 40.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
-                                            child: Image.network(
-                                              valueOrDefault<String>(
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  const Duration(milliseconds: 500),
+                                              fadeOutDuration:
+                                                  const Duration(milliseconds: 500),
+                                              imageUrl: valueOrDefault<String>(
                                                 containerUsersRecord.photoUrl,
                                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                                               ),
@@ -255,7 +260,7 @@ class _UsuariosRecomendadosWidgetState
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 16.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -263,7 +268,7 @@ class _UsuariosRecomendadosWidgetState
                                                   'USUARIOS_RECOMENDADOS_SEGUIR_BTN_ON_TAP');
                                               if (!(currentUserDocument
                                                           ?.listaSeguidos
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [])
                                                   .contains(containerUsersRecord
                                                       .reference)) {
@@ -388,7 +393,7 @@ class _UsuariosRecomendadosWidgetState
                                             },
                                             text: (currentUserDocument
                                                             ?.listaSeguidos
-                                                            ?.toList() ??
+                                                            .toList() ??
                                                         [])
                                                     .contains(
                                                         containerUsersRecord
@@ -398,14 +403,14 @@ class _UsuariosRecomendadosWidgetState
                                             options: FFButtonOptions(
                                               width: 93.0,
                                               height: 28.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: valueOrDefault<Color>(
                                                 (currentUserDocument
                                                                 ?.listaSeguidos
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         .contains(
                                                             containerUsersRecord
@@ -431,7 +436,7 @@ class _UsuariosRecomendadosWidgetState
                                                         valueOrDefault<Color>(
                                                       (currentUserDocument
                                                                       ?.listaSeguidos
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .contains(
                                                                   containerUsersRecord
@@ -455,7 +460,7 @@ class _UsuariosRecomendadosWidgetState
                                                                 .bodySmallFamily),
                                                   ),
                                               elevation: 2.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),

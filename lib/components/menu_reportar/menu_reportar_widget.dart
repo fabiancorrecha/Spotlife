@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'menu_reportar_model.dart';
 export 'menu_reportar_model.dart';
 
@@ -49,7 +47,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -57,7 +55,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -65,7 +63,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                   child: Container(
                     width: 52.0,
                     height: 5.0,
@@ -76,7 +74,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'g5zguejb' /* Reportar */,
@@ -93,7 +91,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -120,7 +118,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'o4l1ocvk' /* Tu reporte será anónimo, excep... */,
@@ -130,7 +128,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
                                     .bodyMediumFamily,
-                                color: Color(0xFF737373),
+                                color: const Color(0xFF737373),
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
@@ -191,7 +189,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                     ),
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

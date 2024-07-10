@@ -68,7 +68,9 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
             ),
           );
         }
+
         final usuariosMeGustaUserPostsRecord = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -84,16 +86,16 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                 children: [
                   Container(
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Stack(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -122,9 +124,9 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -144,7 +146,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(5.0),
+                                  padding: const EdgeInsets.all(5.0),
                                   child: Icon(
                                     Icons.arrow_back_rounded,
                                     color: FlutterFlowTheme.of(context).icono,
@@ -168,8 +170,9 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                               final listaUsuarios =
                                   usuariosMeGustaUserPostsRecord.likes.toList();
                               if (listaUsuarios.isEmpty) {
-                                return ComponenteVacioWidget();
+                                return const ComponenteVacioWidget();
                               }
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -191,7 +194,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                           ),
                         if (FFAppState().indexTabFollow == '0')
                           Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                           ),
                       ],
                     ),
@@ -199,7 +202,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 3,
                     ),
                   ),

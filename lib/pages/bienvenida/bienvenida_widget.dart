@@ -7,6 +7,7 @@ import '/walkthroughs/bienvenida.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'bienvenida_model.dart';
 export 'bienvenida_model.dart';
@@ -29,6 +30,15 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
     _model = createModel(context, () => BienvenidaModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Bienvenida'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('BIENVENIDA_PAGE_Bienvenida_ON_INIT_STATE');
+      logFirebaseEvent('Bienvenida_start_walkthrough');
+      safeSetState(
+          () => _model.bienvenidaController = createPageWalkthrough(context));
+      _model.bienvenidaController?.show(context: context);
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -84,17 +94,17 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color(0x001A1A1A),
+                    const Color(0x001A1A1A),
                     FlutterFlowTheme.of(context).primaryBackground
                   ],
-                  stops: [0.0, 1.0],
-                  begin: AlignmentDirectional(0.0, -1.0),
-                  end: AlignmentDirectional(0, 1.0),
+                  stops: const [0.0, 1.0],
+                  begin: const AlignmentDirectional(0.0, -1.0),
+                  end: const AlignmentDirectional(0, 1.0),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,12 +113,12 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                     child: Container(
                       width: 100.0,
                       height: 100.0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.transparent,
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
                         child: Image.asset(
                           'assets/images/Cartas_(1).png',
                           width: 100.0,
@@ -122,7 +132,7 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +140,7 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                             Expanded(
                               child: AuthUserStreamWidget(
                                 builder: (context) => Text(
-                                  '¡Bienvenido a SpotLife,  ${currentUserDisplayName}!',
+                                  '¡Bienvenido a SpotLife,  $currentUserDisplayName!',
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
                                   style: FlutterFlowTheme.of(context)
@@ -152,7 +162,7 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -203,25 +213,29 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, -0.88),
+              alignment: const AlignmentDirectional(0.0, -0.88),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     FlutterFlowIconButton(
-                      borderColor: Color(0x00F4F176),
+                      borderColor: const Color(0x00F4F176),
                       borderRadius: 20.0,
                       borderWidth: 1.0,
                       buttonSize: 40.0,
-                      fillColor: Color(0x00EEEEEE),
+                      fillColor: const Color(0x00EEEEEE),
                       icon: Icon(
                         Icons.help,
                         color: FlutterFlowTheme.of(context).primary,
                         size: 24.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent('BIENVENIDA_PAGE_help_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_start_walkthrough');
+                        safeSetState(() => _model.bienvenidaController =
+                            createPageWalkthrough(context));
+                        _model.bienvenidaController?.show(context: context);
                       },
                     ),
                   ],

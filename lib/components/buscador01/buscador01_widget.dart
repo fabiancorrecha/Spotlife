@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'buscador01_model.dart';
 export 'buscador01_model.dart';
 
@@ -50,15 +48,15 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -75,7 +73,7 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
                     shape: BoxShape.circle,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Icon(
                       FFIcons.karrowBack,
                       color: FlutterFlowTheme.of(context).icono,
@@ -87,7 +85,7 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.textFieldBuscarTextController,
                   focusNode: _model.textFieldBuscarFocusNode,
@@ -106,28 +104,28 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
                               FlutterFlowTheme.of(context).bodySmallFamily),
                         ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
@@ -135,7 +133,7 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).fondoIcono,
-                    suffixIcon: Icon(
+                    suffixIcon: const Icon(
                       FFIcons.ksearch,
                       color: Color(0xFF757575),
                       size: 22.0,
@@ -170,7 +168,7 @@ class _Buscador01WidgetState extends State<Buscador01Widget> {
                     shape: BoxShape.circle,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Icon(
                       FFIcons.kframe169,
                       color: FlutterFlowTheme.of(context).icono,

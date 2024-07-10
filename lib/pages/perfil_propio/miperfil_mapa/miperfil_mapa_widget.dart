@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'miperfil_mapa_model.dart';
@@ -32,7 +33,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilMapa'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -89,6 +90,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
           );
         }
         List<UserPostsRecord> miperfilMapaUserPostsRecordList = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -104,13 +106,13 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                   Container(
                     width: double.infinity,
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -130,7 +132,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(5.0),
+                                padding: const EdgeInsets.all(5.0),
                                 child: Icon(
                                   Icons.arrow_back_rounded,
                                   color: FlutterFlowTheme.of(context).icono,
@@ -145,17 +147,22 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                             width: 40.0,
                             height: 40.0,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: Image.network(
-                              currentUserPhoto,
+                            child: CachedNetworkImage(
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeOutDuration: const Duration(milliseconds: 500),
+                              imageUrl: valueOrDefault<String>(
+                                currentUserPhoto,
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => Text(
@@ -182,7 +189,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                   wrapWithModel(
                     model: _model.navBar2Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar2Widget(
+                    child: const NavBar2Widget(
                       tab: 1,
                     ),
                   ),
@@ -194,7 +201,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: custom_widgets.MapaPerzonalizado(
@@ -217,9 +224,9 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                           tabletLandscape: false,
                         ))
                           Align(
-                            alignment: AlignmentDirectional(0.0, 1.0),
+                            alignment: const AlignmentDirectional(0.0, 1.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 8.0),
                               child: wrapWithModel(
                                 model: _model.botonAddModel,
@@ -236,7 +243,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 3,
                     ),
                   ),

@@ -67,13 +67,15 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
             ),
           );
         }
+
         final containerUserPostsRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(20.0),
@@ -84,7 +86,7 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Container(
                   width: 52.0,
                   height: 5.0,
@@ -98,10 +100,10 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,14 +229,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
                                       return WebViewAware(
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 82.0,
                                             child: NotificacionBoxWidget(
                                               mensaje: '¡Link de post copiado!',
@@ -321,14 +323,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
                                       return WebViewAware(
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 589.0,
                                             child: MenuReportarWidget(),
                                           ),
@@ -460,8 +462,8 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                         builder: (alertDialogContext) {
                                           return WebViewAware(
                                             child: AlertDialog(
-                                              title: Text('Eliminar Spot'),
-                                              content: Text(
+                                              title: const Text('Eliminar Spot'),
+                                              content: const Text(
                                                   'Confirma que quieres eliminar este post'),
                                               actions: [
                                                 TextButton(
@@ -469,14 +471,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: Text('Cancelar'),
+                                                  child: const Text('Cancelar'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: Text('Confirmar'),
+                                                  child: const Text('Confirmar'),
                                                 ),
                                               ],
                                             ),

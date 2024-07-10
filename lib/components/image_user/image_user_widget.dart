@@ -53,7 +53,7 @@ class _ImageUserWidgetState extends State<ImageUserWidget> {
           width: widget.radioImagen?.toDouble(),
           height: widget.radioImagen?.toDouble(),
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
           child: Image.network(

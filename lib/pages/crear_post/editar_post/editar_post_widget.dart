@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -116,13 +116,13 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                 Container(
                   width: double.infinity,
                   height: 60.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Stack(
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               '7finh1y2' /* Editar post */,
@@ -142,7 +142,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 8.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -167,7 +167,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     borderRadius: BorderRadius.circular(80.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.arrow_back_rounded,
                                       color: FlutterFlowTheme.of(context).icono,
@@ -194,7 +194,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       },
                                     ),
                                   });
-                                  if (widget.post?.placeInfo?.name !=
+                                  if (widget.post?.placeInfo.name !=
                                       _model.placePickerValue.name) {
                                     logFirebaseEvent('Button_backend_call');
 
@@ -224,9 +224,9 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                 options: FFButtonOptions(
                                   width: 100.0,
                                   height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
@@ -244,7 +244,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                     .bodyMediumFamily),
                                       ),
                                   elevation: 0.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -264,10 +264,10 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 26.0, 0.0, 0.0),
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Wrap(
                               spacing: 0.0,
                               runSpacing: 0.0,
@@ -279,7 +279,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                               clipBehavior: Clip.none,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 16.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -289,11 +289,18 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                           width: 40.0,
                                           height: 40.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
-                                          child: Image.network(
-                                            currentUserPhoto,
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 500),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 500),
+                                            imageUrl: valueOrDefault<String>(
+                                              currentUserPhoto,
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                            ),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -301,7 +308,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 0.0, 8.0, 0.0),
                                           child: TextFormField(
                                             controller: _model
@@ -337,51 +344,51 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                                     .bodyMediumFamily),
                                                       ),
                                               enabledBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
                                               focusedBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
-                                              errorBorder: UnderlineInputBorder(
+                                              errorBorder: const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
                                               focusedErrorBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
@@ -411,7 +418,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       ),
                                       Stack(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         children: [
                                           Container(
                                             width: 65.0,
@@ -437,7 +444,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                           Container(
                                             width: 143.0,
                                             height: 100.0,
-                                            constraints: BoxConstraints(
+                                            constraints: const BoxConstraints(
                                               maxHeight: 76.0,
                                             ),
                                             decoration: BoxDecoration(
@@ -457,8 +464,9 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                               builder: (context) {
                                                 final imagenes = widget
                                                         .post?.postPhotolist
-                                                        ?.toList() ??
+                                                        .toList() ??
                                                     [];
+
                                                 return SingleChildScrollView(
                                                   scrollDirection:
                                                       Axis.horizontal,
@@ -473,7 +481,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                               imagenesIndex];
                                                       return Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -523,7 +531,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                   width: 2.0,
                                                 ),
                                               ),
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: FaIcon(
                                                 FontAwesomeIcons.circleNotch,
@@ -544,7 +552,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -552,11 +560,11 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                               Expanded(
                                 child: FlutterFlowPlacePicker(
                                   iOSGoogleMapsApiKey:
-                                      'AIzaSyBPFPY-wOg7x310w7aVGhp1gpRpo_9TVz4',
+                                      'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
                                   androidGoogleMapsApiKey:
-                                      'AIzaSyBXd-oSPKfc85tvGTa9nvkmw7yurBxR5og',
+                                      'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
                                   webGoogleMapsApiKey:
-                                      'AIzaSyAHskm2jbC5FxoT9DoOhIcq2xKwl2zEYNQ',
+                                      'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                                   onSelect: (place) async {
                                     setState(
                                         () => _model.placePickerValue = place);
@@ -565,7 +573,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       FFLocalizations.of(context).getText(
                                     '10adk4m0' /* Etiqueta la ubicación */,
                                   ),
-                                  icon: Icon(
+                                  icon: const Icon(
                                     FFIcons.kpinFilled,
                                     color: Colors.white,
                                     size: 16.0,
@@ -587,7 +595,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily),
                                         ),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -605,7 +613,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           tabletLandscape: false,
                           desktop: false,
                         ))
-                          Divider(
+                          const Divider(
                             height: 32.0,
                             thickness: 1.0,
                             indent: 16.0,
@@ -620,13 +628,13 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           desktop: false,
                         ))
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -658,7 +666,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
+                                  alignment: const AlignmentDirectional(-1.0, 0.0),
                                   child: FlutterFlowRadioButton(
                                     options: [
                                       FFLocalizations.of(context).getText(
@@ -697,7 +705,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     direction: Axis.vertical,
                                     radioButtonColor:
                                         FlutterFlowTheme.of(context).primary,
-                                    inactiveRadioButtonColor: Color(0xFF5C52E2),
+                                    inactiveRadioButtonColor: const Color(0xFF5C52E2),
                                     toggleable: false,
                                     horizontalAlignment: WrapAlignment.start,
                                     verticalAlignment: WrapCrossAlignment.start,
@@ -706,7 +714,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                               ],
                             ),
                           ),
-                        Divider(
+                        const Divider(
                           height: 32.0,
                           thickness: 1.0,
                           indent: 16.0,
@@ -714,13 +722,13 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           color: Color(0x27FAF7FA),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 8.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -754,7 +762,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
 
                               // Enviaremos un valor de 0 para una colección propia
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -846,6 +854,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                   List<CollectionsRecord>
                                       listViewCollectionsRecordList =
                                       snapshot.data!;
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -864,9 +873,10 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         onTap: () async {
                                           logFirebaseEvent(
                                               'EDITAR_POST_PAGE_Row_2ffqn6ab_ON_TAP');
-                                          if (widget.post!.collections.contains(
-                                              listViewCollectionsRecord
-                                                  .reference)) {
+                                          if (widget.post!.collections
+                                              .contains(
+                                                  listViewCollectionsRecord
+                                                      .reference)) {
                                             logFirebaseEvent(
                                                 'Row_backend_call');
 
@@ -904,7 +914,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.all(4.0),
+                                              padding: const EdgeInsets.all(4.0),
                                               child: Stack(
                                                 children: [
                                                   if (!widget.post!.collections
@@ -921,7 +931,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                       size: 24.0,
                                                     ),
                                                   if (widget.post?.collections
-                                                          ?.contains(
+                                                          .contains(
                                                               listViewCollectionsRecord
                                                                   .reference) ??
                                                       true)
@@ -958,7 +968,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                             ),
                                             if (listViewCollectionsRecord
                                                 .coleccionPublica)
-                                              Padding(
+                                              const Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         4.0, 0.0, 0.0, 0.0),
@@ -970,7 +980,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                               ),
                                             if (listViewCollectionsRecord
                                                 .coleccionAmigos)
-                                              Padding(
+                                              const Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         4.0, 0.0, 0.0, 0.0),
@@ -982,7 +992,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                               ),
                                             if (listViewCollectionsRecord
                                                 .coleccionPrivada)
-                                              Padding(
+                                              const Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         4.0, 0.0, 0.0, 0.0),
@@ -1002,7 +1012,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                             ],
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           height: 32.0,
                           thickness: 1.0,
                           indent: 16.0,
@@ -1017,13 +1027,13 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                           desktop: false,
                         ))
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 32.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1055,7 +1065,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         value: _model.switchValue1!,
                                         onChanged: (newValue) async {
                                           setState(() =>
-                                              _model.switchValue1 = newValue!);
+                                              _model.switchValue1 = newValue);
                                         },
                                         activeColor:
                                             FlutterFlowTheme.of(context)
@@ -1069,13 +1079,13 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     ],
                                   ),
                                 ),
-                                Divider(
+                                const Divider(
                                   height: 32.0,
                                   thickness: 1.0,
                                   color: Color(0x27FAF7FA),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1107,7 +1117,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         value: _model.switchValue2!,
                                         onChanged: (newValue) async {
                                           setState(() =>
-                                              _model.switchValue2 = newValue!);
+                                              _model.switchValue2 = newValue);
                                         },
                                         activeColor:
                                             FlutterFlowTheme.of(context)
@@ -1121,16 +1131,16 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     ],
                                   ),
                                 ),
-                                Divider(
+                                const Divider(
                                   height: 32.0,
                                   thickness: 1.0,
                                   color: Color(0x27FAF7FA),
                                 ),
                                 Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1162,7 +1172,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         value: _model.switchValue3!,
                                         onChanged: (newValue) async {
                                           setState(() =>
-                                              _model.switchValue3 = newValue!);
+                                              _model.switchValue3 = newValue);
                                         },
                                         activeColor:
                                             FlutterFlowTheme.of(context)
@@ -1176,7 +1186,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     ],
                                   ),
                                 ),
-                                Divider(
+                                const Divider(
                                   height: 32.0,
                                   thickness: 1.0,
                                   color: Color(0x27FAF7FA),

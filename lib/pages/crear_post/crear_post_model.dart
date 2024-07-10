@@ -1,10 +1,8 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/place.dart';
 import 'crear_post_widget.dart' show CrearPostWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
@@ -68,7 +66,7 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   }
 
   // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
+  FFPlace placePickerValue = const FFPlace();
   // State field(s) for Switch widget.
   bool? switchValue1;
   // State field(s) for Switch widget.

@@ -8,8 +8,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-// ignore: unnecessary_import
-import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
 import '/walkthroughs/crear_post.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
@@ -103,13 +101,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                     Container(
                       width: double.infinity,
                       height: 60.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'kt6uqv7e' /* Nuevo spot */,
@@ -130,7 +128,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 8.0, 16.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -157,7 +155,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             BorderRadius.circular(80.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Icon(
                                           Icons.arrow_back_rounded,
                                           color: FlutterFlowTheme.of(context)
@@ -178,21 +176,21 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         return;
                                       }
                                       if (_model.placePickerValue ==
-                                          FFPlace()) {
+                                          const FFPlace()) {
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: Text('Recordatorio'),
-                                                content: Text(
+                                                title: const Text('Recordatorio'),
+                                                content: const Text(
                                                     'recuerda elegir una ubicacion'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: const Text('Ok'),
                                                   ),
                                                 ],
                                               ),
@@ -201,238 +199,188 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         );
                                         return;
                                       }
-                                      if (_model.placePickerValue.latLng !=
-                                          null) {
-                                        if (widget.esImagen!) {
-                                          if ((_model.uploadedFileUrls1
-                                                  .isNotEmpty) !=
-                                              null) {
-                                            logFirebaseEvent(
-                                                'Button_backend_call');
-
-                                            var userPostsRecordReference1 =
-                                                UserPostsRecord.collection
-                                                    .doc();
-                                            await userPostsRecordReference1
-                                                .set({
-                                              ...createUserPostsRecordData(
-                                                postTitle: _model
-                                                    .tituloColeccionTextController
-                                                    .text,
-                                                postUser: currentUserReference,
-                                                timePosted: getCurrentTimestamp,
-                                                toFacebook: _model.switchValue1,
-                                                toInstagram:
-                                                    _model.switchValue2,
-                                                toTwitter: _model.switchValue3,
-                                                placeInfo:
-                                                    createPlaceInfoStruct(
-                                                  name: _model
-                                                      .placePickerValue.name,
-                                                  address: _model
-                                                      .placePickerValue.address,
-                                                  city: _model
-                                                      .placePickerValue.city,
-                                                  state: _model
-                                                      .placePickerValue.state,
-                                                  country: _model
-                                                      .placePickerValue.country,
-                                                  zipcode: _model
-                                                      .placePickerValue.zipCode,
-                                                  latLng: _model
-                                                      .placePickerValue.latLng,
-                                                  clearUnsetFields: false,
-                                                  create: true,
-                                                ),
-                                                postDescription: '',
-                                                esVideo: false,
-                                                esPublico: _model.varPublico,
-                                                esAmigos: _model.varAmigos,
-                                                esPrivado: _model.varPrivado,
-                                              ),
-                                              ...mapToFirestore(
-                                                {
-                                                  'collections': _model
-                                                      .listaColeccionesSeleccionadas,
-                                                  'PostPhotolist':
-                                                      _model.uploadedFileUrls1,
-                                                },
-                                              ),
-                                            });
-                                            _model.refPost = UserPostsRecord
-                                                .getDocumentFromData({
-                                              ...createUserPostsRecordData(
-                                                postTitle: _model
-                                                    .tituloColeccionTextController
-                                                    .text,
-                                                postUser: currentUserReference,
-                                                timePosted: getCurrentTimestamp,
-                                                toFacebook: _model.switchValue1,
-                                                toInstagram:
-                                                    _model.switchValue2,
-                                                toTwitter: _model.switchValue3,
-                                                placeInfo:
-                                                    createPlaceInfoStruct(
-                                                  name: _model
-                                                      .placePickerValue.name,
-                                                  address: _model
-                                                      .placePickerValue.address,
-                                                  city: _model
-                                                      .placePickerValue.city,
-                                                  state: _model
-                                                      .placePickerValue.state,
-                                                  country: _model
-                                                      .placePickerValue.country,
-                                                  zipcode: _model
-                                                      .placePickerValue.zipCode,
-                                                  latLng: _model
-                                                      .placePickerValue.latLng,
-                                                  clearUnsetFields: false,
-                                                  create: true,
-                                                ),
-                                                postDescription: '',
-                                                esVideo: false,
-                                                esPublico: _model.varPublico,
-                                                esAmigos: _model.varAmigos,
-                                                esPrivado: _model.varPrivado,
-                                              ),
-                                              ...mapToFirestore(
-                                                {
-                                                  'collections': _model
-                                                      .listaColeccionesSeleccionadas,
-                                                  'PostPhotolist':
-                                                      _model.uploadedFileUrls1,
-                                                },
-                                              ),
-                                            }, userPostsRecordReference1);
-                                            logFirebaseEvent(
-                                                'Button_navigate_to');
-
-                                            context.pushNamed('perfilPropio');
-                                          } else {
-                                            logFirebaseEvent(
-                                                'Button_show_snack_bar');
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'Antes sube una imagen',
-                                                  style: TextStyle(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                                ),
-                                                duration: Duration(
-                                                    milliseconds: 2000),
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                              ),
-                                            );
-                                          }
-                                        } else {
-                                          if (_model.uploadedFileUrl2 != null &&
-                                              _model.uploadedFileUrl2 != '') {
-                                            logFirebaseEvent(
-                                                'Button_backend_call');
-
-                                            await UserPostsRecord.collection
-                                                .doc()
-                                                .set({
-                                              ...createUserPostsRecordData(
-                                                postTitle: _model
-                                                    .tituloColeccionTextController
-                                                    .text,
-                                                postUser: currentUserReference,
-                                                timePosted: getCurrentTimestamp,
-                                                toFacebook: _model.switchValue1,
-                                                toInstagram:
-                                                    _model.switchValue2,
-                                                toTwitter: _model.switchValue3,
-                                                placeInfo:
-                                                    createPlaceInfoStruct(
-                                                  name: _model
-                                                      .placePickerValue.name,
-                                                  address: _model
-                                                      .placePickerValue.address,
-                                                  city: _model
-                                                      .placePickerValue.city,
-                                                  state: _model
-                                                      .placePickerValue.state,
-                                                  country: _model
-                                                      .placePickerValue.country,
-                                                  zipcode: _model
-                                                      .placePickerValue.zipCode,
-                                                  latLng: _model
-                                                      .placePickerValue.latLng,
-                                                  clearUnsetFields: false,
-                                                  create: true,
-                                                ),
-                                                postDescription: '',
-                                                video: _model.uploadedFileUrl2,
-                                                esVideo: true,
-                                                esPublico: _model.varPublico,
-                                                esAmigos: _model.varAmigos,
-                                                esPrivado: _model.varPrivado,
-                                              ),
-                                              ...mapToFirestore(
-                                                {
-                                                  'collections': _model
-                                                      .listaColeccionesSeleccionadas,
-                                                },
-                                              ),
-                                            });
-                                            logFirebaseEvent(
-                                                'Button_navigate_to');
-
-                                            context.pushNamed('perfilPropio');
-                                          } else {
-                                            logFirebaseEvent(
-                                                'Button_show_snack_bar');
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'Antes sube un videos',
-                                                  style: TextStyle(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                                ),
-                                                duration: Duration(
-                                                    milliseconds: 2000),
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                              ),
-                                            );
-                                          }
-                                        }
-                                      } else {
+                                      if (widget.esImagen!) {
                                         logFirebaseEvent(
-                                            'Button_show_snack_bar');
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Elije una ubicacion',
-                                              style: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 2500),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .error,
-                                          ),
-                                        );
-                                      }
+                                            'Button_backend_call');
 
+                                        var userPostsRecordReference1 =
+                                            UserPostsRecord.collection
+                                                .doc();
+                                        await userPostsRecordReference1
+                                            .set({
+                                          ...createUserPostsRecordData(
+                                            postTitle: _model
+                                                .tituloColeccionTextController
+                                                .text,
+                                            postUser: currentUserReference,
+                                            timePosted: getCurrentTimestamp,
+                                            toFacebook: _model.switchValue1,
+                                            toInstagram:
+                                                _model.switchValue2,
+                                            toTwitter: _model.switchValue3,
+                                            placeInfo:
+                                                createPlaceInfoStruct(
+                                              name: _model
+                                                  .placePickerValue.name,
+                                              address: _model
+                                                  .placePickerValue.address,
+                                              city: _model
+                                                  .placePickerValue.city,
+                                              state: _model
+                                                  .placePickerValue.state,
+                                              country: _model
+                                                  .placePickerValue.country,
+                                              zipcode: _model
+                                                  .placePickerValue.zipCode,
+                                              latLng: _model
+                                                  .placePickerValue.latLng,
+                                              clearUnsetFields: false,
+                                              create: true,
+                                            ),
+                                            postDescription: '',
+                                            esVideo: false,
+                                            esPublico: _model.varPublico,
+                                            esAmigos: _model.varAmigos,
+                                            esPrivado: _model.varPrivado,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'collections': _model
+                                                  .listaColeccionesSeleccionadas,
+                                              'PostPhotolist':
+                                                  _model.uploadedFileUrls1,
+                                            },
+                                          ),
+                                        });
+                                        _model.refPost = UserPostsRecord
+                                            .getDocumentFromData({
+                                          ...createUserPostsRecordData(
+                                            postTitle: _model
+                                                .tituloColeccionTextController
+                                                .text,
+                                            postUser: currentUserReference,
+                                            timePosted: getCurrentTimestamp,
+                                            toFacebook: _model.switchValue1,
+                                            toInstagram:
+                                                _model.switchValue2,
+                                            toTwitter: _model.switchValue3,
+                                            placeInfo:
+                                                createPlaceInfoStruct(
+                                              name: _model
+                                                  .placePickerValue.name,
+                                              address: _model
+                                                  .placePickerValue.address,
+                                              city: _model
+                                                  .placePickerValue.city,
+                                              state: _model
+                                                  .placePickerValue.state,
+                                              country: _model
+                                                  .placePickerValue.country,
+                                              zipcode: _model
+                                                  .placePickerValue.zipCode,
+                                              latLng: _model
+                                                  .placePickerValue.latLng,
+                                              clearUnsetFields: false,
+                                              create: true,
+                                            ),
+                                            postDescription: '',
+                                            esVideo: false,
+                                            esPublico: _model.varPublico,
+                                            esAmigos: _model.varAmigos,
+                                            esPrivado: _model.varPrivado,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'collections': _model
+                                                  .listaColeccionesSeleccionadas,
+                                              'PostPhotolist':
+                                                  _model.uploadedFileUrls1,
+                                            },
+                                          ),
+                                        }, userPostsRecordReference1);
+                                        logFirebaseEvent(
+                                            'Button_navigate_to');
+
+                                        context.pushNamed('perfilPropio');
+                                                                            } else {
+                                        if (_model.uploadedFileUrl2 != '') {
+                                          logFirebaseEvent(
+                                              'Button_backend_call');
+
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set({
+                                            ...createUserPostsRecordData(
+                                              postTitle: _model
+                                                  .tituloColeccionTextController
+                                                  .text,
+                                              postUser: currentUserReference,
+                                              timePosted: getCurrentTimestamp,
+                                              toFacebook: _model.switchValue1,
+                                              toInstagram:
+                                                  _model.switchValue2,
+                                              toTwitter: _model.switchValue3,
+                                              placeInfo:
+                                                  createPlaceInfoStruct(
+                                                name: _model
+                                                    .placePickerValue.name,
+                                                address: _model
+                                                    .placePickerValue.address,
+                                                city: _model
+                                                    .placePickerValue.city,
+                                                state: _model
+                                                    .placePickerValue.state,
+                                                country: _model
+                                                    .placePickerValue.country,
+                                                zipcode: _model
+                                                    .placePickerValue.zipCode,
+                                                latLng: _model
+                                                    .placePickerValue.latLng,
+                                                clearUnsetFields: false,
+                                                create: true,
+                                              ),
+                                              postDescription: '',
+                                              video: _model.uploadedFileUrl2,
+                                              esVideo: true,
+                                              esPublico: _model.varPublico,
+                                              esAmigos: _model.varAmigos,
+                                              esPrivado: _model.varPrivado,
+                                            ),
+                                            ...mapToFirestore(
+                                              {
+                                                'collections': _model
+                                                    .listaColeccionesSeleccionadas,
+                                              },
+                                            ),
+                                          });
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
+                                          context.pushNamed('perfilPropio');
+                                        } else {
+                                          logFirebaseEvent(
+                                              'Button_show_snack_bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Antes sube un videos',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration: const Duration(
+                                                  milliseconds: 2000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    
                                       setState(() {});
                                     },
                                     text: FFLocalizations.of(context).getText(
@@ -441,10 +389,10 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     options: FFButtonOptions(
                                       width: 100.0,
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
@@ -463,7 +411,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                         .bodyMediumFamily),
                                           ),
                                       elevation: 0.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -551,11 +499,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     }
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: 216.0,
                                   height: 300.0,
                                   child: Stack(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     children: [
                                       if (!(_model
                                           .uploadedFileUrls1.isNotEmpty))
@@ -574,7 +522,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                               width: 2.0,
                                             ),
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.upload_outlined,
                                             color: Color(0xFFD8D8D8),
                                             size: 70.0,
@@ -602,6 +550,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                   .uploadedFileUrls1
                                                   .map((e) => e)
                                                   .toList();
+
                                               return SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
@@ -616,7 +565,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                             imagenCarruselIndex];
                                                     return Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -629,11 +578,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                         child:
                                                             CachedNetworkImage(
                                                           fadeInDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       500),
                                                           fadeOutDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       500),
                                                           imageUrl:
@@ -722,11 +671,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     }
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: 216.0,
                                   height: 300.0,
                                   child: Stack(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     children: [
                                       Container(
                                         width: 216.0,
@@ -742,7 +691,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             width: 2.0,
                                           ),
                                         ),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.upload_outlined,
                                           color: Color(0xFFD8D8D8),
                                           size: 70.0,
@@ -765,19 +714,18 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: const FaIcon(
                                             FontAwesomeIcons.circleNotch,
                                             color: Color(0xFFD8D8D8),
                                             size: 60.0,
                                           ).animateOnPageLoad(animationsMap[
                                               'iconOnPageLoadAnimation']!),
                                         ),
-                                      if (_model.uploadedFileUrl2 != null &&
-                                          _model.uploadedFileUrl2 != '')
+                                      if (_model.uploadedFileUrl2 != '')
                                         Container(
                                           height: 300.0,
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             minWidth: 216.0,
                                             maxWidth: 218.0,
                                           ),
@@ -815,12 +763,12 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 ),
                               ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 26.0, 0.0, 0.0),
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 16.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -830,11 +778,15 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                           width: 40.0,
                                           height: 40.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 500),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 500),
+                                            imageUrl: valueOrDefault<String>(
                                               currentUserPhoto,
                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                                             ),
@@ -845,7 +797,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 0.0, 9.0, 0.0),
                                           child: TextFormField(
                                             controller: _model
@@ -883,51 +835,51 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                                     .bodyMediumFamily),
                                                       ),
                                               enabledBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
                                               focusedBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
-                                              errorBorder: UnderlineInputBorder(
+                                              errorBorder: const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
                                               focusedErrorBorder:
-                                                  UnderlineInputBorder(
+                                                  const UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
+                                                    BorderRadius.only(
                                                   topLeft: Radius.circular(4.0),
                                                   topRight:
                                                       Radius.circular(4.0),
@@ -966,22 +918,22 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 24.0),
                                       child: FlutterFlowPlacePicker(
                                         iOSGoogleMapsApiKey:
-                                            'AIzaSyBPFPY-wOg7x310w7aVGhp1gpRpo_9TVz4',
+                                            'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
                                         androidGoogleMapsApiKey:
-                                            'AIzaSyBXd-oSPKfc85tvGTa9nvkmw7yurBxR5og',
+                                            'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
                                         webGoogleMapsApiKey:
-                                            'AIzaSyAHskm2jbC5FxoT9DoOhIcq2xKwl2zEYNQ',
+                                            'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                                         onSelect: (place) async {
                                           setState(() =>
                                               _model.placePickerValue = place);
@@ -990,7 +942,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             FFLocalizations.of(context).getText(
                                           's6k6yknv' /* Etiqueta la ubicación */,
                                         ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           FFIcons.kpinFilled,
                                           color: Colors.white,
                                           size: 16.0,
@@ -1015,7 +967,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                                 context)
                                                             .bodyMediumFamily),
                                               ),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -1038,7 +990,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               tabletLandscape: false,
                               desktop: false,
                             ))
-                              Divider(
+                              const Divider(
                                 height: 32.0,
                                 thickness: 1.0,
                                 indent: 16.0,
@@ -1046,19 +998,19 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 color: Color(0x27FAF7FA),
                               ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -1100,7 +1052,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -1126,7 +1078,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.all(4.0),
+                                                padding: const EdgeInsets.all(4.0),
                                                 child: Stack(
                                                   children: [
                                                     if (!_model.varPublico)
@@ -1208,7 +1160,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.all(4.0),
+                                                  padding: const EdgeInsets.all(4.0),
                                                   child: Stack(
                                                     children: [
                                                       if (!_model.varAmigos)
@@ -1280,7 +1232,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.all(4.0),
+                                                padding: const EdgeInsets.all(4.0),
                                                 child: Stack(
                                                   children: [
                                                     if (!_model.varPrivado)
@@ -1338,7 +1290,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 ],
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               height: 32.0,
                               thickness: 1.0,
                               indent: 16.0,
@@ -1346,13 +1298,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               color: Color(0x27FAF7FA),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1387,7 +1339,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
 
                                   // Enviaremos un valor de 0 para una colección propia
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1485,6 +1437,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                       List<CollectionsRecord>
                                           listViewCollectionsRecordList =
                                           snapshot.data!;
+
                                       return ListView.builder(
                                         padding: EdgeInsets.zero,
                                         shrinkWrap: true,
@@ -1529,7 +1482,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.all(4.0),
+                                                  padding: const EdgeInsets.all(4.0),
                                                   child: Stack(
                                                     children: [
                                                       if (!_model
@@ -1584,7 +1537,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                 ),
                                                 if (listViewCollectionsRecord
                                                     .coleccionPublica)
-                                                  Padding(
+                                                  const Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(4.0, 0.0,
@@ -1598,7 +1551,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                   ),
                                                 if (listViewCollectionsRecord
                                                     .coleccionAmigos)
-                                                  Padding(
+                                                  const Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(4.0, 0.0,
@@ -1612,7 +1565,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                   ),
                                                 if (listViewCollectionsRecord
                                                     .coleccionPrivada)
-                                                  Padding(
+                                                  const Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(4.0, 0.0,
@@ -1634,7 +1587,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 ],
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               height: 32.0,
                               thickness: 1.0,
                               indent: 16.0,
@@ -1649,13 +1602,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               desktop: false,
                             ))
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 32.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1691,7 +1644,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             value: _model.switchValue1!,
                                             onChanged: (newValue) async {
                                               setState(() => _model
-                                                  .switchValue1 = newValue!);
+                                                  .switchValue1 = newValue);
                                             },
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
@@ -1706,13 +1659,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         ],
                                       ),
                                     ),
-                                    Divider(
+                                    const Divider(
                                       height: 32.0,
                                       thickness: 1.0,
                                       color: Color(0x27FAF7FA),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1748,7 +1701,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             value: _model.switchValue2!,
                                             onChanged: (newValue) async {
                                               setState(() => _model
-                                                  .switchValue2 = newValue!);
+                                                  .switchValue2 = newValue);
                                             },
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
@@ -1763,16 +1716,16 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         ],
                                       ),
                                     ),
-                                    Divider(
+                                    const Divider(
                                       height: 32.0,
                                       thickness: 1.0,
                                       color: Color(0x27FAF7FA),
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1808,7 +1761,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             value: _model.switchValue3!,
                                             onChanged: (newValue) async {
                                               setState(() => _model
-                                                  .switchValue3 = newValue!);
+                                                  .switchValue3 = newValue);
                                             },
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
@@ -1823,7 +1776,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         ],
                                       ),
                                     ),
-                                    Divider(
+                                    const Divider(
                                       height: 32.0,
                                       thickness: 1.0,
                                       color: Color(0x27FAF7FA),
@@ -1839,25 +1792,29 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, -0.85),
+                alignment: const AlignmentDirectional(0.0, -0.85),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FlutterFlowIconButton(
-                        borderColor: Color(0x00F4F176),
+                        borderColor: const Color(0x00F4F176),
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: Color(0x00EEEEEE),
+                        fillColor: const Color(0x00EEEEEE),
                         icon: Icon(
                           Icons.help,
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent('CREAR_POST_PAGE_help_ICN_ON_TAP');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() => _model.crearPostController =
+                              createPageWalkthrough(context));
+                          _model.crearPostController?.show(context: context);
                         },
                       ),
                     ],

@@ -47,13 +47,13 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,7 +76,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -108,10 +108,10 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'dy67a68v' /* Seguridad inicio sesión */,
@@ -129,7 +129,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -153,7 +153,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                           accion: () async {},
                         ),
                       ),
-                    ].divide(SizedBox(height: 8.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
               ],

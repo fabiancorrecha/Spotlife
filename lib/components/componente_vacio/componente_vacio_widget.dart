@@ -42,7 +42,7 @@ class _ComponenteVacioWidgetState extends State<ComponenteVacioWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsets.all(50.0),
+          padding: const EdgeInsets.all(50.0),
           child: Image.network(
             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/ll0xdhzyoat5/icono_principal.png',
             width: 100.0,
@@ -55,7 +55,7 @@ class _ComponenteVacioWidgetState extends State<ComponenteVacioWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   '5fokfn3p' /* Nada que ver por aqui */,

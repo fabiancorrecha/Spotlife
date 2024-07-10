@@ -130,3 +130,5 @@ export '/pages/mapa_principal_copy/mapa_principal_copy_widget.dart'
 export '/pages/chat/todos_los_chats/todos_los_chats_widget.dart'
     show TodosLosChatsWidget;
 export '/pages/chat/chat_page/chat_page_widget.dart' show ChatPageWidget;
+export '/herramientas_promocion/herramientas_promocion_widget.dart'
+    show HerramientasPromocionWidget;

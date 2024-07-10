@@ -10,8 +10,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'otro_perfil_model.dart';
@@ -72,7 +70,9 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
             ),
           );
         }
+
         final otroPerfilUsersRecord = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -95,10 +95,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                   ),
                   Stack(
                     children: [
-                      if ((currentUserDocument?.listaBloqueados?.toList() ?? [])
+                      if ((currentUserDocument?.listaBloqueados.toList() ?? [])
                           .contains(widget.perfilAjeno))
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => Row(
@@ -115,10 +115,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                     options: FFButtonOptions(
                                       width: double.infinity,
                                       height: 35.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context)
                                           .fondoIcono,
@@ -137,7 +137,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                         .bodyMediumFamily),
                                           ),
                                       elevation: 2.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -149,11 +149,11 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                             ),
                           ),
                         ),
-                      if (!(currentUserDocument?.listaBloqueados?.toList() ??
+                      if (!(currentUserDocument?.listaBloqueados.toList() ??
                               [])
                           .contains(widget.perfilAjeno))
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => Row(
@@ -166,7 +166,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                           false)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 4.0, 0.0),
                                           child: StreamBuilder<
                                               List<ActividadRecord>>(
@@ -216,6 +216,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                               List<ActividadRecord>
                                                   siguiendoCuentaPublicaActividadRecordList =
                                                   snapshot.data!;
+
                                               final siguiendoCuentaPublicaActividadRecord =
                                                   siguiendoCuentaPublicaActividadRecordList
                                                           .isNotEmpty
@@ -228,10 +229,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                       'OTRO_PERFIL_SiguiendoCuentaPublica_ON_TA');
                                                   if (!(currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPublica_backend_call');
 
@@ -267,10 +268,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
 
                                                   if ((currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPublica_backend_call');
 
@@ -376,7 +377,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 },
                                                 text: (currentUserDocument
                                                                 ?.listaSeguidos
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         .contains(
                                                             widget.perfilAjeno)
@@ -385,16 +386,16 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 options: FFButtonOptions(
                                                   width: double.infinity,
                                                   height: 35.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: (currentUserDocument
                                                                   ?.listaSeguidos
-                                                                  ?.toList() ??
+                                                                  .toList() ??
                                                               [])
                                                           .contains(widget
                                                               .perfilAjeno)
@@ -425,7 +426,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                                   elevation: 2.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -441,7 +442,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                           true)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 4.0, 0.0),
                                           child: StreamBuilder<
                                               List<ActividadRecord>>(
@@ -491,6 +492,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                               List<ActividadRecord>
                                                   siguiendoCuentaPrivadaActividadRecordList =
                                                   snapshot.data!;
+
                                               final siguiendoCuentaPrivadaActividadRecord =
                                                   siguiendoCuentaPrivadaActividadRecordList
                                                           .isNotEmpty
@@ -503,10 +505,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                       'OTRO_PERFIL_SiguiendoCuentaPrivada_ON_TA');
                                                   if (!(currentUserDocument
                                                               ?.listadeUsuarioenEspera
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPrivada_backend_call');
 
@@ -648,17 +650,17 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 text: () {
                                                   if ((currentUserDocument
                                                               ?.listadeUsuarioenEspera
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     return 'Pendiente';
                                                   } else if ((currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     return 'Siguiendo';
                                                   } else {
                                                     return 'Seguir';
@@ -667,16 +669,16 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 options: FFButtonOptions(
                                                   width: double.infinity,
                                                   height: 35.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: (currentUserDocument
                                                                   ?.listaSeguidos
-                                                                  ?.toList() ??
+                                                                  .toList() ??
                                                               [])
                                                           .contains(widget
                                                               .perfilAjeno)
@@ -707,7 +709,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                                   elevation: 2.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -726,7 +728,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           4.0, 0.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
@@ -803,10 +805,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                           width: 150.0,
                                           height: 35.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .fondoIcono,
@@ -826,7 +828,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                             .bodyMediumFamily),
                                               ),
                                           elevation: 2.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -892,7 +894,9 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                               ),
                             );
                           }
+
                           final postGridUsuariosUsersRecord = snapshot.data!;
+
                           return wrapWithModel(
                             model: _model.postGridUsuariosModel,
                             updateCallback: () => setState(() {}),
@@ -912,13 +916,13 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                       child: wrapWithModel(
                         model: _model.componentePerfilPrivadoModel,
                         updateCallback: () => setState(() {}),
-                        child: ComponentePerfilPrivadoWidget(),
+                        child: const ComponentePerfilPrivadoWidget(),
                       ),
                     ),
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 0,
                     ),
                   ),

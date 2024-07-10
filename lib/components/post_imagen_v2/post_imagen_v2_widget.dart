@@ -12,8 +12,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +30,7 @@ class PostImagenV2Widget extends StatefulWidget {
     this.post,
     this.verIconoCompartir,
     bool? verComentarios,
-  }) : this.verComentarios = verComentarios ?? false;
+  }) : verComentarios = verComentarios ?? false;
 
   final UserPostsRecord? post;
   final bool? verIconoCompartir;
@@ -108,12 +106,14 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                     ),
                   );
                 }
+
                 final containerUsersRecord = snapshot.data!;
+
                 return Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxHeight: 572.0,
                   ),
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Visibility(
                     visible: () {
                       if (widget.post!.esPrivado) {
@@ -152,8 +152,9 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                       builder: (context) {
                                         final listaImagenes = widget
                                                 .post?.postPhotolist
-                                                ?.toList() ??
+                                                .toList() ??
                                             [];
+
                                         return SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -173,7 +174,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     MediaQuery.sizeOf(context)
                                                             .height *
                                                         0.7,
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: InkWell(
                                                   splashColor:
                                                       Colors.transparent,
@@ -203,9 +204,9 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     );
                                                   },
                                                   child: CachedNetworkImage(
-                                                    fadeInDuration: Duration(
+                                                    fadeInDuration: const Duration(
                                                         milliseconds: 500),
-                                                    fadeOutDuration: Duration(
+                                                    fadeOutDuration: const Duration(
                                                         milliseconds: 500),
                                                     imageUrl: listaImagenesItem,
                                                     width: double.infinity,
@@ -221,7 +222,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                     ),
                                   if (widget.post?.esVideo ?? true)
                                     Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: FlutterFlowVideoPlayer(
                                         path: widget.post!.video,
                                         videoType: VideoType.network,
@@ -238,7 +239,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                     ),
                                   Container(
                                     height: 60.0,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
                                           Color(0x771A1A1A),
@@ -250,7 +251,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                       ),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -292,7 +293,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                               width: 40.0,
                                               height: 40.0,
                                               clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Image.network(
@@ -306,7 +307,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 0.0, 0.0),
                                               child: Column(
@@ -474,6 +475,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                       List<CollectionsRecord>
                                                           rowCollectionsRecordList =
                                                           snapshot.data!;
+
                                                       // Return an empty Container when the item does not exist.
                                                       if (snapshot
                                                           .data!.isEmpty) {
@@ -533,31 +535,31 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                 size: 12.0,
                                                               ),
                                                             if ((widget.post?.placeInfo
-                                                                            ?.name !=
+                                                                            .name !=
                                                                         null &&
                                                                     widget
                                                                             .post
                                                                             ?.placeInfo
-                                                                            ?.name !=
+                                                                            .name !=
                                                                         '') ||
                                                                 (widget.post?.placeInfo
-                                                                            ?.city !=
+                                                                            .city !=
                                                                         null &&
                                                                     widget
                                                                             .post
                                                                             ?.placeInfo
-                                                                            ?.city !=
+                                                                            .city !=
                                                                         ''))
                                                               Expanded(
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           4.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
-                                                                    '${widget.post?.placeInfo?.name}, ${widget.post?.placeInfo?.city}'.maybeHandleOverflow(
+                                                                    '${widget.post?.placeInfo.name}, ${widget.post?.placeInfo.city}'.maybeHandleOverflow(
                                                                         maxChars:
                                                                             30),
                                                                     maxLines: 1,
@@ -580,12 +582,11 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                       );
                                                     },
                                                   ),
-                                                ].divide(SizedBox(height: 2.0)),
+                                                ].divide(const SizedBox(height: 2.0)),
                                               ),
                                             ),
                                           ),
-                                          if (widget.post!.collections.length >
-                                              0)
+                                          if (widget.post!.collections.isNotEmpty)
                                             StreamBuilder<CollectionsRecord>(
                                               stream:
                                                   CollectionsRecord.getDocument(
@@ -611,17 +612,19 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     ),
                                                   );
                                                 }
+
                                                 final containerCollectionsRecord =
                                                     snapshot.data!;
+
                                                 return Container(
-                                                  decoration: BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Visibility(
                                                     visible:
                                                         containerCollectionsRecord !=
                                                             null,
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -703,7 +706,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                         padding: MediaQuery
                                                             .viewInsetsOf(
                                                                 context),
-                                                        child: Container(
+                                                        child: SizedBox(
                                                           height: 319.0,
                                                           child:
                                                               MenuPostPropioWidget(
@@ -732,7 +735,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                         padding: MediaQuery
                                                             .viewInsetsOf(
                                                                 context),
-                                                        child: Container(
+                                                        child: SizedBox(
                                                           height: 319.0,
                                                           child:
                                                               MenuPostAjenoWidget(
@@ -760,13 +763,13 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 1.0),
+                                    alignment: const AlignmentDirectional(0.0, 1.0),
                                     child: Container(
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minHeight: 140.0,
                                         maxHeight: 190.0,
                                       ),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: [
                                             Color(0x00F5F5F5),
@@ -779,10 +782,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 15.0),
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -874,7 +877,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                 'an86ht95' /*  likes */,
                                                               ),
                                                               style:
-                                                                  TextStyle(),
+                                                                  const TextStyle(),
                                                             )
                                                           ],
                                                           style: FlutterFlowTheme
@@ -967,7 +970,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                 .getText(
                                                               't8vi189h' /*  likes */,
                                                             ),
-                                                            style: TextStyle(),
+                                                            style: const TextStyle(),
                                                           )
                                                         ],
                                                         style:
@@ -992,7 +995,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                 ],
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 8.0, 8.0, 0.0),
                                                 child: Row(
@@ -1013,7 +1016,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -1021,7 +1024,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                       0.0),
                                                           child: Stack(
                                                             alignment:
-                                                                AlignmentDirectional(
+                                                                const AlignmentDirectional(
                                                                     0.0, 0.0),
                                                             children: [
                                                               Row(
@@ -1033,7 +1036,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                       .verMeGusta)
                                                                     Align(
                                                                       alignment:
-                                                                          AlignmentDirectional(
+                                                                          const AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
                                                                       child: StreamBuilder<
@@ -1081,6 +1084,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                           List<ActividadRecord>
                                                                               iconSIActividadRecordList =
                                                                               snapshot.data!;
+
                                                                           final iconSIActividadRecord = iconSIActividadRecordList.isNotEmpty
                                                                               ? iconSIActividadRecordList.first
                                                                               : null;
@@ -1128,7 +1132,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                       .verMeGusta)
                                                                     Align(
                                                                       alignment:
-                                                                          AlignmentDirectional(
+                                                                          const AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
                                                                       child:
@@ -1256,7 +1260,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -1291,7 +1295,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                 backgroundColor:
                                                                     Colors
                                                                         .transparent,
-                                                                barrierColor: Color(
+                                                                barrierColor: const Color(
                                                                     0x00000000),
                                                                 isDismissible:
                                                                     false,
@@ -1306,7 +1310,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                           .viewInsetsOf(
                                                                               context),
                                                                       child:
-                                                                          Container(
+                                                                          SizedBox(
                                                                         height:
                                                                             419.0,
                                                                         child:
@@ -1369,7 +1373,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                   imageUrl: widget
                                                                       .post
                                                                       ?.postPhotolist
-                                                                      ?.first,
+                                                                      .first,
                                                                   description:
                                                                       widget
                                                                           .post
@@ -1484,7 +1488,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                         backgroundColor:
                                                                             Colors.transparent,
                                                                         barrierColor:
-                                                                            Color(0x00000000),
+                                                                            const Color(0x00000000),
                                                                         enableDrag:
                                                                             false,
                                                                         context:
@@ -1495,7 +1499,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                             child:
                                                                                 Padding(
                                                                               padding: MediaQuery.viewInsetsOf(context),
-                                                                              child: Container(
+                                                                              child: SizedBox(
                                                                                 height: 573.0,
                                                                                 child: FavoritoAColeccionWidget(
                                                                                   post: widget.post?.reference,
@@ -1590,7 +1594,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                         backgroundColor:
                                                                             Colors.transparent,
                                                                         barrierColor:
-                                                                            Color(0x00000000),
+                                                                            const Color(0x00000000),
                                                                         enableDrag:
                                                                             false,
                                                                         context:
@@ -1601,7 +1605,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                             child:
                                                                                 Padding(
                                                                               padding: MediaQuery.viewInsetsOf(context),
-                                                                              child: Container(
+                                                                              child: SizedBox(
                                                                                 height: 573.0,
                                                                                 child: FavoritoAColeccionWidget(
                                                                                   post: widget.post?.reference,
@@ -1638,7 +1642,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                         ))
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         8.0,
                                                                         0.0,
@@ -1679,7 +1683,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 8.0, 8.0, 0.0),
                                                 child: Row(
@@ -1725,7 +1729,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                 desktop: false,
                                               ))
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 8.0, 8.0, 0.0),
                                                   child: Row(
@@ -1740,14 +1744,14 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                             .imageUserModel,
                                                         updateCallback: () =>
                                                             setState(() {}),
-                                                        child: ImageUserWidget(
+                                                        child: const ImageUserWidget(
                                                           radioImagen: 20,
                                                         ),
                                                       ),
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       8.0,
                                                                       0.0,
@@ -1784,7 +1788,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                   ),
                                                 ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 8.0, 8.0, 0.0),
                                                 child: Row(
@@ -1832,7 +1836,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                               if (widget.post?.esVideo ?? true)
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           1.0, 0.0),
                                                   child: Container(
                                                     width: 0.0,
@@ -1873,13 +1877,14 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
             if (!FFAppState().verCajaComentariosActualizados &&
                 widget.verComentarios)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 32.0),
                 child: Builder(
                   builder: (context) {
                     final comentarios = _model.comentariosActuales.toList();
                     if (comentarios.isEmpty) {
-                      return SinComentariosWidget();
+                      return const SinComentariosWidget();
                     }
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -1888,7 +1893,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                       itemBuilder: (context, comentariosIndex) {
                         final comentariosItem = comentarios[comentariosIndex];
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 24.0),
                           child: StreamBuilder<UsersRecord>(
                             stream: UsersRecord.getDocument(
@@ -1909,8 +1914,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   ),
                                 );
                               }
+
                               final columnComentarioUsersRecord =
                                   snapshot.data!;
+
                               return InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -1924,7 +1931,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     enableDrag: false,
                                     context: context,
                                     builder: (context) {
@@ -1932,7 +1939,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 151.0,
                                             child: MenuComentarioWidget(
                                               comentario: comentariosItem,
@@ -1948,7 +1955,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1959,7 +1966,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                             width: 20.0,
                                             height: 20.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: Image.network(
@@ -1973,7 +1980,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: Text(
                                                 comentariosItem.textComment,
@@ -2085,7 +2092,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -2182,14 +2189,15 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
             if (FFAppState().verCajaComentariosActualizados &&
                 widget.verComentarios)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 32.0),
                 child: Builder(
                   builder: (context) {
                     final comentarios =
                         _model.comentariosNuevosComponente?.toList() ?? [];
                     if (comentarios.isEmpty) {
-                      return SinComentariosWidget();
+                      return const SinComentariosWidget();
                     }
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -2198,7 +2206,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                       itemBuilder: (context, comentariosIndex) {
                         final comentariosItem = comentarios[comentariosIndex];
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 24.0),
                           child: StreamBuilder<UsersRecord>(
                             stream: UsersRecord.getDocument(
@@ -2219,8 +2227,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   ),
                                 );
                               }
+
                               final columnComentarioUsersRecord =
                                   snapshot.data!;
+
                               return InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -2234,7 +2244,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     enableDrag: false,
                                     context: context,
                                     builder: (context) {
@@ -2242,7 +2252,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 151.0,
                                             child: MenuComentarioWidget(
                                               comentario: comentariosItem,
@@ -2258,7 +2268,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -2269,7 +2279,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                             width: 20.0,
                                             height: 20.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: Image.network(
@@ -2283,7 +2293,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: Text(
                                                 comentariosItem.textComment,
@@ -2395,7 +2405,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,

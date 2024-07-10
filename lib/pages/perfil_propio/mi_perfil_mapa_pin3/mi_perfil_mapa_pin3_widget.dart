@@ -69,17 +69,17 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
                         scrollDirection: Axis.vertical,
                         children: [
                           Container(
-                            constraints: BoxConstraints(
+                            constraints: const BoxConstraints(
                               maxHeight: 572.0,
                             ),
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 wrapWithModel(
                                   model: _model.postImagenModel1,
                                   updateCallback: () => setState(() {}),
-                                  child: PostImagenWidget(),
+                                  child: const PostImagenWidget(),
                                 ),
                                 Divider(
                                   height: 32.0,
@@ -91,17 +91,17 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
                             ),
                           ),
                           Container(
-                            constraints: BoxConstraints(
+                            constraints: const BoxConstraints(
                               maxHeight: 572.0,
                             ),
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 wrapWithModel(
                                   model: _model.postImagenModel2,
                                   updateCallback: () => setState(() {}),
-                                  child: PostImagenWidget(),
+                                  child: const PostImagenWidget(),
                                 ),
                                 Divider(
                                   height: 32.0,
@@ -121,7 +121,7 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 3,
                 ),
               ),

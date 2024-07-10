@@ -1,7 +1,6 @@
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,7 +52,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -63,12 +62,12 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                   child: Container(
                     width: 52.0,
                     height: 5.0,
@@ -79,7 +78,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'v9vn0pol' /* Ajustes de busqueda */,
@@ -119,7 +118,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                         context.goNamed(
                           'mapaPrincipal',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -207,7 +206,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kpinLines,
@@ -239,7 +238,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                         context.goNamed(
                           'mapaPrincipal',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -327,7 +326,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kgrid,
@@ -340,7 +339,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                     ),
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 32.0,
                   thickness: 1.0,
                   indent: 0.0,
@@ -371,7 +370,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                         context.goNamed(
                           'mapaPrincipal',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -437,7 +436,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kusers,
@@ -469,7 +468,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                         context.goNamed(
                           'mapaPrincipal',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -534,7 +533,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.globeEurope,
@@ -551,12 +550,12 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Container(
                 height: 100.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.boton1Model,
                   updateCallback: () => setState(() {}),

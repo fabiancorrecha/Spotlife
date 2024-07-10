@@ -4,12 +4,9 @@ import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'tarjeta_lista01_model.dart';
 export 'tarjeta_lista01_model.dart';
 
@@ -56,7 +53,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
       child: StreamBuilder<UsersRecord>(
         stream: UsersRecord.getDocument(widget.seguido!),
         builder: (context, snapshot) {
@@ -74,11 +71,13 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
               ),
             );
           }
+
           final containerUsersRecord = snapshot.data!;
+
           return Container(
             width: double.infinity,
             height: 66.0,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -107,17 +106,19 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: Container(
                             width: 40.0,
                             height: 40.0,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: Image.network(
-                              valueOrDefault<String>(
+                            child: CachedNetworkImage(
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeOutDuration: const Duration(milliseconds: 500),
+                              imageUrl: valueOrDefault<String>(
                                 containerUsersRecord.photoUrl,
                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                               ),
@@ -187,7 +188,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                 if (containerUsersRecord.cuentaPrivada == false)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                     child: AuthUserStreamWidget(
                       builder: (context) =>
                           StreamBuilder<List<ActividadRecord>>(
@@ -229,6 +230,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                           }
                           List<ActividadRecord>
                               cuentaPublicaActividadRecordList = snapshot.data!;
+
                           final cuentaPublicaActividadRecord =
                               cuentaPublicaActividadRecordList.isNotEmpty
                                   ? cuentaPublicaActividadRecordList.first
@@ -238,7 +240,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                               logFirebaseEvent(
                                   'TARJETA_LISTA01_CuentaPublica_ON_TAP');
                               if (!(currentUserDocument?.listaSeguidos
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .contains(widget.seguido)) {
                                 logFirebaseEvent('CuentaPublica_backend_call');
@@ -265,7 +267,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                               }
 
                               if ((currentUserDocument?.listaSeguidos
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .contains(widget.seguido)) {
                                 logFirebaseEvent('CuentaPublica_backend_call');
@@ -327,7 +329,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                               }
                             },
                             text:
-                                (currentUserDocument?.listaSeguidos?.toList() ??
+                                (currentUserDocument?.listaSeguidos.toList() ??
                                             [])
                                         .contains(widget.seguido)
                                     ? 'Siguiendo'
@@ -335,12 +337,12 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                             options: FFButtonOptions(
                               width: 93.0,
                               height: 28.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: (currentUserDocument?.listaSeguidos
-                                              ?.toList() ??
+                                              .toList() ??
                                           [])
                                       .contains(widget.seguido)
                                   ? FlutterFlowTheme.of(context).fondoIcono
@@ -360,7 +362,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                                                 .bodyMediumFamily),
                                   ),
                               elevation: 2.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -374,7 +376,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                 if (containerUsersRecord.cuentaPrivada == true)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                     child: AuthUserStreamWidget(
                       builder: (context) =>
                           StreamBuilder<List<ActividadRecord>>(
@@ -416,6 +418,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                           }
                           List<ActividadRecord>
                               cuentaPrivadaActividadRecordList = snapshot.data!;
+
                           final cuentaPrivadaActividadRecord =
                               cuentaPrivadaActividadRecordList.isNotEmpty
                                   ? cuentaPrivadaActividadRecordList.first
@@ -425,7 +428,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                               logFirebaseEvent(
                                   'TARJETA_LISTA01_CuentaPrivada_ON_TAP');
                               if (!(currentUserDocument?.listadeUsuarioenEspera
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .contains(containerUsersRecord.reference)) {
                                 logFirebaseEvent('CuentaPrivada_backend_call');
@@ -505,12 +508,12 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                             },
                             text: () {
                               if ((currentUserDocument?.listadeUsuarioenEspera
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .contains(containerUsersRecord.reference)) {
                                 return 'Pendiente';
                               } else if ((currentUserDocument?.listaSeguidos
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .contains(widget.seguido)) {
                                 return 'Siguiendo';
@@ -521,12 +524,12 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                             options: FFButtonOptions(
                               width: 93.0,
                               height: 28.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: (currentUserDocument?.listaSeguidos
-                                              ?.toList() ??
+                                              .toList() ??
                                           [])
                                       .contains(widget.seguido)
                                   ? FlutterFlowTheme.of(context).fondoIcono
@@ -546,7 +549,7 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                                                 .bodyMediumFamily),
                                   ),
                               elevation: 2.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),

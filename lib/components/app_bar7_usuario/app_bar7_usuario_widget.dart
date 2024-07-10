@@ -1,12 +1,9 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'app_bar7_usuario_model.dart';
 export 'app_bar7_usuario_model.dart';
 
@@ -67,16 +64,18 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
           height: 100.0,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -94,7 +93,7 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Icon(
                         Icons.arrow_back_rounded,
                         color: FlutterFlowTheme.of(context).icono,
@@ -108,11 +107,13 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
                 width: 40.0,
                 height: 40.0,
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: Image.network(
-                  valueOrDefault<String>(
+                child: CachedNetworkImage(
+                  fadeInDuration: const Duration(milliseconds: 500),
+                  fadeOutDuration: const Duration(milliseconds: 500),
+                  imageUrl: valueOrDefault<String>(
                     containerUsersRecord.photoUrl,
                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                   ),
@@ -121,7 +122,7 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +130,7 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

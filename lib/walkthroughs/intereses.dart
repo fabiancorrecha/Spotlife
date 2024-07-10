@@ -17,11 +17,11 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         enableOverlayTab: true,
         alignSkip: Alignment.bottomRight,
         shape: ShapeLightFocus.RRect,
-        color: Color(0x830F1316),
+        color: const Color(0x830F1316),
         contents: [
           TargetContent(
             align: ContentAlign.left,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: '',
             ),
           ),
@@ -38,7 +38,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Presiona continuar para seguir adelante con el proceso',
             ),
           ),

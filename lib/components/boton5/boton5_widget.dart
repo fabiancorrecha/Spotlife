@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton5_model.dart';
 export 'boton5_model.dart';
 
@@ -47,9 +45,9 @@ class _Boton5WidgetState extends State<Boton5Widget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
         child: InkWell(
           splashColor: Colors.transparent,
           focusColor: Colors.transparent,
@@ -60,13 +58,13 @@ class _Boton5WidgetState extends State<Boton5Widget> {
             logFirebaseEvent('Stack_execute_callback');
             await widget.action?.call();
           },
-          child: Container(
+          child: SizedBox(
             width: 316.0,
             height: 54.0,
             child: Stack(
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('BOTON5_COMP__BTN_ON_TAP');
@@ -80,9 +78,9 @@ class _Boton5WidgetState extends State<Boton5Widget> {
                       width: double.infinity,
                       height: double.infinity,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyMedium
@@ -94,7 +92,7 @@ class _Boton5WidgetState extends State<Boton5Widget> {
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       elevation: 4.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xFF333333),
                         width: 1.0,
                       ),
@@ -104,7 +102,7 @@ class _Boton5WidgetState extends State<Boton5Widget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -119,7 +117,7 @@ class _Boton5WidgetState extends State<Boton5Widget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Icon(
                             Icons.warning_rounded,
@@ -128,7 +126,7 @@ class _Boton5WidgetState extends State<Boton5Widget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,

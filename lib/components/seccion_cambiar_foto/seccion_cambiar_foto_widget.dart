@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'seccion_cambiar_foto_model.dart';
@@ -62,7 +63,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                 '',
               ).image,
             ),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(30.0),
@@ -73,7 +74,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
         Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0x7F1A1A1A), Color(0xFF1A1A1A)],
               stops: [0.4, 0.7],
@@ -85,9 +86,9 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
         Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,7 +99,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -148,9 +149,9 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                         width: 70.0,
                         height: 35.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).fondoIcono,
                         textStyle: FlutterFlowTheme.of(context)
                             .bodyMedium
@@ -165,7 +166,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                                       .bodyMediumFamily),
                             ),
                         elevation: 2.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -175,7 +176,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -247,22 +248,24 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 24.0),
                           child: Container(
                             width: 113.0,
                             height: 113.0,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: Image.network(
-                              valueOrDefault<String>(
+                            child: CachedNetworkImage(
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeOutDuration: const Duration(milliseconds: 500),
+                              imageUrl: valueOrDefault<String>(
                                 () {
-                                  if (_model.uploadedFileUrl != null &&
-                                      _model.uploadedFileUrl != '') {
+                                  if (_model.uploadedFileUrl != '') {
                                     return _model.uploadedFileUrl;
-                                  } else if (widget.usuario?.photoUrl != null &&
+                                  } else if (widget.usuario?.photoUrl !=
+                                          null &&
                                       widget.usuario?.photoUrl != '') {
                                     return widget.usuario?.photoUrl;
                                   } else {
@@ -276,7 +279,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 4.0, 0.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(

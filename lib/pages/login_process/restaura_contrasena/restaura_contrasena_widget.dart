@@ -60,7 +60,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.chevron_left,
               color: Colors.white,
               size: 30.0,
@@ -82,7 +82,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                       FlutterFlowTheme.of(context).headlineMediumFamily),
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -93,13 +93,13 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -130,7 +130,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: TextFormField(
                           controller: _model.nuevaconstraseaTextController,
                           focusNode: _model.nuevaconstraseaFocusNode,
@@ -151,35 +151,35 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                                           .bodyMediumFamily),
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFF333333),
+                            fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
                               onTap: () => setState(
                                 () => _model.nuevaconstraseaVisibility =
@@ -190,7 +190,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                                 _model.nuevaconstraseaVisibility
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                color: Color(0xFF757575),
+                                color: const Color(0xFF757575),
                                 size: 22.0,
                               ),
                             ),
@@ -221,7 +221,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: TextFormField(
                           controller:
                               _model.confirmaNuevaConstraseaTextController,
@@ -244,35 +244,35 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                                           .bodyMediumFamily),
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFF333333),
+                            fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
                               onTap: () => setState(
                                 () => _model.confirmaNuevaConstraseaVisibility =
@@ -315,18 +315,14 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                     texto: FFLocalizations.of(context).getText(
                       '6qavzof5' /* Siguiente */,
                     ),
-                    desabilitado: (_model.nuevaconstraseaTextController.text ==
-                                null ||
-                            _model.nuevaconstraseaTextController.text == '') ||
+                    desabilitado: (_model.nuevaconstraseaTextController.text == '') ||
                         (_model.confirmaNuevaConstraseaTextController.text ==
-                                null ||
-                            _model.confirmaNuevaConstraseaTextController.text ==
                                 ''),
                     accion: () async {},
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -348,7 +344,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,

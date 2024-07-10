@@ -5,8 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'seguridad_old_model.dart';
 export 'seguridad_old_model.dart';
@@ -49,7 +47,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -57,13 +55,13 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +84,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -116,9 +114,9 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     '5sybfmyo' /* Contraseña y seguridad */,
@@ -135,7 +133,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -159,7 +157,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                             return WebViewAware(
                               child: Padding(
                                 padding: MediaQuery.viewInsetsOf(context),
-                                child: CambioContrasenaWidget(),
+                                child: const CambioContrasenaWidget(),
                               ),
                             );
                           },
@@ -187,7 +185,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                             return WebViewAware(
                               child: Padding(
                                 padding: MediaQuery.viewInsetsOf(context),
-                                child: RecuperarContrasenaWidget(),
+                                child: const RecuperarContrasenaWidget(),
                               ),
                             );
                           },
@@ -205,7 +203,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                       accion: () async {},
                     ),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
             ),
           ],

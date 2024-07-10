@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'menu_reportar3_model.dart';
 export 'menu_reportar3_model.dart';
 
@@ -50,7 +48,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -64,13 +62,13 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                     child: Container(
                       width: 52.0,
                       height: 5.0,
@@ -82,7 +80,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'budvyh1p' /* Reportar */,
@@ -100,7 +98,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -128,7 +126,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 32.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
@@ -139,7 +137,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
                                       .bodyMediumFamily,
-                                  color: Color(0xFF737373),
+                                  color: const Color(0xFF737373),
                                   letterSpacing: 0.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)

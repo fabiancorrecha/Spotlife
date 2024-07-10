@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton_quinto_model.dart';
 export 'boton_quinto_model.dart';
 
@@ -49,7 +47,7 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
@@ -60,13 +58,13 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
           logFirebaseEvent('Stack_execute_callback');
           await widget.accion?.call();
         },
-        child: Container(
+        child: SizedBox(
           width: 316.0,
           height: 54.0,
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('BOTON_QUINTO_COMP__BTN_ON_TAP');
@@ -79,9 +77,9 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: double.infinity,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily:
@@ -91,7 +89,7 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     elevation: 4.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF333333),
                       width: 1.0,
                     ),
@@ -101,14 +99,14 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                         child: Text(
                           widget.texto!,
                           style: FlutterFlowTheme.of(context)

@@ -7,7 +7,6 @@ import '/components/usuarios_recomendados/usuarios_recomendados_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -112,7 +111,9 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
             ),
           );
         }
+
         final seguidoresYSeguidosUsersRecord = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -128,7 +129,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                 children: [
                   Container(
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: wrapWithModel(
                       model: _model.appBar4Model,
                       updateCallback: () => setState(() {}),
@@ -143,7 +144,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 32.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -247,8 +248,9 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                                         .map((e) => e)
                                         .toList();
                                 if (usuariosSegudos.isEmpty) {
-                                  return ComponenteVacioWidget();
+                                  return const ComponenteVacioWidget();
                                 }
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -277,8 +279,9 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                                         .map((e) => e)
                                         .toList();
                                 if (seguidores.isEmpty) {
-                                  return ComponenteVacioWidget();
+                                  return const ComponenteVacioWidget();
                                 }
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -305,7 +308,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                             wrapWithModel(
                               model: _model.usuariosRecomendadosModel,
                               updateCallback: () => setState(() {}),
-                              child: UsuariosRecomendadosWidget(),
+                              child: const UsuariosRecomendadosWidget(),
                             ).animateOnPageLoad(animationsMap[
                                 'usuariosRecomendadosOnPageLoadAnimation']!),
                         ],
@@ -322,7 +325,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                     wrapWithModel(
                       model: _model.navBar1Model,
                       updateCallback: () => setState(() {}),
-                      child: NavBar1Widget(
+                      child: const NavBar1Widget(
                         tabActiva: 3,
                       ),
                     ),

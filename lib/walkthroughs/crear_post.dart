@@ -25,7 +25,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Selecciona la imagen o el video que deseas publicar',
             ),
           ),
@@ -42,7 +42,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Escribe una descripcion  a cerca de tu post',
             ),
           ),
@@ -59,7 +59,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Presiona aqui para seleccionar la ubicacion de tu post',
             ),
           ),
@@ -76,7 +76,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Selecciona el tipo de privacidad de tu post (privado o publico)',
             ),
@@ -94,7 +94,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Presiona aqui para crear una coleccion donde vas a poder guardar todos tus post ',
             ),
@@ -112,7 +112,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Presiona aqui para publicar tu post',
             ),
           ),

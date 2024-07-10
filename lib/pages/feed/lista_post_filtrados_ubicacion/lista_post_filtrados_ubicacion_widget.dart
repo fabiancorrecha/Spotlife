@@ -15,7 +15,7 @@ class ListaPostFiltradosUbicacionWidget extends StatefulWidget {
     super.key,
     this.userPost,
     int? index,
-  }) : this.index = index ?? 0;
+  }) : index = index ?? 0;
 
   final UserPostsRecord? userPost;
   final int index;
@@ -73,12 +73,12 @@ class _ListaPostFiltradosUbicacionWidgetState
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: StreamBuilder<List<UserPostsRecord>>(
                     stream: queryUserPostsRecord(
                       queryBuilder: (userPostsRecord) => userPostsRecord.where(
                         'placeInfo.city',
-                        isEqualTo: widget.userPost?.placeInfo?.city,
+                        isEqualTo: widget.userPost?.placeInfo.city,
                       ),
                     ),
                     builder: (context, snapshot) {
@@ -98,8 +98,9 @@ class _ListaPostFiltradosUbicacionWidgetState
                       }
                       List<UserPostsRecord> listViewUserPostsRecordList =
                           snapshot.data!;
+
                       if (listViewUserPostsRecordList.isEmpty) {
-                        return Center(
+                        return const Center(
                           child: ComponenteVacioWidget(),
                         );
                       }
@@ -129,7 +130,7 @@ class _ListaPostFiltradosUbicacionWidgetState
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 2,
                 ),
               ),

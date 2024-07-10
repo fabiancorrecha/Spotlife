@@ -77,7 +77,7 @@ class _GridPostFiltradosUbicacionWidgetState
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 2,
                 ),
               ),

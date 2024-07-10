@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class CrearColeccionSinPostWidget extends StatefulWidget {
     super.key,
     bool? esColeccionFavorito,
     this.image,
-  }) : this.esColeccionFavorito = esColeccionFavorito ?? false;
+  }) : esColeccionFavorito = esColeccionFavorito ?? false;
 
   final bool esColeccionFavorito;
   final List<String>? image;
@@ -106,7 +107,7 @@ class _CrearColeccionSinPostWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,8 +120,7 @@ class _CrearColeccionSinPostWidgetState
                       onTap: () async {
                         logFirebaseEvent(
                             'CREAR_COLECCION_SIN_POST_Card_uryxx3ep_O');
-                        if (_model.uploadedFileUrl != null &&
-                            _model.uploadedFileUrl != '') {
+                        if (_model.uploadedFileUrl != '') {
                           logFirebaseEvent('Card_delete_data');
                           await FirebaseStorage.instance
                               .refFromURL(_model.uploadedFileUrl)
@@ -136,7 +136,7 @@ class _CrearColeccionSinPostWidgetState
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -174,10 +174,10 @@ class _CrearColeccionSinPostWidgetState
                 ),
               ),
               Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -186,11 +186,13 @@ class _CrearColeccionSinPostWidgetState
                           width: 40.0,
                           height: 40.0,
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
-                          child: Image.network(
-                            valueOrDefault<String>(
+                          child: CachedNetworkImage(
+                            fadeInDuration: const Duration(milliseconds: 500),
+                            fadeOutDuration: const Duration(milliseconds: 500),
+                            imageUrl: valueOrDefault<String>(
                               currentUserPhoto,
                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                             ),
@@ -200,14 +202,14 @@ class _CrearColeccionSinPostWidgetState
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: TextFormField(
                             controller: _model.tituloColeccionTextController,
                             focusNode: _model.tituloColeccionFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.tituloColeccionTextController',
-                              Duration(milliseconds: 300),
+                              const Duration(milliseconds: 300),
                               () => setState(() {}),
                             ),
                             autofocus: false,
@@ -230,42 +232,42 @@ class _CrearColeccionSinPostWidgetState
                                             FlutterFlowTheme.of(context)
                                                 .bodyMediumFamily),
                                   ),
-                              enabledBorder: UnderlineInputBorder(
+                              enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4.0),
                                   topRight: Radius.circular(4.0),
                                 ),
                               ),
-                              focusedBorder: UnderlineInputBorder(
+                              focusedBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4.0),
                                   topRight: Radius.circular(4.0),
                                 ),
                               ),
-                              errorBorder: UnderlineInputBorder(
+                              errorBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4.0),
                                   topRight: Radius.circular(4.0),
                                 ),
                               ),
-                              focusedErrorBorder: UnderlineInputBorder(
+                              focusedErrorBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4.0),
                                   topRight: Radius.circular(4.0),
                                 ),
@@ -290,8 +292,10 @@ class _CrearColeccionSinPostWidgetState
                       Expanded(
                         child: Builder(
                           builder: (context) {
-                            final imagenes =
-                                (widget.image?.toList() ?? []).take(1).toList();
+                            final imagenes = (widget.image?.toList() ?? [])
+                                .take(1)
+                                .toList();
+
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -368,7 +372,7 @@ class _CrearColeccionSinPostWidgetState
                                       }
                                     },
                                     child: Stack(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       children: [
                                         Container(
                                           width: 96.0,
@@ -386,7 +390,7 @@ class _CrearColeccionSinPostWidgetState
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Icon(
                                             Icons.upload_outlined,
                                             color: FlutterFlowTheme.of(context)
@@ -412,7 +416,7 @@ class _CrearColeccionSinPostWidgetState
                                               ),
                                             ),
                                             alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(0.0, 0.0),
                                             child: FaIcon(
                                               FontAwesomeIcons.circleNotch,
                                               color:
@@ -422,8 +426,7 @@ class _CrearColeccionSinPostWidgetState
                                             ).animateOnPageLoad(animationsMap[
                                                 'iconOnPageLoadAnimation']!),
                                           ),
-                                        if ((_model.uploadedFileUrl != null &&
-                                                _model.uploadedFileUrl != '') ||
+                                        if ((_model.uploadedFileUrl != '') ||
                                             (widget.image != null &&
                                                 (widget.image)!.isNotEmpty))
                                           Container(
@@ -443,8 +446,6 @@ class _CrearColeccionSinPostWidgetState
                                             ),
                                             child: Visibility(
                                               visible: (_model.uploadedFileUrl !=
-                                                          null &&
-                                                      _model.uploadedFileUrl !=
                                                           '') ||
                                                   (widget.image != null &&
                                                       (widget.image)!
@@ -476,7 +477,7 @@ class _CrearColeccionSinPostWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -503,42 +504,42 @@ class _CrearColeccionSinPostWidgetState
                                     FlutterFlowTheme.of(context)
                                         .bodyMediumFamily),
                               ),
-                          enabledBorder: UnderlineInputBorder(
+                          enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(4.0),
                               topRight: Radius.circular(4.0),
                             ),
                           ),
-                          focusedBorder: UnderlineInputBorder(
+                          focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(4.0),
                               topRight: Radius.circular(4.0),
                             ),
                           ),
-                          errorBorder: UnderlineInputBorder(
+                          errorBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(4.0),
                               topRight: Radius.circular(4.0),
                             ),
                           ),
-                          focusedErrorBorder: UnderlineInputBorder(
+                          focusedErrorBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(4.0),
                               topRight: Radius.circular(4.0),
                             ),
@@ -563,7 +564,7 @@ class _CrearColeccionSinPostWidgetState
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 32.0,
                 thickness: 1.0,
                 indent: 16.0,
@@ -571,13 +572,13 @@ class _CrearColeccionSinPostWidgetState
                 color: Color(0x27FAF7FA),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -608,9 +609,9 @@ class _CrearColeccionSinPostWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
                 child: Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -634,7 +635,7 @@ class _CrearColeccionSinPostWidgetState
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: Stack(
                                 children: [
                                   if (!_model.varPublico)
@@ -695,7 +696,7 @@ class _CrearColeccionSinPostWidgetState
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: Stack(
                                 children: [
                                   if (!_model.varAmigos)
@@ -756,7 +757,7 @@ class _CrearColeccionSinPostWidgetState
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: Stack(
                                 children: [
                                   if (!_model.varPrivado)
@@ -801,7 +802,7 @@ class _CrearColeccionSinPostWidgetState
                   ),
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 32.0,
                 thickness: 1.0,
                 indent: 16.0,
@@ -809,13 +810,13 @@ class _CrearColeccionSinPostWidgetState
                 color: Color(0x27FAF7FA),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -840,21 +841,21 @@ class _CrearColeccionSinPostWidgetState
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: FlutterFlowPlacePicker(
                         iOSGoogleMapsApiKey:
-                            'AIzaSyBPFPY-wOg7x310w7aVGhp1gpRpo_9TVz4',
+                            'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
                         androidGoogleMapsApiKey:
-                            'AIzaSyBXd-oSPKfc85tvGTa9nvkmw7yurBxR5og',
+                            'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
                         webGoogleMapsApiKey:
-                            'AIzaSyAHskm2jbC5FxoT9DoOhIcq2xKwl2zEYNQ',
+                            'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                         onSelect: (place) async {
                           setState(() => _model.placePickerValue = place);
                         },
                         defaultText: FFLocalizations.of(context).getText(
                           '8vioq8gd' /* Elige un lugar en el mapa */,
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.place,
                           color: Colors.white,
                           size: 16.0,
@@ -875,7 +876,7 @@ class _CrearColeccionSinPostWidgetState
                                     FlutterFlowTheme.of(context)
                                         .titleSmallFamily),
                               ),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -893,7 +894,7 @@ class _CrearColeccionSinPostWidgetState
                 tabletLandscape: false,
                 desktop: false,
               ))
-                Divider(
+                const Divider(
                   height: 32.0,
                   thickness: 1.0,
                   indent: 16.0,
@@ -908,7 +909,7 @@ class _CrearColeccionSinPostWidgetState
                 desktop: false,
               ))
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -942,7 +943,7 @@ class _CrearColeccionSinPostWidgetState
                       widget.esColeccionFavorito,
                   onChanged: (newValue) async {
                     setState(() =>
-                        _model.switchListTileTipoColeccionValue = newValue!);
+                        _model.switchListTileTipoColeccionValue = newValue);
                   },
                   subtitle: Text(
                     FFLocalizations.of(context).getText(
@@ -960,15 +961,14 @@ class _CrearColeccionSinPostWidgetState
                   dense: false,
                   controlAffinity: ListTileControlAffinity.trailing,
                 ),
-              Spacer(),
+              const Spacer(),
               wrapWithModel(
                 model: _model.boton1Model,
                 updateCallback: () => setState(() {}),
                 child: Boton1Widget(
                   texto: 'Crear',
                   desabilitado:
-                      _model.tituloColeccionTextController.text == null ||
-                          _model.tituloColeccionTextController.text == '',
+                      _model.tituloColeccionTextController.text == '',
                   accion: () async {
                     logFirebaseEvent(
                         'CREAR_COLECCION_SIN_POST_Container_7ji7l');

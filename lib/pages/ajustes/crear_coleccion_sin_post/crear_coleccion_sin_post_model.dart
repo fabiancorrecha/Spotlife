@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/place.dart';
 import 'crear_coleccion_sin_post_widget.dart' show CrearColeccionSinPostWidget;
 import 'package:flutter/material.dart';
 
@@ -34,7 +33,7 @@ class CrearColeccionSinPostModel
   String? Function(BuildContext, String?)?
       descripcionColeccionTextControllerValidator;
   // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
+  FFPlace placePickerValue = const FFPlace();
   // State field(s) for SwitchListTileTipoColeccion widget.
   bool? switchListTileTipoColeccionValue;
   // Model for boton1 component.

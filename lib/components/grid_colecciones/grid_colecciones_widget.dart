@@ -51,7 +51,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: StreamBuilder<List<CollectionsRecord>>(
         stream: queryCollectionsRecord(
           queryBuilder: (collectionsRecord) => collectionsRecord
@@ -81,9 +81,10 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
           }
           List<CollectionsRecord> gridViewCollectionsRecordList =
               snapshot.data!;
+
           return GridView.builder(
             padding: EdgeInsets.zero,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16.0,
               mainAxisSpacing: 16.0,
@@ -112,7 +113,9 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                       ),
                     );
                   }
+
                   final containerIUserUsersRecord = snapshot.data!;
+
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
@@ -210,6 +213,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                         List<UserPostsRecord>
                                             imageUserPostsRecordList =
                                             snapshot.data!;
+
                                         final imageUserPostsRecord =
                                             imageUserPostsRecordList.isNotEmpty
                                                 ? imageUserPostsRecordList.first
@@ -222,24 +226,14 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                               () {
                                                 if (gridViewCollectionsRecord
                                                             .imagen !=
-                                                        null &&
-                                                    gridViewCollectionsRecord
-                                                            .imagen !=
                                                         '') {
                                                   return gridViewCollectionsRecord
                                                       .imagen;
-                                                } else if ((imageUserPostsRecord
-                                                                ?.postPhotolist !=
-                                                            null &&
-                                                        (imageUserPostsRecord
-                                                                ?.postPhotolist)!
-                                                            .isNotEmpty) !=
-                                                    null) {
-                                                  return imageUserPostsRecord
-                                                      ?.postPhotolist?.first;
                                                 } else {
-                                                  return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/tk7vl1robaxz/Logo_Spotlife_Nuevo.png';
+                                                  return imageUserPostsRecord
+                                                    ?.postPhotolist.first;
                                                 }
+                                              
                                               }(),
                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/tk7vl1robaxz/Logo_Spotlife_Nuevo.png',
                                             ),
@@ -260,19 +254,19 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                         ),
                                         gradient: LinearGradient(
                                           colors: [
-                                            Color(0x005C52E2),
+                                            const Color(0x005C52E2),
                                             FlutterFlowTheme.of(context).primary
                                           ],
-                                          stops: [0.5, 1.0],
+                                          stops: const [0.5, 1.0],
                                           begin:
-                                              AlignmentDirectional(0.0, -1.0),
-                                          end: AlignmentDirectional(0, 1.0),
+                                              const AlignmentDirectional(0.0, -1.0),
+                                          end: const AlignmentDirectional(0, 1.0),
                                         ),
                                         borderRadius:
                                             BorderRadius.circular(20.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 10.0, 8.0, 10.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -310,7 +304,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
                                                                     context),
-                                                            child: Container(
+                                                            child: SizedBox(
                                                               height: 260.0,
                                                               child:
                                                                   DetallesDeColeccionWidget(
@@ -332,7 +326,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                     elevation: 0.0,
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   0.0,
@@ -352,14 +346,14 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                 ),
                                               ],
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 4.0),
                                                     child: Text(
@@ -393,7 +387,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                         .coleccionPublica)
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     4.0,
                                                                     0.0,
@@ -412,7 +406,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                         .coleccionAmigos)
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     4.0,
                                                                     0.0,
@@ -431,7 +425,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                                         .coleccionPrivada)
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     4.0,
                                                                     0.0,

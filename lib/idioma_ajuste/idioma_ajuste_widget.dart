@@ -47,7 +47,7 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -55,7 +55,7 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -111,10 +111,10 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'buomonyc' /* Puedes cambiar el idioma selec... */,
@@ -133,7 +133,7 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: FlutterFlowLanguageSelector(
                       width: 200.0,
                       height: 55.0,
@@ -142,7 +142,7 @@ class _IdiomaAjusteWidgetState extends State<IdiomaAjusteWidget> {
                       borderColor: Colors.transparent,
                       dropdownIconColor: Colors.white,
                       borderRadius: 8.0,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 13.0,

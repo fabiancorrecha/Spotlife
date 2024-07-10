@@ -6,8 +6,6 @@ import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/nav_bar2/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'otro_perfil_colecciones_model.dart';
 export 'otro_perfil_colecciones_model.dart';
@@ -77,6 +75,7 @@ class _OtroPerfilColeccionesWidgetState
         }
         List<CollectionsRecord> otroPerfilColeccionesCollectionsRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -127,7 +126,7 @@ class _OtroPerfilColeccionesWidgetState
                   wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 0,
                     ),
                   ),

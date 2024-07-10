@@ -7,8 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -76,13 +75,15 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(20.0),
@@ -93,7 +94,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                 child: Container(
                   width: 52.0,
                   height: 5.0,
@@ -120,19 +121,19 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Container(
                           height: 220.0,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: FutureBuilder<List<PostCommentRecord>>(
                               future: (_model.firestoreRequestCompleter ??=
@@ -165,9 +166,10 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                 List<PostCommentRecord>
                                     listViewComentariosPostCommentRecordList =
                                     snapshot.data!;
+
                                 if (listViewComentariosPostCommentRecordList
                                     .isEmpty) {
-                                  return SinComentariosWidget();
+                                  return const SinComentariosWidget();
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
@@ -182,7 +184,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                         listViewComentariosPostCommentRecordList[
                                             listViewComentariosIndex];
                                     return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 24.0),
                                       child: StreamBuilder<UsersRecord>(
                                         stream: UsersRecord.getDocument(
@@ -207,8 +209,10 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                               ),
                                             );
                                           }
+
                                           final columnComentarioUsersRecord =
                                               snapshot.data!;
+
                                           return InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -223,7 +227,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                 isScrollControlled: true,
                                                 backgroundColor:
                                                     Colors.transparent,
-                                                barrierColor: Color(0x00000000),
+                                                barrierColor: const Color(0x00000000),
                                                 enableDrag: false,
                                                 context: context,
                                                 builder: (context) {
@@ -232,7 +236,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
                                                               context),
-                                                      child: Container(
+                                                      child: SizedBox(
                                                         height: 151.0,
                                                         child:
                                                             MenuComentarioWidget(
@@ -251,7 +255,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 4.0),
                                                   child: Row(
@@ -266,13 +270,23 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                         clipBehavior:
                                                             Clip.antiAlias,
                                                         decoration:
-                                                            BoxDecoration(
+                                                            const BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                         ),
-                                                        child: Image.network(
-                                                          valueOrDefault<
-                                                              String>(
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          fadeOutDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          imageUrl:
+                                                              valueOrDefault<
+                                                                  String>(
                                                             columnComentarioUsersRecord
                                                                 .photoUrl,
                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
@@ -283,7 +297,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -471,6 +485,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                                     iconSIActividadRecordList =
                                                                     snapshot
                                                                         .data!;
+
                                                                 final iconSIActividadRecord =
                                                                     iconSIActividadRecordList
                                                                             .isNotEmpty
@@ -537,7 +552,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 4.0),
                                                   child: Row(
@@ -648,7 +663,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 31.0),
                         child: Container(
                           width: double.infinity,
@@ -665,7 +680,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 0.0, 0.0),
                                     child: TextFormField(
                                       controller:
@@ -673,7 +688,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                       focusNode: _model.commentFieldFocusNode,
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.commentFieldTextController',
-                                        Duration(milliseconds: 300),
+                                        const Duration(milliseconds: 300),
                                         () => setState(() {}),
                                       ),
                                       autofocus: true,
@@ -700,43 +715,43 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                               context)
                                                           .bodyMediumFamily),
                                             ),
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
-                                        errorBorder: UnderlineInputBorder(
+                                        errorBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
                                         ),
                                         focusedErrorBorder:
-                                            UnderlineInputBorder(
+                                            const UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
                                             topRight: Radius.circular(4.0),
                                           ),
@@ -763,9 +778,6 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: (_model.commentFieldTextController
-                                                  .text ==
-                                              null ||
-                                          _model.commentFieldTextController
                                                   .text ==
                                               '')
                                       ? null
@@ -916,9 +928,9 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                   options: FFButtonOptions(
                                     width: 80.0,
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color:
                                         FlutterFlowTheme.of(context).fondoIcono,
@@ -929,9 +941,6 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .titleSmallFamily,
                                           color: _model.commentFieldTextController
-                                                          .text ==
-                                                      null ||
-                                                  _model.commentFieldTextController
                                                           .text ==
                                                       ''
                                               ? FlutterFlowTheme.of(context)
@@ -946,7 +955,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                       .titleSmallFamily),
                                         ),
                                     elevation: 0.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),

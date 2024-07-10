@@ -84,11 +84,13 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: StreamBuilder<List<UserPostsRecord>>(
               stream: queryUserPostsRecord(
                 queryBuilder: (userPostsRecord) => userPostsRecord
@@ -115,9 +117,10 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                 }
                 List<UserPostsRecord> gridViewUserPostsRecordList =
                     snapshot.data!;
+
                 return GridView.builder(
                   padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
@@ -147,7 +150,9 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                             ),
                           );
                         }
+
                         final stackUserPostsRecord = snapshot.data!;
+
                         return Stack(
                           children: [
                             Builder(
@@ -155,6 +160,7 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                 final listaImagenes = gridViewUserPostsRecord
                                     .postPhotolist
                                     .toList();
+
                                 return SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
@@ -171,7 +177,7 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 0.323,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Visibility(
                                           visible:
                                               !gridViewUserPostsRecord.esVideo,
@@ -221,9 +227,9 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                                   child:
                                                       FlutterFlowExpandedImageView(
                                                     image: CachedNetworkImage(
-                                                      fadeInDuration: Duration(
+                                                      fadeInDuration: const Duration(
                                                           milliseconds: 500),
-                                                      fadeOutDuration: Duration(
+                                                      fadeOutDuration: const Duration(
                                                           milliseconds: 500),
                                                       imageUrl:
                                                           listaImagenesItem,
@@ -243,9 +249,9 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                                 child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
+                                                  fadeInDuration: const Duration(
                                                       milliseconds: 500),
-                                                  fadeOutDuration: Duration(
+                                                  fadeOutDuration: const Duration(
                                                       milliseconds: 500),
                                                   imageUrl: listaImagenesItem,
                                                   width: double.infinity,

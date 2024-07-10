@@ -45,10 +45,10 @@ class _BotonAddWidgetState extends State<BotonAddWidget> {
     return Container(
       width: 100.0,
       height: 100.0,
-      decoration: BoxDecoration(),
-      alignment: AlignmentDirectional(0.0, 0.0),
+      decoration: const BoxDecoration(),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Align(
-        alignment: AlignmentDirectional(0.0, 1.0),
+        alignment: const AlignmentDirectional(0.0, 1.0),
         child: InkWell(
           splashColor: Colors.transparent,
           focusColor: Colors.transparent,
@@ -66,7 +66,7 @@ class _BotonAddWidgetState extends State<BotonAddWidget> {
               borderRadius: BorderRadius.circular(100.0),
             ),
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Icon(
                 FFIcons.kadd,
                 color: FlutterFlowTheme.of(context).icono,

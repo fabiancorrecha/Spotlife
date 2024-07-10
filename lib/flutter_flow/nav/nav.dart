@@ -79,14 +79,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
-        child: appStateNotifier.loggedIn ? FeedWidget() : InicioWidget(),
+        child: appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
       ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? FeedWidget() : InicioWidget(),
+              appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
           routes: [
             FFRoute(
               name: 'inicio',
@@ -103,12 +103,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ingresaConTelefono',
               path: 'ingresaConTelefono',
-              builder: (context, params) => IngresaConTelefonoWidget(),
+              builder: (context, params) => const IngresaConTelefonoWidget(),
             ),
             FFRoute(
               name: 'ingresaTelefonoValidacion',
               path: 'ingresaTelefonoValidacion',
-              builder: (context, params) => IngresaTelefonoValidacionWidget(),
+              builder: (context, params) => const IngresaTelefonoValidacionWidget(),
             ),
             FFRoute(
               name: 'ingresaConUsernameValidacion',
@@ -123,76 +123,76 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ingresaConCorreo',
               path: 'ingresaConCorreo',
-              builder: (context, params) => IngresaConCorreoWidget(),
+              builder: (context, params) => const IngresaConCorreoWidget(),
             ),
             FFRoute(
               name: 'restauraContrasena',
               path: 'restauraContrasena',
-              builder: (context, params) => RestauraContrasenaWidget(),
+              builder: (context, params) => const RestauraContrasenaWidget(),
             ),
             FFRoute(
               name: 'ingresoOlvidoContrasena',
               path: 'ingresoOlvidoContrasena',
-              builder: (context, params) => IngresoOlvidoContrasenaWidget(),
+              builder: (context, params) => const IngresoOlvidoContrasenaWidget(),
             ),
             FFRoute(
               name: 'ingresaContrasenaListo',
               path: 'ingresaContrasenaListo',
-              builder: (context, params) => IngresaContrasenaListoWidget(),
+              builder: (context, params) => const IngresaContrasenaListoWidget(),
             ),
             FFRoute(
               name: 'creaCuentaUserName-telefono',
               path: 'creaCuentaUserNameTelefono',
-              builder: (context, params) => CreaCuentaUserNameTelefonoWidget(),
+              builder: (context, params) => const CreaCuentaUserNameTelefonoWidget(),
             ),
             FFRoute(
               name: 'creaCuentaUserName-Correo',
               path: 'creaCuentaUserNameCorreo',
-              builder: (context, params) => CreaCuentaUserNameCorreoWidget(),
+              builder: (context, params) => const CreaCuentaUserNameCorreoWidget(),
             ),
             FFRoute(
               name: 'creaCuentaCorreo',
               path: 'creaCuentaCorreo',
-              builder: (context, params) => CreaCuentaCorreoWidget(),
+              builder: (context, params) => const CreaCuentaCorreoWidget(),
             ),
             FFRoute(
               name: 'creaCuentaCelular',
               path: 'creaCuentaCelular',
-              builder: (context, params) => CreaCuentaCelularWidget(),
+              builder: (context, params) => const CreaCuentaCelularWidget(),
             ),
             FFRoute(
               name: 'crearCuentaTelefonoValidacion',
               path: 'crearCuentaTelefonoValidacion',
               builder: (context, params) =>
-                  CrearCuentaTelefonoValidacionWidget(),
+                  const CrearCuentaTelefonoValidacionWidget(),
             ),
             FFRoute(
               name: 'creaCuentaContrasenha',
               path: 'creaCuentaContrasenha',
-              builder: (context, params) => CreaCuentaContrasenhaWidget(),
+              builder: (context, params) => const CreaCuentaContrasenhaWidget(),
             ),
             FFRoute(
               name: 'Intereses',
               path: 'intereses',
               requireAuth: true,
-              builder: (context, params) => InteresesWidget(),
+              builder: (context, params) => const InteresesWidget(),
             ),
             FFRoute(
               name: 'primerosSeguidos',
               path: 'primerosSeguidos',
               requireAuth: true,
-              builder: (context, params) => PrimerosSeguidosWidget(),
+              builder: (context, params) => const PrimerosSeguidosWidget(),
             ),
             FFRoute(
               name: 'Bienvenida',
               path: 'bienvenida',
-              builder: (context, params) => BienvenidaWidget(),
+              builder: (context, params) => const BienvenidaWidget(),
             ),
             FFRoute(
               name: 'Feed',
               path: 'feed',
               requireAuth: true,
-              builder: (context, params) => FeedWidget(),
+              builder: (context, params) => const FeedWidget(),
             ),
             FFRoute(
               name: 'gridPostFiltradosUbicacion',
@@ -291,37 +291,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'perfilPropio',
               path: 'perfilPropio',
               requireAuth: true,
-              builder: (context, params) => PerfilPropioWidget(),
+              builder: (context, params) => const PerfilPropioWidget(),
             ),
             FFRoute(
               name: 'miperfilMapa',
               path: 'miperfilMapa',
               requireAuth: true,
-              builder: (context, params) => MiperfilMapaWidget(),
+              builder: (context, params) => const MiperfilMapaWidget(),
             ),
             FFRoute(
               name: 'miperfilColeciones',
               path: 'miperfilColeciones',
               requireAuth: true,
-              builder: (context, params) => MiperfilColecionesWidget(),
+              builder: (context, params) => const MiperfilColecionesWidget(),
             ),
             FFRoute(
               name: 'miPerfilMapaPin3',
               path: 'miPerfilMapaPin3',
               requireAuth: true,
-              builder: (context, params) => MiPerfilMapaPin3Widget(),
+              builder: (context, params) => const MiPerfilMapaPin3Widget(),
             ),
             FFRoute(
               name: 'miPerfilEditarPerfil',
               path: 'miPerfilEditarPerfil',
               requireAuth: true,
-              builder: (context, params) => MiPerfilEditarPerfilWidget(),
+              builder: (context, params) => const MiPerfilEditarPerfilWidget(),
             ),
             FFRoute(
               name: 'ajustes_Favoritos',
               path: 'ajustesFavoritos',
               requireAuth: true,
-              builder: (context, params) => AjustesFavoritosWidget(),
+              builder: (context, params) => const AjustesFavoritosWidget(),
             ),
             FFRoute(
               name: 'CrearColeccionConPost',
@@ -349,7 +349,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'AjusteMejoresAmigos',
               path: 'ajusteMejoresAmigos',
               requireAuth: true,
-              builder: (context, params) => AjusteMejoresAmigosWidget(),
+              builder: (context, params) => const AjusteMejoresAmigosWidget(),
             ),
             FFRoute(
               name: 'otroPerfil',
@@ -367,7 +367,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'AjustesPedidosPagos',
               path: 'ajustesPedidosPagos',
               requireAuth: true,
-              builder: (context, params) => AjustesPedidosPagosWidget(),
+              builder: (context, params) => const AjustesPedidosPagosWidget(),
             ),
             FFRoute(
               name: 'otroPerfilMapa',
@@ -399,54 +399,54 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'otroPerfilMapaPin',
               path: 'otroPerfilMapaPin',
               requireAuth: true,
-              builder: (context, params) => OtroPerfilMapaPinWidget(),
+              builder: (context, params) => const OtroPerfilMapaPinWidget(),
             ),
             FFRoute(
               name: 'mapaPosrRecomendados',
               path: 'mapaPosrRecomendados',
               requireAuth: true,
-              builder: (context, params) => MapaPosrRecomendadosWidget(),
+              builder: (context, params) => const MapaPosrRecomendadosWidget(),
             ),
             FFRoute(
               name: 'notificaciones',
               path: 'notificaciones',
               requireAuth: true,
-              builder: (context, params) => NotificacionesWidget(),
+              builder: (context, params) => const NotificacionesWidget(),
             ),
             FFRoute(
               name: 'mapaPrincipal',
               path: 'mapaPrincipal',
-              builder: (context, params) => MapaPrincipalWidget(),
+              builder: (context, params) => const MapaPrincipalWidget(),
             ),
             FFRoute(
               name: 'mapaPost',
               path: 'mapaPost',
               requireAuth: true,
-              builder: (context, params) => MapaPostWidget(),
+              builder: (context, params) => const MapaPostWidget(),
             ),
             FFRoute(
               name: 'mapaFiltrarSpots',
               path: 'mapaFiltrarSpots',
               requireAuth: true,
-              builder: (context, params) => MapaFiltrarSpotsWidget(),
+              builder: (context, params) => const MapaFiltrarSpotsWidget(),
             ),
             FFRoute(
               name: 'buscarSpots',
               path: 'mapaBuscando',
               requireAuth: true,
-              builder: (context, params) => BuscarSpotsWidget(),
+              builder: (context, params) => const BuscarSpotsWidget(),
             ),
             FFRoute(
               name: 'buscarPerfil',
               path: 'buscarPerfil',
               requireAuth: true,
-              builder: (context, params) => BuscarPerfilWidget(),
+              builder: (context, params) => const BuscarPerfilWidget(),
             ),
             FFRoute(
               name: 'buscarLugares',
               path: 'buscarLugares',
               requireAuth: true,
-              builder: (context, params) => BuscarLugaresWidget(),
+              builder: (context, params) => const BuscarLugaresWidget(),
             ),
             FFRoute(
               name: 'CrearPost',
@@ -462,13 +462,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'paginaTOS',
               path: 'paginaTOS',
-              builder: (context, params) => PaginaTOSWidget(),
+              builder: (context, params) => const PaginaTOSWidget(),
             ),
             FFRoute(
               name: 'cuentasBloqueadas',
               path: 'cuentasBloqueadas',
               requireAuth: true,
-              builder: (context, params) => CuentasBloqueadasWidget(),
+              builder: (context, params) => const CuentasBloqueadasWidget(),
             ),
             FFRoute(
               name: 'detallePost',
@@ -556,84 +556,84 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'metodo_de_pago',
               path: 'metodoDePago',
               requireAuth: true,
-              builder: (context, params) => MetodoDePagoWidget(),
+              builder: (context, params) => const MetodoDePagoWidget(),
             ),
             FFRoute(
               name: 'informacin_contacto',
               path: 'informacinContacto',
               requireAuth: true,
-              builder: (context, params) => InformacinContactoWidget(),
+              builder: (context, params) => const InformacinContactoWidget(),
             ),
             FFRoute(
               name: 'configuracion_pagina',
               path: 'configuracionPagina',
-              builder: (context, params) => ConfiguracionPaginaWidget(),
+              builder: (context, params) => const ConfiguracionPaginaWidget(),
             ),
             FFRoute(
               name: 'invitar_amigos_pagina',
               path: 'invitarAmigosPagina',
-              builder: (context, params) => InvitarAmigosPaginaWidget(),
+              builder: (context, params) => const InvitarAmigosPaginaWidget(),
             ),
             FFRoute(
               name: 'notificaciones_pagina',
               path: 'notificacionesPagina',
-              builder: (context, params) => NotificacionesPaginaWidget(),
+              builder: (context, params) => const NotificacionesPaginaWidget(),
             ),
             FFRoute(
               name: 'privacidad_cuenta',
               path: 'privacidadCuenta',
-              builder: (context, params) => PrivacidadCuentaWidget(),
+              builder: (context, params) => const PrivacidadCuentaWidget(),
             ),
             FFRoute(
               name: 'seguridad_pagina',
               path: 'seguridadPagina',
-              builder: (context, params) => SeguridadPaginaWidget(),
+              builder: (context, params) => const SeguridadPaginaWidget(),
             ),
             FFRoute(
               name: 'cuenta_ajuste_pagina',
               path: 'cuentaAjustePagina',
-              builder: (context, params) => CuentaAjustePaginaWidget(),
+              builder: (context, params) => const CuentaAjustePaginaWidget(),
             ),
             FFRoute(
               name: 'ayuda_pagina',
               path: 'ayudaPagina',
-              builder: (context, params) => AyudaPaginaWidget(),
+              builder: (context, params) => const AyudaPaginaWidget(),
             ),
             FFRoute(
               name: 'informacion_ajuste_pagina',
               path: 'informacionAjustePagina',
-              builder: (context, params) => InformacionAjustePaginaWidget(),
+              builder: (context, params) => const InformacionAjustePaginaWidget(),
             ),
             FFRoute(
               name: 'busquedas_recientes_pagina',
               path: 'busquedasRecientesPagina',
-              builder: (context, params) => BusquedasRecientesPaginaWidget(),
+              builder: (context, params) => const BusquedasRecientesPaginaWidget(),
             ),
             FFRoute(
               name: 'idioma_ajuste',
               path: 'idioma_ajuste',
-              builder: (context, params) => IdiomaAjusteWidget(),
+              builder: (context, params) => const IdiomaAjusteWidget(),
             ),
             FFRoute(
               name: 'cuenta_ajuste_paginaCopy',
               path: 'cuentaAjustePaginaCopy',
-              builder: (context, params) => CuentaAjustePaginaCopyWidget(),
+              builder: (context, params) => const CuentaAjustePaginaCopyWidget(),
             ),
             FFRoute(
               name: 'FechadeNacimiento',
               path: 'fechadeNacimiento',
               requireAuth: true,
-              builder: (context, params) => FechadeNacimientoWidget(),
+              builder: (context, params) => const FechadeNacimientoWidget(),
             ),
             FFRoute(
               name: 'mapaPrincipalCopy',
               path: 'mapaPrincipalCopy',
-              builder: (context, params) => MapaPrincipalCopyWidget(),
+              builder: (context, params) => const MapaPrincipalCopyWidget(),
             ),
             FFRoute(
               name: 'TodosLosChats',
               path: 'todosLosChats',
-              builder: (context, params) => TodosLosChatsWidget(),
+              builder: (context, params) => const TodosLosChatsWidget(),
             ),
             FFRoute(
               name: 'ChatPage',
@@ -646,6 +646,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   collectionNamePath: ['chats'],
                 ),
               ),
+            ),
+            FFRoute(
+              name: 'HerramientasPromocion',
+              path: 'herramientasPromocion',
+              builder: (context, params) => const HerramientasPromocionWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -888,15 +893,14 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class _RouteErrorBuilder extends StatefulWidget {
   const _RouteErrorBuilder({
-    Key? key,
     required this.state,
     required this.child,
-  }) : super(key: key);
+  });
 
   final GoRouterState state;
   final Widget child;

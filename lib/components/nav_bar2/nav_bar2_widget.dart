@@ -9,7 +9,7 @@ class NavBar2Widget extends StatefulWidget {
     super.key,
     int? tab,
     this.otroUsuario,
-  }) : this.tab = tab ?? 0;
+  }) : tab = tab ?? 0;
 
   final int tab;
   final DocumentReference? otroUsuario;
@@ -45,14 +45,14 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
         height: 64.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -79,7 +79,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -94,7 +94,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'perfilPropio',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -105,7 +105,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 0)
                       Icon(
@@ -144,7 +144,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -159,7 +159,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'miperfilMapa',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -170,7 +170,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 1)
                       Icon(
@@ -209,7 +209,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -224,7 +224,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'miperfilColeciones',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -235,7 +235,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 2)
                       Icon(

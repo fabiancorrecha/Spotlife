@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -56,16 +55,16 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
         children: [
           if (FFAppState().inicioSesion != 'correo')
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -83,9 +82,9 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -100,7 +99,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                                           .bodyMediumFamily),
                                 ),
                             elevation: 4.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF333333),
                               width: 1.0,
                             ),
@@ -109,7 +108,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/mail_(1)_1.png',
                           width: 22.0,
@@ -124,16 +123,16 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
             ),
           if (FFAppState().inicioSesion == 'correo')
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -151,9 +150,9 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -168,7 +167,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                                           .bodyMediumFamily),
                                 ),
                             elevation: 4.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF333333),
                               width: 1.0,
                             ),
@@ -177,7 +176,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/phone_1_(1).png',
                           width: 22.0,
@@ -192,10 +191,10 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
             ),
           if (isiOS)
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
@@ -203,7 +202,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                       isAndroid
                           ? Container()
                           : Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
@@ -243,9 +242,9 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 8.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
@@ -261,7 +260,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                                                     .bodyMediumFamily),
                                       ),
                                   elevation: 4.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF333333),
                                     width: 1.0,
                                   ),
@@ -270,7 +269,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                               ),
                             ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/apple_(1)_1.png',
                           width: 25.0,
@@ -284,16 +283,16 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
               ),
             ),
           Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-              child: Container(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              child: SizedBox(
                 width: 316.0,
                 height: 54.0,
                 child: Stack(
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -328,7 +327,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                             'FechadeNacimiento',
                             context.mounted,
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -342,9 +341,9 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: double.infinity,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 8.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           textStyle: FlutterFlowTheme.of(context)
@@ -358,7 +357,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                                         .bodyMediumFamily),
                               ),
                           elevation: 4.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0xFF333333),
                             width: 1.0,
                           ),
@@ -367,12 +366,12 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.83, 0.0),
+                      alignment: const AlignmentDirectional(-0.83, 0.0),
                       child: Container(
                         width: 22.0,
                         height: 22.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(

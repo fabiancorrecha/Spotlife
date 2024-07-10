@@ -1,5 +1,3 @@
-// ignore: unused_import
-import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 const kPermissionStateToBool = {
@@ -10,10 +8,10 @@ const kPermissionStateToBool = {
   PermissionStatus.permanentlyDenied: false,
 };
 
-final cameraPermission = Permission.camera;
-final microphonePermission = Permission.microphone;
-final photoLibraryPermission = Permission.photos;
-final locationPermission = Permission.location;
+const cameraPermission = Permission.camera;
+const microphonePermission = Permission.microphone;
+const photoLibraryPermission = Permission.photos;
+const locationPermission = Permission.location;
 
 Future<bool> getPermissionStatus(Permission setting) async {
   final status = await setting.status;

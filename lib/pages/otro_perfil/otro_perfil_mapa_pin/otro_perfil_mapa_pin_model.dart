@@ -32,7 +32,9 @@ class OtroPerfilMapaPinModel extends FlutterFlowModel<OtroPerfilMapaPinWidget> {
   void dispose() {
     unfocusNode.dispose();
     appBar2Model.dispose();
-    listViewStreamSubscriptions.forEach((s) => s?.cancel());
+    for (var s in listViewStreamSubscriptions) {
+      s?.cancel();
+    }
     listViewPagingController?.dispose();
 
     navBar1Model.dispose();

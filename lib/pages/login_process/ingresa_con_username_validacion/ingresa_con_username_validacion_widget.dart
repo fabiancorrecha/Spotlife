@@ -1,8 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,7 +87,7 @@ class _IngresaConUsernameValidacionWidgetState
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -100,7 +98,7 @@ class _IngresaConUsernameValidacionWidgetState
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -111,13 +109,13 @@ class _IngresaConUsernameValidacionWidgetState
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: TextFormField(
                           controller: _model.emailTextController,
                           focusNode: _model.emailFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.emailTextController',
-                            Duration(milliseconds: 200),
+                            const Duration(milliseconds: 200),
                             () => setState(() {}),
                           ),
                           autofocus: true,
@@ -137,35 +135,35 @@ class _IngresaConUsernameValidacionWidgetState
                                           .bodyMediumFamily),
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFF333333),
+                            fillColor: const Color(0xFF333333),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
@@ -192,7 +190,7 @@ class _IngresaConUsernameValidacionWidgetState
                     Expanded(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: TextFormField(
                           controller: _model.contrasenaTextController,
                           focusNode: _model.contrasenaFocusNode,
@@ -213,35 +211,35 @@ class _IngresaConUsernameValidacionWidgetState
                                           .bodyMediumFamily),
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFF333333),
+                            fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
                               onTap: () => setState(
                                 () => _model.contrasenaVisibility =

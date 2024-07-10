@@ -4,13 +4,10 @@ import '/components/ver_comentarios/ver_comentarios_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unnecessary_import
-import 'package:page_transition/page_transition.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'post_imagen_model.dart';
 export 'post_imagen_model.dart';
@@ -51,7 +48,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: 539.0,
       ),
       decoration: BoxDecoration(
@@ -101,10 +98,10 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
             child: Container(
               height: 50.0,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -124,11 +121,14 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                       width: 40.0,
                       height: 40.0,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                      child: CachedNetworkImage(
+                        fadeInDuration: const Duration(milliseconds: 500),
+                        fadeOutDuration: const Duration(milliseconds: 500),
+                        imageUrl:
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -136,7 +136,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -230,13 +230,13 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Color(0x00000000),
+                        barrierColor: const Color(0x00000000),
                         context: context,
                         builder: (context) {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
+                              child: const SizedBox(
                                 height: 319.0,
                                 child: MenuPostAjenoWidget(),
                               ),
@@ -256,12 +256,12 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
               child: Container(
                 height: 140.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -269,7 +269,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 3.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
@@ -309,7 +309,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -318,7 +318,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
                                   FFIcons.kheartLines,
@@ -327,7 +327,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -341,18 +341,18 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
-                                      barrierColor: Color(0x00000000),
+                                      barrierColor: const Color(0x00000000),
                                       context: context,
                                       builder: (context) {
                                         return WebViewAware(
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: Container(
+                                            child: SizedBox(
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
                                                   0.5,
-                                              child: VerComentariosWidget(),
+                                              child: const VerComentariosWidget(),
                                             ),
                                           ),
                                         );
@@ -388,18 +388,18 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
                                       return WebViewAware(
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.5,
-                                            child: FavoritoAColeccionWidget(),
+                                            child: const FavoritoAColeccionWidget(),
                                           ),
                                         ),
                                       );
@@ -413,7 +413,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     5.0, 0.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -441,7 +441,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -471,7 +471,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -484,13 +484,13 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
-                            barrierColor: Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             context: context,
                             builder: (context) {
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 368.0,
                                     child: VerComentariosWidget(),
                                   ),
@@ -507,7 +507,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                               width: 20.0,
                               height: 20.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
@@ -517,7 +517,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -545,7 +545,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

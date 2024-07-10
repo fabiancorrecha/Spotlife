@@ -5,8 +5,6 @@ import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/tarjeta_lista01/tarjeta_lista01_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,19 +61,19 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 16.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -94,7 +92,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Icon(
                                   FFIcons.karrowBack,
                                   color: FlutterFlowTheme.of(context).icono,
@@ -106,14 +104,14 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 16.0, 0.0),
                             child: TextFormField(
                               controller: _model.textFieldBuscarTextController,
                               focusNode: _model.textFieldBuscarFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.textFieldBuscarTextController',
-                                Duration(milliseconds: 1500),
+                                const Duration(milliseconds: 1500),
                                 () async {
                                   logFirebaseEvent(
                                       'BUSCAR_PERFIL_TextFieldBuscar_ON_TEXTFIE');
@@ -151,28 +149,28 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                                                   .bodySmallFamily),
                                     ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
@@ -181,7 +179,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                                 filled: true,
                                 fillColor:
                                     FlutterFlowTheme.of(context).fondoIcono,
-                                suffixIcon: Icon(
+                                suffixIcon: const Icon(
                                   FFIcons.ksearch,
                                   color: Color(0xFF757575),
                                   size: 22.0,
@@ -222,7 +220,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Icon(
                                   FFIcons.kframe169,
                                   color: FlutterFlowTheme.of(context).icono,
@@ -239,7 +237,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
               wrapWithModel(
                 model: _model.menu02Model,
                 updateCallback: () => setState(() {}),
-                child: Menu02Widget(
+                child: const Menu02Widget(
                   seccion: 2,
                 ),
               ),
@@ -262,8 +260,9 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                     final listadoUsuarios =
                         _model.algoliaSearchResults?.toList() ?? [];
                     if (listadoUsuarios.isEmpty) {
-                      return ComponenteVacioWidget();
+                      return const ComponenteVacioWidget();
                     }
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -287,7 +286,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
               wrapWithModel(
                 model: _model.navBar1Model,
                 updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                child: const NavBar1Widget(
                   tabActiva: 4,
                 ),
               ),

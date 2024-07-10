@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '/components/texto_widget.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_theme.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_util.dart';
 
 // Focus widget keys for this walkthrough
 final containerT7zd4lzn = GlobalKey();
@@ -26,7 +22,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Aqui podras visualizar la cantidad de Spots, Seguidores y Editar tu Perfil, entre otras funcionalidades que podras disfrutar',
             ),
@@ -44,7 +40,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Interactua con la barra de navegacion de tu perfil para tener las diferentes vistas de tus publicaciones',
             ),
@@ -62,7 +58,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Desplazate por diferentes secciones de nuestra aplicacion utilizando la barra de navegacion que tienes la parte inferior de la pantalla',
             ),

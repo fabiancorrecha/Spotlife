@@ -41,7 +41,9 @@ class FeedModel extends FlutterFlowModel<FeedWidget> {
     feedController?.finish();
     unfocusNode.dispose();
     appBarModel.dispose();
-    listViewStreamSubscriptions.forEach((s) => s?.cancel());
+    for (var s in listViewStreamSubscriptions) {
+      s?.cancel();
+    }
     listViewPagingController?.dispose();
 
     usuariosRecomendadosModel.dispose();

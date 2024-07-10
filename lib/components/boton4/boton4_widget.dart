@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton4_model.dart';
 export 'boton4_model.dart';
 
@@ -66,12 +64,12 @@ class _Boton4WidgetState extends State<Boton4Widget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: Color(0xFF333333),
+            color: const Color(0xFF333333),
             width: 1.0,
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -92,7 +90,7 @@ class _Boton4WidgetState extends State<Boton4Widget> {
                           FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
               ),
-            ].divide(SizedBox(width: 24.0)),
+            ].divide(const SizedBox(width: 24.0)),
           ),
         ),
       ),

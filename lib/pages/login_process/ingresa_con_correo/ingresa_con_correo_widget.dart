@@ -1,13 +1,9 @@
-// ignore: unnecessary_import
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/components/login_options/login_options_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -95,7 +91,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -123,6 +119,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
               );
             }
             List<UsersRecord> containerUsersRecordList = snapshot.data!;
+
             final containerUsersRecord = containerUsersRecordList.isNotEmpty
                 ? containerUsersRecordList.first
                 : null;
@@ -133,7 +130,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -150,14 +147,14 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 8.0),
                                     child: TextFormField(
                                       controller: _model.emailTextController,
                                       focusNode: _model.emailFocusNode,
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.emailTextController',
-                                        Duration(milliseconds: 200),
+                                        const Duration(milliseconds: 200),
                                         () => setState(() {}),
                                       ),
                                       autofocus: false,
@@ -182,7 +179,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                                           .bodyMediumFamily),
                                             ),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -190,7 +187,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -198,7 +195,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -207,7 +204,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                         ),
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -215,7 +212,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         filled: true,
-                                        fillColor: Color(0xFF333333),
+                                        fillColor: const Color(0xFF333333),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -245,7 +242,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 8.0),
                                     child: TextFormField(
                                       controller:
@@ -253,7 +250,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                       focusNode: _model.contrasenaFocusNode,
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.contrasenaTextController',
-                                        Duration(milliseconds: 200),
+                                        const Duration(milliseconds: 200),
                                         () => setState(() {}),
                                       ),
                                       autofocus: false,
@@ -278,7 +275,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                                           .bodyMediumFamily),
                                             ),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -286,7 +283,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -294,7 +291,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -303,7 +300,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                         ),
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -311,7 +308,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         filled: true,
-                                        fillColor: Color(0xFF333333),
+                                        fillColor: const Color(0xFF333333),
                                         suffixIcon: InkWell(
                                           onTap: () => setState(
                                             () => _model.contrasenaVisibility =
@@ -354,7 +351,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -441,7 +438,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -450,7 +447,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                   if (containerUsersRecord != null)
                                     Text(
                                       valueOrDefault<String>(
-                                        containerUsersRecord?.userName,
+                                        containerUsersRecord.userName,
                                         'No ',
                                       ),
                                       textAlign: TextAlign.end,
@@ -474,7 +471,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -525,14 +522,9 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                 texto: FFLocalizations.of(context).getText(
                                   'gz2yu9wi' /* Continuar */,
                                 ),
-                                desabilitado: (_model
-                                                    .emailTextController.text ==
-                                                null ||
-                                            _model.emailTextController.text ==
+                                desabilitado: (_model.emailTextController.text ==
                                                 '') ||
-                                        (_model.contrasenaTextController.text ==
-                                                null ||
-                                            _model.contrasenaTextController
+                                        (_model.contrasenaTextController
                                                     .text ==
                                                 '')
                                     ? true
@@ -609,7 +601,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                                 .primaryText,
                                           ),
                                         ),
-                                        duration: Duration(milliseconds: 2000),
+                                        duration: const Duration(milliseconds: 2000),
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .primary,
@@ -624,7 +616,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -649,7 +641,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                   ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -692,7 +684,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 24.0, 0.0, 24.0),
                         child: Image.asset(
                           'assets/images/Frame_30_(1).png',
@@ -704,7 +696,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                       wrapWithModel(
                         model: _model.loginOptionsModel,
                         updateCallback: () => setState(() {}),
-                        child: LoginOptionsWidget(),
+                        child: const LoginOptionsWidget(),
                       ),
                     ],
                   ),

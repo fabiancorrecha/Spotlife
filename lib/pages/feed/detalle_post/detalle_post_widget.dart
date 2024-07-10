@@ -55,11 +55,11 @@ class _DetallePostWidgetState extends State<DetallePostWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
                 child: wrapWithModel(
                   model: _model.appBar4Model,
                   updateCallback: () => setState(() {}),
-                  child: AppBar4Widget(
+                  child: const AppBar4Widget(
                     textValue: 'Spot',
                   ),
                 ),

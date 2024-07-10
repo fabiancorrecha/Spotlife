@@ -1454,6 +1454,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Guardar fotos originales',
       'en': 'Save original photos',
     },
+    'mpvymhzi': {
+      'es': 'Herramientas cuenta profesional ',
+      'en': '',
+    },
+    'j415er89': {
+      'es': 'Herramientas promoción',
+      'en': '',
+    },
+    'djmcpi98': {
+      'es': 'Solicitar verificación',
+      'en': '',
+    },
+    'rha6ba9z': {
+      'es': 'Cambiar a cuenta Pro/Empresa',
+      'en': '',
+    },
     'gp0ejsaa': {
       'es': 'Idioma',
       'en': '',
@@ -1627,6 +1643,53 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'sgqps3c2': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // HerramientasPromocion
+  {
+    'ftvqagho': {
+      'es': 'Herramientas\nPromocion',
+      'en': '',
+    },
+    '2t49hy0q': {
+      'es': 'Lista Herramientas',
+      'en': '',
+    },
+    '4huaujyh': {
+      'es': 'Promocion Spot',
+      'en': '',
+    },
+    '660zsyws': {
+      'es': 'Evento 24h-48h en vivo',
+      'en': '',
+    },
+    'clr5fsyx': {
+      'es': 'Reto-Gymkana',
+      'en': '',
+    },
+    'xl35jx67': {
+      'es': 'Analisis demografico usuarios',
+      'en': '',
+    },
+    '7jr2trll': {
+      'es': 'Medallas PoAp',
+      'en': '',
+    },
+    'kw3p2a38': {
+      'es': ' (prueba de asistencia)',
+      'en': '',
+    },
+    'qe3fu7w9': {
+      'es': 'Crear Medalla POAP',
+      'en': '',
+    },
+    'anenfxgi': {
+      'es': 'Medallas Activas',
+      'en': '',
+    },
+    'fthrtj3q': {
       'es': 'Home',
       'en': '',
     },
@@ -2833,6 +2896,178 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'emlyuk4m': {
       'es': 'Omitir',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro
+  {
+    'crlx7wqy': {
+      'es': 'Cambia a una cuenta profesional',
+      'en': '',
+    },
+    'guwcfq8h': {
+      'es':
+          'Con tu cuenta Pro/Empresa en Spotlife te daras a conocer a una audiencia segmentada de una forma real, visual y sencilla.',
+      'en': '',
+    },
+    'c9mxpefe': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro2
+  {
+    '8y1iuke1': {
+      'es': 'Obten herramientas exclusivas para promocionarte',
+      'en': '',
+    },
+    '3wy79mct': {
+      'es':
+          'Tendras acceso a herramientas de promocion exclusivas, que te permiten interactuar con tu publico objetivo de forma facil y real ',
+      'en': '',
+    },
+    'no6l5933': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro3
+  {
+    'hncwftot': {
+      'es': 'Llega a mas personas',
+      'en': '',
+    },
+    'kh22gl2q': {
+      'es':
+          'Crea promociones en Spotlife, para llegar a tu publico de forma natural a traves de los spots favoritos de tu publico objetivo.',
+      'en': '',
+    },
+    'wm66d621': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro4
+  {
+    'c9pj9bpa': {
+      'es': 'Obten informacion e interactua con tu comunidad',
+      'en': '',
+    },
+    'uogz1f16': {
+      'es':
+          'Tu lugar se convertira en un spot oficial, donde los demas usuarios odran ver todos los usuarios que lo visitan.\n\nAdemas tendras canales para comunicarte con esta comunidad de forma divertida y efectiva.',
+      'en': '',
+    },
+    'mbwqg7c7': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntroCobro
+  {
+    'tqcruyxq': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'stfsr3i7': {
+      'es': 'Se te cobrara 22,99€ al mes en esta cuenta',
+      'en': '',
+    },
+    'y85dtt9g': {
+      'es':
+          'La suscripción se renovara mensualmente.\n\nTu suscripción a Spotlife se renovará automáticamente cada mes, asegurando que tu empresa continúe beneficiándose de todas las ventajas y herramientas que ofrecemos sin interrupciones. Este modelo de suscripción mensual te proporciona flexibilidad y permite que tu negocio siempre esté al día con las últimas novedades y mejoras de nuestra plataforma.\n\nCancelación en Cualquier Momento.\n\nEntendemos que las necesidades de tu negocio pueden cambiar. Por eso, te ofrecemos la opción de cancelar tu suscripción en cualquier momento. No hay compromisos a largo plazo ni penalizaciones por cancelar. Si decides que Spotlife ya no es la mejor opción para tu empresa, puedes gestionar y cancelar tu suscripción fácilmente a través de la configuración de tu cuenta.',
+      'en': '',
+    },
+    'ihy6bs18': {
+      'es': 'Listo',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntroCobroRol
+  {
+    'qbpa36em': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'wdc41f77': {
+      'es': '¿Eres Creador o Empresa?',
+      'en': '',
+    },
+    'a27b3li2': {
+      'es': 'Creador',
+      'en': '',
+    },
+    'qroxn5xk': {
+      'es':
+          'La mejor opción para personajes publicos, productores de contenido, artistas y personas influyentes',
+      'en': '',
+    },
+    'ayzbg8r9': {
+      'es': 'Empresa',
+      'en': '',
+    },
+    'edv2uscy': {
+      'es':
+          'La mejor opcion para comercios locales, hosteleria, marcas, organizaciones y proveedores de servicios.',
+      'en': '',
+    },
+    'emzgi0lf': {
+      'es': 'Finalizar',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuenta
+  {
+    '6a1kk7a4': {
+      'es': 'Muestra que tu perfil esta verificado',
+      'en': '',
+    },
+    '2hqssc3d': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'ehhh02dg': {
+      'es':
+          'Verificar tu perfil en Spotlife te brinda múltiples beneficios:\n\nAcceso a Comunidad y Eventos:Obtendras beneficios, invitaciones a eventos y viajes organizados por Spotlife.\n\nCredibilidad y Confianza: Un perfil verificado indica a los demás usuarios que tu contenido es auténtico y confiable.\n\nInteracciones Reales: Conecta con una comunidad genuina que valora la autenticidad y el contenido de calidad.\n\nReconocimiento: Destaca en la plataforma como un usuario de referencia, atrayendo más seguidores interesados en tus spots.',
+      'en': '',
+    },
+    'r3iv2el5': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuentaCobro
+  {
+    '3zxqkt6k': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'gbsg7iow': {
+      'es': 'Spotlife Hero, se te cobrara 3,99€ en esta cuenta.',
+      'en': '',
+    },
+    '7290vu1q': {
+      'es': 'Continuar',
+      'en': '',
+    },
+    'fmw8ed3u': {
+      'es':
+          'Tras el pago confirmaremos tu identidad en un plazo de hasta 48h despues de que envies tu informacion para que se verifique',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuentaCobroFinalizacion
+  {
+    '24w1ubx7': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'peryihpr': {
+      'es': 'Verificacion en marcha!\nGracias por formar parte de Spotlife',
+      'en': '',
+    },
+    '2jsel16p': {
+      'es': 'Finalizar',
       'en': '',
     },
   },

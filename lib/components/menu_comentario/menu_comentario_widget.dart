@@ -53,7 +53,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -61,12 +61,12 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
               child: Container(
                 width: 52.0,
                 height: 5.0,
@@ -84,7 +84,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
               desktop: false,
             ))
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                 child: Text(
                   '',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -98,7 +98,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                 ),
               ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -138,7 +138,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'xa0yy4rc' /* Tu reporte será anónimo, excep... */,
@@ -146,7 +146,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyMediumFamily,
-                              color: Color(0xFF737373),
+                              color: const Color(0xFF737373),
                               letterSpacing: 0.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context)
@@ -165,7 +165,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
               desktop: false,
             ))
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                 child: FFButtonWidget(
                   onPressed: () {
                     print('Button pressed ...');
@@ -176,9 +176,9 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).fondoIcono,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily:
@@ -190,7 +190,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                               FlutterFlowTheme.of(context).titleSmallFamily),
                         ),
                     elevation: 2.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),
@@ -207,19 +207,19 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                       builder: (alertDialogContext) {
                         return WebViewAware(
                           child: AlertDialog(
-                            title: Text('Eliminar comentario'),
-                            content: Text(
+                            title: const Text('Eliminar comentario'),
+                            content: const Text(
                                 'confirma que deseas eliminar este comentario'),
                             actions: [
                               TextButton(
                                 onPressed: () =>
                                     Navigator.pop(alertDialogContext, false),
-                                child: Text('Cancelar'),
+                                child: const Text('Cancelar'),
                               ),
                               TextButton(
                                 onPressed: () =>
                                     Navigator.pop(alertDialogContext, true),
-                                child: Text('Confirmar'),
+                                child: const Text('Confirmar'),
                               ),
                             ],
                           ),
@@ -249,7 +249,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                     }.withoutNulls,
                     extra: <String, dynamic>{
                       'post': widget.post,
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),
@@ -267,8 +267,8 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
               options: FFButtonOptions(
                 width: double.infinity,
                 height: 50.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).fondoIcono,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
@@ -279,7 +279,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                           FlutterFlowTheme.of(context).titleSmallFamily),
                     ),
                 elevation: 2.0,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),

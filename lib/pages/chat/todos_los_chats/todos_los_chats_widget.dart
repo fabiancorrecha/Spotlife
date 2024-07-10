@@ -52,7 +52,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.0, 30.0, 8.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 30.0, 8.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +81,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -137,6 +137,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                     );
                   }
                   List<ChatsRecord> listViewChatsRecordList = snapshot.data!;
+
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
@@ -145,10 +146,9 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                       final listViewChatsRecord =
                           listViewChatsRecordList[listViewIndex];
                       return Visibility(
-                        visible: listViewChatsRecord.lastMessage != null &&
-                            listViewChatsRecord.lastMessage != '',
+                        visible: listViewChatsRecord.lastMessage != '',
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -182,7 +182,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 8.0, 12.0),
                                 child: StreamBuilder<UsersRecord>(
                                   stream: UsersRecord.getDocument(
@@ -206,7 +206,9 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                         ),
                                       );
                                     }
+
                                     final rowUsersRecord = snapshot.data!;
+
                                     return Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -220,22 +222,25 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                                 width: 40.0,
                                                 height: 40.0,
                                                 clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
+                                                  fadeInDuration: const Duration(
                                                       milliseconds: 500),
-                                                  fadeOutDuration: Duration(
+                                                  fadeOutDuration: const Duration(
                                                       milliseconds: 500),
                                                   imageUrl:
-                                                      rowUsersRecord.photoUrl,
+                                                      valueOrDefault<String>(
+                                                    rowUsersRecord.photoUrl,
+                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                                  ),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           15.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -272,7 +277,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     8.0,
@@ -331,7 +336,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                                 ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 8.0, 0.0),
                                                   child: Text(

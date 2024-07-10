@@ -13,8 +13,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'perfil_propio_model.dart';
 export 'perfil_propio_model.dart';
 
@@ -84,7 +82,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                           color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 2.0, 0.0, 2.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -92,7 +90,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -108,10 +106,10 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                                     options: FFButtonOptions(
                                       width: 150.0,
                                       height: 35.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context)
                                           .fondoIcono,
@@ -128,7 +126,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                                                         .bodyMediumFamily),
                                           ),
                                       elevation: 2.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -144,7 +142,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                       wrapWithModel(
                         model: _model.navBar2Model,
                         updateCallback: () => setState(() {}),
-                        child: NavBar2Widget(
+                        child: const NavBar2Widget(
                           tab: 0,
                         ),
                       ).addWalkthrough(
@@ -180,6 +178,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                             List<UserPostsRecord>
                                 postGridUsuarioUserPostsRecordList =
                                 snapshot.data!;
+
                             return wrapWithModel(
                               model: _model.postGridUsuarioModel,
                               updateCallback: () => setState(() {}),
@@ -193,7 +192,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                       wrapWithModel(
                         model: _model.navBar1Model,
                         updateCallback: () => setState(() {}),
-                        child: NavBar1Widget(
+                        child: const NavBar1Widget(
                           tabActiva: 3,
                         ),
                       ).addWalkthrough(
@@ -204,13 +203,13 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, -0.94),
+                  alignment: const AlignmentDirectional(0.0, -0.94),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -230,7 +229,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -244,26 +243,32 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, -0.78),
+                  alignment: const AlignmentDirectional(0.0, -0.78),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         FlutterFlowIconButton(
-                          borderColor: Color(0x00F4F176),
+                          borderColor: const Color(0x00F4F176),
                           borderRadius: 20.0,
                           borderWidth: 1.0,
                           buttonSize: 40.0,
-                          fillColor: Color(0x00EEEEEE),
+                          fillColor: const Color(0x00EEEEEE),
                           icon: Icon(
                             Icons.help,
                             color: FlutterFlowTheme.of(context).primary,
                             size: 24.0,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'PERFIL_PROPIO_PAGE_help_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_start_walkthrough');
+                            safeSetState(() => _model.perfilPropioController =
+                                createPageWalkthrough(context));
+                            _model.perfilPropioController
+                                ?.show(context: context);
                           },
                         ),
                       ],

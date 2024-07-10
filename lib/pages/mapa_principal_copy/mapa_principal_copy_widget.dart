@@ -6,8 +6,6 @@ import '/components/post_grid_mapa_global/post_grid_mapa_global_widget.dart';
 import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -39,7 +37,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapaPrincipalCopy'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
@@ -101,6 +99,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
         }
         List<UserPostsRecord> mapaPrincipalCopyUserPostsRecordList =
             snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -124,7 +123,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                         child: Stack(
                           children: [
                             if (FFAppState().MapaGlobal == true)
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
                                 child: custom_widgets.MapaPerzonalizado(
@@ -145,16 +144,16 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                               ),
                             if (FFAppState().PostGlobal == true)
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 100.0, 0.0, 0.0),
                                 child: wrapWithModel(
                                   model: _model.postGridGlobalModel,
                                   updateCallback: () => setState(() {}),
-                                  child: PostGridMapaGlobalWidget(),
+                                  child: const PostGridMapaGlobalWidget(),
                                 ),
                               ),
                             if (FFAppState().MapaAmigo == true)
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
                                 child: custom_widgets.MapaPerzonalizado(
@@ -176,12 +175,12 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                               ),
                             if (FFAppState().PostAmigo == true)
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 100.0, 0.0, 0.0),
                                 child: wrapWithModel(
                                   model: _model.postGridAmigosModel,
                                   updateCallback: () => setState(() {}),
-                                  child: PostGridMapaAmigosWidget(),
+                                  child: const PostGridMapaAmigosWidget(),
                                 ),
                               ),
                           ],
@@ -191,11 +190,11 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                   ],
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   child: wrapWithModel(
                     model: _model.navBar1Model,
                     updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    child: const NavBar1Widget(
                       tabActiva: 2,
                     ),
                   ),
@@ -205,10 +204,10 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                     (FFAppState().PostGlobal == false) &&
                     (FFAppState().PostAmigo == false))
                   Align(
-                    alignment: AlignmentDirectional(-0.03, 0.6),
+                    alignment: const AlignmentDirectional(-0.03, 0.6),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -233,7 +232,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                           : FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: Container(
+                                    child: const SizedBox(
                                       height: 225.0,
                                       child: TipoDePostWidget(),
                                     ),
@@ -250,7 +249,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                             borderRadius: BorderRadius.circular(100.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Icon(
                               FFIcons.kadd,
                               color: FlutterFlowTheme.of(context).icono,
@@ -262,13 +261,13 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                     ),
                   ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
+                  alignment: const AlignmentDirectional(0.0, -1.0),
                   child: Container(
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -276,12 +275,12 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 0.0, 0.0),
                               child: Stack(
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: TextFormField(
                                       controller:
                                           _model.textFieldBuscarTextController,
@@ -313,7 +312,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                                               .bodySmallFamily),
                                             ),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -321,7 +320,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -329,7 +328,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -338,7 +337,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                         ),
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -347,7 +346,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                         ),
                                         filled: true,
                                         fillColor: Colors.black,
-                                        suffixIcon: Icon(
+                                        suffixIcon: const Icon(
                                           Icons.search_rounded,
                                           color: Color(0xFF757575),
                                           size: 22.0,
@@ -388,7 +387,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                       child: Container(
                                         width: 300.0,
                                         height: 50.0,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                     ),
                                   ),
@@ -397,7 +396,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -411,7 +410,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
-                                  barrierColor: Color(0x00000000),
+                                  barrierColor: const Color(0x00000000),
                                   enableDrag: false,
                                   context: context,
                                   builder: (context) {
@@ -426,7 +425,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 480.0,
                                             child: FiltrarSpotsWidget(),
                                           ),
@@ -443,13 +442,13 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       4.0, 8.0, 4.0, 8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: FaIcon(
                                           FontAwesomeIcons.chevronDown,
                                           color: FlutterFlowTheme.of(context)
@@ -458,7 +457,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Icon(
                                           FFIcons.kframe169,
                                           color: FlutterFlowTheme.of(context)
@@ -467,7 +466,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Icon(
                                           FFIcons.kusers,
                                           color: FlutterFlowTheme.of(context)
