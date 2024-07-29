@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -68,6 +70,52 @@ class NotificacionRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       NotificacionRecord._(reference, mapFromFirestore(data));
+
+  static NotificacionRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      NotificacionRecord.getDocumentFromData(
+        {
+          'tipo': convertAlgoliaParam(
+            snapshot.data['tipo'],
+            ParamType.int,
+            false,
+          ),
+          'emisor': convertAlgoliaParam(
+            snapshot.data['emisor'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'receptor': convertAlgoliaParam(
+            snapshot.data['receptor'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'leido': snapshot.data['leido'],
+          'fechaCreacion': convertAlgoliaParam(
+            snapshot.data['fechaCreacion'],
+            ParamType.DateTime,
+            false,
+          ),
+        },
+        NotificacionRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<NotificacionRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'notificacion',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -50,6 +52,41 @@ class FriendsRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       FriendsRecord._(reference, mapFromFirestore(data));
+
+  static FriendsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      FriendsRecord.getDocumentFromData(
+        {
+          'follower': convertAlgoliaParam(
+            snapshot.data['follower'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'followee': convertAlgoliaParam(
+            snapshot.data['followee'],
+            ParamType.DocumentReference,
+            false,
+          ),
+        },
+        FriendsRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<FriendsRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'friends',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

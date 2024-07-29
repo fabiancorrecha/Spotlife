@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -50,6 +52,39 @@ class InteresesRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       InteresesRecord._(reference, mapFromFirestore(data));
+
+  static InteresesRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      InteresesRecord.getDocumentFromData(
+        {
+          'Interes': snapshot.data['Interes'],
+          'CuentasAsociadas': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['CuentasAsociadas'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
+        },
+        InteresesRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<InteresesRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'Intereses',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

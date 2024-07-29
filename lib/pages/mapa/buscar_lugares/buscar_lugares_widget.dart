@@ -155,7 +155,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                 focusNode: _model.textFieldBuscarFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textFieldBuscarTextController',
-                                  const Duration(milliseconds: 1500),
+                                  const Duration(milliseconds: 0),
                                   () => setState(() {}),
                                 ),
                                 onFieldSubmitted: (_) async {
@@ -329,9 +329,9 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   ),
                                 );
                               }
-                              final postResultado =
+                              final postResultados =
                                   _model.algoliaSearchResults?.toList() ?? [];
-                              if (postResultado.isEmpty) {
+                              if (postResultados.isEmpty) {
                                 return const Center(
                                   child: ComponenteVacioWidget(),
                                 );
@@ -347,13 +347,13 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   childAspectRatio: 0.72,
                                 ),
                                 scrollDirection: Axis.vertical,
-                                itemCount: postResultado.length,
-                                itemBuilder: (context, postResultadoIndex) {
-                                  final postResultadoItem =
-                                      postResultado[postResultadoIndex];
+                                itemCount: postResultados.length,
+                                itemBuilder: (context, postResultadosIndex) {
+                                  final postResultadosItem =
+                                      postResultados[postResultadosIndex];
                                   return Builder(
                                     builder: (context) {
-                                      final listImage = postResultadoItem
+                                      final listImage = postResultadosItem
                                           .postPhotolist
                                           .toList();
 

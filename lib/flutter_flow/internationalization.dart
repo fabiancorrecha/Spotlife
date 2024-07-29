@@ -788,7 +788,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Bloqueaste este usuario',
       'en': 'You blocked this user',
     },
-    'v4jg68ds': {
+    't3mj9plw': {
       'es': 'Enviar mensaje',
       'en': '',
     },
@@ -1474,6 +1474,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Idioma',
       'en': '',
     },
+    '82zxx3mi': {
+      'es': 'Cancelar Suscripcion',
+      'en': '',
+    },
     '3j1828s1': {
       'es': 'Home',
       'en': 'home',
@@ -1690,6 +1694,62 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'fthrtj3q': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // paginaProvisional
+  {
+    'sl5hc3vg': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // suscripcionactivada
+  {
+    '4aplwqmc': {
+      'es': 'Tu suscripcion fue activada correctamente ',
+      'en': '',
+    },
+    'xbv7erwi': {
+      'es': 'Ir al Home',
+      'en': '',
+    },
+    '82y2m63v': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // suscripcionFallida
+  {
+    'myu6zxol': {
+      'es': 'Hemos detectado un fallo para activar tu suscripcion',
+      'en': '',
+    },
+    's3e3hahx': {
+      'es': 'Ir al Home',
+      'en': '',
+    },
+    'chcory1w': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // PaginaEnContruccion
+  {
+    '060szt8h': {
+      'es': 'Esta sección de',
+      'en': '',
+    },
+    'xlqovagm': {
+      'es': ' - Spotlife ',
+      'en': '',
+    },
+    'k8ttq89x': {
+      'es': 'aun se encuentra en desarrollo',
+      'en': '',
+    },
+    'c83ug2am': {
       'es': 'Home',
       'en': '',
     },

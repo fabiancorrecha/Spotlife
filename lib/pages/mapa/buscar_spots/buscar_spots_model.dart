@@ -18,8 +18,7 @@ class BuscarSpotsModel extends FlutterFlowModel<BuscarSpotsWidget> {
   TextEditingController? textFieldBuscarTextController;
   String? Function(BuildContext, String?)?
       textFieldBuscarTextControllerValidator;
-  // Algolia Search Results from action on TextFieldBuscar
-  List<UserPostsRecord>? algoliaSearchResults = [];
+  List<UserPostsRecord> simpleSearchResults = [];
   // Model for menu02 component.
   late Menu02Model menu02Model;
   // Model for navBar1 component.

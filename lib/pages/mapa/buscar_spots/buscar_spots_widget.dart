@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:text_search/text_search.dart';
 import 'buscar_spots_model.dart';
 export 'buscar_spots_model.dart';
 
@@ -149,23 +150,35 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                             focusNode: _model.textFieldBuscarFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textFieldBuscarTextController',
-                              const Duration(milliseconds: 1500),
+                              const Duration(milliseconds: 0),
                               () async {
                                 logFirebaseEvent(
                                     'BUSCAR_SPOTS_TextFieldBuscar_ON_TEXTFIEL');
                                 logFirebaseEvent(
-                                    'TextFieldBuscar_algolia_search');
-                                safeSetState(
-                                    () => _model.algoliaSearchResults = null);
-                                await UserPostsRecord.search(
-                                  term:
-                                      _model.textFieldBuscarTextController.text,
-                                  maxResults: 12,
-                                )
+                                    'TextFieldBuscar_simple_search');
+                                await queryUserPostsRecordOnce()
                                     .then(
-                                        (r) => _model.algoliaSearchResults = r)
+                                      (records) => _model.simpleSearchResults =
+                                          TextSearch(
+                                        records
+                                            .map(
+                                              (record) =>
+                                                  TextSearchItem.fromTerms(
+                                                      record, [
+                                                record.postTitle,
+                                                record.postDescription
+                                              ]),
+                                            )
+                                            .toList(),
+                                      )
+                                              .search(_model
+                                                  .textFieldBuscarTextController
+                                                  .text)
+                                              .map((r) => r.object)
+                                              .toList(),
+                                    )
                                     .onError((_, __) =>
-                                        _model.algoliaSearchResults = [])
+                                        _model.simpleSearchResults = [])
                                     .whenComplete(() => setState(() {}));
                               },
                             ),
@@ -294,28 +307,15 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
               Expanded(
                 child: Stack(
                   children: [
-                    if (_model.verLista)
+                    if (_model.verLista &&
+                        (_model.textFieldBuscarTextController.text != ''))
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults == null) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 12.0,
-                                  height: 12.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
                             final postResultado =
-                                _model.algoliaSearchResults?.toList() ?? [];
+                                _model.simpleSearchResults.toList();
                             if (postResultado.isEmpty) {
                               return const Center(
                                 child: ComponenteVacioWidget(),
@@ -555,7 +555,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                             5.1719404,
                           ),
                           zoom: 16.0,
-                          listaPostMarcadores: _model.algoliaSearchResults,
+                          listaPostMarcadores: _model.simpleSearchResults,
                         ),
                       ),
                   ],

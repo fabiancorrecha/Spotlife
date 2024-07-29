@@ -781,3 +781,27 @@ String getOtherUserName(
       ? listOfNames.last
       : listOfNames.first;
 }
+
+String? createdDynamicLink(
+  String? dynamicLinkDomain,
+  String? packageName,
+  String? deepLink,
+  String? params,
+) {
+  dynamicLinkDomain ??= 'https://example.page.link';
+  packageName ??= 'page.example.com';
+  deepLink ??= 'page';
+  params ??= 'id:23,foo:bar';
+
+  String dynamicLinkCombinated = dynamicLinkDomain + '?';
+
+  dynamicLinkCombinated += 'apn' + packageName + '&';
+
+  dynamicLinkCombinated += 'ibi' + packageName + '&';
+
+  String link = 'link=' +
+      Uri.encodeComponent(dynamicLinkDomain + '/' + deepLink + '?' + params);
+
+  dynamicLinkCombinated += link;
+  return dynamicLinkCombinated;
+}

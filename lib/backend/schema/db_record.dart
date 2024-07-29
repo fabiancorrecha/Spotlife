@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -49,6 +50,35 @@ class DbRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       DbRecord._(reference, mapFromFirestore(data));
+
+  static DbRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      DbRecord.getDocumentFromData(
+        {
+          'listaIntereses': safeGet(
+            () => snapshot.data['listaIntereses'].toList(),
+          ),
+          'Nombre': snapshot.data['Nombre'],
+        },
+        DbRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<DbRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'DB',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

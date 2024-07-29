@@ -303,11 +303,11 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                         }
                         List<UsersRecord> boton1UsersRecordList =
                             snapshot.data!;
-
                         final boton1UsersRecord =
                             boton1UsersRecordList.isNotEmpty
                                 ? boton1UsersRecordList.first
                                 : null;
+
                         return wrapWithModel(
                           model: _model.boton1Model,
                           updateCallback: () => setState(() {}),

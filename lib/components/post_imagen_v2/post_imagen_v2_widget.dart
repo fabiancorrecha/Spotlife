@@ -333,21 +333,31 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                         onTap: () async {
                                                           logFirebaseEvent(
                                                               'POST_IMAGEN_V2_COMP_Text_fbekptvt_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'Text_navigate_to');
+                                                          if (containerUsersRecord
+                                                                  .reference ==
+                                                              currentUserReference) {
+                                                            logFirebaseEvent(
+                                                                'Text_navigate_to');
 
-                                                          context.pushNamed(
-                                                            'otroPerfil',
-                                                            queryParameters: {
-                                                              'perfilAjeno':
-                                                                  serializeParam(
-                                                                containerUsersRecord
-                                                                    .reference,
-                                                                ParamType
-                                                                    .DocumentReference,
-                                                              ),
-                                                            }.withoutNulls,
-                                                          );
+                                                            context.goNamed(
+                                                                'perfilPropio');
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Text_navigate_to');
+
+                                                            context.pushNamed(
+                                                              'otroPerfil',
+                                                              queryParameters: {
+                                                                'perfilAjeno':
+                                                                    serializeParam(
+                                                                  containerUsersRecord
+                                                                      .reference,
+                                                                  ParamType
+                                                                      .DocumentReference,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          }
                                                         },
                                                         child: Text(
                                                           containerUsersRecord
@@ -390,21 +400,32 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                           onTap: () async {
                                                             logFirebaseEvent(
                                                                 'POST_IMAGEN_V2_COMP_Text_g92652er_ON_TAP');
-                                                            logFirebaseEvent(
-                                                                'Text_navigate_to');
+                                                            if (containerUsersRecord
+                                                                    .reference ==
+                                                                currentUserReference) {
+                                                              logFirebaseEvent(
+                                                                  'Text_navigate_to');
 
-                                                            context.pushNamed(
-                                                              'otroPerfil',
-                                                              queryParameters: {
-                                                                'perfilAjeno':
-                                                                    serializeParam(
-                                                                  containerUsersRecord
-                                                                      .reference,
-                                                                  ParamType
-                                                                      .DocumentReference,
-                                                                ),
-                                                              }.withoutNulls,
-                                                            );
+                                                              context.goNamed(
+                                                                  'perfilPropio');
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'Text_navigate_to');
+
+                                                              context.pushNamed(
+                                                                'otroPerfil',
+                                                                queryParameters:
+                                                                    {
+                                                                  'perfilAjeno':
+                                                                      serializeParam(
+                                                                    containerUsersRecord
+                                                                        .reference,
+                                                                    ParamType
+                                                                        .DocumentReference,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
+                                                            }
                                                           },
                                                           child: Text(
                                                             valueOrDefault<
@@ -475,7 +496,6 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                       List<CollectionsRecord>
                                                           rowCollectionsRecordList =
                                                           snapshot.data!;
-
                                                       // Return an empty Container when the item does not exist.
                                                       if (snapshot
                                                           .data!.isEmpty) {
@@ -487,6 +507,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                               ? rowCollectionsRecordList
                                                                   .first
                                                               : null;
+
                                                       return InkWell(
                                                         splashColor:
                                                             Colors.transparent,
@@ -1084,10 +1105,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                           List<ActividadRecord>
                                                                               iconSIActividadRecordList =
                                                                               snapshot.data!;
-
                                                                           final iconSIActividadRecord = iconSIActividadRecordList.isNotEmpty
                                                                               ? iconSIActividadRecordList.first
                                                                               : null;
+
                                                                           return InkWell(
                                                                             splashColor:
                                                                                 Colors.transparent,
@@ -1854,6 +1875,17 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                       ),
                                     ),
                                   ),
+                                  if (widget.post!.postPhotolist.length >= 2)
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(0.84, -0.79),
+                                      child: Icon(
+                                        FFIcons.kcopy,
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        size: 24.0,
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),
