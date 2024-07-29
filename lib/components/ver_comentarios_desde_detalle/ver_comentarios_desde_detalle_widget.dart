@@ -236,11 +236,11 @@ class _VerComentariosDesdeDetalleWidgetState
                                 List<PostCommentRecord>
                                     listViewComentariosPostCommentRecordList =
                                     snapshot.data!;
-
                                 if (listViewComentariosPostCommentRecordList
                                     .isEmpty) {
                                   return const SinComentariosWidget();
                                 }
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -505,13 +505,13 @@ class _VerComentariosDesdeDetalleWidgetState
                                                             List<ActividadRecord>
                                                                 iconSIActividadRecordList =
                                                                 snapshot.data!;
-
                                                             final iconSIActividadRecord =
                                                                 iconSIActividadRecordList
                                                                         .isNotEmpty
                                                                     ? iconSIActividadRecordList
                                                                         .first
                                                                     : null;
+
                                                             return InkWell(
                                                               splashColor: Colors
                                                                   .transparent,

@@ -98,12 +98,12 @@ class _ListaPostFiltradosUbicacionWidgetState
                       }
                       List<UserPostsRecord> listViewUserPostsRecordList =
                           snapshot.data!;
-
                       if (listViewUserPostsRecordList.isEmpty) {
                         return const Center(
                           child: ComponenteVacioWidget(),
                         );
                       }
+
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         primary: false,

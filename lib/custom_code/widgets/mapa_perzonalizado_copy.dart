@@ -44,6 +44,8 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
   late gmap.CameraPosition initialCameraPosition;
   double currentZoom = 15.0;
 
+  UsersRecord? currentUserRecord;
+
   @override
   void initState() {
     super.initState();
@@ -403,20 +405,6 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
                 post.placeInfo.latLng!.latitude,
                 post.placeInfo.latLng!.longitude,
               ),
-              infoWindow: gmap.InfoWindow(
-                  title: _user.displayName,
-                  snippet: post.postTitle,
-                  onTap: () {
-                    context.goNamed(
-                      'otroPerfil',
-                      queryParameters: {
-                        'perfilAjeno': serializeParam(
-                          post.postUser,
-                          ParamType.DocumentReference,
-                        ),
-                      }.withoutNulls,
-                    );
-                  }),
               icon: markerIcon,
             );
             markers.add(marker);

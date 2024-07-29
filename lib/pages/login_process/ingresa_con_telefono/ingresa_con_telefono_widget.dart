@@ -129,10 +129,10 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
               );
             }
             List<UsersRecord> containerUsersRecordList = snapshot.data!;
-
             final containerUsersRecord = containerUsersRecordList.isNotEmpty
                 ? containerUsersRecordList.first
                 : null;
+
             return Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,

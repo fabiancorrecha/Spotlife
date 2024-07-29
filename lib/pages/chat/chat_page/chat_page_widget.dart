@@ -101,224 +101,235 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 50.0,
-                              fillColor:
-                                  FlutterFlowTheme.of(context).fondoIcono,
-                              icon: Icon(
-                                Icons.arrow_back_sharp,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'CHAT_arrow_back_sharp_ICN_ON_TAP');
-                                logFirebaseEvent('IconButton_backend_call');
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 30.0,
+                                borderWidth: 1.0,
+                                buttonSize: 50.0,
+                                fillColor:
+                                    FlutterFlowTheme.of(context).fondoIcono,
+                                icon: Icon(
+                                  Icons.arrow_back_sharp,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'CHAT_arrow_back_sharp_ICN_ON_TAP');
+                                  logFirebaseEvent('IconButton_backend_call');
 
-                                await widget.receiveChat!.update({
-                                  ...mapToFirestore(
-                                    {
-                                      'last_message_seen_by':
-                                          FieldValue.arrayUnion(
-                                              [currentUserReference]),
+                                  await widget.receiveChat!.update({
+                                    ...mapToFirestore(
+                                      {
+                                        'last_message_seen_by':
+                                            FieldValue.arrayUnion(
+                                                [currentUserReference]),
+                                      },
+                                    ),
+                                  });
+                                  logFirebaseEvent('IconButton_backend_call');
+
+                                  await currentUserReference!
+                                      .update(createUsersRecordData(
+                                    fechaUltimaSesion: getCurrentTimestamp,
+                                    estatusDeSesion: 'Desconectado',
+                                  ));
+                                  logFirebaseEvent('IconButton_navigate_back');
+                                  context.pop();
+                                },
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      15.0, 0.0, 0.0, 0.0),
+                                  child: StreamBuilder<UsersRecord>(
+                                    stream: UsersRecord.getDocument(
+                                        functions.getOtherUserRef(
+                                            chatPageChatsRecord.userIds
+                                                .toList(),
+                                            currentUserReference!)),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 12.0,
+                                            height: 12.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+
+                                      final rowUsersRecord = snapshot.data!;
+
+                                      return Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CHAT_CircleImage_8mxr65qb_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'CircleImage_navigate_to');
+
+                                              context.pushNamed(
+                                                'otroPerfil',
+                                                queryParameters: {
+                                                  'perfilAjeno': serializeParam(
+                                                    rowUsersRecord.reference,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 40.0,
+                                              height: 40.0,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    const Duration(milliseconds: 500),
+                                                fadeOutDuration:
+                                                    const Duration(milliseconds: 500),
+                                                imageUrl:
+                                                    valueOrDefault<String>(
+                                                  rowUsersRecord.photoUrl,
+                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  rowUsersRecord.displayName,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .headlineMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineMediumFamily),
+                                                      ),
+                                                ),
+                                              ),
+                                              if (rowUsersRecord
+                                                      .estatusDeSesion ==
+                                                  'Desconectado')
+                                                Text(
+                                                  'Ultima conexion ${dateTimeFormat(
+                                                    'relative',
+                                                    rowUsersRecord
+                                                        .fechaUltimaSesion,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .headlineMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 11.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineMediumFamily),
+                                                      ),
+                                                ),
+                                              if (rowUsersRecord
+                                                      .estatusDeSesion ==
+                                                  'En Linea')
+                                                Text(
+                                                  rowUsersRecord
+                                                      .estatusDeSesion,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .headlineMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 11.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineMediumFamily),
+                                                      ),
+                                                ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
                                     },
                                   ),
-                                });
-                                logFirebaseEvent('IconButton_backend_call');
-
-                                await currentUserReference!
-                                    .update(createUsersRecordData(
-                                  fechaUltimaSesion: getCurrentTimestamp,
-                                  estatusDeSesion: 'Desconectado',
-                                ));
-                                logFirebaseEvent('IconButton_navigate_back');
-                                context.pop();
-                              },
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    15.0, 0.0, 0.0, 0.0),
-                                child: StreamBuilder<UsersRecord>(
-                                  stream: UsersRecord.getDocument(
-                                      functions.getOtherUserRef(
-                                          chatPageChatsRecord.userIds.toList(),
-                                          currentUserReference!)),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 12.0,
-                                          height: 12.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }
-
-                                    final rowUsersRecord = snapshot.data!;
-
-                                    return Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'CHAT_CircleImage_8mxr65qb_ON_TAP');
-                                            logFirebaseEvent(
-                                                'CircleImage_navigate_to');
-
-                                            context.pushNamed(
-                                              'otroPerfil',
-                                              queryParameters: {
-                                                'perfilAjeno': serializeParam(
-                                                  rowUsersRecord.reference,
-                                                  ParamType.DocumentReference,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: Container(
-                                            width: 40.0,
-                                            height: 40.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  const Duration(milliseconds: 500),
-                                              fadeOutDuration:
-                                                  const Duration(milliseconds: 500),
-                                              imageUrl: valueOrDefault<String>(
-                                                rowUsersRecord.photoUrl,
-                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                rowUsersRecord.displayName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .headlineMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMediumFamily),
-                                                        ),
-                                              ),
-                                            ),
-                                            if (rowUsersRecord
-                                                    .estatusDeSesion ==
-                                                'Desconectado')
-                                              Text(
-                                                'Ultima conexion ${dateTimeFormat(
-                                                  'relative',
-                                                  rowUsersRecord
-                                                      .fechaUltimaSesion,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                )}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .headlineMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 11.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMediumFamily),
-                                                        ),
-                                              ),
-                                            if (rowUsersRecord
-                                                    .estatusDeSesion ==
-                                                'En Linea')
-                                              Text(
-                                                rowUsersRecord.estatusDeSesion,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .headlineMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 11.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMediumFamily),
-                                                        ),
-                                              ),
-                                          ],
-                                        ),
-                                      ],
-                                    );
-                                  },
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -132,3 +132,11 @@ export '/pages/chat/todos_los_chats/todos_los_chats_widget.dart'
 export '/pages/chat/chat_page/chat_page_widget.dart' show ChatPageWidget;
 export '/herramientas_promocion/herramientas_promocion_widget.dart'
     show HerramientasPromocionWidget;
+export '/pagina_provisional/pagina_provisional_widget.dart'
+    show PaginaProvisionalWidget;
+export '/suscripcionactivada/suscripcionactivada_widget.dart'
+    show SuscripcionactivadaWidget;
+export '/suscripcion_fallida/suscripcion_fallida_widget.dart'
+    show SuscripcionFallidaWidget;
+export '/pagina_en_contruccion/pagina_en_contruccion_widget.dart'
+    show PaginaEnContruccionWidget;

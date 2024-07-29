@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -99,6 +101,81 @@ class ChatsRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       ChatsRecord._(reference, mapFromFirestore(data));
+
+  static ChatsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      ChatsRecord.getDocumentFromData(
+        {
+          'users': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['users'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
+          'user_a': convertAlgoliaParam(
+            snapshot.data['user_a'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'user_b': convertAlgoliaParam(
+            snapshot.data['user_b'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'last_message': snapshot.data['last_message'],
+          'last_message_time': convertAlgoliaParam(
+            snapshot.data['last_message_time'],
+            ParamType.DateTime,
+            false,
+          ),
+          'last_message_seen_by': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['last_message_seen_by'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
+          'last_message_sent_by': convertAlgoliaParam(
+            snapshot.data['last_message_sent_by'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'userIds': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['userIds'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
+          'timeStamp': convertAlgoliaParam(
+            snapshot.data['timeStamp'],
+            ParamType.DateTime,
+            false,
+          ),
+          'userNames': safeGet(
+            () => snapshot.data['userNames'].toList(),
+          ),
+        },
+        ChatsRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<ChatsRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'chats',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

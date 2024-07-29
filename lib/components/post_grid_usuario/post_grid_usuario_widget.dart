@@ -281,6 +281,15 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                 allowFullScreen: true,
                                 allowPlaybackSpeedMenu: false,
                               ),
+                            if (stackUserPostsRecord.postPhotolist.length >= 2)
+                              Align(
+                                alignment: const AlignmentDirectional(0.84, -0.79),
+                                child: Icon(
+                                  FFIcons.kcopy,
+                                  color: FlutterFlowTheme.of(context).accent1,
+                                  size: 24.0,
+                                ),
+                              ),
                           ],
                         );
                       },

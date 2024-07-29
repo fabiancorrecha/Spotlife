@@ -213,11 +213,11 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
                                         List<UserPostsRecord>
                                             imageUserPostsRecordList =
                                             snapshot.data!;
-
                                         final imageUserPostsRecord =
                                             imageUserPostsRecordList.isNotEmpty
                                                 ? imageUserPostsRecordList.first
                                                 : null;
+
                                         return ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(20.0),

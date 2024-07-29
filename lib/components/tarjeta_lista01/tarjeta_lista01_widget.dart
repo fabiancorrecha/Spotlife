@@ -230,11 +230,11 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                           }
                           List<ActividadRecord>
                               cuentaPublicaActividadRecordList = snapshot.data!;
-
                           final cuentaPublicaActividadRecord =
                               cuentaPublicaActividadRecordList.isNotEmpty
                                   ? cuentaPublicaActividadRecordList.first
                                   : null;
+
                           return FFButtonWidget(
                             onPressed: () async {
                               logFirebaseEvent(
@@ -418,11 +418,11 @@ class _TarjetaLista01WidgetState extends State<TarjetaLista01Widget> {
                           }
                           List<ActividadRecord>
                               cuentaPrivadaActividadRecordList = snapshot.data!;
-
                           final cuentaPrivadaActividadRecord =
                               cuentaPrivadaActividadRecordList.isNotEmpty
                                   ? cuentaPrivadaActividadRecordList.first
                                   : null;
+
                           return FFButtonWidget(
                             onPressed: () async {
                               logFirebaseEvent(

@@ -14,8 +14,7 @@ class BuscarPerfilModel extends FlutterFlowModel<BuscarPerfilWidget> {
   TextEditingController? textFieldBuscarTextController;
   String? Function(BuildContext, String?)?
       textFieldBuscarTextControllerValidator;
-  // Algolia Search Results from action on TextFieldBuscar
-  List<UsersRecord>? algoliaSearchResults = [];
+  List<UsersRecord> simpleSearchResults = [];
   // Model for menu02 component.
   late Menu02Model menu02Model;
   // Model for navBar1 component.

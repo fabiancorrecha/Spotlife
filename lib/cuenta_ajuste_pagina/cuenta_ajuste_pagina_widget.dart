@@ -1,12 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton_quinto/boton_quinto_widget.dart';
-import '/components/cambiara_unacuenta_profesional_intro/cambiara_unacuenta_profesional_intro_widget.dart';
-import '/components/configuracion_cuenta/configuracion_cuenta_widget.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'cuenta_ajuste_pagina_model.dart';
 export 'cuenta_ajuste_pagina_model.dart';
 
@@ -209,7 +208,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                               'CUENTA_AJUSTE_PAGINA_Container_r2imfndc_');
                           logFirebaseEvent('botonQuinto_navigate_to');
 
-                          context.pushNamed('HerramientasPromocion');
+                          context.pushNamed('PaginaEnContruccion');
                         },
                       ),
                     ),
@@ -224,27 +223,9 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       accion: () async {
                         logFirebaseEvent(
                             'CUENTA_AJUSTE_PAGINA_Container_eq4xz41j_');
-                        logFirebaseEvent('botonQuinto_bottom_sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: const ConfiguracionCuentaWidget(),
-                                ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
+                        logFirebaseEvent('botonQuinto_navigate_to');
+
+                        context.pushNamed('PaginaEnContruccion');
                       },
                     ),
                   ),
@@ -261,29 +242,9 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                         accion: () async {
                           logFirebaseEvent(
                               'CUENTA_AJUSTE_PAGINA_Container_6ygqvz57_');
-                          logFirebaseEvent('botonQuinto_bottom_sheet');
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return WebViewAware(
-                                child: GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
-                                  child: Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child:
-                                        const CambiaraUnacuentaProfesionalIntroWidget(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
+                          logFirebaseEvent('botonQuinto_navigate_to');
+
+                          context.pushNamed('PaginaEnContruccion');
                         },
                       ),
                     ),
@@ -334,6 +295,55 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       onChanged: (lang) => setAppLanguage(context, lang),
                     ),
                   ),
+                  if (valueOrDefault<bool>(
+                          currentUserDocument?.suscripcionActiva, false) ==
+                      true)
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: FFLocalizations.of(context).getText(
+                                '82zxx3mi' /* Cancelar Suscripcion */,
+                              ),
+                              options: FFButtonOptions(
+                                height: 50.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).error,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .titleSmallFamily,
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily),
+                                    ),
+                                elevation: 2.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(28.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

@@ -276,6 +276,20 @@ final parametersBuilderMap =
         },
       ),
   'HerramientasPromocion': ParameterData.none(),
+  'paginaProvisional': ParameterData.none(),
+  'suscripcionactivada': (data) async => ParameterData(
+        allParams: {
+          'id': getParameter<int>(data, 'id'),
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
+  'suscripcionFallida': (data) async => ParameterData(
+        allParams: {
+          'id': getParameter<int>(data, 'id'),
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
+  'PaginaEnContruccion': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

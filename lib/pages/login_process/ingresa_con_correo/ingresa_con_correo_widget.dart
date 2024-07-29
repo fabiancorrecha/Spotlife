@@ -119,10 +119,10 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
               );
             }
             List<UsersRecord> containerUsersRecordList = snapshot.data!;
-
             final containerUsersRecord = containerUsersRecordList.isNotEmpty
                 ? containerUsersRecordList.first
                 : null;
+
             return Container(
               width: double.infinity,
               height: double.infinity,

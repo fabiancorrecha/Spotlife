@@ -354,6 +354,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'otroPerfil',
               path: 'otroPerfil',
+              requireAuth: true,
               builder: (context, params) => OtroPerfilWidget(
                 perfilAjeno: params.getParam(
                   'perfilAjeno',
@@ -651,6 +652,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'HerramientasPromocion',
               path: 'herramientasPromocion',
               builder: (context, params) => const HerramientasPromocionWidget(),
+            ),
+            FFRoute(
+              name: 'paginaProvisional',
+              path: 'paginaProvisional',
+              builder: (context, params) => const PaginaProvisionalWidget(),
+            ),
+            FFRoute(
+              name: 'suscripcionactivada',
+              path: 'suscripcionactivada',
+              builder: (context, params) => SuscripcionactivadaWidget(
+                id: params.getParam(
+                  'id',
+                  ParamType.int,
+                ),
+                name: params.getParam(
+                  'name',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'suscripcionFallida',
+              path: 'suscripcionFallida',
+              builder: (context, params) => SuscripcionFallidaWidget(
+                id: params.getParam(
+                  'id',
+                  ParamType.int,
+                ),
+                name: params.getParam(
+                  'name',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'PaginaEnContruccion',
+              path: 'paginaEnContruccion',
+              builder: (context, params) => const PaginaEnContruccionWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -48,6 +48,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
   late gmap.CameraPosition initialCameraPosition;
   double currentZoom = 15.0;
 
+  UsersRecord? currentUserRecord;
+
   @override
   void initState() {
     super.initState();
@@ -412,19 +414,25 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
                 post.placeInfo.latLng!.longitude,
               ),
               infoWindow: gmap.InfoWindow(
-                  title: _user.displayName,
-                  snippet: post.postTitle,
-                  onTap: () {
+                title: _user.displayName,
+                snippet: post.postTitle,
+                onTap: () async {
+                  final currentUser = await getCurrentUser();
+                  if (post.postUser == currentUser.reference) {
+                    context.goNamed('perfilPropio');
+                  } else {
                     context.goNamed(
-                      'otroPerfil',
+                      'perfilAjeno',
                       queryParameters: {
-                        'perfilAjeno': serializeParam(
+                        'otroPerfil': serializeParam(
                           post.postUser,
                           ParamType.DocumentReference,
                         ),
                       }.withoutNulls,
                     );
-                  }),
+                  }
+                },
+              ),
               icon: markerIcon,
             );
 
@@ -460,6 +468,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
       ),
     );
   }
+
+  getCurrentUser() {}
 }
 
 extension PhotoUrlExtension on UserPostsRecord {
