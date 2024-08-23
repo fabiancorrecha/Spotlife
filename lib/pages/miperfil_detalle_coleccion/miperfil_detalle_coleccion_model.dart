@@ -9,9 +9,22 @@ import 'package:flutter/material.dart';
 
 class MiperfilDetalleColeccionModel
     extends FlutterFlowModel<MiperfilDetalleColeccionWidget> {
+  ///  Local state fields for this page.
+
+  List<DocumentReference> postAgregados = [];
+  void addToPostAgregados(DocumentReference item) => postAgregados.add(item);
+  void removeFromPostAgregados(DocumentReference item) =>
+      postAgregados.remove(item);
+  void removeAtIndexFromPostAgregados(int index) =>
+      postAgregados.removeAt(index);
+  void insertAtIndexInPostAgregados(int index, DocumentReference item) =>
+      postAgregados.insert(index, item);
+  void updatePostAgregadosAtIndex(
+          int index, Function(DocumentReference) updateFn) =>
+      postAgregados[index] = updateFn(postAgregados[index]);
+
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar5 component.
   late AppBar5Model appBar5Model;
   // Model for GridPostsFavoritos component.
@@ -32,7 +45,6 @@ class MiperfilDetalleColeccionModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar5Model.dispose();
     gridPostsFavoritosModel.dispose();
     gridPostsBioModel.dispose();

@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class BuscarPerfilModel extends FlutterFlowModel<BuscarPerfilWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextFieldBuscar widget.
   FocusNode? textFieldBuscarFocusNode;
   TextEditingController? textFieldBuscarTextController;
@@ -28,7 +27,6 @@ class BuscarPerfilModel extends FlutterFlowModel<BuscarPerfilWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldBuscarFocusNode?.dispose();
     textFieldBuscarTextController?.dispose();
 

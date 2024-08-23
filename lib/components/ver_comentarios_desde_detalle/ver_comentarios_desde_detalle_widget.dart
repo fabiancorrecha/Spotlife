@@ -580,7 +580,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                   Expanded(
                                                     child: Text(
                                                       dateTimeFormat(
-                                                        'relative',
+                                                        "relative",
                                                         listViewComentariosPostCommentRecord
                                                             .lastEditTime!,
                                                         locale:

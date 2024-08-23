@@ -9,7 +9,6 @@ class CreaCuentaUserNameCorreoModel
     extends FlutterFlowModel<CreaCuentaUserNameCorreoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -51,7 +50,6 @@ class CreaCuentaUserNameCorreoModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
 

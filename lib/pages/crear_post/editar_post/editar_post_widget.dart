@@ -52,7 +52,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
     });
 
     _model.descreipcionPostTextController ??=
-        TextEditingController(text: widget.post?.postDescription);
+        TextEditingController(text: widget.post?.postTitle);
     _model.descreipcionPostFocusNode ??= FocusNode();
 
     _model.switchValue1 = false;
@@ -99,9 +99,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/app_bar7_usuario/app_bar7_usuario_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
@@ -102,9 +103,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
             snapshot.data!;
 
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -213,43 +212,175 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              4.0, 0.0, 0.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: FFLocalizations.of(context).getText(
-                              '8tjn7qv9' /* Enviar mensaje */,
-                            ),
-                            options: FFButtonOptions(
-                              width: 150.0,
-                              height: 35.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).fondoIcono,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              elevation: 2.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
+                        StreamBuilder<List<ChatsRecord>>(
+                          stream: queryChatsRecord(
+                            queryBuilder: (chatsRecord) =>
+                                chatsRecord.where(Filter.or(
+                              Filter(
+                                'user_a',
+                                isEqualTo: currentUserReference,
                               ),
-                              borderRadius: BorderRadius.circular(80.0),
-                            ),
+                              Filter(
+                                'user_b',
+                                isEqualTo: widget.usuario,
+                              ),
+                              Filter(
+                                'user_a',
+                                isEqualTo: widget.usuario,
+                              ),
+                              Filter(
+                                'user_b',
+                                isEqualTo: currentUserReference,
+                              ),
+                            )),
+                            singleRecord: true,
                           ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 12.0,
+                                  height: 12.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<ChatsRecord> buttonChatsRecordList =
+                                snapshot.data!;
+                            final buttonChatsRecord =
+                                buttonChatsRecordList.isNotEmpty
+                                    ? buttonChatsRecordList.first
+                                    : null;
+
+                            return FFButtonWidget(
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'OTRO_PERFIL_MAPA_ENVIAR_MENSAJE_BTN_ON_T');
+                                var shouldSetState = false;
+                                if (buttonChatsRecord != null) {
+                                  logFirebaseEvent('Button_navigate_to');
+
+                                  context.goNamed(
+                                    'ChatPage',
+                                    queryParameters: {
+                                      'receiveChat': serializeParam(
+                                        buttonChatsRecord.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+
+                                  if (shouldSetState) setState(() {});
+                                  return;
+                                } else {
+                                  logFirebaseEvent('Button_backend_call');
+                                  _model.readUsuario =
+                                      await UsersRecord.getDocumentOnce(
+                                          widget.usuario!);
+                                  shouldSetState = true;
+                                  logFirebaseEvent('Button_backend_call');
+
+                                  var chatsRecordReference =
+                                      ChatsRecord.collection.doc();
+                                  await chatsRecordReference.set({
+                                    ...createChatsRecordData(
+                                      timeStamp: getCurrentTimestamp,
+                                      userA: currentUserReference,
+                                      userB: widget.usuario,
+                                    ),
+                                    ...mapToFirestore(
+                                      {
+                                        'userIds':
+                                            functions.generateListOfUsers(
+                                                currentUserReference!,
+                                                widget.usuario!),
+                                        'userNames':
+                                            functions.generateListOfNames(
+                                                currentUserDisplayName,
+                                                _model
+                                                    .readUsuario!.displayName),
+                                      },
+                                    ),
+                                  });
+                                  _model.refChats =
+                                      ChatsRecord.getDocumentFromData({
+                                    ...createChatsRecordData(
+                                      timeStamp: getCurrentTimestamp,
+                                      userA: currentUserReference,
+                                      userB: widget.usuario,
+                                    ),
+                                    ...mapToFirestore(
+                                      {
+                                        'userIds':
+                                            functions.generateListOfUsers(
+                                                currentUserReference!,
+                                                widget.usuario!),
+                                        'userNames':
+                                            functions.generateListOfNames(
+                                                currentUserDisplayName,
+                                                _model
+                                                    .readUsuario!.displayName),
+                                      },
+                                    ),
+                                  }, chatsRecordReference);
+                                  shouldSetState = true;
+                                  logFirebaseEvent('Button_navigate_to');
+
+                                  context.goNamed(
+                                    'ChatPage',
+                                    queryParameters: {
+                                      'receiveChat': serializeParam(
+                                        _model.refChats?.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+
+                                  if (shouldSetState) setState(() {});
+                                  return;
+                                }
+
+                                if (shouldSetState) setState(() {});
+                              },
+                              text: FFLocalizations.of(context).getText(
+                                'eqcg9rl7' /* Enviar mensaje */,
+                              ),
+                              options: FFButtonOptions(
+                                width: 150.0,
+                                height: 35.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).fondoIcono,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .titleSmallFamily,
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily),
+                                    ),
+                                elevation: 2.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(80.0),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -258,6 +389,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                     model: _model.navBar2Model,
                     updateCallback: () => setState(() {}),
                     child: NavBar2Widget(
+                      tab: 1,
                       otroUsuario: widget.usuario,
                     ),
                   ),

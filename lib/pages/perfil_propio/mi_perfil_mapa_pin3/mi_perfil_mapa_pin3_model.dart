@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class MiPerfilMapaPin3Model extends FlutterFlowModel<MiPerfilMapaPin3Widget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar7_usuario component.
   late AppBar7UsuarioModel appBar7UsuarioModel;
   // Model for postImagen component.
@@ -28,7 +27,6 @@ class MiPerfilMapaPin3Model extends FlutterFlowModel<MiPerfilMapaPin3Widget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar7UsuarioModel.dispose();
     postImagenModel1.dispose();
     postImagenModel2.dispose();

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class MapaPostModel extends FlutterFlowModel<MapaPostWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextFieldBuscar widget.
   FocusNode? textFieldBuscarFocusNode;
   TextEditingController? textFieldBuscarTextController;
@@ -27,7 +26,6 @@ class MapaPostModel extends FlutterFlowModel<MapaPostWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldBuscarFocusNode?.dispose();
     textFieldBuscarTextController?.dispose();
 

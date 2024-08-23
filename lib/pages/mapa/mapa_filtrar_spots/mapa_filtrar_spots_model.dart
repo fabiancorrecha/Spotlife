@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class MapaFiltrarSpotsModel extends FlutterFlowModel<MapaFiltrarSpotsWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for buscador01 component.
   late Buscador01Model buscador01Model;
   // Model for contentList02 component.
@@ -25,7 +24,6 @@ class MapaFiltrarSpotsModel extends FlutterFlowModel<MapaFiltrarSpotsWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     buscador01Model.dispose();
     contentList02Model.dispose();
     navBar1Model.dispose();

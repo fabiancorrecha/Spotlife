@@ -66,7 +66,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_CORREO_BTN_ON');
+                                'LOGIN_OPTIONS_CONTINA_CON_CORREO_BTN_ON_');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('ingresaConCorreo');
@@ -131,7 +131,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_TELÉFONO_BTN_');
+                                'LOGIN_OPTIONS_CONTINA_CON_TELFONO_BTN_ON');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('ingresaConTelefono');
@@ -198,7 +198,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'LOGIN_OPTIONS_CONTINÚA_CON_APPLE_BTN_ON_');
+                                      'LOGIN_OPTIONS_CONTINA_CON_APPLE_BTN_ON_T');
                                   logFirebaseEvent('Button_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
@@ -270,7 +270,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_GOOGLE_BTN_ON');
+                                'LOGIN_OPTIONS_CONTINA_CON_GOOGLE_BTN_ON_');
                             logFirebaseEvent('Button_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             final user =
@@ -278,8 +278,19 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                             if (user == null) {
                               return;
                             }
+                            logFirebaseEvent('Button_navigate_to');
 
-                            context.goNamedAuth('Feed', context.mounted);
+                            context.goNamedAuth(
+                              'Feed',
+                              context.mounted,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: const TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
                           },
                           text: FFLocalizations.of(context).getText(
                             'mosgym45' /* Continúa con Google      */,

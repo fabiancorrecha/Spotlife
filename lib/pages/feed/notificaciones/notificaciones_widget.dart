@@ -76,9 +76,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
             snapshot.data!;
 
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -111,14 +109,14 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                       notificacionesActividadRecordList
                                           .where((e) =>
                                               dateTimeFormat(
-                                                'yMd',
+                                                "yMd",
                                                 e.fechaCreacion,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
                                               ) ==
                                               dateTimeFormat(
-                                                'yMd',
+                                                "yMd",
                                                 getCurrentTimestamp,
                                                 locale:
                                                     FFLocalizations.of(context)
@@ -226,14 +224,14 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                                       notificacionesActividadRecordList
                                           .where((e) =>
                                               dateTimeFormat(
-                                                'yMd',
+                                                "yMd",
                                                 e.fechaCreacion,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
                                               ) ==
                                               dateTimeFormat(
-                                                'yMd',
+                                                "yMd",
                                                 functions.diaDeAyer(),
                                                 locale:
                                                     FFLocalizations.of(context)

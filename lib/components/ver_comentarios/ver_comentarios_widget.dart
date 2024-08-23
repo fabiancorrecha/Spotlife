@@ -564,7 +564,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                       Expanded(
                                                         child: Text(
                                                           dateTimeFormat(
-                                                            'relative',
+                                                            "relative",
                                                             listViewComentariosPostCommentRecord
                                                                 .lastEditTime!,
                                                             locale: FFLocalizations

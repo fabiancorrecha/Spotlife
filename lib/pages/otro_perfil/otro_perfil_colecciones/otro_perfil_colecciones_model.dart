@@ -11,7 +11,6 @@ class OtroPerfilColeccionesModel
     extends FlutterFlowModel<OtroPerfilColeccionesWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar7_colecciones component.
   late AppBar7ColeccionesModel appBar7ColeccionesModel;
   // Model for navBar2 component.
@@ -36,7 +35,6 @@ class OtroPerfilColeccionesModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar7ColeccionesModel.dispose();
     navBar2Model.dispose();
     buscadorColeccionesModel.dispose();

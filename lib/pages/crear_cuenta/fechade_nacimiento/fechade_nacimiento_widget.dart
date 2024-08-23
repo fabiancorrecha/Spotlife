@@ -52,9 +52,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
         builder: (context) {
           return WebViewAware(
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
                 padding: MediaQuery.viewInsetsOf(context),
                 child: const SolicitudDePermisoUbicacionWidget(),
@@ -80,9 +78,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -316,7 +312,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                                             child: Text(
                                               valueOrDefault<String>(
                                                 dateTimeFormat(
-                                                  'yMd',
+                                                  "yMd",
                                                   _model.datePicked,
                                                   locale: FFLocalizations.of(
                                                           context)

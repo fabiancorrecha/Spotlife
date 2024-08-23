@@ -9,7 +9,6 @@ class SeguidoresYSeguidosModel
     extends FlutterFlowModel<SeguidoresYSeguidosWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar4 component.
   late AppBar4Model appBar4Model;
   // Model for usuariosRecomendados component.
@@ -27,7 +26,6 @@ class SeguidoresYSeguidosModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar4Model.dispose();
     usuariosRecomendadosModel.dispose();
     navBar1Model.dispose();

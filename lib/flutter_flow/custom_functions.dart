@@ -663,6 +663,13 @@ List<UserPostsRecord> getPlacesMaximumDistance(
   return placesList;
 }
 
+List<DocumentReference> generateListOfUsersCopy(
+  DocumentReference authUser,
+  DocumentReference otherUser,
+) {
+  return [authUser, otherUser];
+}
+
 bool minCaractersAccepted(String word) {
   // Add your function code here!
   if (word.length <= 5) {

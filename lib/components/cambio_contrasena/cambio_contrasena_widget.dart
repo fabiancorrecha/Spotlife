@@ -427,7 +427,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('CAMBIO_CONTRASENA_CAMBIAR_CONTRASEÑA_BTN');
+                  logFirebaseEvent('CAMBIO_CONTRASENA_CAMBIAR_CONTRASEA_BTN_');
                   Function() navigate = () {};
                   logFirebaseEvent('Button_validate_form');
                   if (_model.formKey.currentState == null ||

@@ -690,6 +690,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PaginaEnContruccion',
               path: 'paginaEnContruccion',
               builder: (context, params) => const PaginaEnContruccionWidget(),
+            ),
+            FFRoute(
+              name: 'mapaAmigos',
+              path: 'mapaAmigos',
+              builder: (context, params) => const MapaAmigosWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

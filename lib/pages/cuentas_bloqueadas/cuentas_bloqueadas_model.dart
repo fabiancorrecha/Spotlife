@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class CuentasBloqueadasModel extends FlutterFlowModel<CuentasBloqueadasWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar4 component.
   late AppBar4Model appBar4Model;
   // Model for navBar1 component.
@@ -21,7 +20,6 @@ class CuentasBloqueadasModel extends FlutterFlowModel<CuentasBloqueadasWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar4Model.dispose();
     navBar1Model.dispose();
   }

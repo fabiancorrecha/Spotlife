@@ -36,7 +36,6 @@ class PostImagenV2Model extends FlutterFlowModel<PostImagenV2Widget> {
   List<PostCommentRecord>? obtenerComentarios0;
   // Stores action output result for [Bottom Sheet - verComentariosDesdeDetalle] action in Icon widget.
   List<PostCommentRecord>? comentariosNuevosComponente;
-  String currentPageLink = '';
   // Model for imageUser component.
   late ImageUserModel imageUserModel;
 

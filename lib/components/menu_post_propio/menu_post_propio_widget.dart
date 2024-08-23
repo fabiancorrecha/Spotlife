@@ -121,16 +121,34 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'MENU_POST_PROPIO_Container_xzx84w21_ON_T');
+                                  logFirebaseEvent('Container_show_snack_bar');
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'debug',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: const Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                   logFirebaseEvent(
                                       'Container_generate_current_page_link');
                                   _model.currentPageLink =
                                       await generateCurrentPageLink(
                                     context,
-                                    title: 'Revisa este post',
+                                    title: containerUserPostsRecord.postTitle,
                                     imageUrl: containerUserPostsRecord
                                         .postPhotolist.first,
                                     description: containerUserPostsRecord
                                         .postDescription,
+                                    isShortLink: false,
+                                    forceRedirect: true,
                                   );
 
                                   logFirebaseEvent('Container_share');
@@ -209,18 +227,6 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                       'MENU_POST_PROPIO_Column_eypv35pb_ON_TAP');
                                   logFirebaseEvent('Column_bottom_sheet');
                                   Navigator.pop(context);
-                                  logFirebaseEvent(
-                                      'Column_generate_current_page_link');
-                                  _model.currentPageLink =
-                                      await generateCurrentPageLink(
-                                    context,
-                                    title: 'Revisa este post',
-                                    imageUrl: containerUserPostsRecord
-                                        .postPhotolist.first,
-                                    description: containerUserPostsRecord
-                                        .postDescription,
-                                  );
-
                                   logFirebaseEvent('Column_copy_to_clipboard');
                                   await Clipboard.setData(ClipboardData(
                                       text:

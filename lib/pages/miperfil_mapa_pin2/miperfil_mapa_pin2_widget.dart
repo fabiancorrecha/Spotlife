@@ -68,10 +68,15 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
 
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
-        queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'collections',
-          arrayContains: widget.coleccion?.reference,
-        ),
+        queryBuilder: (userPostsRecord) => userPostsRecord
+            .where(
+              'collections',
+              arrayContains: widget.coleccion?.reference,
+            )
+            .where(
+              'postUser',
+              isEqualTo: currentUserReference,
+            ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -95,9 +100,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
             snapshot.data!;
 
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

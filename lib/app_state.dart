@@ -77,6 +77,9 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _collectionUse;
     });
+    _safeInit(() {
+      _Distancia = prefs.getDouble('ff_Distancia') ?? _Distancia;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -384,6 +387,13 @@ class FFAppState extends ChangeNotifier {
     collectionUse.insert(index, value);
     prefs.setStringList(
         'ff_collectionUse', _collectionUse.map((x) => x.path).toList());
+  }
+
+  double _Distancia = 0.0;
+  double get Distancia => _Distancia;
+  set Distancia(double value) {
+    _Distancia = value;
+    prefs.setDouble('ff_Distancia', value);
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

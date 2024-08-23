@@ -32,7 +32,6 @@ class InteresesModel extends FlutterFlowModel<InteresesWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? interesesController;
-  final unfocusNode = FocusNode();
   // Model for boton1 component.
   late Boton1Model boton1Model;
 
@@ -44,7 +43,6 @@ class InteresesModel extends FlutterFlowModel<InteresesWidget> {
   @override
   void dispose() {
     interesesController?.finish();
-    unfocusNode.dispose();
     boton1Model.dispose();
   }
 }

@@ -105,26 +105,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_9t5veyup_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaPost = false;
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().mapaPrincipal = true;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -225,26 +205,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_0z1h89ir_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaPost = true;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -357,26 +317,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_1hirpmb2_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaAmigos = true;
-                        FFAppState().esVistaPost = false;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -410,6 +350,13 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   setState(() {
                                     _model.globalValue = false;
                                   });
+                                  logFirebaseEvent(
+                                      'SoloAmigos_update_app_state');
+                                  FFAppState().MapaAmigo = true;
+                                  FFAppState().MapaGlobal = false;
+                                  FFAppState().PostAmigo = true;
+                                  FFAppState().PostGlobal = false;
+                                  FFAppState().update(() {});
                                 }
                               },
                               side: BorderSide(
@@ -455,26 +402,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_t8dqegyg_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().esVistaPost = true;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().Global = true;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -507,6 +434,12 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   setState(() {
                                     _model.globalValue = true;
                                   });
+                                  logFirebaseEvent('Global_update_app_state');
+                                  FFAppState().MapaAmigo = false;
+                                  FFAppState().MapaGlobal = true;
+                                  FFAppState().PostAmigo = false;
+                                  FFAppState().PostGlobal = true;
+                                  FFAppState().update(() {});
                                 }
                               },
                               side: BorderSide(
@@ -565,6 +498,24 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                     accion: () async {
                       logFirebaseEvent(
                           'FILTRAR_SPOTS_Container_k2obmszl_CALLBAC');
+                      if (((_model.mapaValue == true) &&
+                              (FFAppState().MapaGlobal == true)) ||
+                          ((_model.spotValue == true) &&
+                              (FFAppState().PostGlobal == true))) {
+                        logFirebaseEvent('boton1_navigate_to');
+
+                        context.pushNamed('mapaPrincipal');
+                      } else if (((_model.mapaValue == true) &&
+                              (FFAppState().MapaAmigo == true)) ||
+                          ((_model.spotValue == true) &&
+                              (FFAppState().PostAmigo == true))) {
+                        logFirebaseEvent('boton1_navigate_to');
+
+                        context.pushNamed('mapaAmigos');
+                      } else {
+                        return;
+                      }
+
                       logFirebaseEvent('boton1_bottom_sheet');
                       Navigator.pop(context);
                     },

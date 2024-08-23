@@ -68,7 +68,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'CREAR_CUENTA_OPTIONS_CONTINÚA_CON_CORREO');
+                                'CREAR_CUENTA_OPTIONS_CONTINA_CON_CORREO_');
                             logFirebaseEvent('Button_update_app_state');
                             FFAppState().inicioSesion = 'correo';
                             FFAppState().update(() {});
@@ -136,7 +136,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'CREAR_CUENTA_OPTIONS_CONTINÚA_CON_TELÉFO');
+                                'CREAR_CUENTA_OPTIONS_CONTINA_CON_TELFONO');
                             logFirebaseEvent('Button_update_app_state');
                             FFAppState().inicioSesion = '';
                             FFAppState().update(() {});
@@ -206,7 +206,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'CREAR_CUENTA_OPTIONS_CONTINÚA_CON_APPLE_');
+                                      'CREAR_CUENTA_OPTIONS_CONTINA_CON_APPLE_B');
                                   logFirebaseEvent('Button_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
@@ -296,7 +296,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
-                              'CREAR_CUENTA_OPTIONS_CONTINÚA_CON_GOOGLE');
+                              'CREAR_CUENTA_OPTIONS_CONTINA_CON_GOOGLE_');
                           logFirebaseEvent('Button_auth');
                           GoRouter.of(context).prepareAuthEvent();
                           final user =

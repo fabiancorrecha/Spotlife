@@ -42,9 +42,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -341,7 +339,7 @@ class _TodosLosChatsWidgetState extends State<TodosLosChatsWidget> {
                                                           0.0, 0.0, 8.0, 0.0),
                                                   child: Text(
                                                     dateTimeFormat(
-                                                      'relative',
+                                                      "relative",
                                                       listViewChatsRecord
                                                           .timeStamp!,
                                                       locale:
