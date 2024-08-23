@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -85,9 +86,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
         final chatPageChatsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -259,7 +258,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                   'Desconectado')
                                                 Text(
                                                   'Ultima conexion ${dateTimeFormat(
-                                                    'relative',
+                                                    "relative",
                                                     rowUsersRecord
                                                         .fechaUltimaSesion,
                                                     locale: FFLocalizations.of(
@@ -480,7 +479,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                           0.0, 8.0, 0.0, 0.0),
                                                   child: Text(
                                                     dateTimeFormat(
-                                                      'relative',
+                                                      "relative",
                                                       listViewChatMessagessRecord
                                                           .timeStamp!,
                                                       locale:
@@ -575,7 +574,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                           0.0, 8.0, 0.0, 0.0),
                                                   child: Text(
                                                     dateTimeFormat(
-                                                      'relative',
+                                                      "relative",
                                                       listViewChatMessagessRecord
                                                           .timeStamp!,
                                                       locale:
@@ -837,6 +836,26 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                           setState(() {
                                             _model.textController?.clear();
                                           });
+                                          logFirebaseEvent(
+                                              'Button_trigger_push_notification');
+                                          triggerPushNotification(
+                                            notificationTitle:
+                                                'Tienes un nuevo mensaje de: ${functions.getOtherUserName(chatPageChatsRecord.userNames.toList(), currentUserDisplayName)}',
+                                            notificationText:
+                                                chatPageChatsRecord.lastMessage,
+                                            notificationSound: 'default',
+                                            userRefs: [
+                                              functions.getOtherUserRef(
+                                                  chatPageChatsRecord.userIds
+                                                      .toList(),
+                                                  currentUserReference!)
+                                            ],
+                                            initialPageName: 'ChatPage',
+                                            parameterData: {
+                                              'receiveChat':
+                                                  widget.receiveChat,
+                                            },
+                                          );
                                         },
                                   text: FFLocalizations.of(context).getText(
                                     'hedkr3d1' /* Enviar */,

@@ -89,8 +89,7 @@ export '/pages/crear_post/crear_post_widget.dart' show CrearPostWidget;
 export '/pages/pagina_t_o_s/pagina_t_o_s_widget.dart' show PaginaTOSWidget;
 export '/pages/cuentas_bloqueadas/cuentas_bloqueadas_widget.dart'
     show CuentasBloqueadasWidget;
-export '/pages/feed/detalle_post/detalle_post_widget.dart'
-    show DetallePostWidget;
+export '/pages/detalle_post/detalle_post_widget.dart' show DetallePostWidget;
 export '/pages/crear_post/editar_post/editar_post_widget.dart'
     show EditarPostWidget;
 export '/pages/ajustes/crear_coleccion_sin_post/crear_coleccion_sin_post_widget.dart'
@@ -140,3 +139,4 @@ export '/suscripcion_fallida/suscripcion_fallida_widget.dart'
     show SuscripcionFallidaWidget;
 export '/pagina_en_contruccion/pagina_en_contruccion_widget.dart'
     show PaginaEnContruccionWidget;
+export '/pages/mapa_amigos/mapa_amigos_widget.dart' show MapaAmigosWidget;

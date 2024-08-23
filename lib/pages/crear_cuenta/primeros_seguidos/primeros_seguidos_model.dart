@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class PrimerosSeguidosModel extends FlutterFlowModel<PrimerosSeguidosWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for usuariosRecomendados component.
   late UsuariosRecomendadosModel usuariosRecomendadosModel;
   // Model for boton1 component.
@@ -22,7 +21,6 @@ class PrimerosSeguidosModel extends FlutterFlowModel<PrimerosSeguidosWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     usuariosRecomendadosModel.dispose();
     boton1Model.dispose();
   }

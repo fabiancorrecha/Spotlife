@@ -220,7 +220,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('RECUPERAR_CONTRASENA_RECUPERAR_CONTRASEÑ');
+                  logFirebaseEvent('RECUPERAR_CONTRASENA_RECUPERAR_CONTRASEA');
                   logFirebaseEvent('Button_auth');
                   if (_model.correoelectronicoTextController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(

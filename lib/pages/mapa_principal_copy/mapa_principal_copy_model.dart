@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class MapaPrincipalCopyModel extends FlutterFlowModel<MapaPrincipalCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for postGridGlobal.
   late PostGridMapaGlobalModel postGridGlobalModel;
   // Model for postGridAmigos.
@@ -30,7 +29,6 @@ class MapaPrincipalCopyModel extends FlutterFlowModel<MapaPrincipalCopyWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     postGridGlobalModel.dispose();
     postGridAmigosModel.dispose();
     navBar1Model.dispose();

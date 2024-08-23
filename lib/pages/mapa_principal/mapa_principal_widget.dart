@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/components/filtrar_spots/filtrar_spots_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/post_grid_mapa_amigos/post_grid_mapa_amigos_widget.dart';
 import '/components/post_grid_mapa_global/post_grid_mapa_global_widget.dart';
 import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -75,11 +74,11 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
       );
     }
 
-    return StreamBuilder<List<UserPostsRecord>>(
-      stream: queryUserPostsRecord(
+    return FutureBuilder<List<UserPostsRecord>>(
+      future: queryUserPostsRecordOnce(
         queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'esPrivado',
-          isNotEqualTo: true,
+          'esPublico',
+          isEqualTo: true,
         ),
       ),
       builder: (context, snapshot) {
@@ -103,9 +102,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
         List<UserPostsRecord> mapaPrincipalUserPostsRecordList = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -120,37 +117,6 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                         height: double.infinity,
                         child: Stack(
                           children: [
-                            if (FFAppState().PostAmigo == true)
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 100.0, 0.0, 0.0),
-                                child: wrapWithModel(
-                                  model: _model.postGridAmigosModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: const PostGridMapaAmigosWidget(),
-                                ),
-                              ),
-                            if (FFAppState().MapaAmigo == true)
-                              SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: custom_widgets.MapaPerzonalizado(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  ubicacionInicialLat: functions.obtenerLatLng(
-                                      currentUserLocationValue!, true),
-                                  ubicacionInicialLng: functions.obtenerLatLng(
-                                      currentUserLocationValue!, false),
-                                  zoom: 16.0,
-                                  listaPostMarcadores:
-                                      functions.getPlacesMaximumDistance(
-                                          mapaPrincipalUserPostsRecordList
-                                              .where((e) => e.esAmigos)
-                                              .toList(),
-                                          currentUserLocationValue!,
-                                          5000.0),
-                                ),
-                              ),
                             if (FFAppState().MapaGlobal == true)
                               SizedBox(
                                 width: double.infinity,
@@ -223,11 +189,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                             builder: (context) {
                               return WebViewAware(
                                 child: GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
+                                  onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: const SizedBox(
@@ -420,12 +382,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   builder: (context) {
                                     return WebViewAware(
                                       child: GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
+                                        onTap: () =>
+                                            FocusScope.of(context).unfocus(),
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),

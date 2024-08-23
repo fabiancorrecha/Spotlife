@@ -49,6 +49,10 @@ class _MiperfilDetalleColeccionWidgetState
       FFAppState().collectionUse =
           widget.coleccion!.postuUserList.toList().cast<DocumentReference>();
       setState(() {});
+      logFirebaseEvent('miperfilDetalleColeccion_update_page_sta');
+      _model.postAgregados =
+          widget.coleccion!.postuUserList.toList().cast<DocumentReference>();
+      setState(() {});
     });
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
@@ -84,9 +88,7 @@ class _MiperfilDetalleColeccionWidgetState
     }
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -137,11 +139,11 @@ class _MiperfilDetalleColeccionWidgetState
                             width: double.infinity,
                             height: double.infinity,
                             ubicacionInicialLat: functions.obtenerLatLng(
-                                currentUserLocationValue!, false),
+                                currentUserLocationValue!, true),
                             ubicacionInicialLng: functions.obtenerLatLng(
                                 currentUserLocationValue!, false),
-                            zoom: 18.0,
-                            listaPostMarcadores: FFAppState().collectionUse,
+                            zoom: 16.0,
+                            listaPostMarcadores: _model.postAgregados,
                           ),
                         ),
                       ),

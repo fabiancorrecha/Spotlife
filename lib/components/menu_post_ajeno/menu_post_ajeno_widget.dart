@@ -180,11 +180,12 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                       _model.currentPageLink =
                                           await generateCurrentPageLink(
                                         context,
-                                        title: 'Revisa este post',
+                                        title: stackUserPostsRecord.postTitle,
                                         imageUrl: stackUserPostsRecord
                                             .postPhotolist.first,
                                         description: stackUserPostsRecord
                                             .postDescription,
+                                        isShortLink: false,
                                       );
 
                                       logFirebaseEvent('Container_share');
@@ -269,18 +270,6 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                           'MENU_POST_AJENO_Column_u8cm12sr_ON_TAP');
                                       logFirebaseEvent('Column_bottom_sheet');
                                       Navigator.pop(context);
-                                      logFirebaseEvent(
-                                          'Column_generate_current_page_link');
-                                      _model.currentPageLink =
-                                          await generateCurrentPageLink(
-                                        context,
-                                        title: 'Revisa este post',
-                                        imageUrl: stackUserPostsRecord
-                                            .postPhotolist.first,
-                                        description: stackUserPostsRecord
-                                            .postDescription,
-                                      );
-
                                       logFirebaseEvent(
                                           'Column_copy_to_clipboard');
                                       await Clipboard.setData(ClipboardData(

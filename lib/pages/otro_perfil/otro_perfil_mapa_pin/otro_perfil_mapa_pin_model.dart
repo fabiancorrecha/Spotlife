@@ -9,7 +9,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class OtroPerfilMapaPinModel extends FlutterFlowModel<OtroPerfilMapaPinWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar2 component.
   late AppBar2Model appBar2Model;
   // State field(s) for ListView widget.
@@ -30,7 +29,6 @@ class OtroPerfilMapaPinModel extends FlutterFlowModel<OtroPerfilMapaPinWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar2Model.dispose();
     for (var s in listViewStreamSubscriptions) {
       s?.cancel();

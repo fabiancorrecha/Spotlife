@@ -834,9 +834,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Siguiendo',
       'en': 'Following',
     },
-    '8tjn7qv9': {
+    'eqcg9rl7': {
       'es': 'Enviar mensaje',
-      'en': 'Send Message',
+      'en': '',
     },
     'fik63qen': {
       'es': 'Home',
@@ -964,12 +964,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Post',
     },
     'kp6cc43j': {
-      'es': 'Escribe la descripción...',
+      'es': 'Escriba el titulo de la publicacion...',
       'en': 'Write the description...',
     },
-    's6k6yknv': {
+    'ovd4wkrt': {
+      'es': 'Info...',
+      'en': '',
+    },
+    'h3tmy3rl': {
       'es': 'Etiqueta la ubicación',
-      'en': 'Tag the location',
+      'en': '',
     },
     'v42yu7m9': {
       'es': 'Privacidad del spot',
@@ -1750,6 +1754,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'c83ug2am': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // mapaAmigos
+  {
+    'c44awpho': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'p98sxtr2': {
       'es': 'Home',
       'en': '',
     },
@@ -3128,6 +3143,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2jsel16p': {
       'es': 'Finalizar',
+      'en': '',
+    },
+  },
+  // filtrarDistancia
+  {
+    'hdlql4lx': {
+      'es': 'Filtrar spots por distancia',
+      'en': '',
+    },
+    '7q5uuaim': {
+      'es': 'Desliza para filtar por la distancia ',
       'en': '',
     },
   },

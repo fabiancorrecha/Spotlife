@@ -29,10 +29,16 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
 
   bool varPrivado = false;
 
+  PlaceInfoStruct? direccion;
+  void updateDireccionStruct(Function(PlaceInfoStruct) updateFn) {
+    updateFn(direccion ??= PlaceInfoStruct());
+  }
+
+  bool? editarDireccion = false;
+
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? crearPostController;
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   UserPostsRecord? refPost;
@@ -65,6 +71,11 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
     return null;
   }
 
+  // State field(s) for DescripcionColeccion widget.
+  FocusNode? descripcionColeccionFocusNode;
+  TextEditingController? descripcionColeccionTextController;
+  String? Function(BuildContext, String?)?
+      descripcionColeccionTextControllerValidator;
   // State field(s) for PlacePicker widget.
   FFPlace placePickerValue = const FFPlace();
   // State field(s) for Switch widget.
@@ -83,8 +94,10 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   @override
   void dispose() {
     crearPostController?.finish();
-    unfocusNode.dispose();
     tituloColeccionFocusNode?.dispose();
     tituloColeccionTextController?.dispose();
+
+    descripcionColeccionFocusNode?.dispose();
+    descripcionColeccionTextController?.dispose();
   }
 }

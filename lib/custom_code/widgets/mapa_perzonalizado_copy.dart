@@ -99,7 +99,7 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
     "elementType": "labels.text",
     "stylers": [
       {
-        "hue": "#009AFF"
+        "hue": "#009aff"
       },
       {
         "saturation": "25"
@@ -204,7 +204,7 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
         "visibility": "simplified"
       },
       {
-        "hue": "#00FF90"
+        "hue": "#00ff90"
       }
     ]
   },
@@ -234,7 +234,7 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
         "saturation": "-100"
       },
       {
-        "color": "#F5F5F5"
+        "color": "#f5f5f5"
       }
     ]
   },
@@ -347,6 +347,7 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
     ]
   }
 ]
+
     ''';
     double initialLat = widget.ubicacionInicialLat ?? 0.0; // Valor por defecto
     double initialLng = widget.ubicacionInicialLng ?? 0.0; // Valor por defecto
@@ -405,6 +406,26 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
                 post.placeInfo.latLng!.latitude,
                 post.placeInfo.latLng!.longitude,
               ),
+              infoWindow: gmap.InfoWindow(
+                title: _user.displayName,
+                snippet: post.postTitle,
+                onTap: () async {
+                  final currentUser = await getCurrentUser();
+                  if (post.postUser == currentUser.reference) {
+                    context.goNamed('perfilPropio');
+                  } else {
+                    context.goNamed(
+                      'perfilAjeno',
+                      queryParameters: {
+                        'otroPerfil': serializeParam(
+                          post.postUser,
+                          ParamType.DocumentReference,
+                        ),
+                      }.withoutNulls,
+                    );
+                  }
+                },
+              ),
               icon: markerIcon,
             );
             markers.add(marker);
@@ -439,6 +460,8 @@ class _MapaPerzonalizadoCopyState extends State<MapaPerzonalizadoCopy> {
       ),
     );
   }
+
+  getCurrentUser() {}
 }
 
 extension PhotoUrlExtension on UserPostsRecord {

@@ -4,7 +4,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 
-const _kDynamicLinksUrl = 'https://spotlifeapp.page.link';
+const _kDynamicLinksUrl = 'https://spotlife.page.link';
 const _kAppBundleId = 'es.spotlife.app';
 const _kIosAppId = '1660300840';
 

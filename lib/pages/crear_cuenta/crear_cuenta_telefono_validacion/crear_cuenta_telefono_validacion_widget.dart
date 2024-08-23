@@ -49,9 +49,7 @@ class _CrearCuentaTelefonoValidacionWidgetState
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -151,10 +149,6 @@ class _CrearCuentaTelefonoValidacionWidgetState
                     activeColor: FlutterFlowTheme.of(context).primary,
                     inactiveColor: const Color(0xFF333333),
                     selectedColor: FlutterFlowTheme.of(context).secondaryText,
-                    activeFillColor: FlutterFlowTheme.of(context).primary,
-                    inactiveFillColor: const Color(0xFF333333),
-                    selectedFillColor:
-                        FlutterFlowTheme.of(context).secondaryText,
                   ),
                   controller: _model.pinCodeController,
                   onChanged: (_) {},
@@ -266,11 +260,7 @@ class _CrearCuentaTelefonoValidacionWidgetState
                             builder: (context) {
                               return WebViewAware(
                                 child: GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
+                                  onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: const SizedBox(

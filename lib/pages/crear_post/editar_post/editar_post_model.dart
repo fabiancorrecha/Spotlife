@@ -23,7 +23,6 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for DescreipcionPost widget.
   FocusNode? descreipcionPostFocusNode;
@@ -46,7 +45,6 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     descreipcionPostFocusNode?.dispose();
     descreipcionPostTextController?.dispose();
   }

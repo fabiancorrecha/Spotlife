@@ -62,6 +62,10 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
               .where(
                 'coleccionFavoritos',
                 isEqualTo: widget.esCollecionTipoFavorito,
+              )
+              .where(
+                'coleccionPublica',
+                isEqualTo: true,
               ),
         ),
         builder: (context, snapshot) {

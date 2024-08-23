@@ -19,7 +19,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'post_imagen_v2_model.dart';
 export 'post_imagen_v2_model.dart';
@@ -1365,62 +1364,6 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        if (widget
-                                                                .verIconoCompartir ??
-                                                            true)
-                                                          Builder(
-                                                            builder:
-                                                                (context) =>
-                                                                    InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                logFirebaseEvent(
-                                                                    'POST_IMAGEN_V2_COMP_Icon_nqyka0go_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'Icon_generate_current_page_link');
-                                                                _model.currentPageLink =
-                                                                    await generateCurrentPageLink(
-                                                                  context,
-                                                                  title:
-                                                                      'Revisa este post',
-                                                                  imageUrl: widget
-                                                                      .post
-                                                                      ?.postPhotolist
-                                                                      .first,
-                                                                  description:
-                                                                      widget
-                                                                          .post
-                                                                          ?.postDescription,
-                                                                );
-
-                                                                logFirebaseEvent(
-                                                                    'Icon_share');
-                                                                await Share
-                                                                    .share(
-                                                                  _model
-                                                                      .currentPageLink,
-                                                                  sharePositionOrigin:
-                                                                      getWidgetBoundingBox(
-                                                                          context),
-                                                                );
-                                                              },
-                                                              child: Icon(
-                                                                FFIcons.kshare,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .icono,
-                                                                size: 24.0,
-                                                              ),
-                                                            ),
-                                                          ),
                                                       ],
                                                     ),
                                                     Row(
@@ -1822,7 +1765,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     Expanded(
                                                       child: Text(
                                                         dateTimeFormat(
-                                                          'relative',
+                                                          "relative",
                                                           widget.post!
                                                               .timePosted!,
                                                           locale:
@@ -2134,7 +2077,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                           Expanded(
                                             child: Text(
                                               dateTimeFormat(
-                                                'relative',
+                                                "relative",
                                                 comentariosItem.dateCreation!,
                                                 locale:
                                                     FFLocalizations.of(context)
@@ -2447,7 +2390,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                           Expanded(
                                             child: Text(
                                               dateTimeFormat(
-                                                'relative',
+                                                "relative",
                                                 comentariosItem.dateCreation!,
                                                 locale:
                                                     FFLocalizations.of(context)

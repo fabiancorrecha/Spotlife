@@ -33,6 +33,38 @@
       ]
     },
     {
+      "collectionGroup": "userPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "postUser",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "collections",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "esPrivado",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "postUser",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timePosted",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "actividad",
       "queryScope": "COLLECTION",
       "fields": [
@@ -51,7 +83,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "placeInfo.city",
+          "fieldPath": "placeInfo.latLng",
           "order": "ASCENDING"
         },
         {

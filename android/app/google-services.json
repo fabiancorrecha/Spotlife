@@ -14,6 +14,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "788970699260-aoglqpupqlqa9v6f94i33d9t47j6jg6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "714ca46de8ce4d0a892ad4fbfe657c699d8f9355"
+          }
+        },
+        {
+          "client_id": "788970699260-oe71llj00itn7oefi5uor19e0ua5369t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "8a3450d658a2e97882c82f8e5e152efba505e363"
+          }
+        },
+        {
+          "client_id": "788970699260-us639tprhlbcb5n4ai5v1fbbam18c0ae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
           "client_id": "788970699260-7smk600vkrbd0j566c5oin4k7qus6f3d.apps.googleusercontent.com",
           "client_type": 3
         }

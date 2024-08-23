@@ -6,7 +6,6 @@ import '/components/texto_widget.dart';
 // Focus widget keys for this walkthrough
 final videoPlayerLhmi3cxm = GlobalKey();
 final textFieldWxqpt3ez = GlobalKey();
-final placePickerQ7demwmw = GlobalKey();
 final textA4wqjt8j = GlobalKey();
 final row1b6e79tc = GlobalKey();
 final buttonHxyj0gn7 = GlobalKey();
@@ -51,23 +50,6 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
 
       /// Step 3
       TargetFocus(
-        keyTarget: placePickerQ7demwmw,
-        enableOverlayTab: true,
-        alignSkip: Alignment.bottomRight,
-        shape: ShapeLightFocus.RRect,
-        color: Colors.black,
-        contents: [
-          TargetContent(
-            align: ContentAlign.bottom,
-            builder: (context, __) => const TextoWidget(
-              texto: 'Presiona aqui para seleccionar la ubicacion de tu post',
-            ),
-          ),
-        ],
-      ),
-
-      /// Step 4
-      TargetFocus(
         keyTarget: textA4wqjt8j,
         enableOverlayTab: true,
         alignSkip: Alignment.bottomRight,
@@ -84,7 +66,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         ],
       ),
 
-      /// Step 5
+      /// Step 4
       TargetFocus(
         keyTarget: row1b6e79tc,
         enableOverlayTab: true,
@@ -102,7 +84,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         ],
       ),
 
-      /// Step 6
+      /// Step 5
       TargetFocus(
         keyTarget: buttonHxyj0gn7,
         enableOverlayTab: true,
