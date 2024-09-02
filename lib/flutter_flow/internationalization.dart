@@ -893,10 +893,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapaPrincipal
   {
-    'ozqqkwow': {
-      'es': 'Buscar',
-      'en': '',
-    },
     'b1wy4gba': {
       'es': 'Home',
       'en': 'home',
@@ -969,6 +965,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ovd4wkrt': {
       'es': 'Info...',
+      'en': '',
+    },
+    'u8a2fojs': {
+      'es': '¿Deseas editar tu ubicacion actual?',
       'en': '',
     },
     'h3tmy3rl': {
@@ -2428,6 +2428,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     't8vi189h': {
       'es': ' likes',
       'en': 'likes',
+    },
+    't6scz3lx': {
+      'es': 'Mas',
+      'en': '',
     },
     '15i1ftxt': {
       'es': 'Añade un comentario...',

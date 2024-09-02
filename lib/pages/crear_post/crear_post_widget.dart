@@ -18,6 +18,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'crear_post_model.dart';
 export 'crear_post_model.dart';
 
@@ -53,11 +54,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
       logFirebaseEvent('CREAR_POST_PAGE_CrearPost_ON_INIT_STATE');
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
-      logFirebaseEvent('CrearPost_update_page_state');
-      _model.updateDireccionStruct(
+      logFirebaseEvent('CrearPost_update_app_state');
+      FFAppState().updateUbicationStruct(
         (e) => e..latLng = currentUserLocationValue,
       );
-      setState(() {});
+      FFAppState().update(() {});
     });
 
     _model.tituloColeccionTextController ??= TextEditingController();
@@ -97,6 +98,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -179,20 +182,100 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                   onPressed: () async {
                                     logFirebaseEvent(
                                         'CREAR_POST_PAGE_PUBLICAR_BTN_ON_TAP');
+                                    currentUserLocationValue =
+                                        await getCurrentUserLocation(
+                                            defaultLocation: const LatLng(0.0, 0.0));
                                     logFirebaseEvent('Button_validate_form');
                                     if (_model.formKey.currentState == null ||
                                         !_model.formKey.currentState!
                                             .validate()) {
                                       return;
                                     }
-                                    if (_model.direccion != null) {
-                                      if (widget.esImagen!) {
+                                    if (widget.esImagen!) {
+                                      logFirebaseEvent(
+                                          'Button_backend_call');
+
+                                      var userPostsRecordReference1 =
+                                          UserPostsRecord.collection.doc();
+                                      await userPostsRecordReference1.set({
+                                        ...createUserPostsRecordData(
+                                          postTitle: _model
+                                              .tituloColeccionTextController
+                                              .text,
+                                          postUser: currentUserReference,
+                                          timePosted: getCurrentTimestamp,
+                                          toFacebook: _model.switchValue1,
+                                          toInstagram: _model.switchValue2,
+                                          toTwitter: _model.switchValue3,
+                                          placeInfo: createPlaceInfoStruct(
+                                            latLng:
+                                                currentUserLocationValue,
+                                            clearUnsetFields: false,
+                                            create: true,
+                                          ),
+                                          postDescription: _model
+                                              .descripcionColeccionTextController
+                                              .text,
+                                          esVideo: false,
+                                          esPublico: _model.varPublico,
+                                          esAmigos: _model.varAmigos,
+                                          esPrivado: _model.varPrivado,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'collections': _model
+                                                .listaColeccionesSeleccionadas,
+                                            'PostPhotolist':
+                                                _model.uploadedFileUrls1,
+                                          },
+                                        ),
+                                      });
+                                      _model.refPost = UserPostsRecord
+                                          .getDocumentFromData({
+                                        ...createUserPostsRecordData(
+                                          postTitle: _model
+                                              .tituloColeccionTextController
+                                              .text,
+                                          postUser: currentUserReference,
+                                          timePosted: getCurrentTimestamp,
+                                          toFacebook: _model.switchValue1,
+                                          toInstagram: _model.switchValue2,
+                                          toTwitter: _model.switchValue3,
+                                          placeInfo: createPlaceInfoStruct(
+                                            latLng:
+                                                currentUserLocationValue,
+                                            clearUnsetFields: false,
+                                            create: true,
+                                          ),
+                                          postDescription: _model
+                                              .descripcionColeccionTextController
+                                              .text,
+                                          esVideo: false,
+                                          esPublico: _model.varPublico,
+                                          esAmigos: _model.varAmigos,
+                                          esPrivado: _model.varPrivado,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'collections': _model
+                                                .listaColeccionesSeleccionadas,
+                                            'PostPhotolist':
+                                                _model.uploadedFileUrls1,
+                                          },
+                                        ),
+                                      }, userPostsRecordReference1);
+                                      logFirebaseEvent(
+                                          'Button_navigate_to');
+
+                                      context.pushNamed('perfilPropio');
+                                                                        } else {
+                                      if (_model.uploadedFileUrl2 != '') {
                                         logFirebaseEvent(
                                             'Button_backend_call');
 
-                                        var userPostsRecordReference1 =
-                                            UserPostsRecord.collection.doc();
-                                        await userPostsRecordReference1.set({
+                                        await UserPostsRecord.collection
+                                            .doc()
+                                            .set({
                                           ...createUserPostsRecordData(
                                             postTitle: _model
                                                 .tituloColeccionTextController
@@ -202,15 +285,17 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             toFacebook: _model.switchValue1,
                                             toInstagram: _model.switchValue2,
                                             toTwitter: _model.switchValue3,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              _model.direccion,
+                                            placeInfo: createPlaceInfoStruct(
+                                              latLng:
+                                                  currentUserLocationValue,
                                               clearUnsetFields: false,
                                               create: true,
                                             ),
                                             postDescription: _model
                                                 .descripcionColeccionTextController
                                                 .text,
-                                            esVideo: false,
+                                            video: _model.uploadedFileUrl2,
+                                            esVideo: true,
                                             esPublico: _model.varPublico,
                                             esAmigos: _model.varAmigos,
                                             esPrivado: _model.varPrivado,
@@ -219,135 +304,37 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             {
                                               'collections': _model
                                                   .listaColeccionesSeleccionadas,
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
                                             },
                                           ),
                                         });
-                                        _model.refPost = UserPostsRecord
-                                            .getDocumentFromData({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloColeccionTextController
-                                                .text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            toFacebook: _model.switchValue1,
-                                            toInstagram: _model.switchValue2,
-                                            toTwitter: _model.switchValue3,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              _model.direccion,
-                                              clearUnsetFields: false,
-                                              create: true,
-                                            ),
-                                            postDescription: _model
-                                                .descripcionColeccionTextController
-                                                .text,
-                                            esVideo: false,
-                                            esPublico: _model.varPublico,
-                                            esAmigos: _model.varAmigos,
-                                            esPrivado: _model.varPrivado,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'collections': _model
-                                                  .listaColeccionesSeleccionadas,
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
-                                            },
-                                          ),
-                                        }, userPostsRecordReference1);
                                         logFirebaseEvent(
                                             'Button_navigate_to');
 
                                         context.pushNamed('perfilPropio');
-                                                                            } else {
-                                        if (_model.uploadedFileUrl2 != '') {
-                                          logFirebaseEvent(
-                                              'Button_backend_call');
-
-                                          await UserPostsRecord.collection
-                                              .doc()
-                                              .set({
-                                            ...createUserPostsRecordData(
-                                              postTitle: _model
-                                                  .tituloColeccionTextController
-                                                  .text,
-                                              postUser: currentUserReference,
-                                              timePosted: getCurrentTimestamp,
-                                              toFacebook: _model.switchValue1,
-                                              toInstagram: _model.switchValue2,
-                                              toTwitter: _model.switchValue3,
-                                              placeInfo: updatePlaceInfoStruct(
-                                                _model.direccion,
-                                                clearUnsetFields: false,
-                                                create: true,
+                                      } else {
+                                        logFirebaseEvent(
+                                            'Button_show_snack_bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Antes sube un videos',
+                                              style: TextStyle(
+                                                color: FlutterFlowTheme.of(
+                                                        context)
+                                                    .primaryText,
                                               ),
-                                              postDescription: _model
-                                                  .descripcionColeccionTextController
-                                                  .text,
-                                              video: _model.uploadedFileUrl2,
-                                              esVideo: true,
-                                              esPublico: _model.varPublico,
-                                              esAmigos: _model.varAmigos,
-                                              esPrivado: _model.varPrivado,
                                             ),
-                                            ...mapToFirestore(
-                                              {
-                                                'collections': _model
-                                                    .listaColeccionesSeleccionadas,
-                                              },
-                                            ),
-                                          });
-                                          logFirebaseEvent(
-                                              'Button_navigate_to');
-
-                                          context.pushNamed('perfilPropio');
-                                        } else {
-                                          logFirebaseEvent(
-                                              'Button_show_snack_bar');
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Antes sube un videos',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  const Duration(milliseconds: 2000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                          );
-                                        }
-                                      }
-                                    } else {
-                                      logFirebaseEvent('Button_show_snack_bar');
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Elije una ubicacion',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
+                                            duration:
+                                                const Duration(milliseconds: 2000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                           ),
-                                          duration:
-                                              const Duration(milliseconds: 2500),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .error,
-                                        ),
-                                      );
+                                        );
+                                      }
                                     }
-
+                                  
                                     setState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -986,7 +973,9 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                               children: [
                                 Expanded(
                                   child: Text(
-                                    _model.direccion!.latLng!.toString(),
+                                    FFLocalizations.of(context).getText(
+                                      'u8a2fojs' /* ¿Deseas editar tu ubicacion ac... */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -1044,7 +1033,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 24.0),
+                                          0.0, 0.0, 10.0, 24.0),
                                       child: FlutterFlowPlacePicker(
                                         iOSGoogleMapsApiKey:
                                             'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',

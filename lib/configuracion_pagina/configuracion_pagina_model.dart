@@ -7,6 +7,7 @@ class ConfiguracionPaginaModel
     extends FlutterFlowModel<ConfiguracionPaginaWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for botonQuinto component.
   late BotonQuintoModel botonQuintoModel1;
   // Model for botonQuinto component.

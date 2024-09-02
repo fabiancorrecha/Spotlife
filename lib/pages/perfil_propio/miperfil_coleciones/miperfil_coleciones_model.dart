@@ -11,6 +11,7 @@ class MiperfilColecionesModel
     extends FlutterFlowModel<MiperfilColecionesWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar7_usuario component.
   late AppBar7UsuarioModel appBar7UsuarioModel;
   // Model for navBar2 component.

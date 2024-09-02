@@ -9,6 +9,7 @@ class MapaPosrRecomendadosModel
     extends FlutterFlowModel<MapaPosrRecomendadosWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar8 component.
   late AppBar8Model appBar8Model;
   // Model for postImagen component.

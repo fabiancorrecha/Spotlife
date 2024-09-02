@@ -15,6 +15,7 @@ class OtroPerfilModel extends FlutterFlowModel<OtroPerfilWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for tarjetaOtroPerfil component.
   late TarjetaOtroPerfilModel tarjetaOtroPerfilModel;
   // Stores action output result for [Backend Call - Create Document] action in SiguiendoCuentaPrivada widget.
