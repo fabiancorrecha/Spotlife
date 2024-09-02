@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class OtroPerfilMapaModel extends FlutterFlowModel<OtroPerfilMapaWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar7_usuario component.
   late AppBar7UsuarioModel appBar7UsuarioModel;
   // Stores action output result for [Backend Call - Read Document] action in Button widget.

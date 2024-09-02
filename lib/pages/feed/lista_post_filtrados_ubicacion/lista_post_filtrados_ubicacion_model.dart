@@ -9,6 +9,7 @@ class ListaPostFiltradosUbicacionModel
     extends FlutterFlowModel<ListaPostFiltradosUbicacionWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar_postList component.
   late AppBarPostListModel appBarPostListModel;
   // Model for navBar1 component.

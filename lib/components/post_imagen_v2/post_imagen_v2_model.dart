@@ -2,6 +2,7 @@ import '/backend/backend.dart';
 import '/components/image_user/image_user_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'post_imagen_v2_widget.dart' show PostImagenV2Widget;
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class PostImagenV2Model extends FlutterFlowModel<PostImagenV2Widget> {
@@ -26,6 +27,8 @@ class PostImagenV2Model extends FlutterFlowModel<PostImagenV2Widget> {
           int index, Function(PostCommentRecord) updateFn) =>
       comentariosActuales[index] = updateFn(comentariosActuales[index]);
 
+  bool verDescripcionHeader = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in postImagenV2 widget.
@@ -36,6 +39,9 @@ class PostImagenV2Model extends FlutterFlowModel<PostImagenV2Widget> {
   List<PostCommentRecord>? obtenerComentarios0;
   // Stores action output result for [Bottom Sheet - verComentariosDesdeDetalle] action in Icon widget.
   List<PostCommentRecord>? comentariosNuevosComponente;
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableExpandableController;
+
   // Model for imageUser component.
   late ImageUserModel imageUserModel;
 
@@ -46,6 +52,7 @@ class PostImagenV2Model extends FlutterFlowModel<PostImagenV2Widget> {
 
   @override
   void dispose() {
+    expandableExpandableController.dispose();
     imageUserModel.dispose();
   }
 }

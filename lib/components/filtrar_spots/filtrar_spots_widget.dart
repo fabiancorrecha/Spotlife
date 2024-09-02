@@ -123,8 +123,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.mapaValue ??=
-                                  FFAppState().MapaGlobal,
+                              value: _model.mapaValue ??= true,
                               onChanged: (newValue) async {
                                 setState(() => _model.mapaValue = newValue!);
                                 if (newValue!) {
@@ -223,8 +222,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.spotValue ??=
-                                  FFAppState().PostGlobal,
+                              value: _model.spotValue ??= false,
                               onChanged: (newValue) async {
                                 setState(() => _model.spotValue = newValue!);
                                 if (newValue!) {
@@ -504,14 +502,32 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                               (FFAppState().PostGlobal == true))) {
                         logFirebaseEvent('boton1_navigate_to');
 
-                        context.pushNamed('mapaPrincipal');
+                        context.pushNamed(
+                          'mapaPrincipal',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       } else if (((_model.mapaValue == true) &&
                               (FFAppState().MapaAmigo == true)) ||
                           ((_model.spotValue == true) &&
                               (FFAppState().PostAmigo == true))) {
                         logFirebaseEvent('boton1_navigate_to');
 
-                        context.pushNamed('mapaAmigos');
+                        context.pushNamed(
+                          'mapaAmigos',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       } else {
                         return;
                       }

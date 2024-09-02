@@ -80,6 +80,17 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _Distancia = prefs.getDouble('ff_Distancia') ?? _Distancia;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_ubication')) {
+        try {
+          final serializedData = prefs.getString('ff_ubication') ?? '{}';
+          _ubication =
+              PlaceInfoStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -394,6 +405,18 @@ class FFAppState extends ChangeNotifier {
   set Distancia(double value) {
     _Distancia = value;
     prefs.setDouble('ff_Distancia', value);
+  }
+
+  PlaceInfoStruct _ubication = PlaceInfoStruct();
+  PlaceInfoStruct get ubication => _ubication;
+  set ubication(PlaceInfoStruct value) {
+    _ubication = value;
+    prefs.setString('ff_ubication', value.serialize());
+  }
+
+  void updateUbicationStruct(Function(PlaceInfoStruct) updateFn) {
+    updateFn(_ubication);
+    prefs.setString('ff_ubication', _ubication.serialize());
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

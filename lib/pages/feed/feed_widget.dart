@@ -13,7 +13,9 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:provider/provider.dart';
 import 'feed_model.dart';
 export 'feed_model.dart';
 
@@ -28,6 +30,7 @@ class _FeedWidgetState extends State<FeedWidget> {
   late FeedModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -35,6 +38,18 @@ class _FeedWidgetState extends State<FeedWidget> {
     _model = createModel(context, () => FeedModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Feed'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('FEED_PAGE_Feed_ON_INIT_STATE');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      logFirebaseEvent('Feed_update_app_state');
+      FFAppState().updateUbicationStruct(
+        (e) => e..latLng = currentUserLocationValue,
+      );
+      FFAppState().update(() {});
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -47,6 +62,8 @@ class _FeedWidgetState extends State<FeedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(

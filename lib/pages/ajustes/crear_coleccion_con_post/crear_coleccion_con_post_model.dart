@@ -19,6 +19,7 @@ class CrearColeccionConPostModel
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? crearColeccionController;
+  final unfocusNode = FocusNode();
   // State field(s) for tituloColeccion widget.
   FocusNode? tituloColeccionFocusNode;
   TextEditingController? tituloColeccionTextController;

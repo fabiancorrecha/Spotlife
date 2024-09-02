@@ -7,6 +7,7 @@ class IngresaConUsernameValidacionModel
     extends FlutterFlowModel<IngresaConUsernameValidacionWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class PaginaTOSModel extends FlutterFlowModel<PaginaTOSWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
   @override
