@@ -134,10 +134,10 @@ class _MyAppState extends State<MyApp> {
   void afStart() async {
     // SDK Options
     final AppsFlyerOptions options = AppsFlyerOptions(
-        afDevKey: "DEV_KEY", // dotenv.env["DEV_KEY"]!
-        appId: "APP_ID", // dotenv.env["APP_ID"]!
-        showDebug: kDebugMode,
-        timeToWaitForATTUserAuthorization: 15,
+      afDevKey: "6kbwWbC4TUWBXn3ezB8uv5", // dotenv.env["DEV_KEY"]!
+      appId: "1660300840", // for ios // dotenv.env["APP_ID"]!
+      showDebug: kDebugMode,
+      timeToWaitForATTUserAuthorization: 15,
     );
 
     _appsflyerSdk = AppsflyerSdk(options);
