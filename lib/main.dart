@@ -1,3 +1,4 @@
+import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late AppsflyerSdk _appsflyerSdk;
   Locale? _locale = FFLocalizations.getStoredLocale();
 
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
@@ -66,7 +68,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    afStart();
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
     userStream = spotlifeappFirebaseUserStream()
@@ -127,5 +129,54 @@ class _MyAppState extends State<MyApp> {
         child: child!,
       ),
     );
+  }
+
+  void afStart() async {
+    // SDK Options
+    final AppsFlyerOptions options = AppsFlyerOptions(
+        afDevKey: "DEV_KEY", // dotenv.env["DEV_KEY"]!
+        appId: "APP_ID", // dotenv.env["APP_ID"]!
+        showDebug: kDebugMode,
+        timeToWaitForATTUserAuthorization: 15,
+    );
+
+    _appsflyerSdk = AppsflyerSdk(options);
+
+    /*
+    Setting configuration to the SDK:
+    _appsflyerSdk.setCurrencyCode("USD");
+    _appsflyerSdk.enableTCFDataCollection(true);
+    var forGdpr = AppsFlyerConsent.forGDPRUser(hasConsentForDataUsage: true, hasConsentForAdsPersonalization: true);
+    _appsflyerSdk.setConsentData(forGdpr);
+    var nonGdpr = AppsFlyerConsent.nonGDPRUser();
+    _appsflyerSdk.setConsentData(nonGdpr);
+     */
+
+    // Init of AppsFlyer SDK
+    await _appsflyerSdk.initSdk(
+        registerConversionDataCallback: true,
+        registerOnAppOpenAttributionCallback: true,
+        registerOnDeepLinkingCallback: true);
+
+
+    // Deep linking callback
+    _appsflyerSdk.onDeepLinking((DeepLinkResult dp) {
+      switch (dp.status) {
+        case Status.FOUND:
+          debugPrint(dp.deepLink?.toString());
+          debugPrint("deep link value: ${dp.deepLink?.deepLinkValue}");
+          break;
+        case Status.NOT_FOUND:
+          debugPrint("deep link not found");
+          break;
+        case Status.ERROR:
+          debugPrint("deep link error: ${dp.error}");
+          break;
+        case Status.PARSE_ERROR:
+          debugPrint("deep link status parsing error");
+          break;
+      }
+      debugPrint("onDeepLinking res: " + dp.toString());
+    });
   }
 }
