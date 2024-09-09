@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class PaginaProvisionalModel extends FlutterFlowModel<PaginaProvisionalWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();

@@ -10,6 +10,7 @@ class GridPostFiltradosUbicacionModel
     extends FlutterFlowModel<GridPostFiltradosUbicacionWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar_postList component.
   late AppBarPostListModel appBarPostListModel;
   // Model for GridPostsFiltradrPorUbicacion component.

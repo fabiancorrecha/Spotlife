@@ -25,6 +25,7 @@ class MiperfilDetalleColeccionModel
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for appBar5 component.
   late AppBar5Model appBar5Model;
   // Model for GridPostsFavoritos component.
