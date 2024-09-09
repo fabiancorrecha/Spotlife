@@ -1,3 +1,4 @@
+import '/auth/base_auth_user_provider.dart';
 import '/backend/backend.dart';
 import '/components/filtrar_spots/filtrar_spots_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
@@ -6,14 +7,10 @@ import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/walkthroughs/mapa_principal.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
-    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'mapa_principal_model.dart';
@@ -41,9 +38,6 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
         parameters: {'screen_name': 'mapaPrincipal'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
-    _model.textFieldBuscarTextController ??= TextEditingController();
-    _model.textFieldBuscarFocusNode ??= FocusNode();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -117,7 +111,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                         height: double.infinity,
                         child: Stack(
                           children: [
-                            if (FFAppState().MapaGlobal == true)
+                            if (!loggedIn)
                               SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
@@ -145,6 +139,26 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   model: _model.postGridGlobalModel,
                                   updateCallback: () => setState(() {}),
                                   child: const PostGridMapaGlobalWidget(),
+                                ),
+                              ),
+                            if (FFAppState().MapaGlobal == true)
+                              SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: custom_widgets.MapaPersonalizado2(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  ubicacionInicialLat: functions.obtenerLatLng(
+                                      currentUserLocationValue!, true),
+                                  ubicacionInicialLng: functions.obtenerLatLng(
+                                      currentUserLocationValue!, false),
+                                  zoom: 16.0,
+                                  listaPostMarcadores:
+                                      functions.getPlacesMaximumDistance(
+                                          mapaPrincipalUserPostsRecordList
+                                              .toList(),
+                                          currentUserLocationValue!,
+                                          5000.0),
                                 ),
                               ),
                           ],
@@ -208,276 +222,173 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Icon(
-                              FFIcons.kadd,
-                              color: FlutterFlowTheme.of(context).icono,
-                              size: 24.0,
+                          child: FlutterFlowIconButton(
+                            borderColor: const Color(0x00F4F176),
+                            borderRadius: 20.0,
+                            borderWidth: 1.0,
+                            buttonSize: 50.0,
+                            fillColor: const Color(0x00EEEEEE),
+                            icon: Icon(
+                              Icons.add,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 35.0,
                             ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
                         ),
-                      ).addWalkthrough(
-                        cardB8pdfuzz,
-                        _model.mapaPrincipalController,
                       ),
                     ),
                   ),
                 Align(
                   alignment: const AlignmentDirectional(0.0, -1.0),
                   child: Container(
-                    height: 100.0,
+                    height: 188.0,
                     decoration: const BoxDecoration(),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 0.0),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(),
-                                    child: TextFormField(
-                                      controller:
-                                          _model.textFieldBuscarTextController,
-                                      focusNode:
-                                          _model.textFieldBuscarFocusNode,
-                                      autofocus: false,
-                                      readOnly: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            FFLocalizations.of(context).getText(
-                                          'ozqqkwow' /* Buscar */,
-                                        ),
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmallFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmallFamily),
-                                            ),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        errorBorder: UnderlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.black,
-                                        suffixIcon: const Icon(
-                                          Icons.search_rounded,
-                                          color: Color(0xFF757575),
-                                          size: 22.0,
-                                        ),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
-                                          ),
-                                      validator: _model
-                                          .textFieldBuscarTextControllerValidator
-                                          .asValidator(context),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'MAPA_PRINCIPAL_Container_8rt78f08_ON_TAP');
-                                      logFirebaseEvent('Container_navigate_to');
-
-                                      context.pushNamed('buscarSpots');
-                                    },
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 0.0,
-                                      child: Container(
-                                        width: 300.0,
-                                        height: 50.0,
-                                        decoration: const BoxDecoration(),
-                                      ),
-                                    ),
-                                  ).addWalkthrough(
-                                    container8rt78f08,
-                                    _model.mapaPrincipalController,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'MAPA_PRINCIPAL_PAGE_Card_s54sydg0_ON_TAP');
-                                logFirebaseEvent('Card_bottom_sheet');
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  barrierColor: const Color(0x00000000),
-                                  enableDrag: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return WebViewAware(
-                                      child: GestureDetector(
-                                        onTap: () =>
-                                            FocusScope.of(context).unfocus(),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: const SizedBox(
-                                            height: 480.0,
-                                            child: FiltrarSpotsWidget(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ).then((value) => safeSetState(() {}));
-                              },
-                              child: Card(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                color: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 8.0, 4.0, 8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.chevronDown,
-                                          color: FlutterFlowTheme.of(context)
-                                              .icono,
-                                          size: 8.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Icon(
-                                          FFIcons.kframe169,
-                                          color: FlutterFlowTheme.of(context)
-                                              .icono,
-                                          size: 18.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Icon(
-                                          FFIcons.kusers,
-                                          color: FlutterFlowTheme.of(context)
-                                              .icono,
-                                          size: 20.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ).addWalkthrough(
-                              cardS54sydg0,
-                              _model.mapaPrincipalController,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, -0.77),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                    child: Row(
+                    child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        FlutterFlowIconButton(
-                          borderColor: const Color(0x00F4F176),
-                          borderRadius: 20.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          fillColor: const Color(0x00EEEEEE),
-                          icon: Icon(
-                            Icons.help,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 30.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'MAPA_PRINCIPAL_PAGE_Card_dbgvgizp_ON_TAP');
+                                    logFirebaseEvent('Card_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0x00000000),
+                                      isDismissible: false,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return WebViewAware(
+                                          child: GestureDetector(
+                                            onTap: () => FocusScope.of(context)
+                                                .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: const SizedBox(
+                                                height: 480.0,
+                                                child: FiltrarSpotsWidget(),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 8.0, 4.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: FaIcon(
+                                              FontAwesomeIcons.chevronDown,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .icono,
+                                              size: 8.0,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Icon(
+                                              FFIcons.kframe169,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .icono,
+                                              size: 18.0,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Icon(
+                                              FFIcons.kusers,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .icono,
+                                              size: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'MAPA_PRINCIPAL_PAGE_help_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_start_walkthrough');
-                            safeSetState(() => _model.mapaPrincipalController =
-                                createPageWalkthrough(context));
-                            _model.mapaPrincipalController
-                                ?.show(context: context);
-                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 16.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'MAPA_PRINCIPAL_Container_vk1xc2pj_ON_TAP');
+                                  logFirebaseEvent('Container_navigate_to');
+
+                                  context.pushNamed('buscarSpots');
+                                },
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 0.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                  child: Container(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ),
+                                    child: Icon(
+                                      FFIcons.kcollection,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -490,15 +401,4 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
       },
     );
   }
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          safeSetState(() => _model.mapaPrincipalController = null);
-        },
-        onSkip: () {
-          return true;
-        },
-      );
 }

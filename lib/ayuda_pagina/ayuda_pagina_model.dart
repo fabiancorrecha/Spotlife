@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class AyudaPaginaModel extends FlutterFlowModel<AyudaPaginaWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for botonQuinto component.
   late BotonQuintoModel botonQuintoModel1;
   // Model for botonQuinto component.

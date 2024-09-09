@@ -375,6 +375,7 @@ class _MapaAmigosWidgetState extends State<MapaAmigosWidget> {
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
                                     barrierColor: const Color(0x00000000),
+                                    isDismissible: false,
                                     enableDrag: false,
                                     context: context,
                                     builder: (context) {

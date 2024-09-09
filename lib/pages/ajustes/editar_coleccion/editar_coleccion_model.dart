@@ -14,6 +14,7 @@ class EditarColeccionModel extends FlutterFlowModel<EditarColeccionWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for tituloColeccion widget.
   FocusNode? tituloColeccionFocusNode;
   TextEditingController? tituloColeccionTextController;

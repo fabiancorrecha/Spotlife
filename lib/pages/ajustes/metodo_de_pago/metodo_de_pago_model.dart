@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class MetodoDePagoModel extends FlutterFlowModel<MetodoDePagoWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for boton5.
   late BotonQuintoModel boton5Model;
 

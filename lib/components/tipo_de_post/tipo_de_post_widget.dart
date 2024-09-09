@@ -1,7 +1,10 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'tipo_de_post_model.dart';
 export 'tipo_de_post_model.dart';
 
@@ -15,6 +18,8 @@ class TipoDePostWidget extends StatefulWidget {
 class _TipoDePostWidgetState extends State<TipoDePostWidget> {
   late TipoDePostModel _model;
 
+  LatLng? currentUserLocationValue;
+
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -25,6 +30,18 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TipoDePostModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('TIPO_DE_POST_tipoDePost_ON_INIT_STATE');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      logFirebaseEvent('tipoDePost_update_app_state');
+      FFAppState().ubication = PlaceInfoStruct(
+        latLng: currentUserLocationValue,
+      );
+      FFAppState().update(() {});
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -38,6 +55,8 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
