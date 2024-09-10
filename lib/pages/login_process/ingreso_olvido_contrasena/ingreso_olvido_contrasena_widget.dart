@@ -38,7 +38,7 @@ class _IngresoOlvidoContrasenaWidgetState
     _model.emailTextController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -55,39 +55,43 @@ class _IngresoOlvidoContrasenaWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: const Icon(
-              Icons.chevron_left,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'fp2ceqxm' /* Restaura tu contraseña */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                'fp2ceqxm' /* Restaura tu contraseña */,
+              ),
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: Form(
           key: _model.formKey,
@@ -99,7 +103,7 @@ class _IngresoOlvidoContrasenaWidgetState
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -147,7 +151,7 @@ class _IngresoOlvidoContrasenaWidgetState
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.emailTextController',
                                 const Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: true,
                               obscureText: false,
@@ -252,7 +256,7 @@ class _IngresoOlvidoContrasenaWidgetState
                   ),
                   wrapWithModel(
                     model: _model.boton1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: Boton1Widget(
                       texto: 'Enviar link',
                       desabilitado: _model.emailTextController.text == '',
@@ -283,7 +287,7 @@ class _IngresoOlvidoContrasenaWidgetState
                         FFAppState().email = '';
                         FFAppState().contrasena = '';
                         FFAppState().recordar = false;
-                        setState(() {});
+                        safeSetState(() {});
                         logFirebaseEvent('boton1_bottom_sheet');
                         await showModalBottomSheet(
                           isScrollControlled: true,

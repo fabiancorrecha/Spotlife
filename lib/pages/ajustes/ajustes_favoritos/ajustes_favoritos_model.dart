@@ -12,7 +12,6 @@ class AjustesFavoritosModel extends FlutterFlowModel<AjustesFavoritosWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? misFavoritosController;
-  final unfocusNode = FocusNode();
   // Model for cabecera component.
   late CabeceraModel cabeceraModel;
   // State field(s) for TabBar widget.

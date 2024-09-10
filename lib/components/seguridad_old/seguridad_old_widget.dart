@@ -30,7 +30,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
     super.initState();
     _model = createModel(context, () => SeguridadOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -139,7 +139,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                 children: [
                   wrapWithModel(
                     model: _model.botonQuintoModel1,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: FFLocalizations.of(context).getText(
                         'so4lffx3' /* Modificar contraseña */,
@@ -167,7 +167,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                   ),
                   wrapWithModel(
                     model: _model.botonQuintoModel2,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: FFLocalizations.of(context).getText(
                         'l0aecvj6' /* Recuperar contraseña */,
@@ -195,7 +195,7 @@ class _SeguridadOldWidgetState extends State<SeguridadOldWidget> {
                   ),
                   wrapWithModel(
                     model: _model.botonQuintoModel3,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: FFLocalizations.of(context).getText(
                         'kcf7u6oo' /* información inicio sesión guar... */,

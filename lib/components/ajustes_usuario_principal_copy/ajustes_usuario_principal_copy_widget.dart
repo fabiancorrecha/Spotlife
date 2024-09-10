@@ -34,7 +34,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
     super.initState();
     _model = createModel(context, () => AjustesUsuarioPrincipalCopyModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -138,7 +138,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksettings,
@@ -177,7 +177,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksignal,
@@ -194,7 +194,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kstarLines,
@@ -217,7 +217,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kusers,
@@ -239,7 +239,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: wrapWithModel(
                         model: _model.boton3Model5,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton3Widget(
                           icono: Icon(
                             FFIcons.kcard,
@@ -256,7 +256,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model6,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kimbox,
@@ -278,7 +278,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                   children: [
                     wrapWithModel(
                       model: _model.boton4Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.kaddUser,
@@ -294,7 +294,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     ),
                     wrapWithModel(
                       model: _model.boton4Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.klogOut,

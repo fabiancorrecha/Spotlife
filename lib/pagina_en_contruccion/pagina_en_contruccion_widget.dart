@@ -26,7 +26,7 @@ class _PaginaEnContruccionWidgetState extends State<PaginaEnContruccionWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PaginaEnContruccion'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,13 +44,13 @@ class _PaginaEnContruccionWidgetState extends State<PaginaEnContruccionWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 50.0, 0.0, 20.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

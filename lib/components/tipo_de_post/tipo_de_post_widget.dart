@@ -43,7 +43,7 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
       FFAppState().update(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

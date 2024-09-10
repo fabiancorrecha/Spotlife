@@ -42,7 +42,7 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,8 +72,8 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
                 focusNode: _model.textFieldBuscarFocusNode,
                 onChanged: (_) => EasyDebounce.debounce(
                   '_model.textFieldBuscarTextController',
-                  const Duration(milliseconds: 200),
-                  () => setState(() {}),
+                  const Duration(milliseconds: 0),
+                  () => safeSetState(() {}),
                 ),
                 onFieldSubmitted: (_) async {
                   logFirebaseEvent('BUSCADOR_COLECCIONES_TextFieldBuscar_ON_');
@@ -83,7 +83,7 @@ class _BuscadorColeccionesWidgetState extends State<BuscadorColeccionesWidget> {
                       widget.coleccionesLista!
                           .map(
                             (record) => TextSearchItem.fromTerms(
-                                record, [record.nombre]),
+                                record, [record.nombre, record.descripcion]),
                           )
                           .toList(),
                     )

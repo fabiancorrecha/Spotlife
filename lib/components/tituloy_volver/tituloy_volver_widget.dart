@@ -24,7 +24,7 @@ class _TituloyVolverWidgetState extends State<TituloyVolverWidget> {
     super.initState();
     _model = createModel(context, () => TituloyVolverModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

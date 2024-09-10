@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class CreaCuentaCelularModel extends FlutterFlowModel<CreaCuentaCelularWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   final textFieldKey1 = GlobalKey();
   FocusNode? textFieldFocusNode1;

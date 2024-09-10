@@ -33,7 +33,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
     _model.confirmaNuevaConstraseaTextController ??= TextEditingController();
     _model.confirmaNuevaConstraseaFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -50,39 +50,43 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: const Icon(
-              Icons.chevron_left,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'w5kgwqq6' /* Restaura tu contraseña */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                'w5kgwqq6' /* Restaura tu contraseña */,
+              ),
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 2.0,
         ),
         body: Container(
           width: double.infinity,
@@ -91,7 +95,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -179,7 +183,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                             filled: true,
                             fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
-                              onTap: () => setState(
+                              onTap: () => safeSetState(
                                 () => _model.nuevaconstraseaVisibility =
                                     !_model.nuevaconstraseaVisibility,
                               ),
@@ -272,7 +276,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                             filled: true,
                             fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
-                              onTap: () => setState(
+                              onTap: () => safeSetState(
                                 () => _model.confirmaNuevaConstraseaVisibility =
                                     !_model.confirmaNuevaConstraseaVisibility,
                               ),
@@ -308,7 +312,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                 ),
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: FFLocalizations.of(context).getText(
                       '6qavzof5' /* Siguiente */,

@@ -30,7 +30,7 @@ class _Menu02WidgetState extends State<Menu02Widget> {
     super.initState();
     _model = createModel(context, () => Menu02Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

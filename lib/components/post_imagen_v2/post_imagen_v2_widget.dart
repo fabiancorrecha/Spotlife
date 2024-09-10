@@ -67,12 +67,12 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
       logFirebaseEvent('postImagenV2_update_component_state');
       _model.comentariosActuales =
           _model.obtenerComentarios1!.toList().cast<PostCommentRecord>();
-      setState(() {});
+      safeSetState(() {});
     });
 
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -1121,7 +1121,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                                 logFirebaseEvent('IconSI_update_component_state');
                                                                                 _model.contar = _model.contar! + -1;
                                                                                 _model.verMeGusta = false;
-                                                                                setState(() {});
+                                                                                safeSetState(() {});
                                                                                 logFirebaseEvent('IconSI_backend_call');
 
                                                                                 await widget.post!.reference.update({
@@ -1169,7 +1169,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                                 _model.contar! + 1;
                                                                             _model.verMeGusta =
                                                                                 true;
-                                                                            setState(() {});
+                                                                            safeSetState(() {});
                                                                             logFirebaseEvent('IconNO_backend_call');
 
                                                                             await widget.post!.reference.update({
@@ -1240,7 +1240,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                               parameterData: {},
                                                                             );
 
-                                                                            setState(() {});
+                                                                            safeSetState(() {});
                                                                           },
                                                                           child:
                                                                               Icon(
@@ -1330,7 +1330,8 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                         _model.comentariosNuevosComponente =
                                                                             value));
 
-                                                                setState(() {});
+                                                                safeSetState(
+                                                                    () {});
                                                               },
                                                               child: FaIcon(
                                                                 FontAwesomeIcons
@@ -1381,7 +1382,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                             'favoritoSI_update_component_state');
                                                                         _model.verFavorito =
                                                                             false;
-                                                                        setState(
+                                                                        safeSetState(
                                                                             () {});
                                                                         logFirebaseEvent(
                                                                             'favoritoSI_backend_call');
@@ -1483,7 +1484,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                             'favoritoNO_update_component_state');
                                                                         _model.verFavorito =
                                                                             true;
-                                                                        setState(
+                                                                        safeSetState(
                                                                             () {});
                                                                         logFirebaseEvent(
                                                                             'favoritoNO_backend_call');
@@ -1673,14 +1674,14 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                               'Expandable_update_component_state');
                                                                           _model.verDescripcionHeader =
                                                                               true;
-                                                                          setState(
+                                                                          safeSetState(
                                                                               () {});
                                                                         } else {
                                                                           logFirebaseEvent(
                                                                               'Expandable_update_component_state');
                                                                           _model.verDescripcionHeader =
                                                                               false;
-                                                                          setState(
+                                                                          safeSetState(
                                                                               () {});
                                                                         }
                                                                       },
@@ -1856,7 +1857,8 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                           model: _model
                                                               .imageUserModel,
                                                           updateCallback: () =>
-                                                              setState(() {}),
+                                                              safeSetState(
+                                                                  () {}),
                                                           child:
                                                               const ImageUserWidget(
                                                             radioImagen: 20,

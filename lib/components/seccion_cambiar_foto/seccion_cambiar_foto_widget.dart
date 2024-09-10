@@ -38,7 +38,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
     super.initState();
     _model = createModel(context, () => SeccionCambiarFotoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -195,7 +195,7 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                       if (selectedMedia != null &&
                           selectedMedia.every((m) =>
                               validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isDataUploading = true);
+                        safeSetState(() => _model.isDataUploading = true);
                         var selectedUploadedFiles = <FFUploadedFile>[];
 
                         var downloadUrls = <String>[];
@@ -231,14 +231,14 @@ class _SeccionCambiarFotoWidgetState extends State<SeccionCambiarFotoWidget> {
                         if (selectedUploadedFiles.length ==
                                 selectedMedia.length &&
                             downloadUrls.length == selectedMedia.length) {
-                          setState(() {
+                          safeSetState(() {
                             _model.uploadedLocalFile =
                                 selectedUploadedFiles.first;
                             _model.uploadedFileUrl = downloadUrls.first;
                           });
                           showUploadMessage(context, 'Success!');
                         } else {
-                          setState(() {});
+                          safeSetState(() {});
                           showUploadMessage(context, 'Failed to upload data');
                           return;
                         }

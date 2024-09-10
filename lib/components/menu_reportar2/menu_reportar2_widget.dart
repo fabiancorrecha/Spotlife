@@ -37,7 +37,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -198,7 +198,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
               children: [
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Enviar reporte',
                     desabilitado: false,

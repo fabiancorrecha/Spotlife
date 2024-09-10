@@ -26,7 +26,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'privacidad_cuenta'});
     _model.switchValue = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +46,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -84,24 +84,23 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                           ),
                         ),
                       ),
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          '6lb7kr0n' /* Privacidad */,
+                      Expanded(
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            '6lb7kr0n' /* Privacidad */,
+                          ),
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .displaySmallFamily,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .displaySmallFamily),
+                              ),
                         ),
-                        style:
-                            FlutterFlowTheme.of(context).displaySmall.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .displaySmallFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .displaySmallFamily),
-                                ),
-                      ),
-                      Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 30.0,
                       ),
                     ],
                   ),
@@ -141,7 +140,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                               alignment: const AlignmentDirectional(0.0, 0.0),
                               child: wrapWithModel(
                                 model: _model.botonQuintoModel1,
-                                updateCallback: () => setState(() {}),
+                                updateCallback: () => safeSetState(() {}),
                                 child: BotonQuintoWidget(
                                   texto: FFLocalizations.of(context).getText(
                                     'l3wjec69' /* Cuenta privada */,
@@ -155,7 +154,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                               child: Switch.adaptive(
                                 value: _model.switchValue!,
                                 onChanged: (newValue) async {
-                                  setState(
+                                  safeSetState(
                                       () => _model.switchValue = newValue);
                                 },
                                 activeColor:
@@ -173,7 +172,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                       ),
                       wrapWithModel(
                         model: _model.botonQuintoModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             'bhy2b27n' /* Privacidad Colecciones */,
@@ -183,7 +182,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                       ),
                       wrapWithModel(
                         model: _model.botonQuintoModel3,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             '21ymigci' /* Privacidad Spots */,
@@ -220,7 +219,7 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'sc6f29o3' /* Usuarios bloqueados */,

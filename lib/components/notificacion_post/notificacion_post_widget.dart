@@ -36,7 +36,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
     super.initState();
     _model = createModel(context, () => NotificacionPostModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

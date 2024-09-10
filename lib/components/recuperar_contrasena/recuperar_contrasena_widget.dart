@@ -33,7 +33,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
     _model.correoelectronicoTextController ??= TextEditingController();
     _model.correoelectronicoFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -147,7 +147,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.correoelectronicoTextController',
                     const Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: false,

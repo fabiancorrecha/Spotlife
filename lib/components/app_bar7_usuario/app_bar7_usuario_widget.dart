@@ -33,7 +33,7 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
     super.initState();
     _model = createModel(context, () => AppBar7UsuarioModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

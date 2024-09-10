@@ -26,7 +26,7 @@ class _SinComentariosWidgetState extends State<SinComentariosWidget> {
     super.initState();
     _model = createModel(context, () => SinComentariosModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

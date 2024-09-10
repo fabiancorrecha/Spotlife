@@ -15,7 +15,6 @@ class BuscarLugaresModel extends FlutterFlowModel<BuscarLugaresWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? buscarLugaresController;
-  final unfocusNode = FocusNode();
   // State field(s) for TextFieldBuscar widget.
   FocusNode? textFieldBuscarFocusNode;
   TextEditingController? textFieldBuscarTextController;

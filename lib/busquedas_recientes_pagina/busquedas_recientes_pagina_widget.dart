@@ -26,7 +26,7 @@ class _BusquedasRecientesPaginaWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'busquedas_recientes_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +46,7 @@ class _BusquedasRecientesPaginaWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

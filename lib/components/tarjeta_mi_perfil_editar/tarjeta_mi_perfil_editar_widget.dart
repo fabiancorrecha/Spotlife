@@ -68,7 +68,7 @@ class _TarjetaMiPerfilEditarWidgetState
     _model.generoTextController ??= TextEditingController();
     _model.generoFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -353,7 +353,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                           selectedMedia.every((m) =>
                                               validateFileFormat(
                                                   m.storagePath, context))) {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.isDataUploading1 = true);
                                         var selectedUploadedFiles =
                                             <FFUploadedFile>[];
@@ -396,7 +396,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                                 selectedMedia.length &&
                                             downloadUrls.length ==
                                                 selectedMedia.length) {
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.uploadedLocalFile1 =
                                                 selectedUploadedFiles.first;
                                             _model.uploadedFileUrl1 =
@@ -405,7 +405,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                           showUploadMessage(
                                               context, 'Success!');
                                         } else {
-                                          setState(() {});
+                                          safeSetState(() {});
                                           showUploadMessage(
                                               context, 'Failed to upload data');
                                           return;
@@ -462,7 +462,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                         selectedMedia.every((m) =>
                                             validateFileFormat(
                                                 m.storagePath, context))) {
-                                      setState(
+                                      safeSetState(
                                           () => _model.isDataUploading2 = true);
                                       var selectedUploadedFiles =
                                           <FFUploadedFile>[];
@@ -504,7 +504,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                               selectedMedia.length &&
                                           downloadUrls.length ==
                                               selectedMedia.length) {
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.uploadedLocalFile2 =
                                               selectedUploadedFiles.first;
                                           _model.uploadedFileUrl2 =
@@ -512,7 +512,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                         });
                                         showUploadMessage(context, 'Success!');
                                       } else {
-                                        setState(() {});
+                                        safeSetState(() {});
                                         showUploadMessage(
                                             context, 'Failed to upload data');
                                         return;
@@ -607,7 +607,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.nombreUsarioTextController',
                                   const Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -774,7 +774,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.celularTextController',
                                   const Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -861,7 +861,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.descripcionTextController',
                                   const Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -950,7 +950,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.urlTextController',
                                   const Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -1036,7 +1036,7 @@ class _TarjetaMiPerfilEditarWidgetState
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.fechadeNacimientoTextController',
                                 const Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: false,
                               obscureText: false,
@@ -1120,7 +1120,7 @@ class _TarjetaMiPerfilEditarWidgetState
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.generoTextController',
                                 const Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: false,
                               obscureText: false,

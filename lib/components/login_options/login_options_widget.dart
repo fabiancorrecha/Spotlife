@@ -29,7 +29,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
     super.initState();
     _model = createModel(context, () => LoginOptionsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -206,8 +206,19 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                   if (user == null) {
                                     return;
                                   }
+                                  logFirebaseEvent('Button_navigate_to');
 
-                                  context.goNamedAuth('Feed', context.mounted);
+                                  context.pushNamedAuth(
+                                    'Feed',
+                                    context.mounted,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   '4gtrpgqc' /* Continúa con Apple         */,

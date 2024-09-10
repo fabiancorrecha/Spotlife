@@ -39,7 +39,6 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? crearPostController;
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   UserPostsRecord? refPost;

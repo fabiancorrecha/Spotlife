@@ -55,7 +55,7 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -187,7 +187,7 @@ class _GridPostsBioWidgetState extends State<GridPostsBioWidget>
                                             FFAppState()
                                                     .verCajaComentariosActualizados =
                                                 false;
-                                            setState(() {});
+                                            safeSetState(() {});
                                           },
                                           onLongPress: () async {
                                             logFirebaseEvent(

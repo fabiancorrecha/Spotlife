@@ -28,7 +28,7 @@ class _ComponentePerfilPrivadoWidgetState
     super.initState();
     _model = createModel(context, () => ComponentePerfilPrivadoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

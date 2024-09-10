@@ -46,7 +46,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
     _model.commentFieldTextController ??= TextEditingController();
     _model.commentFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -408,7 +408,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                                 });
                                                                 logFirebaseEvent(
                                                                     'IconNO_refresh_database_request');
-                                                                setState(() =>
+                                                                safeSetState(() =>
                                                                     _model.firestoreRequestCompleter =
                                                                         null);
                                                                 await _model
@@ -529,7 +529,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                                     });
                                                                     logFirebaseEvent(
                                                                         'IconSI_refresh_database_request');
-                                                                    setState(() =>
+                                                                    safeSetState(() =>
                                                                         _model.firestoreRequestCompleter =
                                                                             null);
                                                                     await _model
@@ -689,7 +689,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.commentFieldTextController',
                                         const Duration(milliseconds: 300),
-                                        () => setState(() {}),
+                                        () => safeSetState(() {}),
                                       ),
                                       autofocus: true,
                                       obscureText: false,
@@ -821,7 +821,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                           _model
                                               .addToComentariosDesdeComponente(
                                                   _model.ultimoComentario!);
-                                          setState(() {});
+                                          safeSetState(() {});
                                           logFirebaseEvent(
                                               'Button_backend_call');
 
@@ -902,14 +902,14 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                           );
                                           logFirebaseEvent(
                                               'Button_refresh_database_request');
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.firestoreRequestCompleter =
                                                   null);
                                           await _model
                                               .waitForFirestoreRequestCompleted();
                                           logFirebaseEvent(
                                               'Button_clear_text_fields_pin_codes');
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.commentFieldTextController
                                                 ?.clear();
                                           });
@@ -920,7 +920,7 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                               _model
                                                   .comentariosDesdeComponente);
 
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                   text: FFLocalizations.of(context).getText(
                                     'bg4ft6gr' /* Enviar */,

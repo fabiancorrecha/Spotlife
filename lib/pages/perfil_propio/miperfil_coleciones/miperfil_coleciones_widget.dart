@@ -31,7 +31,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilColeciones'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -81,28 +81,28 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   wrapWithModel(
                     model: _model.appBar7UsuarioModel,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: AppBar7UsuarioWidget(
                       usuario: currentUserReference,
                     ),
                   ),
                   wrapWithModel(
                     model: _model.navBar2Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar2Widget(
                       tab: 2,
                     ),
                   ),
                   wrapWithModel(
                     model: _model.buscadorColeccionesModel,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BuscadorColeccionesWidget(
                       coleccionesLista: miperfilColecionesCollectionsRecordList,
                       puedeCrearColeccion: true,
@@ -115,7 +115,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                       children: [
                         wrapWithModel(
                           model: _model.gridColeccionesModel,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: GridColeccionesWidget(
                             usuario: currentUserReference,
                             esCollecionTipoFavorito: false,
@@ -126,7 +126,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 3,
                     ),

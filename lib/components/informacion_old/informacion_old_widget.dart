@@ -27,7 +27,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
     super.initState();
     _model = createModel(context, () => InformacionOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -119,7 +119,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'hyzdko9r' /* Politica de datos */,
@@ -129,7 +129,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'p6ngq3ov' /* Condiciones de uso */,
@@ -139,7 +139,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'hfrc1s8f' /* Reglamento UE  */,

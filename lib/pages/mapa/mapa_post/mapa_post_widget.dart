@@ -27,11 +27,11 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'mapaPost'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -65,12 +65,12 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-              child: Row(
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -169,25 +169,25 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: wrapWithModel(
-                  model: _model.postGridMapaGlobalModel,
-                  updateCallback: () => setState(() {}),
-                  child: const PostGridMapaGlobalWidget(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.postGridMapaGlobalModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const PostGridMapaGlobalWidget(),
+                  ),
                 ),
               ),
-            ),
-            wrapWithModel(
-              model: _model.navBar1Model,
-              updateCallback: () => setState(() {}),
-              child: const NavBar1Widget(
-                tabActiva: 2,
+              wrapWithModel(
+                model: _model.navBar1Model,
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
+                  tabActiva: 2,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

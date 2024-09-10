@@ -124,7 +124,7 @@
   "fieldOverrides": [
     {
       "collectionGroup": "postComment",
-      "fieldPath": "users",
+      "fieldPath": "userCreator",
       "indexes": [
         {
           "order": "ASCENDING",

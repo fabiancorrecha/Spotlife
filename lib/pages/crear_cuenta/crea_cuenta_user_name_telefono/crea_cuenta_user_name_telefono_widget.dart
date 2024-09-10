@@ -35,7 +35,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,30 +54,33 @@ class _CreaCuentaUserNameTelefonoWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  '0sldny5a' /* Crear cuenta con teléfono */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    '0sldny5a' /* Crear cuenta con teléfono */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: StreamBuilder<List<UsersRecord>>(
           stream: queryUsersRecord(
@@ -117,7 +120,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -344,8 +347,8 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                     child: Checkbox(
                                       value: _model.checkboxTOSValue ??= false,
                                       onChanged: (newValue) async {
-                                        setState(() => _model.checkboxTOSValue =
-                                            newValue!);
+                                        safeSetState(() => _model
+                                            .checkboxTOSValue = newValue!);
                                       },
                                       side: const BorderSide(
                                         width: 2,
@@ -401,7 +404,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.boton1Model,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton1Widget(
                           texto: FFLocalizations.of(context).getText(
                             'yy33robh' /* Continuar */,
@@ -566,7 +569,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.crearCuentaOptionsModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const CrearCuentaOptionsWidget(),
                       ),
                     ],

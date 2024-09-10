@@ -27,7 +27,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
     super.initState();
     _model = createModel(context, () => CuentaOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -138,7 +138,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'jpfd7qil' /* Informacion personal */,
@@ -148,7 +148,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'e9vqby5k' /* Idioma */,
@@ -164,7 +164,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'pqw2xtu8' /* Guardar fotos originales */,
@@ -201,7 +201,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           's6i1on4c' /* Herramientas promoción */,
@@ -211,7 +211,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel5,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'k451ictb' /* Solicitar verificación */,
@@ -221,7 +221,7 @@ class _CuentaOldWidgetState extends State<CuentaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel6,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'dngpr9ek' /* Cambiar a cuenta empresa */,

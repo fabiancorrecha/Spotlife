@@ -86,7 +86,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -105,176 +105,105 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Stack(
-          children: [
-            Form(
-              key: _model.formKey,
-              autovalidateMode: AutovalidateMode.disabled,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 60.0,
-                    decoration: const BoxDecoration(),
-                    child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'kt6uqv7e' /* Nuevo spot */,
-                              ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 16.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    logFirebaseEvent(
-                                        'CREAR_POST_PAGE_Card_0r0m8dy6_ON_TAP');
-                                    logFirebaseEvent('Card_navigate_back');
-                                    context.pop();
-                                  },
-                                  child: Card(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color:
-                                        FlutterFlowTheme.of(context).fondoIcono,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(80.0),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+          child: Stack(
+            children: [
+              Form(
+                key: _model.formKey,
+                autovalidateMode: AutovalidateMode.disabled,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 60.0,
+                      decoration: const BoxDecoration(),
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'kt6uqv7e' /* Nuevo spot */,
+                                ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        Icons.arrow_back_rounded,
-                                        color:
-                                            FlutterFlowTheme.of(context).icono,
-                                        size: 24.0,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 8.0, 16.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'CREAR_POST_PAGE_Card_0r0m8dy6_ON_TAP');
+                                      logFirebaseEvent('Card_navigate_back');
+                                      context.pop();
+                                    },
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      color: FlutterFlowTheme.of(context)
+                                          .fondoIcono,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.arrow_back_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .icono,
+                                          size: 24.0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'CREAR_POST_PAGE_PUBLICAR_BTN_ON_TAP');
-                                    currentUserLocationValue =
-                                        await getCurrentUserLocation(
-                                            defaultLocation: const LatLng(0.0, 0.0));
-                                    logFirebaseEvent('Button_validate_form');
-                                    if (_model.formKey.currentState == null ||
-                                        !_model.formKey.currentState!
-                                            .validate()) {
-                                      return;
-                                    }
-                                    if (widget.esImagen!) {
+                                  FFButtonWidget(
+                                    onPressed: () async {
                                       logFirebaseEvent(
-                                          'Button_backend_call');
-
-                                      var userPostsRecordReference1 =
-                                          UserPostsRecord.collection.doc();
-                                      await userPostsRecordReference1.set({
-                                        ...createUserPostsRecordData(
-                                          postTitle: _model
-                                              .tituloColeccionTextController
-                                              .text,
-                                          postUser: currentUserReference,
-                                          timePosted: getCurrentTimestamp,
-                                          toFacebook: _model.switchValue1,
-                                          toInstagram: _model.switchValue2,
-                                          toTwitter: _model.switchValue3,
-                                          placeInfo: createPlaceInfoStruct(
-                                            latLng:
-                                                currentUserLocationValue,
-                                            clearUnsetFields: false,
-                                            create: true,
-                                          ),
-                                          postDescription: _model
-                                              .descripcionColeccionTextController
-                                              .text,
-                                          esVideo: false,
-                                          esPublico: _model.varPublico,
-                                          esAmigos: _model.varAmigos,
-                                          esPrivado: _model.varPrivado,
-                                        ),
-                                        ...mapToFirestore(
-                                          {
-                                            'collections': _model
-                                                .listaColeccionesSeleccionadas,
-                                            'PostPhotolist':
-                                                _model.uploadedFileUrls1,
-                                          },
-                                        ),
-                                      });
-                                      _model.refPost = UserPostsRecord
-                                          .getDocumentFromData({
-                                        ...createUserPostsRecordData(
-                                          postTitle: _model
-                                              .tituloColeccionTextController
-                                              .text,
-                                          postUser: currentUserReference,
-                                          timePosted: getCurrentTimestamp,
-                                          toFacebook: _model.switchValue1,
-                                          toInstagram: _model.switchValue2,
-                                          toTwitter: _model.switchValue3,
-                                          placeInfo: createPlaceInfoStruct(
-                                            latLng:
-                                                currentUserLocationValue,
-                                            clearUnsetFields: false,
-                                            create: true,
-                                          ),
-                                          postDescription: _model
-                                              .descripcionColeccionTextController
-                                              .text,
-                                          esVideo: false,
-                                          esPublico: _model.varPublico,
-                                          esAmigos: _model.varAmigos,
-                                          esPrivado: _model.varPrivado,
-                                        ),
-                                        ...mapToFirestore(
-                                          {
-                                            'collections': _model
-                                                .listaColeccionesSeleccionadas,
-                                            'PostPhotolist':
-                                                _model.uploadedFileUrls1,
-                                          },
-                                        ),
-                                      }, userPostsRecordReference1);
-                                      logFirebaseEvent(
-                                          'Button_navigate_to');
-
-                                      context.pushNamed('perfilPropio');
-                                                                        } else {
-                                      if (_model.uploadedFileUrl2 != '') {
+                                          'CREAR_POST_PAGE_PUBLICAR_BTN_ON_TAP');
+                                      currentUserLocationValue =
+                                          await getCurrentUserLocation(
+                                              defaultLocation:
+                                                  const LatLng(0.0, 0.0));
+                                      logFirebaseEvent('Button_validate_form');
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        return;
+                                      }
+                                      if (widget.esImagen!) {
                                         logFirebaseEvent(
                                             'Button_backend_call');
 
-                                        await UserPostsRecord.collection
-                                            .doc()
+                                        var userPostsRecordReference1 =
+                                            UserPostsRecord.collection
+                                                .doc();
+                                        await userPostsRecordReference1
                                             .set({
                                           ...createUserPostsRecordData(
                                             postTitle: _model
@@ -283,9 +212,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             postUser: currentUserReference,
                                             timePosted: getCurrentTimestamp,
                                             toFacebook: _model.switchValue1,
-                                            toInstagram: _model.switchValue2,
+                                            toInstagram:
+                                                _model.switchValue2,
                                             toTwitter: _model.switchValue3,
-                                            placeInfo: createPlaceInfoStruct(
+                                            placeInfo:
+                                                createPlaceInfoStruct(
                                               latLng:
                                                   currentUserLocationValue,
                                               clearUnsetFields: false,
@@ -294,8 +225,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             postDescription: _model
                                                 .descripcionColeccionTextController
                                                 .text,
-                                            video: _model.uploadedFileUrl2,
-                                            esVideo: true,
+                                            esVideo: false,
                                             esPublico: _model.varPublico,
                                             esAmigos: _model.varAmigos,
                                             esPrivado: _model.varPrivado,
@@ -304,160 +234,416 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             {
                                               'collections': _model
                                                   .listaColeccionesSeleccionadas,
+                                              'PostPhotolist':
+                                                  _model.uploadedFileUrls1,
                                             },
                                           ),
                                         });
+                                        _model.refPost = UserPostsRecord
+                                            .getDocumentFromData({
+                                          ...createUserPostsRecordData(
+                                            postTitle: _model
+                                                .tituloColeccionTextController
+                                                .text,
+                                            postUser: currentUserReference,
+                                            timePosted: getCurrentTimestamp,
+                                            toFacebook: _model.switchValue1,
+                                            toInstagram:
+                                                _model.switchValue2,
+                                            toTwitter: _model.switchValue3,
+                                            placeInfo:
+                                                createPlaceInfoStruct(
+                                              latLng:
+                                                  currentUserLocationValue,
+                                              clearUnsetFields: false,
+                                              create: true,
+                                            ),
+                                            postDescription: _model
+                                                .descripcionColeccionTextController
+                                                .text,
+                                            esVideo: false,
+                                            esPublico: _model.varPublico,
+                                            esAmigos: _model.varAmigos,
+                                            esPrivado: _model.varPrivado,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'collections': _model
+                                                  .listaColeccionesSeleccionadas,
+                                              'PostPhotolist':
+                                                  _model.uploadedFileUrls1,
+                                            },
+                                          ),
+                                        }, userPostsRecordReference1);
                                         logFirebaseEvent(
                                             'Button_navigate_to');
 
                                         context.pushNamed('perfilPropio');
-                                      } else {
-                                        logFirebaseEvent(
-                                            'Button_show_snack_bar');
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Antes sube un videos',
-                                              style: TextStyle(
-                                                color: FlutterFlowTheme.of(
-                                                        context)
-                                                    .primaryText,
+                                                                            } else {
+                                        if (_model.uploadedFileUrl2 != '') {
+                                          logFirebaseEvent(
+                                              'Button_backend_call');
+
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set({
+                                            ...createUserPostsRecordData(
+                                              postTitle: _model
+                                                  .tituloColeccionTextController
+                                                  .text,
+                                              postUser: currentUserReference,
+                                              timePosted: getCurrentTimestamp,
+                                              toFacebook: _model.switchValue1,
+                                              toInstagram:
+                                                  _model.switchValue2,
+                                              toTwitter: _model.switchValue3,
+                                              placeInfo:
+                                                  createPlaceInfoStruct(
+                                                latLng:
+                                                    currentUserLocationValue,
+                                                clearUnsetFields: false,
+                                                create: true,
                                               ),
+                                              postDescription: _model
+                                                  .descripcionColeccionTextController
+                                                  .text,
+                                              video: _model.uploadedFileUrl2,
+                                              esVideo: true,
+                                              esPublico: _model.varPublico,
+                                              esAmigos: _model.varAmigos,
+                                              esPrivado: _model.varPrivado,
                                             ),
-                                            duration:
-                                                const Duration(milliseconds: 2000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                          ),
-                                        );
-                                      }
-                                    }
-                                  
-                                    setState(() {});
-                                  },
-                                  text: FFLocalizations.of(context).getText(
-                                    'iegyvusu' /* Publicar */,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 100.0,
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
+                                            ...mapToFirestore(
+                                              {
+                                                'collections': _model
+                                                    .listaColeccionesSeleccionadas,
+                                              },
+                                            ),
+                                          });
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
+                                          context.pushNamed('perfilPropio');
+                                        } else {
+                                          logFirebaseEvent(
+                                              'Button_show_snack_bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Antes sube un videos',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration: const Duration(
+                                                  milliseconds: 2000),
+                                              backgroundColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
-                                    elevation: 0.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                                      .primaryBackground,
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    
+                                      safeSetState(() {});
+                                    },
+                                    text: FFLocalizations.of(context).getText(
+                                      'iegyvusu' /* Publicar */,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    options: FFButtonOptions(
+                                      width: 100.0,
+                                      height: 40.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ).addWalkthrough(
+                                    buttonHxyj0gn7,
+                                    _model.crearPostController,
                                   ),
-                                ).addWalkthrough(
-                                  buttonHxyj0gn7,
-                                  _model.crearPostController,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          if (widget.esImagen ?? true)
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'CREAR_POST_PAGE_StackImagen_ON_TAP');
-                                logFirebaseEvent(
-                                    'StackImagen_upload_media_to_firebase');
-                                final selectedMedia = await selectMedia(
-                                  imageQuality: 50,
-                                  mediaSource: MediaSource.photoGallery,
-                                  multiImage: true,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  setState(
-                                      () => _model.isDataUploading1 = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            if (widget.esImagen ?? true)
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'CREAR_POST_PAGE_StackImagen_ON_TAP');
+                                  logFirebaseEvent(
+                                      'StackImagen_upload_media_to_firebase');
+                                  final selectedMedia = await selectMedia(
+                                    imageQuality: 50,
+                                    mediaSource: MediaSource.photoGallery,
+                                    multiImage: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    safeSetState(
+                                        () => _model.isDataUploading1 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                  var downloadUrls = <String>[];
-                                  try {
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                            ))
-                                        .toList();
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
 
-                                    downloadUrls = (await Future.wait(
-                                      selectedMedia.map(
-                                        (m) async => await uploadData(
-                                            m.storagePath, m.bytes),
-                                      ),
-                                    ))
-                                        .where((u) => u != null)
-                                        .map((u) => u!)
-                                        .toList();
-                                  } finally {
-                                    _model.isDataUploading1 = false;
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading1 = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
+                                      safeSetState(() {
+                                        _model.uploadedLocalFiles1 =
+                                            selectedUploadedFiles;
+                                        _model.uploadedFileUrls1 = downloadUrls;
+                                      });
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
                                   }
-                                  if (selectedUploadedFiles.length ==
-                                          selectedMedia.length &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
-                                    setState(() {
-                                      _model.uploadedLocalFiles1 =
-                                          selectedUploadedFiles;
-                                      _model.uploadedFileUrls1 = downloadUrls;
-                                    });
-                                  } else {
-                                    setState(() {});
-                                    return;
+                                },
+                                child: SizedBox(
+                                  width: 216.0,
+                                  height: 300.0,
+                                  child: Stack(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    children: [
+                                      if (!(_model
+                                          .uploadedFileUrls1.isNotEmpty))
+                                        Container(
+                                          width: 216.0,
+                                          height: 300.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .icono,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: const Icon(
+                                            Icons.upload_outlined,
+                                            color: Color(0xFFD8D8D8),
+                                            size: 70.0,
+                                          ),
+                                        ),
+                                      if (_model.uploadedFileUrls1.isNotEmpty)
+                                        Container(
+                                          width: 216.0,
+                                          height: 300.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              width: 0.0,
+                                            ),
+                                          ),
+                                          child: Builder(
+                                            builder: (context) {
+                                              final imagenCarrusel = _model
+                                                  .uploadedFileUrls1
+                                                  .map((e) => e)
+                                                  .toList();
+
+                                              return SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      imagenCarrusel.length,
+                                                      (imagenCarruselIndex) {
+                                                    final imagenCarruselItem =
+                                                        imagenCarrusel[
+                                                            imagenCarruselIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          fadeOutDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          imageUrl:
+                                                              imagenCarruselItem,
+                                                          width: 190.0,
+                                                          height: 297.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            if (!widget.esImagen!)
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'CREAR_POST_PAGE_StackVideo_ON_TAP');
+                                  logFirebaseEvent(
+                                      'StackVideo_upload_media_to_firebase');
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: false,
+                                    allowVideo: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    safeSetState(
+                                        () => _model.isDataUploading2 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
+
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
+
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading2 = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
+                                      safeSetState(() {
+                                        _model.uploadedLocalFile2 =
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl2 =
+                                            downloadUrls.first;
+                                      });
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
                                   }
-                                }
-                              },
-                              child: SizedBox(
-                                width: 216.0,
-                                height: 300.0,
-                                child: Stack(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    if (!(_model.uploadedFileUrls1.isNotEmpty))
+                                },
+                                child: SizedBox(
+                                  width: 216.0,
+                                  height: 300.0,
+                                  child: Stack(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    children: [
                                       Container(
                                         width: 216.0,
                                         height: 300.0,
@@ -478,271 +664,243 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                           size: 70.0,
                                         ),
                                       ),
-                                    if (_model.uploadedFileUrls1.isNotEmpty)
-                                      Container(
-                                        width: 216.0,
-                                        height: 300.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final imagenCarrusel = _model
-                                                .uploadedFileUrls1
-                                                .map((e) => e)
-                                                .toList();
-
-                                            return SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    imagenCarrusel.length,
-                                                    (imagenCarruselIndex) {
-                                                  final imagenCarruselItem =
-                                                      imagenCarrusel[
-                                                          imagenCarruselIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                4.0, 0.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0),
-                                                      child: CachedNetworkImage(
-                                                        fadeInDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        fadeOutDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        imageUrl:
-                                                            imagenCarruselItem,
-                                                        width: 190.0,
-                                                        height: 297.0,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          if (!widget.esImagen!)
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'CREAR_POST_PAGE_StackVideo_ON_TAP');
-                                logFirebaseEvent(
-                                    'StackVideo_upload_media_to_firebase');
-                                final selectedMedia =
-                                    await selectMediaWithSourceBottomSheet(
-                                  context: context,
-                                  allowPhoto: false,
-                                  allowVideo: true,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  setState(
-                                      () => _model.isDataUploading2 = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
-
-                                  var downloadUrls = <String>[];
-                                  try {
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                            ))
-                                        .toList();
-
-                                    downloadUrls = (await Future.wait(
-                                      selectedMedia.map(
-                                        (m) async => await uploadData(
-                                            m.storagePath, m.bytes),
-                                      ),
-                                    ))
-                                        .where((u) => u != null)
-                                        .map((u) => u!)
-                                        .toList();
-                                  } finally {
-                                    _model.isDataUploading2 = false;
-                                  }
-                                  if (selectedUploadedFiles.length ==
-                                          selectedMedia.length &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
-                                    setState(() {
-                                      _model.uploadedLocalFile2 =
-                                          selectedUploadedFiles.first;
-                                      _model.uploadedFileUrl2 =
-                                          downloadUrls.first;
-                                    });
-                                  } else {
-                                    setState(() {});
-                                    return;
-                                  }
-                                }
-                              },
-                              child: SizedBox(
-                                width: 216.0,
-                                height: 300.0,
-                                child: Stack(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    Container(
-                                      width: 216.0,
-                                      height: 300.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .icono,
-                                          width: 2.0,
-                                        ),
-                                      ),
-                                      child: const Icon(
-                                        Icons.upload_outlined,
-                                        color: Color(0xFFD8D8D8),
-                                        size: 70.0,
-                                      ),
-                                    ),
-                                    if (_model.isDataUploading2)
-                                      Container(
-                                        width: 216.0,
-                                        height: 300.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .icono,
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: const FaIcon(
-                                          FontAwesomeIcons.circleNotch,
-                                          color: Color(0xFFD8D8D8),
-                                          size: 60.0,
-                                        ).animateOnPageLoad(animationsMap[
-                                            'iconOnPageLoadAnimation']!),
-                                      ),
-                                    if (_model.uploadedFileUrl2 != '')
-                                      Container(
-                                        height: 300.0,
-                                        constraints: const BoxConstraints(
-                                          minWidth: 216.0,
-                                          maxWidth: 218.0,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        child: FlutterFlowVideoPlayer(
-                                          path: _model.uploadedFileUrl2,
-                                          videoType: VideoType.network,
+                                      if (_model.isDataUploading2)
+                                        Container(
                                           width: 216.0,
                                           height: 300.0,
-                                          aspectRatio: 0.72,
-                                          autoPlay: false,
-                                          looping: true,
-                                          showControls: true,
-                                          allowFullScreen: true,
-                                          allowPlaybackSpeedMenu: false,
-                                          lazyLoad: true,
-                                        ).addWalkthrough(
-                                          videoPlayerLhmi3cxm,
-                                          _model.crearPostController,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .icono,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: const FaIcon(
+                                            FontAwesomeIcons.circleNotch,
+                                            color: Color(0xFFD8D8D8),
+                                            size: 60.0,
+                                          ).animateOnPageLoad(animationsMap[
+                                              'iconOnPageLoadAnimation']!),
+                                        ),
+                                      if (_model.uploadedFileUrl2 != '')
+                                        Container(
+                                          height: 300.0,
+                                          constraints: const BoxConstraints(
+                                            minWidth: 216.0,
+                                            maxWidth: 218.0,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              width: 0.0,
+                                            ),
+                                          ),
+                                          child: FlutterFlowVideoPlayer(
+                                            path: _model.uploadedFileUrl2,
+                                            videoType: VideoType.network,
+                                            width: 216.0,
+                                            height: 300.0,
+                                            aspectRatio: 0.72,
+                                            autoPlay: false,
+                                            looping: true,
+                                            showControls: true,
+                                            allowFullScreen: true,
+                                            allowPlaybackSpeedMenu: false,
+                                            lazyLoad: true,
+                                          ).addWalkthrough(
+                                            videoPlayerLhmi3cxm,
+                                            _model.crearPostController,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 26.0, 0.0, 0.0),
+                              child: Container(
+                                decoration: const BoxDecoration(),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      AuthUserStreamWidget(
+                                        builder: (context) => Container(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 500),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 500),
+                                            imageUrl: valueOrDefault<String>(
+                                              currentUserPhoto,
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                  ],
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 9.0, 0.0),
+                                          child: TextFormField(
+                                            controller: _model
+                                                .tituloColeccionTextController,
+                                            focusNode:
+                                                _model.tituloColeccionFocusNode,
+                                            autofocus: false,
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              hintText:
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                'kp6cc43j' /* Escriba el titulo de la public... */,
+                                              ),
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                              enabledBorder:
+                                                  const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              errorBorder: const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedErrorBorder:
+                                                  const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                            maxLines: 3,
+                                            minLines: 1,
+                                            validator: _model
+                                                .tituloColeccionTextControllerValidator
+                                                .asValidator(context),
+                                          ).addWalkthrough(
+                                            textFieldWxqpt3ez,
+                                            _model.crearPostController,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 26.0, 0.0, 0.0),
-                            child: Container(
+                            Container(
                               decoration: const BoxDecoration(),
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
+                                    16.0, 0.0, 16.0, 16.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    AuthUserStreamWidget(
-                                      builder: (context) => Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: CachedNetworkImage(
-                                          fadeInDuration:
-                                              const Duration(milliseconds: 500),
-                                          fadeOutDuration:
-                                              const Duration(milliseconds: 500),
-                                          imageUrl: valueOrDefault<String>(
-                                            currentUserPhoto,
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 9.0, 0.0),
+                                            48.0, 0.0, 9.0, 0.0),
                                         child: TextFormField(
                                           controller: _model
-                                              .tituloColeccionTextController,
-                                          focusNode:
-                                              _model.tituloColeccionFocusNode,
+                                              .descripcionColeccionTextController,
+                                          focusNode: _model
+                                              .descripcionColeccionFocusNode,
                                           autofocus: false,
                                           textCapitalization:
                                               TextCapitalization.sentences,
@@ -751,7 +909,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             hintText:
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                              'kp6cc43j' /* Escriba el titulo de la public... */,
+                                              'ovd4wkrt' /* Info... */,
                                             ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
@@ -836,11 +994,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                           maxLines: 3,
                                           minLines: 1,
                                           validator: _model
-                                              .tituloColeccionTextControllerValidator
+                                              .descripcionColeccionTextControllerValidator
                                               .asValidator(context),
-                                        ).addWalkthrough(
-                                          textFieldWxqpt3ez,
-                                          _model.crearPostController,
                                         ),
                                       ),
                                     ),
@@ -848,400 +1003,204 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 16.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          48.0, 0.0, 9.0, 0.0),
-                                      child: TextFormField(
-                                        controller: _model
-                                            .descripcionColeccionTextController,
-                                        focusNode: _model
-                                            .descripcionColeccionFocusNode,
-                                        autofocus: false,
-                                        textCapitalization:
-                                            TextCapitalization.sentences,
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          hintText: FFLocalizations.of(context)
-                                              .getText(
-                                            'ovd4wkrt' /* Info... */,
-                                          ),
-                                          hintStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                          enabledBorder: const UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          focusedBorder: const UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          errorBorder: const UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          focusedErrorBorder:
-                                              const UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
-                                        maxLines: 3,
-                                        minLines: 1,
-                                        validator: _model
-                                            .descripcionColeccionTextControllerValidator
-                                            .asValidator(context),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'u8a2fojs' /* ¿Deseas editar tu ubicacion ac... */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
-                                  ),
-                                ),
-                                FlutterFlowIconButton(
-                                  borderColor: const Color(0x00F4F176),
-                                  borderRadius: 20.0,
-                                  borderWidth: 1.0,
-                                  buttonSize: 40.0,
-                                  fillColor:
-                                      FlutterFlowTheme.of(context).fondoIcono,
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  showLoadingIndicator: true,
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'CREAR_POST_PAGE_edit_ICN_ON_TAP');
-                                    if (_model.editarDireccion!) {
-                                      logFirebaseEvent(
-                                          'IconButton_update_page_state');
-                                      _model.editarDireccion = false;
-                                      setState(() {});
-                                    } else {
-                                      logFirebaseEvent(
-                                          'IconButton_update_page_state');
-                                      _model.editarDireccion = true;
-                                      setState(() {});
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          if (_model.editarDireccion == true)
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
+                                  16.0, 0.0, 16.0, 12.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 10.0, 24.0),
-                                      child: FlutterFlowPlacePicker(
-                                        iOSGoogleMapsApiKey:
-                                            'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
-                                        androidGoogleMapsApiKey:
-                                            'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
-                                        webGoogleMapsApiKey:
-                                            'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
-                                        onSelect: (place) async {
-                                          setState(() =>
-                                              _model.placePickerValue = place);
-                                        },
-                                        defaultText:
-                                            FFLocalizations.of(context).getText(
-                                          'h3tmy3rl' /* Etiqueta la ubicación */,
-                                        ),
-                                        icon: const Icon(
-                                          FFIcons.kpinFilled,
-                                          color: Colors.white,
-                                          size: 16.0,
-                                        ),
-                                        buttonOptions: FFButtonOptions(
-                                          width: 200.0,
-                                          height: 40.0,
-                                          color: FlutterFlowTheme.of(context)
-                                              .fondoIcono,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'u8a2fojs' /* ¿Deseas editar tu ubicacion ac... */,
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
                                     ),
+                                  ),
+                                  FlutterFlowIconButton(
+                                    borderColor: const Color(0x00F4F176),
+                                    borderRadius: 20.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                    showLoadingIndicator: true,
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'CREAR_POST_PAGE_edit_ICN_ON_TAP');
+                                      if (_model.editarDireccion!) {
+                                        logFirebaseEvent(
+                                            'IconButton_update_page_state');
+                                        _model.editarDireccion = false;
+                                        safeSetState(() {});
+                                      } else {
+                                        logFirebaseEvent(
+                                            'IconButton_update_page_state');
+                                        _model.editarDireccion = true;
+                                        safeSetState(() {});
+                                      }
+                                    },
                                   ),
                                 ],
                               ),
                             ),
-                          if (responsiveVisibility(
-                            context: context,
-                            phone: false,
-                            tablet: false,
-                            tabletLandscape: false,
-                            desktop: false,
-                          ))
-                            const Divider(
-                              height: 32.0,
-                              thickness: 1.0,
-                              indent: 16.0,
-                              endIndent: 16.0,
-                              color: Color(0x27FAF7FA),
-                            ),
-                          Container(
-                            decoration: const BoxDecoration(),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Padding(
+                            if (_model.editarDireccion == true)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'v42yu7m9' /* Privacidad del spot */,
-                                                ),
-                                                maxLines: 1,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
+                                            0.0, 0.0, 10.0, 24.0),
+                                        child: FlutterFlowPlacePicker(
+                                          iOSGoogleMapsApiKey:
+                                              'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
+                                          androidGoogleMapsApiKey:
+                                              'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
+                                          webGoogleMapsApiKey:
+                                              'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
+                                          onSelect: (place) async {
+                                            safeSetState(() => _model
+                                                .placePickerValue = place);
+                                          },
+                                          defaultText:
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                            'h3tmy3rl' /* Etiqueta la ubicación */,
+                                          ),
+                                          icon: const Icon(
+                                            FFIcons.kpinFilled,
+                                            color: Colors.white,
+                                            size: 16.0,
+                                          ),
+                                          buttonOptions: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 40.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .fondoIcono,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                              ).addWalkthrough(
-                                                textA4wqjt8j,
-                                                _model.crearPostController,
-                                              ),
+                                                                  .bodyMediumFamily),
+                                                    ),
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
                                             ),
-                                          ],
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'CREAR_POST_PAGE_Row_q1mp5e13_ON_TAP');
-                                          if (!_model.varPublico) {
-                                            logFirebaseEvent(
-                                                'Row_update_page_state');
-                                            _model.varPublico = true;
-                                            _model.varAmigos = false;
-                                            _model.varPrivado = false;
-                                            setState(() {});
-                                          }
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: Stack(
-                                                children: [
-                                                  if (!_model.varPublico)
-                                                    Icon(
-                                                      Icons
-                                                          .check_box_outline_blank,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                  if (_model.varPublico)
-                                                    Icon(
-                                                      Icons.check_box_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'sdnl893t' /* Público */,
+                              ),
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              const Divider(
+                                height: 32.0,
+                                thickness: 1.0,
+                                indent: 16.0,
+                                endIndent: 16.0,
+                                color: Color(0x27FAF7FA),
+                              ),
+                            Container(
+                              decoration: const BoxDecoration(),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'v42yu7m9' /* Privacidad del spot */,
+                                                  ),
+                                                  maxLines: 1,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                ).addWalkthrough(
+                                                  textA4wqjt8j,
+                                                  _model.crearPostController,
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-
-                                      // Se ocultó el estado de privacidad "Amigos" por solicitud de Nahuel. Dijo que ahora no es necesario
-                                      if (responsiveVisibility(
-                                        context: context,
-                                        phone: false,
-                                        tablet: false,
-                                        tabletLandscape: false,
-                                        desktop: false,
-                                      ))
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
                                         InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -1249,14 +1208,14 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'CREAR_POST_PAGE_Row_tyclf6fz_ON_TAP');
-                                            if (!_model.varAmigos) {
+                                                'CREAR_POST_PAGE_Row_q1mp5e13_ON_TAP');
+                                            if (!_model.varPublico) {
                                               logFirebaseEvent(
                                                   'Row_update_page_state');
                                               _model.varPublico = true;
-                                              _model.varAmigos = true;
+                                              _model.varAmigos = false;
                                               _model.varPrivado = false;
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           },
                                           child: Row(
@@ -1266,7 +1225,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                 padding: const EdgeInsets.all(4.0),
                                                 child: Stack(
                                                   children: [
-                                                    if (!_model.varAmigos)
+                                                    if (!_model.varPublico)
                                                       Icon(
                                                         Icons
                                                             .check_box_outline_blank,
@@ -1276,7 +1235,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                                 .primary,
                                                         size: 24.0,
                                                       ),
-                                                    if (_model.varAmigos)
+                                                    if (_model.varPublico)
                                                       Icon(
                                                         Icons.check_box_rounded,
                                                         color:
@@ -1292,7 +1251,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'latkqwqu' /* Amigos */,
+                                                    'sdnl893t' /* Público */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -1315,60 +1274,68 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                             ],
                                           ),
                                         ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'CREAR_POST_PAGE_Row_71ejdfxd_ON_TAP');
-                                          if (!_model.varPrivado) {
-                                            logFirebaseEvent(
-                                                'Row_update_page_state');
-                                            _model.varPublico = false;
-                                            _model.varAmigos = false;
-                                            _model.varPrivado = true;
-                                            setState(() {});
-                                          }
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: Stack(
-                                                children: [
-                                                  if (!_model.varPrivado)
-                                                    Icon(
-                                                      Icons
-                                                          .check_box_outline_blank,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+
+                                        // Se ocultó el estado de privacidad "Amigos" por solicitud de Nahuel. Dijo que ahora no es necesario
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                          tablet: false,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CREAR_POST_PAGE_Row_tyclf6fz_ON_TAP');
+                                              if (!_model.varAmigos) {
+                                                logFirebaseEvent(
+                                                    'Row_update_page_state');
+                                                _model.varPublico = true;
+                                                _model.varAmigos = true;
+                                                _model.varPrivado = false;
+                                                safeSetState(() {});
+                                              }
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Stack(
+                                                    children: [
+                                                      if (!_model.varAmigos)
+                                                        Icon(
+                                                          Icons
+                                                              .check_box_outline_blank,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                  if (_model.varPrivado)
-                                                    Icon(
-                                                      Icons.check_box_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                          size: 24.0,
+                                                        ),
+                                                      if (_model.varAmigos)
+                                                        Icon(
+                                                          Icons
+                                                              .check_box_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'a3mt3ft3' /* Privado */,
+                                                          size: 24.0,
+                                                        ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                Expanded(
+                                                  child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'latkqwqu' /* Amigos */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
@@ -1383,200 +1350,26 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                                           context)
                                                                       .bodyMediumFamily),
                                                         ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Divider(
-                            height: 32.0,
-                            thickness: 1.0,
-                            indent: 16.0,
-                            endIndent: 16.0,
-                            color: Color(0x27FAF7FA),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '38yeg5jl' /* Mis colecciones en Bio */,
-                                          ),
-                                          maxLines: 1,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.normal,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                // Enviaremos un valor de 0 para una colección propia
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 16.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'CREAR_POST_PAGE_Row_1b6e79tc_ON_TAP');
-                                      logFirebaseEvent('Row_navigate_to');
-
-                                      context.pushNamed(
-                                        'CrearColeccionSinPost',
-                                        queryParameters: {
-                                          'esColeccionFavorito': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                          'image': serializeParam(
-                                            _model.uploadedFileUrls1,
-                                            ParamType.String,
-                                            isList: true,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Icon(
-                                          Icons.add_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 32.0,
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'kpult3tq' /* Crear una colección en Bio */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ).addWalkthrough(
-                                    row1b6e79tc,
-                                    _model.crearPostController,
-                                  ),
-                                ),
-                                FutureBuilder<List<CollectionsRecord>>(
-                                  future: queryCollectionsRecordOnce(
-                                    queryBuilder: (collectionsRecord) =>
-                                        collectionsRecord
-                                            .where(
-                                              'createdBy',
-                                              isEqualTo: currentUserReference,
-                                            )
-                                            .where(
-                                              'coleccionFavoritos',
-                                              isEqualTo: false,
-                                            )
-                                            .orderBy('modified_at'),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 12.0,
-                                          height: 12.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }
-                                    List<CollectionsRecord>
-                                        listViewCollectionsRecordList =
-                                        snapshot.data!;
-
-                                    return ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount:
-                                          listViewCollectionsRecordList.length,
-                                      itemBuilder: (context, listViewIndex) {
-                                        final listViewCollectionsRecord =
-                                            listViewCollectionsRecordList[
-                                                listViewIndex];
-                                        return InkWell(
+                                        InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'CREAR_POST_PAGE_Row_uqbh545x_ON_TAP');
-                                            if (_model
-                                                .listaColeccionesSeleccionadas
-                                                .contains(
-                                                    listViewCollectionsRecord
-                                                        .reference)) {
+                                                'CREAR_POST_PAGE_Row_71ejdfxd_ON_TAP');
+                                            if (!_model.varPrivado) {
                                               logFirebaseEvent(
                                                   'Row_update_page_state');
-                                              _model
-                                                  .removeFromListaColeccionesSeleccionadas(
-                                                      listViewCollectionsRecord
-                                                          .reference);
-                                              setState(() {});
-                                            } else {
-                                              logFirebaseEvent(
-                                                  'Row_update_page_state');
-                                              _model
-                                                  .addToListaColeccionesSeleccionadas(
-                                                      listViewCollectionsRecord
-                                                          .reference);
-                                              setState(() {});
+                                              _model.varPublico = false;
+                                              _model.varAmigos = false;
+                                              _model.varPrivado = true;
+                                              safeSetState(() {});
                                             }
                                           },
                                           child: Row(
@@ -1586,11 +1379,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                 padding: const EdgeInsets.all(4.0),
                                                 child: Stack(
                                                   children: [
-                                                    if (!_model
-                                                        .listaColeccionesSeleccionadas
-                                                        .contains(
-                                                            listViewCollectionsRecord
-                                                                .reference))
+                                                    if (!_model.varPrivado)
                                                       Icon(
                                                         Icons
                                                             .check_box_outline_blank,
@@ -1600,11 +1389,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                                 .primary,
                                                         size: 24.0,
                                                       ),
-                                                    if (_model
-                                                        .listaColeccionesSeleccionadas
-                                                        .contains(
-                                                            listViewCollectionsRecord
-                                                                .reference))
+                                                    if (_model.varPrivado)
                                                       Icon(
                                                         Icons.check_box_rounded,
                                                         color:
@@ -1616,92 +1401,49 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                   ],
                                                 ),
                                               ),
-                                              Text(
-                                                listViewCollectionsRecord
-                                                    .nombre,
-                                                maxLines: 1,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
+                                              Expanded(
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'a3mt3ft3' /* Privado */,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                ),
                                               ),
-                                              if (listViewCollectionsRecord
-                                                  .coleccionPublica)
-                                                const Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          4.0, 0.0, 0.0, 0.0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons
-                                                        .globeEurope,
-                                                    color: Color(0x81FFFFFF),
-                                                    size: 18.0,
-                                                  ),
-                                                ),
-                                              if (listViewCollectionsRecord
-                                                  .coleccionAmigos)
-                                                const Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          4.0, 0.0, 0.0, 0.0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons
-                                                        .userFriends,
-                                                    color: Color(0x81FFFFFF),
-                                                    size: 18.0,
-                                                  ),
-                                                ),
-                                              if (listViewCollectionsRecord
-                                                  .coleccionPrivada)
-                                                const Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          4.0, 0.0, 0.0, 0.0),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.userSecret,
-                                                    color: Color(0x81FFFFFF),
-                                                    size: 18.0,
-                                                  ),
-                                                ),
                                             ],
                                           ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const Divider(
-                            height: 32.0,
-                            thickness: 1.0,
-                            indent: 16.0,
-                            endIndent: 16.0,
-                            color: Color(0x27FAF7FA),
-                          ),
-                          if (responsiveVisibility(
-                            context: context,
-                            phone: false,
-                            tablet: false,
-                            tabletLandscape: false,
-                            desktop: false,
-                          ))
+                            const Divider(
+                              height: 32.0,
+                              thickness: 1.0,
+                              indent: 16.0,
+                              endIndent: 16.0,
+                              color: Color(0x27FAF7FA),
+                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 32.0),
+                                  16.0, 0.0, 16.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -1714,7 +1456,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         Expanded(
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'd5xk8jtj' /* Facebook */,
+                                              '38yeg5jl' /* Mis colecciones en Bio */,
                                             ),
                                             maxLines: 1,
                                             style: FlutterFlowTheme.of(context)
@@ -1735,42 +1477,53 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                 ),
                                           ),
                                         ),
-                                        Switch(
-                                          value: _model.switchValue1!,
-                                          onChanged: (newValue) async {
-                                            setState(() => _model.switchValue1 =
-                                                newValue);
-                                          },
-                                          activeColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          inactiveTrackColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .fondoIcono,
-                                          inactiveThumbColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .icono,
-                                        ),
                                       ],
                                     ),
                                   ),
-                                  const Divider(
-                                    height: 32.0,
-                                    thickness: 1.0,
-                                    color: Color(0x27FAF7FA),
-                                  ),
+
+                                  // Enviaremos un valor de 0 para una colección propia
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'rxehug9g' /* Instagram */,
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'CREAR_POST_PAGE_Row_1b6e79tc_ON_TAP');
+                                        logFirebaseEvent('Row_navigate_to');
+
+                                        context.pushNamed(
+                                          'CrearColeccionSinPost',
+                                          queryParameters: {
+                                            'esColeccionFavorito':
+                                                serializeParam(
+                                              false,
+                                              ParamType.bool,
                                             ),
-                                            maxLines: 1,
+                                            'image': serializeParam(
+                                              _model.uploadedFileUrls1,
+                                              ParamType.String,
+                                              isList: true,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Icon(
+                                            Icons.add_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 32.0,
+                                          ),
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'kpult3tq' /* Crear una colección en Bio */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -1779,7 +1532,6 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                               context)
                                                           .bodyMediumFamily,
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.normal,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
@@ -1788,129 +1540,433 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                                               .bodyMediumFamily),
                                                 ),
                                           ),
-                                        ),
-                                        Switch(
-                                          value: _model.switchValue2!,
-                                          onChanged: (newValue) async {
-                                            setState(() => _model.switchValue2 =
-                                                newValue);
-                                          },
-                                          activeColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          inactiveTrackColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .fondoIcono,
-                                          inactiveThumbColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .icono,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
+                                    ).addWalkthrough(
+                                      row1b6e79tc,
+                                      _model.crearPostController,
                                     ),
                                   ),
-                                  const Divider(
-                                    height: 32.0,
-                                    thickness: 1.0,
-                                    color: Color(0x27FAF7FA),
-                                  ),
-                                  Container(
-                                    decoration: const BoxDecoration(),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '6z087o5l' /* Twitter */,
+                                  FutureBuilder<List<CollectionsRecord>>(
+                                    future: queryCollectionsRecordOnce(
+                                      queryBuilder: (collectionsRecord) =>
+                                          collectionsRecord
+                                              .where(
+                                                'createdBy',
+                                                isEqualTo: currentUserReference,
+                                              )
+                                              .where(
+                                                'coleccionFavoritos',
+                                                isEqualTo: false,
+                                              )
+                                              .orderBy('modified_at'),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 12.0,
+                                            height: 12.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                              ),
                                             ),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.normal,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
                                           ),
-                                        ),
-                                        Switch(
-                                          value: _model.switchValue3!,
-                                          onChanged: (newValue) async {
-                                            setState(() => _model.switchValue3 =
-                                                newValue);
-                                          },
-                                          activeColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          inactiveTrackColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .fondoIcono,
-                                          inactiveThumbColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .icono,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Divider(
-                                    height: 32.0,
-                                    thickness: 1.0,
-                                    color: Color(0x27FAF7FA),
+                                        );
+                                      }
+                                      List<CollectionsRecord>
+                                          listViewCollectionsRecordList =
+                                          snapshot.data!;
+
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: listViewCollectionsRecordList
+                                            .length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewCollectionsRecord =
+                                              listViewCollectionsRecordList[
+                                                  listViewIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CREAR_POST_PAGE_Row_uqbh545x_ON_TAP');
+                                              if (_model
+                                                  .listaColeccionesSeleccionadas
+                                                  .contains(
+                                                      listViewCollectionsRecord
+                                                          .reference)) {
+                                                logFirebaseEvent(
+                                                    'Row_update_page_state');
+                                                _model
+                                                    .removeFromListaColeccionesSeleccionadas(
+                                                        listViewCollectionsRecord
+                                                            .reference);
+                                                safeSetState(() {});
+                                              } else {
+                                                logFirebaseEvent(
+                                                    'Row_update_page_state');
+                                                _model
+                                                    .addToListaColeccionesSeleccionadas(
+                                                        listViewCollectionsRecord
+                                                            .reference);
+                                                safeSetState(() {});
+                                              }
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Stack(
+                                                    children: [
+                                                      if (!_model
+                                                          .listaColeccionesSeleccionadas
+                                                          .contains(
+                                                              listViewCollectionsRecord
+                                                                  .reference))
+                                                        Icon(
+                                                          Icons
+                                                              .check_box_outline_blank,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          size: 24.0,
+                                                        ),
+                                                      if (_model
+                                                          .listaColeccionesSeleccionadas
+                                                          .contains(
+                                                              listViewCollectionsRecord
+                                                                  .reference))
+                                                        Icon(
+                                                          Icons
+                                                              .check_box_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          size: 24.0,
+                                                        ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text(
+                                                  listViewCollectionsRecord
+                                                      .nombre,
+                                                  maxLines: 1,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                ),
+                                                if (listViewCollectionsRecord
+                                                    .coleccionPublica)
+                                                  const Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(4.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons
+                                                          .globeEurope,
+                                                      color: Color(0x81FFFFFF),
+                                                      size: 18.0,
+                                                    ),
+                                                  ),
+                                                if (listViewCollectionsRecord
+                                                    .coleccionAmigos)
+                                                  const Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(4.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons
+                                                          .userFriends,
+                                                      color: Color(0x81FFFFFF),
+                                                      size: 18.0,
+                                                    ),
+                                                  ),
+                                                if (listViewCollectionsRecord
+                                                    .coleccionPrivada)
+                                                  const Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(4.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons
+                                                          .userSecret,
+                                                      color: Color(0x81FFFFFF),
+                                                      size: 18.0,
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 ],
                               ),
                             ),
-                        ],
+                            const Divider(
+                              height: 32.0,
+                              thickness: 1.0,
+                              indent: 16.0,
+                              endIndent: 16.0,
+                              color: Color(0x27FAF7FA),
+                            ),
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 32.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'd5xk8jtj' /* Facebook */,
+                                              ),
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ),
+                                          Switch(
+                                            value: _model.switchValue1!,
+                                            onChanged: (newValue) async {
+                                              safeSetState(() => _model
+                                                  .switchValue1 = newValue);
+                                            },
+                                            activeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            inactiveTrackColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .fondoIcono,
+                                            inactiveThumbColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .icono,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 32.0,
+                                      thickness: 1.0,
+                                      color: Color(0x27FAF7FA),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'rxehug9g' /* Instagram */,
+                                              ),
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ),
+                                          Switch(
+                                            value: _model.switchValue2!,
+                                            onChanged: (newValue) async {
+                                              safeSetState(() => _model
+                                                  .switchValue2 = newValue);
+                                            },
+                                            activeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            inactiveTrackColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .fondoIcono,
+                                            inactiveThumbColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .icono,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 32.0,
+                                      thickness: 1.0,
+                                      color: Color(0x27FAF7FA),
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '6z087o5l' /* Twitter */,
+                                              ),
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                            ),
+                                          ),
+                                          Switch(
+                                            value: _model.switchValue3!,
+                                            onChanged: (newValue) async {
+                                              safeSetState(() => _model
+                                                  .switchValue3 = newValue);
+                                            },
+                                            activeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            inactiveTrackColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .fondoIcono,
+                                            inactiveThumbColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .icono,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 32.0,
+                                      thickness: 1.0,
+                                      color: Color(0x27FAF7FA),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.0, -0.85),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderColor: const Color(0x00F4F176),
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 40.0,
-                      fillColor: const Color(0x00EEEEEE),
-                      icon: Icon(
-                        Icons.help,
-                        color: FlutterFlowTheme.of(context).primary,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        logFirebaseEvent('CREAR_POST_PAGE_help_ICN_ON_TAP');
-                        logFirebaseEvent('IconButton_start_walkthrough');
-                        safeSetState(() => _model.crearPostController =
-                            createPageWalkthrough(context));
-                        _model.crearPostController?.show(context: context);
-                      },
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: const AlignmentDirectional(0.0, -0.85),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderColor: const Color(0x00F4F176),
+                        borderRadius: 20.0,
+                        borderWidth: 1.0,
+                        buttonSize: 40.0,
+                        fillColor: const Color(0x00EEEEEE),
+                        icon: Icon(
+                          Icons.help,
+                          color: FlutterFlowTheme.of(context).primary,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          logFirebaseEvent('CREAR_POST_PAGE_help_ICN_ON_TAP');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() => _model.crearPostController =
+                              createPageWalkthrough(context));
+                          _model.crearPostController?.show(context: context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

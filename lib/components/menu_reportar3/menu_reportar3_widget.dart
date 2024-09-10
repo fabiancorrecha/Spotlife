@@ -31,7 +31,7 @@ class _MenuReportar3WidgetState extends State<MenuReportar3Widget> {
     super.initState();
     _model = createModel(context, () => MenuReportar3Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

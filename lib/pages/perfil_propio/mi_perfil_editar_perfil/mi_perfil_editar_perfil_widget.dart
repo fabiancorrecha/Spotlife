@@ -27,7 +27,7 @@ class _MiPerfilEditarPerfilWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miPerfilEditarPerfil'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,15 +44,15 @@ class _MiPerfilEditarPerfilWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 wrapWithModel(
                   model: _model.tarjetaMiPerfilEditarModel,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: TarjetaMiPerfilEditarWidget(
                     usuario: currentUserReference,
                   ),
