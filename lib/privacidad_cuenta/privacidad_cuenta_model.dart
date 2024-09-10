@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class PrivacidadCuentaModel extends FlutterFlowModel<PrivacidadCuentaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for botonQuinto component.
   late BotonQuintoModel botonQuintoModel1;
   // State field(s) for Switch widget.

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class DetallePostModel extends FlutterFlowModel<DetallePostWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar4 component.
   late AppBar4Model appBar4Model;
   // Model for postImagenV2 component.

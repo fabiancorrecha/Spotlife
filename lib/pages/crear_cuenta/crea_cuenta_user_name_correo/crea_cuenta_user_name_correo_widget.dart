@@ -36,7 +36,7 @@ class _CreaCuentaUserNameCorreoWidgetState
         TextEditingController(text: FFAppState().userName);
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -55,30 +55,33 @@ class _CreaCuentaUserNameCorreoWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  'bdy3roor' /* Crear cuenta con correo */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    'bdy3roor' /* Crear cuenta con correo */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: StreamBuilder<List<UsersRecord>>(
           stream: queryUsersRecord(
@@ -115,7 +118,7 @@ class _CreaCuentaUserNameCorreoWidgetState
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -139,7 +142,7 @@ class _CreaCuentaUserNameCorreoWidgetState
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.textController',
                                         const Duration(milliseconds: 300),
-                                        () => setState(() {}),
+                                        () => safeSetState(() {}),
                                       ),
                                       onFieldSubmitted: (_) async {
                                         logFirebaseEvent(
@@ -302,7 +305,7 @@ class _CreaCuentaUserNameCorreoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.boton1Model,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton1Widget(
                           texto: 'Continuar',
                           desabilitado: _model.textController.text == '',
@@ -447,7 +450,7 @@ class _CreaCuentaUserNameCorreoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.crearCuentaOptionsModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const CrearCuentaOptionsWidget(),
                       ),
                     ],

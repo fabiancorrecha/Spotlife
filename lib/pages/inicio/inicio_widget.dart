@@ -38,10 +38,10 @@ class _InicioWidgetState extends State<InicioWidget> {
       logFirebaseEvent('INICIO_PAGE_inicio_ON_INIT_STATE');
       logFirebaseEvent('inicio_update_app_state');
       FFAppState().referente = widget.ref;
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -159,7 +159,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                         },
                         child: wrapWithModel(
                           model: _model.boton1Model,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: Boton1Widget(
                             texto: FFLocalizations.of(context).getText(
                               'm60vu3mn' /* Entrar */,

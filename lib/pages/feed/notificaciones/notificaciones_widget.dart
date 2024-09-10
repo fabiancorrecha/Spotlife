@@ -30,7 +30,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'notificaciones'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -80,18 +80,18 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 28.0),
                     child: wrapWithModel(
                       model: _model.appBar6Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const AppBar6Widget(),
                     ),
                   ),
@@ -677,7 +677,7 @@ class _NotificacionesWidgetState extends State<NotificacionesWidget> {
                   ))
                     wrapWithModel(
                       model: _model.navBar1Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const NavBar1Widget(
                         tabActiva: 1,
                       ),

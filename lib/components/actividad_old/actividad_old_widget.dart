@@ -27,7 +27,7 @@ class _ActividadOldWidgetState extends State<ActividadOldWidget> {
     super.initState();
     _model = createModel(context, () => ActividadOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -91,23 +91,22 @@ class _ActividadOldWidgetState extends State<ActividadOldWidget> {
                         ),
                       ),
                     ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'hkitjja7' /* Actividad */,
+                    Expanded(
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'hkitjja7' /* Actividad */,
+                        ),
+                        textAlign: TextAlign.center,
+                        style:
+                            FlutterFlowTheme.of(context).displaySmall.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                       ),
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).displaySmallFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context)
-                                    .displaySmallFamily),
-                          ),
-                    ),
-                    Icon(
-                      Icons.arrow_back_rounded,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      size: 30.0,
                     ),
                   ],
                 ),
@@ -119,7 +118,7 @@ class _ActividadOldWidgetState extends State<ActividadOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: 'Interacciones',
                         accion: () async {},
@@ -127,7 +126,7 @@ class _ActividadOldWidgetState extends State<ActividadOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: 'Busquedas recientes',
                         accion: () async {},

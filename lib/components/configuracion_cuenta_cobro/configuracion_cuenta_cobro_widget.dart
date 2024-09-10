@@ -35,7 +35,7 @@ class _ConfiguracionCuentaCobroWidgetState
     super.initState();
     _model = createModel(context, () => ConfiguracionCuentaCobroModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

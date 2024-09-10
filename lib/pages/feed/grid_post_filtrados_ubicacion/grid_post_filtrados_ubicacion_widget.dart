@@ -34,7 +34,7 @@ class _GridPostFiltradosUbicacionWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'gridPostFiltradosUbicacion'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,14 +51,14 @@ class _GridPostFiltradosUbicacionWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               wrapWithModel(
                 model: _model.appBarPostListModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: AppBarPostListWidget(
                   userPost: widget.postUser,
                 ),
@@ -66,7 +66,7 @@ class _GridPostFiltradosUbicacionWidgetState
               Expanded(
                 child: wrapWithModel(
                   model: _model.gridPostsFiltradrPorUbicacionModel,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: GridPostsFiltradrPorUbicacionWidget(
                     post: widget.postUser,
                   ),
@@ -74,7 +74,7 @@ class _GridPostFiltradosUbicacionWidgetState
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 2,
                 ),

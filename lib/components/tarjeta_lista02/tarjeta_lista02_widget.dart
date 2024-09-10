@@ -36,7 +36,7 @@ class _TarjetaLista02WidgetState extends State<TarjetaLista02Widget> {
     super.initState();
     _model = createModel(context, () => TarjetaLista02Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

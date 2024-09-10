@@ -36,7 +36,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
     super.initState();
     _model = createModel(context, () => MenuComentarioModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -232,7 +232,7 @@ class _MenuComentarioWidgetState extends State<MenuComentarioWidget> {
                   await widget.comentario!.reference.delete();
                   logFirebaseEvent('Button_update_app_state');
                   FFAppState().verCajaComentariosActualizados = false;
-                  setState(() {});
+                  safeSetState(() {});
                   logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
                   logFirebaseEvent('Button_navigate_to');

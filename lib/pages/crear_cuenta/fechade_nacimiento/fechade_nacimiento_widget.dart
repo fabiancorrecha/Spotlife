@@ -63,7 +63,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
       ).then((value) => safeSetState(() {}));
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -82,39 +82,42 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                logFirebaseEvent('FECHADE_NACIMIENTO_arrow_back_ICN_ON_TAP');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.pop();
+              },
             ),
-            onPressed: () async {
-              logFirebaseEvent('FECHADE_NACIMIENTO_arrow_back_ICN_ON_TAP');
-              logFirebaseEvent('IconButton_navigate_back');
-              context.pop();
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              '2swtd20b' /* ¿Cuando naciste? */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                '2swtd20b' /* ¿Cuando naciste? */,
+              ),
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).displaySmallFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).displaySmallFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: Container(
           width: double.infinity,
@@ -126,7 +129,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
             key: _model.formKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -401,7 +404,7 @@ class _FechadeNacimientoWidgetState extends State<FechadeNacimientoWidget> {
                   ),
                   wrapWithModel(
                     model: _model.boton1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: Boton1Widget(
                       texto: 'Continuar',
                       desabilitado: _model.datePicked == null,

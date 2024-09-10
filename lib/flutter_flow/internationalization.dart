@@ -845,6 +845,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // otroPerfilColecciones
   {
+    '272nhnnn': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'clua705j': {
+      'es': 'Option 1',
+      'en': '',
+    },
     'kyet1e4o': {
       'es': 'Home',
       'en': 'home',
@@ -3158,6 +3166,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7q5uuaim': {
       'es': 'Desliza para filtar por la distancia ',
+      'en': '',
+    },
+  },
+  // InfoDialogo
+  {
+    'mberxydn': {
+      'es': 'Ubicacion Actual',
+      'en': '',
+    },
+    'g2uouq07': {
+      'es': 'Crear Spot',
       'en': '',
     },
   },

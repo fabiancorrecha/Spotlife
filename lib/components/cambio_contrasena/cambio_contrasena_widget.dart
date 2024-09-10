@@ -40,7 +40,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
     _model.confirmarContrasenaTextController ??= TextEditingController();
     _model.confirmarContrasenaFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -154,7 +154,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.contrasenaActualTextController',
                     const Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.contrasenaActualVisibility,
@@ -211,7 +211,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                     filled: true,
                     fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.contrasenaActualVisibility =
                             !_model.contrasenaActualVisibility,
                       ),
@@ -247,7 +247,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.nuevaContrasenaTextController',
                     const Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.nuevaContrasenaVisibility,
@@ -304,7 +304,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                     filled: true,
                     fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.nuevaContrasenaVisibility =
                             !_model.nuevaContrasenaVisibility,
                       ),
@@ -340,7 +340,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.confirmarContrasenaTextController',
                     const Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.confirmarContrasenaVisibility,
@@ -397,7 +397,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                     filled: true,
                     fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.confirmarContrasenaVisibility =
                             !_model.confirmarContrasenaVisibility,
                       ),
@@ -468,7 +468,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                       FFAppState().email = '';
                       FFAppState().contrasena = '';
                       FFAppState().recordar = false;
-                      setState(() {});
+                      safeSetState(() {});
                     } else {
                       logFirebaseEvent('Button_alert_dialog');
                       await showDialog(
@@ -491,7 +491,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                         },
                       );
                       logFirebaseEvent('Button_clear_text_fields_pin_codes');
-                      setState(() {
+                      safeSetState(() {
                         _model.contrasenaActualTextController?.clear();
                         _model.nuevaContrasenaTextController?.clear();
                         _model.confirmarContrasenaTextController?.clear();
@@ -515,7 +515,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
 
                   navigate();
 
-                  setState(() {});
+                  safeSetState(() {});
                 },
                 text: FFLocalizations.of(context).getText(
                   '99qh01yl' /* Cambiar contraseña */,

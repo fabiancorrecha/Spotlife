@@ -27,7 +27,7 @@ class _InformacionAjustePaginaWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'informacion_ajuste_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -47,7 +47,7 @@ class _InformacionAjustePaginaWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -87,25 +87,23 @@ class _InformacionAjustePaginaWidgetState
                             ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            '4zraujwk' /* Información */,
+                        Expanded(
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '4zraujwk' /* Información */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .displaySmallFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .displaySmallFamily),
-                              ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
@@ -118,7 +116,7 @@ class _InformacionAjustePaginaWidgetState
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel1,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: 'Politica de datos',
                             accion: () async {},
@@ -126,7 +124,7 @@ class _InformacionAjustePaginaWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel2,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'gyk6tdi9' /* Condiciones de uso */,
@@ -136,7 +134,7 @@ class _InformacionAjustePaginaWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel3,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'ygotn5ym' /* Reglamento UE  */,

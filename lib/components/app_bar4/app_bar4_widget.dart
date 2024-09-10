@@ -31,7 +31,7 @@ class _AppBar4WidgetState extends State<AppBar4Widget> {
     super.initState();
     _model = createModel(context, () => AppBar4Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -82,9 +82,8 @@ class _AppBar4WidgetState extends State<AppBar4Widget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 logFirebaseEvent('APP_BAR4_COMP_Card_1evoetdm_ON_TAP');
-                logFirebaseEvent('Card_navigate_to');
-
-                context.goNamed('Feed');
+                logFirebaseEvent('Card_navigate_back');
+                context.safePop();
               },
               child: Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,

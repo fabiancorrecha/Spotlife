@@ -39,8 +39,8 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'otroPerfilMapa'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -107,14 +107,14 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   wrapWithModel(
                     model: _model.appBar7UsuarioModel,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: AppBar7UsuarioWidget(
                       usuario: widget.usuario,
                     ),
@@ -276,7 +276,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                     }.withoutNulls,
                                   );
 
-                                  if (shouldSetState) setState(() {});
+                                  if (shouldSetState) safeSetState(() {});
                                   return;
                                 } else {
                                   logFirebaseEvent('Button_backend_call');
@@ -342,11 +342,11 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                                     }.withoutNulls,
                                   );
 
-                                  if (shouldSetState) setState(() {});
+                                  if (shouldSetState) safeSetState(() {});
                                   return;
                                 }
 
-                                if (shouldSetState) setState(() {});
+                                if (shouldSetState) safeSetState(() {});
                               },
                               text: FFLocalizations.of(context).getText(
                                 'eqcg9rl7' /* Enviar mensaje */,
@@ -387,7 +387,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar2Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: NavBar2Widget(
                       tab: 1,
                       otroUsuario: widget.usuario,
@@ -417,7 +417,7 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 0,
                     ),

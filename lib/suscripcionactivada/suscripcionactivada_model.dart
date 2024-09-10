@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 
 class SuscripcionactivadaModel
     extends FlutterFlowModel<SuscripcionactivadaWidget> {
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-
   @override
   void initState(BuildContext context) {}
 

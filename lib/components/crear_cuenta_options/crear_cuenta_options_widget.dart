@@ -31,7 +31,7 @@ class _CrearCuentaOptionsWidgetState extends State<CrearCuentaOptionsWidget> {
     super.initState();
     _model = createModel(context, () => CrearCuentaOptionsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -36,8 +36,8 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilMapaPin2'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -104,14 +104,14 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   wrapWithModel(
                     model: _model.appBar5Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: AppBar5Widget(
                       titulo: 'titulo',
                       coleccion: widget.coleccion,
@@ -145,7 +145,7 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 1,
                     ),

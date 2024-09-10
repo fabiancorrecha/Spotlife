@@ -34,7 +34,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
     super.initState();
     _model = createModel(context, () => FiltroFavoritosModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -141,8 +141,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             '4iv8zkol' /* 2022 */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues1 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues1 = val),
                         controller: _model.checkboxGroupValueController1 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -220,8 +220,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             'wvvy115v' /* Ibiza */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues2 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues2 = val),
                         controller: _model.checkboxGroupValueController2 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -296,8 +296,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             'eppdu8t2' /* Spot secreto (solo yo) */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues3 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues3 = val),
                         controller: _model.checkboxGroupValueController3 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -340,7 +340,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
               ),
               child: wrapWithModel(
                 model: _model.boton1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: Boton1Widget(
                   texto: 'Listo',
                   desabilitado: false,

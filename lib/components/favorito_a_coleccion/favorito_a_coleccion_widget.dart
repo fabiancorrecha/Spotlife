@@ -35,7 +35,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
     super.initState();
     _model = createModel(context, () => FavoritoAColeccionModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -359,7 +359,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                   0.0, 32.0, 0.0, 0.0),
                               child: wrapWithModel(
                                 model: _model.boton1Model,
-                                updateCallback: () => setState(() {}),
+                                updateCallback: () => safeSetState(() {}),
                                 child: Boton1Widget(
                                   texto: 'Listo',
                                   desabilitado: false,

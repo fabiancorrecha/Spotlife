@@ -34,8 +34,8 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilMapa'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -96,14 +96,14 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 100.0,
+                    height: 73.0,
                     decoration: const BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -186,7 +186,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar2Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar2Widget(
                       tab: 1,
                     ),
@@ -228,7 +228,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                                   0.0, 0.0, 0.0, 8.0),
                               child: wrapWithModel(
                                 model: _model.botonAddModel,
-                                updateCallback: () => setState(() {}),
+                                updateCallback: () => safeSetState(() {}),
                                 child: BotonAddWidget(
                                   accion: () async {},
                                 ),
@@ -240,7 +240,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 3,
                     ),

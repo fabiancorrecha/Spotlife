@@ -33,7 +33,7 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
     super.initState();
     _model = createModel(context, () => PostImagenModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

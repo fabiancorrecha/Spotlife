@@ -34,7 +34,7 @@ class _Boton2WidgetState extends State<Boton2Widget> {
     super.initState();
     _model = createModel(context, () => Boton2Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

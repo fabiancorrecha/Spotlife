@@ -32,7 +32,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
     super.initState();
     _model = createModel(context, () => AnadirMetodoPagoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -97,7 +97,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
               children: [
                 wrapWithModel(
                   model: _model.selectorMotivoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'qboqoxgo' /* Tarjeta de credito o debito */,
@@ -106,14 +106,14 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const SelectorMotivoWidget(
                     motivoTexto: 'Paypal',
                   ),
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const SelectorMotivoWidget(
                     motivoTexto: 'Applepay',
                   ),

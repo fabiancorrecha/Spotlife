@@ -26,7 +26,7 @@ class _AppBar6WidgetState extends State<AppBar6Widget> {
     super.initState();
     _model = createModel(context, () => AppBar6Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

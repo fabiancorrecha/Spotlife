@@ -42,7 +42,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'buscarLugares'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
@@ -61,7 +61,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -95,8 +95,8 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Stack(
             children: [
               Column(
@@ -106,8 +106,8 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                     width: double.infinity,
                     decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          16.0, 40.0, 16.0, 32.0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -154,7 +154,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textFieldBuscarTextController',
                                   const Duration(milliseconds: 0),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 onFieldSubmitted: (_) async {
                                   logFirebaseEvent(
@@ -172,7 +172,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                           _model.algoliaSearchResults = r)
                                       .onError((_, __) =>
                                           _model.algoliaSearchResults = [])
-                                      .whenComplete(() => setState(() {}));
+                                      .whenComplete(() => safeSetState(() {}));
                                 },
                                 autofocus: false,
                                 obscureText: false,
@@ -258,7 +258,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   'BUSCAR_LUGARES_Container_hj9dhjph_ON_TAP');
                               logFirebaseEvent('Container_update_page_state');
                               _model.verLista = !_model.verLista!;
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -297,7 +297,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                   ),
                   wrapWithModel(
                     model: _model.menu02Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const Menu02Widget(
                       seccion: 3,
                     ),
@@ -420,7 +420,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 4,
                     ),

@@ -32,7 +32,7 @@ class _ChipPequenoWidgetState extends State<ChipPequenoWidget> {
     super.initState();
     _model = createModel(context, () => ChipPequenoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

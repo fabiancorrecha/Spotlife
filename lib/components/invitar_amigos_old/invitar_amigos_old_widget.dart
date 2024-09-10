@@ -27,7 +27,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
     super.initState();
     _model = createModel(context, () => InvitarAmigosOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -115,7 +115,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   updateOnChange: true,
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
@@ -126,7 +126,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '3w91cz9f' /* Compartir via whatsapp */,
@@ -136,7 +136,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '3oyqfslo' /* Compartir via instagram */,
@@ -146,7 +146,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'pk0dv6rk' /* Compartir via tiktok */,
@@ -156,7 +156,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'qvyny7ue' /* Compartir otros */,

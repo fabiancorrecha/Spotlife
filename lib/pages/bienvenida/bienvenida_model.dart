@@ -9,7 +9,6 @@ class BienvenidaModel extends FlutterFlowModel<BienvenidaWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? bienvenidaController;
-  final unfocusNode = FocusNode();
   // Model for boton1 component.
   late Boton1Model boton1Model;
 

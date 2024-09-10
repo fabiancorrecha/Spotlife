@@ -48,16 +48,16 @@ class _MiperfilDetalleColeccionWidgetState
       logFirebaseEvent('miperfilDetalleColeccion_update_app_stat');
       FFAppState().collectionUse =
           widget.coleccion!.postuUserList.toList().cast<DocumentReference>();
-      setState(() {});
+      safeSetState(() {});
       logFirebaseEvent('miperfilDetalleColeccion_update_page_sta');
       _model.postAgregados =
           widget.coleccion!.postuUserList.toList().cast<DocumentReference>();
-      setState(() {});
+      safeSetState(() {});
     });
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -92,14 +92,14 @@ class _MiperfilDetalleColeccionWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               wrapWithModel(
                 model: _model.appBar5Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: AppBar5Widget(
                   titulo: widget.coleccion?.nombre,
                   coleccion: widget.coleccion,
@@ -111,7 +111,7 @@ class _MiperfilDetalleColeccionWidgetState
                     if (widget.esFavorito! || (FFAppState().vermapa == false))
                       wrapWithModel(
                         model: _model.gridPostsFavoritosModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: GridPostsFavoritosWidget(
                           coleccion: widget.coleccion,
                         ),
@@ -119,7 +119,7 @@ class _MiperfilDetalleColeccionWidgetState
                     if (widget.esFavorito! || (FFAppState().vermapa == false))
                       wrapWithModel(
                         model: _model.gridPostsBioModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: GridPostsBioWidget(
                           coleccion: widget.coleccion?.reference,
                         ),
@@ -152,7 +152,7 @@ class _MiperfilDetalleColeccionWidgetState
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 3,
                 ),

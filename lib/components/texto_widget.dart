@@ -31,7 +31,7 @@ class _TextoWidgetState extends State<TextoWidget> {
     super.initState();
     _model = createModel(context, () => TextoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

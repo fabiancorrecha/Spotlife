@@ -53,13 +53,13 @@ class _VerComentariosDesdeDetalleWidgetState
       logFirebaseEvent('verComentariosDesdeDetalle_update_compon');
       _model.verComentariosDesdeComponente =
           widget.comentariosActuales!.toList().cast<PostCommentRecord>();
-      setState(() {});
+      safeSetState(() {});
     });
 
     _model.commentFieldTextController ??= TextEditingController();
     _model.commentFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -157,13 +157,14 @@ class _VerComentariosDesdeDetalleWidgetState
                             'VER_COMENTARIOS_DESDE_DETALLE_close_roun');
                         logFirebaseEvent('IconButton_update_app_state');
                         FFAppState().verCajaComentariosActualizados = true;
-                        setState(() {});
+                        safeSetState(() {});
                         logFirebaseEvent('IconButton_refresh_database_request');
-                        setState(() => _model.firestoreRequestCompleter = null);
+                        safeSetState(
+                            () => _model.firestoreRequestCompleter = null);
                         await _model.waitForFirestoreRequestCompleted();
                         logFirebaseEvent(
                             'IconButton_clear_text_fields_pin_codes');
-                        setState(() {
+                        safeSetState(() {
                           _model.commentFieldTextController?.clear();
                         });
                         logFirebaseEvent('IconButton_bottom_sheet');
@@ -431,9 +432,9 @@ class _VerComentariosDesdeDetalleWidgetState
                                                             });
                                                             logFirebaseEvent(
                                                                 'IconNO_refresh_database_request');
-                                                            setState(() => _model
-                                                                    .firestoreRequestCompleter =
-                                                                null);
+                                                            safeSetState(() =>
+                                                                _model.firestoreRequestCompleter =
+                                                                    null);
                                                             await _model
                                                                 .waitForFirestoreRequestCompleted();
                                                           },
@@ -548,7 +549,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                                                 });
                                                                 logFirebaseEvent(
                                                                     'IconSI_refresh_database_request');
-                                                                setState(() =>
+                                                                safeSetState(() =>
                                                                     _model.firestoreRequestCompleter =
                                                                         null);
                                                                 await _model
@@ -700,7 +701,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.commentFieldTextController',
                                         const Duration(milliseconds: 300),
-                                        () => setState(() {}),
+                                        () => safeSetState(() {}),
                                       ),
                                       autofocus: true,
                                       obscureText: false,
@@ -832,23 +833,23 @@ class _VerComentariosDesdeDetalleWidgetState
                                           _model
                                               .addToVerComentariosDesdeComponente(
                                                   _model.nuevoComentario!);
-                                          setState(() {});
+                                          safeSetState(() {});
                                           logFirebaseEvent(
                                               'Button_update_app_state');
                                           FFAppState()
                                                   .verCajaComentariosActualizados =
                                               true;
-                                          setState(() {});
+                                          safeSetState(() {});
                                           logFirebaseEvent(
                                               'Button_refresh_database_request');
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.firestoreRequestCompleter =
                                                   null);
                                           await _model
                                               .waitForFirestoreRequestCompleted();
                                           logFirebaseEvent(
                                               'Button_clear_text_fields_pin_codes');
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.commentFieldTextController
                                                 ?.clear();
                                           });
@@ -859,7 +860,7 @@ class _VerComentariosDesdeDetalleWidgetState
                                               _model
                                                   .verComentariosDesdeComponente);
 
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                   text: FFLocalizations.of(context).getText(
                                     'v81srtsj' /* Enviar */,

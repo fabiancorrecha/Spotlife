@@ -32,7 +32,7 @@ class _ChipGrandeWidgetState extends State<ChipGrandeWidget> {
     super.initState();
     _model = createModel(context, () => ChipGrandeModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

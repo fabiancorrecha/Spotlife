@@ -36,7 +36,7 @@ class _UsuariosRecomendadosWidgetState
     super.initState();
     _model = createModel(context, () => UsuariosRecomendadosModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -1,5 +1,6 @@
-import '/auth/base_auth_user_provider.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/crear_spot_widget.dart';
 import '/components/filtrar_spots/filtrar_spots_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/post_grid_mapa_global/post_grid_mapa_global_widget.dart';
@@ -37,8 +38,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapaPrincipal'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -79,7 +80,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
                 width: 12.0,
@@ -99,302 +100,373 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: Stack(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Stack(
-                          children: [
-                            if (!loggedIn)
-                              SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: custom_widgets.MapaPerzonalizado(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+              child: Stack(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Stack(
+                            children: [
+                              if (!loggedIn)
+                                SizedBox(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  ubicacionInicialLat: functions.obtenerLatLng(
-                                      currentUserLocationValue!, true),
-                                  ubicacionInicialLng: functions.obtenerLatLng(
-                                      currentUserLocationValue!, false),
-                                  zoom: 16.0,
-                                  listaPostMarcadores:
-                                      functions.getPlacesMaximumDistance(
-                                          mapaPrincipalUserPostsRecordList
-                                              .toList(),
-                                          currentUserLocationValue!,
-                                          5000.0),
+                                  child: custom_widgets.MapaPerzonalizado(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    ubicacionInicialLat:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, true),
+                                    ubicacionInicialLng:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, false),
+                                    zoom: 16.0,
+                                    listaPostMarcadores:
+                                        functions.getPlacesMaximumDistance(
+                                            mapaPrincipalUserPostsRecordList
+                                                .toList(),
+                                            currentUserLocationValue!,
+                                            5000.0),
+                                  ),
                                 ),
-                              ),
-                            if (FFAppState().PostGlobal == true)
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 100.0, 0.0, 0.0),
-                                child: wrapWithModel(
-                                  model: _model.postGridGlobalModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: const PostGridMapaGlobalWidget(),
+                              if (FFAppState().PostGlobal == true)
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 100.0, 0.0, 0.0),
+                                  child: wrapWithModel(
+                                    model: _model.postGridGlobalModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: const PostGridMapaGlobalWidget(),
+                                  ),
                                 ),
-                              ),
-                            if (FFAppState().MapaGlobal == true)
-                              SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: custom_widgets.MapaPersonalizado2(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  ubicacionInicialLat: functions.obtenerLatLng(
-                                      currentUserLocationValue!, true),
-                                  ubicacionInicialLng: functions.obtenerLatLng(
-                                      currentUserLocationValue!, false),
-                                  zoom: 16.0,
-                                  listaPostMarcadores:
-                                      functions.getPlacesMaximumDistance(
-                                          mapaPrincipalUserPostsRecordList
-                                              .toList(),
-                                          currentUserLocationValue!,
-                                          5000.0),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
-                  child: wrapWithModel(
-                    model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: const NavBar1Widget(
-                      tabActiva: 2,
-                    ),
-                  ),
-                ),
-                if (((FFAppState().MapaGlobal == true) ||
-                        (FFAppState().MapaAmigo == true)) &&
-                    (FFAppState().PostGlobal == false) &&
-                    (FFAppState().PostAmigo == false))
-                  Align(
-                    alignment: const AlignmentDirectional(-0.04, 0.75),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'MAPA_PRINCIPAL_PAGE_Card_b8pdfuzz_ON_TAP');
-                          logFirebaseEvent('Card_bottom_sheet');
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return WebViewAware(
-                                child: GestureDetector(
-                                  onTap: () => FocusScope.of(context).unfocus(),
-                                  child: Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: const SizedBox(
-                                      height: 225.0,
-                                      child: TipoDePostWidget(),
+                              if (FFAppState().MapaGlobal == true)
+                                Builder(
+                                  builder: (context) => SizedBox(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    child: custom_widgets.MapaPersonalizado2(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      ubicacionInicialLat:
+                                          functions.obtenerLatLng(
+                                              currentUserLocationValue!, true),
+                                      ubicacionInicialLng:
+                                          functions.obtenerLatLng(
+                                              currentUserLocationValue!, false),
+                                      zoom: 16.0,
+                                      listaPostMarcadores:
+                                          functions.getPlacesMaximumDistance(
+                                              mapaPrincipalUserPostsRecordList
+                                                  .toList(),
+                                              currentUserLocationValue!,
+                                              5000.0),
+                                      usuarioAutenticado: currentUserReference,
+                                      navigateTo: (ubication) async {
+                                        logFirebaseEvent(
+                                            'MAPA_PRINCIPAL_Container_g4v0n76q_CALLBA');
+                                        logFirebaseEvent(
+                                            'MapaPersonalizado2_alert_dialog');
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  const AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: WebViewAware(
+                                                child: GestureDetector(
+                                                  onTap: () => FocusScope.of(
+                                                          dialogContext)
+                                                      .unfocus(),
+                                                  child: CrearSpotWidget(
+                                                    ubication: ubication,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100.0),
+                            ],
                           ),
-                          child: FlutterFlowIconButton(
-                            borderColor: const Color(0x00F4F176),
-                            borderRadius: 20.0,
-                            borderWidth: 1.0,
-                            buttonSize: 50.0,
-                            fillColor: const Color(0x00EEEEEE),
-                            icon: Icon(
-                              Icons.add,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 35.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, 1.07),
+                    child: wrapWithModel(
+                      model: _model.navBar1Model,
+                      updateCallback: () => safeSetState(() {}),
+                      child: const NavBar1Widget(
+                        tabActiva: 2,
+                      ),
+                    ),
+                  ),
+                  if (((FFAppState().MapaGlobal == true) ||
+                          (FFAppState().MapaAmigo == true)) &&
+                      (FFAppState().PostGlobal == false) &&
+                      (FFAppState().PostAmigo == false))
+                    Align(
+                      alignment: const AlignmentDirectional(-0.04, 0.75),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'MAPA_PRINCIPAL_PAGE_Card_b8pdfuzz_ON_TAP');
+                            logFirebaseEvent('Card_bottom_sheet');
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return WebViewAware(
+                                  child: GestureDetector(
+                                    onTap: () =>
+                                        FocusScope.of(context).unfocus(),
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: const SizedBox(
+                                        height: 225.0,
+                                        child: TipoDePostWidget(),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
+                            child: FlutterFlowIconButton(
+                              borderColor: const Color(0x00F4F176),
+                              borderRadius: 20.0,
+                              borderWidth: 1.0,
+                              buttonSize: 64.0,
+                              fillColor: const Color(0x00EEEEEE),
+                              icon: Icon(
+                                Icons.add,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 40.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'MAPA_PRINCIPAL_PAGE_add_ICN_ON_TAP');
+                                logFirebaseEvent('IconButton_bottom_sheet');
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return WebViewAware(
+                                      child: GestureDetector(
+                                        onTap: () =>
+                                            FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: const SizedBox(
+                                            height: 225.0,
+                                            child: TipoDePostWidget(),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
-                  child: Container(
-                    height: 188.0,
-                    decoration: const BoxDecoration(),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 30.0, 0.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: InkWell(
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, -1.0),
+                    child: Container(
+                      height: 188.0,
+                      decoration: const BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 30.0, 0.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'MAPA_PRINCIPAL_PAGE_Card_dbgvgizp_ON_TAP');
+                                      logFirebaseEvent('Card_bottom_sheet');
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        barrierColor: const Color(0x00000000),
+                                        isDismissible: false,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return WebViewAware(
+                                            child: GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: const SizedBox(
+                                                  height: 480.0,
+                                                  child: FiltrarSpotsWidget(),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    },
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      color: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            4.0, 8.0, 4.0, 8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: FaIcon(
+                                                FontAwesomeIcons.chevronDown,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .icono,
+                                                size: 8.0,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: Icon(
+                                                FFIcons.kframe169,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .icono,
+                                                size: 18.0,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: Icon(
+                                                FFIcons.kusers,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .icono,
+                                                size: 20.0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 15.0, 16.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     logFirebaseEvent(
-                                        'MAPA_PRINCIPAL_PAGE_Card_dbgvgizp_ON_TAP');
-                                    logFirebaseEvent('Card_bottom_sheet');
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      barrierColor: const Color(0x00000000),
-                                      isDismissible: false,
-                                      enableDrag: false,
-                                      context: context,
-                                      builder: (context) {
-                                        return WebViewAware(
-                                          child: GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: const SizedBox(
-                                                height: 480.0,
-                                                child: FiltrarSpotsWidget(),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(() {}));
+                                        'MAPA_PRINCIPAL_Container_vk1xc2pj_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
+                                    context.pushNamed('buscarSpots');
                                   },
-                                  child: Card(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color: Colors.black,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 0.0,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50.0),
+                                      borderRadius: BorderRadius.circular(25.0),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          4.0, 8.0, 4.0, 8.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.chevronDown,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .icono,
-                                              size: 8.0,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Icon(
-                                              FFIcons.kframe169,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .icono,
-                                              size: 18.0,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Icon(
-                                              FFIcons.kusers,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .icono,
-                                              size: 20.0,
-                                            ),
-                                          ),
-                                        ],
+                                    child: Container(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                      ),
+                                      child: Icon(
+                                        FFIcons.ksearch,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 15.0, 16.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  logFirebaseEvent(
-                                      'MAPA_PRINCIPAL_Container_vk1xc2pj_ON_TAP');
-                                  logFirebaseEvent('Container_navigate_to');
-
-                                  context.pushNamed('buscarSpots');
-                                },
-                                child: Material(
-                                  color: Colors.transparent,
-                                  elevation: 0.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                                  child: Container(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(25.0),
-                                    ),
-                                    child: Icon(
-                                      FFIcons.kcollection,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

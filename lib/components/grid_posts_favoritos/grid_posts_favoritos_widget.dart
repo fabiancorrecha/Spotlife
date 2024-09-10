@@ -56,7 +56,7 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -160,7 +160,7 @@ class _GridPostsFavoritosWidgetState extends State<GridPostsFavoritosWidget>
                                           FFAppState()
                                                   .verCajaComentariosActualizados =
                                               false;
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                         onLongPress: () async {
                                           logFirebaseEvent(
