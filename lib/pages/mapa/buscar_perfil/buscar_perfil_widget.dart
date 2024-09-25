@@ -35,7 +35,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,16 +54,16 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Stack(
-            children: [
-              Column(
+        body: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+              child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: Container(
                       width: double.infinity,
                       decoration: const BoxDecoration(),
@@ -145,7 +145,8 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                                           )
                                           .onError((_, __) =>
                                               _model.simpleSearchResults = [])
-                                          .whenComplete(() => setState(() {}));
+                                          .whenComplete(
+                                              () => safeSetState(() {}));
                                     },
                                   ),
                                   autofocus: false,
@@ -256,7 +257,7 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                   ),
                   wrapWithModel(
                     model: _model.menu02Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const Menu02Widget(
                       seccion: 2,
                     ),
@@ -293,18 +294,18 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget> {
                     ),
                 ],
               ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.navBar1Model,
-                  updateCallback: () => setState(() {}),
-                  child: const NavBar1Widget(
-                    tabActiva: 4,
-                  ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 1.0),
+              child: wrapWithModel(
+                model: _model.navBar1Model,
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
+                  tabActiva: 4,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

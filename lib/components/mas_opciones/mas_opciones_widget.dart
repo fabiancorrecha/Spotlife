@@ -27,7 +27,7 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
     super.initState();
     _model = createModel(context, () => MasOpcionesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -80,7 +80,7 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
             Expanded(
               child: wrapWithModel(
                 model: _model.loginOptionsModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const LoginOptionsWidget(),
               ),
             ),

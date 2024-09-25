@@ -29,7 +29,7 @@ class _NotificacionesAjustesWidgetState
     super.initState();
     _model = createModel(context, () => NotificacionesAjustesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -136,7 +136,7 @@ class _NotificacionesAjustesWidgetState
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'miep204a' /* Enlace invitación */,
@@ -146,7 +146,7 @@ class _NotificacionesAjustesWidgetState
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '9rmxvw1p' /* Compartir via whatsapp */,
@@ -156,7 +156,7 @@ class _NotificacionesAjustesWidgetState
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '3q1vqkpu' /* Compartir via instagram */,
@@ -190,7 +190,7 @@ class _NotificacionesAjustesWidgetState
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '7zkjglw1' /* Enlace invitación */,
@@ -200,7 +200,7 @@ class _NotificacionesAjustesWidgetState
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'mvcoqt25' /* Compartir via whatsapp */,

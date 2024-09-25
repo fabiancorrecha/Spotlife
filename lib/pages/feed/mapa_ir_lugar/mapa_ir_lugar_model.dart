@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class MapaIrLugarModel extends FlutterFlowModel<MapaIrLugarWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for buscador01 component.
   late Buscador01Model buscador01Model;
   // Model for navBar1 component.

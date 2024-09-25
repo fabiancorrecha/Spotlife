@@ -35,7 +35,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
     super.initState();
     _model = createModel(context, () => AppBar5Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -66,7 +66,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
               onTap: () async {
                 logFirebaseEvent('APP_BAR5_COMP_Card_tw39opat_ON_TAP');
                 logFirebaseEvent('Card_navigate_back');
-                context.pop();
+                context.safePop();
               },
               child: Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,

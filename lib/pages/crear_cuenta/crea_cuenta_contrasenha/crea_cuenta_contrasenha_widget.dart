@@ -32,7 +32,7 @@ class _CreaCuentaContrasenhaWidgetState
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,46 +51,49 @@ class _CreaCuentaContrasenhaWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              logFirebaseEvent('CREA_CUENTA_CONTRASENHA_Icon_50ar1ukg_ON');
-              logFirebaseEvent('Icon_navigate_back');
-              context.pop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-          ),
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  '9m6xcd1u' /* Crear contraseña */,
-                ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                logFirebaseEvent('CREA_CUENTA_CONTRASENHA_Icon_50ar1ukg_ON');
+                logFirebaseEvent('Icon_navigate_back');
+                context.pop();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 24.0,
               ),
-            ],
+            ),
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    '9m6xcd1u' /* Crear contraseña */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
+                ),
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: Container(
           width: double.infinity,
@@ -99,7 +102,7 @@ class _CreaCuentaContrasenhaWidgetState
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -151,7 +154,7 @@ class _CreaCuentaContrasenhaWidgetState
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textController',
                                   const Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: true,
                                 obscureText: !_model.passwordVisibility,
@@ -215,7 +218,7 @@ class _CreaCuentaContrasenhaWidgetState
                                   filled: true,
                                   fillColor: const Color(0xFF333333),
                                   suffixIcon: InkWell(
-                                    onTap: () => setState(
+                                    onTap: () => safeSetState(
                                       () => _model.passwordVisibility =
                                           !_model.passwordVisibility,
                                     ),
@@ -256,7 +259,7 @@ class _CreaCuentaContrasenhaWidgetState
                 ),
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Siguiente',
                     desabilitado: _model.textController.text == '',

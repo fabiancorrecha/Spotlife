@@ -30,7 +30,7 @@ class _SolicitudDePermisoUbicacionWidgetState
     super.initState();
     _model = createModel(context, () => SolicitudDePermisoUbicacionModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

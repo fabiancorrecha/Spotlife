@@ -63,7 +63,7 @@ class _IngresaConUsernameValidacionWidgetState
         TextEditingController(text: FFAppState().temporalContrasena);
     _model.contrasenaFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -114,7 +114,7 @@ class _IngresaConUsernameValidacionWidgetState
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.emailTextController',
                             const Duration(milliseconds: 200),
-                            () => setState(() {}),
+                            () => safeSetState(() {}),
                           ),
                           autofocus: true,
                           obscureText: false,
@@ -239,7 +239,7 @@ class _IngresaConUsernameValidacionWidgetState
                             filled: true,
                             fillColor: const Color(0xFF333333),
                             suffixIcon: InkWell(
-                              onTap: () => setState(
+                              onTap: () => safeSetState(
                                 () => _model.contrasenaVisibility =
                                     !_model.contrasenaVisibility,
                               ),

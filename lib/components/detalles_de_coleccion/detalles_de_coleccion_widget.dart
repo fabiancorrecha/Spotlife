@@ -34,7 +34,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
     super.initState();
     _model = createModel(context, () => DetallesDeColeccionModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

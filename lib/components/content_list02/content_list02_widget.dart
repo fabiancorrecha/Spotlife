@@ -26,7 +26,7 @@ class _ContentList02WidgetState extends State<ContentList02Widget> {
     super.initState();
     _model = createModel(context, () => ContentList02Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

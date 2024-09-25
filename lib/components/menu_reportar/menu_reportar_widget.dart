@@ -32,7 +32,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
     super.initState();
     _model = createModel(context, () => MenuReportarModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -146,7 +146,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
               children: [
                 wrapWithModel(
                   model: _model.selectorMotivoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       '0tiikwvx' /* Es spam */,
@@ -155,7 +155,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'm5gzyax0' /* Desnudos o actividad sexual */,
@@ -164,7 +164,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'wximtg8h' /* Bullying o acoso */,
@@ -173,7 +173,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'mrmm7hbf' /* Información falsa */,
@@ -182,7 +182,7 @@ class _MenuReportarWidgetState extends State<MenuReportarWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'qzvakjdd' /* Otro motivo */,

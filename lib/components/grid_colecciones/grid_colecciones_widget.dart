@@ -38,7 +38,7 @@ class _GridColeccionesWidgetState extends State<GridColeccionesWidget> {
     super.initState();
     _model = createModel(context, () => GridColeccionesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

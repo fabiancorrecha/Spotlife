@@ -29,7 +29,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'cuenta_ajuste_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,7 +49,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -57,7 +57,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,25 +89,23 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                             ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'uvo383mu' /* Cuenta */,
+                        Expanded(
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'uvo383mu' /* Cuenta */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .displaySmallFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .displaySmallFamily),
-                              ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
@@ -142,7 +140,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel1,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'p0dybf9s' /* Informacion personal */,
@@ -158,7 +156,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel2,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'x9679505' /* Guardar fotos originales */,
@@ -196,7 +194,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: wrapWithModel(
                       model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'j415er89' /* Herramientas promoción */,
@@ -213,7 +211,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.botonQuintoModel4,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: FFLocalizations.of(context).getText(
                         'djmcpi98' /* Solicitar verificación */,
@@ -232,7 +230,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.botonQuintoModel5,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'rha6ba9z' /* Cambiar a cuenta Pro/Empresa */,

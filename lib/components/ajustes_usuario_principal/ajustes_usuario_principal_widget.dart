@@ -34,7 +34,7 @@ class _AjustesUsuarioPrincipalWidgetState
     super.initState();
     _model = createModel(context, () => AjustesUsuarioPrincipalModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -125,7 +125,7 @@ class _AjustesUsuarioPrincipalWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksettings,
@@ -164,7 +164,7 @@ class _AjustesUsuarioPrincipalWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kstarLines,
@@ -188,7 +188,7 @@ class _AjustesUsuarioPrincipalWidgetState
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: wrapWithModel(
                         model: _model.boton3Model3,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton3Widget(
                           icono: Icon(
                             FFIcons.kusers,
@@ -205,7 +205,7 @@ class _AjustesUsuarioPrincipalWidgetState
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kimbox,
@@ -246,7 +246,7 @@ class _AjustesUsuarioPrincipalWidgetState
                     if (!loggedIn)
                       wrapWithModel(
                         model: _model.boton4Model1,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton4Widget(
                           icono: Icon(
                             FFIcons.kaddUser,
@@ -262,7 +262,7 @@ class _AjustesUsuarioPrincipalWidgetState
                       ),
                     wrapWithModel(
                       model: _model.boton4Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.klogOut,

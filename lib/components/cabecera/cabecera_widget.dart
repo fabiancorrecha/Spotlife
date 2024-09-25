@@ -31,7 +31,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
     super.initState();
     _model = createModel(context, () => CabeceraModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,7 +49,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 16.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,

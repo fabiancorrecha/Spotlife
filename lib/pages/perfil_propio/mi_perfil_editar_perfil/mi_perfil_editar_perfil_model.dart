@@ -7,7 +7,6 @@ class MiPerfilEditarPerfilModel
     extends FlutterFlowModel<MiPerfilEditarPerfilWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for tarjetaMiPerfilEditar component.
   late TarjetaMiPerfilEditarModel tarjetaMiPerfilEditarModel;
 

@@ -29,7 +29,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'invitar_amigos_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,7 +49,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -113,7 +113,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           '4ovqiul6' /* Enlace invitación */,
@@ -145,7 +145,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                     Builder(
                       builder: (context) => wrapWithModel(
                         model: _model.botonQuintoModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             'kj3teqfz' /* Compartir enlace */,

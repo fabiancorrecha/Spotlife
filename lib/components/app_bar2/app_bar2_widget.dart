@@ -26,7 +26,7 @@ class _AppBar2WidgetState extends State<AppBar2Widget> {
     super.initState();
     _model = createModel(context, () => AppBar2Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

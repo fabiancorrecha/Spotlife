@@ -37,7 +37,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     authManager.handlePhoneAuthStateChanges(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -56,42 +56,40 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  FFLocalizations.of(context).getText(
-                    'vxvsf68e' /* Añade tu teléfono */,
-                  ),
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).displaySmall.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).displaySmallFamily,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).displaySmallFamily),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            actions: const [],
+            flexibleSpace: FlexibleSpaceBar(
+              title: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      FFLocalizations.of(context).getText(
+                        'vxvsf68e' /* Añade tu teléfono */,
                       ),
-                ),
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).displaySmallFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context)
+                                    .displaySmallFamily),
+                          ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
-              child: Icon(
-                Icons.settings_outlined,
-                color: FlutterFlowTheme.of(context).primaryBackground,
-                size: 24.0,
-              ),
+              centerTitle: true,
+              expandedTitleScale: 1.0,
             ),
-          ],
-          centerTitle: true,
-          elevation: 0.0,
+            elevation: 0.0,
+          ),
         ),
         body: Container(
           width: double.infinity,
@@ -99,7 +97,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -162,7 +160,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                   );
                                 },
                                 onSelected: (String selection) {
-                                  setState(() => _model
+                                  safeSetState(() => _model
                                       .textFieldSelectedOption1 = selection);
                                   FocusScope.of(context).unfocus();
                                 },
@@ -184,7 +182,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.textController1',
                                       const Duration(milliseconds: 200),
-                                      () => setState(() {}),
+                                      () => safeSetState(() {}),
                                     ),
                                     autofocus: true,
                                     obscureText: false,
@@ -244,7 +242,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                           ? InkWell(
                                               onTap: () async {
                                                 _model.textController1?.clear();
-                                                setState(() {});
+                                                safeSetState(() {});
                                               },
                                               child: Icon(
                                                 Icons.clear,
@@ -414,7 +412,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                 ),
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Siguiente',
                     desabilitado: (_model.textController1.text == '') &&

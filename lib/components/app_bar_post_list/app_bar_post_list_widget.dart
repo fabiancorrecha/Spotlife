@@ -35,7 +35,7 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
     super.initState();
     _model = createModel(context, () => AppBarPostListModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

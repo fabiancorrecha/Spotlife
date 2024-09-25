@@ -34,7 +34,7 @@ class _AppBar7ColeccionesWidgetState extends State<AppBar7ColeccionesWidget> {
     super.initState();
     _model = createModel(context, () => AppBar7ColeccionesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -34,7 +34,7 @@ class _BotonQuintoWidgetState extends State<BotonQuintoWidget> {
     super.initState();
     _model = createModel(context, () => BotonQuintoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

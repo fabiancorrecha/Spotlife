@@ -34,7 +34,7 @@ class _ConfiguracionCuentaWidgetState extends State<ConfiguracionCuentaWidget> {
     super.initState();
     _model = createModel(context, () => ConfiguracionCuentaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

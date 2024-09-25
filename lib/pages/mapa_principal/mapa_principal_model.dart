@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class MapaPrincipalModel extends FlutterFlowModel<MapaPrincipalWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for postGridGlobal.
   late PostGridMapaGlobalModel postGridGlobalModel;
   // Model for navBar1 component.

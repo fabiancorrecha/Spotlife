@@ -26,7 +26,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapaFiltrarSpots'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,16 +43,16 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                 child: wrapWithModel(
                   model: _model.buscador01Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const Buscador01Widget(
                     dosIconos: false,
                   ),
@@ -66,7 +66,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.contentList02Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const ContentList02Widget(),
                     ),
                   ],
@@ -74,7 +74,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 0,
                 ),

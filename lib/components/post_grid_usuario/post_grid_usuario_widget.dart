@@ -55,7 +55,7 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -210,7 +210,7 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                               FFAppState()
                                                       .verCajaComentariosActualizados =
                                                   false;
-                                              setState(() {});
+                                              safeSetState(() {});
                                             },
                                             onLongPress: () async {
                                               logFirebaseEvent(

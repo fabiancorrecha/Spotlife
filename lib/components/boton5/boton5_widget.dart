@@ -32,7 +32,7 @@ class _Boton5WidgetState extends State<Boton5Widget> {
     super.initState();
     _model = createModel(context, () => Boton5Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

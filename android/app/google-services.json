@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "788970699260-mpsvig51s34rr547ouvpmp09pvgafa4j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "98dc6b822ebe504d216a0cee7282a246f682c144"
+          }
+        },
+        {
           "client_id": "788970699260-oe71llj00itn7oefi5uor19e0ua5369t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

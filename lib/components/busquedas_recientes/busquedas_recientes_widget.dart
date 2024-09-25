@@ -27,7 +27,7 @@ class _BusquedasRecientesWidgetState extends State<BusquedasRecientesWidget> {
     super.initState();
     _model = createModel(context, () => BusquedasRecientesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

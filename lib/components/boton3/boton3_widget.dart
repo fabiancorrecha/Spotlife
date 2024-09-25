@@ -36,7 +36,7 @@ class _Boton3WidgetState extends State<Boton3Widget> {
     super.initState();
     _model = createModel(context, () => Boton3Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

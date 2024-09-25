@@ -26,7 +26,7 @@ class _CondicionesDeUsoWidgetState extends State<CondicionesDeUsoWidget> {
     super.initState();
     _model = createModel(context, () => CondicionesDeUsoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

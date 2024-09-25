@@ -32,7 +32,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
     super.initState();
     _model = createModel(context, () => ConfiguracionOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -120,7 +120,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Invitar a amigos',
                     accion: () async {
@@ -135,7 +135,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 if (!loggedIn)
                   wrapWithModel(
                     model: _model.botonQuintoModel2,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: 'Notificacionesdd',
                       accion: () async {},
@@ -143,7 +143,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                   ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Privacidad',
                     accion: () async {
@@ -173,7 +173,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Seguridad',
                     accion: () async {
@@ -199,7 +199,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Cuenta',
                     accion: () async {
@@ -213,7 +213,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel6,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Ayuda',
                     accion: () async {
@@ -226,7 +226,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel7,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Información',
                     accion: () async {

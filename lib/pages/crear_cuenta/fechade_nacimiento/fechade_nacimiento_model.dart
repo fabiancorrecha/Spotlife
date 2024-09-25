@@ -10,7 +10,6 @@ class FechadeNacimientoModel extends FlutterFlowModel<FechadeNacimientoWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? fechaDeNacimientoController;
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   DateTime? datePicked;
   // Model for boton1 component.

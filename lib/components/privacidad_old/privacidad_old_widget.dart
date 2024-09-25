@@ -31,7 +31,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
 
     _model.switchValue =
         valueOrDefault<bool>(currentUserDocument?.cuentaPrivada, false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -187,7 +187,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                                 builder: (context) => Switch.adaptive(
                                   value: _model.switchValue!,
                                   onChanged: (newValue) async {
-                                    setState(
+                                    safeSetState(
                                         () => _model.switchValue = newValue);
                                     if (newValue) {
                                       logFirebaseEvent(
@@ -229,7 +229,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                   if (!loggedIn)
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'skf4b9bj' /* Privacidad Colecciones */,
@@ -240,7 +240,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                   if (!loggedIn)
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'tvtdh1md' /* Privacidad Spots */,
@@ -275,7 +275,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'h2f223ry' /* Usuarios bloqueados */,

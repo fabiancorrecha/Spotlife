@@ -34,7 +34,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'usuariosMeGusta'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -76,8 +76,8 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -199,7 +199,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const NavBar1Widget(
                       tabActiva: 3,
                     ),

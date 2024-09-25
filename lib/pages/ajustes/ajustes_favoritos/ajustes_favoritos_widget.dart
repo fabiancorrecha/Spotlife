@@ -40,8 +40,8 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -58,340 +58,345 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Stack(
-          children: [
-            StreamBuilder<List<CollectionsRecord>>(
-              stream: queryCollectionsRecord(
-                queryBuilder: (collectionsRecord) => collectionsRecord
-                    .where(
-                      'createdBy',
-                      isEqualTo: currentUserReference,
-                    )
-                    .where(
-                      'coleccionFavoritos',
-                      isEqualTo: true,
-                    ),
-              ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 12.0,
-                      height: 12.0,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).primaryBackground,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+          child: Stack(
+            children: [
+              StreamBuilder<List<CollectionsRecord>>(
+                stream: queryCollectionsRecord(
+                  queryBuilder: (collectionsRecord) => collectionsRecord
+                      .where(
+                        'createdBy',
+                        isEqualTo: currentUserReference,
+                      )
+                      .where(
+                        'coleccionFavoritos',
+                        isEqualTo: true,
+                      ),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 12.0,
+                        height: 12.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primaryBackground,
+                          ),
                         ),
                       ),
+                    );
+                  }
+                  List<CollectionsRecord> containerCollectionsRecordList =
+                      snapshot.data!;
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                  );
-                }
-                List<CollectionsRecord> containerCollectionsRecordList =
-                    snapshot.data!;
-
-                return Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Stack(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          wrapWithModel(
-                            model: _model.cabeceraModel,
-                            updateCallback: () => setState(() {}),
-                            child: const CabeceraWidget(
-                              seccion: 0,
+                    child: Stack(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            wrapWithModel(
+                              model: _model.cabeceraModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: const CabeceraWidget(
+                                seccion: 0,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: const Alignment(0.0, 0),
-                                  child: TabBar(
-                                    labelColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    unselectedLabelColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMediumFamily,
-                                          fontSize: 0.0,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMediumFamily),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: const Alignment(0.0, 0),
+                                    child: TabBar(
+                                      labelColor: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      unselectedLabelColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            fontSize: 0.0,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                      unselectedLabelStyle: const TextStyle(),
+                                      indicatorColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      padding: const EdgeInsets.all(4.0),
+                                      tabs: [
+                                        const Tab(
+                                          icon: Icon(
+                                            FFIcons.kcollection,
+                                            size: 32.0,
+                                          ),
+                                        ).addWalkthrough(
+                                          tabY38cfb8b,
+                                          _model.misFavoritosController,
                                         ),
-                                    unselectedLabelStyle: const TextStyle(),
-                                    indicatorColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    padding: const EdgeInsets.all(4.0),
-                                    tabs: [
-                                      const Tab(
-                                        icon: Icon(
-                                          FFIcons.kcollection,
-                                          size: 32.0,
+                                        const Tab(
+                                          icon: Icon(
+                                            FFIcons.kpageFill,
+                                            size: 32.0,
+                                          ),
+                                        ).addWalkthrough(
+                                          tabS43zaii5,
+                                          _model.misFavoritosController,
                                         ),
-                                      ).addWalkthrough(
-                                        tabY38cfb8b,
-                                        _model.misFavoritosController,
-                                      ),
-                                      const Tab(
-                                        icon: Icon(
-                                          FFIcons.kpageFill,
-                                          size: 32.0,
-                                        ),
-                                      ).addWalkthrough(
-                                        tabS43zaii5,
-                                        _model.misFavoritosController,
-                                      ),
-                                    ],
-                                    controller: _model.tabBarController,
-                                    onTap: (i) async {
-                                      [() async {}, () async {}][i]();
-                                    },
+                                      ],
+                                      controller: _model.tabBarController,
+                                      onTap: (i) async {
+                                        [() async {}, () async {}][i]();
+                                      },
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TabBarView(
-                                    controller: _model.tabBarController,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                AuthUserStreamWidget(
-                                                  builder: (context) => Builder(
-                                                    builder: (context) {
-                                                      final listadoPostFavoritos =
-                                                          (currentUserDocument
-                                                                      ?.listaPostFavoritos
-                                                                      .toList() ??
-                                                                  [])
-                                                              .toList();
-                                                      if (listadoPostFavoritos
-                                                          .isEmpty) {
-                                                        return const Center(
-                                                          child:
-                                                              ComponenteVacioWidget(),
-                                                        );
-                                                      }
+                                  Expanded(
+                                    child: TabBarView(
+                                      controller: _model.tabBarController,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  AuthUserStreamWidget(
+                                                    builder: (context) =>
+                                                        Builder(
+                                                      builder: (context) {
+                                                        final listadoPostFavoritos =
+                                                            (currentUserDocument
+                                                                        ?.listaPostFavoritos
+                                                                        .toList() ??
+                                                                    [])
+                                                                .toList();
+                                                        if (listadoPostFavoritos
+                                                            .isEmpty) {
+                                                          return const Center(
+                                                            child:
+                                                                ComponenteVacioWidget(),
+                                                          );
+                                                        }
 
-                                                      return ListView.builder(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        primary: false,
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount:
-                                                            listadoPostFavoritos
-                                                                .length,
-                                                        itemBuilder: (context,
-                                                            listadoPostFavoritosIndex) {
-                                                          final listadoPostFavoritosItem =
-                                                              listadoPostFavoritos[
-                                                                  listadoPostFavoritosIndex];
-                                                          return StreamBuilder<
-                                                              UserPostsRecord>(
-                                                            stream: UserPostsRecord
-                                                                .getDocument(
-                                                                    listadoPostFavoritosItem),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 12.0,
-                                                                    height:
-                                                                        12.0,
+                                                        return ListView.builder(
+                                                          padding:
+                                                              EdgeInsets.zero,
+                                                          primary: false,
+                                                          shrinkWrap: true,
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          itemCount:
+                                                              listadoPostFavoritos
+                                                                  .length,
+                                                          itemBuilder: (context,
+                                                              listadoPostFavoritosIndex) {
+                                                            final listadoPostFavoritosItem =
+                                                                listadoPostFavoritos[
+                                                                    listadoPostFavoritosIndex];
+                                                            return StreamBuilder<
+                                                                UserPostsRecord>(
+                                                              stream: UserPostsRecord
+                                                                  .getDocument(
+                                                                      listadoPostFavoritosItem),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
                                                                     child:
-                                                                        CircularProgressIndicator(
-                                                                      valueColor:
-                                                                          AlwaysStoppedAnimation<
-                                                                              Color>(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .primaryBackground,
+                                                                        SizedBox(
+                                                                      width:
+                                                                          12.0,
+                                                                      height:
+                                                                          12.0,
+                                                                      child:
+                                                                          CircularProgressIndicator(
+                                                                        valueColor:
+                                                                            AlwaysStoppedAnimation<Color>(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primaryBackground,
+                                                                        ),
                                                                       ),
+                                                                    ),
+                                                                  );
+                                                                }
+
+                                                                final containerUserPostsRecord =
+                                                                    snapshot
+                                                                        .data!;
+
+                                                                return Container(
+                                                                  decoration:
+                                                                      const BoxDecoration(),
+                                                                  child:
+                                                                      wrapWithModel(
+                                                                    model: _model
+                                                                        .postImagenV2Models
+                                                                        .getModel(
+                                                                      listadoPostFavoritosItem
+                                                                          .id,
+                                                                      listadoPostFavoritosIndex,
+                                                                    ),
+                                                                    updateCallback: () =>
+                                                                        safeSetState(
+                                                                            () {}),
+                                                                    child:
+                                                                        PostImagenV2Widget(
+                                                                      key: Key(
+                                                                        'Key4h9_${listadoPostFavoritosItem.id}',
+                                                                      ),
+                                                                      post:
+                                                                          containerUserPostsRecord,
+                                                                      verIconoCompartir:
+                                                                          false,
+                                                                      verComentarios:
+                                                                          false,
                                                                     ),
                                                                   ),
                                                                 );
-                                                              }
-
-                                                              final containerUserPostsRecord =
-                                                                  snapshot
-                                                                      .data!;
-
-                                                              return Container(
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child:
-                                                                    wrapWithModel(
-                                                                  model: _model
-                                                                      .postImagenV2Models
-                                                                      .getModel(
-                                                                    listadoPostFavoritosItem
-                                                                        .id,
-                                                                    listadoPostFavoritosIndex,
-                                                                  ),
-                                                                  updateCallback:
-                                                                      () => setState(
-                                                                          () {}),
-                                                                  child:
-                                                                      PostImagenV2Widget(
-                                                                    key: Key(
-                                                                      'Key4h9_${listadoPostFavoritosItem.id}',
-                                                                    ),
-                                                                    post:
-                                                                        containerUserPostsRecord,
-                                                                    verIconoCompartir:
-                                                                        false,
-                                                                    verComentarios:
-                                                                        false,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                      );
-                                                    },
+                                                              },
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          wrapWithModel(
-                                            model:
-                                                _model.buscadorColeccionesModel,
-                                            updateCallback: () =>
-                                                setState(() {}),
-                                            child: BuscadorColeccionesWidget(
-                                              coleccionesLista:
-                                                  containerCollectionsRecordList,
-                                              puedeCrearColeccion: true,
-                                              esColeccionFavorito: true,
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            wrapWithModel(
+                                              model: _model
+                                                  .buscadorColeccionesModel,
+                                              updateCallback: () =>
+                                                  safeSetState(() {}),
+                                              child: BuscadorColeccionesWidget(
+                                                coleccionesLista:
+                                                    containerCollectionsRecordList,
+                                                puedeCrearColeccion: true,
+                                                esColeccionFavorito: true,
+                                              ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Stack(
-                                              children: [
-                                                wrapWithModel(
-                                                  model: _model
-                                                      .gridColeccionesModel,
-                                                  updateCallback: () =>
-                                                      setState(() {}),
-                                                  child: GridColeccionesWidget(
-                                                    usuario:
-                                                        currentUserReference,
-                                                    esCollecionTipoFavorito:
-                                                        true,
+                                            Expanded(
+                                              child: Stack(
+                                                children: [
+                                                  wrapWithModel(
+                                                    model: _model
+                                                        .gridColeccionesModel,
+                                                    updateCallback: () =>
+                                                        safeSetState(() {}),
+                                                    child:
+                                                        GridColeccionesWidget(
+                                                      usuario:
+                                                          currentUserReference,
+                                                      esCollecionTipoFavorito:
+                                                          true,
+                                                    ),
                                                   ),
-                                                ),
-                                                if (responsiveVisibility(
-                                                  context: context,
-                                                  phone: false,
-                                                  tablet: false,
-                                                  tabletLandscape: false,
-                                                  desktop: false,
-                                                ))
-                                                  Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            0.0, 1.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  34.0),
-                                                      child: Container(
-                                                        width: 60.0,
-                                                        height: 60.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  10.0),
-                                                          child: Icon(
-                                                            FFIcons.kadd,
+                                                  if (responsiveVisibility(
+                                                    context: context,
+                                                    phone: false,
+                                                    tablet: false,
+                                                    tabletLandscape: false,
+                                                    desktop: false,
+                                                  ))
+                                                    Align(
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              0.0, 1.0),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    34.0),
+                                                        child: Container(
+                                                          width: 60.0,
+                                                          height: 60.0,
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .icono,
-                                                            size: 28.0,
+                                                                .primary,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets.all(
+                                                                    10.0),
+                                                            child: Icon(
+                                                              FFIcons.kadd,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .icono,
+                                                              size: 28.0,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.87, -0.92),
-              child: FlutterFlowIconButton(
-                borderColor: const Color(0x00F4F176),
-                borderRadius: 20.0,
-                borderWidth: 1.0,
-                buttonSize: 40.0,
-                fillColor: const Color(0x00EEEEEE),
-                icon: Icon(
-                  Icons.help,
-                  color: FlutterFlowTheme.of(context).primary,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  logFirebaseEvent('AJUSTES_FAVORITOS_PAGE_help_ICN_ON_TAP');
-                  logFirebaseEvent('IconButton_start_walkthrough');
-                  safeSetState(() => _model.misFavoritosController =
-                      createPageWalkthrough(context));
-                  _model.misFavoritosController?.show(context: context);
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
-            ),
-          ],
+              Align(
+                alignment: const AlignmentDirectional(0.87, -0.92),
+                child: FlutterFlowIconButton(
+                  borderColor: const Color(0x00F4F176),
+                  borderRadius: 20.0,
+                  borderWidth: 1.0,
+                  buttonSize: 40.0,
+                  fillColor: const Color(0x00EEEEEE),
+                  icon: Icon(
+                    Icons.help,
+                    color: FlutterFlowTheme.of(context).primary,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    logFirebaseEvent('AJUSTES_FAVORITOS_PAGE_help_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_start_walkthrough');
+                    safeSetState(() => _model.misFavoritosController =
+                        createPageWalkthrough(context));
+                    _model.misFavoritosController?.show(context: context);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

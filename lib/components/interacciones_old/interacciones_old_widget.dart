@@ -27,7 +27,7 @@ class _InteraccionesOldWidgetState extends State<InteraccionesOldWidget> {
     super.initState();
     _model = createModel(context, () => InteraccionesOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -119,7 +119,7 @@ class _InteraccionesOldWidgetState extends State<InteraccionesOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'f2n6paom' /* Favoritos */,
@@ -129,7 +129,7 @@ class _InteraccionesOldWidgetState extends State<InteraccionesOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           't7c9azc2' /* Likes */,
@@ -139,7 +139,7 @@ class _InteraccionesOldWidgetState extends State<InteraccionesOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           '2cbbr8ad' /* Sitios visitados */,
