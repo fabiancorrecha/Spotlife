@@ -13,7 +13,6 @@ class FeedModel extends FlutterFlowModel<FeedWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? feedController;
-  final unfocusNode = FocusNode();
   // Model for appBar component.
   late AppBarModel appBarModel;
   // State field(s) for ListView widget.

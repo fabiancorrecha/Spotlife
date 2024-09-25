@@ -41,7 +41,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'buscarSpots'});
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
@@ -60,7 +60,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -94,8 +94,8 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -104,7 +104,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                 decoration: const BoxDecoration(),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 32.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -177,7 +177,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                                     )
                                     .onError((_, __) =>
                                         _model.simpleSearchResults = [])
-                                    .whenComplete(() => setState(() {}));
+                                    .whenComplete(() => safeSetState(() {}));
                               },
                             ),
                             autofocus: false,
@@ -260,7 +260,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                               'BUSCAR_SPOTS_Container_o3dszcpb_ON_TAP');
                           logFirebaseEvent('Container_update_page_state');
                           _model.verLista = !_model.verLista;
-                          setState(() {});
+                          safeSetState(() {});
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -297,7 +297,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
               ),
               wrapWithModel(
                 model: _model.menu02Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const Menu02Widget(
                   seccion: 1,
                 ),
@@ -561,7 +561,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 4,
                 ),

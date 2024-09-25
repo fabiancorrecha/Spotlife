@@ -46,8 +46,7 @@ export '/pages/miperfil_mapa_pin2/miperfil_mapa_pin2_widget.dart'
     show MiperfilMapaPin2Widget;
 export '/pages/perfil_propio/perfil_propio/perfil_propio_widget.dart'
     show PerfilPropioWidget;
-export '/pages/perfil_propio/miperfil_mapa/miperfil_mapa_widget.dart'
-    show MiperfilMapaWidget;
+export '/pages/miperfil_mapa/miperfil_mapa_widget.dart' show MiperfilMapaWidget;
 export '/pages/perfil_propio/miperfil_coleciones/miperfil_coleciones_widget.dart'
     show MiperfilColecionesWidget;
 export '/pages/perfil_propio/mi_perfil_mapa_pin3/mi_perfil_mapa_pin3_widget.dart'

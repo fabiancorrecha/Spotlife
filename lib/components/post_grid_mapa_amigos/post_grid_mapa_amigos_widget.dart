@@ -51,7 +51,7 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -208,7 +208,7 @@ class _PostGridMapaAmigosWidgetState extends State<PostGridMapaAmigosWidget>
                                                     FFAppState()
                                                             .verCajaComentariosActualizados =
                                                         false;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   child: ClipRRect(
                                                     borderRadius:

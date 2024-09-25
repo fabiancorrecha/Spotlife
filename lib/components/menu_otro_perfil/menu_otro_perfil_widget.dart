@@ -39,7 +39,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
     super.initState();
     _model = createModel(context, () => MenuOtroPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

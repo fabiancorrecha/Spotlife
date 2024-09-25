@@ -38,7 +38,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     _model = createModel(context, () => PostGridMapaGlobalModel());
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -54,7 +54,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -224,7 +224,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                                   FFAppState()
                                                           .verCajaComentariosActualizados =
                                                       false;
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 },
                                                 child: ClipRRect(
                                                   borderRadius:

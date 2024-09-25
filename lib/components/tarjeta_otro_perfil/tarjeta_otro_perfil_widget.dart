@@ -41,7 +41,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
     super.initState();
     _model = createModel(context, () => TarjetaOtroPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -453,7 +453,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                         logFirebaseEvent(
                                             'Column_update_app_state');
                                         FFAppState().indexTabFollow = '1';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -541,7 +541,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                         logFirebaseEvent(
                                             'Column_update_app_state');
                                         FFAppState().indexTabFollow = '0';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,

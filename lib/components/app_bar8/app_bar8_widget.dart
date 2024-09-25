@@ -26,7 +26,7 @@ class _AppBar8WidgetState extends State<AppBar8Widget> {
     super.initState();
     _model = createModel(context, () => AppBar8Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

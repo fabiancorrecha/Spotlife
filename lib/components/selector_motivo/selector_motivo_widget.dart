@@ -34,7 +34,7 @@ class _SelectorMotivoWidgetState extends State<SelectorMotivoWidget> {
     super.initState();
     _model = createModel(context, () => SelectorMotivoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

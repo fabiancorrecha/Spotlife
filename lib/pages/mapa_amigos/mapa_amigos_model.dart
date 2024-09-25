@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class MapaAmigosModel extends FlutterFlowModel<MapaAmigosWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for postGridAmigos.
   late PostGridMapaAmigosModel postGridAmigosModel;
   // Model for navBar1 component.

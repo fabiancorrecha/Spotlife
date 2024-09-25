@@ -56,7 +56,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     authManager.handlePhoneAuthStateChanges(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -75,30 +75,33 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  'iigcsccl' /* Login */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    'iigcsccl' /* Login */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: StreamBuilder<List<UsersRecord>>(
           stream: queryUsersRecord(
@@ -136,7 +139,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -201,7 +204,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                       );
                                     },
                                     onSelected: (String selection) {
-                                      setState(() =>
+                                      safeSetState(() =>
                                           _model.textFieldSelectedOption1 =
                                               selection);
                                       FocusScope.of(context).unfocus();
@@ -224,7 +227,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.textController1',
                                           const Duration(milliseconds: 200),
-                                          () => setState(() {}),
+                                          () => safeSetState(() {}),
                                         ),
                                         autofocus: false,
                                         obscureText: false,
@@ -289,7 +292,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                   onTap: () async {
                                                     _model.textController1
                                                         ?.clear();
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   child: Icon(
                                                     Icons.clear,
@@ -382,7 +385,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.textController2',
                                         const Duration(milliseconds: 200),
-                                        () => setState(() {}),
+                                        () => safeSetState(() {}),
                                       ),
                                       autofocus: false,
                                       obscureText: false,
@@ -498,7 +501,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                           ),
                           wrapWithModel(
                             model: _model.boton1Model,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: Boton1Widget(
                               texto: 'Log in',
                               desabilitado:
@@ -649,7 +652,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                         children: [
                           wrapWithModel(
                             model: _model.loginOptionsModel,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: const LoginOptionsWidget(),
                           ),
                         ],

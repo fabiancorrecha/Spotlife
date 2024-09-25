@@ -37,7 +37,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
     super.initState();
     _model = createModel(context, () => TarjetaMiPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

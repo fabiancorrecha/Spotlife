@@ -25,7 +25,7 @@ class _PaginaProvisionalWidgetState extends State<PaginaProvisionalWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'paginaProvisional'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

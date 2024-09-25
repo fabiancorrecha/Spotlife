@@ -33,7 +33,7 @@ class _CambiaraUnacuentaProfesionalIntro2WidgetState
     _model =
         createModel(context, () => CambiaraUnacuentaProfesionalIntro2Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

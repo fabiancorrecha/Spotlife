@@ -27,7 +27,7 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'metodo_de_pago'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,51 +44,50 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'METODO_DE_PAGO_PAGE_Card_phko3v64_ON_TAP');
-                          logFirebaseEvent('Card_navigate_back');
-                          context.safePop();
-                        },
-                        child: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.of(context).fondoIcono,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              color: FlutterFlowTheme.of(context).icono,
-                              size: 30.0,
-                            ),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 54.0, 16.0, 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'METODO_DE_PAGO_PAGE_Card_phko3v64_ON_TAP');
+                        logFirebaseEvent('Card_navigate_back');
+                        context.safePop();
+                      },
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).fondoIcono,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(
+                            Icons.arrow_back_rounded,
+                            color: FlutterFlowTheme.of(context).icono,
+                            size: 30.0,
                           ),
                         ),
                       ),
-                      Text(
+                    ),
+                    Expanded(
+                      child: Text(
                         FFLocalizations.of(context).getText(
                           'g9t7c240' /* Metodos de pago */,
                         ),
+                        textAlign: TextAlign.center,
                         style:
                             FlutterFlowTheme.of(context).displaySmall.override(
                                   fontFamily: FlutterFlowTheme.of(context)
@@ -99,52 +98,47 @@ class _MetodoDePagoWidgetState extends State<MetodoDePagoWidget> {
                                           .displaySmallFamily),
                                 ),
                       ),
-                      Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 30.0,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.boton5Model,
-                    updateCallback: () => setState(() {}),
-                    child: BotonQuintoWidget(
-                      texto: FFLocalizations.of(context).getText(
-                        'vnkc8xch' /* Añadir metodo de pago */,
-                      ),
-                      accion: () async {
-                        logFirebaseEvent('METODO_DE_PAGO_PAGE_boton5_CALLBACK');
-                        logFirebaseEvent('boton5_bottom_sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: GestureDetector(
-                                onTap: () => FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: const SizedBox(
-                                    height: 309.0,
-                                    child: AnadirMetodoPagoWidget(),
-                                  ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 0.0),
+                child: wrapWithModel(
+                  model: _model.boton5Model,
+                  updateCallback: () => safeSetState(() {}),
+                  child: BotonQuintoWidget(
+                    texto: FFLocalizations.of(context).getText(
+                      'vnkc8xch' /* Añadir metodo de pago */,
+                    ),
+                    accion: () async {
+                      logFirebaseEvent('METODO_DE_PAGO_PAGE_boton5_CALLBACK');
+                      logFirebaseEvent('boton5_bottom_sheet');
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return WebViewAware(
+                            child: GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const SizedBox(
+                                  height: 309.0,
+                                  child: AnadirMetodoPagoWidget(),
                                 ),
                               ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
-                    ),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    },
                   ),
                 ),
-              ].divide(const SizedBox(height: 8.0)),
-            ),
+              ),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

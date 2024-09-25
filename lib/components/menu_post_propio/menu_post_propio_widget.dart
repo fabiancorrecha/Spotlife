@@ -38,7 +38,7 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
     super.initState();
     _model = createModel(context, () => MenuPostPropioModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

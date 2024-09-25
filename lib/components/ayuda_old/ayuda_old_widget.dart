@@ -27,7 +27,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
     super.initState();
     _model = createModel(context, () => AyudaOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -90,23 +90,22 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                         ),
                       ),
                     ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'guigqk52' /* Ayuda */,
+                    Expanded(
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'guigqk52' /* Ayuda */,
+                        ),
+                        textAlign: TextAlign.center,
+                        style:
+                            FlutterFlowTheme.of(context).displaySmall.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                       ),
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).displaySmallFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context)
-                                    .displaySmallFamily),
-                          ),
-                    ),
-                    Icon(
-                      Icons.arrow_back_rounded,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      size: 30.0,
                     ),
                   ],
                 ),
@@ -118,7 +117,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'zzpa27d1' /* Preguntas frecuentes */,
@@ -128,7 +127,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           '06h8a03q' /* Ayuda online */,

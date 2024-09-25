@@ -14,7 +14,6 @@ class MiperfilMapaModel extends FlutterFlowModel<MiperfilMapaWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for navBar2 component.
   late NavBar2Model navBar2Model;
   // Model for botonAdd component.

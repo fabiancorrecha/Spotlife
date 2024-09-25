@@ -27,7 +27,7 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miPerfilMapaPin3'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,14 +44,14 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               wrapWithModel(
                 model: _model.appBar7UsuarioModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: AppBar7UsuarioWidget(
                   usuario: currentUserReference,
                 ),
@@ -76,7 +76,7 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
                               children: [
                                 wrapWithModel(
                                   model: _model.postImagenModel1,
-                                  updateCallback: () => setState(() {}),
+                                  updateCallback: () => safeSetState(() {}),
                                   child: const PostImagenWidget(),
                                 ),
                                 Divider(
@@ -98,7 +98,7 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
                               children: [
                                 wrapWithModel(
                                   model: _model.postImagenModel2,
-                                  updateCallback: () => setState(() {}),
+                                  updateCallback: () => safeSetState(() {}),
                                   child: const PostImagenWidget(),
                                 ),
                                 Divider(
@@ -118,7 +118,7 @@ class _MiPerfilMapaPin3WidgetState extends State<MiPerfilMapaPin3Widget> {
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 3,
                 ),

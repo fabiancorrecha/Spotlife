@@ -91,6 +91,11 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _startUbication =
+          latLngFromString(prefs.getString('ff_startUbication')) ??
+              _startUbication;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -417,6 +422,15 @@ class FFAppState extends ChangeNotifier {
   void updateUbicationStruct(Function(PlaceInfoStruct) updateFn) {
     updateFn(_ubication);
     prefs.setString('ff_ubication', _ubication.serialize());
+  }
+
+  LatLng? _startUbication;
+  LatLng? get startUbication => _startUbication;
+  set startUbication(LatLng? value) {
+    _startUbication = value;
+    value != null
+        ? prefs.setString('ff_startUbication', value.serialize())
+        : prefs.remove('ff_startUbication');
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

@@ -33,7 +33,7 @@ class _FiltrarDistanciaWidgetState extends State<FiltrarDistanciaWidget> {
     super.initState();
     _model = createModel(context, () => FiltrarDistanciaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -129,7 +129,7 @@ class _FiltrarDistanciaWidgetState extends State<FiltrarDistanciaWidget> {
                     logFirebaseEvent('FILTRAR_DISTANCIA_refresh_ICN_ON_TAP');
                     logFirebaseEvent('IconButton_update_app_state');
                     FFAppState().Distancia = 0.0;
-                    setState(() {});
+                    safeSetState(() {});
                   },
                 ),
               ],
@@ -178,12 +178,12 @@ class _FiltrarDistanciaWidgetState extends State<FiltrarDistanciaWidget> {
                     divisions: 10,
                     onChanged: (newValue) async {
                       newValue = double.parse(newValue.toStringAsFixed(1));
-                      setState(() => _model.sliderValue = newValue);
+                      safeSetState(() => _model.sliderValue = newValue);
                       logFirebaseEvent(
                           'FILTRAR_DISTANCIA_Slider_8qhq89w2_ON_FOR');
                       logFirebaseEvent('Slider_update_app_state');
                       FFAppState().Distancia = _model.sliderValue!;
-                      setState(() {});
+                      safeSetState(() {});
                     },
                   ),
                 ),

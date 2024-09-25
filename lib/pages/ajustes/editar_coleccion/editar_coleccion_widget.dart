@@ -59,7 +59,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
       _model.varPublico = widget.coleccionPublica!;
       _model.varAmigos = widget.coleccionAmigos!;
       _model.varPrivado = widget.coleccionPrivado!;
-      setState(() {});
+      safeSetState(() {});
     });
 
     _model.tituloColeccionFocusNode ??= FocusNode();
@@ -94,7 +94,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -134,8 +134,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -184,6 +184,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                             FFLocalizations.of(context).getText(
                               'zp6uri06' /* Editar colección */,
                             ),
+                            textAlign: TextAlign.center,
                             maxLines: 1,
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
@@ -196,11 +197,6 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                           .displaySmallFamily),
                                 ),
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
@@ -246,7 +242,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.tituloColeccionTextController',
                                   const Duration(milliseconds: 300),
-                                  () => setState(() {}),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 textCapitalization:
@@ -346,7 +342,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                               if (selectedMedia != null &&
                                   selectedMedia.every((m) => validateFileFormat(
                                       m.storagePath, context))) {
-                                setState(() => _model.isDataUploading = true);
+                                safeSetState(
+                                    () => _model.isDataUploading = true);
                                 var selectedUploadedFiles = <FFUploadedFile>[];
 
                                 var downloadUrls = <String>[];
@@ -377,13 +374,13 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                         selectedMedia.length &&
                                     downloadUrls.length ==
                                         selectedMedia.length) {
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.uploadedLocalFile =
                                         selectedUploadedFiles.first;
                                     _model.uploadedFileUrl = downloadUrls.first;
                                   });
                                 } else {
-                                  setState(() {});
+                                  safeSetState(() {});
                                   return;
                                 }
                               }
@@ -635,7 +632,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                 _model.varPublico = true;
                                 _model.varAmigos = false;
                                 _model.varPrivado = false;
-                                setState(() {});
+                                safeSetState(() {});
                               }
                             },
                             child: Row(
@@ -697,7 +694,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                 _model.varPublico = false;
                                 _model.varAmigos = true;
                                 _model.varPrivado = false;
-                                setState(() {});
+                                safeSetState(() {});
                               }
                             },
                             child: Row(
@@ -759,7 +756,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                 _model.varPublico = false;
                                 _model.varAmigos = false;
                                 _model.varPrivado = true;
-                                setState(() {});
+                                safeSetState(() {});
                               }
                             },
                             child: Row(
@@ -862,7 +859,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                             webGoogleMapsApiKey:
                                 'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                             onSelect: (place) async {
-                              setState(() => _model.placePickerValue = place);
+                              safeSetState(
+                                  () => _model.placePickerValue = place);
                             },
                             defaultText: FFLocalizations.of(context).getText(
                               'oyviut30' /* Elige un lugar en el mapa */,
@@ -950,7 +948,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                   const Spacer(),
                   wrapWithModel(
                     model: _model.boton1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: Boton1Widget(
                       texto: 'Editar',
                       desabilitado: false,

@@ -17,6 +17,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 
 class MapaPersonalizado2 extends StatefulWidget {
   const MapaPersonalizado2({
@@ -27,6 +28,8 @@ class MapaPersonalizado2 extends StatefulWidget {
     this.ubicacionInicialLng,
     this.zoom,
     this.listaPostMarcadores,
+    required this.navigateTo, // Argumento agregado
+    required this.usuarioAutenticado,
   }) : super(key: key);
 
   final double? width;
@@ -35,6 +38,8 @@ class MapaPersonalizado2 extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
+  final void Function(ff.LatLng ubication) navigateTo;
+  final DocumentReference? usuarioAutenticado;
 
   @override
   _MapaPersonalizado2State createState() => _MapaPersonalizado2State();
@@ -48,18 +53,17 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       Completer<gmap.GoogleMapController>();
   bool _isInfoVisible = false;
   bool _isMovableMarkerVisible = false;
+  bool _isContainerExpanded = false; // Definir la variable _isContainerExpanded
   String _selectedTitle = '';
   String _selectedSubtitle = '';
   String _selectedImageUrl = '';
   gmap.LatLng? _selectedMarkerPosition;
+  DocumentReference? _selectedPostUser;
   final TextEditingController searchController = TextEditingController();
   List<UserPostsRecord> _searchResults = [];
 
   late gmap.CameraPosition initialCameraPosition;
   double currentZoom = 15.0;
-
-  // Variables para controlar la expansión del container de búsqueda
-  bool _isContainerExpanded = false;
 
   @override
   void initState() {
@@ -67,301 +71,302 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     currentZoom = widget.zoom ?? currentZoom;
     _mapStyle = '''
     [
+  {
+    "featureType": "all",
+    "elementType": "all",
+    "stylers": [
       {
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "weight": "0.5"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "lightness": "-50"
-          },
-          {
-            "saturation": "-50"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.neighborhood",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "hue": "#009aff"
-          },
-          {
-            "saturation": "25"
-          },
-          {
-            "lightness": "0"
-          },
-          {
-            "visibility": "simplified"
-          },
-          {
-            "gamma": "1"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "saturation": "0"
-          },
-          {
-            "lightness": "100"
-          },
-          {
-            "gamma": "2.31"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          },
-          {
-            "lightness": "20"
-          },
-          {
-            "gamma": "1"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "saturation": "-100"
-          },
-          {
-            "lightness": "-100"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape.man_made",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "lightness": "0"
-          },
-          {
-            "saturation": "45"
-          },
-          {
-            "gamma": "4.24"
-          },
-          {
-            "visibility": "simplified"
-          },
-          {
-            "hue": "#00ff90"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "saturation": "-100"
-          },
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          },
-          {
-            "color": "#666666"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "transit",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "saturation": "-25"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.line",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.station.airport",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "lightness": "50"
-          },
-          {
-            "gamma": ".75"
-          },
-          {
-            "saturation": "100"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
+        "visibility": "off"
       }
     ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "weight": "0.5"
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "lightness": "-50"
+      },
+      {
+        "saturation": "-50"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "hue": "#009aff"
+      },
+      {
+        "saturation": "25"
+      },
+      {
+        "lightness": "0"
+      },
+      {
+        "visibility": "simplified"
+      },
+      {
+        "gamma": "1"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": "0"
+      },
+      {
+        "lightness": "100"
+      },
+      {
+        "gamma": "2.31"
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      },
+      {
+        "lightness": "20"
+      },
+      {
+        "gamma": "1"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "saturation": "-100"
+      },
+      {
+        "lightness": "-100"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "lightness": "0"
+      },
+      {
+        "saturation": "45"
+      },
+      {
+        "gamma": "4.24"
+      },
+      {
+        "visibility": "simplified"
+      },
+      {
+        "hue": "#00ff90"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": "-100"
+      },
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      },
+      {
+        "color": "#666666"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "saturation": "-25"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station.airport",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "lightness": "50"
+      },
+      {
+        "gamma": ".75"
+      },
+      {
+        "saturation": "100"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]
+
     ''';
 
     double initialLat = widget.ubicacionInicialLat ?? 0.0;
@@ -493,6 +498,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                       post.placeInfo.latLng!.latitude,
                       post.placeInfo.latLng!.longitude,
                     );
+                    _selectedPostUser = post.postUser; // Guardar postUser
                   });
                 },
               );
@@ -545,16 +551,60 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Ubicación Actual'),
-          content: Text(
-            'Latitud: ${_selectedMarkerPosition!.latitude}\nLongitud: ${_selectedMarkerPosition!.longitude}',
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white),
           ),
-          actions: [
-            TextButton(
-              child: Text('Cerrar'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Ubicación Actual',
+                style: TextStyle(color: Colors.white),
+              ),
+              IconButton(
+                icon: Icon(Icons.close, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Latitud: ${_selectedMarkerPosition!.latitude}',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'Longitud: ${_selectedMarkerPosition!.longitude}',
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  final flutterFlowLatLng = ff.LatLng(
+                    _selectedMarkerPosition!.latitude,
+                    _selectedMarkerPosition!.longitude,
+                  );
+                  widget.navigateTo(flutterFlowLatLng);
+                  Navigator.of(context).pop();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                child: Text(
+                  'Crear Spot',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -577,19 +627,9 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
 
     final results = widget.listaPostMarcadores!.where((post) {
       final postTitle = post.postTitle?.toLowerCase() ?? '';
-      final postUserName = post.postUser != null
-          ? post.postUser!.get().then((userDoc) {
-              return (userDoc.data() as Map<String, dynamic>)['display_name']
-                      ?.toString()
-                      ?.toLowerCase() ??
-                  '';
-            })
-          : '';
+      final postDescription = post.postDescription?.toLowerCase() ?? '';
       final placeInfoCity = post.placeInfo.city?.toLowerCase() ?? '';
-
-      return postTitle.contains(query) ||
-          (postUserName != null && postUserName.toString().contains(query)) ||
-          placeInfoCity.contains(query);
+      return postTitle.contains(query) || placeInfoCity.contains(query);
     }).toList();
 
     setState(() {
@@ -616,12 +656,23 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     );
   }
 
+  void _handleMarkerTap() {
+    if (_selectedPostUser != null && widget.usuarioAutenticado != null) {
+      if (_selectedPostUser == widget.usuarioAutenticado) {
+        Navigator.pushNamed(context, 'perfilPropio');
+      } else {
+        Navigator.pushNamed(context, 'otroPerfil');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GestureDetector(
           onTap: _hideInfoContainer,
+          onDoubleTap: _handleMarkerTap,
           child: Container(
             width: widget.width,
             height: widget.height,
@@ -663,10 +714,15 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
               ],
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (_isContainerExpanded)
                   IconButton(
-                    icon: Icon(Icons.close, color: Colors.white),
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 24,
+                    ),
                     onPressed: () {
                       _toggleSearchBar();
                       searchController.clear();
@@ -691,7 +747,11 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                     ),
                   ),
                 IconButton(
-                  icon: Icon(Icons.search, color: Colors.white),
+                  icon: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                   onPressed: _toggleSearchBar,
                 ),
               ],
@@ -730,7 +790,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
             top: MediaQuery.of(context).size.height * 0.5 - 100,
             left: MediaQuery.of(context).size.width * 0.25,
             child: GestureDetector(
-              onTap: _hideInfoContainer,
+              onDoubleTap: _handleMarkerTap,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 padding: EdgeInsets.all(10),
@@ -797,7 +857,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
               size: 24,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50), // 50 px border radius
+              borderRadius: BorderRadius.circular(50),
             ),
           ),
         ),

@@ -48,7 +48,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
       logFirebaseEvent('EditarPost_update_page_state');
       _model.listaColeccionesSeleccionadas =
           widget.post!.collections.toList().cast<DocumentReference>();
-      setState(() {});
+      safeSetState(() {});
     });
 
     _model.descreipcionPostTextController ??=
@@ -86,7 +86,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -103,11 +103,11 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Form(
-            key: _model.formKey,
-            autovalidateMode: AutovalidateMode.disabled,
+        body: Form(
+          key: _model.formKey,
+          autovalidateMode: AutovalidateMode.disabled,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -141,7 +141,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 8.0, 16.0, 0.0),
+                              16.0, 0.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -564,7 +564,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                   webGoogleMapsApiKey:
                                       'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                                   onSelect: (place) async {
-                                    setState(
+                                    safeSetState(
                                         () => _model.placePickerValue = place);
                                   },
                                   defaultText:
@@ -677,7 +677,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         '4tmhnd8g' /* Privado */,
                                       )
                                     ].toList(),
-                                    onChanged: (val) => setState(() {}),
+                                    onChanged: (val) => safeSetState(() {}),
                                     controller: _model
                                             .radioButtonValueController ??=
                                         FormFieldController<String>(
@@ -1062,7 +1062,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       Switch(
                                         value: _model.switchValue1!,
                                         onChanged: (newValue) async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.switchValue1 = newValue);
                                         },
                                         activeColor:
@@ -1114,7 +1114,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       Switch(
                                         value: _model.switchValue2!,
                                         onChanged: (newValue) async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.switchValue2 = newValue);
                                         },
                                         activeColor:
@@ -1169,7 +1169,7 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                       Switch(
                                         value: _model.switchValue3!,
                                         onChanged: (newValue) async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.switchValue3 = newValue);
                                         },
                                         activeColor:

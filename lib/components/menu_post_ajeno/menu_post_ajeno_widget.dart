@@ -87,7 +87,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -525,7 +525,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
               alignment: const AlignmentDirectional(0.0, 0.2),
               child: wrapWithModel(
                 model: _model.notificacioneModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: NotificacionBoxWidget(
                   mensaje: FFAppState().messagePopUp,
                 ),

@@ -29,7 +29,7 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'cuentasBloqueadas'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,8 +46,8 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -58,7 +58,7 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
                 child: AuthUserStreamWidget(
                   builder: (context) => wrapWithModel(
                     model: _model.appBar4Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: AppBar4Widget(
                       textValue: currentUserDisplayName,
                     ),
@@ -107,7 +107,7 @@ class _CuentasBloqueadasWidgetState extends State<CuentasBloqueadasWidget> {
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const NavBar1Widget(
                   tabActiva: 3,
                 ),

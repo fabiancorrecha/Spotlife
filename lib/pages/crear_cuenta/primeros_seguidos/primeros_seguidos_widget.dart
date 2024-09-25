@@ -29,7 +29,7 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'primerosSeguidos'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -48,13 +48,13 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -87,7 +87,7 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
                       ),
                       wrapWithModel(
                         model: _model.usuariosRecomendadosModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const UsuariosRecomendadosWidget(),
                       ),
                       if (FFAppState().indexTabFollow == '0')
@@ -130,7 +130,7 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
               ),
               wrapWithModel(
                 model: _model.boton1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: Boton1Widget(
                   texto: 'Continuar',
                   desabilitado: false,

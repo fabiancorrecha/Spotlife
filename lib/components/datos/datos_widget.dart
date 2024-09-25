@@ -30,7 +30,7 @@ class _DatosWidgetState extends State<DatosWidget> {
     super.initState();
     _model = createModel(context, () => DatosModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -117,7 +117,7 @@ class _DatosWidgetState extends State<DatosWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Politica de datos',
                     accion: () async {
@@ -143,7 +143,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Condiciones de uso',
                     accion: () async {
@@ -169,7 +169,7 @@ class _DatosWidgetState extends State<DatosWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Reglamento UE',
                     accion: () async {

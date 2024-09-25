@@ -25,7 +25,7 @@ class _AyudaPaginaWidgetState extends State<AyudaPaginaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ayuda_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,7 +45,7 @@ class _AyudaPaginaWidgetState extends State<AyudaPaginaWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -85,25 +85,23 @@ class _AyudaPaginaWidgetState extends State<AyudaPaginaWidget> {
                             ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            '8s5xzl9u' /* Ayuda */,
+                        Expanded(
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '8s5xzl9u' /* Ayuda */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .displaySmallFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .displaySmallFamily),
-                              ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
@@ -116,7 +114,7 @@ class _AyudaPaginaWidgetState extends State<AyudaPaginaWidget> {
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel1,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'aiwzp817' /* Preguntas frecuentes */,
@@ -126,7 +124,7 @@ class _AyudaPaginaWidgetState extends State<AyudaPaginaWidget> {
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel2,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               '1qv57r43' /* Ayuda online */,

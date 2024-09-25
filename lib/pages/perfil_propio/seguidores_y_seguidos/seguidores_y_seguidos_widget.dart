@@ -77,7 +77,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -119,8 +119,8 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -130,7 +130,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                     decoration: const BoxDecoration(),
                     child: wrapWithModel(
                       model: _model.appBar4Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: AppBar4Widget(
                         textValue: seguidoresYSeguidosUsersRecord.displayName,
                       ),
@@ -201,7 +201,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                                     if (animationsMap[
                                             'listViewOnActionTriggerAnimation'] !=
                                         null) {
-                                      setState(
+                                      safeSetState(
                                           () => hasListViewTriggered = true);
                                       SchedulerBinding.instance
                                           .addPostFrameCallback((_) async =>
@@ -305,7 +305,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                           if (FFAppState().indexTabFollow == '0')
                             wrapWithModel(
                               model: _model.usuariosRecomendadosModel,
-                              updateCallback: () => setState(() {}),
+                              updateCallback: () => safeSetState(() {}),
                               child: const UsuariosRecomendadosWidget(),
                             ).animateOnPageLoad(animationsMap[
                                 'usuariosRecomendadosOnPageLoadAnimation']!),
@@ -322,7 +322,7 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                   ))
                     wrapWithModel(
                       model: _model.navBar1Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const NavBar1Widget(
                         tabActiva: 3,
                       ),

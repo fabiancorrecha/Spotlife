@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class InicioModel extends FlutterFlowModel<InicioWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for boton1 component.
   late Boton1Model boton1Model;
 

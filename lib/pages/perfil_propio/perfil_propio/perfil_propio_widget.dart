@@ -35,7 +35,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'perfilPropio'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,8 +54,8 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          body: SafeArea(
-            top: true,
+          body: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
             child: Stack(
               children: [
                 Container(
@@ -67,7 +67,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                     children: [
                       wrapWithModel(
                         model: _model.tarjetaMiPerfilModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: TarjetaMiPerfilWidget(
                           usuario: currentUserReference,
                         ),
@@ -139,7 +139,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                       ),
                       wrapWithModel(
                         model: _model.navBar2Model,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavBar2Widget(
                           tab: 0,
                         ),
@@ -179,7 +179,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
 
                             return wrapWithModel(
                               model: _model.postGridUsuarioModel,
-                              updateCallback: () => setState(() {}),
+                              updateCallback: () => safeSetState(() {}),
                               child: PostGridUsuarioWidget(
                                 usuario: currentUserReference,
                               ),
@@ -189,7 +189,7 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                       ),
                       wrapWithModel(
                         model: _model.navBar1Model,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavBar1Widget(
                           tabActiva: 3,
                         ),

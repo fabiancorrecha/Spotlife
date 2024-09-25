@@ -26,7 +26,7 @@ class _ComponenteVacioWidgetState extends State<ComponenteVacioWidget> {
     super.initState();
     _model = createModel(context, () => ComponenteVacioModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

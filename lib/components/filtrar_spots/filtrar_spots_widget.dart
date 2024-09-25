@@ -34,7 +34,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
     super.initState();
     _model = createModel(context, () => FiltrarSpotsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -125,16 +125,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                             child: Checkbox(
                               value: _model.mapaValue ??= true,
                               onChanged: (newValue) async {
-                                setState(() => _model.mapaValue = newValue!);
+                                safeSetState(
+                                    () => _model.mapaValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Mapa_ON_TOGGLE_ON');
                                   logFirebaseEvent('Mapa_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.mapaValue = true;
                                   });
                                   logFirebaseEvent('Mapa_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.spotValue = false;
                                   });
                                   if ((_model.mapaValue == true) &&
@@ -224,16 +225,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                             child: Checkbox(
                               value: _model.spotValue ??= false,
                               onChanged: (newValue) async {
-                                setState(() => _model.spotValue = newValue!);
+                                safeSetState(
+                                    () => _model.spotValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Spot_ON_TOGGLE_ON');
                                   logFirebaseEvent('Spot_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.mapaValue = false;
                                   });
                                   logFirebaseEvent('Spot_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.spotValue = true;
                                   });
                                   if ((_model.spotValue == true) &&
@@ -335,17 +337,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                             child: Checkbox(
                               value: _model.soloAmigosValue ??= false,
                               onChanged: (newValue) async {
-                                setState(
+                                safeSetState(
                                     () => _model.soloAmigosValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_SoloAmigos_ON_TOGGLE_ON');
                                   logFirebaseEvent('SoloAmigos_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.soloAmigosValue = true;
                                   });
                                   logFirebaseEvent('SoloAmigos_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.globalValue = false;
                                   });
                                   logFirebaseEvent(
@@ -420,16 +422,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                             child: Checkbox(
                               value: _model.globalValue ??= true,
                               onChanged: (newValue) async {
-                                setState(() => _model.globalValue = newValue!);
+                                safeSetState(
+                                    () => _model.globalValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Global_ON_TOGGLE_ON');
                                   logFirebaseEvent('Global_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.soloAmigosValue = false;
                                   });
                                   logFirebaseEvent('Global_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.globalValue = true;
                                   });
                                   logFirebaseEvent('Global_update_app_state');
@@ -489,7 +492,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                 decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Listo',
                     desabilitado: false,

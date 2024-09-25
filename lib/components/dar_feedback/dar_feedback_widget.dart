@@ -34,7 +34,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -187,7 +187,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           RatingBar.builder(
-                            onRatingUpdate: (newValue) => setState(
+                            onRatingUpdate: (newValue) => safeSetState(
                                 () => _model.ratingBarValue = newValue),
                             itemBuilder: (context, index) => Icon(
                               Icons.star_rounded,
@@ -310,7 +310,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
 
                         return wrapWithModel(
                           model: _model.boton1Model,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: Boton1Widget(
                             texto: 'Dar Feedback',
                             desabilitado: false,
@@ -346,7 +346,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                                 ),
                               });
 
-                              setState(() {});
+                              safeSetState(() {});
                             },
                           ),
                         );
