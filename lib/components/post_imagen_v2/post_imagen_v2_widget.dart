@@ -8,10 +8,12 @@ import '/components/menu_post_ajeno/menu_post_ajeno_widget.dart';
 import '/components/menu_post_propio/menu_post_propio_widget.dart';
 import '/components/sin_comentarios/sin_comentarios_widget.dart';
 import '/components/ver_comentarios_desde_detalle/ver_comentarios_desde_detalle_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import 'dart:ui';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -216,7 +218,7 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     imageUrl: listaImagenesItem,
                                                     width: double.infinity,
                                                     height: double.infinity,
-                                                    fit: BoxFit.cover,
+                                                    fit: BoxFit.contain,
                                                   ),
                                                 ),
                                               );
@@ -236,10 +238,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                         aspectRatio: 0.72,
                                         autoPlay: false,
                                         looping: true,
-                                        showControls: true,
+                                        showControls: false,
                                         allowFullScreen: true,
                                         allowPlaybackSpeedMenu: false,
-                                        lazyLoad: true,
+                                        lazyLoad: false,
                                       ),
                                     ),
                                   Container(
@@ -560,47 +562,35 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                     .icono,
                                                                 size: 12.0,
                                                               ),
-                                                            if ((widget.post?.placeInfo.name != null && widget.post?.placeInfo.name != '') ||
-                                                                (widget.post?.placeInfo
-                                                                            .city !=
-                                                                        null &&
-                                                                    widget
-                                                                            .post
-                                                                            ?.placeInfo
-                                                                            .city !=
-                                                                        '') ||
-                                                                (widget
-                                                                        .post
-                                                                        ?.placeInfo
-                                                                        .latLng !=
-                                                                    null))
-                                                              Expanded(
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    '${widget.post?.placeInfo.name} ${widget.post?.placeInfo.city} ${rowCollectionsRecord?.placeInfo.latLng?.toString()}'.maybeHandleOverflow(
-                                                                        maxChars:
-                                                                            30),
-                                                                    maxLines: 1,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodySmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                        ),
-                                                                  ),
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  '${widget.post?.placeInfo.address}'
+                                                                      .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              30),
+                                                                  maxLines: 1,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                      ),
                                                                 ),
                                                               ),
+                                                            ),
                                                           ],
                                                         ),
                                                       );
@@ -1348,440 +1338,423 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
                                                         children: [
-                                                          Stack(
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
                                                             children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
+                                                              Stack(
                                                                 children: [
-                                                                  if (_model
-                                                                      .verFavorito)
-                                                                    InkWell(
-                                                                      splashColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      focusColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      hoverColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      highlightColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      onTap:
-                                                                          () async {
-                                                                        logFirebaseEvent(
-                                                                            'POST_IMAGEN_V2_COMP_favoritoSI_ON_TAP');
-                                                                        logFirebaseEvent(
-                                                                            'favoritoSI_update_component_state');
-                                                                        _model.verFavorito =
-                                                                            false;
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        logFirebaseEvent(
-                                                                            'favoritoSI_backend_call');
-
-                                                                        await currentUserReference!
-                                                                            .update({
-                                                                          ...mapToFirestore(
-                                                                            {
-                                                                              'listaPostFavoritos': FieldValue.arrayRemove([
-                                                                                widget.post?.reference
-                                                                              ]),
-                                                                            },
-                                                                          ),
-                                                                        });
-                                                                        logFirebaseEvent(
-                                                                            'favoritoSI_backend_call');
-
-                                                                        await widget
-                                                                            .post!
-                                                                            .reference
-                                                                            .update({
-                                                                          ...mapToFirestore(
-                                                                            {
-                                                                              'FavoritoUser': FieldValue.arrayRemove([
-                                                                                currentUserReference
-                                                                              ]),
-                                                                            },
-                                                                          ),
-                                                                        });
-                                                                      },
-                                                                      onLongPress:
-                                                                          () async {
-                                                                        logFirebaseEvent(
-                                                                            'POST_IMAGEN_V2_favoritoSI_ON_LONG_PRESS');
-                                                                        logFirebaseEvent(
-                                                                            'favoritoSI_haptic_feedback');
-                                                                        HapticFeedback
-                                                                            .lightImpact();
-                                                                        logFirebaseEvent(
-                                                                            'favoritoSI_bottom_sheet');
-                                                                        await showModalBottomSheet(
-                                                                          isScrollControlled:
-                                                                              true,
-                                                                          backgroundColor:
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      if (_model
+                                                                          .verFavorito)
+                                                                        InkWell(
+                                                                          splashColor:
                                                                               Colors.transparent,
-                                                                          barrierColor:
-                                                                              const Color(0x00000000),
-                                                                          enableDrag:
-                                                                              false,
-                                                                          context:
-                                                                              context,
-                                                                          builder:
-                                                                              (context) {
-                                                                            return WebViewAware(
-                                                                              child: Padding(
-                                                                                padding: MediaQuery.viewInsetsOf(context),
-                                                                                child: SizedBox(
-                                                                                  height: 573.0,
-                                                                                  child: FavoritoAColeccionWidget(
-                                                                                    post: widget.post?.reference,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            );
-                                                                          },
-                                                                        ).then((value) =>
-                                                                            safeSetState(() {}));
-                                                                      },
-                                                                      child:
-                                                                          Icon(
-                                                                        FFIcons
-                                                                            .kframe168,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .customSeleccion,
-                                                                        size:
-                                                                            24.0,
-                                                                      ),
-                                                                    ),
-                                                                  if (!_model
-                                                                      .verFavorito)
-                                                                    InkWell(
-                                                                      splashColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      focusColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      hoverColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      highlightColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      onTap:
-                                                                          () async {
-                                                                        logFirebaseEvent(
-                                                                            'POST_IMAGEN_V2_COMP_favoritoNO_ON_TAP');
-                                                                        logFirebaseEvent(
-                                                                            'favoritoNO_update_component_state');
-                                                                        _model.verFavorito =
-                                                                            true;
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        logFirebaseEvent(
-                                                                            'favoritoNO_backend_call');
-
-                                                                        await currentUserReference!
-                                                                            .update({
-                                                                          ...mapToFirestore(
-                                                                            {
-                                                                              'listaPostFavoritos': FieldValue.arrayUnion([
-                                                                                widget.post?.reference
-                                                                              ]),
-                                                                            },
-                                                                          ),
-                                                                        });
-                                                                        logFirebaseEvent(
-                                                                            'favoritoNO_backend_call');
-
-                                                                        await widget
-                                                                            .post!
-                                                                            .reference
-                                                                            .update({
-                                                                          ...mapToFirestore(
-                                                                            {
-                                                                              'FavoritoUser': FieldValue.arrayUnion([
-                                                                                currentUserReference
-                                                                              ]),
-                                                                            },
-                                                                          ),
-                                                                        });
-                                                                      },
-                                                                      onLongPress:
-                                                                          () async {
-                                                                        logFirebaseEvent(
-                                                                            'POST_IMAGEN_V2_favoritoNO_ON_LONG_PRESS');
-                                                                        logFirebaseEvent(
-                                                                            'favoritoNO_haptic_feedback');
-                                                                        HapticFeedback
-                                                                            .lightImpact();
-                                                                        logFirebaseEvent(
-                                                                            'favoritoNO_bottom_sheet');
-                                                                        await showModalBottomSheet(
-                                                                          isScrollControlled:
-                                                                              true,
-                                                                          backgroundColor:
+                                                                          focusColor:
                                                                               Colors.transparent,
-                                                                          barrierColor:
-                                                                              const Color(0x00000000),
-                                                                          enableDrag:
-                                                                              false,
-                                                                          context:
-                                                                              context,
-                                                                          builder:
-                                                                              (context) {
-                                                                            return WebViewAware(
-                                                                              child: Padding(
-                                                                                padding: MediaQuery.viewInsetsOf(context),
-                                                                                child: SizedBox(
-                                                                                  height: 573.0,
-                                                                                  child: FavoritoAColeccionWidget(
-                                                                                    post: widget.post?.reference,
-                                                                                  ),
-                                                                                ),
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            logFirebaseEvent('POST_IMAGEN_V2_COMP_favoritoSI_ON_TAP');
+                                                                            logFirebaseEvent('favoritoSI_update_component_state');
+                                                                            _model.verFavorito =
+                                                                                false;
+                                                                            safeSetState(() {});
+                                                                            logFirebaseEvent('favoritoSI_backend_call');
+
+                                                                            await currentUserReference!.update({
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'listaPostFavoritos': FieldValue.arrayRemove([
+                                                                                    widget.post?.reference
+                                                                                  ]),
+                                                                                },
                                                                               ),
-                                                                            );
+                                                                            });
+                                                                            logFirebaseEvent('favoritoSI_backend_call');
+
+                                                                            await widget.post!.reference.update({
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'FavoritoUser': FieldValue.arrayRemove([
+                                                                                    currentUserReference
+                                                                                  ]),
+                                                                                },
+                                                                              ),
+                                                                            });
                                                                           },
-                                                                        ).then((value) =>
-                                                                            safeSetState(() {}));
-                                                                      },
-                                                                      child:
-                                                                          Icon(
-                                                                        FFIcons
-                                                                            .kstarLines,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                        size:
-                                                                            24.0,
-                                                                      ),
-                                                                    ),
+                                                                          onLongPress:
+                                                                              () async {
+                                                                            logFirebaseEvent('POST_IMAGEN_V2_favoritoSI_ON_LONG_PRESS');
+                                                                            logFirebaseEvent('favoritoSI_haptic_feedback');
+                                                                            HapticFeedback.lightImpact();
+                                                                            logFirebaseEvent('favoritoSI_bottom_sheet');
+                                                                            await showModalBottomSheet(
+                                                                              isScrollControlled: true,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              barrierColor: const Color(0x00000000),
+                                                                              enableDrag: false,
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return WebViewAware(
+                                                                                  child: Padding(
+                                                                                    padding: MediaQuery.viewInsetsOf(context),
+                                                                                    child: SizedBox(
+                                                                                      height: 573.0,
+                                                                                      child: FavoritoAColeccionWidget(
+                                                                                        post: widget.post?.reference,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            ).then((value) =>
+                                                                                safeSetState(() {}));
+                                                                          },
+                                                                          child:
+                                                                              Icon(
+                                                                            FFIcons.kframe168,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).customSeleccion,
+                                                                            size:
+                                                                                24.0,
+                                                                          ),
+                                                                        ),
+                                                                      if (!_model
+                                                                          .verFavorito)
+                                                                        InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            logFirebaseEvent('POST_IMAGEN_V2_COMP_favoritoNO_ON_TAP');
+                                                                            logFirebaseEvent('favoritoNO_update_component_state');
+                                                                            _model.verFavorito =
+                                                                                true;
+                                                                            safeSetState(() {});
+                                                                            logFirebaseEvent('favoritoNO_backend_call');
+
+                                                                            await currentUserReference!.update({
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'listaPostFavoritos': FieldValue.arrayUnion([
+                                                                                    widget.post?.reference
+                                                                                  ]),
+                                                                                },
+                                                                              ),
+                                                                            });
+                                                                            logFirebaseEvent('favoritoNO_backend_call');
+
+                                                                            await widget.post!.reference.update({
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'FavoritoUser': FieldValue.arrayUnion([
+                                                                                    currentUserReference
+                                                                                  ]),
+                                                                                },
+                                                                              ),
+                                                                            });
+                                                                          },
+                                                                          onLongPress:
+                                                                              () async {
+                                                                            logFirebaseEvent('POST_IMAGEN_V2_favoritoNO_ON_LONG_PRESS');
+                                                                            logFirebaseEvent('favoritoNO_haptic_feedback');
+                                                                            HapticFeedback.lightImpact();
+                                                                            logFirebaseEvent('favoritoNO_bottom_sheet');
+                                                                            await showModalBottomSheet(
+                                                                              isScrollControlled: true,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              barrierColor: const Color(0x00000000),
+                                                                              enableDrag: false,
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return WebViewAware(
+                                                                                  child: Padding(
+                                                                                    padding: MediaQuery.viewInsetsOf(context),
+                                                                                    child: SizedBox(
+                                                                                      height: 573.0,
+                                                                                      child: FavoritoAColeccionWidget(
+                                                                                        post: widget.post?.reference,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            ).then((value) =>
+                                                                                safeSetState(() {}));
+                                                                          },
+                                                                          child:
+                                                                              Icon(
+                                                                            FFIcons.kstarLines,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                            size:
+                                                                                24.0,
+                                                                          ),
+                                                                        ),
+                                                                    ],
+                                                                  ),
                                                                 ],
                                                               ),
                                                             ],
                                                           ),
-                                                          if (responsiveVisibility(
-                                                            context: context,
-                                                            phone: false,
-                                                            tablet: false,
-                                                            tabletLandscape:
-                                                                false,
-                                                            desktop: false,
-                                                          ))
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  logFirebaseEvent(
-                                                                      'POST_IMAGEN_V2_COMP_Icon_qxbcwk6v_ON_TAP');
-                                                                  logFirebaseEvent(
-                                                                      'Icon_navigate_to');
-
-                                                                  context.pushNamed(
-                                                                      'mapa_ir_lugar');
-                                                                },
-                                                                child: Icon(
-                                                                  FFIcons
-                                                                      .kcompassUnfilled,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .icono,
-                                                                  size: 24.0,
-                                                                ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child:
+                                                                FlutterFlowIconButton(
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderRadius: 8.0,
+                                                              buttonSize: 40.0,
+                                                              icon: Icon(
+                                                                FFIcons
+                                                                    .kcompassUnfilled,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                size: 24.0,
                                                               ),
+                                                              showLoadingIndicator:
+                                                                  true,
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'POST_IMAGEN_V2_compassUnfilled_ICN_ON_TA');
+                                                                logFirebaseEvent(
+                                                                    'IconButton_navigate_to');
+
+                                                                context
+                                                                    .pushNamed(
+                                                                  'mapa_ir_lugar',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'userPost':
+                                                                        serializeParam(
+                                                                      widget
+                                                                          .post
+                                                                          ?.reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
                                                             ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 8.0, 0.0, 0.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(
-                                                        sigmaX: 10.0,
-                                                        sigmaY: 5.0,
-                                                      ),
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              const Color(0x21141313),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
+                                                if (functions.lenghtCaracter(
+                                                        widget.post!
+                                                            .postDescription)! <=
+                                                    40)
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 8.0,
+                                                                0.0, 0.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                      child: BackdropFilter(
+                                                        filter:
+                                                            ImageFilter.blur(
+                                                          sigmaX: 10.0,
+                                                          sigmaY: 5.0,
                                                         ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Expanded(
-                                                                child: Builder(
-                                                                    builder:
-                                                                        (_) {
-                                                                  if (!expandableListenerRegistered) {
-                                                                    expandableListenerRegistered =
-                                                                        true;
-                                                                    _model
-                                                                        .expandableExpandableController
-                                                                        .addListener(
-                                                                      () async {
-                                                                        logFirebaseEvent(
-                                                                            'POST_IMAGEN_V2_Expandable_fdne0d8t_ON_TO');
-                                                                        if (_model
-                                                                            .expandableExpandableController
-                                                                            .expanded) {
-                                                                          logFirebaseEvent(
-                                                                              'Expandable_update_component_state');
-                                                                          _model.verDescripcionHeader =
-                                                                              true;
-                                                                          safeSetState(
-                                                                              () {});
-                                                                        } else {
-                                                                          logFirebaseEvent(
-                                                                              'Expandable_update_component_state');
-                                                                          _model.verDescripcionHeader =
-                                                                              false;
-                                                                          safeSetState(
-                                                                              () {});
-                                                                        }
-                                                                      },
-                                                                    );
-                                                                  }
-                                                                  return Container(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    color: const Color(
-                                                                        0x00FFFFFF),
-                                                                    child:
-                                                                        ExpandableNotifier(
-                                                                      controller:
-                                                                          _model
-                                                                              .expandableExpandableController,
-                                                                      child:
-                                                                          ExpandablePanel(
-                                                                        header:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                children: [
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                                                                                    child: Text(
-                                                                                      containerUsersRecord.displayName,
-                                                                                      maxLines: 2,
-                                                                                      style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                            fontSize: 12.0,
-                                                                                            letterSpacing: 0.0,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                                          ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  if (_model.verDescripcionHeader == false)
-                                                                                    Expanded(
-                                                                                      child: Text(
-                                                                                        widget.post!.postDescription.maybeHandleOverflow(
-                                                                                          maxChars: 40,
-                                                                                          replacement: '…',
-                                                                                        ),
-                                                                                        maxLines: 2,
-                                                                                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  if (_model.verDescripcionHeader == true)
-                                                                                    FaIcon(
-                                                                                      FontAwesomeIcons.angleUp,
-                                                                                      color: FlutterFlowTheme.of(context).primary,
-                                                                                      size: 20.0,
-                                                                                    ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                            if (_model.verDescripcionHeader ==
-                                                                                false)
-                                                                              Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: [
-                                                                                    Expanded(
-                                                                                      child: Text(
-                                                                                        FFLocalizations.of(context).getText(
-                                                                                          't6scz3lx' /* Mas */,
-                                                                                        ),
-                                                                                        textAlign: TextAlign.end,
-                                                                                        maxLines: 2,
-                                                                                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w900,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                          ],
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color(
+                                                                0x21141313),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets.all(
+                                                                    16.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    containerUsersRecord
+                                                                        .displayName,
+                                                                    maxLines: 2,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                          fontSize:
+                                                                              12.0,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                         ),
-                                                                        collapsed:
-                                                                            Container(),
-                                                                        expanded:
-                                                                            SingleChildScrollView(
-                                                                          child:
+                                                                  ),
+                                                                ),
+                                                                if (_model
+                                                                        .verDescripcionHeader ==
+                                                                    false)
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      widget
+                                                                          .post!
+                                                                          .postDescription,
+                                                                      maxLines:
+                                                                          2,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                if (functions.lenghtCaracter(
+                                                        widget.post!
+                                                            .postDescription)! >=
+                                                    41)
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 8.0,
+                                                                0.0, 0.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                      child: BackdropFilter(
+                                                        filter:
+                                                            ImageFilter.blur(
+                                                          sigmaX: 10.0,
+                                                          sigmaY: 5.0,
+                                                        ),
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color(
+                                                                0x21141313),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets.all(
+                                                                    8.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Builder(
+                                                                      builder:
+                                                                          (_) {
+                                                                    if (!expandableListenerRegistered) {
+                                                                      expandableListenerRegistered =
+                                                                          true;
+                                                                      _model
+                                                                          .expandableExpandableController
+                                                                          .addListener(
+                                                                        () async {
+                                                                          logFirebaseEvent(
+                                                                              'POST_IMAGEN_V2_Expandable_3ju9ppso_ON_TO');
+                                                                          if (_model
+                                                                              .expandableExpandableController
+                                                                              .expanded) {
+                                                                            logFirebaseEvent('Expandable_update_component_state');
+                                                                            _model.verDescripcionHeader =
+                                                                                true;
+                                                                            safeSetState(() {});
+                                                                          } else {
+                                                                            logFirebaseEvent('Expandable_update_component_state');
+                                                                            _model.verDescripcionHeader =
+                                                                                false;
+                                                                            safeSetState(() {});
+                                                                          }
+                                                                        },
+                                                                      );
+                                                                    }
+                                                                    return Container(
+                                                                      width: double
+                                                                          .infinity,
+                                                                      color: const Color(
+                                                                          0x00FFFFFF),
+                                                                      child:
+                                                                          ExpandableNotifier(
+                                                                        controller:
+                                                                            _model.expandableExpandableController,
+                                                                        child:
+                                                                            ExpandablePanel(
+                                                                          header:
                                                                               Column(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,
@@ -1792,9 +1765,11 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                   children: [
-                                                                                    Expanded(
+                                                                                    Padding(
+                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                                                                                       child: Text(
-                                                                                        widget.post!.postDescription,
+                                                                                        containerUsersRecord.displayName,
+                                                                                        maxLines: 2,
                                                                                         style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                               fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
                                                                                               fontSize: 12.0,
@@ -1803,37 +1778,115 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                                             ),
                                                                                       ),
                                                                                     ),
+                                                                                    if (_model.verDescripcionHeader == false)
+                                                                                      Expanded(
+                                                                                        child: Text(
+                                                                                          widget.post!.postDescription.maybeHandleOverflow(
+                                                                                            maxChars: 40,
+                                                                                            replacement: '…',
+                                                                                          ),
+                                                                                          maxLines: 2,
+                                                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                                              ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    if (_model.verDescripcionHeader == true)
+                                                                                      FaIcon(
+                                                                                        FontAwesomeIcons.angleUp,
+                                                                                        color: FlutterFlowTheme.of(context).primary,
+                                                                                        size: 20.0,
+                                                                                      ),
                                                                                   ],
                                                                                 ),
                                                                               ),
+                                                                              if (_model.verDescripcionHeader == false)
+                                                                                Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'v45t4ek4' /* Mas */,
+                                                                                          ),
+                                                                                          textAlign: TextAlign.end,
+                                                                                          maxLines: 2,
+                                                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FontWeight.w900,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                                              ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
                                                                             ],
                                                                           ),
-                                                                        ),
-                                                                        theme:
-                                                                            const ExpandableThemeData(
-                                                                          tapHeaderToExpand:
-                                                                              true,
-                                                                          tapBodyToExpand:
-                                                                              false,
-                                                                          tapBodyToCollapse:
-                                                                              false,
-                                                                          headerAlignment:
-                                                                              ExpandablePanelHeaderAlignment.top,
-                                                                          hasIcon:
-                                                                              false,
+                                                                          collapsed:
+                                                                              Container(),
+                                                                          expanded:
+                                                                              SingleChildScrollView(
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: Text(
+                                                                                          widget.post!.postDescription,
+                                                                                          style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                                              ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                          theme:
+                                                                              const ExpandableThemeData(
+                                                                            tapHeaderToExpand:
+                                                                                true,
+                                                                            tapBodyToExpand:
+                                                                                false,
+                                                                            tapBodyToCollapse:
+                                                                                false,
+                                                                            headerAlignment:
+                                                                                ExpandablePanelHeaderAlignment.top,
+                                                                            hasIcon:
+                                                                                false,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                }),
-                                                              ),
-                                                            ],
+                                                                    );
+                                                                  }),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
                                                 if (responsiveVisibility(
                                                   context: context,
                                                   phone: false,

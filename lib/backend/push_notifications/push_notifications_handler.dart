@@ -146,8 +146,10 @@ final parametersBuilderMap =
           'index': getParameter<int>(data, 'index'),
         },
       ),
-  'mapa_ir_lugar': (data) async => const ParameterData(
-        allParams: {},
+  'mapa_ir_lugar': (data) async => ParameterData(
+        allParams: {
+          'userPost': getParameter<DocumentReference>(data, 'userPost'),
+        },
       ),
   'seguidoresYSeguidos': (data) async => ParameterData(
         allParams: {
@@ -212,7 +214,6 @@ final parametersBuilderMap =
         },
       ),
   'paginaTOS': ParameterData.none(),
-  'cuentasBloqueadas': ParameterData.none(),
   'detallePost': (data) async {
     final allParams = {
       'post': await getDocumentParameter<UserPostsRecord>(
@@ -290,6 +291,12 @@ final parametersBuilderMap =
       ),
   'PaginaEnContruccion': ParameterData.none(),
   'mapaAmigos': ParameterData.none(),
+  'resetPass': (data) async => ParameterData(
+        allParams: {
+          'oobCode': getParameter<String>(data, 'oobCode'),
+        },
+      ),
+  'mapaPrincipaRespaldo': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

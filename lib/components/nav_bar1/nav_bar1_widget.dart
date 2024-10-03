@@ -48,12 +48,12 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
         // Necesitamos el parámetro "Tab Activa"con valor 1, 2 o 3 para saber qué icono debe estar activo o en que sección nos encontramos
         Container(
       width: double.infinity,
-      height: 72.0,
+      height: 88.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(48.0, 0.0, 48.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(32.0, 12.0, 32.0, 0.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,14 +92,14 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                         child: Icon(
                           FFIcons.kspotlife,
                           color: FlutterFlowTheme.of(context).icono,
-                          size: 35.0,
+                          size: 40.0,
                         ),
                       ),
                     if (widget.tabActiva == 2)
                       Image.asset(
                         'assets/images/Vector_(2)_(1).png',
-                        width: 35.0,
-                        height: 35.0,
+                        width: 40.0,
+                        height: 40.0,
                         fit: BoxFit.contain,
                       ),
                   ],
@@ -134,68 +134,16 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                     Icon(
                       FFIcons.kcollection,
                       color: FlutterFlowTheme.of(context).icono,
-                      size: 34.0,
+                      size: 40.0,
                     ),
                   if (widget.tabActiva == 1)
                     Image.asset(
                       'assets/images/coleccion.png',
-                      width: 35.0,
-                      height: 35.0,
+                      width: 40.0,
+                      height: 40.0,
                       fit: BoxFit.contain,
                     ),
                 ],
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  logFirebaseEvent('NAV_BAR1_COMP_Stack_i0e5z6kw_ON_TAP');
-                  if (widget.tabActiva != 4) {
-                    logFirebaseEvent('Stack_navigate_to');
-
-                    context.pushNamed(
-                      'buscarSpots',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
-                        ),
-                      },
-                    );
-                  }
-                },
-                child: Stack(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
-                  children: [
-                    if (widget.tabActiva != 4)
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
-                        child: Icon(
-                          FFIcons.ksearch,
-                          color: FlutterFlowTheme.of(context).icono,
-                          size: 36.0,
-                        ),
-                      ),
-                    if (widget.tabActiva == 4)
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                        child: Image.asset(
-                          'assets/images/search_(2)_2_(1).png',
-                          width: 42.0,
-                          height: 42.0,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                  ],
-                ),
               ),
             ),
             InkWell(
@@ -260,6 +208,8 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                             visible: currentUserPhoto != '',
                             child: AuthUserStreamWidget(
                               builder: (context) => Container(
+                                width: 40.0,
+                                height: 40.0,
                                 clipBehavior: Clip.antiAlias,
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -287,8 +237,8 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                           shape: BoxShape.circle,
                         ),
                         child: CachedNetworkImage(
-                          fadeInDuration: const Duration(milliseconds: 500),
-                          fadeOutDuration: const Duration(milliseconds: 500),
+                          fadeInDuration: const Duration(milliseconds: 0),
+                          fadeOutDuration: const Duration(milliseconds: 0),
                           imageUrl: valueOrDefault<String>(
                             currentUserPhoto,
                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',

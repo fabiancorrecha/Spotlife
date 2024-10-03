@@ -433,6 +433,18 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_startUbication');
   }
 
+  String _routeDistance = '';
+  String get routeDistance => _routeDistance;
+  set routeDistance(String value) {
+    _routeDistance = value;
+  }
+
+  String _routeDuration = '';
+  String get routeDuration => _routeDuration;
+  set routeDuration(String value) {
+    _routeDuration = value;
+  }
+
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();
   Stream<List<UserPostsRecord>> postUsuarios({
     String? uniqueQueryKey,

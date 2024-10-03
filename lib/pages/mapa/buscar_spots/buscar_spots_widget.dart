@@ -58,6 +58,25 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
           ),
         ],
       ),
+      'navBar1OnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.elasticOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -148,7 +167,7 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                             focusNode: _model.textFieldBuscarFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textFieldBuscarTextController',
-                              const Duration(milliseconds: 0),
+                              const Duration(milliseconds: 2000),
                               () async {
                                 logFirebaseEvent(
                                     'BUSCAR_SPOTS_TextFieldBuscar_ON_TEXTFIEL');
@@ -559,13 +578,15 @@ class _BuscarSpotsWidgetState extends State<BuscarSpotsWidget>
                   ],
                 ),
               ),
-              wrapWithModel(
-                model: _model.navBar1Model,
-                updateCallback: () => safeSetState(() {}),
-                child: const NavBar1Widget(
-                  tabActiva: 4,
-                ),
-              ),
+              if ((_model.textFieldBuscarFocusNode?.hasFocus ?? false) == false)
+                wrapWithModel(
+                  model: _model.navBar1Model,
+                  updateCallback: () => safeSetState(() {}),
+                  child: const NavBar1Widget(
+                    tabActiva: 4,
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['navBar1OnPageLoadAnimation']!),
             ],
           ),
         ),

@@ -151,142 +151,245 @@ class _GridPostsFiltradrPorUbicacionWidgetState
 
                         final stackUserPostsRecord = snapshot.data!;
 
-                        return Stack(
-                          children: [
-                            Builder(
-                              builder: (context) {
-                                final listaImagenes =
-                                    stackUserPostsRecord.postPhotolist.toList();
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'GRID_POSTS_FILTRADR_POR_UBICACION_Stack_');
+                            if (stackUserPostsRecord.postUser ==
+                                currentUserReference) {
+                              logFirebaseEvent('Stack_navigate_to');
 
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children:
-                                        List.generate(listaImagenes.length,
-                                            (listaImagenesIndex) {
-                                      final listaImagenesItem =
-                                          listaImagenes[listaImagenesIndex];
-                                      return Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.449,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.32,
-                                        decoration: const BoxDecoration(),
-                                        child: Visibility(
-                                          visible: !containerVarItem.esVideo,
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onLongPress: () async {
+                              context.goNamed('perfilPropio');
+                            } else {
+                              logFirebaseEvent('Stack_navigate_to');
+
+                              context.pushNamed(
+                                'otroPerfil',
+                                queryParameters: {
+                                  'perfilAjeno': serializeParam(
+                                    stackUserPostsRecord.postUser,
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            }
+                          },
+                          child: Stack(
+                            children: [
+                              Builder(
+                                builder: (context) {
+                                  final listaImagenes = stackUserPostsRecord
+                                      .postPhotolist
+                                      .toList();
+
+                                  return SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children:
+                                          List.generate(listaImagenes.length,
+                                              (listaImagenesIndex) {
+                                        final listaImagenesItem =
+                                            listaImagenes[listaImagenesIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'GRID_POSTS_FILTRADR_POR_UBICACION_Contai');
+                                            if (stackUserPostsRecord.postUser ==
+                                                currentUserReference) {
                                               logFirebaseEvent(
-                                                  'GRID_POSTS_FILTRADR_POR_UBICACION_Image_');
+                                                  'Container_navigate_to');
+
+                                              context.goNamed('perfilPropio');
+                                            } else {
                                               logFirebaseEvent(
-                                                  'Image_haptic_feedback');
-                                              HapticFeedback.lightImpact();
-                                              logFirebaseEvent(
-                                                  'Image_expand_image');
-                                              await Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                  type: PageTransitionType.fade,
-                                                  child:
-                                                      FlutterFlowExpandedImageView(
-                                                    image: CachedNetworkImage(
-                                                      fadeInDuration: const Duration(
-                                                          milliseconds: 500),
-                                                      fadeOutDuration: const Duration(
-                                                          milliseconds: 500),
-                                                      imageUrl:
-                                                          listaImagenesItem,
-                                                      fit: BoxFit.contain,
-                                                    ),
-                                                    allowRotation: false,
-                                                    tag: listaImagenesItem,
-                                                    useHeroAnimation: true,
+                                                  'Container_navigate_to');
+
+                                              context.pushNamed(
+                                                'otroPerfil',
+                                                queryParameters: {
+                                                  'perfilAjeno': serializeParam(
+                                                    stackUserPostsRecord
+                                                        .postUser,
+                                                    ParamType.DocumentReference,
                                                   ),
-                                                ),
+                                                }.withoutNulls,
                                               );
-                                            },
-                                            child: Hero(
-                                              tag: listaImagenesItem,
-                                              transitionOnUserGestures: true,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: listaImagenesItem,
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                            }
+                                          },
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.449,
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                0.32,
+                                            decoration: const BoxDecoration(),
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: SizedBox(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              child: Stack(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                children: [
+                                                  if (!containerVarItem.esVideo)
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onLongPress: () async {
+                                                        logFirebaseEvent(
+                                                            'GRID_POSTS_FILTRADR_POR_UBICACION_Image_');
+                                                        logFirebaseEvent(
+                                                            'Image_haptic_feedback');
+                                                        HapticFeedback
+                                                            .lightImpact();
+                                                        logFirebaseEvent(
+                                                            'Image_expand_image');
+                                                        await Navigator.push(
+                                                          context,
+                                                          PageTransition(
+                                                            type:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            child:
+                                                                FlutterFlowExpandedImageView(
+                                                              image:
+                                                                  CachedNetworkImage(
+                                                                fadeInDuration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                fadeOutDuration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                imageUrl:
+                                                                    listaImagenesItem,
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                              ),
+                                                              allowRotation:
+                                                                  false,
+                                                              tag:
+                                                                  listaImagenesItem,
+                                                              useHeroAnimation:
+                                                                  true,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Hero(
+                                                        tag: listaImagenesItem,
+                                                        transitionOnUserGestures:
+                                                            true,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            fadeInDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            fadeOutDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            imageUrl:
+                                                                listaImagenesItem,
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ).animateOnPageLoad(
+                                                        animationsMap[
+                                                            'imageOnPageLoadAnimation']!),
+                                                  if (stackUserPostsRecord
+                                                      .esVideo)
+                                                    FlutterFlowVideoPlayer(
+                                                      path: stackUserPostsRecord
+                                                          .video,
+                                                      videoType:
+                                                          VideoType.network,
+                                                      width: 216.0,
+                                                      height: 300.0,
+                                                      autoPlay: true,
+                                                      looping: true,
+                                                      showControls: false,
+                                                      allowFullScreen: false,
+                                                      allowPlaybackSpeedMenu:
+                                                          false,
+                                                    ),
+                                                ],
                                               ),
                                             ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation']!),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                );
-                              },
-                            ),
-                            if (stackUserPostsRecord.esVideo)
-                              FlutterFlowVideoPlayer(
-                                path: stackUserPostsRecord.video,
-                                videoType: VideoType.network,
-                                width: 216.0,
-                                height: 300.0,
-                                autoPlay: true,
-                                looping: true,
-                                showControls: false,
-                                allowFullScreen: true,
-                                allowPlaybackSpeedMenu: false,
-                              ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'GRID_POSTS_FILTRADR_POR_UBICACION_Contai');
-                                if (currentUserReference ==
-                                    currentUserReference) {
-                                  logFirebaseEvent('Container_navigate_to');
-
-                                  context.goNamed('perfilPropio');
-                                } else {
-                                  logFirebaseEvent('Container_navigate_to');
-
-                                  context.pushNamed(
-                                    'otroPerfil',
-                                    queryParameters: {
-                                      'perfilAjeno': serializeParam(
-                                        stackUserPostsRecord.postUser,
-                                        ParamType.DocumentReference,
-                                      ),
-                                    }.withoutNulls,
+                                          ),
+                                        );
+                                      }),
+                                    ),
                                   );
-                                }
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                decoration: const BoxDecoration(
-                                  color: Color(0x000F1316),
+                                },
+                              ),
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'GRID_POSTS_FILTRADR_POR_UBICACION_Contai');
+                                  if (stackUserPostsRecord.postUser ==
+                                      currentUserReference) {
+                                    logFirebaseEvent('Container_navigate_to');
+
+                                    context.goNamed('perfilPropio');
+                                  } else {
+                                    logFirebaseEvent('Container_navigate_to');
+
+                                    context.pushNamed(
+                                      'otroPerfil',
+                                      queryParameters: {
+                                        'perfilAjeno': serializeParam(
+                                          stackUserPostsRecord.postUser,
+                                          ParamType.DocumentReference,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0x000F1316),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                     );
