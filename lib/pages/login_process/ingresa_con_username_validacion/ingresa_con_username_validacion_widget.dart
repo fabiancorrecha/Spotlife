@@ -52,7 +52,7 @@ class _IngresaConUsernameValidacionWidgetState
         return;
       }
 
-      context.goNamedAuth('Feed', context.mounted);
+      context.goNamedAuth('mapaPrincipal', context.mounted);
     });
 
     _model.emailTextController ??=

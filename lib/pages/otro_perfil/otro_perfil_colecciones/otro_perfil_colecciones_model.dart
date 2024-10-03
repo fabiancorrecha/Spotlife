@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/components/app_bar7_colecciones/app_bar7_colecciones_widget.dart';
-import '/components/grid_colecciones/grid_colecciones_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/nav_bar2/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -23,8 +22,6 @@ class OtroPerfilColeccionesModel
   String? Function(BuildContext, String?)?
       textFieldBuscarTextControllerValidator;
   List<CollectionsRecord> simpleSearchResults = [];
-  // Model for GridColecciones component.
-  late GridColeccionesModel gridColeccionesModel;
   // Model for navBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -33,7 +30,6 @@ class OtroPerfilColeccionesModel
     appBar7ColeccionesModel =
         createModel(context, () => AppBar7ColeccionesModel());
     navBar2Model = createModel(context, () => NavBar2Model());
-    gridColeccionesModel = createModel(context, () => GridColeccionesModel());
     navBar1Model = createModel(context, () => NavBar1Model());
   }
 
@@ -43,7 +39,6 @@ class OtroPerfilColeccionesModel
     navBar2Model.dispose();
     textFieldBuscarFocusNode?.dispose();
 
-    gridColeccionesModel.dispose();
     navBar1Model.dispose();
   }
 }

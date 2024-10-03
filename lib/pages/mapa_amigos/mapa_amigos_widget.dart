@@ -140,12 +140,9 @@ class _MapaAmigosWidgetState extends State<MapaAmigosWidget> {
                                               currentUserLocationValue!, false),
                                       zoom: 16.0,
                                       listaPostMarcadores:
-                                          functions.getPlacesMaximumDistance(
-                                              mapaAmigosUserPostsRecordList
-                                                  .where((e) => e.esAmigos)
-                                                  .toList(),
-                                              currentUserLocationValue!,
-                                              5000.0),
+                                          mapaAmigosUserPostsRecordList
+                                              .where((e) => e.esAmigos)
+                                              .toList(),
                                     ),
                                   ),
                               ],

@@ -53,7 +53,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       Completer<gmap.GoogleMapController>();
   bool _isInfoVisible = false;
   bool _isMovableMarkerVisible = false;
-  bool _isContainerExpanded = false; // Definir la variable _isContainerExpanded
+  bool _isContainerExpanded = false;
   String _selectedTitle = '';
   String _selectedSubtitle = '';
   String _selectedImageUrl = '';
@@ -71,302 +71,301 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     currentZoom = widget.zoom ?? currentZoom;
     _mapStyle = '''
     [
-  {
-    "featureType": "all",
-    "elementType": "all",
-    "stylers": [
       {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "weight": "0.5"
+        "featureType": "all",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "lightness": "-50"
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "weight": "0.5"
+          },
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "saturation": "-50"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.neighborhood",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "hue": "#009aff"
+        "featureType": "administrative",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
       },
       {
-        "saturation": "25"
+        "featureType": "administrative",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "lightness": "-50"
+          },
+          {
+            "saturation": "-50"
+          }
+        ]
       },
       {
-        "lightness": "0"
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "hue": "#009aff"
+          },
+          {
+            "saturation": "25"
+          },
+          {
+            "lightness": "0"
+          },
+          {
+            "visibility": "simplified"
+          },
+          {
+            "gamma": "1"
+          }
+        ]
       },
       {
-        "visibility": "simplified"
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "saturation": "0"
+          },
+          {
+            "lightness": "100"
+          },
+          {
+            "gamma": "2.31"
+          },
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "gamma": "1"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "saturation": "0"
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          },
+          {
+            "lightness": "20"
+          },
+          {
+            "gamma": "1"
+          }
+        ]
       },
       {
-        "lightness": "100"
+        "featureType": "landscape",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "saturation": "-100"
+          },
+          {
+            "lightness": "-100"
+          }
+        ]
       },
       {
-        "gamma": "2.31"
+        "featureType": "landscape",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "simplified"
+        "featureType": "landscape.man_made",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
       },
       {
-        "lightness": "20"
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "gamma": "1"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "saturation": "-100"
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "lightness": "0"
+          },
+          {
+            "saturation": "45"
+          },
+          {
+            "gamma": "4.24"
+          },
+          {
+            "visibility": "simplified"
+          },
+          {
+            "hue": "#00ff90"
+          }
+        ]
       },
       {
-        "lightness": "-100"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "lightness": "0"
+        "featureType": "poi.park",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "saturation": "45"
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "gamma": "4.24"
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "saturation": "-100"
+          },
+          {
+            "color": "#f5f5f5"
+          }
+        ]
       },
       {
-        "visibility": "simplified"
+        "featureType": "road",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          },
+          {
+            "color": "#666666"
+          }
+        ]
       },
       {
-        "hue": "#00ff90"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "saturation": "-100"
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "color": "#f5f5f5"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "simplified"
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "color": "#666666"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "saturation": "-25"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.station.airport",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "lightness": "50"
+        "featureType": "road.arterial",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "gamma": ".75"
+        "featureType": "transit",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "saturation": "-25"
+          }
+        ]
       },
       {
-        "saturation": "100"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels",
-    "stylers": [
+        "featureType": "transit.line",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
       {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.icon",
-    "stylers": [
+        "featureType": "transit.station.airport",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
       {
-        "visibility": "off"
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "lightness": "50"
+          },
+          {
+            "gamma": ".75"
+          },
+          {
+            "saturation": "100"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       }
     ]
-  }
-]
-
     ''';
 
     double initialLat = widget.ubicacionInicialLat ?? 0.0;
@@ -410,38 +409,40 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
     final double size = 135;
-    final double margin = 5.0;
+    final double shadowOffset = 3.0; // Desplazamiento de la sombra
 
+    // Dibuja un círculo sombra ligeramente más grande para simular la elevación
     Paint shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.25)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3);
-    Path shadowPath = Path()
-      ..moveTo(size / 2, margin + 4 + 3)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4 + 3),
-          radius: Radius.circular(20), clockwise: false)
-      ..quadraticBezierTo(size, size / 2 + 3, size / 2, size * 1.3 + 3)
-      ..quadraticBezierTo(0, size / 2 + 3, size / 2, size * 0.2 + 4 + 3)
-      ..close();
-    canvas.drawPath(shadowPath, shadowPaint);
+      ..color =
+          Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
+    canvas.drawCircle(
+      Offset(
+          size / 2,
+          (size / 2) +
+              shadowOffset), // Posición del círculo con desplazamiento en Y
+      size / 2, // Radio del círculo sombra
+      shadowPaint,
+    );
 
-    Paint paint = Paint()..color = const Color.fromARGB(255, 16, 16, 16);
-    Path path = Path()
-      ..moveTo(size / 2, margin + 4)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4),
-          radius: Radius.circular(50), clockwise: false)
-      ..quadraticBezierTo(size, size / 2, size / 2, size * 1.3)
-      ..quadraticBezierTo(0, size / 2, size / 2, size * 0.2 + 4)
-      ..close();
-    canvas.drawPath(path, paint);
+    // Dibuja un círculo blanco en el centro (con la elevación simulada)
+    Paint paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
+    canvas.drawCircle(
+      Offset(size / 2, size / 2), // Centro del círculo principal
+      size / 2, // Radio del círculo principal
+      paint,
+    );
 
+    // Cargar la imagen desde la URL
     final ui.Image image = await _loadImage(imageUrl);
-    final double imageSize = (size * 0.6 * 0.85) - margin * 2;
-    final double imageX = (size - imageSize) / 2;
-    final double imageY = (size * 1.3 - imageSize) / 2;
+    final double imageSize = size * 0.8; // Tamaño de la imagen
+    final double imageX = (size - imageSize) / 2; // Coordenada X de la imagen
+    final double imageY = (size - imageSize) / 2; // Coordenada Y de la imagen
     final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
     final RRect rrect =
         RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
     canvas.clipRRect(rrect);
+
+    // Dibujar la imagen en el centro del círculo
     canvas.drawImageRect(
       image,
       Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
@@ -449,9 +450,10 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       Paint(),
     );
 
+    // Convertir el lienzo a imagen
     final ui.Image markerAsImage = await pictureRecorder
         .endRecording()
-        .toImage(size.toInt(), (size * 1.3).toInt());
+        .toImage(size.toInt(), size.toInt() + shadowOffset.toInt());
     final ByteData? byteData =
         await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
@@ -476,7 +478,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       try {
         if (post.postUser != null) {
           final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty) {
+          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
@@ -498,7 +500,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                       post.placeInfo.latLng!.latitude,
                       post.placeInfo.latLng!.longitude,
                     );
-                    _selectedPostUser = post.postUser; // Guardar postUser
+                    _selectedPostUser = post.postUser;
                   });
                 },
               );
@@ -790,6 +792,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
             top: MediaQuery.of(context).size.height * 0.5 - 100,
             left: MediaQuery.of(context).size.width * 0.25,
             child: GestureDetector(
+              onTap: _hideInfoContainer, // Ocultar container al tocarlo
               onDoubleTap: _handleMarkerTap,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.45,
@@ -845,22 +848,6 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
               ),
             ),
           ),
-        Positioned(
-          bottom: 110,
-          right: 20,
-          child: FloatingActionButton(
-            onPressed: _toggleMovableMarker,
-            backgroundColor: Colors.black,
-            child: Icon(
-              Icons.add_location_alt,
-              color: Colors.white,
-              size: 24,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-        ),
       ],
     );
   }

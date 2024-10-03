@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/crear_spot_widget.dart';
 import '/components/filtrar_spots/filtrar_spots_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/post_grid_mapa_global/post_grid_mapa_global_widget.dart';
@@ -69,8 +68,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
       );
     }
 
-    return FutureBuilder<List<UserPostsRecord>>(
-      future: queryUserPostsRecordOnce(
+    return StreamBuilder<List<UserPostsRecord>>(
+      stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord.where(
           'esPublico',
           isEqualTo: true,
@@ -102,7 +101,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
               child: Stack(
                 children: [
                   Column(
@@ -114,28 +113,6 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           height: double.infinity,
                           child: Stack(
                             children: [
-                              if (!loggedIn)
-                                SizedBox(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: custom_widgets.MapaPerzonalizado(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    ubicacionInicialLat:
-                                        functions.obtenerLatLng(
-                                            currentUserLocationValue!, true),
-                                    ubicacionInicialLng:
-                                        functions.obtenerLatLng(
-                                            currentUserLocationValue!, false),
-                                    zoom: 16.0,
-                                    listaPostMarcadores:
-                                        functions.getPlacesMaximumDistance(
-                                            mapaPrincipalUserPostsRecordList
-                                                .toList(),
-                                            currentUserLocationValue!,
-                                            5000.0),
-                                  ),
-                                ),
                               if (FFAppState().PostGlobal == true)
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
@@ -147,60 +124,44 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   ),
                                 ),
                               if (FFAppState().MapaGlobal == true)
-                                Builder(
-                                  builder: (context) => SizedBox(
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: custom_widgets.MapaPersonalizado2(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    child: custom_widgets.MapaPersonalizado2(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      ubicacionInicialLat:
-                                          functions.obtenerLatLng(
-                                              currentUserLocationValue!, true),
-                                      ubicacionInicialLng:
-                                          functions.obtenerLatLng(
-                                              currentUserLocationValue!, false),
-                                      zoom: 16.0,
-                                      listaPostMarcadores:
-                                          functions.getPlacesMaximumDistance(
-                                              mapaPrincipalUserPostsRecordList
-                                                  .toList(),
-                                              currentUserLocationValue!,
-                                              5000.0),
-                                      usuarioAutenticado: currentUserReference,
-                                      navigateTo: (ubication) async {
-                                        logFirebaseEvent(
-                                            'MAPA_PRINCIPAL_Container_g4v0n76q_CALLBA');
-                                        logFirebaseEvent(
-                                            'MapaPersonalizado2_alert_dialog');
-                                        await showDialog(
-                                          context: context,
-                                          builder: (dialogContext) {
-                                            return Dialog(
-                                              elevation: 0,
-                                              insetPadding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              child: WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          dialogContext)
-                                                      .unfocus(),
-                                                  child: CrearSpotWidget(
-                                                    ubication: ubication,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
+                                    ubicacionInicialLat:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, true),
+                                    ubicacionInicialLng:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, false),
+                                    zoom: 16.0,
+                                    listaPostMarcadores:
+                                        mapaPrincipalUserPostsRecordList,
+                                    usuarioAutenticado: currentUserReference,
+                                    navigateTo: (ubication) async {
+                                      logFirebaseEvent(
+                                          'MAPA_PRINCIPAL_Container_k8lq7g0r_CALLBA');
+                                      logFirebaseEvent(
+                                          'MapaPersonalizado2_update_app_state');
+                                      FFAppState().ubication = PlaceInfoStruct(
+                                        latLng: ubication,
+                                      );
+                                      safeSetState(() {});
+                                      logFirebaseEvent(
+                                          'MapaPersonalizado2_navigate_to');
+
+                                      context.pushNamed(
+                                        'CrearPost',
+                                        queryParameters: {
+                                          'esImagen': serializeParam(
+                                            false,
+                                            ParamType.bool,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
                                   ),
                                 ),
                             ],
@@ -210,7 +171,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     ],
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 1.07),
+                    alignment: const AlignmentDirectional(0.0, 1.01),
                     child: wrapWithModel(
                       model: _model.navBar1Model,
                       updateCallback: () => safeSetState(() {}),
@@ -219,10 +180,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                       ),
                     ),
                   ),
-                  if (((FFAppState().MapaGlobal == true) ||
-                          (FFAppState().MapaAmigo == true)) &&
-                      (FFAppState().PostGlobal == false) &&
-                      (FFAppState().PostAmigo == false))
+                  if (FFAppState().MapaGlobal == true)
                     Align(
                       alignment: const AlignmentDirectional(-0.04, 0.75),
                       child: Padding(
@@ -235,7 +193,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             logFirebaseEvent(
-                                'MAPA_PRINCIPAL_PAGE_Card_b8pdfuzz_ON_TAP');
+                                'MAPA_PRINCIPAL_PAGE_Card_zn2uosfy_ON_TAP');
                             logFirebaseEvent('Card_bottom_sheet');
                             await showModalBottomSheet(
                               isScrollControlled: true,
@@ -311,14 +269,14 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                   Align(
                     alignment: const AlignmentDirectional(0.0, -1.0),
                     child: Container(
-                      height: 188.0,
+                      height: 168.0,
                       decoration: const BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 30.0, 0.0, 0.0),
+                                0.0, 54.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -334,7 +292,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'MAPA_PRINCIPAL_PAGE_Card_dbgvgizp_ON_TAP');
+                                          'MAPA_PRINCIPAL_PAGE_Card_if4cyymz_ON_TAP');
                                       logFirebaseEvent('Card_bottom_sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
@@ -417,7 +375,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 15.0, 16.0, 0.0),
+                                0.0, 0.0, 16.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -430,7 +388,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     logFirebaseEvent(
-                                        'MAPA_PRINCIPAL_Container_vk1xc2pj_ON_TAP');
+                                        'MAPA_PRINCIPAL_Container_2uw23oat_ON_TAP');
                                     logFirebaseEvent('Container_navigate_to');
 
                                     context.pushNamed('buscarSpots');

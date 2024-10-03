@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton1/boton1_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/walkthroughs/bienvenida.dart';
@@ -203,7 +202,16 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                               'BIENVENIDA_Container_3u8d5bpi_CALLBACK');
                           logFirebaseEvent('boton1_navigate_to');
 
-                          context.pushNamed('Feed');
+                          context.pushNamed(
+                            'mapaPrincipal',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
                         },
                       ),
                     ).addWalkthrough(
@@ -211,36 +219,6 @@ class _BienvenidaWidgetState extends State<BienvenidaWidget> {
                       _model.bienvenidaController,
                     ),
                   ],
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, -0.88),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderColor: const Color(0x00F4F176),
-                        borderRadius: 20.0,
-                        borderWidth: 1.0,
-                        buttonSize: 40.0,
-                        fillColor: const Color(0x00EEEEEE),
-                        icon: Icon(
-                          Icons.help,
-                          color: FlutterFlowTheme.of(context).primary,
-                          size: 24.0,
-                        ),
-                        onPressed: () async {
-                          logFirebaseEvent('BIENVENIDA_PAGE_help_ICN_ON_TAP');
-                          logFirebaseEvent('IconButton_start_walkthrough');
-                          safeSetState(() => _model.bienvenidaController =
-                              createPageWalkthrough(context));
-                          _model.bienvenidaController?.show(context: context);
-                        },
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ],

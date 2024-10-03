@@ -86,8 +86,6 @@ export '/pages/mapa/buscar_lugares/buscar_lugares_widget.dart'
     show BuscarLugaresWidget;
 export '/pages/crear_post/crear_post_widget.dart' show CrearPostWidget;
 export '/pages/pagina_t_o_s/pagina_t_o_s_widget.dart' show PaginaTOSWidget;
-export '/pages/cuentas_bloqueadas/cuentas_bloqueadas_widget.dart'
-    show CuentasBloqueadasWidget;
 export '/pages/detalle_post/detalle_post_widget.dart' show DetallePostWidget;
 export '/pages/crear_post/editar_post/editar_post_widget.dart'
     show EditarPostWidget;
@@ -139,3 +137,7 @@ export '/suscripcion_fallida/suscripcion_fallida_widget.dart'
 export '/pagina_en_contruccion/pagina_en_contruccion_widget.dart'
     show PaginaEnContruccionWidget;
 export '/pages/mapa_amigos/mapa_amigos_widget.dart' show MapaAmigosWidget;
+export '/pages/login_process/reset_pass/reset_pass_widget.dart'
+    show ResetPassWidget;
+export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
+    show MapaPrincipaRespaldoWidget;

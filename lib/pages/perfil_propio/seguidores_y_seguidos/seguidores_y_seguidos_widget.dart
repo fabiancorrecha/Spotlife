@@ -1,10 +1,10 @@
 import '/backend/backend.dart';
-import '/components/app_bar4/app_bar4_widget.dart';
 import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/tarjeta_lista01/tarjeta_lista01_widget.dart';
 import '/components/usuarios_recomendados/usuarios_recomendados_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -120,26 +120,16 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 0.0),
+              child: Stack(
                 children: [
-                  Container(
-                    height: 100.0,
-                    decoration: const BoxDecoration(),
-                    child: wrapWithModel(
-                      model: _model.appBar4Model,
-                      updateCallback: () => safeSetState(() {}),
-                      child: AppBar4Widget(
-                        textValue: seguidoresYSeguidosUsersRecord.displayName,
-                      ),
-                    ),
-                  ),
-                  Expanded(
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 80.0, 0.0, 32.0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -309,24 +299,82 @@ class _SeguidoresYSeguidosWidgetState extends State<SeguidoresYSeguidosWidget>
                               child: const UsuariosRecomendadosWidget(),
                             ).animateOnPageLoad(animationsMap[
                                 'usuariosRecomendadosOnPageLoadAnimation']!),
+                          if (responsiveVisibility(
+                            context: context,
+                            phone: false,
+                            tablet: false,
+                            tabletLandscape: false,
+                            desktop: false,
+                          ))
+                            wrapWithModel(
+                              model: _model.navBar1Model,
+                              updateCallback: () => safeSetState(() {}),
+                              child: const NavBar1Widget(
+                                tabActiva: 3,
+                              ),
+                            ),
                         ],
                       ),
                     ),
                   ),
-                  if (responsiveVisibility(
-                    context: context,
-                    phone: false,
-                    tablet: false,
-                    tabletLandscape: false,
-                    desktop: false,
-                  ))
-                    wrapWithModel(
-                      model: _model.navBar1Model,
-                      updateCallback: () => safeSetState(() {}),
-                      child: const NavBar1Widget(
-                        tabActiva: 3,
+                  Container(
+                    height: 72.0,
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 50.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: FlutterFlowTheme.of(context).icono,
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'SEGUIDORES_Y_SEGUIDOS_arrow_back_ICN_ON_');
+                              logFirebaseEvent('IconButton_navigate_to');
+
+                              context.pushNamed(
+                                'perfilPropio',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                          ),
+                          Expanded(
+                            child: Text(
+                              seguidoresYSeguidosUsersRecord.displayName,
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
                 ],
               ),
             ),
