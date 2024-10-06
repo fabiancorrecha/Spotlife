@@ -21,9 +21,9 @@ class CreaCuentaUserNameTelefonoModel
       );
     }
 
-    if (val.length < 6) {
+    if (val.length < 3) {
       return FFLocalizations.of(context).getText(
-        '4r8aobuz' /* Debes usar al menos 6 caracter... */,
+        '4r8aobuz' /* Debes usar al menos 3 caracter... */,
       );
     }
 

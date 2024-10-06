@@ -987,16 +987,16 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                         },
                       ),
                     ),
-                  if (otroPerfilUsersRecord.cuentaPrivada == true
-                      ? !otroPerfilUsersRecord.listaSeguidores
-                          .contains(currentUserReference)
-                      : otroPerfilUsersRecord.listaSeguidores
-                          .contains(currentUserReference))
+                  if ((otroPerfilUsersRecord.cuentaPrivada == true) &&
+                      !(currentUserDocument?.listaSeguidos.toList() ?? [])
+                          .contains(otroPerfilUsersRecord.reference))
                     Expanded(
-                      child: wrapWithModel(
-                        model: _model.componentePerfilPrivadoModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: const ComponentePerfilPrivadoWidget(),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => wrapWithModel(
+                          model: _model.componentePerfilPrivadoModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: const ComponentePerfilPrivadoWidget(),
+                        ),
                       ),
                     ),
                   wrapWithModel(

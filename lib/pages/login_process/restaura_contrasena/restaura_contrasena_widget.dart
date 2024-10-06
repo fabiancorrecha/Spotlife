@@ -65,8 +65,10 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                 color: Colors.white,
                 size: 30.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                logFirebaseEvent('RESTAURA_CONTRASENA_chevron_left_ICN_ON_');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.safePop();
               },
             ),
             title: Text(
@@ -233,7 +235,7 @@ class _RestauraContrasenaWidgetState extends State<RestauraContrasenaWidget> {
                               !_model.confirmaNuevaConstraseaVisibility,
                           decoration: InputDecoration(
                             hintText: FFLocalizations.of(context).getText(
-                              '64v4f2vg' /* Confirma tu nueva constraseña */,
+                              '64v4f2vg' /* Confirma tu nueva contraseña */,
                             ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium

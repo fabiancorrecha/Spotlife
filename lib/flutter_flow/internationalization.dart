@@ -285,7 +285,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'New Password',
     },
     '64v4f2vg': {
-      'es': 'Confirma tu nueva constraseña',
+      'es': 'Confirma tu nueva contraseña',
       'en': 'Confirm your new password',
     },
     '6qavzof5': {
@@ -379,7 +379,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Fill in this field',
     },
     '4r8aobuz': {
-      'es': 'Debes usar al menos 6 caracteres',
+      'es': 'Debes usar al menos 3 caracteres',
       'en': 'You must use at least 6 characters',
     },
     '2sz1hnou': {
@@ -628,18 +628,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapa_ir_lugar
   {
-    '7vgy1oxd': {
-      'es': '12 minutos en coche',
-      'en': '12 minutes by car',
-    },
-    'ooojodc3': {
-      'es': 'Noruega',
-      'en': 'Norway',
-    },
-    '4fecqaza': {
-      'es': 'Ir',
-      'en': 'Go',
-    },
     '140c348x': {
       'es': 'Home',
       'en': 'home',
@@ -694,6 +682,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // miperfilColeciones
   {
+    'w0vrhxbj': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'lvl94sf4': {
+      'es': 'Option 1',
+      'en': '',
+    },
     '12001ugh': {
       'es': 'Home',
       'en': 'home',
@@ -839,7 +835,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'fik63qen': {
-      'es': 'Home',
+      'es': 'seguidores',
       'en': 'home',
     },
   },
@@ -975,12 +971,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Info...',
       'en': '',
     },
-    'u8a2fojs': {
+    'w9ro86pp': {
       'es': '¿Deseas editar tu ubicacion actual?',
       'en': '',
     },
-    'h3tmy3rl': {
-      'es': 'Etiqueta la ubicación',
+    'a62jq0dn': {
+      'es': 'Editar nueva ubicacion',
+      'en': '',
+    },
+    'eoqx1i3x': {
+      'es': 'Option 1',
       'en': '',
     },
     'v42yu7m9': {
@@ -1051,13 +1051,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Terms and Conditions',
     },
     'mfteid6p': {
-      'es': 'Home',
-      'en': 'home',
-    },
-  },
-  // cuentasBloqueadas
-  {
-    'hjnztpop': {
       'es': 'Home',
       'en': 'home',
     },
@@ -1777,6 +1770,45 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // resetPass
+  {
+    'unue6ecr': {
+      'es': 'Recuperar contraseña',
+      'en': '',
+    },
+    'tmvtybsh': {
+      'es':
+          'Ingresa los datos de tu nueva contraseña para poder reestablecer tu acceso a ',
+      'en': '',
+    },
+    'wdlvh6it': {
+      'es': 'Spotlife',
+      'en': '',
+    },
+    'ey57iy3c': {
+      'es': 'Nueva contraseña',
+      'en': '',
+    },
+    'httamdec': {
+      'es': 'Confirma tu nueva contraseña',
+      'en': '',
+    },
+    'a7lkqjha': {
+      'es': 'Siguiente',
+      'en': '',
+    },
+    'eemc8m4n': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // mapaPrincipaRespaldo
+  {
+    'zded45m2': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
   // crearCuentaOptions
   {
     'x52yy6hl': {
@@ -2006,6 +2038,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'iy2zk87y': {
       'es': 'Correo',
       'en': 'Mail',
+    },
+    'kch8k2f5': {
+      'es': 'Actualmente no puedes editar tu email',
+      'en': '',
     },
     'pxh7kou3': {
       'es': 'Celular',
@@ -2437,7 +2473,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': ' likes',
       'en': 'likes',
     },
-    't6scz3lx': {
+    'v45t4ek4': {
       'es': 'Mas',
       'en': '',
     },

@@ -3,7 +3,9 @@ import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class PlaceInfoStruct extends FFFirebaseStruct {
@@ -15,6 +17,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
     String? country,
     String? zipcode,
     LatLng? latLng,
+    List<String>? direccion,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _name = name,
         _address = address,
@@ -23,6 +26,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         _country = country,
         _zipcode = zipcode,
         _latLng = latLng,
+        _direccion = direccion,
         super(firestoreUtilData);
 
   // "name" field.
@@ -74,6 +78,17 @@ class PlaceInfoStruct extends FFFirebaseStruct {
 
   bool hasLatLng() => _latLng != null;
 
+  // "Direccion" field.
+  List<String>? _direccion;
+  List<String> get direccion => _direccion ?? const [];
+  set direccion(List<String>? val) => _direccion = val;
+
+  void updateDireccion(Function(List<String>) updateFn) {
+    updateFn(_direccion ??= []);
+  }
+
+  bool hasDireccion() => _direccion != null;
+
   static PlaceInfoStruct fromMap(Map<String, dynamic> data) => PlaceInfoStruct(
         name: data['name'] as String?,
         address: data['address'] as String?,
@@ -82,6 +97,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         country: data['country'] as String?,
         zipcode: data['zipcode'] as String?,
         latLng: data['latLng'] as LatLng?,
+        direccion: getDataList(data['Direccion']),
       );
 
   static PlaceInfoStruct? maybeFromMap(dynamic data) => data is Map
@@ -96,6 +112,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         'country': _country,
         'zipcode': _zipcode,
         'latLng': _latLng,
+        'Direccion': _direccion,
       }.withoutNulls;
 
   @override
@@ -127,6 +144,11 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         'latLng': serializeParam(
           _latLng,
           ParamType.LatLng,
+        ),
+        'Direccion': serializeParam(
+          _direccion,
+          ParamType.String,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -167,6 +189,11 @@ class PlaceInfoStruct extends FFFirebaseStruct {
           ParamType.LatLng,
           false,
         ),
+        direccion: deserializeParam<String>(
+          data['Direccion'],
+          ParamType.String,
+          true,
+        ),
       );
 
   static PlaceInfoStruct fromAlgoliaData(Map<String, dynamic> data) =>
@@ -206,6 +233,11 @@ class PlaceInfoStruct extends FFFirebaseStruct {
           ParamType.LatLng,
           false,
         ),
+        direccion: convertAlgoliaParam<String>(
+          data['Direccion'],
+          ParamType.String,
+          true,
+        ),
         firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
@@ -217,6 +249,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is PlaceInfoStruct &&
         name == other.name &&
         address == other.address &&
@@ -224,12 +257,13 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         state == other.state &&
         country == other.country &&
         zipcode == other.zipcode &&
-        latLng == other.latLng;
+        latLng == other.latLng &&
+        listEquality.equals(direccion, other.direccion);
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([name, address, city, state, country, zipcode, latLng]);
+      .hash([name, address, city, state, country, zipcode, latLng, direccion]);
 }
 
 PlaceInfoStruct createPlaceInfoStruct({

@@ -1,5 +1,7 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'nav_bar2_model.dart';
 export 'nav_bar2_model.dart';
@@ -131,6 +133,15 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   logFirebaseEvent('NAV_BAR2_COMP_Stack_q76ij56l_ON_TAP');
                   if (widget.tab != 1) {
                     if (widget.otroUsuario != null) {
+                      logFirebaseEvent('Stack_firestore_query');
+                      _model.readCollection = await queryCollectionsRecordOnce(
+                        queryBuilder: (collectionsRecord) =>
+                            collectionsRecord.where(
+                          'createdBy',
+                          isEqualTo: widget.otroUsuario,
+                        ),
+                        singleRecord: true,
+                      ).then((s) => s.firstOrNull);
                       logFirebaseEvent('Stack_navigate_to');
                       if (Navigator.of(context).canPop()) {
                         context.pop();
@@ -141,6 +152,11 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           'usuario': serializeParam(
                             widget.otroUsuario,
                             ParamType.DocumentReference,
+                          ),
+                          'userPost': serializeParam(
+                            _model.readCollection?.postuUserList,
+                            ParamType.DocumentReference,
+                            isList: true,
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
@@ -168,6 +184,8 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       );
                     }
                   }
+
+                  safeSetState(() {});
                 },
                 child: Stack(
                   alignment: const AlignmentDirectional(0.0, 0.0),

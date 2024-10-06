@@ -1,4 +1,3 @@
-import '/components/app_bar5/app_bar5_widget.dart';
 import '/components/grid_posts_bio/grid_posts_bio_widget.dart';
 import '/components/grid_posts_favoritos/grid_posts_favoritos_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
@@ -25,8 +24,6 @@ class MiperfilDetalleColeccionModel
 
   ///  State fields for stateful widgets in this page.
 
-  // Model for appBar5 component.
-  late AppBar5Model appBar5Model;
   // Model for GridPostsFavoritos component.
   late GridPostsFavoritosModel gridPostsFavoritosModel;
   // Model for GridPostsBio component.
@@ -36,7 +33,6 @@ class MiperfilDetalleColeccionModel
 
   @override
   void initState(BuildContext context) {
-    appBar5Model = createModel(context, () => AppBar5Model());
     gridPostsFavoritosModel =
         createModel(context, () => GridPostsFavoritosModel());
     gridPostsBioModel = createModel(context, () => GridPostsBioModel());
@@ -45,7 +41,6 @@ class MiperfilDetalleColeccionModel
 
   @override
   void dispose() {
-    appBar5Model.dispose();
     gridPostsFavoritosModel.dispose();
     gridPostsBioModel.dispose();
     navBar1Model.dispose();
