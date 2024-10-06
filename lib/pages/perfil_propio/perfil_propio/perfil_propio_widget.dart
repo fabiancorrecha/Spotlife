@@ -208,33 +208,22 @@ class _PerfilPropioWidgetState extends State<PerfilPropioWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent(
-                                'PERFIL_PROPIO_PAGE_Card_u5zy3y2r_ON_TAP');
-                            logFirebaseEvent('Card_navigate_to');
-
-                            context.goNamed('mapaPrincipal');
-                          },
-                          child: Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.of(context).fondoIcono,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Icon(
-                                Icons.arrow_back_rounded,
-                                color: FlutterFlowTheme.of(context).icono,
-                                size: 30.0,
-                              ),
-                            ),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 50.0,
+                          buttonSize: 40.0,
+                          fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: FlutterFlowTheme.of(context).icono,
+                            size: 24.0,
                           ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'PERFIL_PROPIO_PAGE_arrow_back_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_navigate_back');
+                            context.safePop();
+                          },
                         ),
                       ),
                     ],

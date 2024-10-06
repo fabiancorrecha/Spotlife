@@ -59,6 +59,25 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
           ),
         ],
       ),
+      'navBar1OnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.elasticOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -418,13 +437,16 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                       ],
                     ),
                   ),
-                  wrapWithModel(
-                    model: _model.navBar1Model,
-                    updateCallback: () => safeSetState(() {}),
-                    child: const NavBar1Widget(
-                      tabActiva: 4,
-                    ),
-                  ),
+                  if ((_model.textFieldBuscarFocusNode?.hasFocus ?? false) ==
+                      false)
+                    wrapWithModel(
+                      model: _model.navBar1Model,
+                      updateCallback: () => safeSetState(() {}),
+                      child: const NavBar1Widget(
+                        tabActiva: 4,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['navBar1OnPageLoadAnimation']!),
                 ],
               ),
               Align(

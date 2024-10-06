@@ -1,6 +1,8 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,11 +38,42 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
       logFirebaseEvent('TIPO_DE_POST_tipoDePost_ON_INIT_STATE');
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
-      logFirebaseEvent('tipoDePost_update_app_state');
-      FFAppState().ubication = PlaceInfoStruct(
-        latLng: currentUserLocationValue,
+      logFirebaseEvent('tipoDePost_backend_call');
+      _model.apiResulth5l = await GoogleMapsLocationConverterCall.call(
+        lat: functions.converLatLongToDouble(currentUserLocationValue).first,
+        lng: functions.converLatLongToDouble(currentUserLocationValue).last,
       );
-      FFAppState().update(() {});
+
+      if ((_model.apiResulth5l?.succeeded ?? true)) {
+        logFirebaseEvent('tipoDePost_update_app_state');
+        FFAppState().ubication = PlaceInfoStruct(
+          latLng: currentUserLocationValue,
+          address: GoogleMapsLocationConverterCall.longAddress(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+          city: GoogleMapsLocationConverterCall.city(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+          country: GoogleMapsLocationConverterCall.country(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+        );
+        FFAppState().update(() {});
+      } else {
+        logFirebaseEvent('tipoDePost_show_snack_bar');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Error no se pudo registrar tu direccion actual',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).error,
+              ),
+            ),
+            duration: const Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          ),
+        );
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

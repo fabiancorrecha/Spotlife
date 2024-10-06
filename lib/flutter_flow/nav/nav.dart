@@ -79,14 +79,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
-        child: appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
+        child:
+            appStateNotifier.loggedIn ? const MapaPrincipalWidget() : const InicioWidget(),
       ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? const MapaPrincipalWidget()
+              : const InicioWidget(),
           routes: [
             FFRoute(
               name: 'inicio',
@@ -230,15 +232,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'mapa_ir_lugar',
               path: 'mapaIrLugar',
               requireAuth: true,
-              asyncParams: {
-                'userPost':
-                    getDocList(['userPosts'], UserPostsRecord.fromSnapshot),
-              },
               builder: (context, params) => MapaIrLugarWidget(
-                userPost: params.getParam<UserPostsRecord>(
+                userPost: params.getParam(
                   'userPost',
-                  ParamType.Document,
-                  isList: true,
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['userPosts'],
                 ),
               ),
             ),
@@ -381,6 +380,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   isList: false,
                   collectionNamePath: ['users'],
                 ),
+                userPost: params.getParam<DocumentReference>(
+                  'userPost',
+                  ParamType.DocumentReference,
+                  isList: true,
+                  collectionNamePath: ['userPosts'],
+                ),
               ),
             ),
             FFRoute(
@@ -417,6 +422,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'mapaPrincipal',
               path: 'mapaPrincipal',
+              requireAuth: true,
               builder: (context, params) => const MapaPrincipalWidget(),
             ),
             FFRoute(
@@ -464,12 +470,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'paginaTOS',
               path: 'paginaTOS',
               builder: (context, params) => const PaginaTOSWidget(),
-            ),
-            FFRoute(
-              name: 'cuentasBloqueadas',
-              path: 'cuentasBloqueadas',
-              requireAuth: true,
-              builder: (context, params) => const CuentasBloqueadasWidget(),
             ),
             FFRoute(
               name: 'detallePost',
@@ -695,6 +695,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'mapaAmigos',
               path: 'mapaAmigos',
               builder: (context, params) => const MapaAmigosWidget(),
+            ),
+            FFRoute(
+              name: 'resetPass',
+              path: 'resetPass',
+              builder: (context, params) => ResetPassWidget(
+                oobCode: params.getParam(
+                  'oobCode',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'mapaPrincipaRespaldo',
+              path: 'mapaPrincipaRespaldo',
+              builder: (context, params) => const MapaPrincipaRespaldoWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

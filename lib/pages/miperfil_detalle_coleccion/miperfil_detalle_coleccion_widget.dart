@@ -1,14 +1,15 @@
 import '/backend/backend.dart';
-import '/components/app_bar5/app_bar5_widget.dart';
 import '/components/grid_posts_bio/grid_posts_bio_widget.dart';
 import '/components/grid_posts_favoritos/grid_posts_favoritos_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'miperfil_detalle_coleccion_model.dart';
 export 'miperfil_detalle_coleccion_model.dart';
@@ -97,12 +98,127 @@ class _MiperfilDetalleColeccionWidgetState
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              wrapWithModel(
-                model: _model.appBar5Model,
-                updateCallback: () => safeSetState(() {}),
-                child: AppBar5Widget(
-                  titulo: widget.coleccion?.nombre,
-                  coleccion: widget.coleccion,
+              Container(
+                height: 100.0,
+                decoration: const BoxDecoration(),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 50.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: FlutterFlowTheme.of(context).icono,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'MIPERFIL_DETALLE_COLECCION_arrow_back_IC');
+                          logFirebaseEvent('IconButton_navigate_to');
+
+                          context.pushNamed(
+                            'perfilPropio',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    if (widget.coleccion?.imagen != null &&
+                        widget.coleccion?.imagen != '')
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5.0),
+                        child: Image.network(
+                          widget.coleccion!.imagen,
+                          width: 40.0,
+                          height: 40.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                widget.coleccion!.nombre,
+                                maxLines: 2,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'MIPERFIL_DETALLE_COLECCION_Card_3c2hfwfs');
+                          if (FFAppState().vermapa) {
+                            logFirebaseEvent('Card_update_app_state');
+                            FFAppState().vermapa = false;
+                            FFAppState().update(() {});
+                          } else {
+                            logFirebaseEvent('Card_update_app_state');
+                            FFAppState().vermapa = true;
+                            FFAppState().update(() {});
+                          }
+                        },
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color: FlutterFlowTheme.of(context).fondoIcono,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Icon(
+                              FFIcons.kframe169,
+                              color: valueOrDefault<Color>(
+                                FFAppState().vermapa == true
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : const Color(0xFFFAF7FA),
+                                const Color(0xFFFAF7FA),
+                              ),
+                              size: 24.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(

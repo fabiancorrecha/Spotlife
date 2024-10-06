@@ -1,8 +1,10 @@
 import '/components/boton_quinto/boton_quinto_widget.dart';
+import '/components/cuenta_bloqueadas/cuenta_bloqueadas_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'privacidad_cuenta_model.dart';
 export 'privacidad_cuenta_model.dart';
 
@@ -227,9 +229,29 @@ class _PrivacidadCuentaWidgetState extends State<PrivacidadCuentaWidget> {
                         accion: () async {
                           logFirebaseEvent(
                               'PRIVACIDAD_CUENTA_Container_ng7n5h9r_CAL');
-                          logFirebaseEvent('botonQuinto_navigate_to');
-
-                          context.pushNamed('cuentasBloqueadas');
+                          logFirebaseEvent('botonQuinto_bottom_sheet');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () => FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: SizedBox(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              1.0,
+                                      child: const CuentaBloqueadasWidget(),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
                         },
                       ),
                     ),
