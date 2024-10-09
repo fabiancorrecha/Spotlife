@@ -479,17 +479,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                 ),
                 icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
                 onTap: () {
-                  setState(() {
-                    _isInfoVisible = true;
-                    _selectedTitle = post.postTitle ?? '';
-                    _selectedSubtitle = post.postDescription ?? '';
-                    _selectedImageUrl = post.postPhotolist.isNotEmpty ? post.postPhotolist.first : '';
-                    _selectedMarkerPosition = gmap.LatLng(
-                      post.placeInfo.latLng!.latitude,
-                      post.placeInfo.latLng!.longitude,
-                    );
-                    _selectedPostUser = post.postUser;
-                  });
+                  onMarkerTap(post);
                 },
               );
 
@@ -660,180 +650,200 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        GestureDetector(
-          onTap: _hideInfoContainer,
-          onDoubleTap: _handleMarkerTap,
-          child: Container(
-            width: widget.width,
-            height: widget.height,
-            child: gmap.GoogleMap(
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (gmap.GoogleMapController controller) {
-                _controller.complete(controller);
-                controller.setMapStyle(_mapStyle);
-              },
-              onCameraMove: (gmap.CameraPosition position) {
-                if (position.zoom != currentZoom && (position.zoom - currentZoom).abs() >= 1) {
-                  currentZoom = position.zoom;
-                  loadMarkers();
-                }
-              },
-              markers: _movableMarker != null ? {...markers, _movableMarker!} : markers,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 166,
-          right: 16,
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            width: _isContainerExpanded ? 350 : 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (_isContainerExpanded)
-                  IconButton(
-                    icon: Icon(
-                      Icons.close,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                    onPressed: () {
-                      _toggleSearchBar();
-                      searchController.clear();
-                    },
-                  ),
-                if (_isContainerExpanded)
-                  Expanded(
-                    child: TextField(
-                      controller: searchController,
-                      style: TextStyle(color: Colors.white),
-                      onChanged: (text) {
-                        setState(() {
-                          _onSearchChanged();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Buscar...',
-                        hintStyle: TextStyle(color: Colors.white54),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      ),
-                    ),
-                  ),
-                IconButton(
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                  onPressed: _toggleSearchBar,
-                ),
-              ],
-            ),
-          ),
-        ),
-        if (_searchResults.isEmpty && searchController.text.isNotEmpty)
-          Positioned(
-            top: 216,
-            right: 16,
-            child: Container(
-              width: 350,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Text(
-                'No existe ningún resultado!',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        if (_isInfoVisible && _selectedMarkerPosition != null)
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.5 - 100,
-            left: MediaQuery.of(context).size.width * 0.25,
-            child: GestureDetector(
-              onTap: _hideInfoContainer, // Ocultar container al tocarlo
-              onDoubleTap: _handleMarkerTap,
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.45,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (_selectedImageUrl.isNotEmpty)
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          _selectedImageUrl,
-                          width: double.infinity,
-                          height: 150,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    SizedBox(height: 10),
-                    Text(
-                      _selectedTitle,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      _selectedSubtitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: const Color.fromARGB(255, 33, 32, 32),
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+        buildGoogleMap(),
+        buildLocationIcon(),
+        if (_searchResults.isEmpty && searchController.text.isNotEmpty) buildEmptyResult(),
+        if (_isInfoVisible && _selectedMarkerPosition != null) buildCardInfo(context),
       ],
+    );
+  }
+
+  gmap.GoogleMap buildGoogleMap() {
+    return gmap.GoogleMap(
+      initialCameraPosition: initialCameraPosition,
+      onMapCreated: (gmap.GoogleMapController controller) {
+        _controller.complete(controller);
+        controller.setMapStyle(_mapStyle);
+      },
+      onCameraMove: (gmap.CameraPosition position) {
+        if (position.zoom != currentZoom && (position.zoom - currentZoom).abs() >= 1) {
+          currentZoom = position.zoom;
+          loadMarkers();
+        }
+      },
+      markers: _movableMarker != null ? {...markers, _movableMarker!} : markers,
+    );
+  }
+
+  void onMarkerTap(UserPostsRecord post) {
+    setState(() {
+      _isInfoVisible = true;
+      _selectedTitle = post.postTitle ?? '';
+      _selectedSubtitle = post.postDescription ?? '';
+      _selectedImageUrl = post.postPhotolist.isNotEmpty ? post.postPhotolist.first : '';
+      _selectedMarkerPosition = gmap.LatLng(
+        post.placeInfo.latLng!.latitude,
+        post.placeInfo.latLng!.longitude,
+      );
+      _selectedPostUser = post.postUser;
+    });
+  }
+
+  Positioned buildCardInfo(BuildContext context) {
+    return Positioned(
+      top: MediaQuery.of(context).size.height * 0.5 - 100,
+      left: MediaQuery.of(context).size.width * 0.25,
+      child: GestureDetector(
+        onTap: _hideInfoContainer, // Ocultar container al tocarlo
+        onDoubleTap: _handleMarkerTap,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.45,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (_selectedImageUrl.isNotEmpty)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    _selectedImageUrl,
+                    width: double.infinity,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              SizedBox(height: 10),
+              Text(
+                _selectedTitle,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 5),
+              Text(
+                _selectedSubtitle,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  color: const Color.fromARGB(255, 33, 32, 32),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned buildEmptyResult() {
+    return Positioned(
+      top: 216,
+      right: 16,
+      child: Container(
+        width: 350,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Text(
+          'No existe ningún resultado!',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned buildLocationIcon() {
+    return Positioned(
+      top: 166,
+      right: 16,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        width: _isContainerExpanded ? 350 : 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(25),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (_isContainerExpanded)
+              IconButton(
+                icon: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                onPressed: () {
+                  _toggleSearchBar();
+                  searchController.clear();
+                },
+              ),
+            if (_isContainerExpanded)
+              Expanded(
+                child: TextField(
+                  controller: searchController,
+                  style: TextStyle(color: Colors.white),
+                  onChanged: (text) {
+                    setState(() {
+                      _onSearchChanged();
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Buscar...',
+                    hintStyle: TextStyle(color: Colors.white54),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                  ),
+                ),
+              ),
+            IconButton(
+              icon: Icon(
+                Icons.location_on,
+                color: Colors.white,
+                size: 24,
+              ),
+              onPressed: _toggleSearchBar,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
