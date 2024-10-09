@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
+import '/custom_code/utils/maps.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 
@@ -23,22 +24,20 @@ import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 class MapaPersonalizado2 extends StatefulWidget {
   const MapaPersonalizado2({
     Key? key,
-    this.width,
-    this.height,
-    this.ubicacionInicialLat,
-    this.ubicacionInicialLng,
+    required this.userLocation,
     this.zoom,
     this.listaPostMarcadores,
+    required this.onMapTap,
+    required this.onMarkerTap, // Argumento agregado
     required this.navigateTo, // Argumento agregado
     required this.usuarioAutenticado,
   }) : super(key: key);
 
-  final double? width;
-  final double? height;
-  final double? ubicacionInicialLat;
-  final double? ubicacionInicialLng;
+  final LatLng userLocation;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
+  final void Function(UserPostsRecord post) onMarkerTap;
+  final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
   final DocumentReference? usuarioAutenticado;
 
@@ -69,307 +68,10 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   void initState() {
     super.initState();
     currentZoom = widget.zoom ?? currentZoom;
-    _mapStyle = '''
-    [
-      {
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "weight": "0.5"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "lightness": "-50"
-          },
-          {
-            "saturation": "-50"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.neighborhood",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "hue": "#009aff"
-          },
-          {
-            "saturation": "25"
-          },
-          {
-            "lightness": "0"
-          },
-          {
-            "visibility": "simplified"
-          },
-          {
-            "gamma": "1"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "saturation": "0"
-          },
-          {
-            "lightness": "100"
-          },
-          {
-            "gamma": "2.31"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          },
-          {
-            "lightness": "20"
-          },
-          {
-            "gamma": "1"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "saturation": "-100"
-          },
-          {
-            "lightness": "-100"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape.man_made",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "lightness": "0"
-          },
-          {
-            "saturation": "45"
-          },
-          {
-            "gamma": "4.24"
-          },
-          {
-            "visibility": "simplified"
-          },
-          {
-            "hue": "#00ff90"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "saturation": "-100"
-          },
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          },
-          {
-            "color": "#666666"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "transit",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "saturation": "-25"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.line",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.station.airport",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "lightness": "50"
-          },
-          {
-            "gamma": ".75"
-          },
-          {
-            "saturation": "100"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      }
-    ]
-    ''';
+    _mapStyle = MAP_STYLE;
 
-    double initialLat = widget.ubicacionInicialLat ?? 0.0;
-    double initialLng = widget.ubicacionInicialLng ?? 0.0;
+    double initialLat = widget.userLocation.latitude ?? 0.0;
+    double initialLng = widget.userLocation.longitude ?? 0.0;
     initialCameraPosition = gmap.CameraPosition(
       target: gmap.LatLng(initialLat, initialLng),
       zoom: currentZoom,
@@ -412,7 +114,8 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     final double shadowOffset = 3.0; // Desplazamiento de la sombra
 
     // Dibuja un círculo sombra ligeramente más grande para simular la elevación
-    Paint shadowPaint = Paint()..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
+    Paint shadowPaint = Paint()
+      ..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
     canvas.drawCircle(
       Offset(size / 2, (size / 2) + shadowOffset), // Posición del círculo con desplazamiento en Y
       size / 2, // Radio del círculo sombra
@@ -420,7 +123,8 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     );
 
     // Dibuja un círculo blanco en el centro (con la elevación simulada)
-    Paint paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
+    Paint paint = Paint()
+      ..color = Color.fromARGB(255, 255, 255, 255);
     canvas.drawCircle(
       Offset(size / 2, size / 2), // Centro del círculo principal
       size / 2, // Radio del círculo principal
@@ -530,62 +234,63 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     if (_selectedMarkerPosition != null) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Ubicación Actual',
-                style: TextStyle(color: Colors.white),
+        builder: (context) =>
+            AlertDialog(
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                side: BorderSide(color: Colors.white),
               ),
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Latitud: ${_selectedMarkerPosition!.latitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Longitud: ${_selectedMarkerPosition!.longitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  final flutterFlowLatLng = ff.LatLng(
-                    _selectedMarkerPosition!.latitude,
-                    _selectedMarkerPosition!.longitude,
-                  );
-                  widget.navigateTo(flutterFlowLatLng);
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Ubicación Actual',
+                    style: TextStyle(color: Colors.white),
                   ),
-                ),
-                child: Text(
-                  'Crear Spot',
-                  style: TextStyle(color: Colors.black),
-                ),
+                  IconButton(
+                    icon: Icon(Icons.close, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Latitud: ${_selectedMarkerPosition!.latitude}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    'Longitud: ${_selectedMarkerPosition!.longitude}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      final flutterFlowLatLng = ff.LatLng(
+                        _selectedMarkerPosition!.latitude,
+                        _selectedMarkerPosition!.longitude,
+                      );
+                      widget.navigateTo(flutterFlowLatLng);
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    child: Text(
+                      'Crear Spot',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
       );
     }
   }
@@ -661,6 +366,10 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   gmap.GoogleMap buildGoogleMap() {
     return gmap.GoogleMap(
       initialCameraPosition: initialCameraPosition,
+      markers: _movableMarker != null ? {...markers, _movableMarker!} : markers,
+      onTap: (lat) {
+        widget.onMapTap();
+      },
       onMapCreated: (gmap.GoogleMapController controller) {
         _controller.complete(controller);
         controller.setMapStyle(_mapStyle);
@@ -671,11 +380,11 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
           loadMarkers();
         }
       },
-      markers: _movableMarker != null ? {...markers, _movableMarker!} : markers,
     );
   }
 
   void onMarkerTap(UserPostsRecord post) {
+    widget.onMarkerTap(post);
     setState(() {
       _isInfoVisible = true;
       _selectedTitle = post.postTitle ?? '';
@@ -691,13 +400,22 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
 
   Positioned buildCardInfo(BuildContext context) {
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.5 - 100,
-      left: MediaQuery.of(context).size.width * 0.25,
+      top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.5 - 100,
+      left: MediaQuery
+          .of(context)
+          .size
+          .width * 0.25,
       child: GestureDetector(
         onTap: _hideInfoContainer, // Ocultar container al tocarlo
         onDoubleTap: _handleMarkerTap,
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.45,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.45,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
