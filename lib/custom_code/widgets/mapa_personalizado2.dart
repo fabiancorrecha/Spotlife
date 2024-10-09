@@ -358,7 +358,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
         buildGoogleMap(),
         buildLocationIcon(),
         if (_searchResults.isEmpty && searchController.text.isNotEmpty) buildEmptyResult(),
-        if (_isInfoVisible && _selectedMarkerPosition != null) buildCardInfo(context),
+        //if (_isInfoVisible && _selectedMarkerPosition != null) buildCardInfo(context), //hide card
       ],
     );
   }
@@ -400,22 +400,13 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
 
   Positioned buildCardInfo(BuildContext context) {
     return Positioned(
-      top: MediaQuery
-          .of(context)
-          .size
-          .height * 0.5 - 100,
-      left: MediaQuery
-          .of(context)
-          .size
-          .width * 0.25,
+      top: MediaQuery.of(context).size.height * 0.5 - 100,
+      left: MediaQuery.of(context).size.width * 0.25,
       child: GestureDetector(
         onTap: _hideInfoContainer, // Ocultar container al tocarlo
         onDoubleTap: _handleMarkerTap,
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * 0.45,
+          width: MediaQuery.of(context).size.width * 0.45,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
