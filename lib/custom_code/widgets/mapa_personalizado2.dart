@@ -7,6 +7,7 @@ import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
+
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -49,8 +50,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   Set<gmap.Marker> markers = {};
   gmap.Marker? _movableMarker;
   late String _mapStyle;
-  final Completer<gmap.GoogleMapController> _controller =
-      Completer<gmap.GoogleMapController>();
+  final Completer<gmap.GoogleMapController> _controller = Completer<gmap.GoogleMapController>();
   bool _isInfoVisible = false;
   bool _isMovableMarkerVisible = false;
   bool _isContainerExpanded = false;
@@ -412,14 +412,9 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     final double shadowOffset = 3.0; // Desplazamiento de la sombra
 
     // Dibuja un círculo sombra ligeramente más grande para simular la elevación
-    Paint shadowPaint = Paint()
-      ..color =
-          Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
+    Paint shadowPaint = Paint()..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
     canvas.drawCircle(
-      Offset(
-          size / 2,
-          (size / 2) +
-              shadowOffset), // Posición del círculo con desplazamiento en Y
+      Offset(size / 2, (size / 2) + shadowOffset), // Posición del círculo con desplazamiento en Y
       size / 2, // Radio del círculo sombra
       shadowPaint,
     );
@@ -438,8 +433,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     final double imageX = (size - imageSize) / 2; // Coordenada X de la imagen
     final double imageY = (size - imageSize) / 2; // Coordenada Y de la imagen
     final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
-    final RRect rrect =
-        RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
+    final RRect rrect = RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
     canvas.clipRRect(rrect);
 
     // Dibujar la imagen en el centro del círculo
@@ -451,11 +445,8 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     );
 
     // Convertir el lienzo a imagen
-    final ui.Image markerAsImage = await pictureRecorder
-        .endRecording()
-        .toImage(size.toInt(), size.toInt() + shadowOffset.toInt());
-    final ByteData? byteData =
-        await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
+    final ui.Image markerAsImage = await pictureRecorder.endRecording().toImage(size.toInt(), size.toInt() + shadowOffset.toInt());
+    final ByteData? byteData = await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
   }
 
@@ -463,8 +454,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     final completer = Completer<ui.Image>();
     final imageStream = NetworkImage(url).resolve(ImageConfiguration.empty);
     imageStream.addListener(
-      ImageStreamListener(
-          (ImageInfo info, bool _) => completer.complete(info.image)),
+      ImageStreamListener((ImageInfo info, bool _) => completer.complete(info.image)),
     );
     return completer.future;
   }
@@ -493,9 +483,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                     _isInfoVisible = true;
                     _selectedTitle = post.postTitle ?? '';
                     _selectedSubtitle = post.postDescription ?? '';
-                    _selectedImageUrl = post.postPhotolist.isNotEmpty
-                        ? post.postPhotolist.first
-                        : '';
+                    _selectedImageUrl = post.postPhotolist.isNotEmpty ? post.postPhotolist.first : '';
                     _selectedMarkerPosition = gmap.LatLng(
                       post.placeInfo.latLng!.latitude,
                       post.placeInfo.latLng!.longitude,
@@ -685,15 +673,12 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                 controller.setMapStyle(_mapStyle);
               },
               onCameraMove: (gmap.CameraPosition position) {
-                if (position.zoom != currentZoom &&
-                    (position.zoom - currentZoom).abs() >= 1) {
+                if (position.zoom != currentZoom && (position.zoom - currentZoom).abs() >= 1) {
                   currentZoom = position.zoom;
                   loadMarkers();
                 }
               },
-              markers: _movableMarker != null
-                  ? {...markers, _movableMarker!}
-                  : markers,
+              markers: _movableMarker != null ? {...markers, _movableMarker!} : markers,
             ),
           ),
         ),
