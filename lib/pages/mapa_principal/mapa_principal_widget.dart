@@ -125,7 +125,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                 SizedBox(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  child: custom_widgets.MapaPersonalizado2(
+                                  child: custom_widgets.MapWithCarrousel(
                                     userLocation: currentUserLocationValue!,
                                     zoom: 16.0,
                                     listaPostMarcadores: mapaPrincipalUserPostsRecordList,
