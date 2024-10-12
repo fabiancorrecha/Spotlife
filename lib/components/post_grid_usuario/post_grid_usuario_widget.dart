@@ -170,98 +170,153 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                             (listaImagenesIndex) {
                                       final listaImagenesItem =
                                           listaImagenes[listaImagenesIndex];
-                                      return Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.446,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.323,
-                                        decoration: const BoxDecoration(),
-                                        child: Visibility(
-                                          visible:
-                                              !gridViewUserPostsRecord.esVideo,
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'POST_GRID_USUARIO_Image_mgy81b8g_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Image_navigate_to');
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'POST_GRID_USUARIO_Container_1gm25dk8_ON_');
+                                          logFirebaseEvent(
+                                              'Container_navigate_to');
 
-                                              context.pushNamed(
-                                                'detallePost',
-                                                pathParameters: {
-                                                  'post': serializeParam(
-                                                    stackUserPostsRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'post': stackUserPostsRecord,
-                                                },
-                                              );
-
-                                              logFirebaseEvent(
-                                                  'Image_update_app_state');
-                                              FFAppState()
-                                                      .verCajaComentariosActualizados =
-                                                  false;
-                                              safeSetState(() {});
+                                          context.pushNamed(
+                                            'VistaPostlist',
+                                            queryParameters: {
+                                              'user': serializeParam(
+                                                widget.usuario,
+                                                ParamType.DocumentReference,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  const TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                              ),
                                             },
-                                            onLongPress: () async {
-                                              logFirebaseEvent(
-                                                  'POST_GRID_USUARIO_Image_mgy81b8g_ON_LONG');
-                                              logFirebaseEvent(
-                                                  'Image_haptic_feedback');
-                                              HapticFeedback.lightImpact();
-                                              logFirebaseEvent(
-                                                  'Image_expand_image');
-                                              await Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                  type: PageTransitionType.fade,
-                                                  child:
-                                                      FlutterFlowExpandedImageView(
-                                                    image: CachedNetworkImage(
-                                                      fadeInDuration: const Duration(
-                                                          milliseconds: 500),
-                                                      fadeOutDuration: const Duration(
-                                                          milliseconds: 500),
-                                                      imageUrl:
-                                                          listaImagenesItem,
-                                                      fit: BoxFit.contain,
+                                          );
+
+                                          logFirebaseEvent(
+                                              'Container_update_app_state');
+                                          FFAppState()
+                                                  .verCajaComentariosActualizados =
+                                              false;
+                                          safeSetState(() {});
+                                        },
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.446,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.323,
+                                          decoration: const BoxDecoration(),
+                                          child: Visibility(
+                                            visible: !gridViewUserPostsRecord
+                                                .esVideo,
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'POST_GRID_USUARIO_Image_mgy81b8g_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_navigate_to');
+
+                                                context.pushNamed(
+                                                  'VistaPostlist',
+                                                  queryParameters: {
+                                                    'user': serializeParam(
+                                                      widget.usuario,
+                                                      ParamType
+                                                          .DocumentReference,
                                                     ),
-                                                    allowRotation: false,
-                                                    tag: listaImagenesItem,
-                                                    useHeroAnimation: true,
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 0),
+                                                    ),
+                                                  },
+                                                );
+
+                                                logFirebaseEvent(
+                                                    'Image_update_app_state');
+                                                FFAppState()
+                                                        .verCajaComentariosActualizados =
+                                                    false;
+                                                safeSetState(() {});
+                                              },
+                                              onLongPress: () async {
+                                                logFirebaseEvent(
+                                                    'POST_GRID_USUARIO_Image_mgy81b8g_ON_LONG');
+                                                logFirebaseEvent(
+                                                    'Image_haptic_feedback');
+                                                HapticFeedback.lightImpact();
+                                                logFirebaseEvent(
+                                                    'Image_expand_image');
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child:
+                                                        FlutterFlowExpandedImageView(
+                                                      image: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        fadeOutDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        imageUrl:
+                                                            listaImagenesItem,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      allowRotation: false,
+                                                      tag: listaImagenesItem,
+                                                      useHeroAnimation: true,
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                            child: Hero(
-                                              tag: listaImagenesItem,
-                                              transitionOnUserGestures: true,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: listaImagenesItem,
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: listaImagenesItem,
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  child: CachedNetworkImage(
+                                                    fadeInDuration: const Duration(
+                                                        milliseconds: 500),
+                                                    fadeOutDuration: const Duration(
+                                                        milliseconds: 500),
+                                                    imageUrl: listaImagenesItem,
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'imageOnPageLoadAnimation']!),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'imageOnPageLoadAnimation']!),
+                                          ),
                                         ),
                                       );
                                     }),
@@ -286,7 +341,8 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                                 alignment: const AlignmentDirectional(0.84, -0.79),
                                 child: Icon(
                                   FFIcons.kcopy,
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   size: 24.0,
                                 ),
                               ),

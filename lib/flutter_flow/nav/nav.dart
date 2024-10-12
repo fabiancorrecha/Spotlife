@@ -270,6 +270,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'esFavorito',
                   ParamType.bool,
                 ),
+                usuario: params.getParam(
+                  'usuario',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+                refColeccion: params.getParam(
+                  'refColeccion',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['collections'],
+                ),
               ),
             ),
             FFRoute(
@@ -373,6 +385,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'otroPerfilMapa',
               path: 'otroPerfilMapa',
               requireAuth: true,
+              asyncParams: {
+                'colecccion':
+                    getDocList(['collections'], CollectionsRecord.fromSnapshot),
+              },
               builder: (context, params) => OtroPerfilMapaWidget(
                 usuario: params.getParam(
                   'usuario',
@@ -385,6 +401,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ParamType.DocumentReference,
                   isList: true,
                   collectionNamePath: ['userPosts'],
+                ),
+                colecccion: params.getParam<CollectionsRecord>(
+                  'colecccion',
+                  ParamType.Document,
+                  isList: true,
+                ),
+                refColeccion: params.getParam(
+                  'refColeccion',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['collections'],
                 ),
               ),
             ),
@@ -710,6 +737,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'mapaPrincipaRespaldo',
               path: 'mapaPrincipaRespaldo',
               builder: (context, params) => const MapaPrincipaRespaldoWidget(),
+            ),
+            FFRoute(
+              name: 'VistaPostlist',
+              path: 'VistaPostlist',
+              requireAuth: true,
+              builder: (context, params) => VistaPostlistWidget(
+                user: params.getParam(
+                  'user',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+                verCometarios: params.getParam(
+                  'verCometarios',
+                  ParamType.bool,
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -972,10 +1016,33 @@ class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
   @override
   void initState() {
     super.initState();
+
     // Handle erroneous links from Firebase Dynamic Links.
+
+    String? location;
+
+    /*
+    Handle `links` routes that have dynamic-link entangled with deep-link 
+    */
+    if (widget.state.uri.toString().startsWith('/link') &&
+        widget.state.uri.queryParameters.containsKey('deep_link_id')) {
+      final deepLinkId = widget.state.uri.queryParameters['deep_link_id'];
+      if (deepLinkId != null) {
+        final deepLinkUri = Uri.parse(deepLinkId);
+        final link = deepLinkUri.toString();
+        final host = deepLinkUri.host;
+        location = link.split(host).last;
+      }
+    }
+
     if (widget.state.uri.toString().startsWith('/link') &&
         widget.state.uri.toString().contains('request_ip_version')) {
-      SchedulerBinding.instance.addPostFrameCallback((_) => context.go('/'));
+      location = '/';
+    }
+
+    if (location != null) {
+      SchedulerBinding.instance
+          .addPostFrameCallback((_) => context.go(location!));
     }
   }
 

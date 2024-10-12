@@ -142,6 +142,14 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                         ),
                         singleRecord: true,
                       ).then((s) => s.firstOrNull);
+                      logFirebaseEvent('Stack_firestore_query');
+                      _model.allColecction = await queryCollectionsRecordOnce(
+                        queryBuilder: (collectionsRecord) =>
+                            collectionsRecord.where(
+                          'createdBy',
+                          isEqualTo: widget.otroUsuario,
+                        ),
+                      );
                       logFirebaseEvent('Stack_navigate_to');
                       if (Navigator.of(context).canPop()) {
                         context.pop();
@@ -158,8 +166,18 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                             ParamType.DocumentReference,
                             isList: true,
                           ),
+                          'colecccion': serializeParam(
+                            _model.allColecction,
+                            ParamType.Document,
+                            isList: true,
+                          ),
+                          'refColeccion': serializeParam(
+                            _model.readCollection?.reference,
+                            ParamType.DocumentReference,
+                          ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
+                          'colecccion': _model.allColecction,
                           kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,

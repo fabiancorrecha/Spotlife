@@ -54,15 +54,10 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<CollectionsRecord>>(
       stream: queryCollectionsRecord(
-        queryBuilder: (collectionsRecord) => collectionsRecord
-            .where(
-              'createdBy',
-              isEqualTo: currentUserReference,
-            )
-            .where(
-              'coleccionFavoritos',
-              isEqualTo: false,
-            ),
+        queryBuilder: (collectionsRecord) => collectionsRecord.where(
+          'createdBy',
+          isEqualTo: currentUserReference,
+        ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -480,6 +475,19 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                                 false,
                                                                 ParamType.bool,
                                                               ),
+                                                              'usuario':
+                                                                  serializeParam(
+                                                                currentUserReference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
+                                                              'refColeccion':
+                                                                  serializeParam(
+                                                                generalItem
+                                                                    .reference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
                                                             }.withoutNulls,
                                                             extra: <String,
                                                                 dynamic>{
@@ -885,6 +893,19 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                               serializeParam(
                                                             false,
                                                             ParamType.bool,
+                                                          ),
+                                                          'usuario':
+                                                              serializeParam(
+                                                            currentUserReference,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                          'refColeccion':
+                                                              serializeParam(
+                                                            searchCollectionItem
+                                                                .reference,
+                                                            ParamType
+                                                                .DocumentReference,
                                                           ),
                                                         }.withoutNulls,
                                                         extra: <String,

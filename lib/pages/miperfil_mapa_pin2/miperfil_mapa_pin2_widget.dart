@@ -125,20 +125,48 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
                       child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
-                        child: custom_widgets.MapaPerzonalizado(
+                        child: custom_widgets.MapaPersonalizado2(
                           width: double.infinity,
                           height: double.infinity,
                           ubicacionInicialLat: functions.obtenerLatLng(
                               currentUserLocationValue!, true),
                           ubicacionInicialLng: functions.obtenerLatLng(
                               currentUserLocationValue!, false),
-                          zoom: 16.0,
+                          zoom: 18.0,
                           listaPostMarcadores: widget.coleccion?.createdBy ==
                                   currentUserReference
                               ? miperfilMapaPin2UserPostsRecordList
                               : miperfilMapaPin2UserPostsRecordList
                                   .where((e) => e.esPrivado == false)
                                   .toList(),
+                          usuarioAutenticado: currentUserReference,
+                          navigateTo: (bycreate) async {
+                            logFirebaseEvent(
+                                'MIPERFIL_MAPA_PIN2_Container_yliaz712_CA');
+                            if (bycreate == currentUserReference) {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed('perfilPropio');
+
+                              return;
+                            } else {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed(
+                                'otroPerfil',
+                                queryParameters: {
+                                  'perfilAjeno': serializeParam(
+                                    bycreate,
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                              );
+
+                              return;
+                            }
+                          },
                         ),
                       ),
                     ),

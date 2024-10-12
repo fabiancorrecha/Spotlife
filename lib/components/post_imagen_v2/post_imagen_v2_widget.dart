@@ -673,6 +673,20 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                 false,
                                                                 ParamType.bool,
                                                               ),
+                                                              'usuario':
+                                                                  serializeParam(
+                                                                containerUsersRecord
+                                                                    .reference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
+                                                              'refColeccion':
+                                                                  serializeParam(
+                                                                containerCollectionsRecord
+                                                                    .reference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
                                                             }.withoutNulls,
                                                             extra: <String,
                                                                 dynamic>{

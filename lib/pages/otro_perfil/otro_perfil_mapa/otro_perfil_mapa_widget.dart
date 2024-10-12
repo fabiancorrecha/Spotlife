@@ -18,10 +18,14 @@ class OtroPerfilMapaWidget extends StatefulWidget {
     super.key,
     this.usuario,
     required this.userPost,
+    required this.colecccion,
+    required this.refColeccion,
   });
 
   final DocumentReference? usuario;
   final List<DocumentReference>? userPost;
+  final List<CollectionsRecord>? colecccion;
+  final DocumentReference? refColeccion;
 
   @override
   State<OtroPerfilMapaWidget> createState() => _OtroPerfilMapaWidgetState();
@@ -352,24 +356,90 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
                 ),
               ),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                child: StreamBuilder<List<UserPostsRecord>>(
+                  stream: queryUserPostsRecord(
+                    queryBuilder: (userPostsRecord) => userPostsRecord
+                        .where(
+                          'postUser',
+                          isEqualTo: widget.usuario,
+                        )
+                        .whereArrayContainsAny(
+                            'collections',
+                            widget.colecccion
+                                ?.map((e) => e.reference)
+                                .toList()),
                   ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: custom_widgets.MapaPerzonalizadoCopy(
-                      width: double.infinity,
-                      height: double.infinity,
-                      ubicacionInicialLat: functions.obtenerLatLng(
-                          currentUserLocationValue!, true),
-                      ubicacionInicialLng: functions.obtenerLatLng(
-                          currentUserLocationValue!, false),
-                      zoom: 16.0,
-                      listaPostMarcadores: widget.userPost,
-                    ),
-                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 12.0,
+                          height: 12.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primaryBackground,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<UserPostsRecord> containerUserPostsRecordList =
+                        snapshot.data!;
+
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: custom_widgets.MapaPersonalizado2(
+                          width: double.infinity,
+                          height: double.infinity,
+                          ubicacionInicialLat: functions.obtenerLatLng(
+                              currentUserLocationValue!, true),
+                          ubicacionInicialLng: functions.obtenerLatLng(
+                              currentUserLocationValue!, false),
+                          zoom: 16.0,
+                          listaPostMarcadores: containerUserPostsRecordList,
+                          usuarioAutenticado: widget.usuario,
+                          navigateTo: (bycreate) async {
+                            logFirebaseEvent(
+                                'OTRO_PERFIL_MAPA_Container_v3x1d8lp_CALL');
+                            if (bycreate == widget.usuario) {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed(
+                                'otroPerfil',
+                                queryParameters: {
+                                  'perfilAjeno': serializeParam(
+                                    bycreate,
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            } else {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed(
+                                'perfilPropio',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               wrapWithModel(

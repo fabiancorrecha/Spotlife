@@ -170,13 +170,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ingresaTelefonoValidacion
   {
-    'p57n7wgb': {
+    'e4uhnopv': {
       'es': '¿No recibiste un SMS?',
-      'en': 'Didn\'t you receive an SMS?',
+      'en': '',
     },
-    's7cesgaa': {
+    'lzx8zydb': {
       'es': 'Enviar de nuevo',
-      'en': 'Send again',
+      'en': '',
     },
     'j8pde26o': {
       'es': 'Más opciones',
@@ -1809,6 +1809,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // VistaPostlist
+  {
+    'fj1744c1': {
+      'es': ' likes',
+      'en': '',
+    },
+    'kaaia5vd': {
+      'es': ' likes',
+      'en': '',
+    },
+    't4vjpy1r': {
+      'es': 'Mas',
+      'en': '',
+    },
+    'yu7dg2s6': {
+      'es': 'Añade un comentario...',
+      'en': '',
+    },
+    '510ljajz': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'zlo0i1ma': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'go4t0xcu': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
   // crearCuentaOptions
   {
     'x52yy6hl': {
@@ -3212,7 +3243,49 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'g2uouq07': {
-      'es': 'Crear Spot',
+      'es': 'Ver perfil',
+      'en': '',
+    },
+  },
+  // iconmarkert
+  {
+    'xkd8zten': {
+      'es': 'Titulo',
+      'en': '',
+    },
+    'ifv6fp41': {
+      'es': 'Descripcion',
+      'en': '',
+    },
+    'ex2teakx': {
+      'es': 'Ver Perfil',
+      'en': '',
+    },
+  },
+  // postImagenV2Copy
+  {
+    'oriqhn7v': {
+      'es': ' likes',
+      'en': '',
+    },
+    '9rqvem5w': {
+      'es': ' likes',
+      'en': '',
+    },
+    '5swmtbhn': {
+      'es': 'Mas',
+      'en': '',
+    },
+    'g8thixl7': {
+      'es': 'Añade un comentario...',
+      'en': '',
+    },
+    'h4el2xwu': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'wiun52sc': {
+      'es': ' Likes',
       'en': '',
     },
   },
