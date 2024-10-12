@@ -8,6 +8,8 @@ class NavBar2Model extends FlutterFlowModel<NavBar2Widget> {
 
   // Stores action output result for [Firestore Query - Query a collection] action in Stack widget.
   CollectionsRecord? readCollection;
+  // Stores action output result for [Firestore Query - Query a collection] action in Stack widget.
+  List<CollectionsRecord>? allColecction;
 
   @override
   void initState(BuildContext context) {}

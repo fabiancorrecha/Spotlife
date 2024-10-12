@@ -202,7 +202,7 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                           child: SizedBox(
                             width: double.infinity,
                             height: double.infinity,
-                            child: custom_widgets.MapaPerzonalizado(
+                            child: custom_widgets.MapaPersonalizado2(
                               width: double.infinity,
                               height: double.infinity,
                               ubicacionInicialLat: functions.obtenerLatLng(
@@ -212,6 +212,34 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                               zoom: 18.0,
                               listaPostMarcadores:
                                   miperfilMapaUserPostsRecordList,
+                              usuarioAutenticado: currentUserReference,
+                              navigateTo: (bycreate) async {
+                                logFirebaseEvent(
+                                    'MIPERFIL_MAPA_Container_tfw0k4jd_CALLBAC');
+                                if (bycreate == currentUserReference) {
+                                  logFirebaseEvent(
+                                      'MapaPersonalizado2_navigate_to');
+
+                                  context.pushNamed('perfilPropio');
+
+                                  return;
+                                } else {
+                                  logFirebaseEvent(
+                                      'MapaPersonalizado2_navigate_to');
+
+                                  context.pushNamed(
+                                    'otroPerfil',
+                                    queryParameters: {
+                                      'perfilAjeno': serializeParam(
+                                        bycreate,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+
+                                  return;
+                                }
+                              },
                             ),
                           ),
                         ),

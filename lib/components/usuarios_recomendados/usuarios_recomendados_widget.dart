@@ -116,6 +116,7 @@ class _UsuariosRecomendadosWidgetState
 
                     return ListView.builder(
                       padding: EdgeInsets.zero,
+                      primary: false,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemCount: usuarios.length,

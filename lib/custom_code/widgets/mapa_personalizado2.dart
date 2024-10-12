@@ -38,7 +38,7 @@ class MapaPersonalizado2 extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(ff.LatLng ubication) navigateTo;
+  final void Function(DocumentReference bycreate) navigateTo;
   final DocumentReference? usuarioAutenticado;
 
   @override
@@ -408,41 +408,45 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   Future<Uint8List> _createCustomMarkerIcon(String imageUrl) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final double size = 135;
-    final double shadowOffset = 3.0; // Desplazamiento de la sombra
+    final double size = 135.0;
+    final double borderWidth = 2.0;
+    final double padding = 3.0;
 
-    // Dibuja un círculo sombra ligeramente más grande para simular la elevación
-    Paint shadowPaint = Paint()
-      ..color =
-          Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
+    // Dibuja el círculo verde con borde negro
+    Paint borderPaint = Paint()
+      ..color = Color(0xFF1A1A1A) // Color del borde negro
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
+
+    Paint circlePaint = Paint()..color = Color(0xFFF4F176); // Color verde
+
+    // Dibuja el círculo
     canvas.drawCircle(
-      Offset(
-          size / 2,
-          (size / 2) +
-              shadowOffset), // Posición del círculo con desplazamiento en Y
-      size / 2, // Radio del círculo sombra
-      shadowPaint,
+      Offset(size / 2, size / 2),
+      size / 2 - borderWidth / 2, // Ajusta el radio para incluir el borde
+      circlePaint,
     );
 
-    // Dibuja un círculo blanco en el centro (con la elevación simulada)
-    Paint paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
+    // Dibuja el borde
     canvas.drawCircle(
-      Offset(size / 2, size / 2), // Centro del círculo principal
-      size / 2, // Radio del círculo principal
-      paint,
+      Offset(size / 2, size / 2),
+      size / 2 - borderWidth / 2,
+      borderPaint,
     );
 
     // Cargar la imagen desde la URL
     final ui.Image image = await _loadImage(imageUrl);
-    final double imageSize = size * 0.8; // Tamaño de la imagen
-    final double imageX = (size - imageSize) / 2; // Coordenada X de la imagen
-    final double imageY = (size - imageSize) / 2; // Coordenada Y de la imagen
+    final double imageSize = size - 2 * (borderWidth + padding);
+
+    final double imageX = (size - imageSize) / 2;
+    final double imageY = (size - imageSize) / 2;
+
     final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
     final RRect rrect =
         RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
     canvas.clipRRect(rrect);
 
-    // Dibujar la imagen en el centro del círculo
+    // Dibuja la imagen dentro del círculo
     canvas.drawImageRect(
       image,
       Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
@@ -453,7 +457,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     // Convertir el lienzo a imagen
     final ui.Image markerAsImage = await pictureRecorder
         .endRecording()
-        .toImage(size.toInt(), size.toInt() + shadowOffset.toInt());
+        .toImage(size.toInt(), size.toInt());
     final ByteData? byteData =
         await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
@@ -520,96 +524,6 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     setState(() {
       _isInfoVisible = false;
     });
-  }
-
-  void _toggleMovableMarker() {
-    setState(() {
-      _isMovableMarkerVisible = !_isMovableMarkerVisible;
-      if (_isMovableMarkerVisible) {
-        _movableMarker = gmap.Marker(
-          markerId: gmap.MarkerId('movable_marker'),
-          position: initialCameraPosition.target,
-          draggable: true,
-          onDragEnd: (newPosition) {
-            setState(() {
-              _selectedMarkerPosition = newPosition;
-            });
-          },
-          onTap: () {
-            _showMovableMarkerInfo();
-          },
-          icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-            gmap.BitmapDescriptor.hueBlue,
-          ),
-        );
-      } else {
-        _movableMarker = null;
-      }
-    });
-  }
-
-  void _showMovableMarkerInfo() {
-    if (_selectedMarkerPosition != null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Ubicación Actual',
-                style: TextStyle(color: Colors.white),
-              ),
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Latitud: ${_selectedMarkerPosition!.latitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Longitud: ${_selectedMarkerPosition!.longitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  final flutterFlowLatLng = ff.LatLng(
-                    _selectedMarkerPosition!.latitude,
-                    _selectedMarkerPosition!.longitude,
-                  );
-                  widget.navigateTo(flutterFlowLatLng);
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                child: Text(
-                  'Crear Spot',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
   }
 
   void _toggleSearchBar() {
@@ -792,14 +706,14 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
             top: MediaQuery.of(context).size.height * 0.5 - 100,
             left: MediaQuery.of(context).size.width * 0.25,
             child: GestureDetector(
-              onTap: _hideInfoContainer, // Ocultar container al tocarlo
+              onTap: _hideInfoContainer,
               onDoubleTap: _handleMarkerTap,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black, // Fondo negro como en la imagen
+                  borderRadius: BorderRadius.circular(12), // Bordes redondeados
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black26,
@@ -811,23 +725,50 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (_selectedImageUrl.isNotEmpty)
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          _selectedImageUrl,
-                          width: double.infinity,
-                          height: 150,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    Stack(
+                      children: [
+                        if (_selectedImageUrl.isNotEmpty)
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              _selectedImageUrl,
+                              width: double.infinity,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        //Positioned(
+                        //top: 10,
+                        //right: 10,
+                        //child: Container(
+                        //decoration: BoxDecoration(
+                        //color:
+                        //  Colors.black.withOpacity(0.8), // Fondo oscuro
+                        //shape: BoxShape.circle,
+                        //border: Border.all(
+                        //color: Colors.yellow, // Borde amarillo
+                        //width: 2,
+                        //),
+                        //),
+                        //child: IconButton(
+                        //icon: Icon(
+                        //Icons.close,
+                        //color: Colors.yellow, // Icono amarillo
+                        //),
+                        //onPressed: _hideInfoContainer,
+                        //tooltip: 'Cerrar',
+                        //),
+                        //),
+                        //),
+                      ],
+                    ),
                     SizedBox(height: 10),
                     Text(
                       _selectedTitle,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -836,12 +777,36 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                     Text(
                       _selectedSubtitle,
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: const Color.fromARGB(255, 33, 32, 32),
+                        fontSize: 14,
+                        color: Colors.white60,
                       ),
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_selectedPostUser != null) {
+                            widget.navigateTo(_selectedPostUser!);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                        ),
+                        child: Text(
+                          'Ver Perfil',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
