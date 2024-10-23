@@ -150,7 +150,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                       return SizedBox(
                                         width: double.infinity,
                                         height: double.infinity,
-                                        child: _buildMap(mapaAmigoUserPostsRecordList, context),
+                                        child: Container(),
                                       );
                                     },
                                   ),
@@ -196,14 +196,18 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
         listaPostMarcadores: postList,
         usuarioAutenticado: currentUserReference,
         onMapTap: () {
-          setState(() {
-            showMenu = true;
-          });
+          if (!showMenu) {
+            setState(() {
+              showMenu = true;
+            });
+          }
         },
         onMarkerTap: (post) {
-          setState(() {
-            showMenu = false;
-          });
+          if (showMenu) {
+            setState(() {
+              showMenu = false;
+            });
+          }
         },
         navigateTo: (ubication) async {
           logFirebaseEvent('MAPA_PRINCIPAL_Container_k8lq7g0r_CALLBA');

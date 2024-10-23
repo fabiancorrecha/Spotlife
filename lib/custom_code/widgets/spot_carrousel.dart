@@ -4,12 +4,14 @@ class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
     super.key,
     required this.spots,
+    required this.selectedIndex,
     required this.background,
     required this.shouldCards,
   });
 
   final List<SpotDetail> spots;
   final Widget background;
+  final int selectedIndex;
   final bool shouldCards;
 
   @override
@@ -17,18 +19,31 @@ class SpotCarrousel extends StatefulWidget {
 }
 
 class _SpotCarrouselState extends State<SpotCarrousel> {
-  late PageController _pageViewController;
+  PageController _pageViewController = PageController(
+    viewportFraction: 0.8,
+  );
   late int _currentSelectedIndex;
 
   @override
   void initState() {
-    _currentSelectedIndex = 1;
-
-    _pageViewController = PageController(
-      initialPage: _currentSelectedIndex,
-      viewportFraction: 0.8,
-    );
+    _currentSelectedIndex = widget.selectedIndex;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(SpotCarrousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.selectedIndex != oldWidget.selectedIndex) {
+      _currentSelectedIndex = widget.selectedIndex;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _pageViewController.animateToPage(
+          _currentSelectedIndex, // Replace with your desired page index
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      });
+    }
   }
 
   @override
@@ -37,13 +52,19 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
     return Stack(
       children: [
         widget.background,
-        if (widget.shouldCards)
+        if (widget.shouldCards && widget.selectedIndex != -1)
           Align(
             alignment: Alignment.bottomCenter,
             child: buildCarrousel(spots),
           ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _pageViewController.dispose();
+    super.dispose();
   }
 
   Widget buildCarrousel(List<SpotDetail> spots) {

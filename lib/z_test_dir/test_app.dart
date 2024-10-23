@@ -25,6 +25,7 @@ class _TestAppWidgetState extends State<TestAppWidget> {
       home: Scaffold(
         body: SpotCarrousel(
           spots: spots,
+          selectedIndex: 1,
           shouldCards: showCards,
           background: buildFakeMapa(),
         ),
