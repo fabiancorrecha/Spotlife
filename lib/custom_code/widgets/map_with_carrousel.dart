@@ -31,17 +31,18 @@ class MapWithCarrousel extends StatefulWidget {
 
 class _MapWithCarrousel extends State<MapWithCarrousel> {
   var showCards = false;
+  var selectedIndex = -1;
   var spots = <SpotDetail>[];
 
   @override
   void initState() {
     super.initState();
     spots = widget.listaPostMarcadores
-            ?.map((x) => SpotDetail(
-                  id: x.reference.id,
-                  title: x.postTitle,
+            ?.map((spot) => SpotDetail(
+                  id: spot.reference.id,
+                  title: spot.postTitle,
                   place: "place",
-                  imagePath: x.postPhotolist.isNotEmpty ? x.postPhotolist.first : '',
+                  imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
                   avatarUrl: "",
                 ))
             ?.toList() ??
@@ -53,19 +54,24 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     return SpotCarrousel(
       spots: spots,
       shouldCards: showCards,
+      selectedIndex: selectedIndex,
       background: CarrouselMap(
         zoom: widget.zoom,
         userLocation: widget.userLocation,
         usuarioAutenticado: widget.usuarioAutenticado,
         listaPostMarcadores: widget.listaPostMarcadores,
         onMapTap: () {
-          setState(() {
-            showCards = false;
-          });
+          if (showCards) {
+            setState(() {
+              showCards = false;
+            });
+          }
           widget.onMapTap();
         },
         onMarkerTap: (spot) {
           setState(() {
+
+            selectedIndex = spots.indexWhere((it) => it.id == spot.reference.id);
             showCards = true;
           });
           widget.onMarkerTap(spot);
