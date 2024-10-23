@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/filtrar_spots/filtrar_spots_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
+import '/components/post_grid_mapa_amigos/post_grid_mapa_amigos_widget.dart';
 import '/components/post_grid_mapa_global/post_grid_mapa_global_widget.dart';
 import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -112,7 +113,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           height: double.infinity,
                           child: Stack(
                             children: [
-                              if (FFAppState().PostGlobal == true)
+                              if ((FFAppState().Post == true) &&
+                                  (FFAppState().Global == true))
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
                                   child: wrapWithModel(
@@ -121,44 +123,149 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                     child: const PostGridMapaGlobalWidget(),
                                   ),
                                 ),
-                              if (FFAppState().MapaGlobal == true)
+                              if (FFAppState().Mapa &&
+                                  (FFAppState().Amigos == false))
+                                AuthUserStreamWidget(
+                                  builder: (context) =>
+                                      StreamBuilder<List<UserPostsRecord>>(
+                                    stream: queryUserPostsRecord(
+                                      queryBuilder: (userPostsRecord) =>
+                                          userPostsRecord.whereIn(
+                                              'postUser',
+                                              (currentUserDocument
+                                                      ?.listaSeguidos
+                                                      .toList() ??
+                                                  [])),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 12.0,
+                                            height: 12.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<UserPostsRecord>
+                                          mapaAmigoUserPostsRecordList =
+                                          snapshot.data!;
+
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        child:
+                                            custom_widgets.MapaPersonalizado2(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          ubicacionInicialLat:
+                                              functions.obtenerLatLng(
+                                                  currentUserLocationValue!,
+                                                  true),
+                                          ubicacionInicialLng:
+                                              functions.obtenerLatLng(
+                                                  currentUserLocationValue!,
+                                                  false),
+                                          zoom: 16.0,
+                                          listaPostMarcadores:
+                                              mapaAmigoUserPostsRecordList,
+                                          usuarioAutenticado:
+                                              currentUserReference,
+                                          navigateTo: (bycreate) async {
+                                            logFirebaseEvent(
+                                                'MAPA_PRINCIPAL_PAGE_MapaAmigo_CALLBACK');
+                                            if (bycreate ==
+                                                currentUserReference) {
+                                              logFirebaseEvent(
+                                                  'MapaAmigo_navigate_to');
+
+                                              context.pushNamed('perfilPropio');
+
+                                              return;
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'MapaAmigo_navigate_to');
+
+                                              context.pushNamed(
+                                                'otroPerfil',
+                                                queryParameters: {
+                                                  'perfilAjeno': serializeParam(
+                                                    bycreate,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+
+                                              return;
+                                            }
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              if (FFAppState().Mapa == true)
                                 SizedBox(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  child: custom_widgets.MapWithCarrousel(
-                                    userLocation: currentUserLocationValue!,
+                                  child: custom_widgets.MapaPersonalizado2(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    ubicacionInicialLat:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, true),
+                                    ubicacionInicialLng:
+                                        functions.obtenerLatLng(
+                                            currentUserLocationValue!, false),
                                     zoom: 16.0,
-                                    listaPostMarcadores: mapaPrincipalUserPostsRecordList,
+                                    listaPostMarcadores:
+                                        mapaPrincipalUserPostsRecordList,
                                     usuarioAutenticado: currentUserReference,
-                                    onMapTap: () {
-                                      setState(() {
-                                        showMenu = true;
-                                      });
-                                    },
-                                    onMarkerTap: (post) {
-                                      setState(() {
-                                        showMenu = false;
-                                      });
-                                    },
-                                    navigateTo: (ubication) async {
-                                      logFirebaseEvent('MAPA_PRINCIPAL_Container_k8lq7g0r_CALLBA');
-                                      logFirebaseEvent('MapaPersonalizado2_update_app_state');
-                                      FFAppState().ubication = PlaceInfoStruct(
-                                        latLng: ubication,
-                                      );
-                                      safeSetState(() {});
-                                      logFirebaseEvent('MapaPersonalizado2_navigate_to');
+                                    navigateTo: (bycreate) async {
+                                      logFirebaseEvent(
+                                          'MAPA_PRINCIPAL_Container_cojbo4pu_CALLBA');
+                                      if (bycreate == currentUserReference) {
+                                        logFirebaseEvent(
+                                            'MapaPersonalizado2_navigate_to');
 
-                                      context.pushNamed(
-                                        'CrearPost',
-                                        queryParameters: {
-                                          'esImagen': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                        }.withoutNulls,
-                                      );
+                                        context.pushNamed('perfilPropio');
+
+                                        return;
+                                      } else {
+                                        logFirebaseEvent(
+                                            'MapaPersonalizado2_navigate_to');
+
+                                        context.pushNamed(
+                                          'otroPerfil',
+                                          queryParameters: {
+                                            'perfilAjeno': serializeParam(
+                                              bycreate,
+                                              ParamType.DocumentReference,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+
+                                        return;
+                                      }
                                     },
+                                  ),
+                                ),
+                              if ((FFAppState().Post == true) &&
+                                  (FFAppState().Amigos == true))
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 100.0, 0.0, 0.0),
+                                  child: wrapWithModel(
+                                    model: _model.postGridAmigosModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: const PostGridMapaAmigosWidget(),
                                   ),
                                 ),
                             ],
@@ -168,7 +275,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     ],
                   ),
                   if (showMenu) buildNavigationBar(),
-                  if (FFAppState().MapaGlobal == true && showMenu) buildAddIcon(context),
+                  if (FFAppState().Mapa == true && showMenu) buildAddIcon(context),
                   buildTopActions(context),
                 ],
               ),
