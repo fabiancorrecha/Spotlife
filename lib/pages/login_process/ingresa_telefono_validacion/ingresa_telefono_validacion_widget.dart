@@ -2,9 +2,12 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/components/mas_opciones/mas_opciones_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -32,6 +35,22 @@ class _IngresaTelefonoValidacionWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ingresaTelefonoValidacion'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('INGRESA_TELEFONO_VALIDACION_ingresaTelef');
+      logFirebaseEvent('ingresaTelefonoValidacion_timer');
+      _model.timerController.onStartTimer();
+      while (_model.confirmacion == 'SinConfirmar') {
+        logFirebaseEvent('ingresaTelefonoValidacion_wait__delay');
+        await Future.delayed(const Duration(milliseconds: 120000));
+        logFirebaseEvent('ingresaTelefonoValidacion_timer');
+        _model.timerController.onResetTimer();
+
+        logFirebaseEvent('ingresaTelefonoValidacion_timer');
+        _model.timerController.onStartTimer();
+      }
+    });
+
     authManager.handlePhoneAuthStateChanges(context);
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -116,47 +135,71 @@ class _IngresaTelefonoValidacionWidgetState
                     ],
                   ),
                 ),
-                PinCodeTextField(
-                  autoDisposeControllers: false,
-                  appContext: context,
-                  length: 6,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).titleSmallFamily,
-                        color: FlutterFlowTheme.of(context).secondary,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleSmallFamily),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 100.0,
+                          child: custom_widgets.RoundedWithShadow(
+                            width: double.infinity,
+                            height: 100.0,
+                            codigoPin: (valorDelCodigo) async {
+                              logFirebaseEvent(
+                                  'INGRESA_TELEFONO_VALIDACION_Container_76');
+                              logFirebaseEvent(
+                                  'RoundedWithShadow_update_page_state');
+                              _model.codigo = valorDelCodigo;
+                              safeSetState(() {});
+                            },
+                          ),
+                        ),
                       ),
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  enableActiveFill: true,
-                  autoFocus: true,
-                  enablePinAutofill: true,
-                  errorTextSpace: 16.0,
-                  showCursor: true,
-                  cursorColor: FlutterFlowTheme.of(context).primary,
-                  obscureText: false,
-                  hintCharacter: '-',
-                  pinTheme: PinTheme(
-                    fieldHeight: 50.0,
-                    fieldWidth: 40.0,
-                    borderWidth: 2.0,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                      topLeft: Radius.circular(12.0),
-                      topRight: Radius.circular(12.0),
-                    ),
-                    shape: PinCodeFieldShape.box,
-                    activeColor: FlutterFlowTheme.of(context).primary,
-                    inactiveColor: const Color(0xFF333333),
-                    selectedColor: FlutterFlowTheme.of(context).secondaryText,
+                    ],
                   ),
-                  controller: _model.pinCodeController,
-                  onChanged: (_) {},
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator:
-                      _model.pinCodeControllerValidator.asValidator(context),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FlutterFlowTimer(
+                        initialTime: _model.timerInitialTimeMs,
+                        getDisplayTime: (value) =>
+                            StopWatchTimer.getDisplayTime(
+                          value,
+                          hours: false,
+                          milliSecond: false,
+                        ),
+                        controller: _model.timerController,
+                        updateStateInterval: const Duration(milliseconds: 1000),
+                        onChanged: (value, displayTime, shouldUpdate) {
+                          _model.timerMilliseconds = value;
+                          _model.timerValue = displayTime;
+                          if (shouldUpdate) safeSetState(() {});
+                        },
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context)
+                            .headlineSmall
+                            .override(
+                              fontFamily: FlutterFlowTheme.of(context)
+                                  .headlineSmallFamily,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 30.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w200,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .headlineSmallFamily),
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
@@ -169,7 +212,7 @@ class _IngresaTelefonoValidacionWidgetState
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            'p57n7wgb' /* ¿No recibiste un SMS? */,
+                            'e4uhnopv' /* ¿No recibiste un SMS? */,
                           ),
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)
@@ -192,8 +235,8 @@ class _IngresaTelefonoValidacionWidgetState
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           logFirebaseEvent(
-                              'INGRESA_TELEFONO_VALIDACION_Text_l8a0a12');
-                          logFirebaseEvent('Text_auth');
+                              'INGRESA_TELEFONO_VALIDACION_Container_4k');
+                          logFirebaseEvent('Container_auth');
                           final phoneNumberVal = FFAppState().phoneNumber;
                           if (phoneNumberVal.isEmpty ||
                               !phoneNumberVal.startsWith('+')) {
@@ -217,23 +260,30 @@ class _IngresaTelefonoValidacionWidgetState
                             },
                           );
                         },
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            's7cesgaa' /* Enviar de nuevo */,
-                          ),
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
+                        child: Container(
+                          decoration: const BoxDecoration(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'lzx8zydb' /* Enviar de nuevo */,
                               ),
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -303,14 +353,14 @@ class _IngresaTelefonoValidacionWidgetState
                     texto: FFLocalizations.of(context).getText(
                       '1v15ehuq' /* Continuar */,
                     ),
-                    desabilitado: _model.pinCodeController!.text == '',
+                    desabilitado: false,
                     accion: () async {
                       logFirebaseEvent(
                           'INGRESA_TELEFONO_VALIDACION_Container_xm');
                       logFirebaseEvent('boton1_auth');
                       GoRouter.of(context).prepareAuthEvent();
-                      final smsCodeVal = _model.pinCodeController!.text;
-                      if (smsCodeVal.isEmpty) {
+                      final smsCodeVal = _model.codigo;
+                      if (smsCodeVal == null || smsCodeVal.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Enter SMS verification code.'),

@@ -141,3 +141,5 @@ export '/pages/login_process/reset_pass/reset_pass_widget.dart'
     show ResetPassWidget;
 export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
     show MapaPrincipaRespaldoWidget;
+export '/pages/vista_postlist/vista_postlist_widget.dart'
+    show VistaPostlistWidget;

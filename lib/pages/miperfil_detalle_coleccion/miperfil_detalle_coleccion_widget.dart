@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/grid_posts_bio/grid_posts_bio_widget.dart';
 import '/components/grid_posts_favoritos/grid_posts_favoritos_widget.dart';
@@ -19,10 +20,14 @@ class MiperfilDetalleColeccionWidget extends StatefulWidget {
     super.key,
     this.coleccion,
     this.esFavorito,
+    required this.usuario,
+    required this.refColeccion,
   });
 
   final CollectionsRecord? coleccion;
   final bool? esFavorito;
+  final DocumentReference? usuario;
+  final DocumentReference? refColeccion;
 
   @override
   State<MiperfilDetalleColeccionWidget> createState() =>
@@ -121,18 +126,8 @@ class _MiperfilDetalleColeccionWidgetState
                         onPressed: () async {
                           logFirebaseEvent(
                               'MIPERFIL_DETALLE_COLECCION_arrow_back_IC');
-                          logFirebaseEvent('IconButton_navigate_to');
-
-                          context.pushNamed(
-                            'perfilPropio',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 0),
-                              ),
-                            },
-                          );
+                          logFirebaseEvent('IconButton_navigate_back');
+                          context.safePop();
                         },
                       ),
                     ),
@@ -241,27 +236,59 @@ class _MiperfilDetalleColeccionWidgetState
                         ),
                       ),
                     if (FFAppState().vermapa == true)
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.MapaPerzonalizadoCopy(
-                            width: double.infinity,
-                            height: double.infinity,
-                            ubicacionInicialLat: functions.obtenerLatLng(
-                                currentUserLocationValue!, true),
-                            ubicacionInicialLng: functions.obtenerLatLng(
-                                currentUserLocationValue!, false),
-                            zoom: 16.0,
-                            listaPostMarcadores: _model.postAgregados,
+                      StreamBuilder<List<UserPostsRecord>>(
+                        stream: queryUserPostsRecord(
+                          queryBuilder: (userPostsRecord) =>
+                              userPostsRecord.where(
+                            'collections',
+                            arrayContains: widget.refColeccion,
                           ),
                         ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 12.0,
+                                height: 12.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<UserPostsRecord> containerUserPostsRecordList =
+                              snapshot.data!;
+
+                          return Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: custom_widgets.MapaPersonalizado2(
+                                width: double.infinity,
+                                height: double.infinity,
+                                ubicacionInicialLat: functions.obtenerLatLng(
+                                    currentUserLocationValue!, true),
+                                ubicacionInicialLng: functions.obtenerLatLng(
+                                    currentUserLocationValue!, false),
+                                zoom: 16.0,
+                                listaPostMarcadores:
+                                    containerUserPostsRecordList,
+                                usuarioAutenticado: currentUserReference,
+                                navigateTo: (bycreate) async {},
+                              ),
+                            ),
+                          );
+                        },
                       ),
                   ],
                 ),

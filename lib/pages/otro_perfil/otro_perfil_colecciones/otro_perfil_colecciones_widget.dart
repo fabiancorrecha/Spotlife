@@ -465,23 +465,38 @@ class _OtroPerfilColeccionesWidgetState
                                                             'Stack_navigate_to');
 
                                                         context.pushNamed(
-                                                          'otroPerfilMapa',
+                                                          'miperfilDetalleColeccion',
                                                           queryParameters: {
+                                                            'coleccion':
+                                                                serializeParam(
+                                                              generalItem,
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                            'esFavorito':
+                                                                serializeParam(
+                                                              false,
+                                                              ParamType.bool,
+                                                            ),
                                                             'usuario':
                                                                 serializeParam(
                                                               widget.usuario,
                                                               ParamType
                                                                   .DocumentReference,
                                                             ),
-                                                            'userPost':
+                                                            'refColeccion':
                                                                 serializeParam(
                                                               generalItem
-                                                                  .postuUserList,
+                                                                  .reference,
                                                               ParamType
                                                                   .DocumentReference,
-                                                              isList: true,
                                                             ),
                                                           }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'coleccion':
+                                                                generalItem,
+                                                          },
                                                         );
                                                       },
                                                       child: Stack(
@@ -883,23 +898,45 @@ class _OtroPerfilColeccionesWidgetState
                                                         'Container_navigate_to');
 
                                                     context.pushNamed(
-                                                      'otroPerfilMapa',
+                                                      'miperfilDetalleColeccion',
                                                       queryParameters: {
+                                                        'coleccion':
+                                                            serializeParam(
+                                                          searchCollectionItem,
+                                                          ParamType.Document,
+                                                        ),
+                                                        'esFavorito':
+                                                            serializeParam(
+                                                          false,
+                                                          ParamType.bool,
+                                                        ),
                                                         'usuario':
                                                             serializeParam(
                                                           widget.usuario,
                                                           ParamType
                                                               .DocumentReference,
                                                         ),
-                                                        'userPost':
+                                                        'refColeccion':
                                                             serializeParam(
                                                           searchCollectionItem
-                                                              .postuUserList,
+                                                              .reference,
                                                           ParamType
                                                               .DocumentReference,
-                                                          isList: true,
                                                         ),
                                                       }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'coleccion':
+                                                            searchCollectionItem,
+                                                        kTransitionInfoKey:
+                                                            const TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                          duration: Duration(
+                                                              milliseconds: 0),
+                                                        ),
+                                                      },
                                                     );
                                                   },
                                                   child: Container(
