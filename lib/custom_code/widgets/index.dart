@@ -5,3 +5,4 @@ export 'route_view_live.dart' show RouteViewLive;
 export 'rounded_with_shadow.dart' show RoundedWithShadow;
 export 'spot_carrousel.dart';
 export 'map_with_carrousel.dart' show MapWithCarrousel;
+export 'carrousel_map.dart' show CarrouselMap;

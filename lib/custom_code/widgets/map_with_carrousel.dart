@@ -53,7 +53,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     return SpotCarrousel(
       spots: spots,
       shouldCards: showCards,
-      background: MapaPersonalizado2(
+      background: CarrouselMap(
         zoom: widget.zoom,
         userLocation: widget.userLocation,
         usuarioAutenticado: widget.usuarioAutenticado,
