@@ -1,28 +1,43 @@
 import '/components/boton1/boton1_widget.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'ingresa_telefono_validacion_widget.dart'
     show IngresaTelefonoValidacionWidget;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 
 class IngresaTelefonoValidacionModel
     extends FlutterFlowModel<IngresaTelefonoValidacionWidget> {
+  ///  Local state fields for this page.
+
+  String? codigo;
+
+  String? confirmacion = 'SinConfirmar';
+
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for PinCode widget.
-  TextEditingController? pinCodeController;
-  String? Function(BuildContext, String?)? pinCodeControllerValidator;
+  // State field(s) for Timer widget.
+  final timerInitialTimeMs = 120000;
+  int timerMilliseconds = 120000;
+  String timerValue = StopWatchTimer.getDisplayTime(
+    120000,
+    hours: false,
+    milliSecond: false,
+  );
+  FlutterFlowTimerController timerController =
+      FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
   // Model for boton1 component.
   late Boton1Model boton1Model;
 
   @override
   void initState(BuildContext context) {
-    pinCodeController = TextEditingController();
     boton1Model = createModel(context, () => Boton1Model());
   }
 
   @override
   void dispose() {
-    pinCodeController?.dispose();
+    timerController.dispose();
     boton1Model.dispose();
   }
 }

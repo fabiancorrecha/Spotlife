@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'crear_post_widget.dart' show CrearPostWidget;
@@ -76,8 +77,29 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   TextEditingController? descripcionColeccionTextController;
   String? Function(BuildContext, String?)?
       descripcionColeccionTextControllerValidator;
-  // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = const FFPlace();
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in IconButton widget.
+  ApiCallResponse? apiResulth5l;
+  // State field(s) for editarUbicacion widget.
+  final editarUbicacionKey = GlobalKey();
+  FocusNode? editarUbicacionFocusNode;
+  TextEditingController? editarUbicacionTextController;
+  String? editarUbicacionSelectedOption;
+  String? Function(BuildContext, String?)?
+      editarUbicacionTextControllerValidator;
+  // Stores action output result for [Backend Call - API (Google Place)] action in editarUbicacion widget.
+  ApiCallResponse? apiResultpbi;
+  // State field(s) for CheckboxPublico widget.
+  bool? checkboxPublicoValue1;
+  // State field(s) for CheckboxPrivado widget.
+  bool? checkboxPrivadoValue;
+  // State field(s) for CheckboxPublico widget.
+  Map<CollectionsRecord, bool> checkboxPublicoValueMap2 = {};
+  List<CollectionsRecord> get checkboxPublicoCheckedItems2 =>
+      checkboxPublicoValueMap2.entries
+          .where((e) => e.value)
+          .map((e) => e.key)
+          .toList();
+
   // State field(s) for Switch widget.
   bool? switchValue1;
   // State field(s) for Switch widget.
@@ -99,5 +121,7 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
 
     descripcionColeccionFocusNode?.dispose();
     descripcionColeccionTextController?.dispose();
+
+    editarUbicacionFocusNode?.dispose();
   }
 }

@@ -79,14 +79,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
-        child: appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
+        child:
+            appStateNotifier.loggedIn ? const MapaPrincipalWidget() : const InicioWidget(),
       ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const FeedWidget() : const InicioWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? const MapaPrincipalWidget()
+              : const InicioWidget(),
           routes: [
             FFRoute(
               name: 'inicio',
@@ -230,15 +232,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'mapa_ir_lugar',
               path: 'mapaIrLugar',
               requireAuth: true,
-              asyncParams: {
-                'userPost':
-                    getDocList(['userPosts'], UserPostsRecord.fromSnapshot),
-              },
               builder: (context, params) => MapaIrLugarWidget(
-                userPost: params.getParam<UserPostsRecord>(
+                userPost: params.getParam(
                   'userPost',
-                  ParamType.Document,
-                  isList: true,
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['userPosts'],
                 ),
               ),
             ),
@@ -270,6 +269,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 esFavorito: params.getParam(
                   'esFavorito',
                   ParamType.bool,
+                ),
+                usuario: params.getParam(
+                  'usuario',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+                refColeccion: params.getParam(
+                  'refColeccion',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['collections'],
                 ),
               ),
             ),
@@ -374,12 +385,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'otroPerfilMapa',
               path: 'otroPerfilMapa',
               requireAuth: true,
+              asyncParams: {
+                'colecccion':
+                    getDocList(['collections'], CollectionsRecord.fromSnapshot),
+              },
               builder: (context, params) => OtroPerfilMapaWidget(
                 usuario: params.getParam(
                   'usuario',
                   ParamType.DocumentReference,
                   isList: false,
                   collectionNamePath: ['users'],
+                ),
+                userPost: params.getParam<DocumentReference>(
+                  'userPost',
+                  ParamType.DocumentReference,
+                  isList: true,
+                  collectionNamePath: ['userPosts'],
+                ),
+                colecccion: params.getParam<CollectionsRecord>(
+                  'colecccion',
+                  ParamType.Document,
+                  isList: true,
+                ),
+                refColeccion: params.getParam(
+                  'refColeccion',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['collections'],
                 ),
               ),
             ),
@@ -417,6 +449,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'mapaPrincipal',
               path: 'mapaPrincipal',
+              requireAuth: true,
               builder: (context, params) => const MapaPrincipalWidget(),
             ),
             FFRoute(
@@ -464,12 +497,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'paginaTOS',
               path: 'paginaTOS',
               builder: (context, params) => const PaginaTOSWidget(),
-            ),
-            FFRoute(
-              name: 'cuentasBloqueadas',
-              path: 'cuentasBloqueadas',
-              requireAuth: true,
-              builder: (context, params) => const CuentasBloqueadasWidget(),
             ),
             FFRoute(
               name: 'detallePost',
@@ -695,6 +722,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'mapaAmigos',
               path: 'mapaAmigos',
               builder: (context, params) => const MapaAmigosWidget(),
+            ),
+            FFRoute(
+              name: 'resetPass',
+              path: 'resetPass',
+              builder: (context, params) => ResetPassWidget(
+                oobCode: params.getParam(
+                  'oobCode',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'mapaPrincipaRespaldo',
+              path: 'mapaPrincipaRespaldo',
+              builder: (context, params) => const MapaPrincipaRespaldoWidget(),
+            ),
+            FFRoute(
+              name: 'VistaPostlist',
+              path: 'VistaPostlist',
+              requireAuth: true,
+              builder: (context, params) => VistaPostlistWidget(
+                user: params.getParam(
+                  'user',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+                verCometarios: params.getParam(
+                  'verCometarios',
+                  ParamType.bool,
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -957,10 +1016,33 @@ class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
   @override
   void initState() {
     super.initState();
+
     // Handle erroneous links from Firebase Dynamic Links.
+
+    String? location;
+
+    /*
+    Handle `links` routes that have dynamic-link entangled with deep-link 
+    */
+    if (widget.state.uri.toString().startsWith('/link') &&
+        widget.state.uri.queryParameters.containsKey('deep_link_id')) {
+      final deepLinkId = widget.state.uri.queryParameters['deep_link_id'];
+      if (deepLinkId != null) {
+        final deepLinkUri = Uri.parse(deepLinkId);
+        final link = deepLinkUri.toString();
+        final host = deepLinkUri.host;
+        location = link.split(host).last;
+      }
+    }
+
     if (widget.state.uri.toString().startsWith('/link') &&
         widget.state.uri.toString().contains('request_ip_version')) {
-      SchedulerBinding.instance.addPostFrameCallback((_) => context.go('/'));
+      location = '/';
+    }
+
+    if (location != null) {
+      SchedulerBinding.instance
+          .addPostFrameCallback((_) => context.go(location!));
     }
   }
 

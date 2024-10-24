@@ -38,7 +38,7 @@ class MapaPersonalizado2 extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(ff.LatLng ubication) navigateTo;
+  final void Function(DocumentReference bycreate) navigateTo;
   final DocumentReference? usuarioAutenticado;
 
   @override
@@ -53,7 +53,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       Completer<gmap.GoogleMapController>();
   bool _isInfoVisible = false;
   bool _isMovableMarkerVisible = false;
-  bool _isContainerExpanded = false; // Definir la variable _isContainerExpanded
+  bool _isContainerExpanded = false;
   String _selectedTitle = '';
   String _selectedSubtitle = '';
   String _selectedImageUrl = '';
@@ -71,302 +71,301 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     currentZoom = widget.zoom ?? currentZoom;
     _mapStyle = '''
     [
-  {
-    "featureType": "all",
-    "elementType": "all",
-    "stylers": [
       {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "weight": "0.5"
+        "featureType": "all",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "lightness": "-50"
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "weight": "0.5"
+          },
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "saturation": "-50"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.neighborhood",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "hue": "#009aff"
+        "featureType": "administrative",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
       },
       {
-        "saturation": "25"
+        "featureType": "administrative",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "lightness": "-50"
+          },
+          {
+            "saturation": "-50"
+          }
+        ]
       },
       {
-        "lightness": "0"
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "hue": "#009aff"
+          },
+          {
+            "saturation": "25"
+          },
+          {
+            "lightness": "0"
+          },
+          {
+            "visibility": "simplified"
+          },
+          {
+            "gamma": "1"
+          }
+        ]
       },
       {
-        "visibility": "simplified"
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "saturation": "0"
+          },
+          {
+            "lightness": "100"
+          },
+          {
+            "gamma": "2.31"
+          },
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "gamma": "1"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "saturation": "0"
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          },
+          {
+            "lightness": "20"
+          },
+          {
+            "gamma": "1"
+          }
+        ]
       },
       {
-        "lightness": "100"
+        "featureType": "landscape",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "saturation": "-100"
+          },
+          {
+            "lightness": "-100"
+          }
+        ]
       },
       {
-        "gamma": "2.31"
+        "featureType": "landscape",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "simplified"
+        "featureType": "landscape.man_made",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
       },
       {
-        "lightness": "20"
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "gamma": "1"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "saturation": "-100"
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "lightness": "0"
+          },
+          {
+            "saturation": "45"
+          },
+          {
+            "gamma": "4.24"
+          },
+          {
+            "visibility": "simplified"
+          },
+          {
+            "hue": "#00ff90"
+          }
+        ]
       },
       {
-        "lightness": "-100"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "lightness": "0"
+        "featureType": "poi.park",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "saturation": "45"
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
       },
       {
-        "gamma": "4.24"
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "saturation": "-100"
+          },
+          {
+            "color": "#f5f5f5"
+          }
+        ]
       },
       {
-        "visibility": "simplified"
+        "featureType": "road",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          },
+          {
+            "color": "#666666"
+          }
+        ]
       },
       {
-        "hue": "#00ff90"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "saturation": "-100"
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "color": "#f5f5f5"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "simplified"
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "color": "#666666"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "saturation": "-25"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.station.airport",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "on"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "lightness": "50"
+        "featureType": "road.arterial",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "gamma": ".75"
+        "featureType": "transit",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "saturation": "-25"
+          }
+        ]
       },
       {
-        "saturation": "100"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels",
-    "stylers": [
+        "featureType": "transit.line",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
       {
-        "visibility": "simplified"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.icon",
-    "stylers": [
+        "featureType": "transit.station.airport",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
       {
-        "visibility": "off"
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "lightness": "50"
+          },
+          {
+            "gamma": ".75"
+          },
+          {
+            "saturation": "100"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       }
     ]
-  }
-]
-
     ''';
 
     double initialLat = widget.ubicacionInicialLat ?? 0.0;
@@ -409,39 +408,45 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   Future<Uint8List> _createCustomMarkerIcon(String imageUrl) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final double size = 135;
-    final double margin = 5.0;
+    final double size = 135.0;
+    final double borderWidth = 2.0;
+    final double padding = 3.0;
 
-    Paint shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.25)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3);
-    Path shadowPath = Path()
-      ..moveTo(size / 2, margin + 4 + 3)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4 + 3),
-          radius: Radius.circular(20), clockwise: false)
-      ..quadraticBezierTo(size, size / 2 + 3, size / 2, size * 1.3 + 3)
-      ..quadraticBezierTo(0, size / 2 + 3, size / 2, size * 0.2 + 4 + 3)
-      ..close();
-    canvas.drawPath(shadowPath, shadowPaint);
+    // Dibuja el círculo verde con borde negro
+    Paint borderPaint = Paint()
+      ..color = Color(0xFF1A1A1A) // Color del borde negro
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
 
-    Paint paint = Paint()..color = const Color.fromARGB(255, 16, 16, 16);
-    Path path = Path()
-      ..moveTo(size / 2, margin + 4)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4),
-          radius: Radius.circular(50), clockwise: false)
-      ..quadraticBezierTo(size, size / 2, size / 2, size * 1.3)
-      ..quadraticBezierTo(0, size / 2, size / 2, size * 0.2 + 4)
-      ..close();
-    canvas.drawPath(path, paint);
+    Paint circlePaint = Paint()..color = Color(0xFFF4F176); // Color verde
 
+    // Dibuja el círculo
+    canvas.drawCircle(
+      Offset(size / 2, size / 2),
+      size / 2 - borderWidth / 2, // Ajusta el radio para incluir el borde
+      circlePaint,
+    );
+
+    // Dibuja el borde
+    canvas.drawCircle(
+      Offset(size / 2, size / 2),
+      size / 2 - borderWidth / 2,
+      borderPaint,
+    );
+
+    // Cargar la imagen desde la URL
     final ui.Image image = await _loadImage(imageUrl);
-    final double imageSize = (size * 0.6 * 0.85) - margin * 2;
+    final double imageSize = size - 2 * (borderWidth + padding);
+
     final double imageX = (size - imageSize) / 2;
-    final double imageY = (size * 1.3 - imageSize) / 2;
+    final double imageY = (size - imageSize) / 2;
+
     final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
     final RRect rrect =
         RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
     canvas.clipRRect(rrect);
+
+    // Dibuja la imagen dentro del círculo
     canvas.drawImageRect(
       image,
       Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
@@ -449,9 +454,10 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       Paint(),
     );
 
+    // Convertir el lienzo a imagen
     final ui.Image markerAsImage = await pictureRecorder
         .endRecording()
-        .toImage(size.toInt(), (size * 1.3).toInt());
+        .toImage(size.toInt(), size.toInt());
     final ByteData? byteData =
         await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
@@ -476,7 +482,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       try {
         if (post.postUser != null) {
           final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty) {
+          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
@@ -498,7 +504,7 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                       post.placeInfo.latLng!.latitude,
                       post.placeInfo.latLng!.longitude,
                     );
-                    _selectedPostUser = post.postUser; // Guardar postUser
+                    _selectedPostUser = post.postUser;
                   });
                 },
               );
@@ -518,96 +524,6 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
     setState(() {
       _isInfoVisible = false;
     });
-  }
-
-  void _toggleMovableMarker() {
-    setState(() {
-      _isMovableMarkerVisible = !_isMovableMarkerVisible;
-      if (_isMovableMarkerVisible) {
-        _movableMarker = gmap.Marker(
-          markerId: gmap.MarkerId('movable_marker'),
-          position: initialCameraPosition.target,
-          draggable: true,
-          onDragEnd: (newPosition) {
-            setState(() {
-              _selectedMarkerPosition = newPosition;
-            });
-          },
-          onTap: () {
-            _showMovableMarkerInfo();
-          },
-          icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-            gmap.BitmapDescriptor.hueBlue,
-          ),
-        );
-      } else {
-        _movableMarker = null;
-      }
-    });
-  }
-
-  void _showMovableMarkerInfo() {
-    if (_selectedMarkerPosition != null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Ubicación Actual',
-                style: TextStyle(color: Colors.white),
-              ),
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Latitud: ${_selectedMarkerPosition!.latitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Longitud: ${_selectedMarkerPosition!.longitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  final flutterFlowLatLng = ff.LatLng(
-                    _selectedMarkerPosition!.latitude,
-                    _selectedMarkerPosition!.longitude,
-                  );
-                  widget.navigateTo(flutterFlowLatLng);
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                child: Text(
-                  'Crear Spot',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
   }
 
   void _toggleSearchBar() {
@@ -790,13 +706,14 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
             top: MediaQuery.of(context).size.height * 0.5 - 100,
             left: MediaQuery.of(context).size.width * 0.25,
             child: GestureDetector(
+              onTap: _hideInfoContainer,
               onDoubleTap: _handleMarkerTap,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black, // Fondo negro como en la imagen
+                  borderRadius: BorderRadius.circular(12), // Bordes redondeados
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black26,
@@ -808,23 +725,50 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (_selectedImageUrl.isNotEmpty)
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          _selectedImageUrl,
-                          width: double.infinity,
-                          height: 150,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    Stack(
+                      children: [
+                        if (_selectedImageUrl.isNotEmpty)
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              _selectedImageUrl,
+                              width: double.infinity,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        //Positioned(
+                        //top: 10,
+                        //right: 10,
+                        //child: Container(
+                        //decoration: BoxDecoration(
+                        //color:
+                        //  Colors.black.withOpacity(0.8), // Fondo oscuro
+                        //shape: BoxShape.circle,
+                        //border: Border.all(
+                        //color: Colors.yellow, // Borde amarillo
+                        //width: 2,
+                        //),
+                        //),
+                        //child: IconButton(
+                        //icon: Icon(
+                        //Icons.close,
+                        //color: Colors.yellow, // Icono amarillo
+                        //),
+                        //onPressed: _hideInfoContainer,
+                        //tooltip: 'Cerrar',
+                        //),
+                        //),
+                        //),
+                      ],
+                    ),
                     SizedBox(height: 10),
                     Text(
                       _selectedTitle,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -833,34 +777,42 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                     Text(
                       _selectedSubtitle,
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: const Color.fromARGB(255, 33, 32, 32),
+                        fontSize: 14,
+                        color: Colors.white60,
                       ),
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_selectedPostUser != null) {
+                            widget.navigateTo(_selectedPostUser!);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                        ),
+                        child: Text(
+                          'Ver Perfil',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-        Positioned(
-          bottom: 110,
-          right: 20,
-          child: FloatingActionButton(
-            onPressed: _toggleMovableMarker,
-            backgroundColor: Colors.black,
-            child: Icon(
-              Icons.add_location_alt,
-              color: Colors.white,
-              size: 24,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-        ),
       ],
     );
   }

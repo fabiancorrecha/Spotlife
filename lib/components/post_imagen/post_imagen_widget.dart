@@ -415,23 +415,10 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     5.0, 0.0, 0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    logFirebaseEvent(
-                                        'POST_IMAGEN_COMP_Icon_z9v558pi_ON_TAP');
-                                    logFirebaseEvent('Icon_navigate_to');
-
-                                    context.pushNamed('mapa_ir_lugar');
-                                  },
-                                  child: FaIcon(
-                                    FontAwesomeIcons.compass,
-                                    color: FlutterFlowTheme.of(context).icono,
-                                    size: 20.0,
-                                  ),
+                                child: FaIcon(
+                                  FontAwesomeIcons.compass,
+                                  color: FlutterFlowTheme.of(context).icono,
+                                  size: 20.0,
                                 ),
                               ),
                             ],

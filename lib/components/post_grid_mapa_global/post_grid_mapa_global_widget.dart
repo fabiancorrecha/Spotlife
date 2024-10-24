@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -22,8 +21,6 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     with TickerProviderStateMixin {
   late PostGridMapaGlobalModel _model;
 
-  LatLng? currentUserLocationValue;
-
   final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -37,8 +34,6 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     super.initState();
     _model = createModel(context, () => PostGridMapaGlobalModel());
 
-    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -66,28 +61,11 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 12.0,
-            height: 12.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                FlutterFlowTheme.of(context).primaryBackground,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'esAmigos',
-          isEqualTo: false,
+          'esPublico',
+          isEqualTo: true,
         ),
       ),
       builder: (context, snapshot) {
@@ -117,12 +95,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
             padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Builder(
               builder: (context) {
-                final listaUserPost = functions
-                    .getPlacesMaximumDistance(
-                        containerUserPostsRecordList.toList(),
-                        currentUserLocationValue!,
-                        5000.0)
-                    .toList();
+                final listaUserPost = containerUserPostsRecordList.toList();
 
                 return GridView.builder(
                   padding: EdgeInsets.zero,

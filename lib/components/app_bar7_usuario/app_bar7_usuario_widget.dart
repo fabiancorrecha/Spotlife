@@ -84,7 +84,7 @@ class _AppBar7UsuarioWidgetState extends State<AppBar7UsuarioWidget> {
                   onTap: () async {
                     logFirebaseEvent('APP_BAR7_USUARIO_Card_ic5nwnu0_ON_TAP');
                     logFirebaseEvent('Card_navigate_back');
-                    context.pop();
+                    context.safePop();
                   },
                   child: Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,

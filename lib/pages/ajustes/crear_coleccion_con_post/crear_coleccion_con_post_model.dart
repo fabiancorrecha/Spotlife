@@ -34,6 +34,12 @@ class CrearColeccionConPostModel
   TextEditingController? descripcionColeccionTextController;
   String? Function(BuildContext, String?)?
       descripcionColeccionTextControllerValidator;
+  // State field(s) for CheckboxPublico widget.
+  bool? checkboxPublicoValue;
+  // State field(s) for CheckboxAmigos widget.
+  bool? checkboxAmigosValue;
+  // State field(s) for CheckboxPrivado widget.
+  bool? checkboxPrivadoValue;
   // State field(s) for PlacePicker widget.
   FFPlace placePickerValue = const FFPlace();
   // Model for boton1 component.

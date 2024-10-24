@@ -812,3 +812,25 @@ String? createdDynamicLink(
   dynamicLinkCombinated += link;
   return dynamicLinkCombinated;
 }
+
+int? lenghtCaracter(String description) {
+  // retorname el numero de caracteres que tiene una palabra
+  return description.length;
+}
+
+List<double> converLatLongToDouble(LatLng? location) {
+  location ??= LatLng(0.0, 0.0);
+
+  return [location.latitude, location.longitude];
+}
+
+LatLng converDoubleToLatLong(
+  double? lat,
+  double? long,
+) {
+  // null safety
+  lat ??= 0.0;
+  long ??= 0.0;
+
+  return LatLng(lat, long);
+}

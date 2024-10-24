@@ -132,6 +132,11 @@ class UserPostsRecord extends FirestoreRecord {
   String get postPhoto => _postPhoto ?? '';
   bool hasPostPhoto() => _postPhoto != null;
 
+  // "ride" field.
+  DocumentReference? _ride;
+  DocumentReference? get ride => _ride;
+  bool hasRide() => _ride != null;
+
   void _initializeFields() {
     _postTitle = snapshotData['postTitle'] as String?;
     _postDescription = snapshotData['postDescription'] as String?;
@@ -156,6 +161,7 @@ class UserPostsRecord extends FirestoreRecord {
     _esPrivado = snapshotData['esPrivado'] as bool?;
     _postPhotolist = getDataList(snapshotData['PostPhotolist']);
     _postPhoto = snapshotData['postPhoto'] as String?;
+    _ride = snapshotData['ride'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -247,6 +253,11 @@ class UserPostsRecord extends FirestoreRecord {
             () => snapshot.data['PostPhotolist'].toList(),
           ),
           'postPhoto': snapshot.data['postPhoto'],
+          'ride': convertAlgoliaParam(
+            snapshot.data['ride'],
+            ParamType.DocumentReference,
+            false,
+          ),
         },
         UserPostsRecord.collection.doc(snapshot.objectID),
       );
@@ -302,6 +313,7 @@ Map<String, dynamic> createUserPostsRecordData({
   bool? esAmigos,
   bool? esPrivado,
   String? postPhoto,
+  DocumentReference? ride,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -324,6 +336,7 @@ Map<String, dynamic> createUserPostsRecordData({
       'esAmigos': esAmigos,
       'esPrivado': esPrivado,
       'postPhoto': postPhoto,
+      'ride': ride,
     }.withoutNulls,
   );
 
@@ -361,7 +374,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.esAmigos == e2?.esAmigos &&
         e1?.esPrivado == e2?.esPrivado &&
         listEquality.equals(e1?.postPhotolist, e2?.postPhotolist) &&
-        e1?.postPhoto == e2?.postPhoto;
+        e1?.postPhoto == e2?.postPhoto &&
+        e1?.ride == e2?.ride;
   }
 
   @override
@@ -388,7 +402,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.esAmigos,
         e?.esPrivado,
         e?.postPhotolist,
-        e?.postPhoto
+        e?.postPhoto,
+        e?.ride
       ]);
 
   @override
