@@ -93,7 +93,7 @@ class _PaginaEnContruccionWidgetState extends State<PaginaEnContruccionWidget> {
                   children: [
                     Expanded(
                       child: Lottie.asset(
-                        'assets/lottie_animations/Animation_-_1721732948381.json',
+                        'assets/jsons/Animation_-_1721732948381.json',
                         width: 350.0,
                         height: 400.0,
                         fit: BoxFit.contain,

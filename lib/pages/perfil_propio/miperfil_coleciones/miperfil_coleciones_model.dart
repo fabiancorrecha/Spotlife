@@ -1,6 +1,5 @@
+import '/backend/backend.dart';
 import '/components/app_bar7_usuario/app_bar7_usuario_widget.dart';
-import '/components/buscador_colecciones/buscador_colecciones_widget.dart';
-import '/components/grid_colecciones/grid_colecciones_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/nav_bar2/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -15,10 +14,14 @@ class MiperfilColecionesModel
   late AppBar7UsuarioModel appBar7UsuarioModel;
   // Model for navBar2 component.
   late NavBar2Model navBar2Model;
-  // Model for buscadorColecciones component.
-  late BuscadorColeccionesModel buscadorColeccionesModel;
-  // Model for GridColecciones component.
-  late GridColeccionesModel gridColeccionesModel;
+  // State field(s) for TextFieldBuscar widget.
+  final textFieldBuscarKey = GlobalKey();
+  FocusNode? textFieldBuscarFocusNode;
+  TextEditingController? textFieldBuscarTextController;
+  String? textFieldBuscarSelectedOption;
+  String? Function(BuildContext, String?)?
+      textFieldBuscarTextControllerValidator;
+  List<CollectionsRecord> simpleSearchResults = [];
   // Model for navBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -26,9 +29,6 @@ class MiperfilColecionesModel
   void initState(BuildContext context) {
     appBar7UsuarioModel = createModel(context, () => AppBar7UsuarioModel());
     navBar2Model = createModel(context, () => NavBar2Model());
-    buscadorColeccionesModel =
-        createModel(context, () => BuscadorColeccionesModel());
-    gridColeccionesModel = createModel(context, () => GridColeccionesModel());
     navBar1Model = createModel(context, () => NavBar1Model());
   }
 
@@ -36,8 +36,8 @@ class MiperfilColecionesModel
   void dispose() {
     appBar7UsuarioModel.dispose();
     navBar2Model.dispose();
-    buscadorColeccionesModel.dispose();
-    gridColeccionesModel.dispose();
+    textFieldBuscarFocusNode?.dispose();
+
     navBar1Model.dispose();
   }
 }

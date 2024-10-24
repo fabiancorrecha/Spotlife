@@ -112,7 +112,7 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
                   ),
                   Expanded(
                     child: Text(
-                      widget.userPost!.placeInfo.name,
+                      widget.userPost!.placeInfo.address,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyMediumFamily,

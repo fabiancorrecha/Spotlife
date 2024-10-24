@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton1/boton1_widget.dart';
-import '/components/notificacion_box/notificacion_box_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'ingreso_olvido_contrasena_model.dart';
 export 'ingreso_olvido_contrasena_model.dart';
 
@@ -70,8 +68,10 @@ class _IngresoOlvidoContrasenaWidgetState
                 color: Colors.white,
                 size: 30.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                logFirebaseEvent('INGRESO_OLVIDO_CONTRASENA_chevron_left_I');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.safePop();
               },
             ),
             title: Text(
@@ -288,31 +288,6 @@ class _IngresoOlvidoContrasenaWidgetState
                         FFAppState().contrasena = '';
                         FFAppState().recordar = false;
                         safeSetState(() {});
-                        logFirebaseEvent('boton1_bottom_sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          barrierColor: const Color(0x00000000),
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: GestureDetector(
-                                onTap: () => FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: const SizedBox(
-                                    height: 82.0,
-                                    child: NotificacionBoxWidget(
-                                      mensaje:
-                                          'Revisa tu correo electrónico para continuar y restablecer tu contraseña',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
                       },
                     ),
                   ).addWalkthrough(

@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/boton_quinto/boton_quinto_widget.dart';
+import '/components/cuenta_bloqueadas/cuenta_bloqueadas_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'privacidad_old_model.dart';
 export 'privacidad_old_model.dart';
 
@@ -283,9 +285,24 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                     accion: () async {
                       logFirebaseEvent(
                           'PRIVACIDAD_OLD_Container_5qawsx3r_CALLBA');
-                      logFirebaseEvent('botonQuinto_navigate_to');
-
-                      context.pushNamed('cuentasBloqueadas');
+                      logFirebaseEvent('botonQuinto_bottom_sheet');
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return WebViewAware(
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                child: const CuentaBloqueadasWidget(),
+                              ),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
                     },
                   ),
                 ),

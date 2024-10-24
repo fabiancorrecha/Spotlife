@@ -146,8 +146,10 @@ final parametersBuilderMap =
           'index': getParameter<int>(data, 'index'),
         },
       ),
-  'mapa_ir_lugar': (data) async => const ParameterData(
-        allParams: {},
+  'mapa_ir_lugar': (data) async => ParameterData(
+        allParams: {
+          'userPost': getParameter<DocumentReference>(data, 'userPost'),
+        },
       ),
   'seguidoresYSeguidos': (data) async => ParameterData(
         allParams: {
@@ -159,6 +161,8 @@ final parametersBuilderMap =
           'coleccion': await getDocumentParameter<CollectionsRecord>(
               data, 'coleccion', CollectionsRecord.fromSnapshot),
           'esFavorito': getParameter<bool>(data, 'esFavorito'),
+          'usuario': getParameter<DocumentReference>(data, 'usuario'),
+          'refColeccion': getParameter<DocumentReference>(data, 'refColeccion'),
         },
       ),
   'miperfilMapaPin2': (data) async => ParameterData(
@@ -190,6 +194,7 @@ final parametersBuilderMap =
   'otroPerfilMapa': (data) async => ParameterData(
         allParams: {
           'usuario': getParameter<DocumentReference>(data, 'usuario'),
+          'refColeccion': getParameter<DocumentReference>(data, 'refColeccion'),
         },
       ),
   'otroPerfilColecciones': (data) async => ParameterData(
@@ -212,7 +217,6 @@ final parametersBuilderMap =
         },
       ),
   'paginaTOS': ParameterData.none(),
-  'cuentasBloqueadas': ParameterData.none(),
   'detallePost': (data) async {
     final allParams = {
       'post': await getDocumentParameter<UserPostsRecord>(
@@ -290,6 +294,18 @@ final parametersBuilderMap =
       ),
   'PaginaEnContruccion': ParameterData.none(),
   'mapaAmigos': ParameterData.none(),
+  'resetPass': (data) async => ParameterData(
+        allParams: {
+          'oobCode': getParameter<String>(data, 'oobCode'),
+        },
+      ),
+  'mapaPrincipaRespaldo': ParameterData.none(),
+  'VistaPostlist': (data) async => ParameterData(
+        allParams: {
+          'user': getParameter<DocumentReference>(data, 'user'),
+          'verCometarios': getParameter<bool>(data, 'verCometarios'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

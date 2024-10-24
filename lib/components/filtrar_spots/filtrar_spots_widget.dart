@@ -123,13 +123,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.mapaValue ??= true,
+                              value: _model.mapaValue ??= FFAppState().Mapa,
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.mapaValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Mapa_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Mapa_update_app_state');
+                                  FFAppState().Mapa = true;
+                                  FFAppState().Post = false;
+                                  safeSetState(() {});
                                   logFirebaseEvent('Mapa_set_form_field');
                                   safeSetState(() {
                                     _model.mapaValue = true;
@@ -138,27 +142,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.spotValue = false;
                                   });
-                                  if ((_model.mapaValue == true) &&
-                                      (_model.globalValue == true)) {
-                                    logFirebaseEvent('Mapa_update_app_state');
-                                    FFAppState().MapaGlobal = true;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else if ((_model.mapaValue == true) &&
-                                      (_model.soloAmigosValue == true)) {
-                                    logFirebaseEvent('Mapa_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = true;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else {
-                                    return;
-                                  }
                                 }
                               },
                               side: BorderSide(
@@ -223,13 +206,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.spotValue ??= false,
+                              value: _model.spotValue ??= FFAppState().Post,
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.spotValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Spot_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Spot_update_app_state');
+                                  FFAppState().Mapa = false;
+                                  FFAppState().Post = true;
+                                  safeSetState(() {});
                                   logFirebaseEvent('Spot_set_form_field');
                                   safeSetState(() {
                                     _model.mapaValue = false;
@@ -238,27 +225,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.spotValue = true;
                                   });
-                                  if ((_model.spotValue == true) &&
-                                      (_model.globalValue == true)) {
-                                    logFirebaseEvent('Spot_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = true;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else if ((_model.spotValue == true) &&
-                                      (_model.soloAmigosValue == true)) {
-                                    logFirebaseEvent('Spot_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = true;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else {
-                                    return;
-                                  }
                                 }
                               },
                               side: BorderSide(
@@ -335,13 +301,19 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).primary,
                             ),
                             child: Checkbox(
-                              value: _model.soloAmigosValue ??= false,
+                              value: _model.soloAmigosValue ??=
+                                  FFAppState().Amigos,
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.soloAmigosValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_SoloAmigos_ON_TOGGLE_ON');
+                                  logFirebaseEvent(
+                                      'SoloAmigos_update_app_state');
+                                  FFAppState().Amigos = true;
+                                  FFAppState().Global = false;
+                                  FFAppState().update(() {});
                                   logFirebaseEvent('SoloAmigos_set_form_field');
                                   safeSetState(() {
                                     _model.soloAmigosValue = true;
@@ -350,13 +322,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.globalValue = false;
                                   });
-                                  logFirebaseEvent(
-                                      'SoloAmigos_update_app_state');
-                                  FFAppState().MapaAmigo = true;
-                                  FFAppState().MapaGlobal = false;
-                                  FFAppState().PostAmigo = true;
-                                  FFAppState().PostGlobal = false;
-                                  FFAppState().update(() {});
                                 }
                               },
                               side: BorderSide(
@@ -420,13 +385,17 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).primary,
                             ),
                             child: Checkbox(
-                              value: _model.globalValue ??= true,
+                              value: _model.globalValue ??= FFAppState().Global,
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.globalValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Global_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Global_update_app_state');
+                                  FFAppState().Amigos = false;
+                                  FFAppState().Global = true;
+                                  FFAppState().update(() {});
                                   logFirebaseEvent('Global_set_form_field');
                                   safeSetState(() {
                                     _model.soloAmigosValue = false;
@@ -435,12 +404,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.globalValue = true;
                                   });
-                                  logFirebaseEvent('Global_update_app_state');
-                                  FFAppState().MapaAmigo = false;
-                                  FFAppState().MapaGlobal = true;
-                                  FFAppState().PostAmigo = false;
-                                  FFAppState().PostGlobal = true;
-                                  FFAppState().update(() {});
                                 }
                               },
                               side: BorderSide(
@@ -499,42 +462,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                     accion: () async {
                       logFirebaseEvent(
                           'FILTRAR_SPOTS_Container_k2obmszl_CALLBAC');
-                      if (((_model.mapaValue == true) &&
-                              (FFAppState().MapaGlobal == true)) ||
-                          ((_model.spotValue == true) &&
-                              (FFAppState().PostGlobal == true))) {
-                        logFirebaseEvent('boton1_navigate_to');
-
-                        context.pushNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      } else if (((_model.mapaValue == true) &&
-                              (FFAppState().MapaAmigo == true)) ||
-                          ((_model.spotValue == true) &&
-                              (FFAppState().PostAmigo == true))) {
-                        logFirebaseEvent('boton1_navigate_to');
-
-                        context.pushNamed(
-                          'mapaAmigos',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      } else {
-                        return;
-                      }
-
                       logFirebaseEvent('boton1_bottom_sheet');
                       Navigator.pop(context);
                     },

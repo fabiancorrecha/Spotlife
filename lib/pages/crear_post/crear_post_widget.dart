@@ -1,20 +1,23 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/walkthroughs/crear_post.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,23 +52,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
     _model = createModel(context, () => CrearPostModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'CrearPost'});
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('CREAR_POST_PAGE_CrearPost_ON_INIT_STATE');
-      currentUserLocationValue =
-          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
-      logFirebaseEvent('CrearPost_update_app_state');
-      FFAppState().updateUbicationStruct(
-        (e) => e..latLng = currentUserLocationValue,
-      );
-      FFAppState().update(() {});
-    });
-
     _model.tituloColeccionTextController ??= TextEditingController();
     _model.tituloColeccionFocusNode ??= FocusNode();
 
     _model.descripcionColeccionTextController ??= TextEditingController();
     _model.descripcionColeccionFocusNode ??= FocusNode();
+
+    _model.editarUbicacionTextController ??= TextEditingController();
 
     _model.switchValue1 = false;
     _model.switchValue2 = false;
@@ -186,10 +179,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     onPressed: () async {
                                       logFirebaseEvent(
                                           'CREAR_POST_PAGE_PUBLICAR_BTN_ON_TAP');
-                                      currentUserLocationValue =
-                                          await getCurrentUserLocation(
-                                              defaultLocation:
-                                                  const LatLng(0.0, 0.0));
+                                      var shouldSetState = false;
                                       logFirebaseEvent('Button_validate_form');
                                       if (_model.formKey.currentState == null ||
                                           !_model.formKey.currentState!
@@ -197,133 +187,245 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         return;
                                       }
                                       if (widget.esImagen!) {
-                                        logFirebaseEvent(
-                                            'Button_backend_call');
-
-                                        var userPostsRecordReference1 =
-                                            UserPostsRecord.collection
-                                                .doc();
-                                        await userPostsRecordReference1
-                                            .set({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloColeccionTextController
-                                                .text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            toFacebook: _model.switchValue1,
-                                            toInstagram:
-                                                _model.switchValue2,
-                                            toTwitter: _model.switchValue3,
-                                            placeInfo:
-                                                createPlaceInfoStruct(
-                                              latLng:
-                                                  currentUserLocationValue,
-                                              clearUnsetFields: false,
-                                              create: true,
-                                            ),
-                                            postDescription: _model
-                                                .descripcionColeccionTextController
-                                                .text,
-                                            esVideo: false,
-                                            esPublico: _model.varPublico,
-                                            esAmigos: _model.varAmigos,
-                                            esPrivado: _model.varPrivado,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'collections': _model
-                                                  .listaColeccionesSeleccionadas,
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
-                                            },
-                                          ),
-                                        });
-                                        _model.refPost = UserPostsRecord
-                                            .getDocumentFromData({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloColeccionTextController
-                                                .text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            toFacebook: _model.switchValue1,
-                                            toInstagram:
-                                                _model.switchValue2,
-                                            toTwitter: _model.switchValue3,
-                                            placeInfo:
-                                                createPlaceInfoStruct(
-                                              latLng:
-                                                  currentUserLocationValue,
-                                              clearUnsetFields: false,
-                                              create: true,
-                                            ),
-                                            postDescription: _model
-                                                .descripcionColeccionTextController
-                                                .text,
-                                            esVideo: false,
-                                            esPublico: _model.varPublico,
-                                            esAmigos: _model.varAmigos,
-                                            esPrivado: _model.varPrivado,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'collections': _model
-                                                  .listaColeccionesSeleccionadas,
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
-                                            },
-                                          ),
-                                        }, userPostsRecordReference1);
-                                        logFirebaseEvent(
-                                            'Button_navigate_to');
-
-                                        context.pushNamed('perfilPropio');
-                                                                            } else {
-                                        if (_model.uploadedFileUrl2 != '') {
+                                        if ((_model.checkboxPublicoValue1 ==
+                                                true) ||
+                                            (_model.checkboxPrivadoValue ==
+                                                true)) {
                                           logFirebaseEvent(
                                               'Button_backend_call');
 
-                                          await UserPostsRecord.collection
-                                              .doc()
+                                          var userPostsRecordReference1 =
+                                              UserPostsRecord.collection
+                                                  .doc();
+                                          await userPostsRecordReference1
                                               .set({
                                             ...createUserPostsRecordData(
                                               postTitle: _model
                                                   .tituloColeccionTextController
                                                   .text,
-                                              postUser: currentUserReference,
-                                              timePosted: getCurrentTimestamp,
-                                              toFacebook: _model.switchValue1,
+                                              postUser:
+                                                  currentUserReference,
+                                              timePosted:
+                                                  getCurrentTimestamp,
+                                              toFacebook:
+                                                  _model.switchValue1,
                                               toInstagram:
                                                   _model.switchValue2,
-                                              toTwitter: _model.switchValue3,
+                                              toTwitter:
+                                                  _model.switchValue3,
                                               placeInfo:
-                                                  createPlaceInfoStruct(
-                                                latLng:
-                                                    currentUserLocationValue,
+                                                  updatePlaceInfoStruct(
+                                                PlaceInfoStruct(
+                                                  address: FFAppState()
+                                                      .ubication
+                                                      .address,
+                                                  latLng: FFAppState()
+                                                      .ubication
+                                                      .latLng,
+                                                ),
                                                 clearUnsetFields: false,
                                                 create: true,
                                               ),
                                               postDescription: _model
                                                   .descripcionColeccionTextController
                                                   .text,
-                                              video: _model.uploadedFileUrl2,
-                                              esVideo: true,
-                                              esPublico: _model.varPublico,
+                                              esVideo: false,
+                                              esPublico: _model
+                                                  .checkboxPublicoValue1,
                                               esAmigos: _model.varAmigos,
-                                              esPrivado: _model.varPrivado,
+                                              esPrivado: _model
+                                                  .checkboxPrivadoValue,
                                             ),
                                             ...mapToFirestore(
                                               {
                                                 'collections': _model
                                                     .listaColeccionesSeleccionadas,
+                                                'PostPhotolist': _model
+                                                    .uploadedFileUrls1,
                                               },
                                             ),
                                           });
+                                          _model.refPost = UserPostsRecord
+                                              .getDocumentFromData({
+                                            ...createUserPostsRecordData(
+                                              postTitle: _model
+                                                  .tituloColeccionTextController
+                                                  .text,
+                                              postUser:
+                                                  currentUserReference,
+                                              timePosted:
+                                                  getCurrentTimestamp,
+                                              toFacebook:
+                                                  _model.switchValue1,
+                                              toInstagram:
+                                                  _model.switchValue2,
+                                              toTwitter:
+                                                  _model.switchValue3,
+                                              placeInfo:
+                                                  updatePlaceInfoStruct(
+                                                PlaceInfoStruct(
+                                                  address: FFAppState()
+                                                      .ubication
+                                                      .address,
+                                                  latLng: FFAppState()
+                                                      .ubication
+                                                      .latLng,
+                                                ),
+                                                clearUnsetFields: false,
+                                                create: true,
+                                              ),
+                                              postDescription: _model
+                                                  .descripcionColeccionTextController
+                                                  .text,
+                                              esVideo: false,
+                                              esPublico: _model
+                                                  .checkboxPublicoValue1,
+                                              esAmigos: _model.varAmigos,
+                                              esPrivado: _model
+                                                  .checkboxPrivadoValue,
+                                            ),
+                                            ...mapToFirestore(
+                                              {
+                                                'collections': _model
+                                                    .listaColeccionesSeleccionadas,
+                                                'PostPhotolist': _model
+                                                    .uploadedFileUrls1,
+                                              },
+                                            ),
+                                          }, userPostsRecordReference1);
+                                          shouldSetState = true;
                                           logFirebaseEvent(
                                               'Button_navigate_to');
 
                                           context.pushNamed('perfilPropio');
+
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
+                                          return;
+                                        } else {
+                                          logFirebaseEvent(
+                                              'Button_show_snack_bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Recuerda seleccionar la privacidad de tu post',
+                                                style: TextStyle(
+                                                  color:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              ),
+                                              duration: const Duration(
+                                                  milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                            ),
+                                          );
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
+                                          return;
+                                        }
+                                                                            } else {
+                                        if (_model.uploadedFileUrl2 != '') {
+                                          if ((_model.checkboxPublicoValue1 ==
+                                                  true) ||
+                                              (_model.checkboxPrivadoValue ==
+                                                  true)) {
+                                            logFirebaseEvent(
+                                                'Button_backend_call');
+
+                                            await UserPostsRecord.collection
+                                                .doc()
+                                                .set({
+                                              ...createUserPostsRecordData(
+                                                postTitle: _model
+                                                    .tituloColeccionTextController
+                                                    .text,
+                                                postUser:
+                                                    currentUserReference,
+                                                timePosted:
+                                                    getCurrentTimestamp,
+                                                toFacebook:
+                                                    _model.switchValue1,
+                                                toInstagram:
+                                                    _model.switchValue2,
+                                                toTwitter:
+                                                    _model.switchValue3,
+                                                placeInfo:
+                                                    updatePlaceInfoStruct(
+                                                  PlaceInfoStruct(
+                                                    address: FFAppState()
+                                                        .ubication
+                                                        .address,
+                                                    latLng: FFAppState()
+                                                        .ubication
+                                                        .latLng,
+                                                  ),
+                                                  clearUnsetFields: false,
+                                                  create: true,
+                                                ),
+                                                postDescription: _model
+                                                    .descripcionColeccionTextController
+                                                    .text,
+                                                video:
+                                                    _model.uploadedFileUrl2,
+                                                esVideo: true,
+                                                esPublico: _model
+                                                    .checkboxPublicoValue1,
+                                                esAmigos: _model.varAmigos,
+                                                esPrivado: _model
+                                                    .checkboxPrivadoValue,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'collections': _model
+                                                      .listaColeccionesSeleccionadas,
+                                                },
+                                              ),
+                                            });
+                                            logFirebaseEvent(
+                                                'Button_navigate_to');
+
+                                            context.pushNamed('perfilPropio');
+
+                                            if (shouldSetState) {
+                                              safeSetState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            logFirebaseEvent(
+                                                'Button_show_snack_bar');
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Recuerda seleccionar la privacidad de tu post',
+                                                  style: TextStyle(
+                                                    color:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .error,
+                                                  ),
+                                                ),
+                                                duration: const Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                              ),
+                                            );
+                                            if (shouldSetState) {
+                                              safeSetState(() {});
+                                            }
+                                            return;
+                                          }
                                         } else {
                                           logFirebaseEvent(
                                               'Button_show_snack_bar');
@@ -348,7 +450,7 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         }
                                       }
                                     
-                                      safeSetState(() {});
+                                      if (shouldSetState) safeSetState(() {});
                                     },
                                     text: FFLocalizations.of(context).getText(
                                       'iegyvusu' /* Publicar */,
@@ -1011,8 +1113,111 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                 children: [
                                   Expanded(
                                     child: Text(
+                                      FFAppState().ubication.address,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                  FlutterFlowIconButton(
+                                    borderColor: const Color(0x00F4F176),
+                                    borderRadius: 20.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    icon: Icon(
+                                      Icons.refresh_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                    showLoadingIndicator: true,
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'CREAR_POST_PAGE_refresh_sharp_ICN_ON_TAP');
+                                      currentUserLocationValue =
+                                          await getCurrentUserLocation(
+                                              defaultLocation:
+                                                  const LatLng(0.0, 0.0));
+                                      logFirebaseEvent(
+                                          'IconButton_backend_call');
+                                      _model.apiResulth5l =
+                                          await GoogleMapsLocationConverterCall
+                                              .call(
+                                        lat: functions
+                                            .converLatLongToDouble(
+                                                currentUserLocationValue)
+                                            .first,
+                                        lng: functions
+                                            .converLatLongToDouble(
+                                                currentUserLocationValue)
+                                            .last,
+                                      );
+
+                                      if ((_model.apiResulth5l?.succeeded ??
+                                          true)) {
+                                        logFirebaseEvent(
+                                            'IconButton_update_app_state');
+                                        FFAppState().ubication =
+                                            PlaceInfoStruct(
+                                          latLng: currentUserLocationValue,
+                                          address:
+                                              GoogleMapsLocationConverterCall
+                                                  .longAddress(
+                                            (_model.apiResulth5l?.jsonBody ??
+                                                ''),
+                                          ),
+                                        );
+                                        FFAppState().update(() {});
+                                      } else {
+                                        logFirebaseEvent(
+                                            'IconButton_show_snack_bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Error no se pudo registrar tu direccion actual',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                              ),
+                                            ),
+                                            duration:
+                                                const Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                          ),
+                                        );
+                                      }
+
+                                      safeSetState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Text(
                                       FFLocalizations.of(context).getText(
-                                        'u8a2fojs' /* ¿Deseas editar tu ubicacion ac... */,
+                                        'w9ro86pp' /* ¿Deseas editar tu ubicacion ac... */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -1064,63 +1269,353 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                             if (_model.editarDireccion == true)
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
+                                    16.0, 10.0, 16.0, 10.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 24.0),
-                                        child: FlutterFlowPlacePicker(
-                                          iOSGoogleMapsApiKey:
-                                              'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
-                                          androidGoogleMapsApiKey:
-                                              'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
-                                          webGoogleMapsApiKey:
-                                              'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
-                                          onSelect: (place) async {
-                                            safeSetState(() => _model
-                                                .placePickerValue = place);
+                                            0.0, 0.0, 9.0, 0.0),
+                                        child: Autocomplete<String>(
+                                          initialValue: const TextEditingValue(),
+                                          optionsBuilder: (textEditingValue) {
+                                            if (textEditingValue.text == '') {
+                                              return const Iterable<
+                                                  String>.empty();
+                                            }
+                                            return GooglePlaceCall.direccion(
+                                              (_model.apiResultpbi?.jsonBody ??
+                                                  ''),
+                                            )!
+                                                .where((option) {
+                                              final lowercaseOption =
+                                                  option.toLowerCase();
+                                              return lowercaseOption.contains(
+                                                  textEditingValue.text
+                                                      .toLowerCase());
+                                            });
                                           },
-                                          defaultText:
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                            'h3tmy3rl' /* Etiqueta la ubicación */,
-                                          ),
-                                          icon: const Icon(
-                                            FFIcons.kpinFilled,
-                                            color: Colors.white,
-                                            size: 16.0,
-                                          ),
-                                          buttonOptions: FFButtonOptions(
-                                            width: 200.0,
-                                            height: 40.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .fondoIcono,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily,
-                                                      letterSpacing: 0.0,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
+                                          optionsViewBuilder:
+                                              (context, onSelected, options) {
+                                            return AutocompleteOptionsList(
+                                              textFieldKey:
+                                                  _model.editarUbicacionKey,
+                                              textController: _model
+                                                  .editarUbicacionTextController!,
+                                              options: options.toList(),
+                                              onSelected: onSelected,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                              textHighlightStyle: const TextStyle(),
+                                              elevation: 4.0,
+                                              optionBackgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              optionHighlightColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              maxHeight: 200.0,
+                                            );
+                                          },
+                                          onSelected: (String selection) {
+                                            safeSetState(() => _model
+                                                    .editarUbicacionSelectedOption =
+                                                selection);
+                                            FocusScope.of(context).unfocus();
+                                          },
+                                          fieldViewBuilder: (
+                                            context,
+                                            textEditingController,
+                                            focusNode,
+                                            onEditingComplete,
+                                          ) {
+                                            _model.editarUbicacionFocusNode =
+                                                focusNode;
+
+                                            _model.editarUbicacionTextController =
+                                                textEditingController;
+                                            return TextFormField(
+                                              key: _model.editarUbicacionKey,
+                                              controller: textEditingController,
+                                              focusNode: focusNode,
+                                              onEditingComplete:
+                                                  onEditingComplete,
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.editarUbicacionTextController',
+                                                const Duration(milliseconds: 0),
+                                                () async {
+                                                  logFirebaseEvent(
+                                                      'CREAR_POST_editarUbicacion_ON_TEXTFIELD_');
+                                                  logFirebaseEvent(
+                                                      'editarUbicacion_backend_call');
+                                                  _model.apiResultpbi =
+                                                      await GooglePlaceCall
+                                                          .call(
+                                                    yourQuery: _model
+                                                        .editarUbicacionTextController
+                                                        .text,
+                                                  );
+
+                                                  if ((_model.apiResultpbi
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    logFirebaseEvent(
+                                                        'editarUbicacion_update_app_state');
+                                                    FFAppState()
+                                                        .updateUbicationStruct(
+                                                      (e) => e
+                                                        ..address =
+                                                            GooglePlaceCall
+                                                                .direccion(
+                                                          (_model.apiResultpbi
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )?.first
+                                                        ..latLng = functions
+                                                            .converDoubleToLatLong(
+                                                                GooglePlaceCall
+                                                                    .latitud(
+                                                                  (_model.apiResultpbi
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ),
+                                                                GooglePlaceCall
+                                                                    .longitud(
+                                                                  (_model.apiResultpbi
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )),
+                                                    );
+                                                    FFAppState().update(() {});
+                                                  } else {
+                                                    logFirebaseEvent(
+                                                        'editarUbicacion_show_snack_bar');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Error al encontrar tu ubicacion!',
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .error,
+                                                          ),
+                                                        ),
+                                                        duration: const Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBackground,
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  safeSetState(() {});
+                                                },
+                                              ),
+                                              autofocus: false,
+                                              textCapitalization:
+                                                  TextCapitalization.sentences,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                hintText:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'a62jq0dn' /* Editar nueva ubicacion */,
+                                                ),
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyMediumFamily),
-                                                    ),
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 0.5,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          28.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    width: 0.5,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          28.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 0.5,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          28.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 0.5,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          28.0),
+                                                ),
+                                                filled: true,
+                                                suffixIcon: _model
+                                                        .editarUbicacionTextController!
+                                                        .text
+                                                        .isNotEmpty
+                                                    ? InkWell(
+                                                        onTap: () async {
+                                                          _model
+                                                              .editarUbicacionTextController
+                                                              ?.clear();
+                                                          logFirebaseEvent(
+                                                              'CREAR_POST_editarUbicacion_ON_TEXTFIELD_');
+                                                          logFirebaseEvent(
+                                                              'editarUbicacion_backend_call');
+                                                          _model.apiResultpbi =
+                                                              await GooglePlaceCall
+                                                                  .call(
+                                                            yourQuery: _model
+                                                                .editarUbicacionTextController
+                                                                .text,
+                                                          );
+
+                                                          if ((_model
+                                                                  .apiResultpbi
+                                                                  ?.succeeded ??
+                                                              true)) {
+                                                            logFirebaseEvent(
+                                                                'editarUbicacion_update_app_state');
+                                                            FFAppState()
+                                                                .updateUbicationStruct(
+                                                              (e) => e
+                                                                ..address =
+                                                                    GooglePlaceCall
+                                                                        .direccion(
+                                                                  (_model.apiResultpbi
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )?.first
+                                                                ..latLng = functions
+                                                                    .converDoubleToLatLong(
+                                                                        GooglePlaceCall
+                                                                            .latitud(
+                                                                          (_model.apiResultpbi?.jsonBody ??
+                                                                              ''),
+                                                                        ),
+                                                                        GooglePlaceCall
+                                                                            .longitud(
+                                                                          (_model.apiResultpbi?.jsonBody ??
+                                                                              ''),
+                                                                        )),
+                                                            );
+                                                            FFAppState()
+                                                                .update(() {});
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'editarUbicacion_show_snack_bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Error al encontrar tu ubicacion!',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                  ),
+                                                                ),
+                                                                duration: const Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                              ),
+                                                            );
+                                                          }
+
+                                                          safeSetState(() {});
+                                                          safeSetState(() {});
+                                                        },
+                                                        child: const Icon(
+                                                          Icons.clear,
+                                                          color:
+                                                              Color(0xFF757575),
+                                                          size: 22.0,
+                                                        ),
+                                                      )
+                                                    : null,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                              maxLines: 3,
+                                              minLines: 1,
+                                              validator: _model
+                                                  .editarUbicacionTextControllerValidator
+                                                  .asValidator(context),
+                                            );
+                                          },
                                         ),
                                       ),
                                     ),
@@ -1201,78 +1696,96 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'CREAR_POST_PAGE_Row_q1mp5e13_ON_TAP');
-                                            if (!_model.varPublico) {
-                                              logFirebaseEvent(
-                                                  'Row_update_page_state');
-                                              _model.varPublico = true;
-                                              _model.varAmigos = false;
-                                              _model.varPrivado = false;
-                                              safeSetState(() {});
-                                            }
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Stack(
-                                                  children: [
-                                                    if (!_model.varPublico)
-                                                      Icon(
-                                                        Icons
-                                                            .check_box_outline_blank,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 24.0,
-                                                      ),
-                                                    if (_model.varPublico)
-                                                      Icon(
-                                                        Icons.check_box_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 24.0,
-                                                      ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'sdnl893t' /* Público */,
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Theme(
+                                              data: ThemeData(
+                                                checkboxTheme:
+                                                    CheckboxThemeData(
+                                                  visualDensity:
+                                                      VisualDensity.compact,
+                                                  materialTapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
                                                 ),
+                                                unselectedWidgetColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                               ),
-                                            ],
-                                          ),
+                                              child: Checkbox(
+                                                value: _model
+                                                        .checkboxPublicoValue1 ??=
+                                                    false,
+                                                onChanged: (newValue) async {
+                                                  safeSetState(() => _model
+                                                          .checkboxPublicoValue1 =
+                                                      newValue!);
+                                                  if (newValue!) {
+                                                    logFirebaseEvent(
+                                                        'CREAR_POST_CheckboxPublico_ON_TOGGLE_ON');
+                                                    logFirebaseEvent(
+                                                        'CheckboxPublico_custom_action');
+                                                    await actions
+                                                        .hideSoftKeyboard();
+                                                    logFirebaseEvent(
+                                                        'CheckboxPublico_set_form_field');
+                                                    safeSetState(() {
+                                                      _model.checkboxPublicoValue1 =
+                                                          true;
+                                                    });
+                                                    logFirebaseEvent(
+                                                        'CheckboxPublico_set_form_field');
+                                                    safeSetState(() {
+                                                      _model.checkboxPrivadoValue =
+                                                          false;
+                                                    });
+                                                  }
+                                                },
+                                                side: BorderSide(
+                                                  width: 2,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                ),
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                checkColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'sdnl893t' /* Público */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
 
                                         // Se ocultó el estado de privacidad "Amigos" por solicitud de Nahuel. Dijo que ahora no es necesario
@@ -1355,78 +1868,96 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                               ],
                                             ),
                                           ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'CREAR_POST_PAGE_Row_71ejdfxd_ON_TAP');
-                                            if (!_model.varPrivado) {
-                                              logFirebaseEvent(
-                                                  'Row_update_page_state');
-                                              _model.varPublico = false;
-                                              _model.varAmigos = false;
-                                              _model.varPrivado = true;
-                                              safeSetState(() {});
-                                            }
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Stack(
-                                                  children: [
-                                                    if (!_model.varPrivado)
-                                                      Icon(
-                                                        Icons
-                                                            .check_box_outline_blank,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 24.0,
-                                                      ),
-                                                    if (_model.varPrivado)
-                                                      Icon(
-                                                        Icons.check_box_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 24.0,
-                                                      ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'a3mt3ft3' /* Privado */,
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Theme(
+                                              data: ThemeData(
+                                                checkboxTheme:
+                                                    CheckboxThemeData(
+                                                  visualDensity:
+                                                      VisualDensity.compact,
+                                                  materialTapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
                                                 ),
+                                                unselectedWidgetColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                               ),
-                                            ],
-                                          ),
+                                              child: Checkbox(
+                                                value: _model
+                                                        .checkboxPrivadoValue ??=
+                                                    false,
+                                                onChanged: (newValue) async {
+                                                  safeSetState(() => _model
+                                                          .checkboxPrivadoValue =
+                                                      newValue!);
+                                                  if (newValue!) {
+                                                    logFirebaseEvent(
+                                                        'CREAR_POST_CheckboxPrivado_ON_TOGGLE_ON');
+                                                    logFirebaseEvent(
+                                                        'CheckboxPrivado_custom_action');
+                                                    await actions
+                                                        .hideSoftKeyboard();
+                                                    logFirebaseEvent(
+                                                        'CheckboxPrivado_set_form_field');
+                                                    safeSetState(() {
+                                                      _model.checkboxPublicoValue1 =
+                                                          false;
+                                                    });
+                                                    logFirebaseEvent(
+                                                        'CheckboxPrivado_set_form_field');
+                                                    safeSetState(() {
+                                                      _model.checkboxPrivadoValue =
+                                                          true;
+                                                    });
+                                                  }
+                                                },
+                                                side: BorderSide(
+                                                  width: 2,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                ),
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                checkColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'a3mt3ft3' /* Privado */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -1592,137 +2123,148 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                           final listViewCollectionsRecord =
                                               listViewCollectionsRecordList[
                                                   listViewIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'CREAR_POST_PAGE_Row_uqbh545x_ON_TAP');
-                                              if (_model
-                                                  .listaColeccionesSeleccionadas
-                                                  .contains(
-                                                      listViewCollectionsRecord
-                                                          .reference)) {
-                                                logFirebaseEvent(
-                                                    'Row_update_page_state');
-                                                _model
-                                                    .removeFromListaColeccionesSeleccionadas(
-                                                        listViewCollectionsRecord
-                                                            .reference);
-                                                safeSetState(() {});
-                                              } else {
-                                                logFirebaseEvent(
-                                                    'Row_update_page_state');
-                                                _model
-                                                    .addToListaColeccionesSeleccionadas(
-                                                        listViewCollectionsRecord
-                                                            .reference);
-                                                safeSetState(() {});
-                                              }
-                                            },
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: Stack(
-                                                    children: [
-                                                      if (!_model
+                                          return Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Theme(
+                                                data: ThemeData(
+                                                  checkboxTheme:
+                                                      CheckboxThemeData(
+                                                    visualDensity:
+                                                        VisualDensity.compact,
+                                                    materialTapTargetSize:
+                                                        MaterialTapTargetSize
+                                                            .shrinkWrap,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                    ),
+                                                  ),
+                                                  unselectedWidgetColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                ),
+                                                child: Checkbox(
+                                                  value: _model
+                                                              .checkboxPublicoValueMap2[
+                                                          listViewCollectionsRecord] ??=
+                                                      _model
                                                           .listaColeccionesSeleccionadas
                                                           .contains(
                                                               listViewCollectionsRecord
-                                                                  .reference))
-                                                        Icon(
-                                                          Icons
-                                                              .check_box_outline_blank,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          size: 24.0,
-                                                        ),
+                                                                  .reference),
+                                                  onChanged: (newValue) async {
+                                                    safeSetState(() => _model
+                                                                .checkboxPublicoValueMap2[
+                                                            listViewCollectionsRecord] =
+                                                        newValue!);
+                                                    if (newValue!) {
+                                                      logFirebaseEvent(
+                                                          'CREAR_POST_CheckboxPublico_ON_TOGGLE_ON');
+                                                      logFirebaseEvent(
+                                                          'CheckboxPublico_custom_action');
+                                                      await actions
+                                                          .hideSoftKeyboard();
                                                       if (_model
                                                           .listaColeccionesSeleccionadas
                                                           .contains(
                                                               listViewCollectionsRecord
-                                                                  .reference))
-                                                        Icon(
-                                                          Icons
-                                                              .check_box_rounded,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          size: 24.0,
+                                                                  .reference)) {
+                                                        logFirebaseEvent(
+                                                            'CheckboxPublico_update_page_state');
+                                                        _model.removeFromListaColeccionesSeleccionadas(
+                                                            listViewCollectionsRecord
+                                                                .reference);
+                                                        safeSetState(() {});
+                                                      } else {
+                                                        logFirebaseEvent(
+                                                            'CheckboxPublico_update_page_state');
+                                                        _model.addToListaColeccionesSeleccionadas(
+                                                            listViewCollectionsRecord
+                                                                .reference);
+                                                        safeSetState(() {});
+                                                      }
+                                                    }
+                                                  },
+                                                  side: BorderSide(
+                                                    width: 2,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                                  activeColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                  checkColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .info,
+                                                ),
+                                              ),
+                                              Text(
+                                                listViewCollectionsRecord
+                                                    .nombre,
+                                                maxLines: 1,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
-                                                    ],
+                                              ),
+                                              if (listViewCollectionsRecord
+                                                  .coleccionPublica)
+                                                const Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          4.0, 0.0, 0.0, 0.0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .globeEurope,
+                                                    color: Color(0x81FFFFFF),
+                                                    size: 18.0,
                                                   ),
                                                 ),
-                                                Text(
-                                                  listViewCollectionsRecord
-                                                      .nombre,
-                                                  maxLines: 1,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                              if (listViewCollectionsRecord
+                                                  .coleccionAmigos)
+                                                const Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          4.0, 0.0, 0.0, 0.0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .userFriends,
+                                                    color: Color(0x81FFFFFF),
+                                                    size: 18.0,
+                                                  ),
                                                 ),
-                                                if (listViewCollectionsRecord
-                                                    .coleccionPublica)
-                                                  const Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons
-                                                          .globeEurope,
-                                                      color: Color(0x81FFFFFF),
-                                                      size: 18.0,
-                                                    ),
+                                              if (listViewCollectionsRecord
+                                                  .coleccionPrivada)
+                                                const Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          4.0, 0.0, 0.0, 0.0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.userSecret,
+                                                    color: Color(0x81FFFFFF),
+                                                    size: 18.0,
                                                   ),
-                                                if (listViewCollectionsRecord
-                                                    .coleccionAmigos)
-                                                  const Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons
-                                                          .userFriends,
-                                                      color: Color(0x81FFFFFF),
-                                                      size: 18.0,
-                                                    ),
-                                                  ),
-                                                if (listViewCollectionsRecord
-                                                    .coleccionPrivada)
-                                                  const Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons
-                                                          .userSecret,
-                                                      color: Color(0x81FFFFFF),
-                                                      size: 18.0,
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
+                                                ),
+                                            ],
                                           );
                                         },
                                       );

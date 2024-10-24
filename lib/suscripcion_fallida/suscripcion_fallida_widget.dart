@@ -62,7 +62,7 @@ class _SuscripcionFallidaWidgetState extends State<SuscripcionFallidaWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.asset(
-                    'assets/lottie_animations/Animation_-_1721338763005.json',
+                    'assets/jsons/Animation_-_1721338763005.json',
                     width: 300.0,
                     height: 300.0,
                     fit: BoxFit.cover,

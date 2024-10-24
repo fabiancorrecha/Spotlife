@@ -96,6 +96,15 @@ class FFAppState extends ChangeNotifier {
           latLngFromString(prefs.getString('ff_startUbication')) ??
               _startUbication;
     });
+    _safeInit(() {
+      _Amigos = prefs.getBool('ff_Amigos') ?? _Amigos;
+    });
+    _safeInit(() {
+      _Mapa = prefs.getBool('ff_Mapa') ?? _Mapa;
+    });
+    _safeInit(() {
+      _Post = prefs.getBool('ff_Post') ?? _Post;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -286,14 +295,14 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_centro');
   }
 
-  bool _mapaPrincipal = true;
+  bool _mapaPrincipal = false;
   bool get mapaPrincipal => _mapaPrincipal;
   set mapaPrincipal(bool value) {
     _mapaPrincipal = value;
     prefs.setBool('ff_mapaPrincipal', value);
   }
 
-  bool _Global = false;
+  bool _Global = true;
   bool get Global => _Global;
   set Global(bool value) {
     _Global = value;
@@ -337,7 +346,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_recordar', value);
   }
 
-  bool _MapaGlobal = true;
+  bool _MapaGlobal = false;
   bool get MapaGlobal => _MapaGlobal;
   set MapaGlobal(bool value) {
     _MapaGlobal = value;
@@ -431,6 +440,39 @@ class FFAppState extends ChangeNotifier {
     value != null
         ? prefs.setString('ff_startUbication', value.serialize())
         : prefs.remove('ff_startUbication');
+  }
+
+  String _routeDistance = '';
+  String get routeDistance => _routeDistance;
+  set routeDistance(String value) {
+    _routeDistance = value;
+  }
+
+  String _routeDuration = '';
+  String get routeDuration => _routeDuration;
+  set routeDuration(String value) {
+    _routeDuration = value;
+  }
+
+  bool _Amigos = false;
+  bool get Amigos => _Amigos;
+  set Amigos(bool value) {
+    _Amigos = value;
+    prefs.setBool('ff_Amigos', value);
+  }
+
+  bool _Mapa = true;
+  bool get Mapa => _Mapa;
+  set Mapa(bool value) {
+    _Mapa = value;
+    prefs.setBool('ff_Mapa', value);
+  }
+
+  bool _Post = false;
+  bool get Post => _Post;
+  set Post(bool value) {
+    _Post = value;
+    prefs.setBool('ff_Post', value);
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

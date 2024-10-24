@@ -62,7 +62,7 @@ class _SuscripcionactivadaWidgetState extends State<SuscripcionactivadaWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.asset(
-                    'assets/lottie_animations/bvSit2ZkKc.json',
+                    'assets/jsons/bvSit2ZkKc.json',
                     width: 300.0,
                     height: 300.0,
                     fit: BoxFit.cover,
