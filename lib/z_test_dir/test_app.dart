@@ -14,11 +14,6 @@ class _TestAppWidgetState extends State<TestAppWidget> {
   @override
   Widget build(BuildContext context) {
     final spots = <SpotDetail>[
-      const SpotDetail(title: "Arquitecture love", place: "Agra, India", imagePath: "", avatarUrl: ""),
-      const SpotDetail(title: "Veggie Brunch", place: "Bcn, Spain", imagePath: "", avatarUrl: ""),
-      const SpotDetail(title: "Flip", place: "Mad, Spain", imagePath: "", avatarUrl: ""),
-      const SpotDetail(title: "Tom Rios", place: "SVG, Spain", imagePath: "", avatarUrl: ""),
-      const SpotDetail(title: "Arquitecture love", place: "Agra, India", imagePath: "", avatarUrl: ""),
     ];
 
     return MaterialApp(

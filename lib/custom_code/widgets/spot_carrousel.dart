@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '/backend/backend.dart';
+import 'index.dart'; // Imports other custom widgets
+
 class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
     super.key,
@@ -180,6 +183,7 @@ class SpotDetail {
     required this.place,
     required this.imagePath,
     required this.avatarUrl,
+    required this.location,
     // required this.latitude,
     // required this.longitude,
   });
@@ -192,4 +196,5 @@ class SpotDetail {
   final String place;
   final String title;
   final String avatarUrl;
+  final LatLng location;
 }
