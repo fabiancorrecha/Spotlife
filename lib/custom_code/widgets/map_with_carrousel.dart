@@ -38,12 +38,14 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   void initState() {
     super.initState();
     spots = widget.listaPostMarcadores
+            ?.where((spot) => spot.placeInfo.latLng != null)
             ?.map((spot) => SpotDetail(
                   id: spot.reference.id,
                   title: spot.postTitle,
                   place: "place",
                   imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
                   avatarUrl: "",
+                  location: spot.placeInfo.latLng!!,
                 ))
             ?.toList() ??
         [];
@@ -69,9 +71,10 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           widget.onMapTap();
         },
         onMarkerTap: (spot) {
+          List<SpotDetail> sortedPots = _getSpotsSorted(spot);
           setState(() {
-
-            selectedIndex = spots.indexWhere((it) => it.id == spot.reference.id);
+            selectedIndex = sortedPots.indexWhere((it) => it.id == spot.reference.id);
+            spots = sortedPots;
             showCards = true;
           });
           widget.onMarkerTap(spot);
@@ -79,5 +82,12 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         navigateTo: widget.navigateTo,
       ),
     );
+  }
+
+  List<SpotDetail> _getSpotsSorted(UserPostsRecord spot) {
+    final referencePoint = spot.placeInfo.latLng!!;
+    final List<SpotDetail> sortedPots = List.from(spots);
+    sortedPots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
+    return sortedPots;
   }
 }
