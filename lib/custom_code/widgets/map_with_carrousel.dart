@@ -37,18 +37,19 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   @override
   void initState() {
     super.initState();
-    spots = widget.listaPostMarcadores
-            ?.where((spot) => spot.placeInfo.latLng != null)
-            ?.map((spot) => SpotDetail(
-                  id: spot.reference.id,
-                  title: spot.postTitle,
-                  place: "place",
-                  imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
-                  avatarUrl: "",
-                  location: spot.placeInfo.latLng!!,
-                ))
-            ?.toList() ??
-        [];
+    final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
+    spots = allSpots
+        .where((spot) => spot.placeInfo.latLng != null)
+        .map((spot) => SpotDetail(
+              id: spot.reference.id,
+              title: spot.postTitle,
+              place: "place",
+              imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
+              avatarUrl: "",
+              location: spot.placeInfo.latLng!!,
+            ))
+        .toSet()
+        .toList();
   }
 
   @override
