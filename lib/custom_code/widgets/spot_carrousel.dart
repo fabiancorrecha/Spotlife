@@ -178,23 +178,36 @@ class ImageBackground extends StatelessWidget {
 
 class SpotDetail {
   const SpotDetail({
-    this.id,
+    required this.id,
     required this.title,
     required this.place,
     required this.imagePath,
     required this.avatarUrl,
     required this.location,
-    // required this.latitude,
-    // required this.longitude,
   });
 
-  // final double latitude;
-  // final double longitude;
-
-  final String? id;
+  final String id;
   final String imagePath;
   final String place;
   final String title;
   final String avatarUrl;
   final LatLng location;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is SpotDetail &&
+        other.id == id &&
+        other.title == title &&
+        other.place == place &&
+        other.imagePath == imagePath &&
+        other.avatarUrl == avatarUrl &&
+        other.location == location;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ title.hashCode ^ place.hashCode ^ imagePath.hashCode ^ avatarUrl.hashCode ^ location.hashCode;
+  }
 }
