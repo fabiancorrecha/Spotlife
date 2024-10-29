@@ -36,20 +36,21 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
 
   @override
   void initState() {
+    _initSpots();
     super.initState();
+  }
+
+  Future<void> _initSpots() async {
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
-    spots = allSpots
-        .where((spot) => spot.placeInfo.latLng != null)
-        .map((spot) => SpotDetail(
-              id: spot.reference.id,
-              title: spot.postTitle,
-              place: "place",
-              imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
-              avatarUrl: "",
-              location: spot.placeInfo.latLng!!,
-            ))
-        .toSet()
-        .toList();
+    var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null).map((spot) async => SpotDetail(
+          id: spot.reference.id,
+          title: spot.postTitle,
+          place: "place",
+          imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
+          avatarUrl: await getUserPhotoUrl(spot.postUser),
+          location: spot.placeInfo.latLng!!,
+        ));
+    spots = await Future.wait(spotsAsync.toSet().toList());
   }
 
   @override
@@ -102,4 +103,17 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     final referencePoint = spot.placeInfo.latLng!!;
     spots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
   }
+}
+
+Future<String> getUserPhotoUrl(DocumentReference? userRef) async {
+  if (userRef == null) return "";
+  try {
+    final userDoc = await userRef.get();
+    if (userDoc.exists) {
+      return userDoc['photo_url'] ?? '';
+    }
+  } catch (e) {
+    print('Error obteniendo la URL de la foto del usuario: $e');
+  }
+  return '';
 }
