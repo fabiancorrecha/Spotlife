@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/backend/backend.dart';
 import 'index.dart'; // Imports other custom widgets
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
@@ -209,30 +210,28 @@ class ImageBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            imagePath,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-              /*
-            todo asanre
-             1. ux specify color placeholder  -> frameBuilder
-             2. should show a loading indicator? use loadingBuilder
-             3. what to see when loading error?
-             */
-              return Container(
-                color: Colors.grey,
-                child: child,
-              );
-            },
-            errorBuilder: (a, b, c) {
-              return Container(
-                color: Colors.blueGrey,
-              );
-            },
-          )),
+        borderRadius: BorderRadius.circular(20),
+        child: CachedNetworkImage(
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+          fadeInDuration: const Duration(milliseconds: 200),
+          fadeOutDuration: const Duration(milliseconds: 200),
+          imageUrl: imagePath.isNotEmpty
+              ? imagePath
+              : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+          placeholder: (BuildContext context, String url) {
+            return Container(
+              color: Colors.grey,
+            );
+          },
+          errorWidget: (BuildContext context, String url, Object error) {
+            return Container(
+              color: Colors.red, // todo asanre change me
+            );
+          },
+        ),
+      ),
       onTap: onTap,
     );
   }
