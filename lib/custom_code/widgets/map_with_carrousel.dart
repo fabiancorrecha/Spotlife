@@ -63,32 +63,33 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         userLocation: widget.userLocation,
         usuarioAutenticado: widget.usuarioAutenticado,
         listaPostMarcadores: widget.listaPostMarcadores,
-        onMapTap: () {
-          if (showCards) {
-            setState(() {
-              showCards = false;
-            });
-          }
-          widget.onMapTap();
-        },
-        onMarkerTap: (spot) {
-          List<SpotDetail> sortedPots = _getSpotsSorted(spot);
-          setState(() {
-            selectedIndex = sortedPots.indexWhere((it) => it.id == spot.reference.id);
-            spots = sortedPots;
-            showCards = true;
-          });
-          widget.onMarkerTap(spot);
-        },
+        onMapTap: _onMapTap,
+        onMarkerTap: _onMarkerTap,
         navigateTo: widget.navigateTo,
       ),
     );
   }
 
-  List<SpotDetail> _getSpotsSorted(UserPostsRecord spot) {
+  void _onMarkerTap(spot) {
+    _sortSpots(spot);
+    setState(() {
+      selectedIndex = 0;
+      showCards = true;
+    });
+    widget.onMarkerTap(spot);
+  }
+
+  void _onMapTap() {
+    if (showCards) {
+      setState(() {
+        showCards = false;
+      });
+    }
+    widget.onMapTap();
+  }
+
+  void _sortSpots(UserPostsRecord spot) {
     final referencePoint = spot.placeInfo.latLng!!;
-    final List<SpotDetail> sortedPots = List.from(spots);
-    sortedPots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
-    return sortedPots;
+    spots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
   }
 }
