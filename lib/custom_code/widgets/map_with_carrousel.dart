@@ -67,6 +67,16 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         onMarkerTap: _onMarkerTap,
         navigateTo: widget.navigateTo,
       ),
+      itemBuilder: (item, isSelected) {
+        return MapCardSpotItem(
+          item: item,
+          isSelected: isSelected,
+          onImageTap: () => debugPrint("asanre onImageTap"),
+          onFavoritesTap: () => debugPrint("asanre onFavoritesTap"),
+          onNavigateTap: () => debugPrint("asanre onNavigateTap"),
+          onUserTap: () => debugPrint("asanre onUserTap"),
+        );
+      },
     );
   }
 

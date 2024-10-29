@@ -10,12 +10,14 @@ class SpotCarrousel extends StatefulWidget {
     required this.selectedIndex,
     required this.background,
     required this.shouldCards,
+    required this.itemBuilder,
   });
 
   final List<SpotDetail> spots;
   final Widget background;
   final int selectedIndex;
   final bool shouldCards;
+  final Widget? Function(SpotDetail item, bool isSelected) itemBuilder;
 
   @override
   State<SpotCarrousel> createState() => _SpotCarrouselState();
@@ -81,30 +83,8 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
         controller: _pageViewController,
         itemBuilder: (BuildContext context, int index) {
           final SpotDetail item = spots[index];
-
-          return buildSpot(item, index == _currentSelectedIndex);
+          return widget.itemBuilder(item, index == _currentSelectedIndex);
         },
-      ),
-    );
-  }
-
-  Widget buildSpot(SpotDetail item, bool isSelected) {
-    return Transform.scale(
-      scale: isSelected ? 1 : 0.97,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Stack(
-          children: [
-            ImageBackground(imagePath: item.imagePath),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: CustomListTile(item: item),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -116,10 +96,87 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
   }
 }
 
+class MapCardSpotItem extends StatelessWidget {
+  const MapCardSpotItem({
+    super.key,
+    required this.item,
+    required this.isSelected,
+    required this.onFavoritesTap,
+    required this.onNavigateTap,
+    required this.onImageTap,
+    required this.onUserTap,
+  });
+
+  final bool isSelected;
+  final SpotDetail item;
+  final GestureTapCallback onFavoritesTap;
+  final GestureTapCallback onNavigateTap;
+  final GestureTapCallback onImageTap;
+  final GestureTapCallback onUserTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: isSelected ? 1 : 0.97,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          children: [
+            ImageBackground(
+              imagePath: item.imagePath,
+              onTap: onImageTap,
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Row(
+                children: [
+                  _userSpotDetail(item),
+                  _favoritesIcon(),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: _navigateIcon(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  IconButton _navigateIcon() {
+    return IconButton(
+      icon: Icon(Icons.edit_location_outlined, color: Colors.white),
+      onPressed: onNavigateTap,
+    );
+  }
+
+  IconButton _favoritesIcon() {
+    return IconButton(
+      icon: Icon(Icons.star_border, color: Colors.white),
+      onPressed: onFavoritesTap,
+    );
+  }
+
+  Expanded _userSpotDetail(SpotDetail item) {
+    return Expanded(
+      child: CustomListTile(
+        item: item,
+        onTap: onUserTap,
+      ),
+    );
+  }
+}
+
 class CustomListTile extends StatelessWidget {
   final SpotDetail item;
+  final GestureTapCallback? onTap;
 
-  const CustomListTile({super.key, required this.item});
+  const CustomListTile({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -136,43 +193,48 @@ class CustomListTile extends StatelessWidget {
           Text(item.place, style: textColor, maxLines: 1),
         ],
       ),
+      onTap: onTap,
       // Add other ListTile properties if required
     );
   }
 }
 
 class ImageBackground extends StatelessWidget {
-  const ImageBackground({super.key, required this.imagePath});
+  const ImageBackground({super.key, required this.imagePath, this.onTap});
 
   final String imagePath;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.network(
-          imagePath,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-            /*
+    return InkWell(
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            imagePath,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              /*
             todo asanre
              1. ux specify color placeholder  -> frameBuilder
              2. should show a loading indicator? use loadingBuilder
              3. what to see when loading error?
              */
-            return Container(
-              color: Colors.grey,
-              child: child,
-            );
-          },
-          errorBuilder: (a, b, c) {
-            return Container(
-              color: Colors.blueGrey,
-            );
-          },
-        ));
+              return Container(
+                color: Colors.grey,
+                child: child,
+              );
+            },
+            errorBuilder: (a, b, c) {
+              return Container(
+                color: Colors.blueGrey,
+              );
+            },
+          )),
+      onTap: onTap,
+    );
   }
 }
 

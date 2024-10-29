@@ -13,8 +13,7 @@ class _TestAppWidgetState extends State<TestAppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final spots = <SpotDetail>[
-    ];
+    final spots = <SpotDetail>[];
 
     return MaterialApp(
       home: Scaffold(
@@ -23,6 +22,9 @@ class _TestAppWidgetState extends State<TestAppWidget> {
           selectedIndex: 1,
           shouldCards: showCards,
           background: buildFakeMapa(),
+          itemBuilder: (item, foo) {
+            return Container();
+          },
         ),
       ),
     );
