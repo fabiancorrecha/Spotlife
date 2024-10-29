@@ -186,7 +186,7 @@ class CustomListTile extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
     return ListTile(
-      leading: const CircleAvatar(),
+      leading: CircularNetworkImage(imageUrl: item.avatarUrl),
       title: Text(item.title, style: textColor, maxLines: 1),
       subtitle: Row(
         children: [
@@ -196,6 +196,32 @@ class CustomListTile extends StatelessWidget {
       ),
       onTap: onTap,
       // Add other ListTile properties if required
+    );
+  }
+}
+
+class CircularNetworkImage extends StatelessWidget {
+  final String imageUrl;
+  final double radius;
+
+  const CircularNetworkImage({
+    super.key,
+    required this.imageUrl,
+    this.radius = 50.0, // Default radius
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        placeholder: (context, url) => const CircularProgressIndicator(),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
+        width: radius * 2,
+        // Diameter is twice the radius
+        height: radius * 2,
+        fit: BoxFit.cover, // Adjust the fit as needed
+      ),
     );
   }
 }
