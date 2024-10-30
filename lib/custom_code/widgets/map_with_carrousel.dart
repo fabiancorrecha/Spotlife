@@ -19,8 +19,8 @@ class MapWithCarrousel extends StatefulWidget {
 
   final LatLng userLocation;
   final double? zoom;
-  final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(UserPostsRecord post) onMarkerTap;
+  final List<UserPostsRecord>? listaPostMarcadores; // todo remove me
+  final void Function(SpotDetail post) onMarkerTap;
   final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
   final DocumentReference? usuarioAutenticado;
@@ -45,12 +45,17 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null).map((spot) async => SpotDetail(
           id: spot.reference.id,
           title: spot.postTitle,
-          place: "place",
           imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
           avatarUrl: await getUserPhotoUrl(spot.postUser),
           location: spot.placeInfo.latLng!!,
+          postUser: spot.postUser,
+          description: spot.postDescription,
+          placeInfo: spot.placeInfo,
         ));
-    spots = await Future.wait(spotsAsync.toSet().toList());
+    var _spots = await Future.wait(spotsAsync.toSet().toList());
+    setState(() {
+      spots = _spots;
+    });
   }
 
   @override
@@ -58,12 +63,12 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     return SpotCarrousel(
       spots: spots,
       shouldCards: showCards,
-      selectedIndex: selectedIndex,
+      selectedIndex: 0,
       background: CarrouselMap(
+        spots: List.from(spots),
         zoom: widget.zoom,
         userLocation: widget.userLocation,
         usuarioAutenticado: widget.usuarioAutenticado,
-        listaPostMarcadores: widget.listaPostMarcadores,
         onMapTap: _onMapTap,
         onMarkerTap: _onMarkerTap,
         navigateTo: widget.navigateTo,
@@ -84,7 +89,6 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   void _onMarkerTap(spot) {
     _sortSpots(spot);
     setState(() {
-      selectedIndex = 0;
       showCards = true;
     });
     widget.onMarkerTap(spot);
@@ -99,8 +103,8 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     widget.onMapTap();
   }
 
-  void _sortSpots(UserPostsRecord spot) {
-    final referencePoint = spot.placeInfo.latLng!!;
+  void _sortSpots(SpotDetail spot) {
+    final referencePoint = spot.location;
     spots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
   }
 }

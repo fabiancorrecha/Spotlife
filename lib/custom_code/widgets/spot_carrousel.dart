@@ -187,11 +187,11 @@ class CustomListTile extends StatelessWidget {
     );
     return ListTile(
       leading: CircularNetworkImage(imageUrl: item.avatarUrl),
-      title: Text(item.title, style: textColor, maxLines: 1,overflow: TextOverflow.ellipsis),
+      title: Text(item.title, style: textColor, maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: Row(
         children: [
           Icon(Icons.location_on_outlined, color: Colors.white),
-          Text(item.place, style: textColor, maxLines: 1),
+          Text(item.city, style: textColor, maxLines: 1),
         ],
       ),
       onTap: onTap,
@@ -207,23 +207,20 @@ class CircularNetworkImage extends StatelessWidget {
   const CircularNetworkImage({
     super.key,
     required this.imageUrl,
-    this.radius = 50.0, // Default radius
+    this.radius = 24.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: SizedBox.fromSize(
-        size: Size.fromRadius(24),
+        size: Size.fromRadius(radius),
         child: CachedNetworkImage(
           imageUrl: imageUrl.isNotEmpty
               ? imageUrl
               : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
           placeholder: (context, url) => const CircularProgressIndicator(),
           errorWidget: (context, url, error) => const Icon(Icons.error),
-          width: radius * 2,
-          // Diameter is twice the radius
-          height: radius * 2,
           fit: BoxFit.cover, // Adjust the fit as needed
         ),
       ),
@@ -272,18 +269,24 @@ class SpotDetail {
   const SpotDetail({
     required this.id,
     required this.title,
-    required this.place,
     required this.imagePath,
     required this.avatarUrl,
     required this.location,
+    required this.postUser,
+    required this.description,
+    required this.placeInfo,
   });
 
   final String id;
   final String imagePath;
-  final String place;
   final String title;
+  final String? description;
   final String avatarUrl;
   final LatLng location;
+  final DocumentReference? postUser;
+  final PlaceInfoStruct placeInfo;
+
+  String get city => placeInfo.city;
 
   @override
   bool operator ==(Object other) {
@@ -292,14 +295,23 @@ class SpotDetail {
     return other is SpotDetail &&
         other.id == id &&
         other.title == title &&
-        other.place == place &&
         other.imagePath == imagePath &&
         other.avatarUrl == avatarUrl &&
+        other.description == description &&
+        other.postUser == postUser &&
+        other.placeInfo == placeInfo &&
         other.location == location;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ title.hashCode ^ place.hashCode ^ imagePath.hashCode ^ avatarUrl.hashCode ^ location.hashCode;
+    return id.hashCode ^
+        title.hashCode ^
+        description.hashCode ^
+        postUser.hashCode ^
+        placeInfo.hashCode ^
+        imagePath.hashCode ^
+        avatarUrl.hashCode ^
+        location.hashCode;
   }
 }
