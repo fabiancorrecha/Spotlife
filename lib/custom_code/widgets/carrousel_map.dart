@@ -26,7 +26,7 @@ class CarrouselMap extends StatefulWidget {
     Key? key,
     required this.userLocation,
     this.zoom,
-    this.listaPostMarcadores,
+    required this.spots,
     required this.onMapTap,
     required this.onMarkerTap, // Argumento agregado
     required this.navigateTo, // Argumento agregado
@@ -35,8 +35,8 @@ class CarrouselMap extends StatefulWidget {
 
   final LatLng userLocation;
   final double? zoom;
-  final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(UserPostsRecord post) onMarkerTap;
+  final List<SpotDetail> spots;
+  final void Function(SpotDetail post) onMarkerTap;
   final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
   final DocumentReference? usuarioAutenticado;
@@ -59,7 +59,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
   gmap.LatLng? _selectedMarkerPosition;
   DocumentReference? _selectedPostUser;
   final TextEditingController searchController = TextEditingController();
-  List<UserPostsRecord> _searchResults = [];
+  List<SpotDetail> _searchResults = [];
 
   late gmap.CameraPosition initialCameraPosition;
   double currentZoom = 15.0;
@@ -77,22 +77,29 @@ class _CarrouselMapState extends State<CarrouselMap> {
       zoom: currentZoom,
     );
 
-    try {
-      loadMarkers();
-    } catch (e) {
-      print('Error al cargar los marcadores: $e');
-    }
-
     searchController.addListener(_onSearchChanged);
   }
 
-  loadMarkers() async {
-    if (widget.listaPostMarcadores != null) {
-      final listMarkers = await getMarkers(widget.listaPostMarcadores!);
-      setState(() {
-        markers = listMarkers;
+  @override
+  void didUpdateWidget(CarrouselMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.spots.isNotEmpty && widget.spots != oldWidget.spots) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          loadMarkers();
+        } catch (e) {
+          print('Error al cargar los marcadores: $e');
+        }
       });
     }
+  }
+
+  loadMarkers() async {
+    final listMarkers = await getMarkers(widget.spots);
+    setState(() {
+      markers = listMarkers;
+    });
   }
 
   Future<String> _getUserPhotoUrl(DocumentReference userRef) async {
@@ -114,8 +121,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
     final double shadowOffset = 3.0; // Desplazamiento de la sombra
 
     // Dibuja un círculo sombra ligeramente más grande para simular la elevación
-    Paint shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
+    Paint shadowPaint = Paint()..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
     canvas.drawCircle(
       Offset(size / 2, (size / 2) + shadowOffset), // Posición del círculo con desplazamiento en Y
       size / 2, // Radio del círculo sombra
@@ -123,8 +129,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
     );
 
     // Dibuja un círculo blanco en el centro (con la elevación simulada)
-    Paint paint = Paint()
-      ..color = Color.fromARGB(255, 255, 255, 255);
+    Paint paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
     canvas.drawCircle(
       Offset(size / 2, size / 2), // Centro del círculo principal
       size / 2, // Radio del círculo principal
@@ -163,24 +168,22 @@ class _CarrouselMapState extends State<CarrouselMap> {
     return completer.future;
   }
 
-  Future<Set<gmap.Marker>> getMarkers(List<UserPostsRecord> lista) async {
+  Future<Set<gmap.Marker>> getMarkers(List<SpotDetail> spots) async {
     Set<gmap.Marker> markers = {};
 
-    for (int i = 0; i < lista.length; i++) {
-      final post = lista[i];
+    for (int i = 0; i < spots.length; i++) {
+      final post = spots[i];
 
       try {
         if (post.postUser != null) {
-          final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
+          final photoUrl = post.avatarUrl;
+          if (photoUrl.isNotEmpty && post.location != null) {
+            final location = post.location;
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
-                markerId: gmap.MarkerId(post.reference.id),
-                position: gmap.LatLng(
-                  post.placeInfo.latLng!.latitude,
-                  post.placeInfo.latLng!.longitude,
-                ),
+                markerId: gmap.MarkerId(post.id),
+                position: gmap.LatLng(location.latitude, location.longitude),
                 icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
                 onTap: () {
                   onMarkerTap(post);
@@ -234,63 +237,62 @@ class _CarrouselMapState extends State<CarrouselMap> {
     if (_selectedMarkerPosition != null) {
       showDialog(
         context: context,
-        builder: (context) =>
-            AlertDialog(
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                side: BorderSide(color: Colors.white),
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            side: BorderSide(color: Colors.white),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Ubicación Actual',
+                style: TextStyle(color: Colors.white),
               ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Ubicación Actual',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+              IconButton(
+                icon: Icon(Icons.close, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Latitud: ${_selectedMarkerPosition!.latitude}',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    'Longitud: ${_selectedMarkerPosition!.longitude}',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      final flutterFlowLatLng = ff.LatLng(
-                        _selectedMarkerPosition!.latitude,
-                        _selectedMarkerPosition!.longitude,
-                      );
-                      widget.navigateTo(flutterFlowLatLng);
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Crear Spot',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Latitud: ${_selectedMarkerPosition!.latitude}',
+                style: TextStyle(color: Colors.white),
               ),
-            ),
+              Text(
+                'Longitud: ${_selectedMarkerPosition!.longitude}',
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  final flutterFlowLatLng = ff.LatLng(
+                    _selectedMarkerPosition!.latitude,
+                    _selectedMarkerPosition!.longitude,
+                  );
+                  widget.navigateTo(flutterFlowLatLng);
+                  Navigator.of(context).pop();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                child: Text(
+                  'Crear Spot',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     }
   }
@@ -310,10 +312,10 @@ class _CarrouselMapState extends State<CarrouselMap> {
       return;
     }
 
-    final results = widget.listaPostMarcadores!.where((post) {
-      final postTitle = post.postTitle?.toLowerCase() ?? '';
-      final postDescription = post.postDescription?.toLowerCase() ?? '';
-      final placeInfoCity = post.placeInfo.city?.toLowerCase() ?? '';
+    final results = widget.spots.where((post) {
+      final postTitle = post.title.toLowerCase() ?? '';
+      final postDescription = post.description?.toLowerCase() ?? '';
+      final placeInfoCity = post.city?.toLowerCase() ?? '';
       return postTitle.contains(query) || placeInfoCity.contains(query);
     }).toList();
 
@@ -327,11 +329,11 @@ class _CarrouselMapState extends State<CarrouselMap> {
     }
   }
 
-  void _moveCameraToPost(UserPostsRecord post) async {
+  void _moveCameraToPost(SpotDetail post) async {
     final controller = await _controller.future;
     final position = gmap.LatLng(
-      post.placeInfo.latLng!.latitude,
-      post.placeInfo.latLng!.longitude,
+      post.location.latitude,
+      post.location.longitude,
     );
 
     controller.animateCamera(
@@ -383,16 +385,16 @@ class _CarrouselMapState extends State<CarrouselMap> {
     );
   }
 
-  void onMarkerTap(UserPostsRecord post) {
+  void onMarkerTap(SpotDetail post) {
     widget.onMarkerTap(post);
     setState(() {
       _isInfoVisible = true;
-      _selectedTitle = post.postTitle ?? '';
-      _selectedSubtitle = post.postDescription ?? '';
-      _selectedImageUrl = post.postPhotolist.isNotEmpty ? post.postPhotolist.first : '';
+      _selectedTitle = post.title ?? '';
+      _selectedSubtitle = post.description ?? '';
+      _selectedImageUrl = post.imagePath.isNotEmpty ? post.imagePath : '';
       _selectedMarkerPosition = gmap.LatLng(
-        post.placeInfo.latLng!.latitude,
-        post.placeInfo.latLng!.longitude,
+        post.location.latitude,
+        post.location.longitude,
       );
       _selectedPostUser = post.postUser;
     });
