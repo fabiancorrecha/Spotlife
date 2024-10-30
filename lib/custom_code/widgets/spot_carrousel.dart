@@ -187,7 +187,7 @@ class CustomListTile extends StatelessWidget {
     );
     return ListTile(
       leading: CircularNetworkImage(imageUrl: item.avatarUrl),
-      title: Text(item.title, style: textColor, maxLines: 1),
+      title: Text(item.title, style: textColor, maxLines: 1,overflow: TextOverflow.ellipsis),
       subtitle: Row(
         children: [
           Icon(Icons.location_on_outlined, color: Colors.white),
@@ -213,14 +213,19 @@ class CircularNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-        width: radius * 2,
-        // Diameter is twice the radius
-        height: radius * 2,
-        fit: BoxFit.cover, // Adjust the fit as needed
+      child: SizedBox.fromSize(
+        size: Size.fromRadius(24),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl.isNotEmpty
+              ? imageUrl
+              : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+          width: radius * 2,
+          // Diameter is twice the radius
+          height: radius * 2,
+          fit: BoxFit.cover, // Adjust the fit as needed
+        ),
       ),
     );
   }
