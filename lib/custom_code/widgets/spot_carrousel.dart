@@ -28,7 +28,7 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
   PageController _pageViewController = PageController(
     viewportFraction: 0.8,
   );
-  late int _currentSelectedIndex;
+  var listFirstItemId = "";
 
   @override
   void initState() {
@@ -38,6 +38,17 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
   @override
   void didUpdateWidget(SpotCarrousel oldWidget) {
     super.didUpdateWidget(oldWidget);
+    var currentId = widget.spots[0]?.id;
+    if (widget.shouldCards && currentId != listFirstItemId) {
+      listFirstItemId = currentId ?? "";
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _pageViewController.animateToPage(
+          0, // Replace with your desired page index
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      });
+    }
   }
 
   @override
