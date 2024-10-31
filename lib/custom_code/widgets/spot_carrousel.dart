@@ -8,17 +8,17 @@ class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
     super.key,
     required this.spots,
-    required this.selectedIndex,
     required this.background,
     required this.shouldCards,
     required this.itemBuilder,
+    required this.onPageChanged,
   });
 
   final List<SpotDetail> spots;
   final Widget background;
-  final int selectedIndex;
   final bool shouldCards;
   final Widget? Function(SpotDetail item, bool isSelected) itemBuilder;
+  final void Function(SpotDetail spot) onPageChanged;
 
   @override
   State<SpotCarrousel> createState() => _SpotCarrouselState();
@@ -32,24 +32,12 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
 
   @override
   void initState() {
-    _currentSelectedIndex = widget.selectedIndex;
     super.initState();
   }
 
   @override
   void didUpdateWidget(SpotCarrousel oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    if (widget.selectedIndex != oldWidget.selectedIndex) {
-      _currentSelectedIndex = widget.selectedIndex;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _pageViewController.animateToPage(
-          _currentSelectedIndex, // Replace with your desired page index
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      });
-    }
   }
 
   @override
@@ -58,7 +46,7 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
     return Stack(
       children: [
         widget.background,
-        if (widget.shouldCards && widget.selectedIndex != -1)
+        if (widget.shouldCards)
           Align(
             alignment: Alignment.bottomCenter,
             child: buildCarrousel(spots),
@@ -84,16 +72,14 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
         controller: _pageViewController,
         itemBuilder: (BuildContext context, int index) {
           final SpotDetail item = spots[index];
-          return widget.itemBuilder(item, index == _currentSelectedIndex);
+          return widget.itemBuilder(item, false);
         },
       ),
     );
   }
 
   void _handlePageChange(int value) {
-    setState(() {
-      _currentSelectedIndex = value;
-    });
+    widget.onPageChanged(widget.spots[value]);
   }
 }
 

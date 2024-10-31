@@ -31,13 +31,45 @@ class MapWithCarrousel extends StatefulWidget {
 
 class _MapWithCarrousel extends State<MapWithCarrousel> {
   var showCards = false;
-  var selectedIndex = -1;
   var spots = <SpotDetail>[];
+  SpotDetail? carrouselSpotLocation = null;
 
   @override
   void initState() {
     _initSpots();
     super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SpotCarrousel(
+      spots: spots,
+      shouldCards: showCards,
+      background: CarrouselMap(
+        spots: List.from(spots),
+        zoom: widget.zoom,
+        selectedSpotLocation: carrouselSpotLocation,
+        userLocation: widget.userLocation,
+        onMapTap: _onMapTap,
+        onMarkerTap: _onMarkerTap,
+        navigateTo: widget.navigateTo,
+      ),
+      itemBuilder: (item, isSelected) {
+        return MapCardSpotItem(
+          item: item,
+          isSelected: isSelected,
+          onImageTap: () => debugPrint("asanre onImageTap"),
+          onFavoritesTap: () => debugPrint("asanre onFavoritesTap"),
+          onNavigateTap: () => debugPrint("asanre onNavigateTap"),
+          onUserTap: () => debugPrint("asanre onUserTap"),
+        );
+      },
+      onPageChanged: (location) {
+        setState(() {
+          carrouselSpotLocation = location;
+        });
+      },
+    );
   }
 
   Future<void> _initSpots() async {
@@ -56,33 +88,6 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     setState(() {
       spots = _spots;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SpotCarrousel(
-      spots: spots,
-      shouldCards: showCards,
-      selectedIndex: 0,
-      background: CarrouselMap(
-        spots: List.from(spots),
-        zoom: widget.zoom,
-        userLocation: widget.userLocation,
-        onMapTap: _onMapTap,
-        onMarkerTap: _onMarkerTap,
-        navigateTo: widget.navigateTo,
-      ),
-      itemBuilder: (item, isSelected) {
-        return MapCardSpotItem(
-          item: item,
-          isSelected: isSelected,
-          onImageTap: () => debugPrint("asanre onImageTap"),
-          onFavoritesTap: () => debugPrint("asanre onFavoritesTap"),
-          onNavigateTap: () => debugPrint("asanre onNavigateTap"),
-          onUserTap: () => debugPrint("asanre onUserTap"),
-        );
-      },
-    );
   }
 
   void _onMarkerTap(spot) {
