@@ -26,6 +26,7 @@ class CarrouselMap extends StatefulWidget {
     Key? key,
     required this.userLocation,
     this.zoom,
+    this.selectedSpotLocation,
     required this.spots,
     required this.onMapTap,
     required this.onMarkerTap, // Argumento agregado
@@ -33,6 +34,7 @@ class CarrouselMap extends StatefulWidget {
   }) : super(key: key);
 
   final LatLng userLocation;
+  final SpotDetail? selectedSpotLocation;
   final double? zoom;
   final List<SpotDetail> spots;
   final void Function(SpotDetail post) onMarkerTap;
@@ -88,6 +90,13 @@ class _CarrouselMapState extends State<CarrouselMap> {
         } catch (e) {
           print('Error al cargar los marcadores: $e');
         }
+      });
+    }
+
+    var currentLocation = widget.selectedSpotLocation;
+    if (currentLocation != null && currentLocation != oldWidget.selectedSpotLocation) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _moveCameraToPost(currentLocation, 14);
       });
     }
   }
@@ -322,11 +331,11 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     if (_searchResults.isNotEmpty) {
       final firstMatch = _searchResults.first;
-      _moveCameraToPost(firstMatch);
+      _moveCameraToPost(firstMatch, 16.0);
     }
   }
 
-  void _moveCameraToPost(SpotDetail post) async {
+  void _moveCameraToPost(SpotDetail post, double zoom) async {
     final controller = await _controller.future;
     final position = gmap.LatLng(
       post.location.latitude,
@@ -335,7 +344,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     controller.animateCamera(
       gmap.CameraUpdate.newCameraPosition(
-        gmap.CameraPosition(target: position, zoom: 16.0),
+        gmap.CameraPosition(target: position, zoom: zoom),
       ),
     );
   }
@@ -385,7 +394,6 @@ class _CarrouselMapState extends State<CarrouselMap> {
       );
     });
   }
-
 
   Positioned buildEmptyResult() {
     return Positioned(
