@@ -68,7 +68,6 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         spots: List.from(spots),
         zoom: widget.zoom,
         userLocation: widget.userLocation,
-        usuarioAutenticado: widget.usuarioAutenticado,
         onMapTap: _onMapTap,
         onMarkerTap: _onMarkerTap,
         navigateTo: widget.navigateTo,
