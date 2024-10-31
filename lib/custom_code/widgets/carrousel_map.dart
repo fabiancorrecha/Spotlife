@@ -30,7 +30,6 @@ class CarrouselMap extends StatefulWidget {
     required this.onMapTap,
     required this.onMarkerTap, // Argumento agregado
     required this.navigateTo, // Argumento agregado
-    required this.usuarioAutenticado,
   }) : super(key: key);
 
   final LatLng userLocation;
@@ -39,7 +38,6 @@ class CarrouselMap extends StatefulWidget {
   final void Function(SpotDetail post) onMarkerTap;
   final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
-  final DocumentReference? usuarioAutenticado;
 
   @override
   _CarrouselMapState createState() => _CarrouselMapState();
@@ -57,7 +55,6 @@ class _CarrouselMapState extends State<CarrouselMap> {
   String _selectedSubtitle = '';
   String _selectedImageUrl = '';
   gmap.LatLng? _selectedMarkerPosition;
-  DocumentReference? _selectedPostUser;
   final TextEditingController searchController = TextEditingController();
   List<SpotDetail> _searchResults = [];
 
@@ -343,16 +340,6 @@ class _CarrouselMapState extends State<CarrouselMap> {
     );
   }
 
-  void _handleMarkerTap() {
-    if (_selectedPostUser != null && widget.usuarioAutenticado != null) {
-      if (_selectedPostUser == widget.usuarioAutenticado) {
-        Navigator.pushNamed(context, 'perfilPropio');
-      } else {
-        Navigator.pushNamed(context, 'otroPerfil');
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -396,72 +383,9 @@ class _CarrouselMapState extends State<CarrouselMap> {
         post.location.latitude,
         post.location.longitude,
       );
-      _selectedPostUser = post.postUser;
     });
   }
 
-  Positioned buildCardInfo(BuildContext context) {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * 0.5 - 100,
-      left: MediaQuery.of(context).size.width * 0.25,
-      child: GestureDetector(
-        onTap: _hideInfoContainer, // Ocultar container al tocarlo
-        onDoubleTap: _handleMarkerTap,
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.45,
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (_selectedImageUrl.isNotEmpty)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    _selectedImageUrl,
-                    width: double.infinity,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              SizedBox(height: 10),
-              Text(
-                _selectedTitle,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: 5),
-              Text(
-                _selectedSubtitle,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  color: const Color.fromARGB(255, 33, 32, 32),
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Positioned buildEmptyResult() {
     return Positioned(
