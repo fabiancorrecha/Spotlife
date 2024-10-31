@@ -9,7 +9,7 @@ class MapWithCarrousel extends StatefulWidget {
   const MapWithCarrousel({
     Key? key,
     required this.userLocation,
-    this.zoom,
+    this.zoom = 16.0,
     this.listaPostMarcadores,
     required this.onMapTap,
     required this.onMarkerTap,
@@ -18,7 +18,7 @@ class MapWithCarrousel extends StatefulWidget {
   }) : super(key: key);
 
   final LatLng userLocation;
-  final double? zoom;
+  final double zoom;
   final List<UserPostsRecord>? listaPostMarcadores; // todo remove me
   final void Function(SpotDetail post) onMarkerTap;
   final void Function() onMapTap;

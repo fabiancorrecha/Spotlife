@@ -25,7 +25,7 @@ class CarrouselMap extends StatefulWidget {
   const CarrouselMap({
     Key? key,
     required this.userLocation,
-    this.zoom,
+    this.zoom = 16.0,
     this.selectedSpotLocation,
     required this.spots,
     required this.onMapTap,
@@ -35,7 +35,7 @@ class CarrouselMap extends StatefulWidget {
 
   final LatLng userLocation;
   final SpotDetail? selectedSpotLocation;
-  final double? zoom;
+  final double zoom;
   final List<SpotDetail> spots;
   final void Function(SpotDetail post) onMarkerTap;
   final void Function() onMapTap;
@@ -96,7 +96,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
     var currentLocation = widget.selectedSpotLocation;
     if (currentLocation != null && currentLocation != oldWidget.selectedSpotLocation) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _moveCameraToPost(currentLocation, 14);
+        _moveCameraToPost(currentLocation, currentZoom);
       });
     }
   }
