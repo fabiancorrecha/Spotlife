@@ -491,6 +491,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'esImagen',
                   ParamType.bool,
                 ),
+                selectedUser: params.getParam<DocumentReference>(
+                  'selectedUser',
+                  ParamType.DocumentReference,
+                  isList: true,
+                  collectionNamePath: ['users'],
+                ),
               ),
             ),
             FFRoute(
@@ -523,6 +529,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 post: params.getParam(
                   'post',
                   ParamType.Document,
+                ),
+                refPostUser: params.getParam(
+                  'refPostUser',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['userPosts'],
+                ),
+                titulo: params.getParam(
+                  'titulo',
+                  ParamType.String,
+                ),
+                descripcion: params.getParam(
+                  'descripcion',
+                  ParamType.String,
                 ),
               ),
             ),
@@ -752,6 +772,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 verCometarios: params.getParam(
                   'verCometarios',
                   ParamType.bool,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'testNewVideo',
+              path: 'testNewVideo',
+              builder: (context, params) => const TestNewVideoWidget(),
+            ),
+            FFRoute(
+              name: 'EtiquetarUbicacion',
+              path: 'EtiquetarUbicacion',
+              requireAuth: true,
+              builder: (context, params) => const EtiquetarUbicacionWidget(),
+            ),
+            FFRoute(
+              name: 'EtiquetarPersonas',
+              path: 'etiquetarPersonas',
+              requireAuth: true,
+              builder: (context, params) => EtiquetarPersonasWidget(
+                esImagen: params.getParam(
+                  'esImagen',
+                  ParamType.bool,
+                ),
+                imageList: params.getParam<String>(
+                  'imageList',
+                  ParamType.String,
+                  isList: true,
+                ),
+                video: params.getParam(
+                  'video',
+                  ParamType.String,
                 ),
               ),
             )

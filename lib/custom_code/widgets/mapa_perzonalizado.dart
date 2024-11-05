@@ -401,7 +401,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
       final post = lista[i];
 
       try {
-        if (post.postPhotoUrl.isNotEmpty && post.placeInfo.latLng != null) {
+        if (post.postPhotoUrl.isNotEmpty &&
+            post.placeInfo.localizacion != null) {
           //ignore marker if not have photo or latLng
           final markerIcon = (await getMarketIcon(post));
           if (markerIcon != null) {
@@ -410,8 +411,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
             gmap.Marker marker = gmap.Marker(
               markerId: gmap.MarkerId(post.reference.id),
               position: gmap.LatLng(
-                post.placeInfo.latLng!.latitude,
-                post.placeInfo.latLng!.longitude,
+                post.placeInfo.localizacion!.latitude,
+                post.placeInfo.localizacion!.longitude,
               ),
               infoWindow: gmap.InfoWindow(
                 title: _user.displayName,

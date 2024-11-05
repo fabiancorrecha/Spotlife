@@ -1108,7 +1108,7 @@ class _CrearColeccionConPostWidgetState
                               state: _model.placePickerValue.state,
                               country: _model.placePickerValue.country,
                               zipcode: _model.placePickerValue.zipCode,
-                              latLng: _model.placePickerValue.latLng,
+                              localizacion: _model.placePickerValue.latLng,
                               clearUnsetFields: false,
                               create: true,
                             ),
@@ -1140,7 +1140,8 @@ class _CrearColeccionConPostWidgetState
                                       state: _model.placePickerValue.state,
                                       country: _model.placePickerValue.country,
                                       zipcode: _model.placePickerValue.zipCode,
-                                      latLng: _model.placePickerValue.latLng,
+                                      localizacion:
+                                          _model.placePickerValue.latLng,
                                       clearUnsetFields: false,
                                       create: true,
                                     ),

@@ -83,7 +83,7 @@ class _UsuariosRecomendadosWidgetState
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        'vbg51sfp' /* Perfiles recomendados */,
+                        'vbg51sfp' /* Personas  recomendadas */,
                       ),
                       style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily:
