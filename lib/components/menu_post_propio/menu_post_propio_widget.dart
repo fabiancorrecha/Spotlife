@@ -415,6 +415,10 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                     containerUserPostsRecord,
                                     ParamType.Document,
                                   ),
+                                  'refPostUser': serializeParam(
+                                    containerUserPostsRecord.reference,
+                                    ParamType.DocumentReference,
+                                  ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'post': containerUserPostsRecord,

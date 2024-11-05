@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "788970699260-kqhmijht0t7cd9lukolgv7kh5cmt9r1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "eb3598990c8bb8a0e30db7007761e7cd3376800d"
+          }
+        },
+        {
           "client_id": "788970699260-mpsvig51s34rr547ouvpmp09pvgafa4j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -35,6 +43,14 @@
           "android_info": {
             "package_name": "es.spotlife.app",
             "certificate_hash": "8a3450d658a2e97882c82f8e5e152efba505e363"
+          }
+        },
+        {
+          "client_id": "788970699260-pd62j8bnto7p5h6getuv3ig21kdb0c8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.spotlife.app",
+            "certificate_hash": "2342a8bd78839559c8231bcc8469638d68efbe46"
           }
         },
         {

@@ -121,8 +121,8 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                                   'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
                               webGoogleMapsApiKey:
                                   'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
-                              endCoordinate:
-                                  mapaIrLugarUserPostsRecord.placeInfo.latLng!,
+                              endCoordinate: mapaIrLugarUserPostsRecord
+                                  .placeInfo.localizacion!,
                               startCoordinate: currentUserLocationValue!,
                               userImage: mapaIrLugarUserPostsRecord
                                   .postPhotolist.first,

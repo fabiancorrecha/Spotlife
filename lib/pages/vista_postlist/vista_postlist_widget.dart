@@ -10,8 +10,8 @@ import '/components/ver_comentarios_desde_detalle/ver_comentarios_desde_detalle_
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_video_player.dart';
 import 'dart:ui';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -193,13 +193,15 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                   Expanded(
                                                     child: Container(
                                                       width: double.infinity,
-                                                      height: double.infinity,
+                                                      height: 430.0,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
                                                                 .of(context)
                                                             .secondaryBackground,
                                                       ),
                                                       child: Container(
+                                                        width: double.infinity,
+                                                        height: 430.0,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: FlutterFlowTheme
@@ -208,6 +210,73 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                         ),
                                                         child: Stack(
                                                           children: [
+                                                            if (listPostItem
+                                                                .esVideo)
+                                                              ClipRRect(
+                                                                child:
+                                                                    Container(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  height: 410.0,
+                                                                  decoration:
+                                                                      const BoxDecoration(),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height: double
+                                                                        .infinity,
+                                                                    child: custom_widgets
+                                                                        .CustomVideoPlayer(
+                                                                      width: double
+                                                                          .infinity,
+                                                                      height: double
+                                                                          .infinity,
+                                                                      videoPath:
+                                                                          listPostItem
+                                                                              .video,
+                                                                      soundOn:
+                                                                          FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .volumeUp,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      soundOff:
+                                                                          FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .volumeMute,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      fullscreen:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .fullscreen_sharp,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      closeScreem:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .fullscreen_exit,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      buttonSize:
+                                                                          40.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             if (!listPostItem
                                                                 .esVideo)
                                                               Builder(
@@ -281,39 +350,6 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                     ),
                                                                   );
                                                                 },
-                                                              ),
-                                                            if (listPostItem
-                                                                .esVideo)
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                                child:
-                                                                    FlutterFlowVideoPlayer(
-                                                                  path:
-                                                                      listPostItem
-                                                                          .video,
-                                                                  videoType:
-                                                                      VideoType
-                                                                          .network,
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: 570.0,
-                                                                  aspectRatio:
-                                                                      0.72,
-                                                                  autoPlay:
-                                                                      false,
-                                                                  looping: true,
-                                                                  showControls:
-                                                                      false,
-                                                                  allowFullScreen:
-                                                                      true,
-                                                                  allowPlaybackSpeedMenu:
-                                                                      false,
-                                                                  lazyLoad:
-                                                                      false,
-                                                                ),
                                                               ),
                                                             Container(
                                                               height: 60.0,
@@ -585,7 +621,9 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                         child: Padding(
                                                                                           padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
-                                                                                            listPostItem.placeInfo.address.maybeHandleOverflow(maxChars: 30),
+                                                                                            listPostItem.placeInfo.address.maybeHandleOverflow(
+                                                                                              maxChars: 30,
+                                                                                            ),
                                                                                             maxLines: 1,
                                                                                             style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                                   fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
@@ -737,6 +775,17 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                               safeSetState(() {}));
                                                                         } else {
                                                                           logFirebaseEvent(
+                                                                              'Icon_generate_current_page_link');
+                                                                          _model.currentPageLink =
+                                                                              await generateCurrentPageLink(
+                                                                            context,
+                                                                            title:
+                                                                                'Compartir link',
+                                                                            isShortLink:
+                                                                                false,
+                                                                          );
+
+                                                                          logFirebaseEvent(
                                                                               'Icon_bottom_sheet');
                                                                           await showModalBottomSheet(
                                                                             isScrollControlled:
@@ -758,6 +807,7 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                       height: 319.0,
                                                                                       child: MenuPostAjenoWidget(
                                                                                         post: listPostItem.reference,
+                                                                                        link: _model.currentPageLink,
                                                                                       ),
                                                                                     ),
                                                                                   ),

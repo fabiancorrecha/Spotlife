@@ -138,11 +138,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                             currentUserLocationValue!, false),
                                     zoom: 16.0,
                                     listaPostMarcadores:
-                                        functions.getPlacesMaximumDistance(
-                                            mapaPrincipalCopyUserPostsRecordList
-                                                .toList(),
-                                            currentUserLocationValue!,
-                                            5000.0),
+                                        mapaPrincipalCopyUserPostsRecordList,
                                   ),
                                 ),
                               if (FFAppState().PostGlobal == true)
@@ -170,12 +166,7 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                             currentUserLocationValue!, false),
                                     zoom: 16.0,
                                     listaPostMarcadores:
-                                        functions.getPlacesMaximumDistance(
-                                            mapaPrincipalCopyUserPostsRecordList
-                                                .where((e) => e.esAmigos)
-                                                .toList(),
-                                            currentUserLocationValue!,
-                                            5000.0),
+                                        mapaPrincipalCopyUserPostsRecordList,
                                   ),
                                 ),
                               if (FFAppState().PostAmigo == true)

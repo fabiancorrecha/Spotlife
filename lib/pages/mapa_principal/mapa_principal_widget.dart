@@ -214,49 +214,52 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                   ),
                                 ),
                               if (FFAppState().Mapa == true)
-                                SizedBox(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: custom_widgets.MapaPersonalizado2(
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: SizedBox(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    ubicacionInicialLat:
-                                        functions.obtenerLatLng(
-                                            currentUserLocationValue!, true),
-                                    ubicacionInicialLng:
-                                        functions.obtenerLatLng(
-                                            currentUserLocationValue!, false),
-                                    zoom: 16.0,
-                                    listaPostMarcadores:
-                                        mapaPrincipalUserPostsRecordList,
-                                    usuarioAutenticado: currentUserReference,
-                                    navigateTo: (bycreate) async {
-                                      logFirebaseEvent(
-                                          'MAPA_PRINCIPAL_Container_cojbo4pu_CALLBA');
-                                      if (bycreate == currentUserReference) {
+                                    child: custom_widgets.MapaPersonalizado2(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      ubicacionInicialLat:
+                                          functions.obtenerLatLng(
+                                              currentUserLocationValue!, true),
+                                      ubicacionInicialLng:
+                                          functions.obtenerLatLng(
+                                              currentUserLocationValue!, false),
+                                      zoom: 16.0,
+                                      listaPostMarcadores:
+                                          mapaPrincipalUserPostsRecordList,
+                                      usuarioAutenticado: currentUserReference,
+                                      navigateTo: (bycreate) async {
                                         logFirebaseEvent(
-                                            'MapaPersonalizado2_navigate_to');
+                                            'MAPA_PRINCIPAL_Container_cojbo4pu_CALLBA');
+                                        if (bycreate == currentUserReference) {
+                                          logFirebaseEvent(
+                                              'MapaPersonalizado2_navigate_to');
 
-                                        context.pushNamed('perfilPropio');
+                                          context.pushNamed('perfilPropio');
 
-                                        return;
-                                      } else {
-                                        logFirebaseEvent(
-                                            'MapaPersonalizado2_navigate_to');
+                                          return;
+                                        } else {
+                                          logFirebaseEvent(
+                                              'MapaPersonalizado2_navigate_to');
 
-                                        context.pushNamed(
-                                          'otroPerfil',
-                                          queryParameters: {
-                                            'perfilAjeno': serializeParam(
-                                              bycreate,
-                                              ParamType.DocumentReference,
-                                            ),
-                                          }.withoutNulls,
-                                        );
+                                          context.pushNamed(
+                                            'otroPerfil',
+                                            queryParameters: {
+                                              'perfilAjeno': serializeParam(
+                                                bycreate,
+                                                ParamType.DocumentReference,
+                                              ),
+                                            }.withoutNulls,
+                                          );
 
-                                        return;
-                                      }
-                                    },
+                                          return;
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ),
                               if ((FFAppState().Post == true) &&

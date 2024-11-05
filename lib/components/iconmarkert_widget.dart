@@ -44,7 +44,7 @@ class _IconmarkertWidgetState extends State<IconmarkertWidget> {
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 40.0, 0.0),
@@ -213,6 +213,56 @@ class _IconmarkertWidgetState extends State<IconmarkertWidget> {
                   fit: BoxFit.cover,
                 ),
               ),
+            ),
+          ),
+          FlutterFlowIconButton(
+            borderRadius: 100.0,
+            buttonSize: 40.0,
+            fillColor: const Color(0x159D9B9B),
+            icon: Icon(
+              Icons.fullscreen_sharp,
+              color: FlutterFlowTheme.of(context).white,
+              size: 24.0,
+            ),
+            onPressed: () {
+              print('IconButton pressed ...');
+            },
+          ),
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 100.0,
+            buttonSize: 40.0,
+            fillColor: const Color(0x159D9B9B),
+            icon: Icon(
+              Icons.fullscreen_exit,
+              color: FlutterFlowTheme.of(context).white,
+              size: 24.0,
+            ),
+            onPressed: () {
+              print('IconButton pressed ...');
+            },
+          ),
+          Container(
+            width: 50.0,
+            height: 20.0,
+            decoration: BoxDecoration(
+              color: const Color(0x159D9B9B),
+              borderRadius: BorderRadius.circular(28.0),
+            ),
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            child: Text(
+              FFLocalizations.of(context).getText(
+                'wtse5imr' /* 00:34 */,
+              ),
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                    fontSize: 12.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w300,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).bodyMediumFamily),
+                  ),
             ),
           ),
         ],

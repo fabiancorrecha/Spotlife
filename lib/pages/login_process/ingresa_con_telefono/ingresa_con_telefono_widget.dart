@@ -358,7 +358,9 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                             functions.getDialCode(
                                                 _model.textController1.text),
                                             '+34',
-                                          ).maybeHandleOverflow(maxChars: 4),
+                                          ).maybeHandleOverflow(
+                                            maxChars: 4,
+                                          ),
                                           maxLines: 1,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
