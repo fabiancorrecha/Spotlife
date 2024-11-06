@@ -32,7 +32,7 @@ class MapWithCarrousel extends StatefulWidget {
 class _MapWithCarrousel extends State<MapWithCarrousel> {
   var showCards = false;
   var spots = <SpotDetail>[];
-  SpotDetail? carrouselSpotLocation = null;
+  SpotDetail? selectedSpot = null;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
       background: CarrouselMap(
         spots: List.from(spots),
         zoom: widget.zoom,
-        selectedSpotLocation: carrouselSpotLocation,
+        selectedSpot: selectedSpot,
         userLocation: widget.userLocation,
         onMapTap: _onMapTap,
         onMarkerTap: _onMarkerTap,
@@ -64,9 +64,9 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           onUserTap: () => debugPrint("asanre onUserTap"),
         );
       },
-      onPageChanged: (location) {
+      onPageChanged: (spot) {
         setState(() {
-          carrouselSpotLocation = location;
+          selectedSpot = spot;
         });
       },
     );
@@ -94,6 +94,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     _sortSpots(spot);
     setState(() {
       showCards = true;
+      selectedSpot = spot;
     });
     widget.onMarkerTap(spot);
   }

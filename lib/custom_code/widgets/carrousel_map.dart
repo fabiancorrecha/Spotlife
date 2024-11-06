@@ -20,13 +20,14 @@ import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
+import 'package:widget_to_marker/widget_to_marker.dart';
 
 class CarrouselMap extends StatefulWidget {
   const CarrouselMap({
     Key? key,
     required this.userLocation,
     this.zoom = 16.0,
-    this.selectedSpotLocation,
+    this.selectedSpot,
     required this.spots,
     required this.onMapTap,
     required this.onMarkerTap, // Argumento agregado
@@ -34,7 +35,7 @@ class CarrouselMap extends StatefulWidget {
   }) : super(key: key);
 
   final LatLng userLocation;
-  final SpotDetail? selectedSpotLocation;
+  final SpotDetail? selectedSpot;
   final double zoom;
   final List<SpotDetail> spots;
   final void Function(SpotDetail post) onMarkerTap;
@@ -85,27 +86,39 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     if (widget.spots.isNotEmpty && widget.spots != oldWidget.spots) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        try {
-          loadMarkers();
-        } catch (e) {
-          print('Error al cargar los marcadores: $e');
-        }
+        loadMarkers();
       });
     }
 
-    var currentLocation = widget.selectedSpotLocation;
-    if (currentLocation != null && currentLocation != oldWidget.selectedSpotLocation) {
+    var currentLocation = widget.selectedSpot;
+    if (currentLocation != null && currentLocation != oldWidget.selectedSpot) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _moveCameraToPost(currentLocation, currentZoom);
       });
     }
   }
 
-  loadMarkers() async {
-    final listMarkers = await getMarkers(widget.spots);
+  void updateSelectedMarker() {
     setState(() {
-      markers = listMarkers;
+      markers = Set<gmap.Marker>.of(markers.map((gmap.Marker marker) {
+        return marker.copyWith(alphaParam: marker.markerId.value == widget.selectedSpot?.id ? 1 : 0.7);
+      }));
     });
+  }
+
+  void loadMarkers() async {
+    try {
+      if (markers.isEmpty) {
+        final listMarkers = await getMarkers(widget.spots);
+        setState(() {
+          markers = listMarkers;
+        });
+      } else {
+        updateSelectedMarker();
+      }
+    } catch (e) {
+      print('Error al cargar los marcadores: $e');
+    }
   }
 
   Future<String> _getUserPhotoUrl(DocumentReference userRef) async {
@@ -120,84 +133,34 @@ class _CarrouselMapState extends State<CarrouselMap> {
     return '';
   }
 
-  Future<Uint8List> _createCustomMarkerIcon(String imageUrl) async {
-    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
-    final Canvas canvas = Canvas(pictureRecorder);
-    final double size = 135;
-    final double shadowOffset = 3.0; // Desplazamiento de la sombra
-
-    // Dibuja un círculo sombra ligeramente más grande para simular la elevación
-    Paint shadowPaint = Paint()..color = Colors.black.withOpacity(0.25); // Color de la sombra con opacidad
-    canvas.drawCircle(
-      Offset(size / 2, (size / 2) + shadowOffset), // Posición del círculo con desplazamiento en Y
-      size / 2, // Radio del círculo sombra
-      shadowPaint,
-    );
-
-    // Dibuja un círculo blanco en el centro (con la elevación simulada)
-    Paint paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
-    canvas.drawCircle(
-      Offset(size / 2, size / 2), // Centro del círculo principal
-      size / 2, // Radio del círculo principal
-      paint,
-    );
-
-    // Cargar la imagen desde la URL
-    final ui.Image image = await _loadImage(imageUrl);
-    final double imageSize = size * 0.8; // Tamaño de la imagen
-    final double imageX = (size - imageSize) / 2; // Coordenada X de la imagen
-    final double imageY = (size - imageSize) / 2; // Coordenada Y de la imagen
-    final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
-    final RRect rrect = RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
-    canvas.clipRRect(rrect);
-
-    // Dibujar la imagen en el centro del círculo
-    canvas.drawImageRect(
-      image,
-      Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
-      rect,
-      Paint(),
-    );
-
-    // Convertir el lienzo a imagen
-    final ui.Image markerAsImage = await pictureRecorder.endRecording().toImage(size.toInt(), size.toInt() + shadowOffset.toInt());
-    final ByteData? byteData = await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
-    return byteData!.buffer.asUint8List();
-  }
-
-  Future<ui.Image> _loadImage(String url) async {
-    final completer = Completer<ui.Image>();
-    final imageStream = NetworkImage(url).resolve(ImageConfiguration.empty);
-    imageStream.addListener(
-      ImageStreamListener((ImageInfo info, bool _) => completer.complete(info.image)),
-    );
-    return completer.future;
-  }
-
   Future<Set<gmap.Marker>> getMarkers(List<SpotDetail> spots) async {
     Set<gmap.Marker> markers = {};
 
     for (int i = 0; i < spots.length; i++) {
-      final post = spots[i];
+      final spot = spots[i];
+      final size = 120.0;
 
       try {
-        if (post.postUser != null) {
-          final photoUrl = post.avatarUrl;
-          if (photoUrl.isNotEmpty && post.location != null) {
-            final location = post.location;
-            final markerIcon = await _createCustomMarkerIcon(photoUrl);
-            if (markerIcon.isNotEmpty) {
-              gmap.Marker marker = gmap.Marker(
-                markerId: gmap.MarkerId(post.id),
-                position: gmap.LatLng(location.latitude, location.longitude),
-                icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
-                onTap: () {
-                  onMarkerTap(post);
-                },
-              );
+        if (spot.postUser != null) {
+          final photoUrl = spot.avatarUrl;
+          if (photoUrl.isNotEmpty && spot.location != null) {
+            final location = spot.location;
+            final markerIcon = await CircularNetworkImage(imageUrl: photoUrl, radius: 70).toBitmapDescriptor(
+              logicalSize: Size(size, size),
+              imageSize: Size(size, size),
+              waitToRender: Duration(milliseconds: 100),
+            );
+            gmap.Marker marker = gmap.Marker(
+              markerId: gmap.MarkerId(spot.id),
+              position: gmap.LatLng(location.latitude, location.longitude),
+              icon: markerIcon,
+              alpha: 0.7,
+              onTap: () {
+                onMarkerTap(spot);
+              },
+            );
 
-              markers.add(marker);
-            }
+            markers.add(marker);
           }
         }
       } catch (e) {
@@ -375,7 +338,6 @@ class _CarrouselMapState extends State<CarrouselMap> {
       onCameraMove: (gmap.CameraPosition position) {
         if (position.zoom != currentZoom && (position.zoom - currentZoom).abs() >= 1) {
           currentZoom = position.zoom;
-          loadMarkers();
         }
       },
     );
