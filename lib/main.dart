@@ -1,4 +1,5 @@
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,42 @@ void main() async {
   ));
 }
 
+class MyApp2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final cachedNetworkImage = CachedNetworkImage(
+      imageUrl: "imageUrl.isNotEmpty ? imageUrl : defaultImage",
+      errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: "https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png", fit: BoxFit.cover),
+      fit: BoxFit.cover, // Adjust the fit as needed
+    );
+    final size = 60.0;
+    final isUser = true;
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Circular Container'),
+        ),
+        body: Center(
+          child: Container(
+            height: size,
+            width: size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: isUser
+                  ? Border.all(
+                      color: Color(0xFF5c52e2),
+                      width: 3,
+                    )
+                  : null,
+            ),
+            child: ClipOval(child: cachedNetworkImage),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -48,8 +85,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 
-  static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>()!;
+  static _MyAppState of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {
@@ -155,10 +191,7 @@ class _MyAppState extends State<MyApp> {
 
     // Init of AppsFlyer SDK
     await _appsflyerSdk.initSdk(
-        registerConversionDataCallback: true,
-        registerOnAppOpenAttributionCallback: true,
-        registerOnDeepLinkingCallback: true);
-
+        registerConversionDataCallback: true, registerOnAppOpenAttributionCallback: true, registerOnDeepLinkingCallback: true);
 
     // Deep linking callback
     _appsflyerSdk.onDeepLinking((DeepLinkResult dp) {

@@ -270,6 +270,7 @@ class SpotDetail {
     required this.avatarUrl,
     required this.location,
     required this.postUser,
+    required this.isLoggedUser,
     required this.description,
     required this.placeInfo,
   });
@@ -280,6 +281,7 @@ class SpotDetail {
   final String? description;
   final String avatarUrl;
   final LatLng location;
+  final bool isLoggedUser;
   final DocumentReference? postUser;
   final PlaceInfoStruct placeInfo;
 
@@ -294,6 +296,7 @@ class SpotDetail {
         other.title == title &&
         other.imagePath == imagePath &&
         other.avatarUrl == avatarUrl &&
+        other.isLoggedUser == isLoggedUser &&
         other.description == description &&
         other.postUser == postUser &&
         other.placeInfo == placeInfo &&
