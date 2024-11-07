@@ -21,6 +21,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 import 'package:widget_to_marker/widget_to_marker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:ui';
 
 class CarrouselMap extends StatefulWidget {
   const CarrouselMap({
@@ -86,7 +88,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     if (widget.spots.isNotEmpty && widget.spots != oldWidget.spots) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        loadMarkers();
+        loadMarkers(widget.selectedSpot, oldWidget.selectedSpot);
       });
     }
 
@@ -98,15 +100,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
     }
   }
 
-  void updateSelectedMarker() {
-    setState(() {
-      markers = Set<gmap.Marker>.of(markers.map((gmap.Marker marker) {
-        return marker.copyWith(alphaParam: marker.markerId.value == widget.selectedSpot?.id ? 1 : 0.7);
-      }));
-    });
-  }
-
-  void loadMarkers() async {
+  void loadMarkers(SpotDetail? selected, SpotDetail? oldSelected) async {
     try {
       if (markers.isEmpty) {
         final listMarkers = await getMarkers(widget.spots);
@@ -114,10 +108,42 @@ class _CarrouselMapState extends State<CarrouselMap> {
           markers = listMarkers;
         });
       } else {
-        updateSelectedMarker();
+        updateSelectedMarker(selected, oldSelected);
       }
     } catch (e) {
       print('Error al cargar los marcadores: $e');
+    }
+  }
+
+  void updateSelectedMarker(SpotDetail? selectedSpot, SpotDetail? oldSelectedSpot) async {
+    if (selectedSpot?.id != oldSelectedSpot?.id) {
+      final updatedMarkers = await Future.wait(markers.map((gmap.Marker marker) async {
+        var isCurrentSelected = marker.markerId.value == selectedSpot?.id;
+        var wasOldSelected = marker.markerId.value == oldSelectedSpot?.id;
+        var markerIcon = marker.icon;
+
+        if (isCurrentSelected) {
+          markerIcon =
+              await CustomMarker(imageUrl: selectedSpot?.avatarUrl ?? "", isActive: true, isUser: selectedSpot?.isLoggedUser ?? false)
+                  .toBitmapDescriptor(
+            waitToRender: Duration(milliseconds: 100),
+          );
+        }
+
+        if (wasOldSelected) {
+          markerIcon = await CustomMarker(
+                  imageUrl: oldSelectedSpot?.avatarUrl ?? "", isActive: false, isUser: oldSelectedSpot?.isLoggedUser ?? false)
+              .toBitmapDescriptor(
+            waitToRender: Duration(milliseconds: 100),
+          );
+        }
+
+        return marker.copyWith(iconParam: markerIcon);
+      }));
+
+      setState(() {
+        markers = Set<gmap.Marker>.of(updatedMarkers);
+      });
     }
   }
 
@@ -138,23 +164,21 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     for (int i = 0; i < spots.length; i++) {
       final spot = spots[i];
-      final size = 120.0;
-
       try {
         if (spot.postUser != null) {
           final photoUrl = spot.avatarUrl;
           if (photoUrl.isNotEmpty && spot.location != null) {
             final location = spot.location;
-            final markerIcon = await CircularNetworkImage(imageUrl: photoUrl, radius: 70).toBitmapDescriptor(
-              logicalSize: Size(size, size),
-              imageSize: Size(size, size),
+            final markerIcon = await CustomMarker(
+              imageUrl: photoUrl,
+              isUser: spot.isLoggedUser,
+            ).toBitmapDescriptor(
               waitToRender: Duration(milliseconds: 100),
             );
             gmap.Marker marker = gmap.Marker(
               markerId: gmap.MarkerId(spot.id),
               position: gmap.LatLng(location.latitude, location.longitude),
               icon: markerIcon,
-              alpha: 0.7,
               onTap: () {
                 onMarkerTap(spot);
               },
@@ -449,6 +473,47 @@ class _CarrouselMapState extends State<CarrouselMap> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomMarker extends StatelessWidget {
+  final String imageUrl;
+  final bool isUser; // isLoggedUser
+  final bool isActive;
+
+  const CustomMarker({
+    super.key,
+    required this.imageUrl,
+    this.isUser = true,
+    this.isActive = false,
+  });
+
+  final defaultImage =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png';
+
+  @override
+  Widget build(BuildContext context) {
+    double pixelRatio = window.devicePixelRatio;
+    final size = (isActive ? 60 : 40.0) * pixelRatio;
+    final cachedNetworkImage = CachedNetworkImage(
+      imageUrl: imageUrl.isNotEmpty ? imageUrl : defaultImage,
+      errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: defaultImage, fit: BoxFit.cover),
+      fit: BoxFit.cover, // Adjust the fit as needed
+    );
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: isUser
+            ? Border.all(
+                color: Color(0xFF5c52e2),
+                width: 3 * pixelRatio,
+              )
+            : null,
+      ),
+      child: ClipOval(child: cachedNetworkImage),
     );
   }
 }
