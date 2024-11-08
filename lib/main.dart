@@ -42,42 +42,6 @@ void main() async {
   ));
 }
 
-class MyApp2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final cachedNetworkImage = CachedNetworkImage(
-      imageUrl: "imageUrl.isNotEmpty ? imageUrl : defaultImage",
-      errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: "https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png", fit: BoxFit.cover),
-      fit: BoxFit.cover, // Adjust the fit as needed
-    );
-    final size = 60.0;
-    final isUser = true;
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Circular Container'),
-        ),
-        body: Center(
-          child: Container(
-            height: size,
-            width: size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: isUser
-                  ? Border.all(
-                      color: Color(0xFF5c52e2),
-                      width: 3,
-                    )
-                  : null,
-            ),
-            child: ClipOval(child: cachedNetworkImage),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 

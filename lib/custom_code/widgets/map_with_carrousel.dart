@@ -75,7 +75,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   Future<void> _initSpots() async {
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
     final currentUser = widget.usuarioAutenticado;
-    var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null).map((spot) async => SpotDetail(
+    var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null && spot.postUser != null).map((spot) async => SpotDetail(
           id: spot.reference.id,
           title: spot.postTitle,
           imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
@@ -104,6 +104,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   void _onMapTap() {
     if (showCards) {
       setState(() {
+        selectedSpot = null;
         showCards = false;
       });
     }

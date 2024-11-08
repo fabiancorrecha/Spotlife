@@ -124,7 +124,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
         if (isCurrentSelected) {
           markerIcon =
-              await CustomMarker(imageUrl: selectedSpot?.avatarUrl ?? "", isActive: true, isUser: selectedSpot?.isLoggedUser ?? false)
+              await CustomMarker(imageUrl: selectedSpot?.imagePath ?? "", isActive: true, isUser: selectedSpot?.isLoggedUser ?? false)
                   .toBitmapDescriptor(
             waitToRender: Duration(milliseconds: 100),
           );
@@ -132,7 +132,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
         if (wasOldSelected) {
           markerIcon = await CustomMarker(
-                  imageUrl: oldSelectedSpot?.avatarUrl ?? "", isActive: false, isUser: oldSelectedSpot?.isLoggedUser ?? false)
+                  imageUrl: oldSelectedSpot?.imagePath ?? "", isActive: false, isUser: oldSelectedSpot?.isLoggedUser ?? false)
               .toBitmapDescriptor(
             waitToRender: Duration(milliseconds: 100),
           );
@@ -165,27 +165,25 @@ class _CarrouselMapState extends State<CarrouselMap> {
     for (int i = 0; i < spots.length; i++) {
       final spot = spots[i];
       try {
-        if (spot.postUser != null) {
-          final photoUrl = spot.avatarUrl;
-          if (photoUrl.isNotEmpty && spot.location != null) {
-            final location = spot.location;
-            final markerIcon = await CustomMarker(
-              imageUrl: photoUrl,
-              isUser: spot.isLoggedUser,
-            ).toBitmapDescriptor(
-              waitToRender: Duration(milliseconds: 100),
-            );
-            gmap.Marker marker = gmap.Marker(
-              markerId: gmap.MarkerId(spot.id),
-              position: gmap.LatLng(location.latitude, location.longitude),
-              icon: markerIcon,
-              onTap: () {
-                onMarkerTap(spot);
-              },
-            );
+        final photoUrl = spot.imagePath;
+        if (photoUrl.isNotEmpty && spot.location != null) {
+          final location = spot.location;
+          final markerIcon = await CustomMarker(
+            imageUrl: photoUrl,
+            isUser: spot.isLoggedUser,
+          ).toBitmapDescriptor(
+            waitToRender: Duration(milliseconds: 300),
+          );
+          gmap.Marker marker = gmap.Marker(
+            markerId: gmap.MarkerId(spot.id),
+            position: gmap.LatLng(location.latitude, location.longitude),
+            icon: markerIcon,
+            onTap: () {
+              onMarkerTap(spot);
+            },
+          );
 
-            markers.add(marker);
-          }
+          markers.add(marker);
         }
       } catch (e) {
         debugPrint('getMarkers Error: $e');
