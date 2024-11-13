@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/backend/backend.dart';
+import 'dart:ui';
 import 'index.dart'; // Imports other custom widgets
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:spotlifeapp/flutter_flow/custom_icons.dart';
@@ -131,11 +132,23 @@ class MapCardSpotItem extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomLeft,
-              child: Row(
-                children: [
-                  _userSpotDetail(item),
-                  _favoritesIcon(context, item.isFavorite),
-                ],
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 2.0),
+                  child: Container(
+                    color: Color(0x21141313),
+                    child: Row(
+                      children: [
+                        _userSpotDetail(item),
+                        _favoritesIcon(context, item.isFavorite),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
             Align(
@@ -252,14 +265,10 @@ class ImageBackground extends StatelessWidget {
               ? imagePath
               : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
           placeholder: (BuildContext context, String url) {
-            return Container(
-              color: Colors.grey,
-            );
+            return Image.asset('assets/images/card_loading_image.png');
           },
           errorWidget: (BuildContext context, String url, Object error) {
-            return Container(
-              color: Colors.red, // todo asanre change me
-            );
+            return Image.asset('assets/images/card_loading_image.png');
           },
         ),
       ),
