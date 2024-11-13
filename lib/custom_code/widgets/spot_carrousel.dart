@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import 'index.dart'; // Imports other custom widgets
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:spotlifeapp/flutter_flow/custom_icons.dart';
+import 'package:spotlifeapp/flutter_flow/flutter_flow_theme.dart';
 
 class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
@@ -132,7 +134,7 @@ class MapCardSpotItem extends StatelessWidget {
               child: Row(
                 children: [
                   _userSpotDetail(item),
-                  _favoritesIcon(),
+                  _favoritesIcon(context, item.isFavorite),
                 ],
               ),
             ),
@@ -153,9 +155,13 @@ class MapCardSpotItem extends StatelessWidget {
     );
   }
 
-  IconButton _favoritesIcon() {
+  IconButton _favoritesIcon(BuildContext context, bool isFavorite) {
     return IconButton(
-      icon: Icon(Icons.star_border, color: Colors.white),
+      icon: Icon(
+        isFavorite ? FFIcons.kframe168 : FFIcons.kstarLines,
+        color: isFavorite ? FlutterFlowTheme.of(context).customSeleccion : FlutterFlowTheme.of(context).primaryText,
+        size: 24.0,
+      ),
       onPressed: onFavoritesTap,
     );
   }
@@ -263,7 +269,7 @@ class ImageBackground extends StatelessWidget {
 }
 
 class SpotDetail {
-  const SpotDetail({
+  SpotDetail({
     required this.id,
     required this.title,
     required this.imagePath,
@@ -273,6 +279,8 @@ class SpotDetail {
     required this.isLoggedUser,
     required this.description,
     required this.placeInfo,
+    required this.isFavorite,
+    required this.reference,
   });
 
   final String id;
@@ -282,6 +290,8 @@ class SpotDetail {
   final String avatarUrl;
   final LatLng location;
   final bool isLoggedUser;
+  bool isFavorite;
+  final DocumentReference reference;
   final DocumentReference? postUser;
   final PlaceInfoStruct placeInfo;
 

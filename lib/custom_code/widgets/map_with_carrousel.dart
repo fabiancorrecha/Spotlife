@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 import 'index.dart'; // Imports other custom widgets
+import '/auth/firebase_auth/auth_util.dart';
 
 class MapWithCarrousel extends StatefulWidget {
   const MapWithCarrousel({
@@ -59,7 +60,12 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           item: item,
           isSelected: isSelected,
           onImageTap: () => debugPrint("asanre onImageTap"),
-          onFavoritesTap: () => debugPrint("asanre onFavoritesTap"),
+          onFavoritesTap: () {
+            _savedFavorites(item.isFavorite, item.reference);
+            item.isFavorite = !item.isFavorite;
+            setState(() {});
+            debugPrint("asanre onFavoritesTap");
+          },
           onNavigateTap: () => debugPrint("asanre onNavigateTap"),
           onUserTap: () => debugPrint("asanre onUserTap"),
         );
@@ -73,10 +79,12 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   }
 
   Future<void> _initSpots() async {
+    final favoritesList = (currentUserDocument?.listaPostFavoritos.toList() ?? []).map((spot) => spot.id).toSet();
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
     final currentUser = widget.usuarioAutenticado;
     var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null && spot.postUser != null).map((spot) async => SpotDetail(
           id: spot.reference.id,
+          reference: spot.reference,
           title: spot.postTitle,
           imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
           avatarUrl: await getUserPhotoUrl(spot.postUser),
@@ -85,6 +93,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           isLoggedUser: spot.postUser == currentUser,
           description: spot.postDescription,
           placeInfo: spot.placeInfo,
+          isFavorite: favoritesList.contains(spot.reference.id),
         ));
     var _spots = await Future.wait(spotsAsync.toSet().toList());
     setState(() {
@@ -114,6 +123,44 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   void _sortSpots(SpotDetail spot) {
     final referencePoint = spot.location;
     spots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
+  }
+
+  void _savedFavorites(bool isFav, DocumentReference postReference) async {
+    // remove
+    if (isFav) {
+      await currentUserReference!.update({
+        ...mapToFirestore(
+          {
+            'listaPostFavoritos': FieldValue.arrayRemove([postReference]),
+          },
+        ),
+      });
+
+      await postReference.update({
+        ...mapToFirestore(
+          {
+            'FavoritoUser': FieldValue.arrayRemove([currentUserReference]),
+          },
+        ),
+      });
+    } else {
+      // add
+      await currentUserReference!.update({
+        ...mapToFirestore(
+          {
+            'listaPostFavoritos': FieldValue.arrayUnion([postReference]),
+          },
+        ),
+      });
+
+      await postReference.update({
+        ...mapToFirestore(
+          {
+            'FavoritoUser': FieldValue.arrayUnion([currentUserReference]),
+          },
+        ),
+      });
+    }
   }
 }
 
