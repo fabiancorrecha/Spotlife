@@ -203,13 +203,16 @@ class CustomListTile extends StatelessWidget {
     );
     return ListTile(
       leading: CircularNetworkImage(imageUrl: item.avatarUrl),
-      title: Text(item.title, style: textColor, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Row(
-        children: [
-          Icon(Icons.location_on_outlined, color: Colors.white),
-          Text(item.city, style: textColor, maxLines: 1),
-        ],
-      ),
+      title: Text(item.title,
+          style: textColor.copyWith(fontSize: 16, fontWeight: FontWeight.w600), maxLines: 1, overflow: TextOverflow.ellipsis),
+      subtitle: item.city.isNotEmpty
+          ? Row(
+              children: [
+                Icon(Icons.location_on_outlined, color: Colors.white, size: 12),
+                Text(item.city, style: textColor.copyWith(fontSize: 10), maxLines: 1),
+              ],
+            )
+          : Container(height: 14),
       onTap: onTap,
       // Add other ListTile properties if required
     );
