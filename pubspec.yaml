@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.145+146
+version: 1.0.161+162
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -107,7 +107,7 @@ dependencies:
   google_sign_in_platform_interface: 2.4.5
   google_sign_in_web: 0.12.4+2
   html: 0.15.4
-  http: 0.13.5
+  http: ^0.13.3
   image_picker: 1.1.2
   image_picker_android: 0.8.12+13
   image_picker_for_web: 3.0.5
@@ -132,7 +132,7 @@ dependencies:
   path_provider_foundation: 2.4.0
   path_provider_linux: 2.2.1
   path_provider_platform_interface: 2.1.2
-  path_provider_windows: 2.2.1
+  path_provider_windows: 2.3.0
   permission_handler: 11.3.1
   permission_handler_android: 12.0.12
   permission_handler_apple: 9.4.5
@@ -283,6 +283,9 @@ flutter:
     - family: IconPin
       fonts:
         - asset: assets/fonts/IconPin.ttf
+    - family: IconosMetaEnergia
+      fonts:
+        - asset: assets/fonts/IconosMetaEnergia.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

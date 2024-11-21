@@ -234,7 +234,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                         decoration: InputDecoration(
                                           hintText: FFLocalizations.of(context)
                                               .getText(
-                                            '17b7cy81' /* País/región */,
+                                            '17b7cy81' /* Paísregión */,
                                           ),
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)
