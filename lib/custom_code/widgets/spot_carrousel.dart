@@ -294,6 +294,7 @@ class SpotDetail {
     required this.placeInfo,
     required this.isFavorite,
     required this.reference,
+    required this.postRecord,
   });
 
   final String id;
@@ -305,6 +306,7 @@ class SpotDetail {
   final bool isLoggedUser;
   bool isFavorite;
   final DocumentReference reference;
+  final UserPostsRecord postRecord;
   final DocumentReference? postUser;
   final PlaceInfoStruct placeInfo;
 

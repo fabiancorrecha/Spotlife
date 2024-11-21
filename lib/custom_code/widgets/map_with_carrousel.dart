@@ -67,12 +67,12 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
               'detallePost',
               pathParameters: {
                 'post': serializeParam(
-                  item.reference,
+                  item.postRecord,
                   ParamType.Document,
                 ),
               }.withoutNulls,
               extra: <String, dynamic>{
-                'post': item.reference,
+                'post': item.postRecord,
               },
             );
             debugPrint("asanre onImageTap");
@@ -113,6 +113,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           description: spot.postDescription,
           placeInfo: spot.placeInfo,
           isFavorite: favoritesList.contains(spot.reference.id),
+          postRecord: spot,
         ));
     var _spots = await Future.wait(spotsAsync.toSet().toList());
     setState(() {
