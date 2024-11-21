@@ -228,6 +228,28 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
             }.withoutNulls,
           );
         },
+        goToProfile: (bycreate) async {
+          logFirebaseEvent('MAPA_PRINCIPAL_PAGE_MapaAmigo_CALLBACK');
+          if (bycreate == currentUserReference) {
+            logFirebaseEvent('MapaAmigo_navigate_to');
+
+            context.pushNamed('perfilPropio');
+
+            return;
+          } else {
+            logFirebaseEvent('MapaAmigo_navigate_to');
+
+            context.pushNamed(
+              'otroPerfil',
+              queryParameters: {
+                'perfilAjeno': serializeParam(
+                  bycreate,
+                  ParamType.DocumentReference,
+                ),
+              }.withoutNulls,
+            );
+          }
+        },
       );
     } else {
       return custom_widgets.MapaPersonalizado2(
