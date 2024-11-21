@@ -189,7 +189,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                     decoration: InputDecoration(
                                       hintText:
                                           FFLocalizations.of(context).getText(
-                                        'ute5ep75' /* País/región */,
+                                        'ute5ep75' /* Paísregión */,
                                       ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -300,7 +300,9 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                       functions.getDialCode(
                                           _model.textController1.text),
                                       '+34',
-                                    ).maybeHandleOverflow(maxChars: 4),
+                                    ).maybeHandleOverflow(
+                                      maxChars: 4,
+                                    ),
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium

@@ -100,15 +100,10 @@ class GooglePlaceCall {
     );
   }
 
-  static List<String>? direccion(dynamic response) => (getJsonField(
+  static String? direccion(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.results[:].formatted_address''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<String>(x))
-          .withoutNulls
-          .toList();
+      ));
   static double? latitud(dynamic response) => castToType<double>(getJsonField(
         response,
         r'''$.results[:].geometry.location.lat''',
@@ -116,6 +111,10 @@ class GooglePlaceCall {
   static double? longitud(dynamic response) => castToType<double>(getJsonField(
         response,
         r'''$.results[:].geometry.location.lng''',
+      ));
+  static String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.results[:].name''',
       ));
 }
 

@@ -233,7 +233,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
-                          'rha6ba9z' /* Cambiar a cuenta Pro/Empresa */,
+                          'rha6ba9z' /* Cambiar a cuenta ProEmpresa */,
                         ),
                         accion: () async {
                           logFirebaseEvent(

@@ -590,9 +590,11 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      listPostItem.placeInfo.address.maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              30),
+                                                                      listPostItem.placeInfo.address
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            30,
+                                                                      ),
                                                                       maxLines:
                                                                           1,
                                                                       style: FlutterFlowTheme.of(
@@ -774,6 +776,14 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                         safeSetState(() {}));
                                                   } else {
                                                     logFirebaseEvent(
+                                                        'Icon_generate_current_page_link');
+                                                    _model.currentPageLink =
+                                                        await generateCurrentPageLink(
+                                                      context,
+                                                      isShortLink: false,
+                                                    );
+
+                                                    logFirebaseEvent(
                                                         'Icon_bottom_sheet');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
@@ -794,6 +804,8 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                                   MenuPostAjenoWidget(
                                                                 post: listPostItem
                                                                     .reference,
+                                                                link: _model
+                                                                    .currentPageLink,
                                                               ),
                                                             ),
                                                           ),
