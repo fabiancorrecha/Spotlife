@@ -992,7 +992,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                               state: _model.placePickerValue.state,
                               country: _model.placePickerValue.country,
                               zipcode: _model.placePickerValue.zipCode,
-                              latLng: _model.placePickerValue.latLng,
+                              localizacion: _model.placePickerValue.latLng,
                               clearUnsetFields: false,
                             ),
                           ));

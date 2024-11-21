@@ -236,6 +236,9 @@ final parametersBuilderMap =
         allParams: {
           'post': await getDocumentParameter<UserPostsRecord>(
               data, 'post', UserPostsRecord.fromSnapshot),
+          'refPostUser': getParameter<DocumentReference>(data, 'refPostUser'),
+          'titulo': getParameter<String>(data, 'titulo'),
+          'descripcion': getParameter<String>(data, 'descripcion'),
         },
       ),
   'CrearColeccionSinPost': (data) async => ParameterData(
@@ -304,6 +307,14 @@ final parametersBuilderMap =
         allParams: {
           'user': getParameter<DocumentReference>(data, 'user'),
           'verCometarios': getParameter<bool>(data, 'verCometarios'),
+        },
+      ),
+  'testNewVideo': ParameterData.none(),
+  'EtiquetarUbicacion': ParameterData.none(),
+  'EtiquetarPersonas': (data) async => ParameterData(
+        allParams: {
+          'esImagen': getParameter<bool>(data, 'esImagen'),
+          'video': getParameter<String>(data, 'video'),
         },
       ),
 };

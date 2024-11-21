@@ -5,6 +5,10 @@ import 'reset_pass_widget.dart' show ResetPassWidget;
 import 'package:flutter/material.dart';
 
 class ResetPassModel extends FlutterFlowModel<ResetPassWidget> {
+  ///  Local state fields for this page.
+
+  String? pagelink;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for nuevaconstrasea widget.

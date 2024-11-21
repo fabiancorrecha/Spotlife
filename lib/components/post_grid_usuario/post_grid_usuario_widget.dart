@@ -3,7 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_video_player.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -325,16 +325,52 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                               },
                             ),
                             if (stackUserPostsRecord.esVideo)
-                              FlutterFlowVideoPlayer(
-                                path: stackUserPostsRecord.video,
-                                videoType: VideoType.network,
-                                width: 216.0,
-                                height: 300.0,
-                                autoPlay: true,
-                                looping: true,
-                                showControls: false,
-                                allowFullScreen: true,
-                                allowPlaybackSpeedMenu: false,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 300.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    child: custom_widgets
+                                        .CustomVideoPlayerMiniture(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      videoPath: stackUserPostsRecord.video,
+                                      soundOn: Icon(
+                                        Icons.fourteen_mp,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        size: 10.0,
+                                      ),
+                                      soundOff: Icon(
+                                        Icons.sixteen_mp_sharp,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        size: 10.0,
+                                      ),
+                                      fullscreen: Icon(
+                                        Icons.thirteen_mp_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        size: 10.0,
+                                      ),
+                                      closeScreem: Icon(
+                                        Icons.onetwothree_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        size: 10.0,
+                                      ),
+                                      buttonSize: 40.0,
+                                    ),
+                                  ),
+                                ),
                               ),
                             if (stackUserPostsRecord.postPhotolist.length >= 2)
                               Align(

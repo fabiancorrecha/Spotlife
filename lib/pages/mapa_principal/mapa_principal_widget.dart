@@ -213,7 +213,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
           logFirebaseEvent('MAPA_PRINCIPAL_Container_k8lq7g0r_CALLBA');
           logFirebaseEvent('MapaPersonalizado2_update_app_state');
           FFAppState().ubication = PlaceInfoStruct(
-            latLng: ubication,
+            localizacion: ubication,
           );
           safeSetState(() {});
           logFirebaseEvent('MapaPersonalizado2_navigate_to');

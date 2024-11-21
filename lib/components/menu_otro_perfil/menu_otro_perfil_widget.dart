@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'menu_otro_perfil_model.dart';
 export 'menu_otro_perfil_model.dart';
@@ -113,51 +114,73 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              width: 100.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).fondoIcono,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Icon(
-                                    FFIcons.kshare,
-                                    color: FlutterFlowTheme.of(context).icono,
-                                    size: 24.0,
+                            Builder(
+                              builder: (context) => InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'MENU_OTRO_PERFIL_Container_ph4jyqp0_ON_T');
+                                  logFirebaseEvent('Container_share');
+                                  await Share.share(
+                                    widget.linkPage!,
+                                    sharePositionOrigin:
+                                        getWidgetBoundingBox(context),
+                                  );
+                                },
+                                child: Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  Row(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '1vkq4vte' /* Compartir */,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
+                                      Icon(
+                                        FFIcons.kshare,
+                                        color:
+                                            FlutterFlowTheme.of(context).icono,
+                                        size: 24.0,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              '1vkq4vte' /* Compartir */,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                             Container(

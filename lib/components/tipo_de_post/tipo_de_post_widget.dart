@@ -47,7 +47,7 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
       if ((_model.apiResulth5l?.succeeded ?? true)) {
         logFirebaseEvent('tipoDePost_update_app_state');
         FFAppState().ubication = PlaceInfoStruct(
-          latLng: currentUserLocationValue,
+          localizacion: currentUserLocationValue,
           address: GoogleMapsLocationConverterCall.longAddress(
             (_model.apiResulth5l?.jsonBody ?? ''),
           ),

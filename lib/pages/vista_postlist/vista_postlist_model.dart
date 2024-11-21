@@ -32,6 +32,7 @@ class VistaPostlistModel extends FlutterFlowModel<VistaPostlistWidget> {
 
   // Model for appBar4 component.
   late AppBar4Model appBar4Model;
+  String currentPageLink = '';
   // Stores action output result for [Backend Call - Create Document] action in IconNO widget.
   ActividadRecord? nuevaActividad;
   // Stores action output result for [Firestore Query - Query a collection] action in Icon widget.
