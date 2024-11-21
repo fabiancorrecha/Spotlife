@@ -151,10 +151,11 @@ class MapCardSpotItem extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: _navigateIcon(),
-            ),
+            if (false) // todo hide to route
+              Align(
+                alignment: Alignment.topRight,
+                child: _navigateIcon(),
+              ),
           ],
         ),
       ),
