@@ -1038,10 +1038,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Ubicación',
       'en': '',
     },
-    '1vy8nyqw': {
-      'es': 'Etiqueta la ubicación',
-      'en': '',
-    },
     'xp7b5zpc': {
       'es': 'Privacidad del spot',
       'en': '',
@@ -1920,18 +1916,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EtiquetarUbicacion
   {
-    'gr1kgrtu': {
-      'es': 'Buscar...',
-      'en': '',
-    },
-    '7nvl03ly': {
-      'es': 'Ver más',
-      'en': '',
-    },
-    'wk7apzfz': {
-      'es': 'Etiquetar',
-      'en': '',
-    },
     'b3yu6bar': {
       'es': 'Home',
       'en': '',

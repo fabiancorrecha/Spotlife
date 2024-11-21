@@ -11,13 +11,11 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmap;
-import 'package:label_marker/label_marker.dart';
-import 'dart:ui' as ui;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
+import 'dart:ui' as ui;
 
 class MapaPersonalizadoEtiqueta extends StatefulWidget {
   const MapaPersonalizadoEtiqueta({
@@ -28,8 +26,11 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
     this.ubicacionInicialLng,
     this.zoom,
     this.listaPostMarcadores,
-    required this.navigateToWithProfile, // Función modificada para recibir ambas propiedades
-    required this.usuarioAutenticado,
+    required this.navigateToWithProfile,
+    required this.androidMapsKey,
+    required this.iOSMapsKey,
+    required this.webMapsKey,
+    required this.addIcon,
   }) : super(key: key);
 
   final double? width;
@@ -38,9 +39,12 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(ff.LatLng ubication, DocumentReference? userRef)
-      navigateToWithProfile;
-  final DocumentReference? usuarioAutenticado;
+  final void Function(gmap.LatLng ubication, String street, String city)
+      navigateToWithProfile; // Modificado
+  final String? androidMapsKey;
+  final String? iOSMapsKey;
+  final String? webMapsKey;
+  final Icon addIcon;
 
   @override
   _MapaPersonalizadoEtiquetaState createState() =>
@@ -50,27 +54,19 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
 class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
   Set<gmap.Marker> markers = {};
   gmap.Marker? _movableMarker;
-  late String _mapStyle;
-  final Completer<gmap.GoogleMapController> _controller =
-      Completer<gmap.GoogleMapController>();
-  bool _isInfoVisible = false;
-  bool _isMovableMarkerVisible = false;
-  bool _isContainerExpanded = false;
-  String _selectedTitle = '';
-  String _selectedSubtitle = '';
-  String _selectedImageUrl = '';
-  gmap.LatLng? _selectedMarkerPosition;
-  DocumentReference? _selectedPostUser;
+  final Completer<gmap.GoogleMapController> _controller = Completer();
   final TextEditingController searchController = TextEditingController();
-  List<UserPostsRecord> _searchResults = [];
+  final FocusNode searchFocusNode = FocusNode();
   late gmap.CameraPosition initialCameraPosition;
-  double currentZoom = 15.0;
 
-  @override
-  void initState() {
-    super.initState();
-    currentZoom = widget.zoom ?? currentZoom;
-    _mapStyle = '''
+  gmap.LatLng? selectedLocation;
+  bool isSearching = false;
+  bool showMore = false;
+  bool noResultsFound = false;
+  List<Map<String, dynamic>> searchResults = [];
+
+  // Estilo del mapa...
+  static const String _mapStyle = '''
     [
       {
         "featureType": "all",
@@ -368,30 +364,176 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       }
     ]
     ''';
-    ; // Aquí iría el estilo del mapa JSON completo
-    double initialLat = widget.ubicacionInicialLat ?? 0.0;
-    double initialLng = widget.ubicacionInicialLng ?? 0.0;
-    initialCameraPosition = gmap.CameraPosition(
-      target: gmap.LatLng(initialLat, initialLng),
-      zoom: currentZoom,
-    );
 
+  @override
+  void initState() {
+    super.initState();
+    initialCameraPosition = gmap.CameraPosition(
+      target: gmap.LatLng(
+          widget.ubicacionInicialLat ?? 0.0, widget.ubicacionInicialLng ?? 0.0),
+      zoom: widget.zoom ?? 15.0,
+    );
+    searchController.addListener(_onSearchChanged);
+    searchFocusNode.addListener(() {
+      setState(() {});
+    });
     try {
-      loadMarkers();
+      loadMarkers(); // Cargar los marcadores personalizados
     } catch (e) {
       print('Error al cargar los marcadores: $e');
     }
-
-    searchController.addListener(_onSearchChanged);
   }
 
-  loadMarkers() async {
+  @override
+  void dispose() {
+    searchController.removeListener(_onSearchChanged);
+    searchController.dispose();
+    searchFocusNode.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() async {
+    String query = searchController.text.trim();
+    if (query.isNotEmpty) {
+      setState(() {
+        isSearching = true;
+        noResultsFound = false;
+      });
+      String apiKey =
+          widget.androidMapsKey ?? widget.iOSMapsKey ?? widget.webMapsKey ?? '';
+      final response = await http.get(
+        Uri.parse(
+            'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$query&key=$apiKey'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final results = data['results'] as List;
+        setState(() {
+          searchResults = results.map((place) {
+            return {
+              'address': place['formatted_address'] ?? '',
+              'location': place['geometry']['location'],
+            };
+          }).toList();
+          noResultsFound = searchResults.isEmpty;
+        });
+      } else {
+        print('Error en la solicitud de búsqueda');
+      }
+    } else {
+      setState(() {
+        isSearching = false;
+        searchResults.clear();
+        noResultsFound = false;
+      });
+    }
+  }
+
+  void _clearSearch() {
+    setState(() {
+      searchController.clear(); // Limpia el texto de la barra de búsqueda
+      isSearching = false; // Desactiva el modo de búsqueda
+      searchResults.clear(); // Limpia los resultados de búsqueda
+      noResultsFound = false; // Resetea el estado de no resultados encontrados
+      FocusManager.instance.primaryFocus
+          ?.unfocus(); // Desactiva el foco de la barra de búsqueda
+    });
+  }
+
+  void _selectLocation(Map<String, dynamic> place) {
+    final location = place['location'];
+    final selectedLatLng = gmap.LatLng(location['lat'], location['lng']);
+    final street = place['address'].split(',')[0]; // Obtiene la calle
+    final city = place['address']
+        .split(',')
+        .skip(1)
+        .join(', ')
+        .trim(); // Obtiene la ciudad
+
+    setState(() {
+      selectedLocation = selectedLatLng;
+      markers.add(gmap.Marker(
+        markerId: gmap.MarkerId("selected_location"),
+        position: selectedLatLng,
+        icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
+            gmap.BitmapDescriptor.hueRed),
+      ));
+    });
+
+    // Desactiva el focus y limpia la barra de búsqueda
+    searchController.clear();
+    searchFocusNode.unfocus();
+    setState(() {
+      isSearching = false;
+    });
+
+    // Llama a navigateToWithProfile con los nuevos parámetros
+    widget.navigateToWithProfile(selectedLatLng, street, city);
+  }
+
+  void _toggleMovableMarker() {
+    setState(() {
+      if (_movableMarker == null) {
+        _movableMarker = gmap.Marker(
+          markerId: gmap.MarkerId('movable_marker'),
+          position: initialCameraPosition.target,
+          draggable: true,
+          onDragEnd: (newPosition) {
+            setState(() {
+              selectedLocation = newPosition;
+            });
+          },
+          icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
+              gmap.BitmapDescriptor.hueBlue),
+        );
+      } else {
+        _movableMarker = null;
+      }
+    });
+  }
+
+  Future<void> loadMarkers() async {
     if (widget.listaPostMarcadores != null) {
       final listMarkers = await getMarkers(widget.listaPostMarcadores!);
       setState(() {
         markers = listMarkers;
       });
     }
+  }
+
+  Future<Set<gmap.Marker>> getMarkers(List<UserPostsRecord> lista) async {
+    Set<gmap.Marker> customMarkers = {};
+
+    for (var post in lista) {
+      try {
+        if (post.postUser != null) {
+          final photoUrl = await _getUserPhotoUrl(post.postUser!);
+          if (photoUrl.isNotEmpty && post.placeInfo.localizacion != null) {
+            final markerIcon = await _createCustomMarkerIcon(photoUrl);
+            if (markerIcon.isNotEmpty) {
+              gmap.Marker marker = gmap.Marker(
+                markerId: gmap.MarkerId(post.reference.id),
+                position: gmap.LatLng(
+                  post.placeInfo.localizacion!.latitude,
+                  post.placeInfo.localizacion!.longitude,
+                ),
+                icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
+                onTap: () {
+                  setState(() {
+                    // Muestra información del marcador
+                  });
+                },
+              );
+              customMarkers.add(marker);
+            }
+          }
+        }
+      } catch (e) {
+        debugPrint('getMarkers Error: $e');
+      }
+    }
+    return customMarkers;
   }
 
   Future<String> _getUserPhotoUrl(DocumentReference userRef) async {
@@ -467,252 +609,228 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     return completer.future;
   }
 
-  Future<Set<gmap.Marker>> getMarkers(List<UserPostsRecord> lista) async {
-    Set<gmap.Marker> markers = {};
-
-    for (int i = 0; i < lista.length; i++) {
-      final post = lista[i];
-
-      try {
-        if (post.postUser != null) {
-          final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty && post.placeInfo.localizacion != null) {
-            final markerIcon = await _createCustomMarkerIcon(photoUrl);
-            if (markerIcon.isNotEmpty) {
-              gmap.Marker marker = gmap.Marker(
-                markerId: gmap.MarkerId(post.reference.id),
-                position: gmap.LatLng(
-                  post.placeInfo.localizacion!.latitude,
-                  post.placeInfo.localizacion!.longitude,
-                ),
-                icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
-                onTap: () {
-                  setState(() {
-                    _isInfoVisible = true;
-                    _selectedTitle = post.postTitle ?? '';
-                    _selectedSubtitle = post.postDescription ?? '';
-                    _selectedImageUrl = post.postPhotolist.isNotEmpty
-                        ? post.postPhotolist.first
-                        : '';
-                    _selectedMarkerPosition = gmap.LatLng(
-                      post.placeInfo.localizacion!.latitude,
-                      post.placeInfo.localizacion!.longitude,
-                    );
-                    _selectedPostUser = post.postUser;
-                  });
-                },
-              );
-
-              markers.add(marker);
-            }
-          }
-        }
-      } catch (e) {
-        debugPrint('getMarkers Error: $e');
-      }
-    }
-    return markers;
-  }
-
-  void _hideInfoContainer() {
-    setState(() {
-      _isInfoVisible = false;
-    });
-  }
-
-  void _toggleMovableMarker() {
-    setState(() {
-      _isMovableMarkerVisible = !_isMovableMarkerVisible;
-      if (_isMovableMarkerVisible) {
-        _movableMarker = gmap.Marker(
-          markerId: gmap.MarkerId('movable_marker'),
-          position: initialCameraPosition.target,
-          draggable: true,
-          onDragEnd: (newPosition) {
-            setState(() {
-              _selectedMarkerPosition = newPosition;
-            });
-          },
-          onTap: _showMovableMarkerInfo,
-          icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-            gmap.BitmapDescriptor.hueBlue,
-          ),
-        );
-      } else {
-        _movableMarker = null;
-      }
-    });
-  }
-
-  void _showMovableMarkerInfo() {
-    if (_selectedMarkerPosition != null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Ubicación Actual',
-                style: TextStyle(color: Colors.white),
-              ),
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Latitud: ${_selectedMarkerPosition!.latitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Longitud: ${_selectedMarkerPosition!.longitude}',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  if (_selectedMarkerPosition != null) {
-                    final flutterFlowLatLng = ff.LatLng(
-                      _selectedMarkerPosition!.latitude,
-                      _selectedMarkerPosition!.longitude,
-                    );
-                    widget.navigateToWithProfile(
-                        flutterFlowLatLng, widget.usuarioAutenticado);
-                    Navigator.of(context).pop();
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                child: Text(
-                  'Guardar ubicación',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-
-  void _toggleSearchBar() {
-    setState(() {
-      _isContainerExpanded = !_isContainerExpanded;
-    });
-  }
-
-  void _onSearchChanged() {
-    final query = searchController.text.toLowerCase();
-    if (query.isEmpty) {
-      setState(() {
-        _searchResults.clear();
-      });
-      return;
-    }
-
-    final results = widget.listaPostMarcadores!.where((post) {
-      final postTitle = post.postTitle?.toLowerCase() ?? '';
-      final postDescription = post.postDescription?.toLowerCase() ?? '';
-      final placeInfoCity = post.placeInfo.city?.toLowerCase() ?? '';
-      return postTitle.contains(query) || placeInfoCity.contains(query);
-    }).toList();
-
-    setState(() {
-      _searchResults = results.where((element) => element != null).toList();
-    });
-
-    if (_searchResults.isNotEmpty) {
-      final firstMatch = _searchResults.first;
-      _moveCameraToPost(firstMatch);
-    }
-  }
-
-  void _moveCameraToPost(UserPostsRecord post) async {
-    final controller = await _controller.future;
-    final position = gmap.LatLng(
-      post.placeInfo.localizacion!.latitude,
-      post.placeInfo.localizacion!.longitude,
-    );
-
-    controller.animateCamera(
-      gmap.CameraUpdate.newCameraPosition(
-        gmap.CameraPosition(target: position, zoom: 16.0),
-      ),
-    );
-  }
-
-  void _handleMarkerTap() {
-    if (_selectedPostUser != null && widget.usuarioAutenticado != null) {
-      if (_selectedPostUser == widget.usuarioAutenticado) {
-        Navigator.pushNamed(context, 'perfilPropio');
-      } else {
-        Navigator.pushNamed(context, 'otroPerfil');
-      }
-    }
-  }
-
+//
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GestureDetector(
-          onTap: _hideInfoContainer,
-          onDoubleTap: _handleMarkerTap,
-          child: Container(
+          behavior: HitTestBehavior
+              .translucent, // Asegura que los toques sean detectados
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus(); // Desactiva el foco
+            setState(() {
+              isSearching = false;
+            });
+          },
+          child: gmap.GoogleMap(
+            initialCameraPosition: initialCameraPosition,
+            onMapCreated: (controller) {
+              _controller.complete(controller);
+              controller.setMapStyle(_mapStyle);
+            },
+            markers: _movableMarker != null
+                ? {...markers, _movableMarker!}
+                : markers,
+          ),
+        ),
+        if (isSearching)
+          Container(
+            color: Colors.black.withOpacity(0.5),
             width: widget.width,
             height: widget.height,
-            child: gmap.GoogleMap(
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (gmap.GoogleMapController controller) {
-                _controller.complete(controller);
-                controller.setMapStyle(_mapStyle);
-              },
-              onCameraMove: (gmap.CameraPosition position) {
-                if (position.zoom != currentZoom &&
-                    (position.zoom - currentZoom).abs() >= 1) {
-                  currentZoom = position.zoom;
-                  loadMarkers();
-                }
-              },
-              markers: _movableMarker != null
-                  ? {...markers, _movableMarker!}
-                  : markers,
-            ),
           ),
-        ),
-        Positioned(
-          bottom: 110,
-          right: 20,
-          child: FloatingActionButton(
-            onPressed: _toggleMovableMarker,
-            backgroundColor: Colors.black,
-            child: Icon(
-              Icons.add_location_alt,
-              color: Colors.white,
-              size: 24,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-        ),
+        _buildSearchBar(),
+        if (!searchFocusNode.hasFocus) ...[
+          _buildFloatingButton(),
+          _buildEtiquetaButton(),
+        ],
       ],
+    );
+  }
+
+  ///
+
+  Widget _buildSearchBar() {
+    return Positioned(
+      top: 60,
+      left: 20,
+      right: 20,
+      child: Column(
+        children: [
+          TextField(
+            controller: searchController,
+            focusNode: searchFocusNode, // Asignamos el FocusNode
+            decoration: InputDecoration(
+              hintText: 'Buscar',
+              hintStyle: TextStyle(color: Colors.white70),
+              filled: true,
+              fillColor: Colors.black,
+              prefixIcon: Icon(Icons.search, color: Colors.white70),
+              // Dentro de _buildSearchBar()
+              suffixIcon:
+                  (searchController.text.isNotEmpty || searchFocusNode.hasFocus)
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: BoxDecoration(
+                              color: Colors.grey, // Fondo gris
+                              shape: BoxShape.circle, // Forma circular
+                            ),
+                            child: Center(
+                              child: IconButton(
+                                icon: Icon(Icons.clear,
+                                    color: Colors.black, size: 14),
+                                onPressed:
+                                    _clearSearch, // Llama a la función modificada
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(),
+                              ),
+                            ),
+                          ),
+                        )
+                      : null,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            ),
+            style: TextStyle(color: Colors.white),
+            onChanged: (text) => setState(() => isSearching = text.isNotEmpty),
+          ),
+          if (isSearching) _buildSearchResults(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchResults() {
+    final double maxHeight = MediaQuery.of(context).size.height *
+        0.6; // 60% de la altura de la pantalla
+
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.all(10),
+      constraints: BoxConstraints(
+        maxHeight:
+            showMore ? maxHeight : 310, // Limitar la altura máxima dinámica
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: noResultsFound
+          ? Center(
+              child: Text(
+                '¡Lo sentimos, no hemos encontrado tu dirección!',
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: searchResults.length,
+                    itemBuilder: (context, index) => ListTile(
+                      leading: Icon(Icons.location_on, color: Colors.white),
+                      title: Text(
+                        searchResults[index]['address'].split(',')[0],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      subtitle: Text(
+                        searchResults[index]['address']
+                            .split(',')
+                            .skip(1)
+                            .join(', '),
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      onTap: () => _selectLocation(searchResults[index]),
+                    ),
+                  ),
+                ),
+                if (searchResults.length > 3)
+                  TextButton(
+                    onPressed: () => setState(() => showMore = !showMore),
+                    child: Text(
+                      showMore ? 'Ver menos' : 'Ver más',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildFloatingButton() {
+    return Positioned(
+      bottom: 110,
+      right: 20,
+      child: FloatingActionButton(
+        onPressed: _toggleMovableMarker,
+        backgroundColor: Colors.black,
+        child: widget.addIcon,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      ),
+    );
+  }
+
+  Widget _buildEtiquetaButton() {
+    return Positioned(
+      bottom: 30,
+      left: 50,
+      right: 50,
+      child: SizedBox(
+        width: 200,
+        height: 45,
+        child: Container(
+          decoration: BoxDecoration(
+            color: selectedLocation != null
+                ? Color(
+                    0xFFF4F176) // Color amarillo cuando hay ubicación seleccionada
+                : Colors.black, // Color negro completo por defecto
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: ElevatedButton(
+            onPressed: selectedLocation != null
+                ? () {
+                    final street =
+                        "Default Street"; // Opcional: Reemplaza con un valor real si está disponible
+                    final city =
+                        "Default City"; // Opcional: Reemplaza con un valor real si está disponible
+
+                    widget.navigateToWithProfile(
+                        selectedLocation!, street, city);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Ubicación etiquetada: (${selectedLocation!.latitude.toStringAsFixed(5)}, ${selectedLocation!.longitude.toStringAsFixed(5)})',
+                        ),
+                      ),
+                    );
+                  }
+                : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent, // Fondo transparente
+              shadowColor: Colors.transparent, // Sin sombra
+              elevation: 3, // Sin elevación
+              padding: EdgeInsets.symmetric(vertical: 15),
+            ),
+            child: Text(
+              'Etiquetar',
+              style: TextStyle(
+                color: selectedLocation != null ? Colors.black : Colors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
