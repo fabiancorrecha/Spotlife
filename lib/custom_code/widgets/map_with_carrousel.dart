@@ -5,6 +5,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 import 'index.dart'; // Imports other custom widgets
 import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class MapWithCarrousel extends StatefulWidget {
   const MapWithCarrousel({
@@ -16,6 +17,7 @@ class MapWithCarrousel extends StatefulWidget {
     required this.onMarkerTap,
     required this.navigateTo,
     required this.usuarioAutenticado,
+    required this.goToProfile,
   }) : super(key: key);
 
   final LatLng userLocation;
@@ -25,6 +27,7 @@ class MapWithCarrousel extends StatefulWidget {
   final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
   final DocumentReference? usuarioAutenticado;
+  final void Function(DocumentReference bycreate) goToProfile;
 
   @override
   State<MapWithCarrousel> createState() => _MapWithCarrousel();
@@ -59,7 +62,21 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         return MapCardSpotItem(
           item: item,
           isSelected: isSelected,
-          onImageTap: () => debugPrint("asanre onImageTap"),
+          onImageTap: () {
+            context.pushNamed(
+              'detallePost',
+              pathParameters: {
+                'post': serializeParam(
+                  item.reference,
+                  ParamType.Document,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                'post': item.reference,
+              },
+            );
+            debugPrint("asanre onImageTap");
+          },
           onFavoritesTap: () {
             _savedFavorites(item.isFavorite, item.reference);
             item.isFavorite = !item.isFavorite;
@@ -67,7 +84,9 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
             debugPrint("asanre onFavoritesTap");
           },
           onNavigateTap: () => debugPrint("asanre onNavigateTap"),
-          onUserTap: () => debugPrint("asanre onUserTap"),
+          onUserTap: () {
+            if (item.postUser != null) widget.goToProfile(item.postUser!!);
+          },
         );
       },
       onPageChanged: (spot) {

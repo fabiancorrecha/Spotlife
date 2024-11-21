@@ -208,11 +208,11 @@ class CustomListTile extends StatelessWidget {
           style: textColor.copyWith(fontSize: 16, fontWeight: FontWeight.w600), maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: item.city.isNotEmpty
           ? Row(
-              children: [
-                Icon(Icons.location_on_outlined, color: Colors.white, size: 12),
-                Text(item.city, style: textColor.copyWith(fontSize: 10), maxLines: 1),
-              ],
-            )
+        children: [
+          Icon(Icons.location_on_outlined, color: Colors.white, size: 12),
+          Text(item.city, style: textColor.copyWith(fontSize: 10), maxLines: 1),
+        ],
+      )
           : Container(height: 14),
       onTap: onTap,
       // Add other ListTile properties if required
@@ -329,12 +329,12 @@ class SpotDetail {
   @override
   int get hashCode {
     return id.hashCode ^
-        title.hashCode ^
-        description.hashCode ^
-        postUser.hashCode ^
-        placeInfo.hashCode ^
-        imagePath.hashCode ^
-        avatarUrl.hashCode ^
-        location.hashCode;
+    title.hashCode ^
+    description.hashCode ^
+    postUser.hashCode ^
+    placeInfo.hashCode ^
+    imagePath.hashCode ^
+    avatarUrl.hashCode ^
+    location.hashCode;
   }
 }
