@@ -214,6 +214,7 @@ final parametersBuilderMap =
   'CrearPost': (data) async => ParameterData(
         allParams: {
           'esImagen': getParameter<bool>(data, 'esImagen'),
+          'direccion': getParameter<LatLng>(data, 'direccion'),
         },
       ),
   'paginaTOS': ParameterData.none(),

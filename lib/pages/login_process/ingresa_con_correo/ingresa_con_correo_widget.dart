@@ -166,7 +166,7 @@ class _IngresaConCorreoWidgetState extends State<IngresaConCorreoWidget> {
                                         decoration: InputDecoration(
                                           hintText: FFLocalizations.of(context)
                                               .getText(
-                                            's68kbjdw' /* Correo electrónico / Nombre de... */,
+                                            's68kbjdw' /* Correo electrónico  Nombre de... */,
                                           ),
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)

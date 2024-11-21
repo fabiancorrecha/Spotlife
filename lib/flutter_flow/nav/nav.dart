@@ -497,6 +497,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   isList: true,
                   collectionNamePath: ['users'],
                 ),
+                direccion: params.getParam(
+                  'direccion',
+                  ParamType.LatLng,
+                ),
               ),
             ),
             FFRoute(

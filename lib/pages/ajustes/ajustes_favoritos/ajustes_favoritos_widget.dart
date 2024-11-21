@@ -118,7 +118,7 @@ class _AjustesFavoritosWidgetState extends State<AjustesFavoritosWidget>
                                           .primaryText,
                                       unselectedLabelColor:
                                           FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                              .secondaryText,
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(

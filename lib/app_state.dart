@@ -475,6 +475,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_Post', value);
   }
 
+  LatLng? _prueba = const LatLng(40.38025669999999, -3.637530599999999);
+  LatLng? get prueba => _prueba;
+  set prueba(LatLng? value) {
+    _prueba = value;
+  }
+
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();
   Stream<List<UserPostsRecord>> postUsuarios({
     String? uniqueQueryKey,

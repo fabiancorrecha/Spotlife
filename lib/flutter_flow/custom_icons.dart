@@ -12,6 +12,7 @@ class FFIcons {
   static const String _lote7Family = 'Lote7';
   static const String _pageIconFamily = 'PageIcon';
   static const String _iconPinFamily = 'IconPin';
+  static const String _iconosMetaEnergiaFamily = 'IconosMetaEnergia';
 
   // SpotfileIcons
   static const IconData kcollection =
@@ -116,4 +117,8 @@ class FFIcons {
   static const IconData kpageO = IconData(0xe901, fontFamily: _pageIconFamily);
 
   // IconPin
+
+  // IconosMetaEnergia
+  static const IconData kframe =
+      IconData(0xe900, fontFamily: _iconosMetaEnergiaFamily);
 }

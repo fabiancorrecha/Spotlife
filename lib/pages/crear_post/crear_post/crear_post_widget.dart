@@ -23,10 +23,12 @@ class CrearPostWidget extends StatefulWidget {
     super.key,
     this.esImagen,
     this.selectedUser,
+    this.direccion,
   });
 
   final bool? esImagen;
   final List<DocumentReference>? selectedUser;
+  final LatLng? direccion;
 
   @override
   State<CrearPostWidget> createState() => _CrearPostWidgetState();
@@ -1200,9 +1202,9 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '1vy8nyqw' /* Etiqueta la ubicación */,
+                                              valueOrDefault<String>(
+                                                widget.direccion?.toString(),
+                                                'Etiqueta la ubicación',
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
