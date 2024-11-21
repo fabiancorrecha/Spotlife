@@ -4,13 +4,11 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_video_player.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'grid_posts_filtradr_por_ubicacion_model.dart';
 export 'grid_posts_filtradr_por_ubicacion_model.dart';
 
@@ -72,14 +70,12 @@ class _GridPostsFiltradrPorUbicacionWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord
             .where(
-              'placeInfo.latLng',
-              isEqualTo: widget.post?.placeInfo.latLng?.toGeoPoint(),
+              'placeInfo.localizacion',
+              isEqualTo: widget.post?.placeInfo.localizacion?.toGeoPoint(),
             )
             .orderBy('timePosted', descending: true),
       ),
@@ -110,12 +106,7 @@ class _GridPostsFiltradrPorUbicacionWidgetState
             padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Builder(
               builder: (context) {
-                final containerVar = functions
-                    .getPlacesMaximumDistance(
-                        containerUserPostsRecordList.toList(),
-                        widget.post!.placeInfo.latLng!,
-                        FFAppState().Distancia ?? 0.0)
-                    .toList();
+                final containerVar = containerUserPostsRecordList.toList();
 
                 return GridView.builder(
                   padding: EdgeInsets.zero,
@@ -328,19 +319,72 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                                                             'imageOnPageLoadAnimation']!),
                                                   if (stackUserPostsRecord
                                                       .esVideo)
-                                                    FlutterFlowVideoPlayer(
-                                                      path: stackUserPostsRecord
-                                                          .video,
-                                                      videoType:
-                                                          VideoType.network,
-                                                      width: 216.0,
-                                                      height: 300.0,
-                                                      autoPlay: true,
-                                                      looping: true,
-                                                      showControls: false,
-                                                      allowFullScreen: false,
-                                                      allowPlaybackSpeedMenu:
-                                                          false,
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 300.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
+                                                        ),
+                                                        child: SizedBox(
+                                                          width:
+                                                              double.infinity,
+                                                          height:
+                                                              double.infinity,
+                                                          child: custom_widgets
+                                                              .CustomVideoPlayerMiniture(
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            videoPath:
+                                                                containerVarItem
+                                                                    .video,
+                                                            soundOn: Icon(
+                                                              Icons.fourteen_mp,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondary,
+                                                              size: 10.0,
+                                                            ),
+                                                            soundOff: Icon(
+                                                              Icons
+                                                                  .sixteen_mp_sharp,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondary,
+                                                              size: 10.0,
+                                                            ),
+                                                            fullscreen: Icon(
+                                                              Icons
+                                                                  .thirteen_mp_outlined,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondary,
+                                                              size: 10.0,
+                                                            ),
+                                                            closeScreem: Icon(
+                                                              Icons
+                                                                  .onetwothree_outlined,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondary,
+                                                              size: 10.0,
+                                                            ),
+                                                            buttonSize: 40.0,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
                                                 ],
                                               ),

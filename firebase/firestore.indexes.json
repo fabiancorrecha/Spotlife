@@ -83,7 +83,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "placeInfo.latLng",
+          "fieldPath": "placeInfo.localizacion",
           "order": "ASCENDING"
         },
         {

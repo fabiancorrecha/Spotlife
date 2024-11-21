@@ -4,6 +4,7 @@ import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/components/menu02/menu02_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/tarjeta_lista01/tarjeta_lista01_widget.dart';
+import '/components/usuarios_recomendados/usuarios_recomendados_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -330,36 +331,63 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget>
                         seccion: 2,
                       ),
                     ),
-                    if (_model.textFieldBuscarTextController.text != '')
-                      Expanded(
-                        child: Builder(
-                          builder: (context) {
-                            final listadoUsuarios =
-                                _model.simpleSearchResults.toList();
-                            if (listadoUsuarios.isEmpty) {
-                              return const ComponenteVacioWidget();
-                            }
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 55.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if (_model.textFieldBuscarTextController.text ==
+                                      '')
+                                wrapWithModel(
+                                  model: _model.usuariosRecomendadosModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: const UsuariosRecomendadosWidget(),
+                                ),
+                              Container(
+                                child: Visibility(
+                                  visible: _model.textFieldBuscarTextController
+                                              .text !=
+                                          '',
+                                  child: Builder(
+                                    builder: (context) {
+                                      final listadoUsuarios =
+                                          _model.simpleSearchResults.toList();
+                                      if (listadoUsuarios.isEmpty) {
+                                        return const ComponenteVacioWidget();
+                                      }
 
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listadoUsuarios.length,
-                              itemBuilder: (context, listadoUsuariosIndex) {
-                                final listadoUsuariosItem =
-                                    listadoUsuarios[listadoUsuariosIndex];
-                                return TarjetaLista01Widget(
-                                  key: Key(
-                                      'Key4et_${listadoUsuariosIndex}_of_${listadoUsuarios.length}'),
-                                  mostrarBoton: true,
-                                  seguido: listadoUsuariosItem.reference,
-                                  textoBtn: 'Siguiendo',
-                                );
-                              },
-                            );
-                          },
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: listadoUsuarios.length,
+                                        itemBuilder:
+                                            (context, listadoUsuariosIndex) {
+                                          final listadoUsuariosItem =
+                                              listadoUsuarios[
+                                                  listadoUsuariosIndex];
+                                          return TarjetaLista01Widget(
+                                            key: Key(
+                                                'Key4et_${listadoUsuariosIndex}_of_${listadoUsuarios.length}'),
+                                            mostrarBoton: true,
+                                            seguido:
+                                                listadoUsuariosItem.reference,
+                                            textoBtn: 'Siguiendo',
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
+                    ),
                   ],
                 ),
               ),
