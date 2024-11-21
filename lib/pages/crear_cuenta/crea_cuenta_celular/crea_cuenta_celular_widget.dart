@@ -189,7 +189,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                     decoration: InputDecoration(
                                       hintText:
                                           FFLocalizations.of(context).getText(
-                                        'ute5ep75' /* País/región */,
+                                        'ute5ep75' /* Paísregión */,
                                       ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium

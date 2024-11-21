@@ -121,14 +121,14 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                                   'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
                               webGoogleMapsApiKey:
                                   'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
-                              endCoordinate: mapaIrLugarUserPostsRecord
-                                  .placeInfo.localizacion!,
-                              startCoordinate: currentUserLocationValue!,
                               userImage: mapaIrLugarUserPostsRecord
                                   .postPhotolist.first,
+                              startCoordinate: currentUserLocationValue!,
+                              endCoordinate: mapaIrLugarUserPostsRecord
+                                  .placeInfo.localizacion!,
                               actualizarDatos: (time, distance) async {
                                 logFirebaseEvent(
-                                    'MAPA_IR_LUGAR_Container_e5251ubq_CALLBAC');
+                                    'MAPA_IR_LUGAR_Container_lgf1zod3_CALLBAC');
                                 logFirebaseEvent(
                                     'RouteViewLive_update_app_state');
                                 FFAppState().routeDistance = distance;
