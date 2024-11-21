@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,18 +77,47 @@ class FFLocalizations {
   };
 }
 
+/// Used if the locale is not supported by GlobalMaterialLocalizations.
+class FallbackMaterialLocalizationDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
+  const FallbackMaterialLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<MaterialLocalizations> load(Locale locale) async =>
+      SynchronousFuture<MaterialLocalizations>(
+        const DefaultMaterialLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackMaterialLocalizationDelegate old) => false;
+}
+
+/// Used if the locale is not supported by GlobalCupertinoLocalizations.
+class FallbackCupertinoLocalizationDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
+  const FallbackCupertinoLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) =>
+      SynchronousFuture<CupertinoLocalizations>(
+        const DefaultCupertinoLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackCupertinoLocalizationDelegate old) => false;
+}
+
 class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
   const FFLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) {
-    final language = locale.toString();
-    return FFLocalizations.languages().contains(
-      language.endsWith('_')
-          ? language.substring(0, language.length - 1)
-          : language,
-    );
-  }
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
 
   @override
   Future<FFLocalizations> load(Locale locale) =>
@@ -103,6 +133,15 @@ Locale createLocale(String language) => language.contains('_')
         scriptCode: language.split('_').last,
       )
     : Locale(language);
+
+bool _isSupportedLocale(Locale locale) {
+  final language = locale.toString();
+  return FFLocalizations.languages().contains(
+    language.endsWith('_')
+        ? language.substring(0, language.length - 1)
+        : language,
+  );
+}
 
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // inicio
@@ -926,6 +965,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Buscar',
       'en': 'Look for',
     },
+    '2a74di3l': {
+      'es': 'Playa',
+      'en': '',
+    },
+    '6uax31vq': {
+      'es': 'Option 2',
+      'en': '',
+    },
+    'l5mg0sas': {
+      'es': 'Option 3',
+      'en': '',
+    },
+    'e1prln4b': {
+      'es': 'Lugares Recomendados ',
+      'en': '',
+    },
     'c1ucnvay': {
       'es': 'Home',
       'en': 'home',
@@ -959,53 +1014,53 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Nuevo spot',
       'en': 'New spot',
     },
-    'iegyvusu': {
-      'es': 'Publicar',
-      'en': 'Post',
-    },
-    'kp6cc43j': {
-      'es': 'Escriba el titulo de la publicacion...',
-      'en': 'Write the description...',
-    },
-    'ovd4wkrt': {
-      'es': 'Info...',
+    'ovs993vm': {
+      'es': 'Titulo',
       'en': '',
     },
-    'w9ro86pp': {
-      'es': '¿Deseas editar tu ubicacion actual?',
+    't0u2tkzd': {
+      'es': 'Titulo',
       'en': '',
     },
-    'a62jq0dn': {
-      'es': 'Editar nueva ubicacion',
+    '4hfio31z': {
+      'es': 'Descripción',
       'en': '',
     },
-    'eoqx1i3x': {
-      'es': 'Option 1',
+    'fdffw9r5': {
+      'es': 'Descripción',
       'en': '',
     },
-    'v42yu7m9': {
+    '4kuobmxt': {
+      'es': 'Etiquetar Personas',
+      'en': '',
+    },
+    'wlyzvf4s': {
+      'es': 'Ubicación',
+      'en': '',
+    },
+    'xp7b5zpc': {
       'es': 'Privacidad del spot',
-      'en': 'Spot Privacy',
+      'en': '',
     },
-    'sdnl893t': {
+    'fulc8zhi': {
       'es': 'Público',
-      'en': 'Public',
+      'en': '',
     },
-    'latkqwqu': {
-      'es': 'Amigos',
-      'en': 'Friends',
+    'smfw16wj': {
+      'es': 'Mejores amigos',
+      'en': '',
     },
-    'a3mt3ft3': {
-      'es': 'Privado',
-      'en': 'Private',
+    'gc772dze': {
+      'es': 'Spot secreto (solo yo)',
+      'en': '',
     },
     '38yeg5jl': {
-      'es': 'Mis colecciones en Bio',
+      'es': 'Colección',
       'en': 'My collections in Bio',
     },
-    'kpult3tq': {
-      'es': 'Crear una colección en Bio',
-      'en': 'Create a collection in Bio',
+    'bboy6pnx': {
+      'es': 'Crear una nueva colección',
+      'en': '',
     },
     'd5xk8jtj': {
       'es': 'Facebook',
@@ -1019,6 +1074,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Twitter',
       'en': 'Twitter',
     },
+    'ky3lljfy': {
+      'es': 'Facebook',
+      'en': '',
+    },
+    '9awmcbbl': {
+      'es': 'Instagram',
+      'en': '',
+    },
+    'a8wxnvnf': {
+      'es': 'Twitter',
+      'en': '',
+    },
     '0434z4c2': {
       'es': 'El título es requerido',
       'en': 'Title is required',
@@ -1026,6 +1093,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'rwq2rmaq': {
       'es': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
+    },
+    '9tfvfuh7': {
+      'es': 'Publicar',
+      'en': '',
     },
     's891481e': {
       'es': 'Home',
@@ -1064,77 +1135,73 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditarPost
   {
-    '7finh1y2': {
-      'es': 'Editar post',
-      'en': 'Edit post',
+    'ypyzkwh0': {
+      'es': 'Editar Post',
+      'en': '',
     },
-    'ywqhv1hf': {
-      'es': 'Guadar',
-      'en': 'Save',
+    'smvocg4s': {
+      'es': 'Titulo',
+      'en': '',
     },
-    't85jx574': {
-      'es': 'Escribe la descripción...',
-      'en': 'Write the description...',
+    'mf1wpjwf': {
+      'es': 'Titulo',
+      'en': '',
     },
-    '10adk4m0': {
+    'bgraccv5': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'c7uptc1z': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'e0wl6wr2': {
+      'es': 'Ubicación',
+      'en': '',
+    },
+    'h5nste0h': {
       'es': 'Etiqueta la ubicación',
-      'en': 'Tag the location',
+      'en': '',
     },
-    'z092s19u': {
-      'es': 'Privacidad de colección',
-      'en': 'Collection Privacy',
+    '85u22a8t': {
+      'es': 'Privacidad del spot',
+      'en': '',
     },
-    '9tguovn4': {
+    's5z0ydrg': {
       'es': 'Público',
-      'en': 'Public',
+      'en': '',
     },
-    'rtjfrnia': {
-      'es': 'Público',
-      'en': 'Public',
+    '9qxxmxx4': {
+      'es': 'Mejores amigos',
+      'en': '',
     },
-    'qws6xjjp': {
-      'es': 'Amigos',
-      'en': 'Friends',
+    'lnwp5zng': {
+      'es': 'Spot secreto (solo yo)',
+      'en': '',
     },
-    '4tmhnd8g': {
-      'es': 'Privado',
-      'en': 'Private',
+    '8vsagv44': {
+      'es': 'Colección',
+      'en': '',
     },
-    '8wuo93rg': {
-      'es': 'Mis colecciones en Bio',
-      'en': 'My collections in Bio',
+    'wstfwl3i': {
+      'es': 'Crear una nueva colección',
+      'en': '',
     },
-    '2ojrmvnt': {
-      'es': 'Crear una colección en Bio',
-      'en': 'Create a collection in Bio',
-    },
-    'nytdgkrg': {
+    'gyvhisu2': {
       'es': 'Facebook',
-      'en': 'Facebook',
+      'en': '',
     },
-    'uy2c2itb': {
+    'kdwh7qd6': {
       'es': 'Instagram',
-      'en': 'instagram',
+      'en': '',
     },
-    '89od7k5r': {
+    'p3xducn7': {
       'es': 'Twitter',
-      'en': 'Twitter',
+      'en': '',
     },
-    '3e8lbvnl': {
-      'es': 'El título es requerido',
-      'en': 'Title is required',
-    },
-    '3ijl9vq0': {
-      'es': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'ms3gzesc': {
-      'es': 'Field is required',
-      'en': 'Field is required',
-    },
-    'n5z3hw5r': {
-      'es': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
+    '7dvmzr5r': {
+      'es': 'Publicar',
+      'en': '',
     },
     'nextta34': {
       'es': 'Home',
@@ -1840,6 +1907,47 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // testNewVideo
+  {
+    'axqhf19c': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // EtiquetarUbicacion
+  {
+    'b3yu6bar': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // EtiquetarPersonas
+  {
+    'h7rc762a': {
+      'es': 'Etiquetar Personas',
+      'en': '',
+    },
+    'wli67byf': {
+      'es': 'Siguiente',
+      'en': '',
+    },
+    'bn6o7vhe': {
+      'es': 'Toca la imagen para etiquetar personas',
+      'en': '',
+    },
+    'iubylvd3': {
+      'es': 'Etiquetas',
+      'en': '',
+    },
+    'mn8e91cp': {
+      'es': 'Buscar...',
+      'en': '',
+    },
+    '88j0amqt': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
   // crearCuentaOptions
   {
     'x52yy6hl': {
@@ -2314,6 +2422,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Look for',
     },
   },
+  // menu02
+  {
+    '07cg8q15': {
+      'es': 'Lugares',
+      'en': '',
+    },
+    'fombtlvv': {
+      'es': 'Personas',
+      'en': '',
+    },
+  },
   // contentList02
   {
     's058ecbj': {
@@ -2462,7 +2581,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // usuariosRecomendados
   {
     'vbg51sfp': {
-      'es': 'Perfiles recomendados',
+      'es': 'Personas  recomendadas',
       'en': 'Recommended profiles',
     },
   },
@@ -3259,6 +3378,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ex2teakx': {
       'es': 'Ver Perfil',
+      'en': '',
+    },
+    'wtse5imr': {
+      'es': '00:34',
       'en': '',
     },
   },

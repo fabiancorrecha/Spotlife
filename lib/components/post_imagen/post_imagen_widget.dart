@@ -226,6 +226,12 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       logFirebaseEvent('POST_IMAGEN_COMP_Icon_u1pyzaze_ON_TAP');
+                      logFirebaseEvent('Icon_generate_current_page_link');
+                      _model.currentPageLink = await generateCurrentPageLink(
+                        context,
+                        isShortLink: false,
+                      );
+
                       logFirebaseEvent('Icon_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
@@ -236,9 +242,11 @@ class _PostImagenWidgetState extends State<PostImagenWidget> {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: const SizedBox(
+                              child: SizedBox(
                                 height: 319.0,
-                                child: MenuPostAjenoWidget(),
+                                child: MenuPostAjenoWidget(
+                                  link: _model.currentPageLink,
+                                ),
                               ),
                             ),
                           );

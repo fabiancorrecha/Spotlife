@@ -1024,28 +1024,31 @@ class _CrearColeccionSinPostWidgetState
                 tabletLandscape: false,
                 desktop: false,
               ))
-                SwitchListTile(
-                  value: _model.switchListTileTipoColeccionValue ??=
-                      widget.esColeccionFavorito,
-                  onChanged: (newValue) async {
-                    safeSetState(() =>
-                        _model.switchListTileTipoColeccionValue = newValue);
-                  },
-                  subtitle: Text(
-                    FFLocalizations.of(context).getText(
-                      'ac79gekk' /* Al activar esta opcion esta co... */,
+                Material(
+                  color: Colors.transparent,
+                  child: SwitchListTile(
+                    value: _model.switchListTileTipoColeccionValue ??=
+                        widget.esColeccionFavorito,
+                    onChanged: (newValue) async {
+                      safeSetState(() =>
+                          _model.switchListTileTipoColeccionValue = newValue);
+                    },
+                    subtitle: Text(
+                      FFLocalizations.of(context).getText(
+                        'ac79gekk' /* Al activar esta opcion esta co... */,
+                      ),
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).titleSmallFamily,
+                            fontSize: 15.0,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleSmallFamily),
+                          ),
                     ),
-                    style: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          fontSize: 15.0,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
+                    dense: false,
+                    controlAffinity: ListTileControlAffinity.trailing,
                   ),
-                  dense: false,
-                  controlAffinity: ListTileControlAffinity.trailing,
                 ),
               const Spacer(),
               wrapWithModel(
@@ -1086,7 +1089,7 @@ class _CrearColeccionSinPostWidgetState
                           state: _model.placePickerValue.state,
                           country: _model.placePickerValue.country,
                           zipcode: _model.placePickerValue.zipCode,
-                          latLng: _model.placePickerValue.latLng,
+                          localizacion: _model.placePickerValue.latLng,
                           clearUnsetFields: false,
                           create: true,
                         ),
@@ -1113,7 +1116,7 @@ class _CrearColeccionSinPostWidgetState
                                   state: _model.placePickerValue.state,
                                   country: _model.placePickerValue.country,
                                   zipcode: _model.placePickerValue.zipCode,
-                                  latLng: _model.placePickerValue.latLng,
+                                  localizacion: _model.placePickerValue.latLng,
                                   clearUnsetFields: false,
                                   create: true,
                                 ),

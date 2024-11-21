@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'menu02_model.dart';
 export 'menu02_model.dart';
 
@@ -42,142 +44,111 @@ class _Menu02WidgetState extends State<Menu02Widget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 32.0),
-      child: Container(
-        decoration: const BoxDecoration(),
-        child: Row(
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent('MENU02_COMP_Icon_xpdkn9j7_ON_TAP');
-                      if (widget.seccion != 1) {
-                        logFirebaseEvent('Icon_navigate_to');
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
-                        }
-                        context.pushNamed(
-                          'buscarSpots',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      }
+            FFButtonWidget(
+              onPressed: () async {
+                logFirebaseEvent('MENU02_COMP_LUGARES_BTN_ON_TAP');
+                if (widget.seccion != 1) {
+                  logFirebaseEvent('Button_navigate_to');
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
+                  context.pushNamed(
+                    'buscarSpots',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
                     },
-                    child: Icon(
-                      FFIcons.kimages,
+                  );
+                }
+              },
+              text: FFLocalizations.of(context).getText(
+                '07cg8q15' /* Lugares */,
+              ),
+              options: FFButtonOptions(
+                height: 40.0,
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                color: const Color(0x00F4F176),
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
                       color: valueOrDefault<Color>(
                         widget.seccion == 1
                             ? FlutterFlowTheme.of(context).primaryText
                             : FlutterFlowTheme.of(context).accent4,
                         FlutterFlowTheme.of(context).accent4,
                       ),
-                      size: 32.0,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).titleSmallFamily),
                     ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent('MENU02_COMP_Icon_vx8d4fq1_ON_TAP');
-                      if (widget.seccion != 2) {
-                        logFirebaseEvent('Icon_navigate_to');
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
-                        }
-                        context.pushNamed(
-                          'buscarPerfil',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      }
+                elevation: 0.0,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            FFButtonWidget(
+              onPressed: () async {
+                logFirebaseEvent('MENU02_COMP_PERSONAS_BTN_ON_TAP');
+                if (widget.seccion != 2) {
+                  logFirebaseEvent('Button_navigate_to');
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
+                  context.pushNamed(
+                    'buscarPerfil',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
                     },
-                    child: Icon(
-                      FFIcons.kframe172,
+                  );
+                }
+              },
+              text: FFLocalizations.of(context).getText(
+                'fombtlvv' /* Personas */,
+              ),
+              options: FFButtonOptions(
+                height: 40.0,
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                color: const Color(0x00F4F176),
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
                       color: valueOrDefault<Color>(
                         widget.seccion == 2
                             ? FlutterFlowTheme.of(context).primaryText
                             : FlutterFlowTheme.of(context).accent4,
                         FlutterFlowTheme.of(context).accent4,
                       ),
-                      size: 32.0,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).titleSmallFamily),
                     ),
-                  ),
-                ],
+                elevation: 0.0,
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            if (responsiveVisibility(
-              context: context,
-              phone: false,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
-            ))
-              Icon(
-                FFIcons.kmountains,
-                color: valueOrDefault<Color>(
-                  widget.seccion == 4
-                      ? FlutterFlowTheme.of(context).primaryText
-                      : FlutterFlowTheme.of(context).accent4,
-                  FlutterFlowTheme.of(context).accent4,
-                ),
-                size: 32.0,
-              ),
-            if (responsiveVisibility(
-              context: context,
-              phone: false,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
-            ))
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  logFirebaseEvent('MENU02_COMP_Icon_qr10nhhd_ON_TAP');
-                  if (widget.seccion != 3) {
-                    logFirebaseEvent('Icon_navigate_to');
-
-                    context.pushNamed('buscarLugares');
-                  }
-                },
-                child: Icon(
-                  FFIcons.kpinLines,
-                  color: valueOrDefault<Color>(
-                    widget.seccion == 3
-                        ? FlutterFlowTheme.of(context).primaryText
-                        : FlutterFlowTheme.of(context).accent4,
-                    FlutterFlowTheme.of(context).accent4,
-                  ),
-                  size: 32.0,
-                ),
-              ),
           ],
         ),
-      ),
+        Divider(
+          thickness: 1.0,
+          indent: 39.0,
+          endIndent: 39.0,
+          color: FlutterFlowTheme.of(context).accent4,
+        ),
+      ],
     );
   }
 }

@@ -19,9 +19,11 @@ class MenuPostAjenoWidget extends StatefulWidget {
   const MenuPostAjenoWidget({
     super.key,
     this.post,
+    required this.link,
   });
 
   final DocumentReference? post;
+  final String? link;
 
   @override
   State<MenuPostAjenoWidget> createState() => _MenuPostAjenoWidgetState();
@@ -175,22 +177,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'MENU_POST_AJENO_Container_59tbcvo4_ON_TA');
-                                      logFirebaseEvent(
-                                          'Container_generate_current_page_link');
-                                      _model.currentPageLink =
-                                          await generateCurrentPageLink(
-                                        context,
-                                        title: stackUserPostsRecord.postTitle,
-                                        imageUrl: stackUserPostsRecord
-                                            .postPhotolist.first,
-                                        description: stackUserPostsRecord
-                                            .postDescription,
-                                        isShortLink: false,
-                                      );
-
                                       logFirebaseEvent('Container_share');
                                       await Share.share(
-                                        _model.currentPageLink,
+                                        widget.link!,
                                         sharePositionOrigin:
                                             getWidgetBoundingBox(context),
                                       );
@@ -274,7 +263,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                           'Column_copy_to_clipboard');
                                       await Clipboard.setData(ClipboardData(
                                           text:
-                                              'Comparto este enlace contigo para que puedas revisarlo ${_model.currentPageLink}'));
+                                              'Comparto este enlace contigo para que puedas revisarlo ${widget.link}'));
                                       logFirebaseEvent('Column_bottom_sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,

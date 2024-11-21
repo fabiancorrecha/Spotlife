@@ -45,7 +45,7 @@ class _FeedWidgetState extends State<FeedWidget> {
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       logFirebaseEvent('Feed_update_app_state');
       FFAppState().updateUbicationStruct(
-        (e) => e..latLng = currentUserLocationValue,
+        (e) => e..localizacion = currentUserLocationValue,
       );
       FFAppState().update(() {});
     });

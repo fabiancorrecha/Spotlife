@@ -31,6 +31,7 @@ class PostImagenV2CopyModel extends FlutterFlowModel<PostImagenV2CopyWidget> {
 
   // Stores action output result for [Firestore Query - Query a collection] action in postImagenV2Copy widget.
   List<PostCommentRecord>? obtenerComentarios1;
+  String currentPageLink = '';
   // Stores action output result for [Backend Call - Create Document] action in IconNO widget.
   ActividadRecord? nuevaActividad;
   // Stores action output result for [Firestore Query - Query a collection] action in Icon widget.

@@ -84,7 +84,8 @@ export '/pages/mapa/buscar_perfil/buscar_perfil_widget.dart'
     show BuscarPerfilWidget;
 export '/pages/mapa/buscar_lugares/buscar_lugares_widget.dart'
     show BuscarLugaresWidget;
-export '/pages/crear_post/crear_post_widget.dart' show CrearPostWidget;
+export '/pages/crear_post/crear_post/crear_post_widget.dart'
+    show CrearPostWidget;
 export '/pages/pagina_t_o_s/pagina_t_o_s_widget.dart' show PaginaTOSWidget;
 export '/pages/detalle_post/detalle_post_widget.dart' show DetallePostWidget;
 export '/pages/crear_post/editar_post/editar_post_widget.dart'
@@ -143,3 +144,8 @@ export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
     show MapaPrincipaRespaldoWidget;
 export '/pages/vista_postlist/vista_postlist_widget.dart'
     show VistaPostlistWidget;
+export '/test_new_video/test_new_video_widget.dart' show TestNewVideoWidget;
+export '/pages/crear_post/etiquetar_ubicacion/etiquetar_ubicacion_widget.dart'
+    show EtiquetarUbicacionWidget;
+export '/pages/crear_post/etiquetar_personas/etiquetar_personas_widget.dart'
+    show EtiquetarPersonasWidget;

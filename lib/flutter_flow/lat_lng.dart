@@ -1,5 +1,8 @@
+import 'dart:math';
+
 class LatLng {
   const LatLng(this.latitude, this.longitude);
+
   final double latitude;
   final double longitude;
 
@@ -12,8 +15,9 @@ class LatLng {
   int get hashCode => latitude.hashCode + longitude.hashCode;
 
   @override
-  bool operator ==(other) =>
-      other is LatLng &&
-      latitude == other.latitude &&
-      longitude == other.longitude;
+  bool operator ==(other) => other is LatLng && latitude == other.latitude && longitude == other.longitude;
+
+  double distanceFrom(LatLng other) {
+    return sqrt(pow(longitude - other.longitude, 2) + pow(latitude - other.latitude, 2));
+  }
 }
