@@ -101,13 +101,13 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     final favoritesList = (currentUserDocument?.listaPostFavoritos.toList() ?? []).map((spot) => spot.id).toSet();
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
     final currentUser = widget.usuarioAutenticado;
-    var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null && spot.postUser != null).map((spot) async => SpotDetail(
+    var spotsAsync = allSpots.where((spot) => spot.placeInfo.localizacion != null && spot.postUser != null).map((spot) async => SpotDetail(
           id: spot.reference.id,
           reference: spot.reference,
           title: spot.postTitle,
           imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
           avatarUrl: await getUserPhotoUrl(spot.postUser),
-          location: spot.placeInfo.latLng!!,
+          location: spot.placeInfo.localizacion!!,
           postUser: spot.postUser,
           isLoggedUser: spot.postUser == currentUser,
           description: spot.postDescription,
