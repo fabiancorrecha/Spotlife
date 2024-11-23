@@ -41,9 +41,9 @@ class _SpotCarrouselState extends State<SpotCarrousel> {
   @override
   void didUpdateWidget(SpotCarrousel oldWidget) {
     super.didUpdateWidget(oldWidget);
-    var currentId = widget.spots[0]?.id;
-    if (widget.shouldCards && currentId != listFirstItemId) {
-      listFirstItemId = currentId ?? "";
+    final spotList = widget.spots;
+    if (widget.shouldCards && spotList.isNotEmpty && widget.spots[0]?.id != listFirstItemId) {
+      listFirstItemId = widget.spots[0]?.id ?? "";
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _pageViewController.animateToPage(
           0, // Replace with your desired page index
