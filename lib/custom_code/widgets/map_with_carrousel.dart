@@ -101,7 +101,9 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
     final favoritesList = (currentUserDocument?.listaPostFavoritos.toList() ?? []).map((spot) => spot.id).toSet();
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
     final currentUser = widget.usuarioAutenticado;
-    var spotsAsync = allSpots.where((spot) => spot.placeInfo.localizacion != null && spot.postUser != null).map((spot) async => SpotDetail(
+    var spotsAsync = allSpots.where((spot) => spot.placeInfo.localizacion != null && spot.postUser != null).map((spot) async {
+      try {
+        return SpotDetail(
           id: spot.reference.id,
           reference: spot.reference,
           title: spot.postTitle,
@@ -114,8 +116,13 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
           placeInfo: spot.placeInfo,
           isFavorite: favoritesList.contains(spot.reference.id),
           postRecord: spot,
-        ));
-    var _spots = await Future.wait(spotsAsync.toSet().toList());
+        );
+      } catch (e) {
+        debugPrint("error mapping to spotDetail ${e}");
+        return null;
+      }
+    });
+    List<SpotDetail> _spots = (await Future.wait(spotsAsync)).toSet().whereType<SpotDetail>().toList();
     setState(() {
       spots = _spots;
     });
