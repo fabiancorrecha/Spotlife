@@ -501,6 +501,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'direccion',
                   ParamType.LatLng,
                 ),
+                street: params.getParam(
+                  'street',
+                  ParamType.String,
+                ),
+                city: params.getParam(
+                  'city',
+                  ParamType.String,
+                ),
               ),
             ),
             FFRoute(

@@ -24,11 +24,15 @@ class CrearPostWidget extends StatefulWidget {
     this.esImagen,
     this.selectedUser,
     this.direccion,
+    this.street,
+    this.city,
   });
 
   final bool? esImagen;
   final List<DocumentReference>? selectedUser;
   final LatLng? direccion;
+  final String? street;
+  final String? city;
 
   @override
   State<CrearPostWidget> createState() => _CrearPostWidgetState();

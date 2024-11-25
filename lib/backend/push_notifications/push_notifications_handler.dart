@@ -215,6 +215,8 @@ final parametersBuilderMap =
         allParams: {
           'esImagen': getParameter<bool>(data, 'esImagen'),
           'direccion': getParameter<LatLng>(data, 'direccion'),
+          'street': getParameter<String>(data, 'street'),
+          'city': getParameter<String>(data, 'city'),
         },
       ),
   'paginaTOS': ParameterData.none(),

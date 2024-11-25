@@ -148,7 +148,7 @@ class _EtiquetarUbicacionWidgetState extends State<EtiquetarUbicacionWidget> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              '$street  $city',
+                              '${ubication.toString()}$street$city',
                               style: TextStyle(
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
