@@ -509,14 +509,14 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       try {
         if (post.postUser != null) {
           final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty && post.placeInfo.localizacion != null) {
+          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
                 markerId: gmap.MarkerId(post.reference.id),
                 position: gmap.LatLng(
-                  post.placeInfo.localizacion!.latitude,
-                  post.placeInfo.localizacion!.longitude,
+                  post.placeInfo.latLng!.latitude,
+                  post.placeInfo.latLng!.longitude,
                 ),
                 icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
                 onTap: () {

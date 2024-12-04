@@ -45,7 +45,7 @@ class _FeedWidgetState extends State<FeedWidget> {
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       logFirebaseEvent('Feed_update_app_state');
       FFAppState().updateUbicationStruct(
-        (e) => e..localizacion = currentUserLocationValue,
+        (e) => e..latLng = currentUserLocationValue,
       );
       FFAppState().update(() {});
     });
@@ -75,7 +75,8 @@ class _FeedWidgetState extends State<FeedWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
                 child: wrapWithModel(
                   model: _model.appBarModel,
                   updateCallback: () => safeSetState(() {}),
@@ -146,7 +147,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                                     ),
                                   ),
                                 ),
-                                noItemsFoundIndicatorBuilder: (_) => const Center(
+                                noItemsFoundIndicatorBuilder: (_) =>
+                                    const Center(
                                   child: ComponenteVacioWidget(),
                                 ),
                                 itemBuilder: (context, _, listViewIndex) {

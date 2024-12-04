@@ -36,8 +36,10 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
     super.initState();
     _model = createModel(context, () => MapaPrincipalModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'mapaPrincipal'});
-    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'mapaPrincipal'});
+    getCurrentUserLocation(
+            defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -102,7 +104,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
               child: Stack(
                 children: [
                   Column(
@@ -114,21 +117,30 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           height: double.infinity,
                           child: Stack(
                             children: [
-                              if ((FFAppState().Post == true) && (FFAppState().Global == true))
+                              if ((FFAppState().Post == true) &&
+                                  (FFAppState().Global == true))
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 100.0, 0.0, 0.0),
                                   child: wrapWithModel(
                                     model: _model.postGridGlobalModel,
                                     updateCallback: () => safeSetState(() {}),
                                     child: const PostGridMapaGlobalWidget(),
                                   ),
                                 ),
-                              if (FFAppState().Mapa && (FFAppState().Amigos == false))
+                              if (FFAppState().Mapa &&
+                                  (FFAppState().Amigos == false))
                                 AuthUserStreamWidget(
-                                  builder: (context) => StreamBuilder<List<UserPostsRecord>>(
+                                  builder: (context) =>
+                                      StreamBuilder<List<UserPostsRecord>>(
                                     stream: queryUserPostsRecord(
                                       queryBuilder: (userPostsRecord) =>
-                                          userPostsRecord.whereIn('postUser', (currentUserDocument?.listaSeguidos.toList() ?? [])),
+                                          userPostsRecord.whereIn(
+                                              'postUser',
+                                              (currentUserDocument
+                                                      ?.listaSeguidos
+                                                      .toList() ??
+                                                  [])),
                                     ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
@@ -138,14 +150,18 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                             width: 12.0,
                                             height: 12.0,
                                             child: CircularProgressIndicator(
-                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context).primaryBackground,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
                                               ),
                                             ),
                                           ),
                                         );
                                       }
-                                      List<UserPostsRecord> mapaAmigoUserPostsRecordList = snapshot.data!;
+                                      List<UserPostsRecord>
+                                          mapaAmigoUserPostsRecordList =
+                                          snapshot.data!;
 
                                       return SizedBox(
                                         width: double.infinity,
@@ -159,11 +175,15 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                 SizedBox(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  child: _buildMap(mapaPrincipalUserPostsRecordList, context),
+                                  child: _buildMap(
+                                      mapaPrincipalUserPostsRecordList,
+                                      context),
                                 ),
-                              if ((FFAppState().Post == true) && (FFAppState().Amigos == true))
+                              if ((FFAppState().Post == true) &&
+                                  (FFAppState().Amigos == true))
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 100.0, 0.0, 0.0),
                                   child: wrapWithModel(
                                     model: _model.postGridAmigosModel,
                                     updateCallback: () => safeSetState(() {}),
@@ -177,7 +197,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     ],
                   ),
                   if (showMenu) buildNavigationBar(),
-                  if (FFAppState().Mapa == true && showMenu) buildAddIcon(context),
+                  if (FFAppState().Mapa == true && showMenu)
+                    buildAddIcon(context),
                   buildTopActions(context),
                 ],
               ),
@@ -213,7 +234,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
           logFirebaseEvent('MAPA_PRINCIPAL_Container_k8lq7g0r_CALLBA');
           logFirebaseEvent('MapaPersonalizado2_update_app_state');
           FFAppState().ubication = PlaceInfoStruct(
-            localizacion: ubication,
+            latLng: ubication,
           );
           safeSetState(() {});
           logFirebaseEvent('MapaPersonalizado2_navigate_to');
@@ -255,8 +276,10 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
       return custom_widgets.MapaPersonalizado2(
         width: double.infinity,
         height: double.infinity,
-        ubicacionInicialLat: functions.obtenerLatLng(currentUserLocationValue!, true),
-        ubicacionInicialLng: functions.obtenerLatLng(currentUserLocationValue!, false),
+        ubicacionInicialLat:
+            functions.obtenerLatLng(currentUserLocationValue!, true),
+        ubicacionInicialLng:
+            functions.obtenerLatLng(currentUserLocationValue!, false),
         zoom: 16.0,
         listaPostMarcadores: postList,
         usuarioAutenticado: currentUserReference,
@@ -298,21 +321,24 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        logFirebaseEvent('MAPA_PRINCIPAL_PAGE_Card_if4cyymz_ON_TAP');
+                        logFirebaseEvent(
+                            'MAPA_PRINCIPAL_PAGE_Card_if4cyymz_ON_TAP');
                         logFirebaseEvent('Card_bottom_sheet');
                         await showModalBottomSheet(
                           isScrollControlled: true,
@@ -344,7 +370,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(4.0, 8.0, 4.0, 8.0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              4.0, 8.0, 4.0, 8.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -382,7 +409,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -394,7 +422,8 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      logFirebaseEvent('MAPA_PRINCIPAL_Container_2uw23oat_ON_TAP');
+                      logFirebaseEvent(
+                          'MAPA_PRINCIPAL_Container_2uw23oat_ON_TAP');
                       logFirebaseEvent('Container_navigate_to');
 
                       context.pushNamed('buscarSpots');

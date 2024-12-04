@@ -135,13 +135,14 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 32.0, 16.0, 16.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        12.0, 32.0, 16.0, 16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,8 +205,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                   Container(
                     decoration: const BoxDecoration(),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          16.0, 0.0, 16.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -218,8 +219,10 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                 shape: BoxShape.circle,
                               ),
                               child: CachedNetworkImage(
-                                fadeInDuration: const Duration(milliseconds: 500),
-                                fadeOutDuration: const Duration(milliseconds: 500),
+                                fadeInDuration:
+                                    const Duration(milliseconds: 500),
+                                fadeOutDuration:
+                                    const Duration(milliseconds: 500),
                                 imageUrl: valueOrDefault<String>(
                                   currentUserPhoto,
                                   'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
@@ -295,7 +298,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                       topRight: Radius.circular(4.0),
                                     ),
                                   ),
-                                  focusedErrorBorder: const UnderlineInputBorder(
+                                  focusedErrorBorder:
+                                      const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
@@ -401,7 +405,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                       width: 2.0,
                                     ),
                                   ),
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment:
+                                      const AlignmentDirectional(0.0, 0.0),
                                   child: Icon(
                                     Icons.upload_outlined,
                                     color: FlutterFlowTheme.of(context)
@@ -409,9 +414,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                     size: 30.0,
                                   ),
                                 ),
-                                if ((editarColeccionCollectionsRecord
-                                                .imagen !=
-                                            '') ||
+                                if ((editarColeccionCollectionsRecord.imagen !=
+                                        '') ||
                                     (_model.uploadedFileUrl != ''))
                                   Container(
                                     width: 97.0,
@@ -453,7 +457,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                                         width: 2.0,
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment:
+                                        const AlignmentDirectional(0.0, 0.0),
                                     child: FaIcon(
                                       FontAwesomeIcons.circleNotch,
                                       color: FlutterFlowTheme.of(context)
@@ -470,8 +475,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -574,8 +579,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                     color: Color(0x27FAF7FA),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -612,8 +617,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 8.0, 16.0, 0.0),
                     child: Container(
                       decoration: const BoxDecoration(),
                       child: Column(
@@ -817,8 +822,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                     color: Color(0x27FAF7FA),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -920,8 +925,8 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                     desktop: false,
                   ))
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          16.0, 0.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -992,7 +997,7 @@ class _EditarColeccionWidgetState extends State<EditarColeccionWidget>
                               state: _model.placePickerValue.state,
                               country: _model.placePickerValue.country,
                               zipcode: _model.placePickerValue.zipCode,
-                              localizacion: _model.placePickerValue.latLng,
+                              latLng: _model.placePickerValue.latLng,
                               clearUnsetFields: false,
                             ),
                           ));

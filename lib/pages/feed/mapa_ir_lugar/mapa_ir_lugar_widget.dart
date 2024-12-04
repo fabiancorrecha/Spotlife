@@ -34,7 +34,8 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapa_ir_lugar'});
-    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(
+            defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -95,7 +96,8 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -124,8 +126,8 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                               userImage: mapaIrLugarUserPostsRecord
                                   .postPhotolist.first,
                               startCoordinate: currentUserLocationValue!,
-                              endCoordinate: mapaIrLugarUserPostsRecord
-                                  .placeInfo.localizacion!,
+                              endCoordinate:
+                                  mapaIrLugarUserPostsRecord.placeInfo.latLng!,
                               actualizarDatos: (time, distance) async {
                                 logFirebaseEvent(
                                     'MAPA_IR_LUGAR_Container_lgf1zod3_CALLBAC');
