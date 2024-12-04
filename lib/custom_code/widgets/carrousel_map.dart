@@ -166,8 +166,8 @@ class _CarrouselMapState extends State<CarrouselMap> {
       final spot = spots[i];
       try {
         final photoUrl = spot.imagePath;
-        if (photoUrl.isNotEmpty && spot.location != null) {
-          final location = spot.location;
+        if (photoUrl.isNotEmpty && spot.latLng != null) {
+          final latLng = spot.latLng;
           final markerIcon = await CustomMarker(
             imageUrl: photoUrl,
             isUser: spot.isLoggedUser,
@@ -176,7 +176,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
           );
           gmap.Marker marker = gmap.Marker(
             markerId: gmap.MarkerId(spot.id),
-            position: gmap.LatLng(location.latitude, location.longitude),
+            position: gmap.LatLng(latLng.latitude, latLng.longitude),
             icon: markerIcon,
             onTap: () {
               onMarkerTap(spot);
@@ -323,8 +323,8 @@ class _CarrouselMapState extends State<CarrouselMap> {
   void _moveCameraToPost(SpotDetail post, double zoom) async {
     final controller = await _controller.future;
     final position = gmap.LatLng(
-      post.location.latitude,
-      post.location.longitude,
+      post.latLng.latitude,
+      post.latLng.longitude,
     );
 
     controller.animateCamera(
@@ -373,8 +373,8 @@ class _CarrouselMapState extends State<CarrouselMap> {
       _selectedSubtitle = post.description ?? '';
       _selectedImageUrl = post.imagePath.isNotEmpty ? post.imagePath : '';
       _selectedMarkerPosition = gmap.LatLng(
-        post.location.latitude,
-        post.location.longitude,
+        post.latLng.latitude,
+        post.latLng.longitude,
       );
     });
   }
