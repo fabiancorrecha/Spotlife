@@ -130,13 +130,14 @@ class _CrearColeccionConPostWidgetState
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 16.0, 16.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        12.0, 0.0, 16.0, 16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -222,8 +223,8 @@ class _CrearColeccionConPostWidgetState
                   Container(
                     decoration: const BoxDecoration(),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          16.0, 0.0, 16.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -236,8 +237,10 @@ class _CrearColeccionConPostWidgetState
                                 shape: BoxShape.circle,
                               ),
                               child: CachedNetworkImage(
-                                fadeInDuration: const Duration(milliseconds: 500),
-                                fadeOutDuration: const Duration(milliseconds: 500),
+                                fadeInDuration:
+                                    const Duration(milliseconds: 500),
+                                fadeOutDuration:
+                                    const Duration(milliseconds: 500),
                                 imageUrl: valueOrDefault<String>(
                                   currentUserPhoto,
                                   'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
@@ -310,7 +313,8 @@ class _CrearColeccionConPostWidgetState
                                       topRight: Radius.circular(4.0),
                                     ),
                                   ),
-                                  focusedErrorBorder: const UnderlineInputBorder(
+                                  focusedErrorBorder:
+                                      const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
@@ -434,8 +438,8 @@ class _CrearColeccionConPostWidgetState
                                           }
                                         },
                                         child: Stack(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                          alignment: const AlignmentDirectional(
+                                              0.0, 0.0),
                                           children: [
                                             Container(
                                               width: 96.0,
@@ -453,8 +457,9 @@ class _CrearColeccionConPostWidgetState
                                                   width: 2.0,
                                                 ),
                                               ),
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      0.0, 0.0),
                                               child: Icon(
                                                 Icons.upload_outlined,
                                                 color:
@@ -481,8 +486,9 @@ class _CrearColeccionConPostWidgetState
                                                     width: 2.0,
                                                   ),
                                                 ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
+                                                alignment:
+                                                    const AlignmentDirectional(
+                                                        0.0, 0.0),
                                                 child: FaIcon(
                                                   FontAwesomeIcons.circleNotch,
                                                   color: FlutterFlowTheme.of(
@@ -510,19 +516,19 @@ class _CrearColeccionConPostWidgetState
                                                   ),
                                                 ),
                                                 child: Visibility(
-                                                  visible: (_model.uploadedFileUrl !=
-                                                              '') ||
+                                                  visible: (_model
+                                                              .uploadedFileUrl !=
+                                                          '') ||
                                                       (crearColeccionConPostUserPostsRecord
-                                                                  .postPhotolist
-                                                                  .first !=
-                                                              ''),
+                                                              .postPhotolist
+                                                              .first !=
+                                                          ''),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             4.0),
                                                     child: Image.network(
-                                                      _model.uploadedFileUrl !=
-                                                                  ''
+                                                      _model.uploadedFileUrl != ''
                                                           ? _model
                                                               .uploadedFileUrl
                                                           : crearColeccionConPostUserPostsRecord
@@ -557,8 +563,8 @@ class _CrearColeccionConPostWidgetState
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -660,8 +666,8 @@ class _CrearColeccionConPostWidgetState
                     color: Color(0x27FAF7FA),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -701,8 +707,8 @@ class _CrearColeccionConPostWidgetState
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 8.0, 16.0, 0.0),
                     child: Container(
                       decoration: const BoxDecoration(),
                       child: Column(
@@ -982,8 +988,8 @@ class _CrearColeccionConPostWidgetState
                     color: Color(0x27FAF7FA),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -1108,7 +1114,7 @@ class _CrearColeccionConPostWidgetState
                               state: _model.placePickerValue.state,
                               country: _model.placePickerValue.country,
                               zipcode: _model.placePickerValue.zipCode,
-                              localizacion: _model.placePickerValue.latLng,
+                              latLng: _model.placePickerValue.latLng,
                               clearUnsetFields: false,
                               create: true,
                             ),
@@ -1140,8 +1146,7 @@ class _CrearColeccionConPostWidgetState
                                       state: _model.placePickerValue.state,
                                       country: _model.placePickerValue.country,
                                       zipcode: _model.placePickerValue.zipCode,
-                                      localizacion:
-                                          _model.placePickerValue.latLng,
+                                      latLng: _model.placePickerValue.latLng,
                                       clearUnsetFields: false,
                                       create: true,
                                     ),

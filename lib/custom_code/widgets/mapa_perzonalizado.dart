@@ -411,8 +411,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
             gmap.Marker marker = gmap.Marker(
               markerId: gmap.MarkerId(post.reference.id),
               position: gmap.LatLng(
-                post.placeInfo.localizacion!.latitude,
-                post.placeInfo.localizacion!.longitude,
+                post.placeInfo.latLng!.latitude,
+                post.placeInfo.latLng!.longitude,
               ),
               infoWindow: gmap.InfoWindow(
                 title: _user.displayName,

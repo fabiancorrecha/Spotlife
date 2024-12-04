@@ -47,7 +47,7 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
       if ((_model.apiResulth5l?.succeeded ?? true)) {
         logFirebaseEvent('tipoDePost_update_app_state');
         FFAppState().ubication = PlaceInfoStruct(
-          localizacion: currentUserLocationValue,
+          latLng: currentUserLocationValue,
           address: GoogleMapsLocationConverterCall.longAddress(
             (_model.apiResulth5l?.jsonBody ?? ''),
           ),
@@ -122,7 +122,8 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
               height: 100.0,
               decoration: const BoxDecoration(),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -130,8 +131,8 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
                     Align(
                       alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 20.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '9bd5zs5f' /* Que vas a subir? */,
