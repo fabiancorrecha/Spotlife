@@ -16,7 +16,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
     String? state,
     String? country,
     String? zipcode,
-    LatLng? localizacion,
+    LatLng? latLng,
     List<String>? direccion,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _name = name,
@@ -25,7 +25,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         _state = state,
         _country = country,
         _zipcode = zipcode,
-        _localizacion = localizacion,
+        _latLng = latLng,
         _direccion = direccion,
         super(firestoreUtilData);
 
@@ -72,11 +72,11 @@ class PlaceInfoStruct extends FFFirebaseStruct {
   bool hasZipcode() => _zipcode != null;
 
   // "localizacion" field.
-  LatLng? _localizacion;
-  LatLng? get localizacion => _localizacion;
-  set localizacion(LatLng? val) => _localizacion = val;
+  LatLng? _latLng;
+  LatLng? get latLng => _latLng;
+  set latLng(LatLng? val) => _latLng = val;
 
-  bool hasLocalizacion() => _localizacion != null;
+  bool hasLocalizacion() => _latLng != null;
 
   // "Direccion" field.
   List<String>? _direccion;
@@ -96,7 +96,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         state: data['state'] as String?,
         country: data['country'] as String?,
         zipcode: data['zipcode'] as String?,
-        localizacion: data['localizacion'] as LatLng?,
+        latLng: data['latLng'] as LatLng?,
         direccion: getDataList(data['Direccion']),
       );
 
@@ -111,7 +111,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         'state': _state,
         'country': _country,
         'zipcode': _zipcode,
-        'localizacion': _localizacion,
+        'latLng': _latLng,
         'Direccion': _direccion,
       }.withoutNulls;
 
@@ -141,8 +141,8 @@ class PlaceInfoStruct extends FFFirebaseStruct {
           _zipcode,
           ParamType.String,
         ),
-        'localizacion': serializeParam(
-          _localizacion,
+        'latLng': serializeParam(
+          _latLng,
           ParamType.LatLng,
         ),
         'Direccion': serializeParam(
@@ -184,8 +184,8 @@ class PlaceInfoStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        localizacion: deserializeParam(
-          data['localizacion'],
+        latLng: deserializeParam(
+          data['latLng'],
           ParamType.LatLng,
           false,
         ),
@@ -228,7 +228,7 @@ class PlaceInfoStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        localizacion: convertAlgoliaParam(
+        latLng: convertAlgoliaParam(
           data,
           ParamType.LatLng,
           false,
@@ -257,13 +257,13 @@ class PlaceInfoStruct extends FFFirebaseStruct {
         state == other.state &&
         country == other.country &&
         zipcode == other.zipcode &&
-        localizacion == other.localizacion &&
+        latLng == other.latLng &&
         listEquality.equals(direccion, other.direccion);
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [name, address, city, state, country, zipcode, localizacion, direccion]);
+  int get hashCode => const ListEquality()
+      .hash([name, address, city, state, country, zipcode, latLng, direccion]);
 }
 
 PlaceInfoStruct createPlaceInfoStruct({
@@ -273,7 +273,7 @@ PlaceInfoStruct createPlaceInfoStruct({
   String? state,
   String? country,
   String? zipcode,
-  LatLng? localizacion,
+  LatLng? latLng,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -286,7 +286,7 @@ PlaceInfoStruct createPlaceInfoStruct({
       state: state,
       country: country,
       zipcode: zipcode,
-      localizacion: localizacion,
+      latLng: latLng,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
