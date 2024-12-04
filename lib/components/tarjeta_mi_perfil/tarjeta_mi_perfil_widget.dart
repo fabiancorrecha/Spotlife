@@ -5,8 +5,6 @@ import '/components/seccion_cambiar_foto/seccion_cambiar_foto_widget.dart';
 import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -39,7 +37,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
     super.initState();
     _model = createModel(context, () => TarjetaMiPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,8 +66,10 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
             ),
           );
         }
+
         final stackUsersRecord = snapshot.data!;
-        return Container(
+
+        return SizedBox(
           height: 254.0,
           child: Stack(
             children: [
@@ -89,7 +89,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
               Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0x7F1A1A1A), Color(0xFF1A1A1A)],
                     stops: [0.4, 0.7],
@@ -101,15 +101,15 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
               Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: AuthUserStreamWidget(
                           builder: (context) => InkWell(
                             splashColor: Colors.transparent,
@@ -129,7 +129,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                   return WebViewAware(
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 260.0,
                                         child: SeccionCambiarFotoWidget(
                                           usuario: stackUsersRecord,
@@ -144,7 +144,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                               width: 70.0,
                               height: 70.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
@@ -164,7 +164,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
                               child: Text(
                                 stackUsersRecord.displayName,
@@ -187,7 +187,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             100.0, 0.0, 100.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -195,7 +195,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
                                   stackUsersRecord.bio,
@@ -219,7 +219,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             100.0, 0.0, 100.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -227,7 +227,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 16.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -266,7 +266,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 16.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -274,15 +274,15 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 2.0, 0.0),
                                 child: Container(
                                   height: 100.0,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxHeight: 40.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Color(0x7F232323),
+                                    color: const Color(0x7F232323),
                                     borderRadius: BorderRadius.circular(80.0),
                                   ),
                                   child: Row(
@@ -317,6 +317,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                             );
                                           }
                                           int textCount = snapshot.data!;
+
                                           return Text(
                                             valueOrDefault<String>(
                                               formatNumber(
@@ -370,7 +371,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     2.0, 0.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -394,11 +395,11 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                   },
                                   child: Container(
                                     height: 100.0,
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       maxHeight: 40.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Color(0x7F232323),
+                                      color: const Color(0x7F232323),
                                       borderRadius: BorderRadius.circular(80.0),
                                     ),
                                     child: Row(
@@ -441,9 +442,9 @@ seguidores */
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(1.0, -1.0),
+                alignment: const AlignmentDirectional(1.0, -1.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 16.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -465,7 +466,7 @@ seguidores */
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 225.0,
                                     child: TipoDePostWidget(),
                                   ),
@@ -481,7 +482,7 @@ seguidores */
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Icon(
                               FFIcons.kadd,
                               color: FlutterFlowTheme.of(context).icono,
@@ -503,14 +504,14 @@ seguidores */
                             isScrollControlled: true,
                             backgroundColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
-                            barrierColor: Color(0x331A1A1A),
+                            barrierColor: const Color(0x331A1A1A),
                             isDismissible: false,
                             context: context,
                             builder: (context) {
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 667.0,
                                     child: AjustesUsuarioPrincipalWidget(),
                                   ),

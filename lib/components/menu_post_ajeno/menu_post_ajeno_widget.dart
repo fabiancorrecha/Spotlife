@@ -19,9 +19,11 @@ class MenuPostAjenoWidget extends StatefulWidget {
   const MenuPostAjenoWidget({
     super.key,
     this.post,
+    required this.link,
   });
 
   final DocumentReference? post;
+  final String? link;
 
   @override
   State<MenuPostAjenoWidget> createState() => _MenuPostAjenoWidgetState();
@@ -87,7 +89,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -118,7 +120,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
             ),
           );
         }
+
         final stackUserPostsRecord = snapshot.data!;
+
         return Stack(
           children: [
             Container(
@@ -126,7 +130,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
               height: double.infinity,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(0.0),
                   topLeft: Radius.circular(20.0),
@@ -138,7 +142,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       width: 52.0,
                       height: 5.0,
@@ -152,9 +156,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                     child: Container(
                       width: double.infinity,
                       height: 100.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -173,21 +177,9 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'MENU_POST_AJENO_Container_59tbcvo4_ON_TA');
-                                      logFirebaseEvent(
-                                          'Container_generate_current_page_link');
-                                      _model.currentPageLink =
-                                          await generateCurrentPageLink(
-                                        context,
-                                        title: 'Revisa este post',
-                                        imageUrl: stackUserPostsRecord
-                                            .postPhotolist.first,
-                                        description: stackUserPostsRecord
-                                            .postDescription,
-                                      );
-
                                       logFirebaseEvent('Container_share');
                                       await Share.share(
-                                        _model.currentPageLink,
+                                        widget.link!,
                                         sharePositionOrigin:
                                             getWidgetBoundingBox(context),
                                       );
@@ -201,7 +193,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -256,7 +248,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         FlutterFlowTheme.of(context).fondoIcono,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -268,34 +260,22 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                       logFirebaseEvent('Column_bottom_sheet');
                                       Navigator.pop(context);
                                       logFirebaseEvent(
-                                          'Column_generate_current_page_link');
-                                      _model.currentPageLink =
-                                          await generateCurrentPageLink(
-                                        context,
-                                        title: 'Revisa este post',
-                                        imageUrl: stackUserPostsRecord
-                                            .postPhotolist.first,
-                                        description: stackUserPostsRecord
-                                            .postDescription,
-                                      );
-
-                                      logFirebaseEvent(
                                           'Column_copy_to_clipboard');
                                       await Clipboard.setData(ClipboardData(
                                           text:
-                                              'Comparto este enlace contigo para que puedas revisarlo ${_model.currentPageLink}'));
+                                              'Comparto este enlace contigo para que puedas revisarlo ${widget.link}'));
                                       logFirebaseEvent('Column_bottom_sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
+                                        barrierColor: const Color(0x00000000),
                                         context: context,
                                         builder: (context) {
                                           return WebViewAware(
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: Container(
+                                              child: const SizedBox(
                                                 height: 82.0,
                                                 child: NotificacionBoxWidget(
                                                   mensaje:
@@ -374,7 +354,7 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                         FlutterFlowTheme.of(context).fondoIcono,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -389,14 +369,14 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x00000000),
+                                        barrierColor: const Color(0x00000000),
                                         context: context,
                                         builder: (context) {
                                           return WebViewAware(
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: Container(
+                                              child: const SizedBox(
                                                 height: 589.0,
                                                 child: MenuReportarWidget(),
                                               ),
@@ -531,10 +511,10 @@ class _MenuPostAjenoWidgetState extends State<MenuPostAjenoWidget>
               animationsMap['containerOnActionTriggerAnimation']!,
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.2),
+              alignment: const AlignmentDirectional(0.0, 0.2),
               child: wrapWithModel(
                 model: _model.notificacioneModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: NotificacionBoxWidget(
                   mensaje: FFAppState().messagePopUp,
                 ),

@@ -4,8 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'notificacion_post_model.dart';
@@ -37,7 +36,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
     super.initState();
     _model = createModel(context, () => NotificacionPostModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -66,10 +65,12 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -102,11 +103,13 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                   width: 40.0,
                   height: 40.0,
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  child: Image.network(
-                    valueOrDefault<String>(
+                  child: CachedNetworkImage(
+                    fadeInDuration: const Duration(milliseconds: 500),
+                    fadeOutDuration: const Duration(milliseconds: 500),
+                    imageUrl: valueOrDefault<String>(
                       containerUsersRecord.photoUrl,
                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                     ),
@@ -116,7 +119,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => Text(
                       valueOrDefault<String>(
@@ -166,7 +169,9 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                         ),
                       );
                     }
+
                     final imageUserPostsRecord = snapshot.data!;
+
                     return InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -203,13 +208,13 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                   },
                 ),
               if (widget.actividad!.esSeguir &&
-                  !(currentUserDocument?.listaSeguidos?.toList() ?? [])
+                  !(currentUserDocument?.listaSeguidos.toList() ?? [])
                       .contains(containerUsersRecord.reference) &&
                   (valueOrDefault<bool>(
                           currentUserDocument?.cuentaPrivada, false) ==
                       false))
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => FFButtonWidget(
                       onPressed: () async {
@@ -217,7 +222,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                             'NOTIFICACION_POST_COMP_SEGUIR_BTN_ON_TAP');
                         if (containerUsersRecord.reference !=
                             currentUserReference) {
-                          if (!(currentUserDocument?.listaSeguidos?.toList() ??
+                          if (!(currentUserDocument?.listaSeguidos.toList() ??
                                   [])
                               .contains(containerUsersRecord.reference)) {
                             logFirebaseEvent('Button_backend_call');
@@ -243,7 +248,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                             });
                           }
 
-                          if ((currentUserDocument?.listaSeguidos?.toList() ??
+                          if ((currentUserDocument?.listaSeguidos.toList() ??
                                   [])
                               .contains(containerUsersRecord.reference)) {
                             logFirebaseEvent('Button_backend_call');
@@ -291,9 +296,9 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                         width: 100.0,
                         height: 40.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle: FlutterFlowTheme.of(context)
                             .titleSmall
@@ -308,7 +313,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                                       .titleSmallFamily),
                             ),
                         elevation: 2.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -322,14 +327,14 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   if (widget.actividad!.esSeguir &&
-                      !(currentUserDocument?.listaSeguidos?.toList() ?? [])
+                      !(currentUserDocument?.listaSeguidos.toList() ?? [])
                           .contains(containerUsersRecord.reference) &&
                       (valueOrDefault<bool>(
                               currentUserDocument?.cuentaPrivada, false) ==
                           true))
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                       child: AuthUserStreamWidget(
                         builder: (context) => FlutterFlowIconButton(
                           borderRadius: 20.0,
@@ -381,7 +386,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                       ),
                     ),
                   if (widget.actividad!.esSeguir &&
-                      !(currentUserDocument?.listaSeguidos?.toList() ?? [])
+                      !(currentUserDocument?.listaSeguidos.toList() ?? [])
                           .contains(containerUsersRecord.reference) &&
                       (valueOrDefault<bool>(
                               currentUserDocument?.cuentaPrivada, false) ==

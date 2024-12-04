@@ -1,18 +1,19 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ActividadRecord extends FirestoreRecord {
   ActividadRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -130,6 +131,68 @@ class ActividadRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       ActividadRecord._(reference, mapFromFirestore(data));
+
+  static ActividadRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      ActividadRecord.getDocumentFromData(
+        {
+          'creadorActividad': convertAlgoliaParam(
+            snapshot.data['creadorActividad'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'recibeActividad': convertAlgoliaParam(
+            snapshot.data['recibeActividad'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'sinLeer': snapshot.data['sinLeer'],
+          'meGusta': snapshot.data['meGusta'],
+          'esComentario': snapshot.data['esComentario'],
+          'esSeguir': snapshot.data['esSeguir'],
+          'nombreUsuarioCreador': snapshot.data['nombreUsuarioCreador'],
+          'nombreUsuarioReceptor': snapshot.data['nombreUsuarioReceptor'],
+          'fechaCreacion': convertAlgoliaParam(
+            snapshot.data['fechaCreacion'],
+            ParamType.DateTime,
+            false,
+          ),
+          'postRelacionado': convertAlgoliaParam(
+            snapshot.data['postRelacionado'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'comentarioRelacionado': convertAlgoliaParam(
+            snapshot.data['comentarioRelacionado'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'meGustaComentario': snapshot.data['meGustaComentario'],
+          'imagenUsuario': snapshot.data['imagenUsuario'],
+          'imagenPost': snapshot.data['imagenPost'],
+          'imagenPostList': safeGet(
+            () => snapshot.data['imagenPostList'].toList(),
+          ),
+        },
+        ActividadRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<ActividadRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'actividad',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

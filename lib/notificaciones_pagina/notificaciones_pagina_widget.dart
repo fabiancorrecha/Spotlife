@@ -27,7 +27,7 @@ class _NotificacionesPaginaWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'notificaciones_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -40,57 +40,55 @@ class _NotificacionesPaginaWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'NOTIFICACIONES_PAGINA_Card_n6xxqdyh_ON_T');
-                          logFirebaseEvent('Card_bottom_sheet');
-                          Navigator.pop(context);
-                        },
-                        child: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.of(context).fondoIcono,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              color: FlutterFlowTheme.of(context).icono,
-                              size: 30.0,
-                            ),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'NOTIFICACIONES_PAGINA_Card_n6xxqdyh_ON_T');
+                        logFirebaseEvent('Card_bottom_sheet');
+                        Navigator.pop(context);
+                      },
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).fondoIcono,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(
+                            Icons.arrow_back_rounded,
+                            color: FlutterFlowTheme.of(context).icono,
+                            size: 30.0,
                           ),
                         ),
                       ),
-                      Text(
+                    ),
+                    Expanded(
+                      child: Text(
                         FFLocalizations.of(context).getText(
                           'h06kmanl' /* Notificaciones */,
                         ),
+                        textAlign: TextAlign.center,
                         style:
                             FlutterFlowTheme.of(context).displaySmall.override(
                                   fontFamily: FlutterFlowTheme.of(context)
@@ -101,118 +99,109 @@ class _NotificacionesPaginaWidgetState
                                           .displaySmallFamily),
                                 ),
                       ),
-                      Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 30.0,
-                      ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(-1.0, 0.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      '6vhh8drf' /* Notificaciones sociales */,
+                    ),
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).displaySmallFamily,
+                          fontSize: 20.0,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).displaySmallFamily),
+                        ),
                   ),
                 ),
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        '6vhh8drf' /* Notificaciones sociales */,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  wrapWithModel(
+                    model: _model.botonQuintoModel1,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        'bmeaq35g' /* Enlace invitación */,
                       ),
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).displaySmallFamily,
-                            fontSize: 20.0,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context)
-                                    .displaySmallFamily),
-                          ),
+                      accion: () async {},
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
-                      child: BotonQuintoWidget(
-                        texto: FFLocalizations.of(context).getText(
-                          'bmeaq35g' /* Enlace invitación */,
-                        ),
-                        accion: () async {},
+                  wrapWithModel(
+                    model: _model.botonQuintoModel2,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        't100x62k' /* Compartir via whatsapp */,
                       ),
-                    ),
-                    wrapWithModel(
-                      model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
-                      child: BotonQuintoWidget(
-                        texto: FFLocalizations.of(context).getText(
-                          't100x62k' /* Compartir via whatsapp */,
-                        ),
-                        accion: () async {},
-                      ),
-                    ),
-                    wrapWithModel(
-                      model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
-                      child: BotonQuintoWidget(
-                        texto: FFLocalizations.of(context).getText(
-                          'daqy9oi5' /* Compartir via instagram */,
-                        ),
-                        accion: () async {},
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 8.0)),
-                ),
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'vwklgbyr' /* Notificaciones sociales */,
-                      ),
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).displaySmallFamily,
-                            fontSize: 20.0,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context)
-                                    .displaySmallFamily),
-                          ),
+                      accion: () async {},
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.botonQuintoModel4,
-                      updateCallback: () => setState(() {}),
-                      child: BotonQuintoWidget(
-                        texto: FFLocalizations.of(context).getText(
-                          '9nf40o4k' /* Enlace invitación */,
-                        ),
-                        accion: () async {},
+                  wrapWithModel(
+                    model: _model.botonQuintoModel3,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        'daqy9oi5' /* Compartir via instagram */,
                       ),
+                      accion: () async {},
                     ),
-                    wrapWithModel(
-                      model: _model.botonQuintoModel5,
-                      updateCallback: () => setState(() {}),
-                      child: BotonQuintoWidget(
-                        texto: FFLocalizations.of(context).getText(
-                          '1jx16lia' /* Compartir via whatsapp */,
+                  ),
+                ].divide(const SizedBox(height: 8.0)),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(-1.0, 0.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'vwklgbyr' /* Notificaciones sociales */,
+                    ),
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).displaySmallFamily,
+                          fontSize: 20.0,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).displaySmallFamily),
                         ),
-                        accion: () async {},
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ),
                 ),
-              ],
-            ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  wrapWithModel(
+                    model: _model.botonQuintoModel4,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        '9nf40o4k' /* Enlace invitación */,
+                      ),
+                      accion: () async {},
+                    ),
+                  ),
+                  wrapWithModel(
+                    model: _model.botonQuintoModel5,
+                    updateCallback: () => safeSetState(() {}),
+                    child: BotonQuintoWidget(
+                      texto: FFLocalizations.of(context).getText(
+                        '1jx16lia' /* Compartir via whatsapp */,
+                      ),
+                      accion: () async {},
+                    ),
+                  ),
+                ].divide(const SizedBox(height: 8.0)),
+              ),
+            ],
           ),
         ),
       ),

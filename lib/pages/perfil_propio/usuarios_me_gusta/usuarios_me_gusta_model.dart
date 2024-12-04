@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class UsuariosMeGustaModel extends FlutterFlowModel<UsuariosMeGustaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for navBar1 component.
   late NavBar1Model navBar1Model;
 
@@ -17,7 +16,6 @@ class UsuariosMeGustaModel extends FlutterFlowModel<UsuariosMeGustaWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navBar1Model.dispose();
   }
 }

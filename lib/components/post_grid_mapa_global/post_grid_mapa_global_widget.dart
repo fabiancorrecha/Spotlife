@@ -2,12 +2,9 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_video_player.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'post_grid_mapa_global_model.dart';
 export 'post_grid_mapa_global_model.dart';
@@ -24,8 +21,6 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     with TickerProviderStateMixin {
   late PostGridMapaGlobalModel _model;
 
-  LatLng? currentUserLocationValue;
-
   final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -39,8 +34,6 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
     super.initState();
     _model = createModel(context, () => PostGridMapaGlobalModel());
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -56,7 +49,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,28 +61,11 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 12.0,
-            height: 12.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                FlutterFlowTheme.of(context).primaryBackground,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'esAmigos',
-          isEqualTo: false,
+          'esPublico',
+          isEqualTo: true,
         ),
       ),
       builder: (context, snapshot) {
@@ -108,25 +84,22 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
           );
         }
         List<UserPostsRecord> containerUserPostsRecordList = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child:
               // debo agregar el formato videos
               Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Builder(
               builder: (context) {
-                final listaUserPost = functions
-                    .getPlacesMaximumDistance(
-                        containerUserPostsRecordList.toList(),
-                        currentUserLocationValue!,
-                        5000.0)
-                    .toList();
+                final listaUserPost = containerUserPostsRecordList.toList();
+
                 return GridView.builder(
                   padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
@@ -137,7 +110,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                   itemBuilder: (context, listaUserPostIndex) {
                     final listaUserPostItem = listaUserPost[listaUserPostIndex];
                     return Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: StreamBuilder<UserPostsRecord>(
                         stream: UserPostsRecord.getDocument(
                             listaUserPostItem.reference),
@@ -157,8 +130,10 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                               ),
                             );
                           }
+
                           final stackUserPostsRecord = snapshot.data!;
-                          return Container(
+
+                          return SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: Stack(
@@ -168,6 +143,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                     final listaImagenes = stackUserPostsRecord
                                         .postPhotolist
                                         .toList();
+
                                     return SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
@@ -184,7 +160,7 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.323,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Visibility(
                                               visible: !stackUserPostsRecord
                                                       .esVideo &&
@@ -221,16 +197,16 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                                   FFAppState()
                                                           .verCajaComentariosActualizados =
                                                       false;
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 },
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20.0),
                                                   child: CachedNetworkImage(
-                                                    fadeInDuration: Duration(
+                                                    fadeInDuration: const Duration(
                                                         milliseconds: 500),
-                                                    fadeOutDuration: Duration(
+                                                    fadeOutDuration: const Duration(
                                                         milliseconds: 500),
                                                     imageUrl: listaImagenesItem,
                                                     width: double.infinity,
@@ -249,16 +225,53 @@ class _PostGridMapaGlobalWidgetState extends State<PostGridMapaGlobalWidget>
                                 ),
                                 if (stackUserPostsRecord.esVideo &&
                                     stackUserPostsRecord.hasVideo())
-                                  FlutterFlowVideoPlayer(
-                                    path: stackUserPostsRecord.video,
-                                    videoType: VideoType.network,
-                                    width: 216.0,
-                                    height: 300.0,
-                                    autoPlay: true,
-                                    looping: true,
-                                    showControls: false,
-                                    allowFullScreen: true,
-                                    allowPlaybackSpeedMenu: false,
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 300.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        child: custom_widgets
+                                            .CustomVideoPlayerMiniture(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          videoPath: listaUserPostItem.video,
+                                          soundOn: Icon(
+                                            Icons.fourteen_mp,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 10.0,
+                                          ),
+                                          soundOff: Icon(
+                                            Icons.sixteen_mp_sharp,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 10.0,
+                                          ),
+                                          fullscreen: Icon(
+                                            Icons.thirteen_mp_outlined,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 10.0,
+                                          ),
+                                          closeScreem: Icon(
+                                            Icons.onetwothree_outlined,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 10.0,
+                                          ),
+                                          buttonSize: 40.0,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                               ],
                             ),

@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'busquedas_recientes_model.dart';
 export 'busquedas_recientes_model.dart';
 
@@ -29,7 +27,7 @@ class _BusquedasRecientesWidgetState extends State<BusquedasRecientesWidget> {
     super.initState();
     _model = createModel(context, () => BusquedasRecientesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +44,7 @@ class _BusquedasRecientesWidgetState extends State<BusquedasRecientesWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -54,14 +52,14 @@ class _BusquedasRecientesWidgetState extends State<BusquedasRecientesWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +82,7 @@ class _BusquedasRecientesWidgetState extends State<BusquedasRecientesWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,

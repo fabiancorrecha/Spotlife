@@ -25,7 +25,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'seguridad_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,22 +38,20 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,7 +74,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -85,33 +83,32 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                           ),
                         ),
                       ),
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'ix21v9lh' /* Seguridad */,
+                      Expanded(
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'ix21v9lh' /* Seguridad */,
+                          ),
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .displaySmallFamily,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .displaySmallFamily),
+                              ),
                         ),
-                        style:
-                            FlutterFlowTheme.of(context).displaySmall.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .displaySmallFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .displaySmallFamily),
-                                ),
-                      ),
-                      Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 30.0,
                       ),
                     ],
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'dy67a68v' /* Seguridad inicio sesión */,
@@ -129,13 +126,13 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       wrapWithModel(
                         model: _model.botonQuintoModel1,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             'nfprqha5' /* Contraseña */,
@@ -145,7 +142,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                       ),
                       wrapWithModel(
                         model: _model.botonQuintoModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             'gztgmupb' /* información inicio sesión guar... */,
@@ -153,7 +150,7 @@ class _SeguridadPaginaWidgetState extends State<SeguridadPaginaWidget> {
                           accion: () async {},
                         ),
                       ),
-                    ].divide(SizedBox(height: 8.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
               ],

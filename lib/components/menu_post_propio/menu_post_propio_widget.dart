@@ -38,7 +38,7 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
     super.initState();
     _model = createModel(context, () => MenuPostPropioModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -67,13 +67,15 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
             ),
           );
         }
+
         final containerUserPostsRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(20.0),
@@ -84,7 +86,7 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Container(
                   width: 52.0,
                   height: 5.0,
@@ -98,10 +100,10 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -119,16 +121,34 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'MENU_POST_PROPIO_Container_xzx84w21_ON_T');
+                                  logFirebaseEvent('Container_show_snack_bar');
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'debug',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: const Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                   logFirebaseEvent(
                                       'Container_generate_current_page_link');
                                   _model.currentPageLink =
                                       await generateCurrentPageLink(
                                     context,
-                                    title: 'Revisa este post',
+                                    title: containerUserPostsRecord.postTitle,
                                     imageUrl: containerUserPostsRecord
                                         .postPhotolist.first,
                                     description: containerUserPostsRecord
                                         .postDescription,
+                                    isShortLink: false,
+                                    forceRedirect: true,
                                   );
 
                                   logFirebaseEvent('Container_share');
@@ -207,18 +227,6 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                       'MENU_POST_PROPIO_Column_eypv35pb_ON_TAP');
                                   logFirebaseEvent('Column_bottom_sheet');
                                   Navigator.pop(context);
-                                  logFirebaseEvent(
-                                      'Column_generate_current_page_link');
-                                  _model.currentPageLink =
-                                      await generateCurrentPageLink(
-                                    context,
-                                    title: 'Revisa este post',
-                                    imageUrl: containerUserPostsRecord
-                                        .postPhotolist.first,
-                                    description: containerUserPostsRecord
-                                        .postDescription,
-                                  );
-
                                   logFirebaseEvent('Column_copy_to_clipboard');
                                   await Clipboard.setData(ClipboardData(
                                       text:
@@ -227,14 +235,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
                                       return WebViewAware(
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 82.0,
                                             child: NotificacionBoxWidget(
                                               mensaje: '¡Link de post copiado!',
@@ -321,14 +329,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     context: context,
                                     builder: (context) {
                                       return WebViewAware(
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: const SizedBox(
                                             height: 589.0,
                                             child: MenuReportarWidget(),
                                           ),
@@ -407,6 +415,10 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                     containerUserPostsRecord,
                                     ParamType.Document,
                                   ),
+                                  'refPostUser': serializeParam(
+                                    containerUserPostsRecord.reference,
+                                    ParamType.DocumentReference,
+                                  ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'post': containerUserPostsRecord,
@@ -460,8 +472,8 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                         builder: (alertDialogContext) {
                                           return WebViewAware(
                                             child: AlertDialog(
-                                              title: Text('Eliminar Spot'),
-                                              content: Text(
+                                              title: const Text('Eliminar Spot'),
+                                              content: const Text(
                                                   'Confirma que quieres eliminar este post'),
                                               actions: [
                                                 TextButton(
@@ -469,14 +481,14 @@ class _MenuPostPropioWidgetState extends State<MenuPostPropioWidget> {
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: Text('Cancelar'),
+                                                  child: const Text('Cancelar'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: Text('Confirmar'),
+                                                  child: const Text('Confirmar'),
                                                 ),
                                               ],
                                             ),

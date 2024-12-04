@@ -35,7 +35,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -50,36 +50,37 @@ class _CreaCuentaUserNameTelefonoWidgetState
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  '0sldny5a' /* Crear cuenta con teléfono */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    '0sldny5a' /* Crear cuenta con teléfono */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: StreamBuilder<List<UsersRecord>>(
           stream: queryUsersRecord(
@@ -111,6 +112,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
             final containerUsersRecord = containerUsersRecordList.isNotEmpty
                 ? containerUsersRecordList.first
                 : null;
+
             return Container(
               width: double.infinity,
               height: double.infinity,
@@ -118,7 +120,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -137,7 +139,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                   children: [
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 8.0),
                                         child: TextFormField(
                                           controller: _model.textController,
@@ -145,7 +147,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.textController',
-                                            Duration(milliseconds: 300),
+                                            const Duration(milliseconds: 300),
                                             () async {
                                               logFirebaseEvent(
                                                   'CREA_CUENTA_USER_NAME_TELEFONO_TextField');
@@ -202,7 +204,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                                                   .bodyMediumFamily),
                                                     ),
                                             enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -210,7 +212,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                                   BorderRadius.circular(10.0),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -218,7 +220,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                                   BorderRadius.circular(10.0),
                                             ),
                                             errorBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -227,7 +229,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                             ),
                                             focusedErrorBorder:
                                                 UnderlineInputBorder(
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1.0,
                                               ),
@@ -235,7 +237,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                                   BorderRadius.circular(10.0),
                                             ),
                                             filled: true,
-                                            fillColor: Color(0xFF333333),
+                                            fillColor: const Color(0xFF333333),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -266,9 +268,9 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                     functions.minCaractersAccepted(
                                         _model.textController.text))
                                   Align(
-                                    alignment: AlignmentDirectional(0.9, 0.0),
+                                    alignment: const AlignmentDirectional(0.9, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 12.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.check_circle_outline,
@@ -282,9 +284,9 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                     functions.minCaractersAccepted(
                                         _model.textController.text))
                                   Align(
-                                    alignment: AlignmentDirectional(0.9, 0.0),
+                                    alignment: const AlignmentDirectional(0.9, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 12.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.close_rounded,
@@ -297,7 +299,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -327,7 +329,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -340,15 +342,15 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                               BorderRadius.circular(4.0),
                                         ),
                                       ),
-                                      unselectedWidgetColor: Color(0xFFF5F5F5),
+                                      unselectedWidgetColor: const Color(0xFFF5F5F5),
                                     ),
                                     child: Checkbox(
                                       value: _model.checkboxTOSValue ??= false,
                                       onChanged: (newValue) async {
-                                        setState(() => _model.checkboxTOSValue =
-                                            newValue!);
+                                        safeSetState(() => _model
+                                            .checkboxTOSValue = newValue!);
                                       },
-                                      side: BorderSide(
+                                      side: const BorderSide(
                                         width: 2,
                                         color: Color(0xFFF5F5F5),
                                       ),
@@ -402,13 +404,12 @@ class _CreaCuentaUserNameTelefonoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.boton1Model,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton1Widget(
                           texto: FFLocalizations.of(context).getText(
                             'yy33robh' /* Continuar */,
                           ),
-                          desabilitado: (_model.textController.text == null ||
-                                  _model.textController.text == '') ||
+                          desabilitado: (_model.textController.text == '') ||
                               (_model.checkboxTOSValue == false),
                           accion: () async {
                             logFirebaseEvent(
@@ -447,7 +448,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                               .primaryText,
                                         ),
                                       ),
-                                      duration: Duration(milliseconds: 2000),
+                                      duration: const Duration(milliseconds: 2000),
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
                                               .primaryBackground,
@@ -465,7 +466,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                             .primaryText,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 2000),
+                                    duration: const Duration(milliseconds: 2000),
                                     backgroundColor:
                                         FlutterFlowTheme.of(context)
                                             .primaryBackground,
@@ -483,7 +484,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 2000),
+                                  duration: const Duration(milliseconds: 2000),
                                   backgroundColor: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                 ),
@@ -494,7 +495,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -518,7 +519,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                                   ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -557,7 +558,7 @@ class _CreaCuentaUserNameTelefonoWidgetState
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 24.0, 0.0, 24.0),
                         child: Image.asset(
                           'assets/images/Frame_30_(1).png',
@@ -568,8 +569,8 @@ class _CreaCuentaUserNameTelefonoWidgetState
                       ),
                       wrapWithModel(
                         model: _model.crearCuentaOptionsModel,
-                        updateCallback: () => setState(() {}),
-                        child: CrearCuentaOptionsWidget(),
+                        updateCallback: () => safeSetState(() {}),
+                        child: const CrearCuentaOptionsWidget(),
                       ),
                     ],
                   ),

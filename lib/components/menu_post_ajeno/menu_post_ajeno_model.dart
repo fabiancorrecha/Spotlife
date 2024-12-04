@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class MenuPostAjenoModel extends FlutterFlowModel<MenuPostAjenoWidget> {
   ///  State fields for stateful widgets in this component.
 
-  String currentPageLink = '';
   // Model for notificacione.
   late NotificacionBoxModel notificacioneModel;
 

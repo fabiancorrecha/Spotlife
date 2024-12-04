@@ -28,7 +28,7 @@ class _CuentaAjustePaginaCopyWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'cuenta_ajuste_paginaCopy'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -41,16 +41,14 @@ class _CuentaAjustePaginaCopyWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -58,7 +56,7 @@ class _CuentaAjustePaginaCopyWidgetState
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +79,7 @@ class _CuentaAjustePaginaCopyWidgetState
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -90,34 +88,32 @@ class _CuentaAjustePaginaCopyWidgetState
                             ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'd8hdg61r' /* Cuenta */,
+                        Expanded(
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'd8hdg61r' /* Cuenta */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .displaySmallFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .displaySmallFamily),
-                              ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'e5j78qir' /* Información usuario */,
@@ -137,13 +133,13 @@ class _CuentaAjustePaginaCopyWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel1,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               '15yxjtlv' /* Informacion personal */,
@@ -153,7 +149,7 @@ class _CuentaAjustePaginaCopyWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel2,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'zajjlkyw' /* Guardar fotos originales */,
@@ -161,14 +157,14 @@ class _CuentaAjustePaginaCopyWidgetState
                             accion: () async {},
                           ),
                         ),
-                      ].divide(SizedBox(height: 8.0)),
+                      ].divide(const SizedBox(height: 8.0)),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '7gbx1oom' /* Herramientas cuenta profesiona... */,
@@ -188,13 +184,13 @@ class _CuentaAjustePaginaCopyWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel3,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'jlrmz5rm' /* Herramientas promoción */,
@@ -204,7 +200,7 @@ class _CuentaAjustePaginaCopyWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel4,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               '2hln9euu' /* Solicitar verificación */,
@@ -214,7 +210,7 @@ class _CuentaAjustePaginaCopyWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel5,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               '1u55e3k3' /* Cambiar a cuenta empresa */,
@@ -222,14 +218,14 @@ class _CuentaAjustePaginaCopyWidgetState
                             accion: () async {},
                           ),
                         ),
-                      ].divide(SizedBox(height: 8.0)),
+                      ].divide(const SizedBox(height: 8.0)),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '93rqmt2h' /* Idioma */,
@@ -249,7 +245,7 @@ class _CuentaAjustePaginaCopyWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: FlutterFlowLanguageSelector(
                       width: 319.0,
                       height: 55.0,
@@ -258,7 +254,7 @@ class _CuentaAjustePaginaCopyWidgetState
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       dropdownIconColor: Colors.white,
                       borderRadius: 8.0,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 13.0,

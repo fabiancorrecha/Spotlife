@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/place.dart';
 import 'crear_coleccion_con_post_widget.dart' show CrearColeccionConPostWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
@@ -20,7 +19,6 @@ class CrearColeccionConPostModel
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? crearColeccionController;
-  final unfocusNode = FocusNode();
   // State field(s) for tituloColeccion widget.
   FocusNode? tituloColeccionFocusNode;
   TextEditingController? tituloColeccionTextController;
@@ -36,8 +34,14 @@ class CrearColeccionConPostModel
   TextEditingController? descripcionColeccionTextController;
   String? Function(BuildContext, String?)?
       descripcionColeccionTextControllerValidator;
+  // State field(s) for CheckboxPublico widget.
+  bool? checkboxPublicoValue;
+  // State field(s) for CheckboxAmigos widget.
+  bool? checkboxAmigosValue;
+  // State field(s) for CheckboxPrivado widget.
+  bool? checkboxPrivadoValue;
   // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
+  FFPlace placePickerValue = const FFPlace();
   // Model for boton1 component.
   late Boton1Model boton1Model;
   // Stores action output result for [Backend Call - Create Document] action in boton1 widget.
@@ -51,7 +55,6 @@ class CrearColeccionConPostModel
   @override
   void dispose() {
     crearColeccionController?.finish();
-    unfocusNode.dispose();
     tituloColeccionFocusNode?.dispose();
     tituloColeccionTextController?.dispose();
 

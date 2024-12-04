@@ -31,7 +31,7 @@ class _NotificacionBoxWidgetState extends State<NotificacionBoxWidget> {
     super.initState();
     _model = createModel(context, () => NotificacionBoxModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,7 +44,7 @@ class _NotificacionBoxWidgetState extends State<NotificacionBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,

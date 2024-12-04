@@ -5,16 +5,15 @@ import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -170,6 +169,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get misIntereses => _misIntereses ?? const [];
   bool hasMisIntereses() => _misIntereses != null;
 
+  // "SuscripcionActiva" field.
+  bool? _suscripcionActiva;
+  bool get suscripcionActiva => _suscripcionActiva ?? false;
+  bool hasSuscripcionActiva() => _suscripcionActiva != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -204,6 +208,7 @@ class UsersRecord extends FirestoreRecord {
     _estatusDeSesion = snapshotData['EstatusDeSesion'] as String?;
     _fechaUltimaSesion = snapshotData['FechaUltimaSesion'] as DateTime?;
     _misIntereses = getDataList(snapshotData['MisIntereses']);
+    _suscripcionActiva = snapshotData['SuscripcionActiva'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -331,6 +336,7 @@ class UsersRecord extends FirestoreRecord {
               true,
             ).toList(),
           ),
+          'SuscripcionActiva': snapshot.data['SuscripcionActiva'],
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -389,6 +395,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? cuentaPrivada,
   String? estatusDeSesion,
   DateTime? fechaUltimaSesion,
+  bool? suscripcionActiva,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -414,6 +421,7 @@ Map<String, dynamic> createUsersRecordData({
       'CuentaPrivada': cuentaPrivada,
       'EstatusDeSesion': estatusDeSesion,
       'FechaUltimaSesion': fechaUltimaSesion,
+      'SuscripcionActiva': suscripcionActiva,
     }.withoutNulls,
   );
 
@@ -456,7 +464,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
             e1?.listadeUsuarioenEspera, e2?.listadeUsuarioenEspera) &&
         e1?.estatusDeSesion == e2?.estatusDeSesion &&
         e1?.fechaUltimaSesion == e2?.fechaUltimaSesion &&
-        listEquality.equals(e1?.misIntereses, e2?.misIntereses);
+        listEquality.equals(e1?.misIntereses, e2?.misIntereses) &&
+        e1?.suscripcionActiva == e2?.suscripcionActiva;
   }
 
   @override
@@ -490,7 +499,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.listadeUsuarioenEspera,
         e?.estatusDeSesion,
         e?.fechaUltimaSesion,
-        e?.misIntereses
+        e?.misIntereses,
+        e?.suscripcionActiva
       ]);
 
   @override

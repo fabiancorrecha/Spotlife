@@ -46,8 +46,7 @@ export '/pages/miperfil_mapa_pin2/miperfil_mapa_pin2_widget.dart'
     show MiperfilMapaPin2Widget;
 export '/pages/perfil_propio/perfil_propio/perfil_propio_widget.dart'
     show PerfilPropioWidget;
-export '/pages/perfil_propio/miperfil_mapa/miperfil_mapa_widget.dart'
-    show MiperfilMapaWidget;
+export '/pages/miperfil_mapa/miperfil_mapa_widget.dart' show MiperfilMapaWidget;
 export '/pages/perfil_propio/miperfil_coleciones/miperfil_coleciones_widget.dart'
     show MiperfilColecionesWidget;
 export '/pages/perfil_propio/mi_perfil_mapa_pin3/mi_perfil_mapa_pin3_widget.dart'
@@ -85,12 +84,10 @@ export '/pages/mapa/buscar_perfil/buscar_perfil_widget.dart'
     show BuscarPerfilWidget;
 export '/pages/mapa/buscar_lugares/buscar_lugares_widget.dart'
     show BuscarLugaresWidget;
-export '/pages/crear_post/crear_post_widget.dart' show CrearPostWidget;
+export '/pages/crear_post/crear_post/crear_post_widget.dart'
+    show CrearPostWidget;
 export '/pages/pagina_t_o_s/pagina_t_o_s_widget.dart' show PaginaTOSWidget;
-export '/pages/cuentas_bloqueadas/cuentas_bloqueadas_widget.dart'
-    show CuentasBloqueadasWidget;
-export '/pages/feed/detalle_post/detalle_post_widget.dart'
-    show DetallePostWidget;
+export '/pages/detalle_post/detalle_post_widget.dart' show DetallePostWidget;
 export '/pages/crear_post/editar_post/editar_post_widget.dart'
     show EditarPostWidget;
 export '/pages/ajustes/crear_coleccion_sin_post/crear_coleccion_sin_post_widget.dart'
@@ -130,3 +127,25 @@ export '/pages/mapa_principal_copy/mapa_principal_copy_widget.dart'
 export '/pages/chat/todos_los_chats/todos_los_chats_widget.dart'
     show TodosLosChatsWidget;
 export '/pages/chat/chat_page/chat_page_widget.dart' show ChatPageWidget;
+export '/herramientas_promocion/herramientas_promocion_widget.dart'
+    show HerramientasPromocionWidget;
+export '/pagina_provisional/pagina_provisional_widget.dart'
+    show PaginaProvisionalWidget;
+export '/suscripcionactivada/suscripcionactivada_widget.dart'
+    show SuscripcionactivadaWidget;
+export '/suscripcion_fallida/suscripcion_fallida_widget.dart'
+    show SuscripcionFallidaWidget;
+export '/pagina_en_contruccion/pagina_en_contruccion_widget.dart'
+    show PaginaEnContruccionWidget;
+export '/pages/mapa_amigos/mapa_amigos_widget.dart' show MapaAmigosWidget;
+export '/pages/login_process/reset_pass/reset_pass_widget.dart'
+    show ResetPassWidget;
+export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
+    show MapaPrincipaRespaldoWidget;
+export '/pages/vista_postlist/vista_postlist_widget.dart'
+    show VistaPostlistWidget;
+export '/test_new_video/test_new_video_widget.dart' show TestNewVideoWidget;
+export '/pages/crear_post/etiquetar_ubicacion/etiquetar_ubicacion_widget.dart'
+    show EtiquetarUbicacionWidget;
+export '/pages/crear_post/etiquetar_personas/etiquetar_personas_widget.dart'
+    show EtiquetarPersonasWidget;

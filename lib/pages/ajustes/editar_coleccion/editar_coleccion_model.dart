@@ -1,6 +1,5 @@
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/place.dart';
 import 'editar_coleccion_widget.dart' show EditarColeccionWidget;
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,6 @@ class EditarColeccionModel extends FlutterFlowModel<EditarColeccionWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for tituloColeccion widget.
   FocusNode? tituloColeccionFocusNode;
   TextEditingController? tituloColeccionTextController;
@@ -32,7 +30,7 @@ class EditarColeccionModel extends FlutterFlowModel<EditarColeccionWidget> {
   String? Function(BuildContext, String?)?
       descripcionColeccionTextControllerValidator;
   // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
+  FFPlace placePickerValue = const FFPlace();
   // Model for boton1 component.
   late Boton1Model boton1Model;
 
@@ -43,7 +41,6 @@ class EditarColeccionModel extends FlutterFlowModel<EditarColeccionWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tituloColeccionFocusNode?.dispose();
     tituloColeccionTextController?.dispose();
 

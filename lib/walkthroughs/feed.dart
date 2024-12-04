@@ -20,7 +20,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Barra de navegacion aqui podras crear un post, ver todas tus notificaciones y mensajes ',
             ),

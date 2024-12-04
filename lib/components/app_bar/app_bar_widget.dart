@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'app_bar_model.dart';
 export 'app_bar_model.dart';
@@ -31,7 +29,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     super.initState();
     _model = createModel(context, () => AppBarModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -48,17 +46,17 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       children: [
         Container(
           height: 40.0,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                 child: Container(
                   width: 118.0,
                   height: 47.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Image.asset(
                     'assets/images/Spotlife_logo_white.png',
                     width: double.infinity,
@@ -72,7 +70,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -91,7 +89,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                             return WebViewAware(
                               child: Padding(
                                 padding: MediaQuery.viewInsetsOf(context),
-                                child: Container(
+                                child: const SizedBox(
                                   height: 225.0,
                                   child: TipoDePostWidget(),
                                 ),
@@ -107,7 +105,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           color: FlutterFlowTheme.of(context).fondoIcono,
                           borderRadius: BorderRadius.circular(100.0),
                         ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Icon(
                           FFIcons.kadd,
                           color: FlutterFlowTheme.of(context).icono,
@@ -118,9 +116,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                     child: Stack(
-                      alignment: AlignmentDirectional(1.0, -1.0),
+                      alignment: const AlignmentDirectional(1.0, -1.0),
                       children: [
                         InkWell(
                           splashColor: Colors.transparent,
@@ -141,7 +139,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                               color: FlutterFlowTheme.of(context).fondoIcono,
                               borderRadius: BorderRadius.circular(100.0),
                             ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Icon(
                               FFIcons.kframe166,
                               color: FlutterFlowTheme.of(context).icono,
@@ -158,7 +156,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                                     0) >
                                 0))
                           Align(
-                            alignment: AlignmentDirectional(0.0, -1.0),
+                            alignment: const AlignmentDirectional(0.0, -1.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => Container(
                                 width: 15.0,
@@ -167,7 +165,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                                   color: FlutterFlowTheme.of(context).secondary,
                                   shape: BoxShape.circle,
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
                                     valueOrDefault(
@@ -206,7 +204,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -226,7 +224,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           color: FlutterFlowTheme.of(context).fondoIcono,
                           borderRadius: BorderRadius.circular(100.0),
                         ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Icon(
                           FFIcons.kmessageSquare,
                           color: FlutterFlowTheme.of(context).icono,

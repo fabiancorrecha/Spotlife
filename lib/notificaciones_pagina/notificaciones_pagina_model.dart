@@ -7,7 +7,6 @@ class NotificacionesPaginaModel
     extends FlutterFlowModel<NotificacionesPaginaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for botonQuinto component.
   late BotonQuintoModel botonQuintoModel1;
   // Model for botonQuinto component.
@@ -30,7 +29,6 @@ class NotificacionesPaginaModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     botonQuintoModel1.dispose();
     botonQuintoModel2.dispose();
     botonQuintoModel3.dispose();

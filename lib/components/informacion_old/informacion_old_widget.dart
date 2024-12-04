@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'informacion_old_model.dart';
 export 'informacion_old_model.dart';
 
@@ -29,7 +27,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
     super.initState();
     _model = createModel(context, () => InformacionOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +44,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -54,14 +52,14 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +82,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -115,13 +113,13 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'hyzdko9r' /* Politica de datos */,
@@ -131,7 +129,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'p6ngq3ov' /* Condiciones de uso */,
@@ -141,7 +139,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'hfrc1s8f' /* Reglamento UE  */,
@@ -149,7 +147,7 @@ class _InformacionOldWidgetState extends State<InformacionOldWidget> {
                         accion: () async {},
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ),
             ],

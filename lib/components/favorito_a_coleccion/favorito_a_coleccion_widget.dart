@@ -35,7 +35,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
     super.initState();
     _model = createModel(context, () => FavoritoAColeccionModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,7 +52,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -63,7 +63,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
             child: Container(
               width: 52.0,
               height: 5.0,
@@ -87,17 +87,17 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 83.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 83.0, 16.0, 0.0),
               child: Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Padding(
-                  padding: EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -158,7 +158,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                           children: [
                             Container(
                               height: 150.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: StreamBuilder<List<CollectionsRecord>>(
                                 stream: queryCollectionsRecord(
                                   queryBuilder: (collectionsRecord) =>
@@ -193,6 +193,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                   List<CollectionsRecord>
                                       listViewCollectionsRecordList =
                                       snapshot.data!;
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -204,10 +205,10 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                           listViewCollectionsRecordList[
                                               listViewIndex];
                                       return Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 16.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -248,10 +249,10 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                                       },
                                                       child: Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: Stack(
                                                           alignment:
-                                                              AlignmentDirectional(
+                                                              const AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           children: [
                                                             Container(
@@ -319,7 +320,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                                 ],
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         8.0, 0.0, 0.0, 0.0),
                                                 child: Text(
@@ -354,11 +355,11 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 32.0, 0.0, 0.0),
                               child: wrapWithModel(
                                 model: _model.boton1Model,
-                                updateCallback: () => setState(() {}),
+                                updateCallback: () => safeSetState(() {}),
                                 child: Boton1Widget(
                                   texto: 'Listo',
                                   desabilitado: false,

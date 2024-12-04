@@ -5,8 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'recuperar_contrasena_model.dart';
 export 'recuperar_contrasena_model.dart';
 
@@ -35,7 +33,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
     _model.correoelectronicoTextController ??= TextEditingController();
     _model.correoelectronicoFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,7 +50,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -63,13 +61,13 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
         key: _model.formKey,
         autovalidateMode: AutovalidateMode.disabled,
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +90,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -123,9 +121,9 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '6fty4hdm' /* Recuperar contraseña */,
@@ -142,14 +140,14 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: TextFormField(
                   controller: _model.correoelectronicoTextController,
                   focusNode: _model.correoelectronicoFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.correoelectronicoTextController',
-                    Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    const Duration(milliseconds: 200),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: false,
@@ -176,35 +174,35 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     filled: true,
-                    fillColor: Color(0xFF333333),
+                    fillColor: const Color(0xFF333333),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily:
@@ -222,11 +220,11 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('RECUPERAR_CONTRASENA_RECUPERAR_CONTRASEÑ');
+                  logFirebaseEvent('RECUPERAR_CONTRASENA_RECUPERAR_CONTRASEA');
                   logFirebaseEvent('Button_auth');
                   if (_model.correoelectronicoTextController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text(
                           'Email required!',
                         ),
@@ -245,9 +243,9 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                 options: FFButtonOptions(
                   width: 249.0,
                   height: 53.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily:
@@ -258,7 +256,7 @@ class _RecuperarContrasenaWidgetState extends State<RecuperarContrasenaWidget> {
                             FlutterFlowTheme.of(context).titleSmallFamily),
                       ),
                   elevation: 3.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

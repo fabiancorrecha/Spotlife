@@ -4,8 +4,6 @@ import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +37,7 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
     _model.cotrasenaTextController ??= TextEditingController();
     _model.cotrasenaFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,45 +52,46 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                logFirebaseEvent('CREA_CUENTA_CORREO_arrow_back_ICN_ON_TAP');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.pop();
+              },
             ),
-            onPressed: () async {
-              logFirebaseEvent('CREA_CUENTA_CORREO_arrow_back_ICN_ON_TAP');
-              logFirebaseEvent('IconButton_navigate_back');
-              context.pop();
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              '5sika88s' /* Crea una cuenta */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                '5sika88s' /* Crea una cuenta */,
+              ),
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).displaySmallFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).displaySmallFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: Container(
           width: double.infinity,
@@ -104,7 +103,7 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
             key: _model.formKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -114,15 +113,15 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 8.0),
                           child: TextFormField(
                             controller: _model.correoTextController,
                             focusNode: _model.correoFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.correoTextController',
-                              Duration(milliseconds: 200),
-                              () => setState(() {}),
+                              const Duration(milliseconds: 200),
+                              () => safeSetState(() {}),
                             ),
                             autofocus: true,
                             obscureText: false,
@@ -142,35 +141,35 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                                                 .bodyMediumFamily),
                                   ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               filled: true,
-                              fillColor: Color(0xFF333333),
+                              fillColor: const Color(0xFF333333),
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -197,15 +196,15 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 8.0),
                           child: TextFormField(
                             controller: _model.cotrasenaTextController,
                             focusNode: _model.cotrasenaFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.cotrasenaTextController',
-                              Duration(milliseconds: 200),
-                              () => setState(() {}),
+                              const Duration(milliseconds: 200),
+                              () => safeSetState(() {}),
                             ),
                             autofocus: false,
                             obscureText: !_model.cotrasenaVisibility,
@@ -225,37 +224,37 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                                                 .bodyMediumFamily),
                                   ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               filled: true,
-                              fillColor: Color(0xFF333333),
+                              fillColor: const Color(0xFF333333),
                               suffixIcon: InkWell(
-                                onTap: () => setState(
+                                onTap: () => safeSetState(
                                   () => _model.cotrasenaVisibility =
                                       !_model.cotrasenaVisibility,
                                 ),
@@ -291,7 +290,7 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -315,7 +314,7 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -343,13 +342,11 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                   ),
                   wrapWithModel(
                     model: _model.boton1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: Boton1Widget(
                       texto: 'Siguiente',
-                      desabilitado: (_model.correoTextController.text == null ||
-                              _model.correoTextController.text == '') ||
-                          (_model.cotrasenaTextController.text == null ||
-                              _model.cotrasenaTextController.text == ''),
+                      desabilitado: (_model.correoTextController.text == '') ||
+                          (_model.cotrasenaTextController.text == ''),
                       accion: () async {
                         logFirebaseEvent(
                             'CREA_CUENTA_CORREO_Container_rshk2h0e_CA');
@@ -387,7 +384,7 @@ class _CreaCuentaCorreoWidgetState extends State<CreaCuentaCorreoWidget> {
                           'FechadeNacimiento',
                           context.mounted,
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),

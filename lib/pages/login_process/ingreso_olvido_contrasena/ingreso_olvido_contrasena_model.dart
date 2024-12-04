@@ -11,7 +11,6 @@ class IngresoOlvidoContrasenaModel
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? olvidarContrasenaController;
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -44,7 +43,6 @@ class IngresoOlvidoContrasenaModel
   @override
   void dispose() {
     olvidarContrasenaController?.finish();
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     emailTextController?.dispose();
 

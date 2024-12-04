@@ -12,7 +12,7 @@ class AppBar5Widget extends StatefulWidget {
     super.key,
     String? titulo,
     this.coleccion,
-  }) : this.titulo = titulo ?? 'Lugar de Fotos, Pais';
+  }) : titulo = titulo ?? 'Lugar de Fotos, Pais';
 
   final String titulo;
   final CollectionsRecord? coleccion;
@@ -35,7 +35,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
     super.initState();
     _model = createModel(context, () => AppBar5Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,13 +51,13 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
 
     return Container(
       height: 100.0,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -66,7 +66,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
               onTap: () async {
                 logFirebaseEvent('APP_BAR5_COMP_Card_tw39opat_ON_TAP');
                 logFirebaseEvent('Card_navigate_back');
-                context.pop();
+                context.safePop();
               },
               child: Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -75,7 +75,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Icon(
                     Icons.arrow_back_rounded,
                     color: FlutterFlowTheme.of(context).icono,
@@ -98,7 +98,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
             ),
           Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -120,7 +120,7 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -145,14 +145,14 @@ class _AppBar5WidgetState extends State<AppBar5Widget> {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Icon(
                     FFIcons.kframe169,
                     color: valueOrDefault<Color>(
                       FFAppState().vermapa == true
                           ? FlutterFlowTheme.of(context).primary
-                          : Color(0xFFFAF7FA),
-                      Color(0xFFFAF7FA),
+                          : const Color(0xFFFAF7FA),
+                      const Color(0xFFFAF7FA),
                     ),
                     size: 24.0,
                   ),

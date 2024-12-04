@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'ayuda_old_model.dart';
 export 'ayuda_old_model.dart';
 
@@ -29,7 +27,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
     super.initState();
     _model = createModel(context, () => AyudaOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +44,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -54,14 +52,14 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +81,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -92,35 +90,34 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                         ),
                       ),
                     ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'guigqk52' /* Ayuda */,
+                    Expanded(
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'guigqk52' /* Ayuda */,
+                        ),
+                        textAlign: TextAlign.center,
+                        style:
+                            FlutterFlowTheme.of(context).displaySmall.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                       ),
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).displaySmallFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context)
-                                    .displaySmallFamily),
-                          ),
-                    ),
-                    Icon(
-                      Icons.arrow_back_rounded,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      size: 30.0,
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'zzpa27d1' /* Preguntas frecuentes */,
@@ -130,7 +127,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                     ),
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           '06h8a03q' /* Ayuda online */,
@@ -138,7 +135,7 @@ class _AyudaOldWidgetState extends State<AyudaOldWidget> {
                         accion: () async {},
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ),
             ],

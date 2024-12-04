@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class CreaCuentaCorreoModel extends FlutterFlowModel<CreaCuentaCorreoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for correo widget.
   FocusNode? correoFocusNode;
@@ -28,7 +27,6 @@ class CreaCuentaCorreoModel extends FlutterFlowModel<CreaCuentaCorreoWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     correoFocusNode?.dispose();
     correoTextController?.dispose();
 

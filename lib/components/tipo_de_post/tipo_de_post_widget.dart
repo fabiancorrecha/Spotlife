@@ -1,8 +1,11 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
 import 'package:provider/provider.dart';
 import 'tipo_de_post_model.dart';
 export 'tipo_de_post_model.dart';
@@ -17,6 +20,8 @@ class TipoDePostWidget extends StatefulWidget {
 class _TipoDePostWidgetState extends State<TipoDePostWidget> {
   late TipoDePostModel _model;
 
+  LatLng? currentUserLocationValue;
+
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -28,7 +33,50 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
     super.initState();
     _model = createModel(context, () => TipoDePostModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('TIPO_DE_POST_tipoDePost_ON_INIT_STATE');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      logFirebaseEvent('tipoDePost_backend_call');
+      _model.apiResulth5l = await GoogleMapsLocationConverterCall.call(
+        lat: functions.converLatLongToDouble(currentUserLocationValue).first,
+        lng: functions.converLatLongToDouble(currentUserLocationValue).last,
+      );
+
+      if ((_model.apiResulth5l?.succeeded ?? true)) {
+        logFirebaseEvent('tipoDePost_update_app_state');
+        FFAppState().ubication = PlaceInfoStruct(
+          localizacion: currentUserLocationValue,
+          address: GoogleMapsLocationConverterCall.longAddress(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+          city: GoogleMapsLocationConverterCall.city(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+          country: GoogleMapsLocationConverterCall.country(
+            (_model.apiResulth5l?.jsonBody ?? ''),
+          ),
+        );
+        FFAppState().update(() {});
+      } else {
+        logFirebaseEvent('tipoDePost_show_snack_bar');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Error no se pudo registrar tu direccion actual',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).error,
+              ),
+            ),
+            duration: const Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          ),
+        );
+      }
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -40,12 +88,14 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -56,7 +106,7 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Container(
               width: 52.0,
               height: 5.0,
@@ -70,18 +120,18 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
             child: Container(
               width: double.infinity,
               height: 100.0,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '9bd5zs5f' /* Que vas a subir? */,

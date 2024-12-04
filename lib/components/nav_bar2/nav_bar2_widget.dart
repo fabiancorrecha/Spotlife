@@ -1,5 +1,7 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'nav_bar2_model.dart';
 export 'nav_bar2_model.dart';
@@ -9,7 +11,7 @@ class NavBar2Widget extends StatefulWidget {
     super.key,
     int? tab,
     this.otroUsuario,
-  }) : this.tab = tab ?? 0;
+  }) : tab = tab ?? 0;
 
   final int tab;
   final DocumentReference? otroUsuario;
@@ -32,7 +34,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
     super.initState();
     _model = createModel(context, () => NavBar2Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,14 +47,14 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
         height: 64.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -79,7 +81,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -94,7 +96,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'perfilPropio',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -105,7 +107,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 0)
                       Icon(
@@ -131,6 +133,23 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   logFirebaseEvent('NAV_BAR2_COMP_Stack_q76ij56l_ON_TAP');
                   if (widget.tab != 1) {
                     if (widget.otroUsuario != null) {
+                      logFirebaseEvent('Stack_firestore_query');
+                      _model.readCollection = await queryCollectionsRecordOnce(
+                        queryBuilder: (collectionsRecord) =>
+                            collectionsRecord.where(
+                          'createdBy',
+                          isEqualTo: widget.otroUsuario,
+                        ),
+                        singleRecord: true,
+                      ).then((s) => s.firstOrNull);
+                      logFirebaseEvent('Stack_firestore_query');
+                      _model.allColecction = await queryCollectionsRecordOnce(
+                        queryBuilder: (collectionsRecord) =>
+                            collectionsRecord.where(
+                          'createdBy',
+                          isEqualTo: widget.otroUsuario,
+                        ),
+                      );
                       logFirebaseEvent('Stack_navigate_to');
                       if (Navigator.of(context).canPop()) {
                         context.pop();
@@ -142,9 +161,24 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                             widget.otroUsuario,
                             ParamType.DocumentReference,
                           ),
+                          'userPost': serializeParam(
+                            _model.readCollection?.postuUserList,
+                            ParamType.DocumentReference,
+                            isList: true,
+                          ),
+                          'colecccion': serializeParam(
+                            _model.allColecction,
+                            ParamType.Document,
+                            isList: true,
+                          ),
+                          'refColeccion': serializeParam(
+                            _model.readCollection?.reference,
+                            ParamType.DocumentReference,
+                          ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          'colecccion': _model.allColecction,
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -159,7 +193,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'miperfilMapa',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -168,9 +202,11 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       );
                     }
                   }
+
+                  safeSetState(() {});
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 1)
                       Icon(
@@ -209,7 +245,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -224,7 +260,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       context.pushNamed(
                         'miperfilColeciones',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -235,7 +271,7 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                   }
                 },
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (widget.tab != 2)
                       Icon(

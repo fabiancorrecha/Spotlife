@@ -34,7 +34,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
     super.initState();
     _model = createModel(context, () => DetallesDeColeccionModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +51,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -62,7 +62,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Container(
               width: 52.0,
               height: 5.0,
@@ -90,20 +90,22 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                     ),
                   );
                 }
+
                 final containerCollectionsRecord = snapshot.data!;
+
                 return Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 8.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -175,7 +177,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 8.0),
                           child: Container(
                             width: double.infinity,
@@ -199,8 +201,8 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: Text('Confirmar'),
-                                                content: Text(
+                                                title: const Text('Confirmar'),
+                                                content: const Text(
                                                     '¿Deseas eliminar esta colección?'),
                                                 actions: [
                                                   TextButton(
@@ -208,14 +210,14 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                                                         Navigator.pop(
                                                             alertDialogContext,
                                                             false),
-                                                    child: Text('Cancelar'),
+                                                    child: const Text('Cancelar'),
                                                   ),
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext,
                                                             true),
-                                                    child: Text('Eliminar'),
+                                                    child: const Text('Eliminar'),
                                                   ),
                                                 ],
                                               ),
@@ -260,7 +262,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 8.0),
                           child: InkWell(
                             splashColor: Colors.transparent,

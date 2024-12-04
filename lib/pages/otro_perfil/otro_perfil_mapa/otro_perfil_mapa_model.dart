@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/components/app_bar7_usuario/app_bar7_usuario_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/nav_bar2/nav_bar2_widget.dart';
@@ -8,9 +9,12 @@ import 'package:flutter/material.dart';
 class OtroPerfilMapaModel extends FlutterFlowModel<OtroPerfilMapaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar7_usuario component.
   late AppBar7UsuarioModel appBar7UsuarioModel;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  UsersRecord? readUsuario;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  ChatsRecord? refChats;
   // Model for navBar2 component.
   late NavBar2Model navBar2Model;
   // Model for navBar1 component.
@@ -25,7 +29,6 @@ class OtroPerfilMapaModel extends FlutterFlowModel<OtroPerfilMapaWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar7UsuarioModel.dispose();
     navBar2Model.dispose();
     navBar1Model.dispose();

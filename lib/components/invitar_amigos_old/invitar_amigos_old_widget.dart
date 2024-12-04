@@ -27,7 +27,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
     super.initState();
     _model = createModel(context, () => InvitarAmigosOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,7 +44,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -52,13 +52,13 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +81,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -115,7 +115,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   updateOnChange: true,
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
@@ -126,7 +126,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel2,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '3w91cz9f' /* Compartir via whatsapp */,
@@ -136,7 +136,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       '3oyqfslo' /* Compartir via instagram */,
@@ -146,7 +146,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'pk0dv6rk' /* Compartir via tiktok */,
@@ -156,7 +156,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'qvyny7ue' /* Compartir otros */,
@@ -164,7 +164,7 @@ class _InvitarAmigosOldWidgetState extends State<InvitarAmigosOldWidget> {
                     accion: () async {},
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

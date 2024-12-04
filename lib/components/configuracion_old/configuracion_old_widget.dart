@@ -7,8 +7,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'configuracion_old_model.dart';
 export 'configuracion_old_model.dart';
@@ -34,7 +32,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
     super.initState();
     _model = createModel(context, () => ConfiguracionOldModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +49,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -59,13 +57,13 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +86,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -122,7 +120,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Invitar a amigos',
                     accion: () async {
@@ -137,7 +135,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 if (!loggedIn)
                   wrapWithModel(
                     model: _model.botonQuintoModel2,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: BotonQuintoWidget(
                       texto: 'Notificacionesdd',
                       accion: () async {},
@@ -145,7 +143,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                   ),
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Privacidad',
                     accion: () async {
@@ -155,14 +153,14 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Color(0x00000000),
+                        barrierColor: const Color(0x00000000),
                         enableDrag: false,
                         context: context,
                         builder: (context) {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
+                              child: const SizedBox(
                                 height: 600.0,
                                 child: PrivacidadOldWidget(),
                               ),
@@ -175,7 +173,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel4,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Seguridad',
                     accion: () async {
@@ -191,7 +189,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: SeguridadOldWidget(),
+                              child: const SeguridadOldWidget(),
                             ),
                           );
                         },
@@ -201,7 +199,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel5,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Cuenta',
                     accion: () async {
@@ -215,7 +213,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel6,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Ayuda',
                     accion: () async {
@@ -228,7 +226,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                 ),
                 wrapWithModel(
                   model: _model.botonQuintoModel7,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: 'Información',
                     accion: () async {
@@ -244,7 +242,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: DatosWidget(),
+                              child: const DatosWidget(),
                             ),
                           );
                         },
@@ -252,7 +250,7 @@ class _ConfiguracionOldWidgetState extends State<ConfiguracionOldWidget> {
                     },
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

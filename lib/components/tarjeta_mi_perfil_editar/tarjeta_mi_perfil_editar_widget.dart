@@ -2,18 +2,16 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/notificacion_box/notificacion_box_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'tarjeta_mi_perfil_editar_model.dart';
 export 'tarjeta_mi_perfil_editar_model.dart';
@@ -32,8 +30,10 @@ class TarjetaMiPerfilEditarWidget extends StatefulWidget {
 }
 
 class _TarjetaMiPerfilEditarWidgetState
-    extends State<TarjetaMiPerfilEditarWidget> {
+    extends State<TarjetaMiPerfilEditarWidget> with TickerProviderStateMixin {
   late TarjetaMiPerfilEditarModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -53,7 +53,20 @@ class _TarjetaMiPerfilEditarWidgetState
     _model.emailTextController ??=
         TextEditingController(text: currentUserEmail);
     _model.emailFocusNode ??= FocusNode();
-
+    _model.emailFocusNode!.addListener(
+      () async {
+        logFirebaseEvent('TARJETA_MI_PERFIL_EDITAR_Email_ON_FOCUS_');
+        if (_model.verMensaje) {
+          logFirebaseEvent('Email_update_component_state');
+          _model.verMensaje = false;
+          safeSetState(() {});
+        } else {
+          logFirebaseEvent('Email_update_component_state');
+          _model.verMensaje = true;
+          safeSetState(() {});
+        }
+      },
+    );
     _model.celularTextController ??=
         TextEditingController(text: currentPhoneNumber);
     _model.celularFocusNode ??= FocusNode();
@@ -72,7 +85,29 @@ class _TarjetaMiPerfilEditarWidgetState
     _model.generoTextController ??= TextEditingController();
     _model.generoFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    animationsMap.addAll({
+      'rowOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.elasticOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: const Offset(80.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -104,8 +139,10 @@ class _TarjetaMiPerfilEditarWidgetState
                 ),
               );
             }
+
             final stackUsersRecord = snapshot.data!;
-            return Container(
+
+            return SizedBox(
               height: 254.0,
               child: Stack(
                 children: [
@@ -117,13 +154,12 @@ class _TarjetaMiPerfilEditarWidgetState
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: Image.network(
-                          _model.uploadedFileUrl1 != null &&
-                                  _model.uploadedFileUrl1 != ''
+                          _model.uploadedFileUrl1 != ''
                               ? _model.uploadedFileUrl1
                               : stackUsersRecord.bgURL,
                         ).image,
                       ),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(0.0),
                         topLeft: Radius.circular(30.0),
@@ -134,7 +170,7 @@ class _TarjetaMiPerfilEditarWidgetState
                   Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0x7F1A1A1A), Color(0xFF1A1A1A)],
                         stops: [0.4, 0.7],
@@ -146,9 +182,9 @@ class _TarjetaMiPerfilEditarWidgetState
                   Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,7 +194,7 @@ class _TarjetaMiPerfilEditarWidgetState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -221,12 +257,10 @@ class _TarjetaMiPerfilEditarWidgetState
                                     bio: _model.descripcionTextController.text,
                                     isProfileComplete: true,
                                     web: _model.urlTextController.text,
-                                    bgURL: _model.uploadedFileUrl1 != null &&
-                                            _model.uploadedFileUrl1 != ''
+                                    bgURL: _model.uploadedFileUrl1 != ''
                                         ? _model.uploadedFileUrl1
                                         : stackUsersRecord.bgURL,
-                                    photoUrl: _model.uploadedFileUrl2 != null &&
-                                            _model.uploadedFileUrl2 != ''
+                                    photoUrl: _model.uploadedFileUrl2 != ''
                                         ? _model.uploadedFileUrl2
                                         : stackUsersRecord.photoUrl,
                                   ));
@@ -236,7 +270,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    barrierColor: Color(0x00000000),
+                                    barrierColor: const Color(0x00000000),
                                     enableDrag: false,
                                     context: context,
                                     builder: (context) {
@@ -244,7 +278,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: NotificacionBoxWidget(
+                                          child: const NotificacionBoxWidget(
                                             mensaje:
                                                 'Has actualizado tu perfil',
                                           ),
@@ -265,9 +299,9 @@ class _TarjetaMiPerfilEditarWidgetState
                                 options: FFButtonOptions(
                                   width: 70.0,
                                   height: 35.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color:
                                       FlutterFlowTheme.of(context).fondoIcono,
@@ -286,7 +320,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                                     .bodyMediumFamily),
                                       ),
                                   elevation: 2.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -296,13 +330,13 @@ class _TarjetaMiPerfilEditarWidgetState
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.all(29.0),
                                   child: Icon(
                                     Icons.add_rounded,
@@ -315,17 +349,15 @@ class _TarjetaMiPerfilEditarWidgetState
                                     width: 113.0,
                                     height: 113.0,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.network(
                                       valueOrDefault<String>(
                                         () {
-                                          if (_model.uploadedFileUrl2 != null &&
-                                              _model.uploadedFileUrl2 != '') {
+                                          if (_model.uploadedFileUrl2 != '') {
                                             return _model.uploadedFileUrl2;
-                                          } else if (currentUserPhoto != null &&
-                                              currentUserPhoto != '') {
+                                          } else if (currentUserPhoto != '') {
                                             return stackUsersRecord.photoUrl;
                                           } else {
                                             return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png';
@@ -338,7 +370,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 24.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -360,7 +392,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                           selectedMedia.every((m) =>
                                               validateFileFormat(
                                                   m.storagePath, context))) {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.isDataUploading1 = true);
                                         var selectedUploadedFiles =
                                             <FFUploadedFile>[];
@@ -403,7 +435,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                                 selectedMedia.length &&
                                             downloadUrls.length ==
                                                 selectedMedia.length) {
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.uploadedLocalFile1 =
                                                 selectedUploadedFiles.first;
                                             _model.uploadedFileUrl1 =
@@ -412,7 +444,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                           showUploadMessage(
                                               context, 'Success!');
                                         } else {
-                                          setState(() {});
+                                          safeSetState(() {});
                                           showUploadMessage(
                                               context, 'Failed to upload data');
                                           return;
@@ -428,7 +460,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                             BorderRadius.circular(50.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Icon(
                                           Icons.edit_outlined,
                                           color: FlutterFlowTheme.of(context)
@@ -447,7 +479,7 @@ class _TarjetaMiPerfilEditarWidgetState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -469,7 +501,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                         selectedMedia.every((m) =>
                                             validateFileFormat(
                                                 m.storagePath, context))) {
-                                      setState(
+                                      safeSetState(
                                           () => _model.isDataUploading2 = true);
                                       var selectedUploadedFiles =
                                           <FFUploadedFile>[];
@@ -511,7 +543,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                               selectedMedia.length &&
                                           downloadUrls.length ==
                                               selectedMedia.length) {
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.uploadedLocalFile2 =
                                               selectedUploadedFiles.first;
                                           _model.uploadedFileUrl2 =
@@ -519,7 +551,7 @@ class _TarjetaMiPerfilEditarWidgetState
                                         });
                                         showUploadMessage(context, 'Success!');
                                       } else {
-                                        setState(() {});
+                                        safeSetState(() {});
                                         showUploadMessage(
                                             context, 'Failed to upload data');
                                         return;
@@ -591,11 +623,12 @@ class _TarjetaMiPerfilEditarWidgetState
                 formUserProfileUsersRecordList.isNotEmpty
                     ? formUserProfileUsersRecordList.first
                     : null;
+
             return Form(
               key: _model.formKey,
               autovalidateMode: AutovalidateMode.disabled,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -604,7 +637,7 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
@@ -612,8 +645,8 @@ class _TarjetaMiPerfilEditarWidgetState
                                 focusNode: _model.nombreUsarioFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.nombreUsarioTextController',
-                                  Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  const Duration(milliseconds: 200),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -634,35 +667,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                     .bodyMediumFamily),
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xFF333333),
+                                  fillColor: const Color(0xFF333333),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -686,84 +719,120 @@ class _TarjetaMiPerfilEditarWidgetState
                         ),
                       ],
                     ),
-                    Row(
+                    Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 16.0),
-                            child: TextFormField(
-                              controller: _model.emailTextController,
-                              focusNode: _model.emailFocusNode,
-                              autofocus: false,
-                              readOnly: true,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: FFLocalizations.of(context).getText(
-                                  'iy2zk87y' /* Correo */,
-                                ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: TextFormField(
+                                  controller: _model.emailTextController,
+                                  focusNode: _model.emailFocusNode,
+                                  autofocus: false,
+                                  readOnly: true,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText:
+                                        FFLocalizations.of(context).getText(
+                                      'iy2zk87y' /* Correo */,
                                     ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    errorBorder: UnderlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    focusedErrorBorder: UnderlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF333333),
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: _model.emailTextControllerValidator
+                                      .asValidator(context),
                                 ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                filled: true,
-                                fillColor: Color(0xFF333333),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: _model.emailTextControllerValidator
-                                  .asValidator(context),
                             ),
-                          ),
+                          ],
                         ),
+                        if (_model.verMensaje == true)
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 0.0, 16.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'kch8k2f5' /* Actualmente no puedes editar t... */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                ),
+                              ],
+                            ).animateOnPageLoad(
+                                animationsMap['rowOnPageLoadAnimation']!),
+                          ),
                       ],
                     ),
                     Row(
@@ -771,7 +840,7 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
@@ -779,8 +848,8 @@ class _TarjetaMiPerfilEditarWidgetState
                                 focusNode: _model.celularFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.celularTextController',
-                                  Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  const Duration(milliseconds: 200),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -801,35 +870,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                     .bodyMediumFamily),
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xFF333333),
+                                  fillColor: const Color(0xFF333333),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -858,7 +927,7 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
@@ -866,8 +935,8 @@ class _TarjetaMiPerfilEditarWidgetState
                                 focusNode: _model.descripcionFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.descripcionTextController',
-                                  Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  const Duration(milliseconds: 200),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -888,35 +957,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                     .bodyMediumFamily),
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xFF333333),
+                                  fillColor: const Color(0xFF333333),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -947,7 +1016,7 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 10.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
@@ -955,8 +1024,8 @@ class _TarjetaMiPerfilEditarWidgetState
                                 focusNode: _model.urlFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.urlTextController',
-                                  Duration(milliseconds: 200),
-                                  () => setState(() {}),
+                                  const Duration(milliseconds: 200),
+                                  () => safeSetState(() {}),
                                 ),
                                 autofocus: false,
                                 obscureText: false,
@@ -977,35 +1046,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                     .bodyMediumFamily),
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xFF333333),
+                                  fillColor: const Color(0xFF333333),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -1033,7 +1102,7 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 10.0),
                             child: TextFormField(
                               controller:
@@ -1041,8 +1110,8 @@ class _TarjetaMiPerfilEditarWidgetState
                               focusNode: _model.fechadeNacimientoFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.fechadeNacimientoTextController',
-                                Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                const Duration(milliseconds: 200),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: false,
                               obscureText: false,
@@ -1062,35 +1131,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                   .bodyMediumFamily),
                                     ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Color(0xFF333333),
+                                fillColor: const Color(0xFF333333),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -1118,15 +1187,15 @@ class _TarjetaMiPerfilEditarWidgetState
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 10.0),
                             child: TextFormField(
                               controller: _model.generoTextController,
                               focusNode: _model.generoFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.generoTextController',
-                                Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                const Duration(milliseconds: 200),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: false,
                               obscureText: false,
@@ -1146,35 +1215,35 @@ class _TarjetaMiPerfilEditarWidgetState
                                                   .bodyMediumFamily),
                                     ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Color(0xFF333333),
+                                fillColor: const Color(0xFF333333),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium

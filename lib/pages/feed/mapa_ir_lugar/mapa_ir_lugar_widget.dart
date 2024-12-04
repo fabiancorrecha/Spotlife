@@ -1,14 +1,10 @@
 import '/backend/backend.dart';
-import '/components/buscador01/buscador01_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
 import 'package:provider/provider.dart';
 import 'mapa_ir_lugar_model.dart';
 export 'mapa_ir_lugar_model.dart';
@@ -19,7 +15,7 @@ class MapaIrLugarWidget extends StatefulWidget {
     this.userPost,
   });
 
-  final List<UserPostsRecord>? userPost;
+  final DocumentReference? userPost;
 
   @override
   State<MapaIrLugarWidget> createState() => _MapaIrLugarWidgetState();
@@ -38,9 +34,9 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapa_ir_lugar'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,6 +48,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,199 +66,227 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
       );
     }
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: custom_widgets.MapaPerzonalizado(
-                        width: double.infinity,
-                        height: double.infinity,
-                        ubicacionInicialLat: functions.obtenerLatLng(
-                            currentUserLocationValue!, true),
-                        ubicacionInicialLng: functions.obtenerLatLng(
-                            currentUserLocationValue!, false),
-                        zoom: 80.0,
-                        listaPostMarcadores: widget.userPost,
-                      ),
-                    ),
+    return StreamBuilder<UserPostsRecord>(
+      stream: UserPostsRecord.getDocument(widget.userPost!),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 12.0,
+                height: 12.0,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primaryBackground,
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 100.0,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 40.0, 0.0, 0.0),
-                          child: wrapWithModel(
-                            model: _model.buscador01Model,
-                            updateCallback: () => setState(() {}),
-                            child: Buscador01Widget(
-                              dosIconos: false,
+                ),
+              ),
+            ),
+          );
+        }
+
+        final mapaIrLugarUserPostsRecord = snapshot.data!;
+
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: custom_widgets.RouteViewLive(
+                              width: double.infinity,
+                              height: double.infinity,
+                              lineColor: FlutterFlowTheme.of(context).primary,
+                              iOSGoogleMapsApiKey:
+                                  'AIzaSyCh-IGEBvdvzziaujkF-QlXNHvyMlAom-U',
+                              androidGoogleMapsApiKey:
+                                  'AIzaSyCsdwY0ZN0_MRcjhomnqjtjb8Co6QYPY8M',
+                              webGoogleMapsApiKey:
+                                  'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
+                              userImage: mapaIrLugarUserPostsRecord
+                                  .postPhotolist.first,
+                              startCoordinate: currentUserLocationValue!,
+                              endCoordinate: mapaIrLugarUserPostsRecord
+                                  .placeInfo.localizacion!,
+                              actualizarDatos: (time, distance) async {
+                                logFirebaseEvent(
+                                    'MAPA_IR_LUGAR_Container_lgf1zod3_CALLBAC');
+                                logFirebaseEvent(
+                                    'RouteViewLive_update_app_state');
+                                FFAppState().routeDistance = distance;
+                                FFAppState().routeDuration = time;
+                                FFAppState().update(() {});
+                              },
                             ),
                           ),
                         ),
-                      ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'MAPA_IR_LUGAR_Container_1h1ojjav_ON_TAP');
-                          logFirebaseEvent('Container_navigate_to');
-
-                          context.pushNamed('buscarPerfil');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 100.0,
-                          decoration: BoxDecoration(),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 120.0, 20.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  width: 100.0,
+                                  height: 76.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(28.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Tiempo estimado de llegada: ${FFAppState().routeDuration}',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Distancia estimada: ${FFAppState().routeDistance}',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 56.0, 20.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 16.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'MAPA_IR_LUGAR_PAGE_Card_0879zq29_ON_TAP');
+                                    logFirebaseEvent('Card_navigate_back');
+                                    context.pop();
+                                  },
+                                  child: Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Icon(
+                                        Icons.arrow_back_rounded,
+                                        color:
+                                            FlutterFlowTheme.of(context).icono,
+                                        size: 30.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  wrapWithModel(
+                    model: _model.navBar1Model,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const NavBar1Widget(
+                      tabActiva: 2,
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 70.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).fondoIcono,
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  '7vgy1oxd' /* 12 minutos en coche */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 4.0, 0.0),
-                                child: Icon(
-                                  FFIcons.kpinLines,
-                                  color: FlutterFlowTheme.of(context).icono,
-                                  size: 18.0,
-                                ),
-                              ),
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'ooojodc3' /* Noruega */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        '4fecqaza' /* Ir */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 75.0,
-                        height: 54.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).titleSmallFamily,
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .titleSmallFamily),
-                            ),
-                        elevation: 2.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            wrapWithModel(
-              model: _model.navBar1Model,
-              updateCallback: () => setState(() {}),
-              child: NavBar1Widget(
-                tabActiva: 2,
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -29,7 +29,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
     super.initState();
     _model = createModel(context, () => LoginOptionsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -53,20 +53,20 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
         children: [
           if (FFAppState().inicioSesion != 'correo')
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_CORREO_BTN_ON');
+                                'LOGIN_OPTIONS_CONTINA_CON_CORREO_BTN_ON_');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('ingresaConCorreo');
@@ -77,9 +77,9 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -94,7 +94,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                           .bodyMediumFamily),
                                 ),
                             elevation: 4.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF333333),
                               width: 1.0,
                             ),
@@ -103,7 +103,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/mail_(1)_1.png',
                           width: 22.0,
@@ -118,20 +118,20 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
             ),
           if (FFAppState().inicioSesion == 'correo')
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_TELÉFONO_BTN_');
+                                'LOGIN_OPTIONS_CONTINA_CON_TELFONO_BTN_ON');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('ingresaConTelefono');
@@ -142,9 +142,9 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -159,7 +159,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                           .bodyMediumFamily),
                                 ),
                             elevation: 4.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF333333),
                               width: 1.0,
                             ),
@@ -168,7 +168,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/phone_1_(1).png',
                           width: 22.0,
@@ -183,10 +183,10 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
             ),
           if (isiOS)
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
@@ -194,11 +194,11 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                       isAndroid
                           ? Container()
                           : Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'LOGIN_OPTIONS_CONTINÚA_CON_APPLE_BTN_ON_');
+                                      'LOGIN_OPTIONS_CONTINA_CON_APPLE_BTN_ON_T');
                                   logFirebaseEvent('Button_auth');
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
@@ -206,8 +206,19 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                   if (user == null) {
                                     return;
                                   }
+                                  logFirebaseEvent('Button_navigate_to');
 
-                                  context.goNamedAuth('Feed', context.mounted);
+                                  context.pushNamedAuth(
+                                    'Feed',
+                                    context.mounted,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   '4gtrpgqc' /* Continúa con Apple         */,
@@ -215,9 +226,9 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 8.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
@@ -233,7 +244,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                                     .bodyMediumFamily),
                                       ),
                                   elevation: 4.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0xFF333333),
                                     width: 1.0,
                                   ),
@@ -242,7 +253,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                               ),
                             ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Image.asset(
                           'assets/images/apple_(1)_1.png',
                           width: 25.0,
@@ -257,20 +268,20 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
             ),
           if ((isAndroid == true) || (isWeb == true))
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                child: SizedBox(
                   width: 316.0,
                   height: 54.0,
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'LOGIN_OPTIONS_CONTINÚA_CON_GOOGLE_BTN_ON');
+                                'LOGIN_OPTIONS_CONTINA_CON_GOOGLE_BTN_ON_');
                             logFirebaseEvent('Button_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             final user =
@@ -278,8 +289,19 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                             if (user == null) {
                               return;
                             }
+                            logFirebaseEvent('Button_navigate_to');
 
-                            context.goNamedAuth('Feed', context.mounted);
+                            context.goNamedAuth(
+                              'Feed',
+                              context.mounted,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: const TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
                           },
                           text: FFLocalizations.of(context).getText(
                             'mosgym45' /* Continúa con Google      */,
@@ -287,9 +309,9 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: double.infinity,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 8.0, 0.0),
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -304,7 +326,7 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                                           .bodyMediumFamily),
                                 ),
                             elevation: 4.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF333333),
                               width: 1.0,
                             ),
@@ -313,12 +335,12 @@ class _LoginOptionsWidgetState extends State<LoginOptionsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-0.83, 0.0),
+                        alignment: const AlignmentDirectional(-0.83, 0.0),
                         child: Container(
                           width: 22.0,
                           height: 22.0,
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           child: Image.network(

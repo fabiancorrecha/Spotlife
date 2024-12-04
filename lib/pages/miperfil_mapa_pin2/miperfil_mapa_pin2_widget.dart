@@ -35,9 +35,9 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'miperfilMapaPin2'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,10 +68,15 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
 
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
-        queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'collections',
-          arrayContains: widget.coleccion?.reference,
-        ),
+        queryBuilder: (userPostsRecord) => userPostsRecord
+            .where(
+              'collections',
+              arrayContains: widget.coleccion?.reference,
+            )
+            .where(
+              'postUser',
+              isEqualTo: currentUserReference,
+            ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -93,21 +98,20 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
         }
         List<UserPostsRecord> miperfilMapaPin2UserPostsRecordList =
             snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   wrapWithModel(
                     model: _model.appBar5Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: AppBar5Widget(
                       titulo: 'titulo',
                       coleccion: widget.coleccion,
@@ -118,31 +122,59 @@ class _MiperfilMapaPin2WidgetState extends State<MiperfilMapaPin2Widget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
-                        child: custom_widgets.MapaPerzonalizado(
+                        child: custom_widgets.MapaPersonalizado2(
                           width: double.infinity,
                           height: double.infinity,
                           ubicacionInicialLat: functions.obtenerLatLng(
                               currentUserLocationValue!, true),
                           ubicacionInicialLng: functions.obtenerLatLng(
                               currentUserLocationValue!, false),
-                          zoom: 16.0,
+                          zoom: 18.0,
                           listaPostMarcadores: widget.coleccion?.createdBy ==
                                   currentUserReference
                               ? miperfilMapaPin2UserPostsRecordList
                               : miperfilMapaPin2UserPostsRecordList
                                   .where((e) => e.esPrivado == false)
                                   .toList(),
+                          usuarioAutenticado: currentUserReference,
+                          navigateTo: (bycreate) async {
+                            logFirebaseEvent(
+                                'MIPERFIL_MAPA_PIN2_Container_yliaz712_CA');
+                            if (bycreate == currentUserReference) {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed('perfilPropio');
+
+                              return;
+                            } else {
+                              logFirebaseEvent(
+                                  'MapaPersonalizado2_navigate_to');
+
+                              context.pushNamed(
+                                'otroPerfil',
+                                queryParameters: {
+                                  'perfilAjeno': serializeParam(
+                                    bycreate,
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                              );
+
+                              return;
+                            }
+                          },
                         ),
                       ),
                     ),
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    updateCallback: () => safeSetState(() {}),
+                    child: const NavBar1Widget(
                       tabActiva: 1,
                     ),
                   ),

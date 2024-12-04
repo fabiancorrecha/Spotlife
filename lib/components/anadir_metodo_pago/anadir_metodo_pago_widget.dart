@@ -1,7 +1,6 @@
 import '/components/selector_motivo/selector_motivo_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'anadir_metodo_pago_model.dart';
@@ -33,7 +32,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
     super.initState();
     _model = createModel(context, () => AnadirMetodoPagoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -48,7 +47,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -56,7 +55,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -64,7 +63,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                   child: Container(
                     width: 52.0,
                     height: 5.0,
@@ -75,7 +74,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'p9oie00f' /* Añadir metodo de pago */,
@@ -98,7 +97,7 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
               children: [
                 wrapWithModel(
                   model: _model.selectorMotivoModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: SelectorMotivoWidget(
                     motivoTexto: FFLocalizations.of(context).getText(
                       'qboqoxgo' /* Tarjeta de credito o debito */,
@@ -107,19 +106,19 @@ class _AnadirMetodoPagoWidgetState extends State<AnadirMetodoPagoWidget> {
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel2,
-                  updateCallback: () => setState(() {}),
-                  child: SelectorMotivoWidget(
+                  updateCallback: () => safeSetState(() {}),
+                  child: const SelectorMotivoWidget(
                     motivoTexto: 'Paypal',
                   ),
                 ),
                 wrapWithModel(
                   model: _model.selectorMotivoModel3,
-                  updateCallback: () => setState(() {}),
-                  child: SelectorMotivoWidget(
+                  updateCallback: () => safeSetState(() {}),
+                  child: const SelectorMotivoWidget(
                     motivoTexto: 'Applepay',
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

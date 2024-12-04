@@ -27,7 +27,7 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
     super.initState();
     _model = createModel(context, () => MasOpcionesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,7 +44,7 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -52,13 +52,13 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -80,8 +80,8 @@ class _MasOpcionesWidgetState extends State<MasOpcionesWidget> {
             Expanded(
               child: wrapWithModel(
                 model: _model.loginOptionsModel,
-                updateCallback: () => setState(() {}),
-                child: LoginOptionsWidget(),
+                updateCallback: () => safeSetState(() {}),
+                child: const LoginOptionsWidget(),
               ),
             ),
           ],

@@ -34,7 +34,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +51,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -59,14 +59,14 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +89,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -133,7 +133,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 12.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -181,13 +181,13 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 12.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           RatingBar.builder(
-                            onRatingUpdate: (newValue) => setState(
+                            onRatingUpdate: (newValue) => safeSetState(
                                 () => _model.ratingBarValue = newValue),
                             itemBuilder: (context, index) => Icon(
                               Icons.star_rounded,
@@ -229,28 +229,28 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                                                 .bodySmallFamily),
                                   ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -307,9 +307,10 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                             boton1UsersRecordList.isNotEmpty
                                 ? boton1UsersRecordList.first
                                 : null;
+
                         return wrapWithModel(
                           model: _model.boton1Model,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: Boton1Widget(
                             texto: 'Dar Feedback',
                             desabilitado: false,
@@ -329,12 +330,12 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                               logFirebaseEvent('boton1_custom_action');
                               _model.ratingBar = await actions.calculateRating(
                                 boton1UsersRecord!.rating,
-                                boton1UsersRecord!.numberOfRating,
+                                boton1UsersRecord.numberOfRating,
                                 _model.ratingBarValue!,
                               );
                               logFirebaseEvent('boton1_backend_call');
 
-                              await boton1UsersRecord!.reference.update({
+                              await boton1UsersRecord.reference.update({
                                 ...createUsersRecordData(
                                   rating: _model.ratingBar,
                                 ),
@@ -345,7 +346,7 @@ class _DarFeedbackWidgetState extends State<DarFeedbackWidget> {
                                 ),
                               });
 
-                              setState(() {});
+                              safeSetState(() {});
                             },
                           ),
                         );

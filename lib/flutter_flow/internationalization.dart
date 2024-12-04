@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,18 +77,47 @@ class FFLocalizations {
   };
 }
 
+/// Used if the locale is not supported by GlobalMaterialLocalizations.
+class FallbackMaterialLocalizationDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
+  const FallbackMaterialLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<MaterialLocalizations> load(Locale locale) async =>
+      SynchronousFuture<MaterialLocalizations>(
+        const DefaultMaterialLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackMaterialLocalizationDelegate old) => false;
+}
+
+/// Used if the locale is not supported by GlobalCupertinoLocalizations.
+class FallbackCupertinoLocalizationDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
+  const FallbackCupertinoLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) =>
+      SynchronousFuture<CupertinoLocalizations>(
+        const DefaultCupertinoLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackCupertinoLocalizationDelegate old) => false;
+}
+
 class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
   const FFLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) {
-    final language = locale.toString();
-    return FFLocalizations.languages().contains(
-      language.endsWith('_')
-          ? language.substring(0, language.length - 1)
-          : language,
-    );
-  }
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
 
   @override
   Future<FFLocalizations> load(Locale locale) =>
@@ -103,6 +133,15 @@ Locale createLocale(String language) => language.contains('_')
         scriptCode: language.split('_').last,
       )
     : Locale(language);
+
+bool _isSupportedLocale(Locale locale) {
+  final language = locale.toString();
+  return FFLocalizations.languages().contains(
+    language.endsWith('_')
+        ? language.substring(0, language.length - 1)
+        : language,
+  );
+}
 
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // inicio
@@ -170,13 +209,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ingresaTelefonoValidacion
   {
-    'p57n7wgb': {
+    'e4uhnopv': {
       'es': '¿No recibiste un SMS?',
-      'en': 'Didn\'t you receive an SMS?',
+      'en': '',
     },
-    's7cesgaa': {
+    'lzx8zydb': {
       'es': 'Enviar de nuevo',
-      'en': 'Send again',
+      'en': '',
     },
     'j8pde26o': {
       'es': 'Más opciones',
@@ -285,7 +324,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'New Password',
     },
     '64v4f2vg': {
-      'es': 'Confirma tu nueva constraseña',
+      'es': 'Confirma tu nueva contraseña',
       'en': 'Confirm your new password',
     },
     '6qavzof5': {
@@ -379,7 +418,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Fill in this field',
     },
     '4r8aobuz': {
-      'es': 'Debes usar al menos 6 caracteres',
+      'es': 'Debes usar al menos 3 caracteres',
       'en': 'You must use at least 6 characters',
     },
     '2sz1hnou': {
@@ -628,18 +667,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapa_ir_lugar
   {
-    '7vgy1oxd': {
-      'es': '12 minutos en coche',
-      'en': '12 minutes by car',
-    },
-    'ooojodc3': {
-      'es': 'Noruega',
-      'en': 'Norway',
-    },
-    '4fecqaza': {
-      'es': 'Ir',
-      'en': 'Go',
-    },
     '140c348x': {
       'es': 'Home',
       'en': 'home',
@@ -694,6 +721,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // miperfilColeciones
   {
+    'w0vrhxbj': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'lvl94sf4': {
+      'es': 'Option 1',
+      'en': '',
+    },
     '12001ugh': {
       'es': 'Home',
       'en': 'home',
@@ -788,7 +823,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Bloqueaste este usuario',
       'en': 'You blocked this user',
     },
-    'v4jg68ds': {
+    't3mj9plw': {
       'es': 'Enviar mensaje',
       'en': '',
     },
@@ -834,17 +869,25 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Siguiendo',
       'en': 'Following',
     },
-    '8tjn7qv9': {
+    'eqcg9rl7': {
       'es': 'Enviar mensaje',
-      'en': 'Send Message',
+      'en': '',
     },
     'fik63qen': {
-      'es': 'Home',
+      'es': 'seguidores',
       'en': 'home',
     },
   },
   // otroPerfilColecciones
   {
+    '272nhnnn': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'clua705j': {
+      'es': 'Option 1',
+      'en': '',
+    },
     'kyet1e4o': {
       'es': 'Home',
       'en': 'home',
@@ -893,10 +936,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapaPrincipal
   {
-    'ozqqkwow': {
-      'es': 'Buscar',
-      'en': '',
-    },
     'b1wy4gba': {
       'es': 'Home',
       'en': 'home',
@@ -925,6 +964,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '6leulu8q': {
       'es': 'Buscar',
       'en': 'Look for',
+    },
+    '2a74di3l': {
+      'es': 'Playa',
+      'en': '',
+    },
+    '6uax31vq': {
+      'es': 'Option 2',
+      'en': '',
+    },
+    'l5mg0sas': {
+      'es': 'Option 3',
+      'en': '',
+    },
+    'e1prln4b': {
+      'es': 'Lugares Recomendados ',
+      'en': '',
     },
     'c1ucnvay': {
       'es': 'Home',
@@ -959,41 +1014,53 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Nuevo spot',
       'en': 'New spot',
     },
-    'iegyvusu': {
-      'es': 'Publicar',
-      'en': 'Post',
+    'ovs993vm': {
+      'es': 'Titulo',
+      'en': '',
     },
-    'kp6cc43j': {
-      'es': 'Escribe la descripción...',
-      'en': 'Write the description...',
+    't0u2tkzd': {
+      'es': 'Titulo',
+      'en': '',
     },
-    's6k6yknv': {
-      'es': 'Etiqueta la ubicación',
-      'en': 'Tag the location',
+    '4hfio31z': {
+      'es': 'Descripción',
+      'en': '',
     },
-    'v42yu7m9': {
+    'fdffw9r5': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    '4kuobmxt': {
+      'es': 'Etiquetar Personas',
+      'en': '',
+    },
+    'wlyzvf4s': {
+      'es': 'Ubicación',
+      'en': '',
+    },
+    'xp7b5zpc': {
       'es': 'Privacidad del spot',
-      'en': 'Spot Privacy',
+      'en': '',
     },
-    'sdnl893t': {
+    'fulc8zhi': {
       'es': 'Público',
-      'en': 'Public',
+      'en': '',
     },
-    'latkqwqu': {
-      'es': 'Amigos',
-      'en': 'Friends',
+    'smfw16wj': {
+      'es': 'Mejores amigos',
+      'en': '',
     },
-    'a3mt3ft3': {
-      'es': 'Privado',
-      'en': 'Private',
+    'gc772dze': {
+      'es': 'Spot secreto (solo yo)',
+      'en': '',
     },
     '38yeg5jl': {
-      'es': 'Mis colecciones en Bio',
+      'es': 'Colección',
       'en': 'My collections in Bio',
     },
-    'kpult3tq': {
-      'es': 'Crear una colección en Bio',
-      'en': 'Create a collection in Bio',
+    'bboy6pnx': {
+      'es': 'Crear una nueva colección',
+      'en': '',
     },
     'd5xk8jtj': {
       'es': 'Facebook',
@@ -1007,6 +1074,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Twitter',
       'en': 'Twitter',
     },
+    'ky3lljfy': {
+      'es': 'Facebook',
+      'en': '',
+    },
+    '9awmcbbl': {
+      'es': 'Instagram',
+      'en': '',
+    },
+    'a8wxnvnf': {
+      'es': 'Twitter',
+      'en': '',
+    },
     '0434z4c2': {
       'es': 'El título es requerido',
       'en': 'Title is required',
@@ -1014,6 +1093,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'rwq2rmaq': {
       'es': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
+    },
+    '9tfvfuh7': {
+      'es': 'Publicar',
+      'en': '',
     },
     's891481e': {
       'es': 'Home',
@@ -1043,13 +1126,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'home',
     },
   },
-  // cuentasBloqueadas
-  {
-    'hjnztpop': {
-      'es': 'Home',
-      'en': 'home',
-    },
-  },
   // detallePost
   {
     'l9btdihp': {
@@ -1059,77 +1135,73 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditarPost
   {
-    '7finh1y2': {
-      'es': 'Editar post',
-      'en': 'Edit post',
+    'ypyzkwh0': {
+      'es': 'Editar Post',
+      'en': '',
     },
-    'ywqhv1hf': {
-      'es': 'Guadar',
-      'en': 'Save',
+    'smvocg4s': {
+      'es': 'Titulo',
+      'en': '',
     },
-    't85jx574': {
-      'es': 'Escribe la descripción...',
-      'en': 'Write the description...',
+    'mf1wpjwf': {
+      'es': 'Titulo',
+      'en': '',
     },
-    '10adk4m0': {
+    'bgraccv5': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'c7uptc1z': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'e0wl6wr2': {
+      'es': 'Ubicación',
+      'en': '',
+    },
+    'h5nste0h': {
       'es': 'Etiqueta la ubicación',
-      'en': 'Tag the location',
+      'en': '',
     },
-    'z092s19u': {
-      'es': 'Privacidad de colección',
-      'en': 'Collection Privacy',
+    '85u22a8t': {
+      'es': 'Privacidad del spot',
+      'en': '',
     },
-    '9tguovn4': {
+    's5z0ydrg': {
       'es': 'Público',
-      'en': 'Public',
+      'en': '',
     },
-    'rtjfrnia': {
-      'es': 'Público',
-      'en': 'Public',
+    '9qxxmxx4': {
+      'es': 'Mejores amigos',
+      'en': '',
     },
-    'qws6xjjp': {
-      'es': 'Amigos',
-      'en': 'Friends',
+    'lnwp5zng': {
+      'es': 'Spot secreto (solo yo)',
+      'en': '',
     },
-    '4tmhnd8g': {
-      'es': 'Privado',
-      'en': 'Private',
+    '8vsagv44': {
+      'es': 'Colección',
+      'en': '',
     },
-    '8wuo93rg': {
-      'es': 'Mis colecciones en Bio',
-      'en': 'My collections in Bio',
+    'wstfwl3i': {
+      'es': 'Crear una nueva colección',
+      'en': '',
     },
-    '2ojrmvnt': {
-      'es': 'Crear una colección en Bio',
-      'en': 'Create a collection in Bio',
-    },
-    'nytdgkrg': {
+    'gyvhisu2': {
       'es': 'Facebook',
-      'en': 'Facebook',
+      'en': '',
     },
-    'uy2c2itb': {
+    'kdwh7qd6': {
       'es': 'Instagram',
-      'en': 'instagram',
+      'en': '',
     },
-    '89od7k5r': {
+    'p3xducn7': {
       'es': 'Twitter',
-      'en': 'Twitter',
+      'en': '',
     },
-    '3e8lbvnl': {
-      'es': 'El título es requerido',
-      'en': 'Title is required',
-    },
-    '3ijl9vq0': {
-      'es': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'ms3gzesc': {
-      'es': 'Field is required',
-      'en': 'Field is required',
-    },
-    'n5z3hw5r': {
-      'es': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
+    '7dvmzr5r': {
+      'es': 'Publicar',
+      'en': '',
     },
     'nextta34': {
       'es': 'Home',
@@ -1454,8 +1526,28 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Guardar fotos originales',
       'en': 'Save original photos',
     },
+    'mpvymhzi': {
+      'es': 'Herramientas cuenta profesional ',
+      'en': '',
+    },
+    'j415er89': {
+      'es': 'Herramientas promoción',
+      'en': '',
+    },
+    'djmcpi98': {
+      'es': 'Solicitar verificación',
+      'en': '',
+    },
+    'rha6ba9z': {
+      'es': 'Cambiar a cuenta Pro/Empresa',
+      'en': '',
+    },
     'gp0ejsaa': {
       'es': 'Idioma',
+      'en': '',
+    },
+    '82zxx3mi': {
+      'es': 'Cancelar Suscripcion',
       'en': '',
     },
     '3j1828s1': {
@@ -1627,6 +1719,231 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'sgqps3c2': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // HerramientasPromocion
+  {
+    'ftvqagho': {
+      'es': 'Herramientas\nPromocion',
+      'en': '',
+    },
+    '2t49hy0q': {
+      'es': 'Lista Herramientas',
+      'en': '',
+    },
+    '4huaujyh': {
+      'es': 'Promocion Spot',
+      'en': '',
+    },
+    '660zsyws': {
+      'es': 'Evento 24h-48h en vivo',
+      'en': '',
+    },
+    'clr5fsyx': {
+      'es': 'Reto-Gymkana',
+      'en': '',
+    },
+    'xl35jx67': {
+      'es': 'Analisis demografico usuarios',
+      'en': '',
+    },
+    '7jr2trll': {
+      'es': 'Medallas PoAp',
+      'en': '',
+    },
+    'kw3p2a38': {
+      'es': ' (prueba de asistencia)',
+      'en': '',
+    },
+    'qe3fu7w9': {
+      'es': 'Crear Medalla POAP',
+      'en': '',
+    },
+    'anenfxgi': {
+      'es': 'Medallas Activas',
+      'en': '',
+    },
+    'fthrtj3q': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // paginaProvisional
+  {
+    'sl5hc3vg': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // suscripcionactivada
+  {
+    '4aplwqmc': {
+      'es': 'Tu suscripcion fue activada correctamente ',
+      'en': '',
+    },
+    'xbv7erwi': {
+      'es': 'Ir al Home',
+      'en': '',
+    },
+    '82y2m63v': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // suscripcionFallida
+  {
+    'myu6zxol': {
+      'es': 'Hemos detectado un fallo para activar tu suscripcion',
+      'en': '',
+    },
+    's3e3hahx': {
+      'es': 'Ir al Home',
+      'en': '',
+    },
+    'chcory1w': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // PaginaEnContruccion
+  {
+    '060szt8h': {
+      'es': 'Esta sección de',
+      'en': '',
+    },
+    'xlqovagm': {
+      'es': ' - Spotlife ',
+      'en': '',
+    },
+    'k8ttq89x': {
+      'es': 'aun se encuentra en desarrollo',
+      'en': '',
+    },
+    'c83ug2am': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // mapaAmigos
+  {
+    'c44awpho': {
+      'es': 'Buscar',
+      'en': '',
+    },
+    'p98sxtr2': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // resetPass
+  {
+    'unue6ecr': {
+      'es': 'Recuperar contraseña',
+      'en': '',
+    },
+    'tmvtybsh': {
+      'es':
+          'Ingresa los datos de tu nueva contraseña para poder reestablecer tu acceso a ',
+      'en': '',
+    },
+    'wdlvh6it': {
+      'es': 'Spotlife',
+      'en': '',
+    },
+    'ey57iy3c': {
+      'es': 'Nueva contraseña',
+      'en': '',
+    },
+    'httamdec': {
+      'es': 'Confirma tu nueva contraseña',
+      'en': '',
+    },
+    'a7lkqjha': {
+      'es': 'Siguiente',
+      'en': '',
+    },
+    'eemc8m4n': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // mapaPrincipaRespaldo
+  {
+    'zded45m2': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // VistaPostlist
+  {
+    'fj1744c1': {
+      'es': ' likes',
+      'en': '',
+    },
+    'kaaia5vd': {
+      'es': ' likes',
+      'en': '',
+    },
+    't4vjpy1r': {
+      'es': 'Mas',
+      'en': '',
+    },
+    'yu7dg2s6': {
+      'es': 'Añade un comentario...',
+      'en': '',
+    },
+    '510ljajz': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'zlo0i1ma': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'go4t0xcu': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // testNewVideo
+  {
+    'axqhf19c': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // EtiquetarUbicacion
+  {
+    'b3yu6bar': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // EtiquetarPersonas
+  {
+    'h7rc762a': {
+      'es': 'Etiquetar Personas',
+      'en': '',
+    },
+    'wli67byf': {
+      'es': 'Siguiente',
+      'en': '',
+    },
+    'bn6o7vhe': {
+      'es': 'Toca la imagen para etiquetar personas',
+      'en': '',
+    },
+    'iubylvd3': {
+      'es': 'Etiquetas',
+      'en': '',
+    },
+    'mn8e91cp': {
+      'es': 'Buscar...',
+      'en': '',
+    },
+    '88j0amqt': {
       'es': 'Home',
       'en': '',
     },
@@ -1860,6 +2177,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'iy2zk87y': {
       'es': 'Correo',
       'en': 'Mail',
+    },
+    'kch8k2f5': {
+      'es': 'Actualmente no puedes editar tu email',
+      'en': '',
     },
     'pxh7kou3': {
       'es': 'Celular',
@@ -2101,6 +2422,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Look for',
     },
   },
+  // menu02
+  {
+    '07cg8q15': {
+      'es': 'Lugares',
+      'en': '',
+    },
+    'fombtlvv': {
+      'es': 'Personas',
+      'en': '',
+    },
+  },
   // contentList02
   {
     's058ecbj': {
@@ -2249,7 +2581,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // usuariosRecomendados
   {
     'vbg51sfp': {
-      'es': 'Perfiles recomendados',
+      'es': 'Personas  recomendadas',
       'en': 'Recommended profiles',
     },
   },
@@ -2290,6 +2622,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     't8vi189h': {
       'es': ' likes',
       'en': 'likes',
+    },
+    'v45t4ek4': {
+      'es': 'Mas',
+      'en': '',
     },
     '15i1ftxt': {
       'es': 'Añade un comentario...',
@@ -2833,6 +3169,246 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'emlyuk4m': {
       'es': 'Omitir',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro
+  {
+    'crlx7wqy': {
+      'es': 'Cambia a una cuenta profesional',
+      'en': '',
+    },
+    'guwcfq8h': {
+      'es':
+          'Con tu cuenta Pro/Empresa en Spotlife te daras a conocer a una audiencia segmentada de una forma real, visual y sencilla.',
+      'en': '',
+    },
+    'c9mxpefe': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro2
+  {
+    '8y1iuke1': {
+      'es': 'Obten herramientas exclusivas para promocionarte',
+      'en': '',
+    },
+    '3wy79mct': {
+      'es':
+          'Tendras acceso a herramientas de promocion exclusivas, que te permiten interactuar con tu publico objetivo de forma facil y real ',
+      'en': '',
+    },
+    'no6l5933': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro3
+  {
+    'hncwftot': {
+      'es': 'Llega a mas personas',
+      'en': '',
+    },
+    'kh22gl2q': {
+      'es':
+          'Crea promociones en Spotlife, para llegar a tu publico de forma natural a traves de los spots favoritos de tu publico objetivo.',
+      'en': '',
+    },
+    'wm66d621': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntro4
+  {
+    'c9pj9bpa': {
+      'es': 'Obten informacion e interactua con tu comunidad',
+      'en': '',
+    },
+    'uogz1f16': {
+      'es':
+          'Tu lugar se convertira en un spot oficial, donde los demas usuarios odran ver todos los usuarios que lo visitan.\n\nAdemas tendras canales para comunicarte con esta comunidad de forma divertida y efectiva.',
+      'en': '',
+    },
+    'mbwqg7c7': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntroCobro
+  {
+    'tqcruyxq': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'stfsr3i7': {
+      'es': 'Se te cobrara 22,99€ al mes en esta cuenta',
+      'en': '',
+    },
+    'y85dtt9g': {
+      'es':
+          'La suscripción se renovara mensualmente.\n\nTu suscripción a Spotlife se renovará automáticamente cada mes, asegurando que tu empresa continúe beneficiándose de todas las ventajas y herramientas que ofrecemos sin interrupciones. Este modelo de suscripción mensual te proporciona flexibilidad y permite que tu negocio siempre esté al día con las últimas novedades y mejoras de nuestra plataforma.\n\nCancelación en Cualquier Momento.\n\nEntendemos que las necesidades de tu negocio pueden cambiar. Por eso, te ofrecemos la opción de cancelar tu suscripción en cualquier momento. No hay compromisos a largo plazo ni penalizaciones por cancelar. Si decides que Spotlife ya no es la mejor opción para tu empresa, puedes gestionar y cancelar tu suscripción fácilmente a través de la configuración de tu cuenta.',
+      'en': '',
+    },
+    'ihy6bs18': {
+      'es': 'Listo',
+      'en': '',
+    },
+  },
+  // CambiaraUnacuentaProfesionalIntroCobroRol
+  {
+    'qbpa36em': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'wdc41f77': {
+      'es': '¿Eres Creador o Empresa?',
+      'en': '',
+    },
+    'a27b3li2': {
+      'es': 'Creador',
+      'en': '',
+    },
+    'qroxn5xk': {
+      'es':
+          'La mejor opción para personajes publicos, productores de contenido, artistas y personas influyentes',
+      'en': '',
+    },
+    'ayzbg8r9': {
+      'es': 'Empresa',
+      'en': '',
+    },
+    'edv2uscy': {
+      'es':
+          'La mejor opcion para comercios locales, hosteleria, marcas, organizaciones y proveedores de servicios.',
+      'en': '',
+    },
+    'emzgi0lf': {
+      'es': 'Finalizar',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuenta
+  {
+    '6a1kk7a4': {
+      'es': 'Muestra que tu perfil esta verificado',
+      'en': '',
+    },
+    '2hqssc3d': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'ehhh02dg': {
+      'es':
+          'Verificar tu perfil en Spotlife te brinda múltiples beneficios:\n\nAcceso a Comunidad y Eventos:Obtendras beneficios, invitaciones a eventos y viajes organizados por Spotlife.\n\nCredibilidad y Confianza: Un perfil verificado indica a los demás usuarios que tu contenido es auténtico y confiable.\n\nInteracciones Reales: Conecta con una comunidad genuina que valora la autenticidad y el contenido de calidad.\n\nReconocimiento: Destaca en la plataforma como un usuario de referencia, atrayendo más seguidores interesados en tus spots.',
+      'en': '',
+    },
+    'r3iv2el5': {
+      'es': 'Continuar',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuentaCobro
+  {
+    '3zxqkt6k': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'gbsg7iow': {
+      'es': 'Spotlife Hero, se te cobrara 3,99€ en esta cuenta.',
+      'en': '',
+    },
+    '7290vu1q': {
+      'es': 'Continuar',
+      'en': '',
+    },
+    'fmw8ed3u': {
+      'es':
+          'Tras el pago confirmaremos tu identidad en un plazo de hasta 48h despues de que envies tu informacion para que se verifique',
+      'en': '',
+    },
+  },
+  // ConfiguracionCuentaCobroFinalizacion
+  {
+    '24w1ubx7': {
+      'es': 'Spotlife Hero',
+      'en': '',
+    },
+    'peryihpr': {
+      'es': 'Verificacion en marcha!\nGracias por formar parte de Spotlife',
+      'en': '',
+    },
+    '2jsel16p': {
+      'es': 'Finalizar',
+      'en': '',
+    },
+  },
+  // filtrarDistancia
+  {
+    'hdlql4lx': {
+      'es': 'Filtrar spots por distancia',
+      'en': '',
+    },
+    '7q5uuaim': {
+      'es': 'Desliza para filtar por la distancia ',
+      'en': '',
+    },
+  },
+  // InfoDialogo
+  {
+    'mberxydn': {
+      'es': 'Ubicacion Actual',
+      'en': '',
+    },
+    'g2uouq07': {
+      'es': 'Ver perfil',
+      'en': '',
+    },
+  },
+  // iconmarkert
+  {
+    'xkd8zten': {
+      'es': 'Titulo',
+      'en': '',
+    },
+    'ifv6fp41': {
+      'es': 'Descripcion',
+      'en': '',
+    },
+    'ex2teakx': {
+      'es': 'Ver Perfil',
+      'en': '',
+    },
+    'wtse5imr': {
+      'es': '00:34',
+      'en': '',
+    },
+  },
+  // postImagenV2Copy
+  {
+    'oriqhn7v': {
+      'es': ' likes',
+      'en': '',
+    },
+    '9rqvem5w': {
+      'es': ' likes',
+      'en': '',
+    },
+    '5swmtbhn': {
+      'es': 'Mas',
+      'en': '',
+    },
+    'g8thixl7': {
+      'es': 'Añade un comentario...',
+      'en': '',
+    },
+    'h4el2xwu': {
+      'es': ' Likes',
+      'en': '',
+    },
+    'wiun52sc': {
+      'es': ' Likes',
       'en': '',
     },
   },

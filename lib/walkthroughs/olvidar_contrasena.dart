@@ -21,7 +21,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'ingresa aqui el email con el que te registraste en nuestra aplicacion',
             ),
@@ -39,7 +39,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'presiona el siguiente boton y recibiras un enlace a el correo ingresado anteriormente ',
             ),

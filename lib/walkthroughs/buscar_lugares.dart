@@ -21,7 +21,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'escribe en este apartado lo que deseas buscar ',
             ),
           ),
@@ -38,7 +38,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Navega entre las dos vistas de la pagina para filtrar por post o por usuario ',
             ),
