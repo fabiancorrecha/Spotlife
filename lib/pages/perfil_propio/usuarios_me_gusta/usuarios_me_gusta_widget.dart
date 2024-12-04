@@ -34,7 +34,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'usuariosMeGusta'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,32 +68,32 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
             ),
           );
         }
+
         final usuariosMeGustaUserPostsRecord = snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     height: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Stack(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -122,9 +122,9 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -144,7 +144,7 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(5.0),
+                                  padding: const EdgeInsets.all(5.0),
                                   child: Icon(
                                     Icons.arrow_back_rounded,
                                     color: FlutterFlowTheme.of(context).icono,
@@ -168,8 +168,9 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                               final listaUsuarios =
                                   usuariosMeGustaUserPostsRecord.likes.toList();
                               if (listaUsuarios.isEmpty) {
-                                return ComponenteVacioWidget();
+                                return const ComponenteVacioWidget();
                               }
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -191,15 +192,15 @@ class _UsuariosMeGustaWidgetState extends State<UsuariosMeGustaWidget> {
                           ),
                         if (FFAppState().indexTabFollow == '0')
                           Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                           ),
                       ],
                     ),
                   ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    updateCallback: () => safeSetState(() {}),
+                    child: const NavBar1Widget(
                       tabActiva: 3,
                     ),
                   ),

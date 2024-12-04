@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class NotificacionesModel extends FlutterFlowModel<NotificacionesWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for appBar6 component.
   late AppBar6Model appBar6Model;
   // Model for navBar1 component.
@@ -21,7 +20,6 @@ class NotificacionesModel extends FlutterFlowModel<NotificacionesWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     appBar6Model.dispose();
     navBar1Model.dispose();
   }

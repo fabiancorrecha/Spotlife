@@ -32,7 +32,7 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'otroPerfilMapaPin'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,21 +45,19 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               wrapWithModel(
                 model: _model.appBar2Model,
-                updateCallback: () => setState(() {}),
-                child: AppBar2Widget(),
+                updateCallback: () => safeSetState(() {}),
+                child: const AppBar2Widget(),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -75,14 +73,18 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
                                     'postUser',
                                     functions.usuariosConcatenados(
                                         (currentUserDocument?.listaSeguidos
-                                                    ?.toList() ??
+                                                    .toList() ??
                                                 [])
                                             .toList(),
                                         currentUserReference,
                                         (currentUserDocument?.listaBloqueados
-                                                    ?.toList() ??
+                                                    .toList() ??
                                                 [])
                                             .toList()))
+                                .where(
+                                  'esPrivado',
+                                  isEqualTo: false,
+                                )
                                 .orderBy('timePosted', descending: true),
                           ),
                           padding: EdgeInsets.zero,
@@ -118,7 +120,7 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
                                 ),
                               ),
                             ),
-                            noItemsFoundIndicatorBuilder: (_) => Center(
+                            noItemsFoundIndicatorBuilder: (_) => const Center(
                               child: ComponenteVacioWidget(),
                             ),
                             itemBuilder: (context, _, listViewIndex) {
@@ -141,8 +143,8 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
                   tabActiva: 0,
                 ),
               ),

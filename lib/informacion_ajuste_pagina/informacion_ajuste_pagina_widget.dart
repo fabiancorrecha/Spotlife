@@ -27,7 +27,7 @@ class _InformacionAjustePaginaWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'informacion_ajuste_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -40,16 +40,14 @@ class _InformacionAjustePaginaWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -57,7 +55,7 @@ class _InformacionAjustePaginaWidgetState
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +78,7 @@ class _InformacionAjustePaginaWidgetState
                               borderRadius: BorderRadius.circular(50.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Icon(
                                 Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).icono,
@@ -89,38 +87,36 @@ class _InformacionAjustePaginaWidgetState
                             ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            '4zraujwk' /* Información */,
+                        Expanded(
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '4zraujwk' /* Información */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .displaySmallFamily,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .displaySmallFamily),
+                                ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .displaySmallFamily,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .displaySmallFamily),
-                              ),
-                        ),
-                        Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 30.0,
                         ),
                       ],
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         wrapWithModel(
                           model: _model.botonQuintoModel1,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: 'Politica de datos',
                             accion: () async {},
@@ -128,7 +124,7 @@ class _InformacionAjustePaginaWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel2,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'gyk6tdi9' /* Condiciones de uso */,
@@ -138,7 +134,7 @@ class _InformacionAjustePaginaWidgetState
                         ),
                         wrapWithModel(
                           model: _model.botonQuintoModel3,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: BotonQuintoWidget(
                             texto: FFLocalizations.of(context).getText(
                               'ygotn5ym' /* Reglamento UE  */,
@@ -146,7 +142,7 @@ class _InformacionAjustePaginaWidgetState
                             accion: () async {},
                           ),
                         ),
-                      ].divide(SizedBox(height: 8.0)),
+                      ].divide(const SizedBox(height: 8.0)),
                     ),
                   ),
                 ],

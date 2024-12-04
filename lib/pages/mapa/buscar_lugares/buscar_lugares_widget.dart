@@ -41,8 +41,8 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'buscarLugares'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
@@ -59,9 +59,28 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
           ),
         ],
       ),
+      'navBar1OnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.elasticOut,
+            delay: 300.0.ms,
+            duration: 900.0.ms,
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -91,14 +110,12 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
     }
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Stack(
             children: [
               Column(
@@ -106,16 +123,16 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                 children: [
                   Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 40.0, 16.0, 32.0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 16.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -135,7 +152,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   shape: BoxShape.circle,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Icon(
                                     FFIcons.karrowBack,
                                     color: FlutterFlowTheme.of(context).icono,
@@ -147,7 +164,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 16.0, 0.0),
                               child: TextFormField(
                                 controller:
@@ -155,8 +172,8 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                 focusNode: _model.textFieldBuscarFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textFieldBuscarTextController',
-                                  Duration(milliseconds: 1500),
-                                  () => setState(() {}),
+                                  const Duration(milliseconds: 0),
+                                  () => safeSetState(() {}),
                                 ),
                                 onFieldSubmitted: (_) async {
                                   logFirebaseEvent(
@@ -174,7 +191,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                           _model.algoliaSearchResults = r)
                                       .onError((_, __) =>
                                           _model.algoliaSearchResults = [])
-                                      .whenComplete(() => setState(() {}));
+                                      .whenComplete(() => safeSetState(() {}));
                                 },
                                 autofocus: false,
                                 obscureText: false,
@@ -194,28 +211,28 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                                     .bodySmallFamily),
                                       ),
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -224,7 +241,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   filled: true,
                                   fillColor:
                                       FlutterFlowTheme.of(context).fondoIcono,
-                                  suffixIcon: Icon(
+                                  suffixIcon: const Icon(
                                     FFIcons.ksearch,
                                     color: Color(0xFF757575),
                                     size: 22.0,
@@ -260,7 +277,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   'BUSCAR_LUGARES_Container_hj9dhjph_ON_TAP');
                               logFirebaseEvent('Container_update_page_state');
                               _model.verLista = !_model.verLista!;
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -271,7 +288,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                 children: [
                                   if (!_model.verLista!)
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Icon(
                                         FFIcons.kframe169,
                                         color:
@@ -281,7 +298,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                     ),
                                   if (_model.verLista ?? true)
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Icon(
                                         FFIcons.kmenu,
                                         color:
@@ -299,8 +316,8 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                   ),
                   wrapWithModel(
                     model: _model.menu02Model,
-                    updateCallback: () => setState(() {}),
-                    child: Menu02Widget(
+                    updateCallback: () => safeSetState(() {}),
+                    child: const Menu02Widget(
                       seccion: 3,
                     ),
                   ).addWalkthrough(
@@ -311,7 +328,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                     child: Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: Builder(
                             builder: (context) {
@@ -329,32 +346,34 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                   ),
                                 );
                               }
-                              final postResultado =
+                              final postResultados =
                                   _model.algoliaSearchResults?.toList() ?? [];
-                              if (postResultado.isEmpty) {
-                                return Center(
+                              if (postResultados.isEmpty) {
+                                return const Center(
                                   child: ComponenteVacioWidget(),
                                 );
                               }
+
                               return GridView.builder(
                                 padding: EdgeInsets.zero,
                                 gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 16.0,
                                   mainAxisSpacing: 16.0,
                                   childAspectRatio: 0.72,
                                 ),
                                 scrollDirection: Axis.vertical,
-                                itemCount: postResultado.length,
-                                itemBuilder: (context, postResultadoIndex) {
-                                  final postResultadoItem =
-                                      postResultado[postResultadoIndex];
+                                itemCount: postResultados.length,
+                                itemBuilder: (context, postResultadosIndex) {
+                                  final postResultadosItem =
+                                      postResultados[postResultadosIndex];
                                   return Builder(
                                     builder: (context) {
-                                      final listImage = postResultadoItem
+                                      final listImage = postResultadosItem
                                           .postPhotolist
                                           .toList();
+
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: List.generate(
@@ -368,9 +387,9 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.278,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 8.0, 0.0),
                                               child: ClipRRect(
                                                 borderRadius:
@@ -395,7 +414,7 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                           ),
                         ),
                         if (_model.verLista ?? true)
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: custom_widgets.MapaPerzonalizado(
@@ -418,35 +437,44 @@ class _BuscarLugaresWidgetState extends State<BuscarLugaresWidget>
                       ],
                     ),
                   ),
-                  wrapWithModel(
-                    model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
-                      tabActiva: 4,
-                    ),
-                  ),
+                  if ((_model.textFieldBuscarFocusNode?.hasFocus ?? false) ==
+                      false)
+                    wrapWithModel(
+                      model: _model.navBar1Model,
+                      updateCallback: () => safeSetState(() {}),
+                      child: const NavBar1Widget(
+                        tabActiva: 4,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['navBar1OnPageLoadAnimation']!),
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, -0.79),
+                alignment: const AlignmentDirectional(0.0, -0.79),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FlutterFlowIconButton(
-                        borderColor: Color(0x00F4F176),
+                        borderColor: const Color(0x00F4F176),
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: Color(0x00EEEEEE),
+                        fillColor: const Color(0x00EEEEEE),
                         icon: Icon(
                           Icons.help,
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'BUSCAR_LUGARES_PAGE_help_ICN_ON_TAP');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() => _model.buscarLugaresController =
+                              createPageWalkthrough(context));
+                          _model.buscarLugaresController
+                              ?.show(context: context);
                         },
                       ),
                     ],

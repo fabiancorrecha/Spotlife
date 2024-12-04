@@ -34,7 +34,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
     super.initState();
     _model = createModel(context, () => FiltroFavoritosModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,7 +51,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -61,14 +61,14 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 180.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 180.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                     child: Container(
                       width: 52.0,
                       height: 5.0,
@@ -80,7 +80,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'cp3qsx2y' /* Filtros favoritos */,
@@ -102,7 +102,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -141,8 +141,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             '4iv8zkol' /* 2022 */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues1 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues1 = val),
                         controller: _model.checkboxGroupValueController1 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -166,7 +166,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                       ),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     height: 32.0,
                     thickness: 1.0,
                     indent: 0.0,
@@ -178,7 +178,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -220,8 +220,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             'wvvy115v' /* Ibiza */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues2 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues2 = val),
                         controller: _model.checkboxGroupValueController2 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -245,7 +245,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                       ),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     height: 32.0,
                     thickness: 1.0,
                     indent: 0.0,
@@ -257,7 +257,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -296,8 +296,8 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                             'eppdu8t2' /* Spot secreto (solo yo) */,
                           )
                         ],
-                        onChanged: (val) =>
-                            setState(() => _model.checkboxGroupValues3 = val),
+                        onChanged: (val) => safeSetState(
+                            () => _model.checkboxGroupValues3 = val),
                         controller: _model.checkboxGroupValueController3 ??=
                             FormFieldController<List<String>>(
                           [],
@@ -321,7 +321,7 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
                       ),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     height: 32.0,
                     thickness: 1.0,
                     indent: 0.0,
@@ -333,14 +333,14 @@ class _FiltroFavoritosWidgetState extends State<FiltroFavoritosWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: wrapWithModel(
                 model: _model.boton1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: Boton1Widget(
                   texto: 'Listo',
                   desabilitado: false,

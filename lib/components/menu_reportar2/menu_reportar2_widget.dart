@@ -37,7 +37,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,7 +54,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -68,13 +68,13 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                     child: Container(
                       width: 52.0,
                       height: 5.0,
@@ -86,7 +86,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'ymgv4jnn' /* Reportar */,
@@ -104,7 +104,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -132,7 +132,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 32.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
@@ -143,7 +143,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
                                       .bodyMediumFamily,
-                                  color: Color(0xFF737373),
+                                  color: const Color(0xFF737373),
                                   letterSpacing: 0.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
@@ -198,7 +198,7 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
               children: [
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Enviar reporte',
                     desabilitado: false,
@@ -216,14 +216,14 @@ class _MenuReportar2WidgetState extends State<MenuReportar2Widget> {
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Color(0x00000000),
+                        barrierColor: const Color(0x00000000),
                         enableDrag: false,
                         context: context,
                         builder: (context) {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
+                              child: const SizedBox(
                                 height: 200.0,
                                 child: MenuReportar3Widget(),
                               ),

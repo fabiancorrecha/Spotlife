@@ -21,7 +21,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto: 'Selecciona el siguiente recuadro para ingresar tu edad ',
             ),
           ),
@@ -38,7 +38,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => TextoWidget(
+            builder: (context, __) => const TextoWidget(
               texto:
                   'Después de seleccionar tu fecha de nacimiento presiona el botón de continuar',
             ),

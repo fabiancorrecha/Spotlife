@@ -2,8 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-// ignore: unused_import
-import 'flutter_flow_util.dart';
 
 Widget wrapWithModel<T extends FlutterFlowModel>({
   required T model,
@@ -46,14 +44,17 @@ abstract class FlutterFlowModel<W extends Widget> {
       _isInitialized = true;
     }
     if (context.widget is W) _widget = context.widget as W;
+    _context = context;
   }
 
   // The widget associated with this model. This is useful for accessing the
   // parameters of the widget, for example.
   W? _widget;
-  // This will always be non-null when used, but is nullable to allow us to
-  // dispose of the widget in the [dispose] method (for garbage collection).
-  W get widget => _widget!;
+  W? get widget => _widget;
+
+  // The context associated with this model.
+  BuildContext? _context;
+  BuildContext? get context => _context;
 
   // Dispose methods
   // Whether to dispose this model when the corresponding widget is

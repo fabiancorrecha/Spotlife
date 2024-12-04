@@ -1,10 +1,8 @@
-import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'intereses_widget.dart' show InteresesWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class InteresesModel extends FlutterFlowModel<InteresesWidget> {
@@ -34,7 +32,6 @@ class InteresesModel extends FlutterFlowModel<InteresesWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? interesesController;
-  final unfocusNode = FocusNode();
   // Model for boton1 component.
   late Boton1Model boton1Model;
 
@@ -46,7 +43,6 @@ class InteresesModel extends FlutterFlowModel<InteresesWidget> {
   @override
   void dispose() {
     interesesController?.finish();
-    unfocusNode.dispose();
     boton1Model.dispose();
   }
 }

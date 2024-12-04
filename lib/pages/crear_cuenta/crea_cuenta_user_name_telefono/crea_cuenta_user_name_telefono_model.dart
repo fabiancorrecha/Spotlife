@@ -9,7 +9,6 @@ class CreaCuentaUserNameTelefonoModel
     extends FlutterFlowModel<CreaCuentaUserNameTelefonoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -22,9 +21,9 @@ class CreaCuentaUserNameTelefonoModel
       );
     }
 
-    if (val.length < 6) {
+    if (val.length < 3) {
       return FFLocalizations.of(context).getText(
-        '4r8aobuz' /* Debes usar al menos 6 caracter... */,
+        '4r8aobuz' /* Debes usar al menos 3 caracter... */,
       );
     }
 
@@ -53,7 +52,6 @@ class CreaCuentaUserNameTelefonoModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
 

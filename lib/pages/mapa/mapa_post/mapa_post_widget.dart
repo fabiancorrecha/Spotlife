@@ -26,12 +26,12 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
     _model = createModel(context, () => MapaPostModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'mapaPost'});
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textFieldBuscarTextController ??= TextEditingController();
     _model.textFieldBuscarFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -61,25 +61,23 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
     }
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-              child: Row(
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.textFieldBuscarTextController,
                         focusNode: _model.textFieldBuscarFocusNode,
@@ -102,28 +100,28 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                                         .bodySmallFamily),
                               ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0x00000000),
                               width: 1.0,
                             ),
@@ -131,7 +129,7 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                           ),
                           filled: true,
                           fillColor: FlutterFlowTheme.of(context).fondoIcono,
-                          suffixIcon: Icon(
+                          suffixIcon: const Icon(
                             Icons.search_rounded,
                             color: Color(0xFF757575),
                             size: 22.0,
@@ -152,7 +150,7 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       color: FlutterFlowTheme.of(context).fondoIcono,
@@ -160,7 +158,7 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.location_pin,
                           color: FlutterFlowTheme.of(context).icono,
@@ -171,25 +169,25 @@ class _MapaPostWidgetState extends State<MapaPostWidget> {
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: wrapWithModel(
-                  model: _model.postGridMapaGlobalModel,
-                  updateCallback: () => setState(() {}),
-                  child: PostGridMapaGlobalWidget(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.postGridMapaGlobalModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const PostGridMapaGlobalWidget(),
+                  ),
                 ),
               ),
-            ),
-            wrapWithModel(
-              model: _model.navBar1Model,
-              updateCallback: () => setState(() {}),
-              child: NavBar1Widget(
-                tabActiva: 2,
+              wrapWithModel(
+                model: _model.navBar1Model,
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
+                  tabActiva: 2,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

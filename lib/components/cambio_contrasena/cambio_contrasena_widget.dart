@@ -40,7 +40,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
     _model.confirmarContrasenaTextController ??= TextEditingController();
     _model.confirmarContrasenaFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -57,7 +57,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -68,13 +68,13 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
         key: _model.formKey,
         autovalidateMode: AutovalidateMode.disabled,
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +97,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             Icons.arrow_back_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -128,9 +128,9 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'h1i7g2co' /* Modificar contraseña */,
@@ -147,14 +147,14 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: TextFormField(
                   controller: _model.contrasenaActualTextController,
                   focusNode: _model.contrasenaActualFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.contrasenaActualTextController',
-                    Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    const Duration(milliseconds: 200),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.contrasenaActualVisibility,
@@ -181,37 +181,37 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     filled: true,
-                    fillColor: Color(0xFF333333),
+                    fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.contrasenaActualVisibility =
                             !_model.contrasenaActualVisibility,
                       ),
@@ -240,14 +240,14 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: TextFormField(
                   controller: _model.nuevaContrasenaTextController,
                   focusNode: _model.nuevaContrasenaFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.nuevaContrasenaTextController',
-                    Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    const Duration(milliseconds: 200),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.nuevaContrasenaVisibility,
@@ -274,37 +274,37 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     filled: true,
-                    fillColor: Color(0xFF333333),
+                    fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.nuevaContrasenaVisibility =
                             !_model.nuevaContrasenaVisibility,
                       ),
@@ -333,14 +333,14 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: TextFormField(
                   controller: _model.confirmarContrasenaTextController,
                   focusNode: _model.confirmarContrasenaFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.confirmarContrasenaTextController',
-                    Duration(milliseconds: 200),
-                    () => setState(() {}),
+                    const Duration(milliseconds: 200),
+                    () => safeSetState(() {}),
                   ),
                   autofocus: true,
                   obscureText: !_model.confirmarContrasenaVisibility,
@@ -367,37 +367,37 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                               FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     filled: true,
-                    fillColor: Color(0xFF333333),
+                    fillColor: const Color(0xFF333333),
                     suffixIcon: InkWell(
-                      onTap: () => setState(
+                      onTap: () => safeSetState(
                         () => _model.confirmarContrasenaVisibility =
                             !_model.confirmarContrasenaVisibility,
                       ),
@@ -427,8 +427,8 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('CAMBIO_CONTRASENA_CAMBIAR_CONTRASEÑA_BTN');
-                  Function() _navigate = () {};
+                  logFirebaseEvent('CAMBIO_CONTRASENA_CAMBIAR_CONTRASEA_BTN_');
+                  Function() navigate = () {};
                   logFirebaseEvent('Button_validate_form');
                   if (_model.formKey.currentState == null ||
                       !_model.formKey.currentState!.validate()) {
@@ -448,7 +448,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      _navigate =
+                      navigate =
                           () => context.goNamedAuth('inicio', context.mounted);
                       logFirebaseEvent('Button_show_snack_bar');
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -459,7 +459,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                               color: FlutterFlowTheme.of(context).secondary,
                             ),
                           ),
-                          duration: Duration(milliseconds: 1500),
+                          duration: const Duration(milliseconds: 1500),
                           backgroundColor:
                               FlutterFlowTheme.of(context).alternate,
                         ),
@@ -468,7 +468,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                       FFAppState().email = '';
                       FFAppState().contrasena = '';
                       FFAppState().recordar = false;
-                      setState(() {});
+                      safeSetState(() {});
                     } else {
                       logFirebaseEvent('Button_alert_dialog');
                       await showDialog(
@@ -476,14 +476,14 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                         builder: (alertDialogContext) {
                           return WebViewAware(
                             child: AlertDialog(
-                              title: Text('Error en la operacion'),
-                              content: Text(
+                              title: const Text('Error en la operacion'),
+                              content: const Text(
                                   'Parece que haz introducido mal tu contraseña actual'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
+                                  child: const Text('Ok'),
                                 ),
                               ],
                             ),
@@ -491,7 +491,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                         },
                       );
                       logFirebaseEvent('Button_clear_text_fields_pin_codes');
-                      setState(() {
+                      safeSetState(() {
                         _model.contrasenaActualTextController?.clear();
                         _model.nuevaContrasenaTextController?.clear();
                         _model.confirmarContrasenaTextController?.clear();
@@ -507,15 +507,15 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                             color: FlutterFlowTheme.of(context).error,
                           ),
                         ),
-                        duration: Duration(milliseconds: 1500),
+                        duration: const Duration(milliseconds: 1500),
                         backgroundColor: FlutterFlowTheme.of(context).alternate,
                       ),
                     );
                   }
 
-                  _navigate();
+                  navigate();
 
-                  setState(() {});
+                  safeSetState(() {});
                 },
                 text: FFLocalizations.of(context).getText(
                   '99qh01yl' /* Cambiar contraseña */,
@@ -523,9 +523,9 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                 options: FFButtonOptions(
                   width: 226.0,
                   height: 48.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily:
@@ -536,7 +536,7 @@ class _CambioContrasenaWidgetState extends State<CambioContrasenaWidget> {
                             FlutterFlowTheme.of(context).titleSmallFamily),
                       ),
                   elevation: 3.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

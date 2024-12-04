@@ -1,19 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'serialization_util.dart';
 import '../backend.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 
 final _handledMessageIds = <String?>{};
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({Key? key, required this.child})
-      : super(key: key);
+  const PushNotificationsHandler({super.key, required this.child});
 
   final Widget child;
 
@@ -43,9 +42,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     }
     _handledMessageIds.add(message.messageId);
 
-    if (mounted) {
-      setState(() => _loading = true);
-    }
+    safeSetState(() => _loading = true);
     try {
       final initialPageName = message.data['initialPageName'] as String;
       final initialParameterData = getInitialParameterData(message.data);
@@ -61,16 +58,16 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     } catch (e) {
       print('Error: $e');
     } finally {
-      if (mounted) {
-        setState(() => _loading = false);
-      }
+      safeSetState(() => _loading = false);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    handleOpenedPushNotification();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      handleOpenedPushNotification();
+    });
   }
 
   @override
@@ -105,7 +102,7 @@ class ParameterData {
       );
 
   static Future<ParameterData> Function(Map<String, dynamic>) none() =>
-      (data) async => ParameterData();
+      (data) async => const ParameterData();
 }
 
 final parametersBuilderMap =
@@ -150,7 +147,9 @@ final parametersBuilderMap =
         },
       ),
   'mapa_ir_lugar': (data) async => ParameterData(
-        allParams: {},
+        allParams: {
+          'userPost': getParameter<DocumentReference>(data, 'userPost'),
+        },
       ),
   'seguidoresYSeguidos': (data) async => ParameterData(
         allParams: {
@@ -162,6 +161,8 @@ final parametersBuilderMap =
           'coleccion': await getDocumentParameter<CollectionsRecord>(
               data, 'coleccion', CollectionsRecord.fromSnapshot),
           'esFavorito': getParameter<bool>(data, 'esFavorito'),
+          'usuario': getParameter<DocumentReference>(data, 'usuario'),
+          'refColeccion': getParameter<DocumentReference>(data, 'refColeccion'),
         },
       ),
   'miperfilMapaPin2': (data) async => ParameterData(
@@ -193,6 +194,7 @@ final parametersBuilderMap =
   'otroPerfilMapa': (data) async => ParameterData(
         allParams: {
           'usuario': getParameter<DocumentReference>(data, 'usuario'),
+          'refColeccion': getParameter<DocumentReference>(data, 'refColeccion'),
         },
       ),
   'otroPerfilColecciones': (data) async => ParameterData(
@@ -212,10 +214,10 @@ final parametersBuilderMap =
   'CrearPost': (data) async => ParameterData(
         allParams: {
           'esImagen': getParameter<bool>(data, 'esImagen'),
+          'direccion': getParameter<LatLng>(data, 'direccion'),
         },
       ),
   'paginaTOS': ParameterData.none(),
-  'cuentasBloqueadas': ParameterData.none(),
   'detallePost': (data) async {
     final allParams = {
       'post': await getDocumentParameter<UserPostsRecord>(
@@ -235,6 +237,9 @@ final parametersBuilderMap =
         allParams: {
           'post': await getDocumentParameter<UserPostsRecord>(
               data, 'post', UserPostsRecord.fromSnapshot),
+          'refPostUser': getParameter<DocumentReference>(data, 'refPostUser'),
+          'titulo': getParameter<String>(data, 'titulo'),
+          'descripcion': getParameter<String>(data, 'descripcion'),
         },
       ),
   'CrearColeccionSinPost': (data) async => ParameterData(
@@ -275,6 +280,42 @@ final parametersBuilderMap =
   'ChatPage': (data) async => ParameterData(
         allParams: {
           'receiveChat': getParameter<DocumentReference>(data, 'receiveChat'),
+        },
+      ),
+  'HerramientasPromocion': ParameterData.none(),
+  'paginaProvisional': ParameterData.none(),
+  'suscripcionactivada': (data) async => ParameterData(
+        allParams: {
+          'id': getParameter<int>(data, 'id'),
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
+  'suscripcionFallida': (data) async => ParameterData(
+        allParams: {
+          'id': getParameter<int>(data, 'id'),
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
+  'PaginaEnContruccion': ParameterData.none(),
+  'mapaAmigos': ParameterData.none(),
+  'resetPass': (data) async => ParameterData(
+        allParams: {
+          'oobCode': getParameter<String>(data, 'oobCode'),
+        },
+      ),
+  'mapaPrincipaRespaldo': ParameterData.none(),
+  'VistaPostlist': (data) async => ParameterData(
+        allParams: {
+          'user': getParameter<DocumentReference>(data, 'user'),
+          'verCometarios': getParameter<bool>(data, 'verCometarios'),
+        },
+      ),
+  'testNewVideo': ParameterData.none(),
+  'EtiquetarUbicacion': ParameterData.none(),
+  'EtiquetarPersonas': (data) async => ParameterData(
+        allParams: {
+          'esImagen': getParameter<bool>(data, 'esImagen'),
+          'video': getParameter<String>(data, 'video'),
         },
       ),
 };

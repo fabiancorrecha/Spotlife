@@ -15,7 +15,7 @@ class ListaPostFiltradosUbicacionWidget extends StatefulWidget {
     super.key,
     this.userPost,
     int? index,
-  }) : this.index = index ?? 0;
+  }) : index = index ?? 0;
 
   final UserPostsRecord? userPost;
   final int index;
@@ -38,7 +38,7 @@ class _ListaPostFiltradosUbicacionWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'listaPostFiltradosUbicacion'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,20 +51,18 @@ class _ListaPostFiltradosUbicacionWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               wrapWithModel(
                 model: _model.appBarPostListModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: AppBarPostListWidget(
                   userPost: widget.userPost,
                 ),
@@ -73,12 +71,12 @@ class _ListaPostFiltradosUbicacionWidgetState
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: StreamBuilder<List<UserPostsRecord>>(
                     stream: queryUserPostsRecord(
                       queryBuilder: (userPostsRecord) => userPostsRecord.where(
                         'placeInfo.city',
-                        isEqualTo: widget.userPost?.placeInfo?.city,
+                        isEqualTo: widget.userPost?.placeInfo.city,
                       ),
                     ),
                     builder: (context, snapshot) {
@@ -99,10 +97,11 @@ class _ListaPostFiltradosUbicacionWidgetState
                       List<UserPostsRecord> listViewUserPostsRecordList =
                           snapshot.data!;
                       if (listViewUserPostsRecordList.isEmpty) {
-                        return Center(
+                        return const Center(
                           child: ComponenteVacioWidget(),
                         );
                       }
+
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         primary: false,
@@ -128,8 +127,8 @@ class _ListaPostFiltradosUbicacionWidgetState
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
                   tabActiva: 2,
                 ),
               ),

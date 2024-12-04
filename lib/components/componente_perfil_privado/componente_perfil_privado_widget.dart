@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'componente_perfil_privado_model.dart';
 export 'componente_perfil_privado_model.dart';
 
@@ -30,7 +28,7 @@ class _ComponentePerfilPrivadoWidgetState
     super.initState();
     _model = createModel(context, () => ComponentePerfilPrivadoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,12 +43,12 @@ class _ComponentePerfilPrivadoWidgetState
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsets.all(50.0),
+            padding: const EdgeInsets.all(50.0),
             child: Image.network(
               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/ll0xdhzyoat5/icono_principal.png',
               width: 100.0,
@@ -64,7 +62,7 @@ class _ComponentePerfilPrivadoWidgetState
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '5zq086n2' /* Esta cuenta es privada */,

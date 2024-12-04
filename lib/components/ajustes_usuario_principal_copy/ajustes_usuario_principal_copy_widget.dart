@@ -34,7 +34,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
     super.initState();
     _model = createModel(context, () => AjustesUsuarioPrincipalCopyModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -53,7 +53,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -61,14 +61,14 @@ class _AjustesUsuarioPrincipalCopyWidgetState
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Icon(
                           FFIcons.kadd,
@@ -119,7 +119,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Icon(
                             Icons.close_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -135,10 +135,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksettings,
@@ -154,14 +154,14 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
-                            barrierColor: Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             enableDrag: false,
                             context: context,
                             builder: (context) {
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 600.0,
                                     child: ConfiguracionOldWidget(),
                                   ),
@@ -174,10 +174,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksignal,
@@ -191,10 +191,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model3,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kstarLines,
@@ -214,10 +214,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kusers,
@@ -236,10 +236,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                         tablet: false,
                       ))
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: wrapWithModel(
                         model: _model.boton3Model5,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton3Widget(
                           icono: Icon(
                             FFIcons.kcard,
@@ -253,10 +253,10 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                       ),
                     ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model6,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kimbox,
@@ -269,16 +269,16 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     wrapWithModel(
                       model: _model.boton4Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.kaddUser,
@@ -294,7 +294,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                     ),
                     wrapWithModel(
                       model: _model.boton4Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.klogOut,
@@ -317,7 +317,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                         },
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ),
             ],

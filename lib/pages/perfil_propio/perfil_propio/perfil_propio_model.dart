@@ -12,7 +12,6 @@ class PerfilPropioModel extends FlutterFlowModel<PerfilPropioWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? perfilPropioController;
-  final unfocusNode = FocusNode();
   // Model for tarjetaMiPerfil component.
   late TarjetaMiPerfilModel tarjetaMiPerfilModel;
   // Model for navBar2 component.
@@ -33,7 +32,6 @@ class PerfilPropioModel extends FlutterFlowModel<PerfilPropioWidget> {
   @override
   void dispose() {
     perfilPropioController?.finish();
-    unfocusNode.dispose();
     tarjetaMiPerfilModel.dispose();
     navBar2Model.dispose();
     postGridUsuarioModel.dispose();

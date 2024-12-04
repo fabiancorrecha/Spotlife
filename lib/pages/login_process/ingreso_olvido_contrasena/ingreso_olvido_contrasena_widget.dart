@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton1/boton1_widget.dart';
-import '/components/notificacion_box/notificacion_box_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'ingreso_olvido_contrasena_model.dart';
 export 'ingreso_olvido_contrasena_model.dart';
 
@@ -38,7 +36,7 @@ class _IngresoOlvidoContrasenaWidgetState
     _model.emailTextController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,45 +49,49 @@ class _IngresoOlvidoContrasenaWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.chevron_left,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                logFirebaseEvent('INGRESO_OLVIDO_CONTRASENA_chevron_left_I');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.safePop();
+              },
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'fp2ceqxm' /* Restaura tu contraseña */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                'fp2ceqxm' /* Restaura tu contraseña */,
+              ),
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
         ),
         body: Form(
           key: _model.formKey,
@@ -101,7 +103,7 @@ class _IngresoOlvidoContrasenaWidgetState
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -110,39 +112,46 @@ class _IngresoOlvidoContrasenaWidgetState
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FlutterFlowIconButton(
-                        borderColor: Color(0x00F4F176),
+                        borderColor: const Color(0x00F4F176),
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: Color(0x00EEEEEE),
+                        fillColor: const Color(0x00EEEEEE),
                         icon: Icon(
                           Icons.help,
                           color: FlutterFlowTheme.of(context).primary,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'INGRESO_OLVIDO_CONTRASENA_help_ICN_ON_TA');
+                          logFirebaseEvent('IconButton_start_walkthrough');
+                          safeSetState(() =>
+                              _model.olvidarContrasenaController =
+                                  createPageWalkthrough(context));
+                          _model.olvidarContrasenaController
+                              ?.show(context: context);
                         },
                       ),
                     ],
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 8.0),
                             child: TextFormField(
                               controller: _model.emailTextController,
                               focusNode: _model.textFieldFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.emailTextController',
-                                Duration(milliseconds: 200),
-                                () => setState(() {}),
+                                const Duration(milliseconds: 200),
+                                () => safeSetState(() {}),
                               ),
                               autofocus: true,
                               obscureText: false,
@@ -162,35 +171,35 @@ class _IngresoOlvidoContrasenaWidgetState
                                                   .bodyMediumFamily),
                                     ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Color(0xFF333333),
+                                fillColor: const Color(0xFF333333),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -219,7 +228,7 @@ class _IngresoOlvidoContrasenaWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -247,11 +256,10 @@ class _IngresoOlvidoContrasenaWidgetState
                   ),
                   wrapWithModel(
                     model: _model.boton1Model,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: Boton1Widget(
                       texto: 'Enviar link',
-                      desabilitado: _model.emailTextController.text == null ||
-                          _model.emailTextController.text == '',
+                      desabilitado: _model.emailTextController.text == '',
                       accion: () async {
                         logFirebaseEvent(
                             'INGRESO_OLVIDO_CONTRASENA_Container_kn6r');
@@ -263,7 +271,7 @@ class _IngresoOlvidoContrasenaWidgetState
                         logFirebaseEvent('boton1_auth');
                         if (_model.emailTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text(
                                 'Email required!',
                               ),
@@ -279,35 +287,7 @@ class _IngresoOlvidoContrasenaWidgetState
                         FFAppState().email = '';
                         FFAppState().contrasena = '';
                         FFAppState().recordar = false;
-                        setState(() {});
-                        logFirebaseEvent('boton1_bottom_sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          barrierColor: Color(0x00000000),
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
-                                    height: 82.0,
-                                    child: NotificacionBoxWidget(
-                                      mensaje:
-                                          'Revisa tu correo electrónico para continuar y restablecer tu contraseña',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
+                        safeSetState(() {});
                       },
                     ),
                   ).addWalkthrough(

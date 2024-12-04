@@ -25,7 +25,7 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
     _model = createModel(context, () => PaginaTOSModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'paginaTOS'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,47 +38,49 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.chevron_left,
-              color: Colors.white,
-              size: 30.0,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: const Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                logFirebaseEvent('PAGINA_T_O_S_chevron_left_ICN_ON_TAP');
+                logFirebaseEvent('IconButton_navigate_back');
+                context.safePop();
+              },
             ),
-            onPressed: () async {
-              logFirebaseEvent('PAGINA_T_O_S_chevron_left_ICN_ON_TAP');
-              logFirebaseEvent('IconButton_navigate_back');
-              context.safePop();
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'm9a5290w' /* Términos y condiciones */,
+            title: Text(
+              FFLocalizations.of(context).getText(
+                'm9a5290w' /* Términos y condiciones */,
+              ),
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 0.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
         ),
         body: Form(
           key: _model.formKey,
@@ -90,7 +92,7 @@ class _PaginaTOSWidgetState extends State<PaginaTOSWidget> {
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,

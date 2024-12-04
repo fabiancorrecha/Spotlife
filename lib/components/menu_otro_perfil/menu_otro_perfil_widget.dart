@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'menu_otro_perfil_model.dart';
 export 'menu_otro_perfil_model.dart';
@@ -39,7 +40,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
     super.initState();
     _model = createModel(context, () => MenuOtroPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,13 +69,15 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
             ),
           );
         }
+
         final containerUsersRecord = snapshot.data!;
+
         return Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(20.0),
@@ -85,7 +88,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Container(
                   width: 52.0,
                   height: 5.0,
@@ -99,10 +102,10 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                 child: Container(
                   width: double.infinity,
                   height: 100.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,51 +114,73 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              width: 100.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).fondoIcono,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Icon(
-                                    FFIcons.kshare,
-                                    color: FlutterFlowTheme.of(context).icono,
-                                    size: 24.0,
+                            Builder(
+                              builder: (context) => InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'MENU_OTRO_PERFIL_Container_ph4jyqp0_ON_T');
+                                  logFirebaseEvent('Container_share');
+                                  await Share.share(
+                                    widget.linkPage!,
+                                    sharePositionOrigin:
+                                        getWidgetBoundingBox(context),
+                                  );
+                                },
+                                child: Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  Row(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '1vkq4vte' /* Compartir */,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
+                                      Icon(
+                                        FFIcons.kshare,
+                                        color:
+                                            FlutterFlowTheme.of(context).icono,
+                                        size: 24.0,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              '1vkq4vte' /* Compartir */,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                             Container(
@@ -165,7 +190,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                 color: FlutterFlowTheme.of(context).fondoIcono,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -187,8 +212,8 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                               .primaryText,
                                         ),
                                       ),
-                                      duration: Duration(milliseconds: 1500),
-                                      backgroundColor: Color(0x00000000),
+                                      duration: const Duration(milliseconds: 1500),
+                                      backgroundColor: const Color(0x00000000),
                                     ),
                                   );
                                 },
@@ -236,7 +261,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                             Stack(
                               children: [
                                 if ((currentUserDocument?.listaBloqueados
-                                            ?.toList() ??
+                                            .toList() ??
                                         [])
                                     .contains(widget.user))
                                   AuthUserStreamWidget(
@@ -259,7 +284,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                               'MENU_OTRO_PERFIL_Column_pt5ktatr_ON_TAP');
                                           if ((currentUserDocument
                                                       ?.listaBloqueados
-                                                      ?.toList() ??
+                                                      .toList() ??
                                                   [])
                                               .contains(widget.user)) {
                                             // Si un usuario sera bloqueado lo eliminaremos de la lista de seguidores
@@ -345,7 +370,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                     ),
                                   ),
                                 if (!(currentUserDocument?.listaBloqueados
-                                            ?.toList() ??
+                                            .toList() ??
                                         [])
                                     .contains(widget.user))
                                   AuthUserStreamWidget(
@@ -358,7 +383,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
@@ -369,7 +394,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                               'MENU_OTRO_PERFIL_Column_dv2cn68o_ON_TAP');
                                           if (!(currentUserDocument
                                                       ?.listaBloqueados
-                                                      ?.toList() ??
+                                                      .toList() ??
                                                   [])
                                               .contains(widget.user)) {
                                             logFirebaseEvent(
@@ -381,9 +406,9 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                                           (alertDialogContext) {
                                                         return WebViewAware(
                                                           child: AlertDialog(
-                                                            title: Text(
+                                                            title: const Text(
                                                                 'Bloquear usuario'),
-                                                            content: Text(
+                                                            content: const Text(
                                                                 '¿Seguro de quieres bloquear este usuario?'),
                                                             actions: [
                                                               TextButton(
@@ -391,7 +416,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                                                     Navigator.pop(
                                                                         alertDialogContext,
                                                                         false),
-                                                                child: Text(
+                                                                child: const Text(
                                                                     'Cancelar'),
                                                               ),
                                                               TextButton(
@@ -399,7 +424,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                                                     Navigator.pop(
                                                                         alertDialogContext,
                                                                         true),
-                                                                child: Text(
+                                                                child: const Text(
                                                                     'Bloquear'),
                                                               ),
                                                             ],
@@ -411,7 +436,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                             if (confirmDialogResponse) {
                                               if ((currentUserDocument
                                                           ?.listaSeguidos
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [])
                                                   .contains(widget.user)) {
                                                 // Acciones para que el usuario actual bloquee a un usuario
@@ -436,7 +461,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                               }
                                               if ((currentUserDocument
                                                           ?.listaSeguidores
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [])
                                                   .contains(widget.user)) {
                                                 // Acciones para que el usuario actual bloquee a un usuario
@@ -514,7 +539,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                                 isScrollControlled: true,
                                                 backgroundColor:
                                                     Colors.transparent,
-                                                barrierColor: Color(0x00000000),
+                                                barrierColor: const Color(0x00000000),
                                                 enableDrag: false,
                                                 context: context,
                                                 builder: (context) {
@@ -523,7 +548,7 @@ class _MenuOtroPerfilWidgetState extends State<MenuOtroPerfilWidget> {
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
                                                               context),
-                                                      child: Container(
+                                                      child: SizedBox(
                                                         height: 50.0,
                                                         child:
                                                             NotificacionBoxWidget(

@@ -1,7 +1,6 @@
 import '/components/boton1/boton1_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +34,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
     super.initState();
     _model = createModel(context, () => FiltrarSpotsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -53,7 +52,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -63,12 +62,12 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                   child: Container(
                     width: 52.0,
                     height: 5.0,
@@ -79,7 +78,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'v9vn0pol' /* Ajustes de busqueda */,
@@ -106,26 +105,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_9t5veyup_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaPost = false;
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().mapaPrincipal = true;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -144,42 +123,25 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.mapaValue ??=
-                                  FFAppState().MapaGlobal,
+                              value: _model.mapaValue ??= FFAppState().Mapa,
                               onChanged: (newValue) async {
-                                setState(() => _model.mapaValue = newValue!);
+                                safeSetState(
+                                    () => _model.mapaValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Mapa_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Mapa_update_app_state');
+                                  FFAppState().Mapa = true;
+                                  FFAppState().Post = false;
+                                  safeSetState(() {});
                                   logFirebaseEvent('Mapa_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.mapaValue = true;
                                   });
                                   logFirebaseEvent('Mapa_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.spotValue = false;
                                   });
-                                  if ((_model.mapaValue == true) &&
-                                      (_model.globalValue == true)) {
-                                    logFirebaseEvent('Mapa_update_app_state');
-                                    FFAppState().MapaGlobal = true;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else if ((_model.mapaValue == true) &&
-                                      (_model.soloAmigosValue == true)) {
-                                    logFirebaseEvent('Mapa_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = true;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else {
-                                    return;
-                                  }
                                 }
                               },
                               side: BorderSide(
@@ -207,7 +169,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kpinLines,
@@ -226,26 +188,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_0z1h89ir_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaPost = true;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -264,42 +206,25 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).secondaryText,
                             ),
                             child: Checkbox(
-                              value: _model.spotValue ??=
-                                  FFAppState().PostGlobal,
+                              value: _model.spotValue ??= FFAppState().Post,
                               onChanged: (newValue) async {
-                                setState(() => _model.spotValue = newValue!);
+                                safeSetState(
+                                    () => _model.spotValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Spot_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Spot_update_app_state');
+                                  FFAppState().Mapa = false;
+                                  FFAppState().Post = true;
+                                  safeSetState(() {});
                                   logFirebaseEvent('Spot_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.mapaValue = false;
                                   });
                                   logFirebaseEvent('Spot_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.spotValue = true;
                                   });
-                                  if ((_model.spotValue == true) &&
-                                      (_model.globalValue == true)) {
-                                    logFirebaseEvent('Spot_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = true;
-                                    FFAppState().PostAmigo = false;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else if ((_model.spotValue == true) &&
-                                      (_model.soloAmigosValue == true)) {
-                                    logFirebaseEvent('Spot_update_app_state');
-                                    FFAppState().MapaGlobal = false;
-                                    FFAppState().MapaAmigo = false;
-                                    FFAppState().PostGlobal = false;
-                                    FFAppState().PostAmigo = true;
-                                    FFAppState().update(() {});
-                                    return;
-                                  } else {
-                                    return;
-                                  }
                                 }
                               },
                               side: BorderSide(
@@ -327,7 +252,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kgrid,
@@ -340,7 +265,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                     ),
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 32.0,
                   thickness: 1.0,
                   indent: 0.0,
@@ -358,26 +283,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_1hirpmb2_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaAmigos = true;
-                        FFAppState().esVistaPost = false;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().Global = false;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -396,19 +301,25 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).primary,
                             ),
                             child: Checkbox(
-                              value: _model.soloAmigosValue ??= false,
+                              value: _model.soloAmigosValue ??=
+                                  FFAppState().Amigos,
                               onChanged: (newValue) async {
-                                setState(
+                                safeSetState(
                                     () => _model.soloAmigosValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_SoloAmigos_ON_TOGGLE_ON');
+                                  logFirebaseEvent(
+                                      'SoloAmigos_update_app_state');
+                                  FFAppState().Amigos = true;
+                                  FFAppState().Global = false;
+                                  FFAppState().update(() {});
                                   logFirebaseEvent('SoloAmigos_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.soloAmigosValue = true;
                                   });
                                   logFirebaseEvent('SoloAmigos_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.globalValue = false;
                                   });
                                 }
@@ -437,7 +348,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Icon(
                               FFIcons.kusers,
@@ -456,26 +367,6 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'FILTRAR_SPOTS_COMP_Row_t8dqegyg_ON_TAP');
-                        logFirebaseEvent('Row_update_app_state');
-                        FFAppState().esVistaAmigos = false;
-                        FFAppState().esVistaPost = true;
-                        FFAppState().mapaPrincipal = false;
-                        FFAppState().Global = true;
-                        FFAppState().update(() {});
-                        logFirebaseEvent('Row_bottom_sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Row_navigate_to');
-
-                        context.goNamed(
-                          'mapaPrincipal',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -494,18 +385,23 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   FlutterFlowTheme.of(context).primary,
                             ),
                             child: Checkbox(
-                              value: _model.globalValue ??= true,
+                              value: _model.globalValue ??= FFAppState().Global,
                               onChanged: (newValue) async {
-                                setState(() => _model.globalValue = newValue!);
+                                safeSetState(
+                                    () => _model.globalValue = newValue!);
                                 if (newValue!) {
                                   logFirebaseEvent(
                                       'FILTRAR_SPOTS_COMP_Global_ON_TOGGLE_ON');
+                                  logFirebaseEvent('Global_update_app_state');
+                                  FFAppState().Amigos = false;
+                                  FFAppState().Global = true;
+                                  FFAppState().update(() {});
                                   logFirebaseEvent('Global_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.soloAmigosValue = false;
                                   });
                                   logFirebaseEvent('Global_set_form_field');
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.globalValue = true;
                                   });
                                 }
@@ -534,7 +430,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.globeEurope,
@@ -551,15 +447,15 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Container(
                 height: 100.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Listo',
                     desabilitado: false,

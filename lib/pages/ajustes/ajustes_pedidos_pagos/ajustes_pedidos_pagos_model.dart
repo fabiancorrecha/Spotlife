@@ -7,7 +7,6 @@ class AjustesPedidosPagosModel
     extends FlutterFlowModel<AjustesPedidosPagosWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for boton5.
   late BotonQuintoModel boton5Model1;
   // Model for boton5.
@@ -27,7 +26,6 @@ class AjustesPedidosPagosModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     boton5Model1.dispose();
     boton5Model2.dispose();
     boton5Model3.dispose();

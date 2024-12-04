@@ -5,8 +5,6 @@ import '/components/login_options/login_options_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// ignore: unused_import
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +56,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     authManager.handlePhoneAuthStateChanges(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -73,36 +71,37 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  'iigcsccl' /* Login */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    'iigcsccl' /* Login */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: StreamBuilder<List<UsersRecord>>(
           stream: queryUsersRecord(
@@ -134,12 +133,13 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
             final containerUsersRecord = containerUsersRecordList.isNotEmpty
                 ? containerUsersRecordList.first
                 : null;
+
             return Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 34.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 32.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -153,10 +153,10 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       37.0, 0.0, 37.0, 8.0),
                                   child: Autocomplete<String>(
-                                    initialValue: TextEditingValue(),
+                                    initialValue: const TextEditingValue(),
                                     optionsBuilder: (textEditingValue) {
                                       if (textEditingValue.text == '') {
                                         return const Iterable<String>.empty();
@@ -192,7 +192,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                               context)
                                                           .bodyMediumFamily),
                                             ),
-                                        textHighlightStyle: TextStyle(),
+                                        textHighlightStyle: const TextStyle(),
                                         elevation: 4.0,
                                         optionBackgroundColor:
                                             FlutterFlowTheme.of(context)
@@ -204,7 +204,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                       );
                                     },
                                     onSelected: (String selection) {
-                                      setState(() =>
+                                      safeSetState(() =>
                                           _model.textFieldSelectedOption1 =
                                               selection);
                                       FocusScope.of(context).unfocus();
@@ -226,15 +226,15 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                         onEditingComplete: onEditingComplete,
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.textController1',
-                                          Duration(milliseconds: 200),
-                                          () => setState(() {}),
+                                          const Duration(milliseconds: 200),
+                                          () => safeSetState(() {}),
                                         ),
                                         autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: FFLocalizations.of(context)
                                               .getText(
-                                            '17b7cy81' /* País/región */,
+                                            '17b7cy81' /* Paísregión */,
                                           ),
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)
@@ -252,7 +252,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                             .bodyMediumFamily),
                                               ),
                                           enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -260,7 +260,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -268,7 +268,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -277,7 +277,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                           ),
                                           focusedErrorBorder:
                                               UnderlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -285,14 +285,14 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           filled: true,
-                                          fillColor: Color(0xFF333333),
+                                          fillColor: const Color(0xFF333333),
                                           suffixIcon: _model.textController1!
                                                   .text.isNotEmpty
                                               ? InkWell(
                                                   onTap: () async {
                                                     _model.textController1
                                                         ?.clear();
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   child: Icon(
                                                     Icons.clear,
@@ -332,12 +332,12 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 37.0, 0.0, 37.0, 8.0),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xFF333333),
+                                color: const Color(0xFF333333),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Row(
@@ -346,19 +346,21 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                 children: [
                                   Container(
                                     width: 60.0,
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Align(
                                       alignment:
-                                          AlignmentDirectional(0.0, -0.05),
+                                          const AlignmentDirectional(0.0, -0.05),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 15.0, 0.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
                                             functions.getDialCode(
                                                 _model.textController1.text),
                                             '+34',
-                                          ).maybeHandleOverflow(maxChars: 4),
+                                          ).maybeHandleOverflow(
+                                            maxChars: 4,
+                                          ),
                                           maxLines: 1,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -384,8 +386,8 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                       focusNode: _model.textFieldFocusNode2,
                                       onChanged: (_) => EasyDebounce.debounce(
                                         '_model.textController2',
-                                        Duration(milliseconds: 200),
-                                        () => setState(() {}),
+                                        const Duration(milliseconds: 200),
+                                        () => safeSetState(() {}),
                                       ),
                                       autofocus: false,
                                       obscureText: false,
@@ -409,7 +411,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                                           .bodyMediumFamily),
                                             ),
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -417,7 +419,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -425,7 +427,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -434,7 +436,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                         ),
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0x00000000),
                                             width: 1.0,
                                           ),
@@ -442,7 +444,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         filled: true,
-                                        fillColor: Color(0xFF333333),
+                                        fillColor: const Color(0xFF333333),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -467,14 +469,14 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 24.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         37.0, 0.0, 37.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
@@ -501,14 +503,12 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                           ),
                           wrapWithModel(
                             model: _model.boton1Model,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: Boton1Widget(
                               texto: 'Log in',
                               desabilitado:
-                                  (_model.textController1.text == null ||
-                                          _model.textController1.text == '') ||
-                                      (_model.textController2.text == null ||
-                                          _model.textController2.text == ''),
+                                  (_model.textController1.text == '') ||
+                                      (_model.textController2.text == ''),
                               accion: () async {
                                 logFirebaseEvent(
                                     'INGRESA_CON_TELEFONO_Container_5fgwode3_');
@@ -524,11 +524,10 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                   logFirebaseEvent('boton1_auth');
                                   final phoneNumberVal =
                                       FFAppState().phoneNumber;
-                                  if (phoneNumberVal == null ||
-                                      phoneNumberVal.isEmpty ||
+                                  if (phoneNumberVal.isEmpty ||
                                       !phoneNumberVal.startsWith('+')) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                         content: Text(
                                             'Phone Number is required and has to start with +.'),
                                       ),
@@ -557,7 +556,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                               .primaryText,
                                         ),
                                       ),
-                                      duration: Duration(milliseconds: 2000),
+                                      duration: const Duration(milliseconds: 2000),
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
                                               .primaryBackground,
@@ -568,7 +567,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 37.0, 0.0, 37.0, 9.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -594,7 +593,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                       ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -641,7 +640,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             30.0, 24.0, 30.0, 24.0),
                         child: Image.asset(
                           'assets/images/Frame_30_(1).png',
@@ -655,8 +654,8 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                         children: [
                           wrapWithModel(
                             model: _model.loginOptionsModel,
-                            updateCallback: () => setState(() {}),
-                            child: LoginOptionsWidget(),
+                            updateCallback: () => safeSetState(() {}),
+                            child: const LoginOptionsWidget(),
                           ),
                         ],
                       ),

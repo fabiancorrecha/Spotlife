@@ -1,15 +1,16 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
-// ignore: unnecessary_import
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-// Imports other custom widgets
-// Imports custom actions
-// Imports custom functions
+import 'index.dart'; // Imports other custom widgets
+import '/custom_code/actions/index.dart'; // Imports custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 
 import 'dart:async';
 
@@ -46,6 +47,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
 
   late gmap.CameraPosition initialCameraPosition;
   double currentZoom = 15.0;
+
+  UsersRecord? currentUserRecord;
 
   @override
   void initState() {
@@ -398,7 +401,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
       final post = lista[i];
 
       try {
-        if (post.postPhotoUrl.isNotEmpty && post.placeInfo.latLng != null) {
+        if (post.postPhotoUrl.isNotEmpty &&
+            post.placeInfo.localizacion != null) {
           //ignore marker if not have photo or latLng
           final markerIcon = (await getMarketIcon(post));
           if (markerIcon != null) {
@@ -407,23 +411,29 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
             gmap.Marker marker = gmap.Marker(
               markerId: gmap.MarkerId(post.reference.id),
               position: gmap.LatLng(
-                post.placeInfo.latLng!.latitude,
-                post.placeInfo.latLng!.longitude,
+                post.placeInfo.localizacion!.latitude,
+                post.placeInfo.localizacion!.longitude,
               ),
               infoWindow: gmap.InfoWindow(
-                  title: _user.displayName,
-                  snippet: post.postTitle,
-                  onTap: () {
+                title: _user.displayName,
+                snippet: post.postTitle,
+                onTap: () async {
+                  final currentUser = await getCurrentUser();
+                  if (post.postUser == currentUser.reference) {
+                    context.goNamed('perfilPropio');
+                  } else {
                     context.goNamed(
-                      'otroPerfil',
+                      'perfilAjeno',
                       queryParameters: {
-                        'perfilAjeno': serializeParam(
+                        'otroPerfil': serializeParam(
                           post.postUser,
                           ParamType.DocumentReference,
                         ),
                       }.withoutNulls,
                     );
-                  }),
+                  }
+                },
+              ),
               icon: markerIcon,
             );
 
@@ -459,6 +469,8 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
       ),
     );
   }
+
+  getCurrentUser() {}
 }
 
 extension PhotoUrlExtension on UserPostsRecord {

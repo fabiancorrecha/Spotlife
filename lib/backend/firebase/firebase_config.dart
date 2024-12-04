@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 Future initFirebase() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
-            apiKey: "AIzaSyAHskm2jbC5FxoT9DoOhIcq2xKwl2zEYNQ",
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo",
             authDomain: "spotlife-b4d08.firebaseapp.com",
             projectId: "spotlife-b4d08",
             storageBucket: "spotlife-b4d08.appspot.com",

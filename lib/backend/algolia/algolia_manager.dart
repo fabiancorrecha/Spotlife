@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:algolia/algolia.dart';
 import 'package:equatable/equatable.dart';
-// ignore: unused_import
-import 'package:flutter/foundation.dart';
 
 import '../backend.dart';
 
@@ -28,7 +26,7 @@ class AlgoliaQueryParams extends Equatable {
 
 class FFAlgoliaManager {
   FFAlgoliaManager._()
-      : algolia = Algolia.init(
+      : algolia = const Algolia.init(
           applicationId: kAlgoliaApplicationId,
           apiKey: kAlgoliaApiKey,
           extraUserAgents: ['FlutterFlow_3.1.0'],
@@ -39,7 +37,7 @@ class FFAlgoliaManager {
   static FFAlgoliaManager get instance => _instance ??= FFAlgoliaManager._();
 
   // Cache that will ensure identical queries are not repeatedly made.
-  static Map<AlgoliaQueryParams, List<AlgoliaObjectSnapshot>> _algoliaCache =
+  static final Map<AlgoliaQueryParams, List<AlgoliaObjectSnapshot>> _algoliaCache =
       {};
 
   Future<List<AlgoliaObjectSnapshot>> algoliaQuery({
@@ -57,11 +55,6 @@ class FFAlgoliaManager {
     LatLng? loc;
     if (location != null) {
       loc = await location;
-      // Either the user denied permissions, we could not access
-      // their location, or null location specified.
-      if (loc == null) {
-        return [];
-      }
     }
     final params =
         AlgoliaQueryParams(index, term, loc, maxResults, searchRadiusMeters);

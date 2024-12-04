@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton1_model.dart';
 export 'boton1_model.dart';
 
@@ -38,7 +36,7 @@ class _Boton1WidgetState extends State<Boton1Widget> {
     super.initState();
     _model = createModel(context, () => Boton1Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,10 +49,10 @@ class _Boton1WidgetState extends State<Boton1Widget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
-      alignment: AlignmentDirectional(0.0, 0.0),
+      decoration: const BoxDecoration(),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 24.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 24.0),
         child: Stack(
           children: [
             if (!widget.desabilitado!)
@@ -63,7 +61,7 @@ class _Boton1WidgetState extends State<Boton1Widget> {
                 height: 64.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 25.0,
                       color: Color(0x25F4F176),
@@ -85,8 +83,8 @@ class _Boton1WidgetState extends State<Boton1Widget> {
               options: FFButtonOptions(
                 width: 316.0,
                 height: 64.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -102,7 +100,7 @@ class _Boton1WidgetState extends State<Boton1Widget> {
                           FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
                 elevation: 2.0,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),

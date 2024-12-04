@@ -13,7 +13,9 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:provider/provider.dart';
 import 'feed_model.dart';
 export 'feed_model.dart';
 
@@ -28,6 +30,7 @@ class _FeedWidgetState extends State<FeedWidget> {
   late FeedModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -35,7 +38,19 @@ class _FeedWidgetState extends State<FeedWidget> {
     _model = createModel(context, () => FeedModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Feed'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('FEED_PAGE_Feed_ON_INIT_STATE');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      logFirebaseEvent('Feed_update_app_state');
+      FFAppState().updateUbicationStruct(
+        (e) => e..localizacion = currentUserLocationValue,
+      );
+      FFAppState().update(() {});
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -47,24 +62,24 @@ class _FeedWidgetState extends State<FeedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
                 child: wrapWithModel(
                   model: _model.appBarModel,
-                  updateCallback: () => setState(() {}),
-                  child: AppBarWidget(),
+                  updateCallback: () => safeSetState(() {}),
+                  child: const AppBarWidget(),
                 ).addWalkthrough(
                   containerF3zvicrn,
                   _model.feedController,
@@ -86,13 +101,13 @@ class _FeedWidgetState extends State<FeedWidget> {
                                         'postUser',
                                         functions.usuariosConcatenados(
                                             (currentUserDocument?.listaSeguidos
-                                                        ?.toList() ??
+                                                        .toList() ??
                                                     [])
                                                 .toList(),
                                             currentUserReference,
                                             (currentUserDocument
                                                         ?.listaBloqueados
-                                                        ?.toList() ??
+                                                        .toList() ??
                                                     [])
                                                 .toList()))
                                     .orderBy('timePosted', descending: true),
@@ -131,7 +146,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                                     ),
                                   ),
                                 ),
-                                noItemsFoundIndicatorBuilder: (_) => Center(
+                                noItemsFoundIndicatorBuilder: (_) => const Center(
                                   child: ComponenteVacioWidget(),
                                 ),
                                 itemBuilder: (context, _, listViewIndex) {
@@ -157,37 +172,42 @@ class _FeedWidgetState extends State<FeedWidget> {
                             desktop: false,
                           ))
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: wrapWithModel(
                                 model: _model.usuariosRecomendadosModel,
-                                updateCallback: () => setState(() {}),
-                                child: UsuariosRecomendadosWidget(),
+                                updateCallback: () => safeSetState(() {}),
+                                child: const UsuariosRecomendadosWidget(),
                               ),
                             ),
                         ],
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.77),
+                      alignment: const AlignmentDirectional(0.0, -0.77),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             FlutterFlowIconButton(
-                              borderColor: Color(0x00F4F176),
+                              borderColor: const Color(0x00F4F176),
                               borderRadius: 20.0,
                               borderWidth: 1.0,
                               buttonSize: 40.0,
-                              fillColor: Color(0x00EEEEEE),
+                              fillColor: const Color(0x00EEEEEE),
                               icon: Icon(
                                 Icons.help,
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 24.0,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                logFirebaseEvent('FEED_PAGE_help_ICN_ON_TAP');
+                                logFirebaseEvent(
+                                    'IconButton_start_walkthrough');
+                                safeSetState(() => _model.feedController =
+                                    createPageWalkthrough(context));
+                                _model.feedController?.show(context: context);
                               },
                             ),
                           ],
@@ -199,8 +219,8 @@ class _FeedWidgetState extends State<FeedWidget> {
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
                   tabActiva: 1,
                 ),
               ),

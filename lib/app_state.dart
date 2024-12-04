@@ -77,6 +77,34 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _collectionUse;
     });
+    _safeInit(() {
+      _Distancia = prefs.getDouble('ff_Distancia') ?? _Distancia;
+    });
+    _safeInit(() {
+      if (prefs.containsKey('ff_ubication')) {
+        try {
+          final serializedData = prefs.getString('ff_ubication') ?? '{}';
+          _ubication =
+              PlaceInfoStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+    _safeInit(() {
+      _startUbication =
+          latLngFromString(prefs.getString('ff_startUbication')) ??
+              _startUbication;
+    });
+    _safeInit(() {
+      _Amigos = prefs.getBool('ff_Amigos') ?? _Amigos;
+    });
+    _safeInit(() {
+      _Mapa = prefs.getBool('ff_Mapa') ?? _Mapa;
+    });
+    _safeInit(() {
+      _Post = prefs.getBool('ff_Post') ?? _Post;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -258,7 +286,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_low', value);
   }
 
-  LatLng? _centro = LatLng(40.4149599, -3.7107405);
+  LatLng? _centro = const LatLng(40.4149599, -3.7107405);
   LatLng? get centro => _centro;
   set centro(LatLng? value) {
     _centro = value;
@@ -267,14 +295,14 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_centro');
   }
 
-  bool _mapaPrincipal = true;
+  bool _mapaPrincipal = false;
   bool get mapaPrincipal => _mapaPrincipal;
   set mapaPrincipal(bool value) {
     _mapaPrincipal = value;
     prefs.setBool('ff_mapaPrincipal', value);
   }
 
-  bool _Global = false;
+  bool _Global = true;
   bool get Global => _Global;
   set Global(bool value) {
     _Global = value;
@@ -318,7 +346,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_recordar', value);
   }
 
-  bool _MapaGlobal = true;
+  bool _MapaGlobal = false;
   bool get MapaGlobal => _MapaGlobal;
   set MapaGlobal(bool value) {
     _MapaGlobal = value;
@@ -384,6 +412,73 @@ class FFAppState extends ChangeNotifier {
     collectionUse.insert(index, value);
     prefs.setStringList(
         'ff_collectionUse', _collectionUse.map((x) => x.path).toList());
+  }
+
+  double _Distancia = 0.0;
+  double get Distancia => _Distancia;
+  set Distancia(double value) {
+    _Distancia = value;
+    prefs.setDouble('ff_Distancia', value);
+  }
+
+  PlaceInfoStruct _ubication = PlaceInfoStruct();
+  PlaceInfoStruct get ubication => _ubication;
+  set ubication(PlaceInfoStruct value) {
+    _ubication = value;
+    prefs.setString('ff_ubication', value.serialize());
+  }
+
+  void updateUbicationStruct(Function(PlaceInfoStruct) updateFn) {
+    updateFn(_ubication);
+    prefs.setString('ff_ubication', _ubication.serialize());
+  }
+
+  LatLng? _startUbication;
+  LatLng? get startUbication => _startUbication;
+  set startUbication(LatLng? value) {
+    _startUbication = value;
+    value != null
+        ? prefs.setString('ff_startUbication', value.serialize())
+        : prefs.remove('ff_startUbication');
+  }
+
+  String _routeDistance = '';
+  String get routeDistance => _routeDistance;
+  set routeDistance(String value) {
+    _routeDistance = value;
+  }
+
+  String _routeDuration = '';
+  String get routeDuration => _routeDuration;
+  set routeDuration(String value) {
+    _routeDuration = value;
+  }
+
+  bool _Amigos = false;
+  bool get Amigos => _Amigos;
+  set Amigos(bool value) {
+    _Amigos = value;
+    prefs.setBool('ff_Amigos', value);
+  }
+
+  bool _Mapa = true;
+  bool get Mapa => _Mapa;
+  set Mapa(bool value) {
+    _Mapa = value;
+    prefs.setBool('ff_Mapa', value);
+  }
+
+  bool _Post = false;
+  bool get Post => _Post;
+  set Post(bool value) {
+    _Post = value;
+    prefs.setBool('ff_Post', value);
+  }
+
+  LatLng? _prueba = const LatLng(40.38025669999999, -3.637530599999999);
+  LatLng? get prueba => _prueba;
+  set prueba(LatLng? value) {
+    _prueba = value;
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

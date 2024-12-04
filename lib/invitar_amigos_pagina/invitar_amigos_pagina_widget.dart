@@ -29,7 +29,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'invitar_amigos_pagina'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -42,22 +42,20 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 0.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 54.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +78,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Icon(
                               Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).icono,
@@ -115,7 +113,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           '4ovqiul6' /* Enlace invitación */,
@@ -132,7 +130,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                   color: FlutterFlowTheme.of(context).secondary,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 1500),
+                              duration: const Duration(milliseconds: 1500),
                               backgroundColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
@@ -140,14 +138,14 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                           logFirebaseEvent('botonQuinto_copy_to_clipboard');
                           await Clipboard.setData(ClipboardData(
                               text:
-                                  'https://spolifeapp-15z0hb.flutterflow.app?userRef=${currentUserUid}'));
+                                  'https://spolifeapp-15z0hb.flutterflow.app?userRef=$currentUserUid'));
                         },
                       ),
                     ),
                     Builder(
                       builder: (context) => wrapWithModel(
                         model: _model.botonQuintoModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: BotonQuintoWidget(
                           texto: FFLocalizations.of(context).getText(
                             'kj3teqfz' /* Compartir enlace */,
@@ -157,7 +155,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                 'INVITAR_AMIGOS_PAGINA_Container_38j5tf3n');
                             logFirebaseEvent('botonQuinto_share');
                             await Share.share(
-                              'https://spolifeapp-15z0hb.flutterflow.app?userRef=${currentUserUid}',
+                              'https://spolifeapp-15z0hb.flutterflow.app?userRef=$currentUserUid',
                               sharePositionOrigin:
                                   getWidgetBoundingBox(context),
                             );
@@ -171,7 +169,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                                         FlutterFlowTheme.of(context).secondary,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 1500),
+                                duration: const Duration(milliseconds: 1500),
                                 backgroundColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
@@ -180,7 +178,7 @@ class _InvitarAmigosPaginaWidgetState extends State<InvitarAmigosPaginaWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ],
             ),

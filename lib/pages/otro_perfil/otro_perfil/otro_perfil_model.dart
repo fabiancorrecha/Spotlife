@@ -9,9 +9,12 @@ import 'otro_perfil_widget.dart' show OtroPerfilWidget;
 import 'package:flutter/material.dart';
 
 class OtroPerfilModel extends FlutterFlowModel<OtroPerfilWidget> {
+  ///  Local state fields for this page.
+
+  DocumentReference? refChat;
+
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for tarjetaOtroPerfil component.
   late TarjetaOtroPerfilModel tarjetaOtroPerfilModel;
   // Stores action output result for [Backend Call - Create Document] action in SiguiendoCuentaPrivada widget.
@@ -40,7 +43,6 @@ class OtroPerfilModel extends FlutterFlowModel<OtroPerfilWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tarjetaOtroPerfilModel.dispose();
     navBar2Model.dispose();
     postGridUsuariosModel.dispose();

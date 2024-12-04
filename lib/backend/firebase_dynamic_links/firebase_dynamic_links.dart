@@ -4,7 +4,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 
-const _kDynamicLinksUrl = 'https://spotlifeapp.page.link';
+const _kDynamicLinksUrl = 'https://spotlife.page.link';
 const _kAppBundleId = 'es.spotlife.app';
 const _kIosAppId = '1660300840';
 
@@ -31,7 +31,7 @@ Future<String> generateCurrentPageLink(
       imageUrl: imageUrl != null ? Uri.tryParse(imageUrl) : null,
     ),
     navigationInfoParameters: forceRedirect
-        ? NavigationInfoParameters(forcedRedirectEnabled: true)
+        ? const NavigationInfoParameters(forcedRedirectEnabled: true)
         : null,
   );
   return isShortLink
@@ -45,10 +45,10 @@ Future<String> generateCurrentPageLink(
 
 class DynamicLinksHandler extends StatefulWidget {
   const DynamicLinksHandler({
-    Key? key,
+    super.key,
     required this.router,
     required this.child,
-  }) : super(key: key);
+  });
 
   final GoRouter router;
   final Widget child;

@@ -26,7 +26,7 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'mapaFiltrarSpots'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -39,23 +39,21 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                 child: wrapWithModel(
                   model: _model.buscador01Model,
-                  updateCallback: () => setState(() {}),
-                  child: Buscador01Widget(
+                  updateCallback: () => safeSetState(() {}),
+                  child: const Buscador01Widget(
                     dosIconos: false,
                   ),
                 ),
@@ -68,16 +66,16 @@ class _MapaFiltrarSpotsWidgetState extends State<MapaFiltrarSpotsWidget> {
                   children: [
                     wrapWithModel(
                       model: _model.contentList02Model,
-                      updateCallback: () => setState(() {}),
-                      child: ContentList02Widget(),
+                      updateCallback: () => safeSetState(() {}),
+                      child: const ContentList02Widget(),
                     ),
                   ],
                 ),
               ),
               wrapWithModel(
                 model: _model.navBar1Model,
-                updateCallback: () => setState(() {}),
-                child: NavBar1Widget(
+                updateCallback: () => safeSetState(() {}),
+                child: const NavBar1Widget(
                   tabActiva: 0,
                 ),
               ),

@@ -1,11 +1,12 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/boton_quinto/boton_quinto_widget.dart';
+import '/components/cuenta_bloqueadas/cuenta_bloqueadas_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'privacidad_old_model.dart';
 export 'privacidad_old_model.dart';
 
@@ -32,7 +33,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
 
     _model.switchValue =
         valueOrDefault<bool>(currentUserDocument?.cuentaPrivada, false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,7 +50,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -57,13 +58,13 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +87,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: FlutterFlowTheme.of(context).icono,
@@ -116,9 +117,9 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'ctlxpn5c' /* Privacidad cuenta */,
@@ -135,7 +136,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -152,7 +153,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         borderRadius: BorderRadius.circular(12.0),
                         border: Border.all(
-                          color: Color(0xFF333333),
+                          color: const Color(0xFF333333),
                         ),
                       ),
                       child: Row(
@@ -160,7 +161,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -180,17 +181,17 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(1.0, 0.0),
+                            alignment: const AlignmentDirectional(1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: AuthUserStreamWidget(
                                 builder: (context) => Switch.adaptive(
                                   value: _model.switchValue!,
                                   onChanged: (newValue) async {
-                                    setState(
-                                        () => _model.switchValue = newValue!);
-                                    if (newValue!) {
+                                    safeSetState(
+                                        () => _model.switchValue = newValue);
+                                    if (newValue) {
                                       logFirebaseEvent(
                                           'PRIVACIDAD_OLD_Switch_h19z6yiz_ON_TOGGLE');
                                       logFirebaseEvent('Switch_backend_call');
@@ -230,7 +231,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                   if (!loggedIn)
                     wrapWithModel(
                       model: _model.botonQuintoModel1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'skf4b9bj' /* Privacidad Colecciones */,
@@ -241,7 +242,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                   if (!loggedIn)
                     wrapWithModel(
                       model: _model.botonQuintoModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
                           'tvtdh1md' /* Privacidad Spots */,
@@ -249,13 +250,13 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                         accion: () async {},
                       ),
                     ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'yoq9487e' /* Conexiones */,
@@ -276,7 +277,7 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
               children: [
                 wrapWithModel(
                   model: _model.botonQuintoModel3,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: BotonQuintoWidget(
                     texto: FFLocalizations.of(context).getText(
                       'h2f223ry' /* Usuarios bloqueados */,
@@ -284,13 +285,28 @@ class _PrivacidadOldWidgetState extends State<PrivacidadOldWidget> {
                     accion: () async {
                       logFirebaseEvent(
                           'PRIVACIDAD_OLD_Container_5qawsx3r_CALLBA');
-                      logFirebaseEvent('botonQuinto_navigate_to');
-
-                      context.pushNamed('cuentasBloqueadas');
+                      logFirebaseEvent('botonQuinto_bottom_sheet');
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return WebViewAware(
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 1.0,
+                                child: const CuentaBloqueadasWidget(),
+                              ),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
                     },
                   ),
                 ),
-              ].divide(SizedBox(height: 8.0)),
+              ].divide(const SizedBox(height: 8.0)),
             ),
           ],
         ),

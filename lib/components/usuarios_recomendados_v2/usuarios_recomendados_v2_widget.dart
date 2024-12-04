@@ -6,12 +6,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'usuarios_recomendados_v2_model.dart';
 export 'usuarios_recomendados_v2_model.dart';
 
@@ -45,7 +41,7 @@ class _UsuariosRecomendadosV2WidgetState
     super.initState();
     _model = createModel(context, () => UsuariosRecomendadosV2Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -78,13 +74,14 @@ class _UsuariosRecomendadosV2WidgetState
         }
         List<UsersRecord> containerUsersRecordList =
             snapshot.data!.where((u) => u.uid != currentUserUid).toList();
+
         return Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 26.0, 16.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 26.0, 16.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -111,15 +108,16 @@ class _UsuariosRecomendadosV2WidgetState
                             containerUsersRecordList
                                 .map((e) => e.reference)
                                 .toList(),
-                            (currentUserDocument?.listaBloqueados?.toList() ??
+                            (currentUserDocument?.listaBloqueados.toList() ??
                                     [])
                                 .toList(),
-                            (currentUserDocument?.listaSeguidos?.toList() ?? [])
+                            (currentUserDocument?.listaSeguidos.toList() ?? [])
                                 .toList())
                         .toList();
                     if (usariosRecomendadosFiltrados.isEmpty) {
-                      return ComponenteVacioWidget();
+                      return const ComponenteVacioWidget();
                     }
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -136,22 +134,24 @@ class _UsuariosRecomendadosV2WidgetState
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
-                              return Center(
-                                child: Container(
+                              return const Center(
+                                child: SizedBox(
                                   width: 1.0,
                                   height: 1.0,
                                   child: EmptyComponentWidget(),
                                 ),
                               );
                             }
+
                             final containerUsersRecord = snapshot.data!;
+
                             return Container(
                               width: double.infinity,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Visibility(
                                 visible: containerUsersRecord != null,
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -178,13 +178,13 @@ class _UsuariosRecomendadosV2WidgetState
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Container(
                                             width: 40.0,
                                             height: 40.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: Image.network(
@@ -264,7 +264,7 @@ class _UsuariosRecomendadosV2WidgetState
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 16.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -272,7 +272,7 @@ class _UsuariosRecomendadosV2WidgetState
                                                   'USUARIOS_RECOMENDADOS_V2_SEGUIR_BTN_ON_T');
                                               if (!(currentUserDocument
                                                           ?.listaSeguidos
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [])
                                                   .contains(
                                                       usariosRecomendadosFiltradosItem)) {
@@ -311,7 +311,7 @@ class _UsuariosRecomendadosV2WidgetState
 
                                               if ((currentUserDocument
                                                           ?.listaSeguidos
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [])
                                                   .contains(
                                                       usariosRecomendadosFiltradosItem)) {
@@ -366,7 +366,7 @@ class _UsuariosRecomendadosV2WidgetState
                                             },
                                             text: (currentUserDocument
                                                             ?.listaSeguidos
-                                                            ?.toList() ??
+                                                            .toList() ??
                                                         [])
                                                     .contains(
                                                         containerUsersRecord
@@ -376,14 +376,14 @@ class _UsuariosRecomendadosV2WidgetState
                                             options: FFButtonOptions(
                                               width: 93.0,
                                               height: 28.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: valueOrDefault<Color>(
                                                 (currentUserDocument
                                                                 ?.listaSeguidos
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         .contains(
                                                             containerUsersRecord
@@ -414,7 +414,7 @@ class _UsuariosRecomendadosV2WidgetState
                                                                     .bodySmallFamily),
                                                       ),
                                               elevation: 2.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),

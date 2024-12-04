@@ -3,9 +3,12 @@ import '/backend/backend.dart';
 import '/components/boton1/boton1_widget.dart';
 import '/components/mas_opciones/mas_opciones_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -33,8 +36,24 @@ class _CrearCuentaTelefonoValidacionWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'crearCuentaTelefonoValidacion'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CREAR_CUENTA_TELEFONO_VALIDACION_crearCu');
+      logFirebaseEvent('crearCuentaTelefonoValidacion_timer');
+      _model.timerController.onStartTimer();
+      while (_model.confirmacion == 'SinConfirmar') {
+        logFirebaseEvent('crearCuentaTelefonoValidacion_wait__dela');
+        await Future.delayed(const Duration(milliseconds: 120000));
+        logFirebaseEvent('crearCuentaTelefonoValidacion_timer');
+        _model.timerController.onResetTimer();
+
+        logFirebaseEvent('crearCuentaTelefonoValidacion_timer');
+        _model.timerController.onStartTimer();
+      }
+    });
+
     authManager.handlePhoneAuthStateChanges(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,36 +68,37 @@ class _CrearCuentaTelefonoValidacionWidgetState
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  'exdvfadm' /* Crear Cuenta */,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(54.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FFLocalizations.of(context).getText(
+                    'exdvfadm' /* Crear Cuenta */,
+                  ),
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).displaySmallFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).displaySmallFamily),
-                    ),
-              ),
-            ],
+              ],
+            ),
+            actions: const [],
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: Container(
           width: double.infinity,
@@ -87,13 +107,13 @@ class _CrearCuentaTelefonoValidacionWidgetState
             color: FlutterFlowTheme.of(context).primaryBackground,
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(37.0, 16.0, 37.0, 32.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -116,61 +136,83 @@ class _CrearCuentaTelefonoValidacionWidgetState
                     ],
                   ),
                 ),
-                PinCodeTextField(
-                  autoDisposeControllers: false,
-                  appContext: context,
-                  length: 6,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).titleSmallFamily,
-                        color: FlutterFlowTheme.of(context).secondary,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).titleSmallFamily),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 100.0,
+                            child: custom_widgets.RoundedWithShadow(
+                              width: double.infinity,
+                              height: 100.0,
+                              codigoPin: (valorDelCodigo) async {
+                                logFirebaseEvent(
+                                    'CREAR_CUENTA_TELEFONO_VALIDACION_Contain');
+                                logFirebaseEvent(
+                                    'RoundedWithShadow_update_page_state');
+                                _model.codigo = valorDelCodigo;
+                                safeSetState(() {});
+                              },
+                            ),
+                          ),
+                        ),
                       ),
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  enableActiveFill: true,
-                  autoFocus: true,
-                  enablePinAutofill: true,
-                  errorTextSpace: 16.0,
-                  showCursor: true,
-                  cursorColor: FlutterFlowTheme.of(context).primary,
-                  obscureText: false,
-                  hintCharacter: '-',
-                  pinTheme: PinTheme(
-                    fieldHeight: 50.0,
-                    fieldWidth: 40.0,
-                    borderWidth: 2.0,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                      topLeft: Radius.circular(12.0),
-                      topRight: Radius.circular(12.0),
-                    ),
-                    shape: PinCodeFieldShape.box,
-                    activeColor: FlutterFlowTheme.of(context).primary,
-                    inactiveColor: Color(0xFF333333),
-                    selectedColor: FlutterFlowTheme.of(context).secondaryText,
-                    activeFillColor: FlutterFlowTheme.of(context).primary,
-                    inactiveFillColor: Color(0xFF333333),
-                    selectedFillColor:
-                        FlutterFlowTheme.of(context).secondaryText,
+                    ],
                   ),
-                  controller: _model.pinCodeController,
-                  onChanged: (_) {},
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator:
-                      _model.pinCodeControllerValidator.asValidator(context),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FlutterFlowTimer(
+                        initialTime: _model.timerInitialTimeMs,
+                        getDisplayTime: (value) =>
+                            StopWatchTimer.getDisplayTime(
+                          value,
+                          hours: false,
+                          milliSecond: false,
+                        ),
+                        controller: _model.timerController,
+                        updateStateInterval: const Duration(milliseconds: 1000),
+                        onChanged: (value, displayTime, shouldUpdate) {
+                          _model.timerMilliseconds = value;
+                          _model.timerValue = displayTime;
+                          if (shouldUpdate) safeSetState(() {});
+                        },
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context)
+                            .headlineSmall
+                            .override(
+                              fontFamily: FlutterFlowTheme.of(context)
+                                  .headlineSmallFamily,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 30.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w200,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .headlineSmallFamily),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'x2ytelhm' /* ¿No recibiste un SMS? */,
@@ -196,14 +238,13 @@ class _CrearCuentaTelefonoValidacionWidgetState
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             logFirebaseEvent(
-                                'CREAR_CUENTA_TELEFONO_VALIDACION_Text_9t');
-                            logFirebaseEvent('Text_auth');
+                                'CREAR_CUENTA_TELEFONO_VALIDACION_Contain');
+                            logFirebaseEvent('Container_auth');
                             final phoneNumberVal = FFAppState().phoneNumber;
-                            if (phoneNumberVal == null ||
-                                phoneNumberVal.isEmpty ||
+                            if (phoneNumberVal.isEmpty ||
                                 !phoneNumberVal.startsWith('+')) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text(
                                       'Phone Number is required and has to start with +.'),
                                 ),
@@ -222,23 +263,32 @@ class _CrearCuentaTelefonoValidacionWidgetState
                               },
                             );
                           },
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'sv27xsus' /* Enviar de nuevo */,
-                            ),
-                            textAlign: TextAlign.end,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.underline,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: const BoxDecoration(),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'sv27xsus' /* Enviar de nuevo */,
                                 ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                      decoration: TextDecoration.underline,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -246,7 +296,7 @@ class _CrearCuentaTelefonoValidacionWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -262,19 +312,15 @@ class _CrearCuentaTelefonoValidacionWidgetState
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
-                            barrierColor: Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             context: context,
                             builder: (context) {
                               return WebViewAware(
                                 child: GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
+                                  onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: Container(
+                                    child: const SizedBox(
                                       height: 420.0,
                                       child: MasOpcionesWidget(),
                                     ),
@@ -308,20 +354,19 @@ class _CrearCuentaTelefonoValidacionWidgetState
                 ),
                 wrapWithModel(
                   model: _model.boton1Model,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: Boton1Widget(
                     texto: 'Continuar',
-                    desabilitado: _model.pinCodeController!.text == null ||
-                        _model.pinCodeController!.text == '',
+                    desabilitado: false,
                     accion: () async {
                       logFirebaseEvent(
                           'CREAR_CUENTA_TELEFONO_VALIDACION_Contain');
                       logFirebaseEvent('boton1_auth');
                       GoRouter.of(context).prepareAuthEvent();
-                      final smsCodeVal = _model.pinCodeController!.text;
+                      final smsCodeVal = _model.codigo;
                       if (smsCodeVal == null || smsCodeVal.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Enter SMS verification code.'),
                           ),
                         );

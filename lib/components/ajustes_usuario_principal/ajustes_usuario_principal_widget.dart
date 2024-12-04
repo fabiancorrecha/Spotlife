@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/boton3/boton3_widget.dart';
 import '/components/boton4/boton4_widget.dart';
@@ -8,8 +7,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'ajustes_usuario_principal_model.dart';
 export 'ajustes_usuario_principal_model.dart';
@@ -37,7 +34,7 @@ class _AjustesUsuarioPrincipalWidgetState
     super.initState();
     _model = createModel(context, () => AjustesUsuarioPrincipalModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,7 +51,7 @@ class _AjustesUsuarioPrincipalWidgetState
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -62,14 +59,14 @@ class _AjustesUsuarioPrincipalWidgetState
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(37.0, 24.0, 37.0, 34.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +106,7 @@ class _AjustesUsuarioPrincipalWidgetState
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Icon(
                             Icons.close_rounded,
                             color: FlutterFlowTheme.of(context).icono,
@@ -125,10 +122,10 @@ class _AjustesUsuarioPrincipalWidgetState
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model1,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.ksettings,
@@ -144,14 +141,14 @@ class _AjustesUsuarioPrincipalWidgetState
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
-                            barrierColor: Color(0x00000000),
+                            barrierColor: const Color(0x00000000),
                             enableDrag: false,
                             context: context,
                             builder: (context) {
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
+                                  child: const SizedBox(
                                     height: 600.0,
                                     child: ConfiguracionOldWidget(),
                                   ),
@@ -164,10 +161,10 @@ class _AjustesUsuarioPrincipalWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kstarLines,
@@ -188,10 +185,10 @@ class _AjustesUsuarioPrincipalWidgetState
                   ),
                   if (!loggedIn)
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: wrapWithModel(
                         model: _model.boton3Model3,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton3Widget(
                           icono: Icon(
                             FFIcons.kusers,
@@ -205,10 +202,10 @@ class _AjustesUsuarioPrincipalWidgetState
                       ),
                     ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: wrapWithModel(
                       model: _model.boton3Model4,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton3Widget(
                         icono: Icon(
                           FFIcons.kimbox,
@@ -230,7 +227,7 @@ class _AjustesUsuarioPrincipalWidgetState
                               return WebViewAware(
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: DarFeedbackWidget(),
+                                  child: const DarFeedbackWidget(),
                                 ),
                               );
                             },
@@ -239,17 +236,17 @@ class _AjustesUsuarioPrincipalWidgetState
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     if (!loggedIn)
                       wrapWithModel(
                         model: _model.boton4Model1,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: Boton4Widget(
                           icono: Icon(
                             FFIcons.kaddUser,
@@ -265,7 +262,7 @@ class _AjustesUsuarioPrincipalWidgetState
                       ),
                     wrapWithModel(
                       model: _model.boton4Model2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: Boton4Widget(
                         icono: Icon(
                           FFIcons.klogOut,
@@ -288,7 +285,7 @@ class _AjustesUsuarioPrincipalWidgetState
                         },
                       ),
                     ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ),
             ],

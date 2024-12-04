@@ -1,9 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import 'editar_post_widget.dart' show EditarPostWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
@@ -26,17 +23,28 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
-  final formKey = GlobalKey<FormState>();
-  // State field(s) for DescreipcionPost widget.
-  FocusNode? descreipcionPostFocusNode;
-  TextEditingController? descreipcionPostTextController;
-  String? Function(BuildContext, String?)?
-      descreipcionPostTextControllerValidator;
-  // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = FFPlace();
-  // State field(s) for RadioButton widget.
-  FormFieldController<String>? radioButtonValueController;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode1;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController2;
+  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue1;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue2;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue3;
+  // State field(s) for CheckboxPublico widget.
+  Map<CollectionsRecord, bool> checkboxPublicoValueMap = {};
+  List<CollectionsRecord> get checkboxPublicoCheckedItems =>
+      checkboxPublicoValueMap.entries
+          .where((e) => e.value)
+          .map((e) => e.key)
+          .toList();
+
   // State field(s) for Switch widget.
   bool? switchValue1;
   // State field(s) for Switch widget.
@@ -49,11 +57,10 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
-    descreipcionPostFocusNode?.dispose();
-    descreipcionPostTextController?.dispose();
-  }
+    textFieldFocusNode1?.dispose();
+    textController1?.dispose();
 
-  /// Additional helper methods.
-  String? get radioButtonValue => radioButtonValueController?.value;
+    textFieldFocusNode2?.dispose();
+    textController2?.dispose();
+  }
 }

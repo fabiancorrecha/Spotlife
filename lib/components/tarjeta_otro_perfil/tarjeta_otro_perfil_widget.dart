@@ -3,6 +3,7 @@ import '/components/menu_otro_perfil/menu_otro_perfil_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +41,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
     super.initState();
     _model = createModel(context, () => TarjetaOtroPerfilModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -71,8 +72,10 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
             ),
           );
         }
+
         final stackUsersRecord = snapshot.data!;
-        return Container(
+
+        return SizedBox(
           height: 314.0,
           child: Stack(
             children: [
@@ -89,8 +92,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                   ),
                 ),
                 child: Visibility(
-                  visible: stackUsersRecord.bgURL != null &&
-                      stackUsersRecord.bgURL != '',
+                  visible: stackUsersRecord.bgURL != '',
                   child: Image.network(
                     stackUsersRecord.bgURL,
                     width: 100.0,
@@ -105,12 +107,12 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color(0x751A1A1A),
+                      const Color(0x751A1A1A),
                       FlutterFlowTheme.of(context).primaryBackground
                     ],
-                    stops: [0.5, 0.9],
-                    begin: AlignmentDirectional(0.0, -1.0),
-                    end: AlignmentDirectional(0, 1.0),
+                    stops: const [0.5, 0.9],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
                   ),
                 ),
               ),
@@ -138,18 +140,19 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                   }
                   List<UserPostsRecord> containerInfoUserPostsRecordList =
                       snapshot.data!;
+
                   return Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: Container(
                               width: 100.0,
@@ -160,15 +163,14 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                     FlutterFlowTheme.of(context).primary,
                                     FlutterFlowTheme.of(context).secondary
                                   ],
-                                  stops: [0.0, 1.0],
-                                  begin: AlignmentDirectional(0.0, -1.0),
-                                  end: AlignmentDirectional(0, 1.0),
+                                  stops: const [0.0, 1.0],
+                                  begin: const AlignmentDirectional(0.0, -1.0),
+                                  end: const AlignmentDirectional(0, 1.0),
                                 ),
                                 borderRadius: BorderRadius.circular(100.0),
                               ),
                               child: Visibility(
-                                visible: stackUsersRecord.photoUrl != null &&
-                                    stackUsersRecord.photoUrl != '',
+                                visible: stackUsersRecord.photoUrl != '',
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -187,8 +189,12 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                       PageTransition(
                                         type: PageTransitionType.fade,
                                         child: FlutterFlowExpandedImageView(
-                                          image: Image.network(
-                                            valueOrDefault<String>(
+                                          image: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(milliseconds: 500),
+                                            fadeOutDuration:
+                                                const Duration(milliseconds: 500),
+                                            imageUrl: valueOrDefault<String>(
                                               stackUsersRecord.photoUrl,
                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                                             ),
@@ -214,11 +220,15 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                       width: 113.0,
                                       height: 113.0,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            const Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            const Duration(milliseconds: 500),
+                                        imageUrl: valueOrDefault<String>(
                                           stackUsersRecord.photoUrl,
                                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                                         ),
@@ -236,7 +246,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
                                     stackUsersRecord.displayName,
@@ -260,7 +270,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 100.0, 0.0, 100.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -268,7 +278,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Text(
                                       stackUsersRecord.bio,
@@ -293,7 +303,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 100.0, 0.0, 100.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -301,7 +311,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -342,18 +352,18 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 16.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 2.0, 0.0),
                                   child: Container(
                                     height: 100.0,
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       maxWidth: 177.0,
                                       maxHeight: 40.0,
                                     ),
@@ -409,11 +419,11 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 2.0, 0.0),
                                   child: Container(
                                     height: 100.0,
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       maxWidth: 177.0,
                                       maxHeight: 40.0,
                                     ),
@@ -443,7 +453,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                         logFirebaseEvent(
                                             'Column_update_app_state');
                                         FFAppState().indexTabFollow = '1';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -497,11 +507,11 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 2.0, 0.0),
                                   child: Container(
                                     height: 100.0,
-                                    constraints: BoxConstraints(
+                                    constraints: const BoxConstraints(
                                       maxWidth: 177.0,
                                       maxHeight: 40.0,
                                     ),
@@ -531,7 +541,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                                         logFirebaseEvent(
                                             'Column_update_app_state');
                                         FFAppState().indexTabFollow = '0';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -594,7 +604,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                 },
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -613,7 +623,7 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Icon(
                         Icons.arrow_back,
                         color: FlutterFlowTheme.of(context).icono,
@@ -624,9 +634,9 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(1.0, -1.0),
+                alignment: const AlignmentDirectional(1.0, -1.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 16.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -639,14 +649,14 @@ class _TarjetaOtroPerfilWidgetState extends State<TarjetaOtroPerfilWidget> {
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Color(0x00000000),
+                        barrierColor: const Color(0x00000000),
                         enableDrag: false,
                         context: context,
                         builder: (context) {
                           return WebViewAware(
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
+                              child: SizedBox(
                                 height: 256.0,
                                 child: MenuOtroPerfilWidget(
                                   user: widget.usuario,

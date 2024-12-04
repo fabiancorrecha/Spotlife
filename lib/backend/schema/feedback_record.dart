@@ -1,18 +1,19 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class FeedbackRecord extends FirestoreRecord {
   FeedbackRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -63,6 +64,47 @@ class FeedbackRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       FeedbackRecord._(reference, mapFromFirestore(data));
+
+  static FeedbackRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      FeedbackRecord.getDocumentFromData(
+        {
+          'Usuario': convertAlgoliaParam(
+            snapshot.data['Usuario'],
+            ParamType.DocumentReference,
+            false,
+          ),
+          'rating': convertAlgoliaParam(
+            snapshot.data['rating'],
+            ParamType.double,
+            false,
+          ),
+          'coment': snapshot.data['coment'],
+          'Spotlife': convertAlgoliaParam(
+            snapshot.data['Spotlife'],
+            ParamType.DocumentReference,
+            false,
+          ),
+        },
+        FeedbackRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<FeedbackRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'Feedback',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

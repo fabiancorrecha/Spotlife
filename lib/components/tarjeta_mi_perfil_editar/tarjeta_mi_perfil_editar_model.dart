@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 class TarjetaMiPerfilEditarModel
     extends FlutterFlowModel<TarjetaMiPerfilEditarWidget> {
+  ///  Local state fields for this component.
+
+  bool verMensaje = false;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();

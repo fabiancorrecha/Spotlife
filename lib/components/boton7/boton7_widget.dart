@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:provider/provider.dart';
 import 'boton7_model.dart';
 export 'boton7_model.dart';
 
@@ -34,7 +32,7 @@ class _Boton7WidgetState extends State<Boton7Widget> {
     super.initState();
     _model = createModel(context, () => Boton7Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -58,8 +56,8 @@ class _Boton7WidgetState extends State<Boton7Widget> {
       options: FFButtonOptions(
         width: double.infinity,
         height: 50.0,
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         color: FlutterFlowTheme.of(context).fondoIcono,
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
@@ -70,7 +68,7 @@ class _Boton7WidgetState extends State<Boton7Widget> {
                   .containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
             ),
         elevation: 2.0,
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Colors.transparent,
           width: 1.0,
         ),

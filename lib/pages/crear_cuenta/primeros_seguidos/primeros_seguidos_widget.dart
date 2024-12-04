@@ -29,7 +29,7 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'primerosSeguidos'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,30 +44,28 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 18.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Container(
                         width: 118.0,
                         height: 42.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Image.asset(
                           'assets/images/Spotlife_logo_white.png',
                           width: 100.0,
@@ -85,12 +83,12 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                       ),
                       wrapWithModel(
                         model: _model.usuariosRecomendadosModel,
-                        updateCallback: () => setState(() {}),
-                        child: UsuariosRecomendadosWidget(),
+                        updateCallback: () => safeSetState(() {}),
+                        child: const UsuariosRecomendadosWidget(),
                       ),
                       if (FFAppState().indexTabFollow == '0')
                         AuthUserStreamWidget(
@@ -98,13 +96,14 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
                             builder: (context) {
                               final usuariosSegudos = (currentUserDocument
                                           ?.listaSeguidos
-                                          ?.toList() ??
+                                          .toList() ??
                                       [])
                                   .map((e) => e)
                                   .toList();
                               if (usuariosSegudos.isEmpty) {
-                                return ComponenteVacioWidget();
+                                return const ComponenteVacioWidget();
                               }
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
@@ -131,7 +130,7 @@ class _PrimerosSeguidosWidgetState extends State<PrimerosSeguidosWidget> {
               ),
               wrapWithModel(
                 model: _model.boton1Model,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: Boton1Widget(
                   texto: 'Continuar',
                   desabilitado: false,

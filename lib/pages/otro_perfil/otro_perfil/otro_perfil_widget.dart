@@ -10,8 +10,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-// ignore: unnecessary_import
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'otro_perfil_model.dart';
@@ -40,7 +38,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
     _model = createModel(context, () => OtroPerfilModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'otroPerfil'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,22 +70,22 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
             ),
           );
         }
+
         final otroPerfilUsersRecord = snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   wrapWithModel(
                     model: _model.tarjetaOtroPerfilModel,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: TarjetaOtroPerfilWidget(
                       usuario: widget.perfilAjeno,
                       pageLink: 'a',
@@ -95,10 +93,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                   ),
                   Stack(
                     children: [
-                      if ((currentUserDocument?.listaBloqueados?.toList() ?? [])
+                      if ((currentUserDocument?.listaBloqueados.toList() ?? [])
                           .contains(widget.perfilAjeno))
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => Row(
@@ -115,10 +113,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                     options: FFButtonOptions(
                                       width: double.infinity,
                                       height: 35.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context)
                                           .fondoIcono,
@@ -137,7 +135,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                         .bodyMediumFamily),
                                           ),
                                       elevation: 2.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -149,11 +147,11 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                             ),
                           ),
                         ),
-                      if (!(currentUserDocument?.listaBloqueados?.toList() ??
+                      if (!(currentUserDocument?.listaBloqueados.toList() ??
                               [])
                           .contains(widget.perfilAjeno))
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => Row(
@@ -166,7 +164,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                           false)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 4.0, 0.0),
                                           child: StreamBuilder<
                                               List<ActividadRecord>>(
@@ -222,16 +220,17 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                       ? siguiendoCuentaPublicaActividadRecordList
                                                           .first
                                                       : null;
+
                                               return FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
                                                       'OTRO_PERFIL_SiguiendoCuentaPublica_ON_TA');
                                                   if (!(currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPublica_backend_call');
 
@@ -267,10 +266,10 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
 
                                                   if ((currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPublica_backend_call');
 
@@ -376,7 +375,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 },
                                                 text: (currentUserDocument
                                                                 ?.listaSeguidos
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         .contains(
                                                             widget.perfilAjeno)
@@ -385,16 +384,16 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 options: FFButtonOptions(
                                                   width: double.infinity,
                                                   height: 35.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: (currentUserDocument
                                                                   ?.listaSeguidos
-                                                                  ?.toList() ??
+                                                                  .toList() ??
                                                               [])
                                                           .contains(widget
                                                               .perfilAjeno)
@@ -425,7 +424,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                                   elevation: 2.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -441,7 +440,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                           true)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 4.0, 0.0),
                                           child: StreamBuilder<
                                               List<ActividadRecord>>(
@@ -497,16 +496,17 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                       ? siguiendoCuentaPrivadaActividadRecordList
                                                           .first
                                                       : null;
+
                                               return FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
                                                       'OTRO_PERFIL_SiguiendoCuentaPrivada_ON_TA');
                                                   if (!(currentUserDocument
                                                               ?.listadeUsuarioenEspera
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     logFirebaseEvent(
                                                         'SiguiendoCuentaPrivada_backend_call');
 
@@ -643,22 +643,22 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                     }.withoutNulls,
                                                   );
 
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 },
                                                 text: () {
                                                   if ((currentUserDocument
                                                               ?.listadeUsuarioenEspera
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     return 'Pendiente';
                                                   } else if ((currentUserDocument
                                                               ?.listaSeguidos
-                                                              ?.toList() ??
+                                                              .toList() ??
                                                           [])
-                                                      .contains(
-                                                          widget.perfilAjeno)) {
+                                                      .contains(widget
+                                                          .perfilAjeno)) {
                                                     return 'Siguiendo';
                                                   } else {
                                                     return 'Seguir';
@@ -667,16 +667,16 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                 options: FFButtonOptions(
                                                   width: double.infinity,
                                                   height: 35.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: (currentUserDocument
                                                                   ?.listaSeguidos
-                                                                  ?.toList() ??
+                                                                  .toList() ??
                                                               [])
                                                           .contains(widget
                                                               .perfilAjeno)
@@ -707,7 +707,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                                                     .bodyMediumFamily),
                                                       ),
                                                   elevation: 2.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -725,115 +725,197 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4.0, 0.0, 0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'OTRO_PERFIL_ENVIAR_MENSAJE_BTN_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Button_backend_call');
-
-                                          var chatsRecordReference =
-                                              ChatsRecord.collection.doc();
-                                          await chatsRecordReference.set({
-                                            ...createChatsRecordData(
-                                              timeStamp: getCurrentTimestamp,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'userIds': functions
-                                                    .generateListOfUsers(
-                                                        currentUserReference!,
-                                                        otroPerfilUsersRecord
-                                                            .reference),
-                                                'userNames': functions
-                                                    .generateListOfNames(
-                                                        currentUserDisplayName,
-                                                        otroPerfilUsersRecord
-                                                            .displayName),
-                                              },
-                                            ),
-                                          });
-                                          _model.refChats =
-                                              ChatsRecord.getDocumentFromData({
-                                            ...createChatsRecordData(
-                                              timeStamp: getCurrentTimestamp,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'userIds': functions
-                                                    .generateListOfUsers(
-                                                        currentUserReference!,
-                                                        otroPerfilUsersRecord
-                                                            .reference),
-                                                'userNames': functions
-                                                    .generateListOfNames(
-                                                        currentUserDisplayName,
-                                                        otroPerfilUsersRecord
-                                                            .displayName),
-                                              },
-                                            ),
-                                          }, chatsRecordReference);
-                                          logFirebaseEvent(
-                                              'Button_navigate_to');
-
-                                          context.pushNamed(
-                                            'ChatPage',
-                                            queryParameters: {
-                                              'receiveChat': serializeParam(
-                                                _model.refChats?.reference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          logFirebaseEvent(
-                                              'Button_bottom_sheet');
-                                          Navigator.pop(context);
-
-                                          setState(() {});
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'v4jg68ds' /* Enviar mensaje */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 150.0,
-                                          height: 35.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .fondoIcono,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                          elevation: 2.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
+                                    StreamBuilder<List<ChatsRecord>>(
+                                      stream: queryChatsRecord(
+                                        queryBuilder: (chatsRecord) =>
+                                            chatsRecord.where(Filter.or(
+                                          Filter(
+                                            'user_a',
+                                            isEqualTo: currentUserReference,
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(80.0),
-                                        ),
+                                          Filter(
+                                            'user_b',
+                                            isEqualTo: widget.perfilAjeno,
+                                          ),
+                                          Filter(
+                                            'user_a',
+                                            isEqualTo: widget.perfilAjeno,
+                                          ),
+                                          Filter(
+                                            'user_b',
+                                            isEqualTo: currentUserReference,
+                                          ),
+                                        )),
+                                        singleRecord: true,
                                       ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 12.0,
+                                              height: 12.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ChatsRecord>
+                                            buttonChatsRecordList =
+                                            snapshot.data!;
+                                        final buttonChatsRecord =
+                                            buttonChatsRecordList.isNotEmpty
+                                                ? buttonChatsRecordList.first
+                                                : null;
+
+                                        return FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'OTRO_PERFIL_ENVIAR_MENSAJE_BTN_ON_TAP');
+                                            var shouldSetState = false;
+                                            if (buttonChatsRecord != null) {
+                                              logFirebaseEvent(
+                                                  'Button_navigate_to');
+
+                                              context.goNamed(
+                                                'ChatPage',
+                                                queryParameters: {
+                                                  'receiveChat': serializeParam(
+                                                    buttonChatsRecord
+                                                        .reference,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+
+                                              if (shouldSetState) {
+                                                safeSetState(() {});
+                                              }
+                                              return;
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+
+                                              var chatsRecordReference =
+                                                  ChatsRecord.collection.doc();
+                                              await chatsRecordReference.set({
+                                                ...createChatsRecordData(
+                                                  timeStamp:
+                                                      getCurrentTimestamp,
+                                                  userA: currentUserReference,
+                                                  userB: widget.perfilAjeno,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'userIds': functions
+                                                        .generateListOfUsers(
+                                                            currentUserReference!,
+                                                            otroPerfilUsersRecord
+                                                                .reference),
+                                                    'userNames': functions
+                                                        .generateListOfNames(
+                                                            currentUserDisplayName,
+                                                            otroPerfilUsersRecord
+                                                                .displayName),
+                                                  },
+                                                ),
+                                              });
+                                              _model.refChats = ChatsRecord
+                                                  .getDocumentFromData({
+                                                ...createChatsRecordData(
+                                                  timeStamp:
+                                                      getCurrentTimestamp,
+                                                  userA: currentUserReference,
+                                                  userB: widget.perfilAjeno,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'userIds': functions
+                                                        .generateListOfUsers(
+                                                            currentUserReference!,
+                                                            otroPerfilUsersRecord
+                                                                .reference),
+                                                    'userNames': functions
+                                                        .generateListOfNames(
+                                                            currentUserDisplayName,
+                                                            otroPerfilUsersRecord
+                                                                .displayName),
+                                                  },
+                                                ),
+                                              }, chatsRecordReference);
+                                              shouldSetState = true;
+                                              logFirebaseEvent(
+                                                  'Button_navigate_to');
+
+                                              context.goNamed(
+                                                'ChatPage',
+                                                queryParameters: {
+                                                  'receiveChat': serializeParam(
+                                                    _model.refChats?.reference,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+
+                                              if (shouldSetState) {
+                                                safeSetState(() {});
+                                              }
+                                              return;
+                                            }
+
+                                            if (shouldSetState) {
+                                              safeSetState(() {});
+                                            }
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            't3mj9plw' /* Enviar mensaje */,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 150.0,
+                                            height: 35.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .fondoIcono,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmallFamily,
+                                                      color: Colors.white,
+                                                      fontSize: 16.0,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily),
+                                                    ),
+                                            elevation: 2.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(80.0),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -861,7 +943,7 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                   }())
                     wrapWithModel(
                       model: _model.navBar2Model,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: NavBar2Widget(
                         otroUsuario: widget.perfilAjeno,
                       ),
@@ -892,10 +974,12 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                               ),
                             );
                           }
+
                           final postGridUsuariosUsersRecord = snapshot.data!;
+
                           return wrapWithModel(
                             model: _model.postGridUsuariosModel,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: PostGridUsuarioWidget(
                               usuario: widget.perfilAjeno,
                             ),
@@ -903,22 +987,22 @@ class _OtroPerfilWidgetState extends State<OtroPerfilWidget> {
                         },
                       ),
                     ),
-                  if (otroPerfilUsersRecord.cuentaPrivada == true
-                      ? !otroPerfilUsersRecord.listaSeguidores
-                          .contains(currentUserReference)
-                      : otroPerfilUsersRecord.listaSeguidores
-                          .contains(currentUserReference))
+                  if ((otroPerfilUsersRecord.cuentaPrivada == true) &&
+                      !(currentUserDocument?.listaSeguidos.toList() ?? [])
+                          .contains(otroPerfilUsersRecord.reference))
                     Expanded(
-                      child: wrapWithModel(
-                        model: _model.componentePerfilPrivadoModel,
-                        updateCallback: () => setState(() {}),
-                        child: ComponentePerfilPrivadoWidget(),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => wrapWithModel(
+                          model: _model.componentePerfilPrivadoModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: const ComponentePerfilPrivadoWidget(),
+                        ),
                       ),
                     ),
                   wrapWithModel(
                     model: _model.navBar1Model,
-                    updateCallback: () => setState(() {}),
-                    child: NavBar1Widget(
+                    updateCallback: () => safeSetState(() {}),
+                    child: const NavBar1Widget(
                       tabActiva: 0,
                     ),
                   ),

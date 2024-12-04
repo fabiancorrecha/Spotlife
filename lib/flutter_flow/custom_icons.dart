@@ -8,8 +8,11 @@ class FFIcons {
   static const String _lote3Family = 'Lote3';
   static const String _lote4Family = 'Lote4';
   static const String _lote5Family = 'Lote5';
+  static const String _lote6Family = 'Lote6';
   static const String _lote7Family = 'Lote7';
   static const String _pageIconFamily = 'PageIcon';
+  static const String _iconPinFamily = 'IconPin';
+  static const String _iconosMetaEnergiaFamily = 'IconosMetaEnergia';
 
   // SpotfileIcons
   static const IconData kcollection =
@@ -112,4 +115,10 @@ class FFIcons {
   static const IconData kpageFill =
       IconData(0xe900, fontFamily: _pageIconFamily);
   static const IconData kpageO = IconData(0xe901, fontFamily: _pageIconFamily);
+
+  // IconPin
+
+  // IconosMetaEnergia
+  static const IconData kframe =
+      IconData(0xe900, fontFamily: _iconosMetaEnergiaFamily);
 }
