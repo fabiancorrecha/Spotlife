@@ -106,7 +106,8 @@ class _CrearColeccionSinPostWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 16.0, 16.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 16.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,8 +176,8 @@ class _CrearColeccionSinPostWidgetState
               Container(
                 decoration: const BoxDecoration(),
                 child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      16.0, 0.0, 16.0, 16.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -291,9 +292,8 @@ class _CrearColeccionSinPostWidgetState
                       Expanded(
                         child: Builder(
                           builder: (context) {
-                            final imagenes = (widget.image?.toList() ?? [])
-                                .take(1)
-                                .toList();
+                            final imagenes =
+                                (widget.image?.toList() ?? []).take(1).toList();
 
                             return SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -371,7 +371,8 @@ class _CrearColeccionSinPostWidgetState
                                       }
                                     },
                                     child: Stack(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment:
+                                          const AlignmentDirectional(0.0, 0.0),
                                       children: [
                                         Container(
                                           width: 96.0,
@@ -388,8 +389,8 @@ class _CrearColeccionSinPostWidgetState
                                               width: 2.0,
                                             ),
                                           ),
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                          alignment: const AlignmentDirectional(
+                                              0.0, 0.0),
                                           child: Icon(
                                             Icons.upload_outlined,
                                             color: FlutterFlowTheme.of(context)
@@ -415,7 +416,8 @@ class _CrearColeccionSinPostWidgetState
                                               ),
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(
+                                                    0.0, 0.0),
                                             child: FaIcon(
                                               FontAwesomeIcons.circleNotch,
                                               color:
@@ -444,11 +446,12 @@ class _CrearColeccionSinPostWidgetState
                                               ),
                                             ),
                                             child: Visibility(
-                                              visible: (_model.uploadedFileUrl !=
+                                              visible:
+                                                  (_model.uploadedFileUrl !=
                                                           '') ||
-                                                  (widget.image != null &&
-                                                      (widget.image)!
-                                                          .isNotEmpty),
+                                                      (widget.image != null &&
+                                                          (widget.image)!
+                                                              .isNotEmpty),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(4.0),
@@ -476,7 +479,8 @@ class _CrearColeccionSinPostWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -571,13 +575,14 @@ class _CrearColeccionSinPostWidgetState
                 color: Color(0x27FAF7FA),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -608,7 +613,8 @@ class _CrearColeccionSinPostWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
                 child: Container(
                   decoration: const BoxDecoration(),
                   child: Column(
@@ -896,13 +902,14 @@ class _CrearColeccionSinPostWidgetState
                 color: Color(0x27FAF7FA),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -995,7 +1002,8 @@ class _CrearColeccionSinPostWidgetState
                 desktop: false,
               ))
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -1056,8 +1064,7 @@ class _CrearColeccionSinPostWidgetState
                 updateCallback: () => safeSetState(() {}),
                 child: Boton1Widget(
                   texto: 'Crear',
-                  desabilitado:
-                      _model.tituloColeccionTextController.text == '',
+                  desabilitado: _model.tituloColeccionTextController.text == '',
                   accion: () async {
                     logFirebaseEvent(
                         'CREAR_COLECCION_SIN_POST_Container_7ji7l');
@@ -1089,7 +1096,7 @@ class _CrearColeccionSinPostWidgetState
                           state: _model.placePickerValue.state,
                           country: _model.placePickerValue.country,
                           zipcode: _model.placePickerValue.zipCode,
-                          localizacion: _model.placePickerValue.latLng,
+                          latLng: _model.placePickerValue.latLng,
                           clearUnsetFields: false,
                           create: true,
                         ),
@@ -1116,7 +1123,7 @@ class _CrearColeccionSinPostWidgetState
                                   state: _model.placePickerValue.state,
                                   country: _model.placePickerValue.country,
                                   zipcode: _model.placePickerValue.zipCode,
-                                  localizacion: _model.placePickerValue.latLng,
+                                  latLng: _model.placePickerValue.latLng,
                                   clearUnsetFields: false,
                                   create: true,
                                 ),

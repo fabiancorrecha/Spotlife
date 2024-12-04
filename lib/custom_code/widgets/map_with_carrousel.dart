@@ -98,16 +98,22 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   }
 
   Future<void> _initSpots() async {
-    final favoritesList = (currentUserDocument?.listaPostFavoritos.toList() ?? []).map((spot) => spot.id).toSet();
+    final favoritesList =
+        (currentUserDocument?.listaPostFavoritos.toList() ?? [])
+            .map((spot) => spot.id)
+            .toSet();
     final List<UserPostsRecord> allSpots = widget.listaPostMarcadores ?? [];
     final currentUser = widget.usuarioAutenticado;
-    var spotsAsync = allSpots.where((spot) => spot.placeInfo.latLng != null && spot.postUser != null).map((spot) async {
+    var spotsAsync = allSpots
+        .where((spot) => spot.placeInfo.latLng != null && spot.postUser != null)
+        .map((spot) async {
       try {
         return SpotDetail(
           id: spot.reference.id,
           reference: spot.reference,
           title: spot.postTitle,
-          imagePath: spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
+          imagePath:
+              spot.postPhotolist.isNotEmpty ? spot.postPhotolist.first : '',
           avatarUrl: await getUserPhotoUrl(spot.postUser),
           location: spot.placeInfo.latLng!!,
           postUser: spot.postUser,
@@ -122,7 +128,10 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
         return null;
       }
     });
-    List<SpotDetail> _spots = (await Future.wait(spotsAsync)).toSet().whereType<SpotDetail>().toList();
+    List<SpotDetail> _spots = (await Future.wait(spotsAsync))
+        .toSet()
+        .whereType<SpotDetail>()
+        .toList();
     setState(() {
       spots = _spots;
     });
@@ -149,7 +158,9 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
 
   void _sortSpots(SpotDetail spot) {
     final referencePoint = spot.location;
-    spots.sort((a, b) => a.location.distanceFrom(referencePoint).compareTo(b.location.distanceFrom(referencePoint)));
+    spots.sort((a, b) => a.location
+        .distanceFrom(referencePoint)
+        .compareTo(b.location.distanceFrom(referencePoint)));
   }
 
   void _savedFavorites(bool isFav, DocumentReference postReference) async {

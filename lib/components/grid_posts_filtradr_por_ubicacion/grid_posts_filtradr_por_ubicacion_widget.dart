@@ -75,7 +75,7 @@ class _GridPostsFiltradrPorUbicacionWidgetState
         queryBuilder: (userPostsRecord) => userPostsRecord
             .where(
               'placeInfo.localizacion',
-              isEqualTo: widget.post?.placeInfo.localizacion?.toGeoPoint(),
+              isEqualTo: widget.post?.placeInfo.latLng?.toGeoPoint(),
             )
             .orderBy('timePosted', descending: true),
       ),
@@ -225,13 +225,15 @@ class _GridPostsFiltradrPorUbicacionWidgetState
                                                 0.32,
                                             decoration: const BoxDecoration(),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(
+                                                    0.0, 0.0),
                                             child: SizedBox(
                                               width: double.infinity,
                                               height: double.infinity,
                                               child: Stack(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
+                                                alignment:
+                                                    const AlignmentDirectional(
+                                                        0.0, 0.0),
                                                 children: [
                                                   if (!containerVarItem.esVideo)
                                                     InkWell(
