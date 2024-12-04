@@ -402,7 +402,7 @@ class _MapaPerzonalizadoState extends State<MapaPerzonalizado> {
 
       try {
         if (post.postPhotoUrl.isNotEmpty &&
-            post.placeInfo.localizacion != null) {
+            post.placeInfo.latLng != null) {
           //ignore marker if not have photo or latLng
           final markerIcon = (await getMarketIcon(post));
           if (markerIcon != null) {
