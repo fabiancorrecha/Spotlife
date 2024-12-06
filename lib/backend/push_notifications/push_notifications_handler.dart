@@ -214,9 +214,12 @@ final parametersBuilderMap =
   'CrearPost': (data) async => ParameterData(
         allParams: {
           'esImagen': getParameter<bool>(data, 'esImagen'),
-          'direccion': getParameter<LatLng>(data, 'direccion'),
+          'latLng': getParameter<LatLng>(data, 'latLng'),
           'street': getParameter<String>(data, 'street'),
           'city': getParameter<String>(data, 'city'),
+          'titulo': getParameter<String>(data, 'titulo'),
+          'descripcion': getParameter<String>(data, 'descripcion'),
+          'video': getParameter<String>(data, 'video'),
         },
       ),
   'paginaTOS': ParameterData.none(),
@@ -313,13 +316,6 @@ final parametersBuilderMap =
         },
       ),
   'testNewVideo': ParameterData.none(),
-  'EtiquetarUbicacion': ParameterData.none(),
-  'EtiquetarPersonas': (data) async => ParameterData(
-        allParams: {
-          'esImagen': getParameter<bool>(data, 'esImagen'),
-          'video': getParameter<String>(data, 'video'),
-        },
-      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

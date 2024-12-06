@@ -1,4 +1,5 @@
 export 'mapa_perzonalizado.dart' show MapaPerzonalizado;
+export 'custom_video_player_copy.dart' show CustomVideoPlayerCopy;
 export 'custom_video_player_miniture.dart' show CustomVideoPlayerMiniture;
 export 'mapa_personalizado2.dart' show MapaPersonalizado2;
 export 'mapa_personalizado_etiqueta.dart' show MapaPersonalizadoEtiqueta;
@@ -7,4 +8,3 @@ export 'mapa_perzonalizado_copy.dart' show MapaPerzonalizadoCopy;
 export 'route_view_live.dart' show RouteViewLive;
 export 'rounded_with_shadow.dart' show RoundedWithShadow;
 export 'custom_video_player.dart' show CustomVideoPlayer;
-export 'carrouselmap.dart' show Carrouselmap;

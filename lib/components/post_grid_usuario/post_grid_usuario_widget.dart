@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -117,6 +118,14 @@ class _PostGridUsuarioWidgetState extends State<PostGridUsuarioWidget>
                 }
                 List<UserPostsRecord> gridViewUserPostsRecordList =
                     snapshot.data!;
+                if (gridViewUserPostsRecordList.isEmpty) {
+                  return const Center(
+                    child: SizedBox(
+                      width: 200.0,
+                      child: ComponenteVacioWidget(),
+                    ),
+                  );
+                }
 
                 return GridView.builder(
                   padding: EdgeInsets.zero,

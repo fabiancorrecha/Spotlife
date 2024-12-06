@@ -1038,6 +1038,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Ubicación',
       'en': '',
     },
+    '1vy8nyqw': {
+      'es': 'Etiqueta la ubicación',
+      'en': '',
+    },
     'xp7b5zpc': {
       'es': 'Privacidad del spot',
       'en': '',
@@ -1086,13 +1090,25 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Twitter',
       'en': '',
     },
-    '0434z4c2': {
-      'es': 'El título es requerido',
-      'en': 'Title is required',
+    'yxsxn8rn': {
+      'es': 'Este campo es obligatorio',
+      'en': '',
     },
-    'rwq2rmaq': {
+    'd5a9q2ac': {
+      'es': 'Tu titulo debe tener minimo',
+      'en': '',
+    },
+    'tcedau2g': {
       'es': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'z08cz2sz': {
+      'es': 'Field is required',
+      'en': '',
+    },
+    'x9sjw6es': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
     },
     '9tfvfuh7': {
       'es': 'Publicar',
@@ -1910,40 +1926,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // testNewVideo
   {
     'axqhf19c': {
-      'es': 'Home',
-      'en': '',
-    },
-  },
-  // EtiquetarUbicacion
-  {
-    'b3yu6bar': {
-      'es': 'Home',
-      'en': '',
-    },
-  },
-  // EtiquetarPersonas
-  {
-    'h7rc762a': {
-      'es': 'Etiquetar Personas',
-      'en': '',
-    },
-    'wli67byf': {
-      'es': 'Siguiente',
-      'en': '',
-    },
-    'bn6o7vhe': {
-      'es': 'Toca la imagen para etiquetar personas',
-      'en': '',
-    },
-    'iubylvd3': {
-      'es': 'Etiquetas',
-      'en': '',
-    },
-    'mn8e91cp': {
-      'es': 'Buscar...',
-      'en': '',
-    },
-    '88j0amqt': {
       'es': 'Home',
       'en': '',
     },
@@ -3047,7 +3029,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Este campo es obligatorio',
       'en': '',
     },
-    'tcedau2g': {
+    '76bnyjd1': {
       'es': 'Please choose an option from the dropdown',
       'en': '',
     },
@@ -3055,7 +3037,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Este campo es obligatorio',
       'en': '',
     },
-    'x9sjw6es': {
+    'uvrzu1c2': {
       'es': 'Please choose an option from the dropdown',
       'en': '',
     },
@@ -3355,36 +3337,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // InfoDialogo
-  {
-    'mberxydn': {
-      'es': 'Ubicacion Actual',
-      'en': '',
-    },
-    'g2uouq07': {
-      'es': 'Ver perfil',
-      'en': '',
-    },
-  },
-  // iconmarkert
-  {
-    'xkd8zten': {
-      'es': 'Titulo',
-      'en': '',
-    },
-    'ifv6fp41': {
-      'es': 'Descripcion',
-      'en': '',
-    },
-    'ex2teakx': {
-      'es': 'Ver Perfil',
-      'en': '',
-    },
-    'wtse5imr': {
-      'es': '00:34',
-      'en': '',
-    },
-  },
   // postImagenV2Copy
   {
     'oriqhn7v': {
@@ -3409,6 +3361,55 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wiun52sc': {
       'es': ' Likes',
+      'en': '',
+    },
+  },
+  // AlertaDeImagenesYVideosVacios
+  {
+    'lylid1dz': {
+      'es': '¡Recordatorio!',
+      'en': '',
+    },
+    'lm5va1z4': {
+      'es': 'Recuerda subir una imagen o un video antes de etiquetar ',
+      'en': '',
+    },
+    'sav2mwly': {
+      'es': 'Cerrar',
+      'en': '',
+    },
+  },
+  // AlertaDeUbicacion
+  {
+    '7aoom88b': {
+      'es': '¡Recordatorio!',
+      'en': '',
+    },
+    'hjx0bq2t': {
+      'es': 'Recuerda seleccionar una ubicacion ',
+      'en': '',
+    },
+    'c4gf8d07': {
+      'es': 'Cerrar',
+      'en': '',
+    },
+  },
+  // EtiquetarUsuarios
+  {
+    '3a82wqdh': {
+      'es': 'Etiquetar Personas',
+      'en': '',
+    },
+    'hv6h9kpo': {
+      'es': 'Siguiente',
+      'en': '',
+    },
+    'eds92nm3': {
+      'es': 'Etiquetas',
+      'en': '',
+    },
+    'asarl4zo': {
+      'es': 'Buscar...',
       'en': '',
     },
   },

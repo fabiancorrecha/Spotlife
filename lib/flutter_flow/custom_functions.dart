@@ -797,3 +797,20 @@ LatLng converDoubleToLatLong(
 
   return LatLng(lat, long);
 }
+
+LatLng? newCustomFunction(String? cordenate) {
+  // convierteme unas coordenadas que estan en string a una en LatLng
+  if (cordenate == null) {
+    return null;
+  }
+
+  List<String> parts = cordenate.split(',');
+  if (parts.length != 2) {
+    return null;
+  }
+
+  double latitude = double.tryParse(parts[0]) ?? 0.0;
+  double longitude = double.tryParse(parts[1]) ?? 0.0;
+
+  return LatLng(latitude, longitude);
+}

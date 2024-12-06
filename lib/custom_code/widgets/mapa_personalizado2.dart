@@ -482,14 +482,14 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
       try {
         if (post.postUser != null) {
           final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty && post.placeInfo.localizacion != null) {
+          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
                 markerId: gmap.MarkerId(post.reference.id),
                 position: gmap.LatLng(
-                  post.placeInfo.localizacion!.latitude,
-                  post.placeInfo.localizacion!.longitude,
+                  post.placeInfo.latLng!.latitude,
+                  post.placeInfo.latLng!.longitude,
                 ),
                 icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
                 onTap: () {
@@ -501,8 +501,8 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
                         ? post.postPhotolist.first
                         : '';
                     _selectedMarkerPosition = gmap.LatLng(
-                      post.placeInfo.localizacion!.latitude,
-                      post.placeInfo.localizacion!.longitude,
+                      post.placeInfo.latLng!.latitude,
+                      post.placeInfo.latLng!.longitude,
                     );
                     _selectedPostUser = post.postUser;
                   });
@@ -561,8 +561,8 @@ class _MapaPersonalizado2State extends State<MapaPersonalizado2> {
   void _moveCameraToPost(UserPostsRecord post) async {
     final controller = await _controller.future;
     final position = gmap.LatLng(
-      post.placeInfo.localizacion!.latitude,
-      post.placeInfo.localizacion!.longitude,
+      post.placeInfo.latLng!.latitude,
+      post.placeInfo.latLng!.longitude,
     );
 
     controller.animateCamera(
