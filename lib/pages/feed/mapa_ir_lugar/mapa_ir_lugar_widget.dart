@@ -124,8 +124,8 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                               userImage: mapaIrLugarUserPostsRecord
                                   .postPhotolist.first,
                               startCoordinate: currentUserLocationValue!,
-                              endCoordinate: mapaIrLugarUserPostsRecord
-                                  .placeInfo.localizacion!,
+                              endCoordinate:
+                                  mapaIrLugarUserPostsRecord.placeInfo.latLng!,
                               actualizarDatos: (time, distance) async {
                                 logFirebaseEvent(
                                     'MAPA_IR_LUGAR_Container_lgf1zod3_CALLBAC');

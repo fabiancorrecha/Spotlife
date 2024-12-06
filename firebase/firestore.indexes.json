@@ -83,7 +83,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "placeInfo.localizacion",
+          "fieldPath": "placeInfo.latLng",
           "order": "ASCENDING"
         },
         {
@@ -122,16 +122,6 @@
     }
   ],
   "fieldOverrides": [
-    {
-      "collectionGroup": "postComment",
-      "fieldPath": "userCreator",
-      "indexes": [
-        {
-          "order": "ASCENDING",
-          "queryScope": "COLLECTION_GROUP"
-        }
-      ]
-    },
     {
       "collectionGroup": "fcm_tokens",
       "fieldPath": "fcm_token",

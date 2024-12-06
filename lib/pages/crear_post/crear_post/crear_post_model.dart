@@ -43,6 +43,25 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   void updateUsersAtIndex(int index, Function(DocumentReference) updateFn) =>
       users[index] = updateFn(users[index]);
 
+  LatLng? coordenadas;
+
+  bool filtro = false;
+
+  List<String> imagenes = [];
+  void addToImagenes(String item) => imagenes.add(item);
+  void removeFromImagenes(String item) => imagenes.remove(item);
+  void removeAtIndexFromImagenes(int index) => imagenes.removeAt(index);
+  void insertAtIndexInImagenes(int index, String item) =>
+      imagenes.insert(index, item);
+  void updateImagenesAtIndex(int index, Function(String) updateFn) =>
+      imagenes[index] = updateFn(imagenes[index]);
+
+  String? video;
+
+  String? titulo;
+
+  String? descripcion;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -55,20 +74,36 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue1;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue2;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue3;
+  // State field(s) for Titulo widget.
+  FocusNode? tituloFocusNode;
+  TextEditingController? tituloTextController;
+  String? Function(BuildContext, String?)? tituloTextControllerValidator;
+  String? _tituloTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'yxsxn8rn' /* Este campo es obligatorio */,
+      );
+    }
+
+    if (val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'd5a9q2ac' /* Tu titulo debe tener minimo */,
+      );
+    }
+
+    return null;
+  }
+
+  // State field(s) for Descripcion widget.
+  FocusNode? descripcionFocusNode;
+  TextEditingController? descripcionTextController;
+  String? Function(BuildContext, String?)? descripcionTextControllerValidator;
+  // State field(s) for Publico widget.
+  bool? publicoValue;
+  // State field(s) for MejoresAmigos widget.
+  bool? mejoresAmigosValue;
+  // State field(s) for SoloYo widget.
+  bool? soloYoValue;
   // State field(s) for CheckboxPublico widget.
   Map<CollectionsRecord, bool> checkboxPublicoValueMap = {};
   List<CollectionsRecord> get checkboxPublicoCheckedItems =>
@@ -91,14 +126,16 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   bool? switchValue6;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    tituloTextControllerValidator = _tituloTextControllerValidator;
+  }
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    tituloFocusNode?.dispose();
+    tituloTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    descripcionFocusNode?.dispose();
+    descripcionTextController?.dispose();
   }
 }

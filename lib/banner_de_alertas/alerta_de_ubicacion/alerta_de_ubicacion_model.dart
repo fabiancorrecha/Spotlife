@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'iconmarkert_widget.dart' show IconmarkertWidget;
+import 'alerta_de_ubicacion_widget.dart' show AlertaDeUbicacionWidget;
 import 'package:flutter/material.dart';
 
-class IconmarkertModel extends FlutterFlowModel<IconmarkertWidget> {
+class AlertaDeUbicacionModel extends FlutterFlowModel<AlertaDeUbicacionWidget> {
   @override
   void initState(BuildContext context) {}
 

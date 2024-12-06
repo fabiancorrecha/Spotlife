@@ -16,6 +16,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import '/flutter_flow/lat_lng.dart' as ff;
 
 class MapaPersonalizadoEtiqueta extends StatefulWidget {
   const MapaPersonalizadoEtiqueta({
@@ -31,6 +32,7 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
     required this.iOSMapsKey,
     required this.webMapsKey,
     required this.addIcon,
+    this.dissmid,
   }) : super(key: key);
 
   final double? width;
@@ -39,12 +41,14 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(gmap.LatLng ubication, String street, String city)
-      navigateToWithProfile; // Modificado
+  final void Function(ff.LatLng ubication, String street, String city)
+      navigateToWithProfile;
+  // Modificado
   final String? androidMapsKey;
   final String? iOSMapsKey;
   final String? webMapsKey;
   final Icon addIcon;
+  final Future Function()? dissmid;
 
   @override
   _MapaPersonalizadoEtiquetaState createState() =>
@@ -60,10 +64,17 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
   late gmap.CameraPosition initialCameraPosition;
 
   gmap.LatLng? selectedLocation;
+  String? selectedStreet;
+  String? selectedCity;
   bool isSearching = false;
   bool showMore = false;
   bool noResultsFound = false;
   List<Map<String, dynamic>> searchResults = [];
+
+  // Función de conversión integrada
+  ff.LatLng convertToCustomLatLng(gmap.LatLng googleLatLng) {
+    return ff.LatLng(googleLatLng.latitude, googleLatLng.longitude);
+  }
 
   // Estilo del mapa...
   static const String _mapStyle = '''
@@ -487,12 +498,9 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     final Uint8List? customIcon = await _createCustomMarkerFromUrl();
 
     setState(() {
-      selectedLocation = selectedLatLng;
-
-      // Guardar los valores seleccionados para ser usados posteriormente
-      var selectedStreet =
-          street; // Agregamos una variable para guardar la calle
-      var selectedCity = city; // Agregamos una variable para guardar la ciudad
+      selectedLocation = selectedLatLng; // Guarda la ubicación seleccionada
+      selectedStreet = street; // Guarda la calle seleccionada
+      selectedCity = city; // Guarda la ciudad seleccionada
 
       // Agregar el marcador personalizado o usar el marcador por defecto
       markers.add(gmap.Marker(
@@ -504,7 +512,14 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       ));
     });
 
-    // Desactiva el focus y limpia la barra de búsqueda
+    // Llamar a navigateToWithProfile con los datos seleccionados
+    widget.navigateToWithProfile(
+      convertToCustomLatLng(selectedLatLng), // Convertir a ff.LatLng
+      street,
+      city,
+    );
+
+    // Desactiva el foco y limpia la barra de búsqueda
     searchController.clear();
     searchFocusNode.unfocus();
     setState(() {
@@ -515,30 +530,43 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
   void _toggleMovableMarker() {
     setState(() {
       if (_movableMarker == null) {
+        // Crear el marcador móvil
         _movableMarker = gmap.Marker(
           markerId: gmap.MarkerId('movable_marker'),
           position: initialCameraPosition.target,
-          draggable: true,
+          draggable: true, // Hacerlo arrastrable
           onDragEnd: (newPosition) async {
+            // Actualizar la posición seleccionada
             setState(() {
               selectedLocation = newPosition;
             });
 
-            // Intentar obtener la dirección
+            // Llamar a la API de Google Maps para obtener la dirección
             final address = await _getAddressFromLatLng(newPosition);
 
-            // Llamar a navigateToWithProfile con street y city
-            widget.navigateToWithProfile(
-              newPosition,
-              address['street'] ?? "Lugar elegido",
-              address['city'] ?? "Lugar elegido",
-            );
+            // Actualizar la calle y ciudad o usar valores por defecto
+            setState(() {
+              selectedStreet = address['street'] ?? "Lugar elegido";
+              selectedCity = address['city'] ?? "Lugar elegido";
+            });
+
+            // Llamar a navigateToWithProfile si es necesario
+            // widget.navigateToWithProfile(
+            //   convertToCustomLatLng(newPosition), // Convertir a ff.LatLng
+            // selectedStreet ?? "Lugar elegido",
+            //   selectedCity ?? "Lugar elegido",
+            // );
+
+            print(
+                "Coordenadas: ${newPosition.latitude}, ${newPosition.longitude}");
+            print("Dirección: ${selectedStreet}, Ciudad: ${selectedCity}");
           },
           icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
             gmap.BitmapDescriptor.hueBlue,
           ),
         );
       } else {
+        // Eliminar el marcador móvil si ya está activo
         _movableMarker = null;
       }
     });
@@ -549,33 +577,44 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     final apiKey =
         widget.androidMapsKey ?? widget.iOSMapsKey ?? widget.webMapsKey ?? '';
 
-    final response = await http.get(
-      Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$apiKey',
-      ),
-    );
+    try {
+      // Llamada a la API de Google Maps para geocodificación inversa
+      final response = await http.get(
+        Uri.parse(
+          'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$apiKey',
+        ),
+      );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
 
-      if (data['results'] != null && data['results'].isNotEmpty) {
-        final result = data['results'][0];
-        final street = result['address_components']?.firstWhere(
-          (component) => component['types'].contains('route'),
-          orElse: () => null,
-        )?['long_name'];
-        final city = result['address_components']?.firstWhere(
-          (component) =>
-              component['types'].contains('administrative_area_level_2'),
-          orElse: () => null,
-        )?['long_name'];
+        if (data['results'] != null && data['results'].isNotEmpty) {
+          final result = data['results'][0];
 
-        return {
-          'street': street ?? "Lugar elegido",
-          'city': city ?? "Lugar elegido",
-        };
+          // Obtener la calle
+          final street = result['address_components']?.firstWhere(
+            (component) => component['types'].contains('route'),
+            orElse: () => null,
+          )?['long_name'];
+
+          // Obtener la ciudad o provincia
+          final city = result['address_components']?.firstWhere(
+            (component) =>
+                component['types'].contains('administrative_area_level_2'),
+            orElse: () => null,
+          )?['long_name'];
+
+          return {
+            'street': street ?? "Lugar elegido",
+            'city': city ?? "Lugar elegido",
+          };
+        }
       }
+    } catch (e) {
+      print("Error al obtener dirección: $e");
     }
+
+    // Retornar valores por defecto si no se pudo obtener información
     return {
       'street': "Lugar elegido",
       'city': "Lugar elegido",
@@ -598,14 +637,14 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       try {
         if (post.postUser != null) {
           final photoUrl = await _getUserPhotoUrl(post.postUser!);
-          if (photoUrl.isNotEmpty && post.placeInfo.localizacion != null) {
+          if (photoUrl.isNotEmpty && post.placeInfo.latLng != null) {
             final markerIcon = await _createCustomMarkerIcon(photoUrl);
             if (markerIcon.isNotEmpty) {
               gmap.Marker marker = gmap.Marker(
                 markerId: gmap.MarkerId(post.reference.id),
                 position: gmap.LatLng(
-                  post.placeInfo.localizacion!.latitude,
-                  post.placeInfo.localizacion!.longitude,
+                  post.placeInfo.latLng!.latitude,
+                  post.placeInfo.latLng!.longitude,
                 ),
                 icon: gmap.BitmapDescriptor.fromBytes(markerIcon),
                 onTap: () {
@@ -747,18 +786,37 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       right: 20,
       child: Column(
         children: [
-          TextField(
-            controller: searchController,
-            focusNode: searchFocusNode, // Asignamos el FocusNode
-            decoration: InputDecoration(
-              hintText: 'Buscar',
-              hintStyle: TextStyle(color: Colors.white70),
-              filled: true,
-              fillColor: Colors.black,
-              prefixIcon: Icon(Icons.search, color: Colors.white70),
-              // Dentro de _buildSearchBar()
-              suffixIcon:
-                  (searchController.text.isNotEmpty || searchFocusNode.hasFocus)
+          Stack(
+            children: [
+              // IconButton para cerrar
+              Positioned(
+                left: 16,
+                top: 0,
+                bottom: 0,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  padding: EdgeInsets.only(
+                      left: 16, right: 45), // Espaciado solicitado
+                  onPressed: () {
+                    if (widget.dissmid != null) {
+                      widget
+                          .dissmid!(); // Acción personalizada que recibe como argumento
+                    }
+                  },
+                ),
+              ),
+              // Barra de búsqueda
+              TextField(
+                controller: searchController,
+                focusNode: searchFocusNode, // Asignamos el FocusNode
+                decoration: InputDecoration(
+                  hintText: 'Buscar',
+                  hintStyle: TextStyle(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.black,
+                  prefixIcon: Icon(Icons.search, color: Colors.white70),
+                  suffixIcon: (searchController.text.isNotEmpty ||
+                          searchFocusNode.hasFocus)
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -781,14 +839,17 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
                           ),
                         )
                       : null,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            ),
-            style: TextStyle(color: Colors.white),
-            onChanged: (text) => setState(() => isSearching = text.isNotEmpty),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                ),
+                style: TextStyle(color: Colors.white),
+                onChanged: (text) =>
+                    setState(() => isSearching = text.isNotEmpty),
+              ),
+            ],
           ),
           if (isSearching) _buildSearchResults(),
         ],
@@ -878,37 +939,31 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
         child: Container(
           decoration: BoxDecoration(
             color: selectedLocation != null
-                ? Color(
-                    0xFFF4F176) // Color amarillo cuando hay ubicación seleccionada
-                : Colors.black, // Color negro por defecto
+                ? Color(0xFFF4F176) // Amarillo si hay ubicación seleccionada
+                : Colors.black, // Negro por defecto
             borderRadius: BorderRadius.circular(20),
           ),
           child: ElevatedButton(
             onPressed: selectedLocation != null
                 ? () {
-                    // Llama a navigateToWithProfile solo cuando se presiona el botón
-                    var selectedStreet;
-                    var selectedCity;
+                    // Convertir gmap.LatLng a ff.LatLng antes de usarlo
+                    final customLatLng =
+                        convertToCustomLatLng(selectedLocation!);
+
                     widget.navigateToWithProfile(
-                      selectedLocation!,
-                      selectedStreet ??
-                          "Lugar elegido", // Usa los valores seleccionados
+                      convertToCustomLatLng(selectedLocation!),
+                      selectedStreet ?? "Lugar elegido",
                       selectedCity ?? "Lugar elegido",
                     );
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Ubicación etiquetada: (${selectedLocation!.latitude.toStringAsFixed(5)}, ${selectedLocation!.longitude.toStringAsFixed(5)})',
-                        ),
-                      ),
-                    );
+                    // Usar customLatLng si se requiere más adelante
+                    print(
+                        "Ubicación convertida: ${customLatLng.latitude}, ${customLatLng.longitude}");
                   }
-                : null, // Desactiva el botón si no hay ubicación seleccionada
+                : null, // Desactiva si no hay ubicación seleccionada
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent, // Fondo transparente
-              shadowColor: Colors.transparent, // Sin sombra
-              elevation: 3, // Sin elevación
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 3,
               padding: EdgeInsets.symmetric(vertical: 15),
             ),
             child: Text(

@@ -497,8 +497,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   isList: true,
                   collectionNamePath: ['users'],
                 ),
-                direccion: params.getParam(
-                  'direccion',
+                latLng: params.getParam(
+                  'latLng',
                   ParamType.LatLng,
                 ),
                 street: params.getParam(
@@ -507,6 +507,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
                 city: params.getParam(
                   'city',
+                  ParamType.String,
+                ),
+                titulo: params.getParam(
+                  'titulo',
+                  ParamType.String,
+                ),
+                descripcion: params.getParam(
+                  'descripcion',
+                  ParamType.String,
+                ),
+                imagenes: params.getParam<String>(
+                  'imagenes',
+                  ParamType.String,
+                  isList: true,
+                ),
+                video: params.getParam(
+                  'video',
                   ParamType.String,
                 ),
               ),
@@ -791,32 +808,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'testNewVideo',
               path: 'testNewVideo',
               builder: (context, params) => const TestNewVideoWidget(),
-            ),
-            FFRoute(
-              name: 'EtiquetarUbicacion',
-              path: 'EtiquetarUbicacion',
-              requireAuth: true,
-              builder: (context, params) => const EtiquetarUbicacionWidget(),
-            ),
-            FFRoute(
-              name: 'EtiquetarPersonas',
-              path: 'etiquetarPersonas',
-              requireAuth: true,
-              builder: (context, params) => EtiquetarPersonasWidget(
-                esImagen: params.getParam(
-                  'esImagen',
-                  ParamType.bool,
-                ),
-                imageList: params.getParam<String>(
-                  'imageList',
-                  ParamType.String,
-                  isList: true,
-                ),
-                video: params.getParam(
-                  'video',
-                  ParamType.String,
-                ),
-              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
