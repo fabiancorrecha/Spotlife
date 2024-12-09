@@ -166,7 +166,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
       final spot = spots[i];
       try {
         final photoUrl = spot.imagePath;
-        if (photoUrl.isNotEmpty && spot.location != null) {
+        if (spot.location != null) {
           final location = spot.location;
           final markerIcon = await CustomMarker(
             imageUrl: photoUrl,
