@@ -389,9 +389,9 @@ class _MapaAmigosWidgetState extends State<MapaAmigosWidget> {
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: const SizedBox(
+                                              child:  SizedBox(
                                                 height: 480.0,
-                                                child: FiltrarSpotsWidget(),
+                                                child: FiltrarSpotsWidget(filterSpots: (foo) {},),
                                               ),
                                             ),
                                           ),

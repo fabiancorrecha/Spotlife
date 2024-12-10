@@ -45,6 +45,17 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   }
 
   @override
+  void didUpdateWidget(MapWithCarrousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.listaPostMarcadores != oldWidget.listaPostMarcadores) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _initSpots();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SpotCarrousel(
       spots: spots,

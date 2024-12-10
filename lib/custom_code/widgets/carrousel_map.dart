@@ -88,28 +88,25 @@ class _CarrouselMapState extends State<CarrouselMap> {
 
     if (widget.spots.isNotEmpty && widget.spots != oldWidget.spots) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        loadMarkers(widget.selectedSpot, oldWidget.selectedSpot);
+        loadMarkers();
       });
     }
 
-    var currentLocation = widget.selectedSpot;
-    if (currentLocation != null && currentLocation != oldWidget.selectedSpot) {
+    var currentSelected = widget.selectedSpot;
+    if (currentSelected != null && currentSelected != oldWidget.selectedSpot) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _moveCameraToPost(currentLocation, currentZoom);
+       // updateSelectedMarker(widget.selectedSpot, oldWidget.selectedSpot); // todo asanre review this
+        _moveCameraToPost(currentSelected, currentZoom);
       });
     }
   }
 
-  void loadMarkers(SpotDetail? selected, SpotDetail? oldSelected) async {
+  void loadMarkers() async {
     try {
-      if (markers.isEmpty) {
-        final listMarkers = await getMarkers(widget.spots);
-        setState(() {
-          markers = listMarkers;
-        });
-      } else {
-        updateSelectedMarker(selected, oldSelected);
-      }
+      final listMarkers = await getMarkers(widget.spots);
+      setState(() {
+        markers = listMarkers;
+      });
     } catch (e) {
       print('Error al cargar los marcadores: $e');
     }
@@ -171,6 +168,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
           final markerIcon = await CustomMarker(
             imageUrl: photoUrl,
             isUser: spot.isLoggedUser,
+            isActive: spot.id == widget.selectedSpot?.id,
           ).toBitmapDescriptor(
             waitToRender: Duration(milliseconds: 300),
           );
