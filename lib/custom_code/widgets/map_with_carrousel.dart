@@ -169,7 +169,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
 
   void _sortSpots(SpotDetail spot) {
     final referencePoint = spot.location;
-    let sorted = List.from(spots);
+    var sorted = List<SpotDetail>.from(spots);
     sorted.sort((a, b) => a.location
         .distanceFrom(referencePoint)
         .compareTo(b.location.distanceFrom(referencePoint)));
