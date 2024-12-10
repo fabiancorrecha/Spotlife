@@ -158,9 +158,11 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
 
   void _sortSpots(SpotDetail spot) {
     final referencePoint = spot.location;
-    spots.sort((a, b) => a.location
+    let sorted = List.from(spots);
+    sorted.sort((a, b) => a.location
         .distanceFrom(referencePoint)
         .compareTo(b.location.distanceFrom(referencePoint)));
+    spots = sorted;
   }
 
   void _savedFavorites(bool isFav, DocumentReference postReference) async {
