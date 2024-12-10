@@ -6,6 +6,7 @@ import 'index.dart'; // Imports other custom widgets
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:spotlifeapp/flutter_flow/custom_icons.dart';
 import 'package:spotlifeapp/flutter_flow/flutter_flow_theme.dart';
+import 'package:equatable/equatable.dart';
 
 class SpotCarrousel extends StatefulWidget {
   const SpotCarrousel({
@@ -208,11 +209,11 @@ class CustomListTile extends StatelessWidget {
           style: textColor.copyWith(fontSize: 16, fontWeight: FontWeight.w600), maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: item.city.isNotEmpty
           ? Row(
-        children: [
-          Icon(Icons.location_on_outlined, color: Colors.white, size: 12),
-          Text(item.city, style: textColor.copyWith(fontSize: 10), maxLines: 1),
-        ],
-      )
+              children: [
+                Icon(Icons.location_on_outlined, color: Colors.white, size: 12),
+                Text(item.city, style: textColor.copyWith(fontSize: 10), maxLines: 1),
+              ],
+            )
           : Container(height: 14),
       onTap: onTap,
       // Add other ListTile properties if required
@@ -281,7 +282,7 @@ class ImageBackground extends StatelessWidget {
   }
 }
 
-class SpotDetail {
+class SpotDetail extends Equatable {
   SpotDetail({
     required this.id,
     required this.title,
@@ -313,30 +314,5 @@ class SpotDetail {
   String get city => placeInfo.city;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is SpotDetail &&
-        other.id == id &&
-        other.title == title &&
-        other.imagePath == imagePath &&
-        other.avatarUrl == avatarUrl &&
-        other.isLoggedUser == isLoggedUser &&
-        other.description == description &&
-        other.postUser == postUser &&
-        other.placeInfo == placeInfo &&
-        other.location == location;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-    title.hashCode ^
-    description.hashCode ^
-    postUser.hashCode ^
-    placeInfo.hashCode ^
-    imagePath.hashCode ^
-    avatarUrl.hashCode ^
-    location.hashCode;
-  }
+  List<Object?> get props => [id, title, imagePath, avatarUrl, isLoggedUser, description, postUser, placeInfo, location];
 }
