@@ -6,6 +6,7 @@ import '/flutter_flow/lat_lng.dart' as ff; // Importamos LatLng de FlutterFlow
 import 'index.dart'; // Imports other custom widgets
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:collection/collection.dart';
 
 class MapWithCarrousel extends StatefulWidget {
   const MapWithCarrousel({
@@ -47,8 +48,8 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
   @override
   void didUpdateWidget(MapWithCarrousel oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    if (widget.listaPostMarcadores != oldWidget.listaPostMarcadores) {
+    final areEqual = const DeepCollectionEquality().equals(widget.listaPostMarcadores, oldWidget.listaPostMarcadores);
+    if (!areEqual) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _initSpots();
       });
@@ -169,11 +170,9 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
 
   void _sortSpots(SpotDetail spot) {
     final referencePoint = spot.location;
-    var sorted = List<SpotDetail>.from(spots);
-    sorted.sort((a, b) => a.location
+    spots.sort((a, b) => a.location
         .distanceFrom(referencePoint)
         .compareTo(b.location.distanceFrom(referencePoint)));
-    spots = sorted;
   }
 
   void _savedFavorites(bool isFav, DocumentReference postReference) async {
