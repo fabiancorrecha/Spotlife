@@ -449,9 +449,9 @@ class _MapaPrincipalCopyWidgetState extends State<MapaPrincipalCopyWidget> {
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: const SizedBox(
+                                            child:  SizedBox(
                                               height: 480.0,
-                                              child: FiltrarSpotsWidget(),
+                                              child: FiltrarSpotsWidget(filterSpots: (isGlobal){}),
                                             ),
                                           ),
                                         ),

@@ -27,6 +27,7 @@ class MapaPrincipalWidget extends StatefulWidget {
 class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
   late MapaPrincipalModel _model;
   bool showMenu = true;
+  bool isGlobal = FFAppState().Global;
   bool showCarrousel = true;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng? currentUserLocationValue;
@@ -74,7 +75,7 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord.where(
-          'esPublico',
+          isGlobal ? 'esPublico' : 'esAmigos',
           isEqualTo: true,
         ),
       ),
@@ -353,9 +354,14 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                                 onTap: () => FocusScope.of(context).unfocus(),
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: const SizedBox(
+                                  child: SizedBox(
                                     height: 480.0,
-                                    child: FiltrarSpotsWidget(),
+                                    child: FiltrarSpotsWidget(
+                                      filterSpots: (change) {
+                                       setState(() {
+                                         isGlobal = change;
+                                       });
+                                    },),
                                   ),
                                 ),
                               ),
