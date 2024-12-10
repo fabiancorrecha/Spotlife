@@ -8,6 +8,7 @@ import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/custom_code/utils/maps.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
@@ -86,7 +87,8 @@ class _CarrouselMapState extends State<CarrouselMap> {
   void didUpdateWidget(CarrouselMap oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.spots.isNotEmpty && widget.spots != oldWidget.spots) {
+    final areEqual = const DeepCollectionEquality().equals(widget.spots, oldWidget.spots);
+    if (widget.spots.isNotEmpty && !areEqual) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         loadMarkers();
       });
@@ -95,7 +97,7 @@ class _CarrouselMapState extends State<CarrouselMap> {
     var currentSelected = widget.selectedSpot;
     if (currentSelected != null && currentSelected != oldWidget.selectedSpot) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-       // updateSelectedMarker(widget.selectedSpot, oldWidget.selectedSpot); // todo asanre review this
+        updateSelectedMarker(widget.selectedSpot, oldWidget.selectedSpot);
         _moveCameraToPost(currentSelected, currentZoom);
       });
     }
