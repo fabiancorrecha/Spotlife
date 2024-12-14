@@ -1,10 +1,10 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'etiquetar_personas_widget.dart' show EtiquetarPersonasWidget;
+import 'etiquetar_usuarios_widget.dart' show EtiquetarUsuariosWidget;
 import 'package:flutter/material.dart';
 
-class EtiquetarPersonasModel extends FlutterFlowModel<EtiquetarPersonasWidget> {
-  ///  Local state fields for this page.
+class EtiquetarUsuariosModel extends FlutterFlowModel<EtiquetarUsuariosWidget> {
+  ///  Local state fields for this component.
 
   bool? buscarPersonas = false;
 
@@ -19,7 +19,7 @@ class EtiquetarPersonasModel extends FlutterFlowModel<EtiquetarPersonasWidget> {
           int index, Function(DocumentReference) updateFn) =>
       selectedUser[index] = updateFn(selectedUser[index]);
 
-  ///  State fields for stateful widgets in this page.
+  ///  State fields for stateful widgets in this component.
 
   // State field(s) for buscarusuario widget.
   FocusNode? buscarusuarioFocusNode;

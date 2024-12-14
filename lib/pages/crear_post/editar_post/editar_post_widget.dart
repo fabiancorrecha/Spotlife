@@ -117,7 +117,10 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
         final editarPostUserPostsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -936,22 +939,6 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                           onPressed: () async {
                                             logFirebaseEvent(
                                                 'EDITAR_POST_arrow_forward_ICN_ON_TAP');
-                                            logFirebaseEvent(
-                                                'IconButton_navigate_to');
-
-                                            context.pushNamed(
-                                              'EtiquetarUbicacion',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    const TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
                                           },
                                         ),
                                       ],
@@ -1487,204 +1474,213 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 20.0, 12.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'gyvhisu2' /* Facebook */,
+                            if (!loggedIn)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 20.0, 12.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'gyvhisu2' /* Facebook */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 10.0, 0.0),
-                                          child: Switch.adaptive(
-                                            value: _model.switchValue1!,
-                                            onChanged: (newValue) async {
-                                              safeSetState(() => _model
-                                                  .switchValue1 = newValue);
-                                            },
-                                            activeColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .btnText,
-                                            activeTrackColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            inactiveTrackColor:
-                                                const Color(0xFF4D4D4D),
-                                            inactiveThumbColor:
-                                                const Color(0xFF737373),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Switch.adaptive(
+                                              value: _model.switchValue1!,
+                                              onChanged: (newValue) async {
+                                                safeSetState(() => _model
+                                                    .switchValue1 = newValue);
+                                              },
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .btnText,
+                                              activeTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              inactiveTrackColor:
+                                                  const Color(0xFF4D4D4D),
+                                              inactiveThumbColor:
+                                                  const Color(0xFF737373),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    thickness: 0.5,
-                                    color: FlutterFlowTheme.of(context).accent4,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 20.0, 12.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'kdwh7qd6' /* Instagram */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 10.0, 0.0),
-                                          child: Switch.adaptive(
-                                            value: _model.switchValue2!,
-                                            onChanged: (newValue) async {
-                                              safeSetState(() => _model
-                                                  .switchValue2 = newValue);
-                                            },
-                                            activeColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .btnText,
-                                            activeTrackColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            inactiveTrackColor:
-                                                const Color(0xFF4D4D4D),
-                                            inactiveThumbColor:
-                                                const Color(0xFF737373),
-                                          ),
-                                        ),
-                                      ],
+                                    Divider(
+                                      thickness: 0.5,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
                                     ),
-                                  ),
-                                  Divider(
-                                    thickness: 0.5,
-                                    color: FlutterFlowTheme.of(context).accent4,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 20.0, 12.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'p3xducn7' /* Twitter */,
+                            if (!loggedIn)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 20.0, 12.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'kdwh7qd6' /* Instagram */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily),
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 10.0, 0.0),
-                                          child: Switch.adaptive(
-                                            value: _model.switchValue3!,
-                                            onChanged: (newValue) async {
-                                              safeSetState(() => _model
-                                                  .switchValue3 = newValue);
-                                            },
-                                            activeColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .btnText,
-                                            activeTrackColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            inactiveTrackColor:
-                                                const Color(0xFF4D4D4D),
-                                            inactiveThumbColor:
-                                                const Color(0xFF737373),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Switch.adaptive(
+                                              value: _model.switchValue2!,
+                                              onChanged: (newValue) async {
+                                                safeSetState(() => _model
+                                                    .switchValue2 = newValue);
+                                              },
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .btnText,
+                                              activeTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              inactiveTrackColor:
+                                                  const Color(0xFF4D4D4D),
+                                              inactiveThumbColor:
+                                                  const Color(0xFF737373),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    thickness: 0.5,
-                                    color: FlutterFlowTheme.of(context).accent4,
-                                  ),
-                                ],
+                                    Divider(
+                                      thickness: 0.5,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                            if (!loggedIn)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 20.0, 12.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'p3xducn7' /* Twitter */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Switch.adaptive(
+                                              value: _model.switchValue3!,
+                                              onChanged: (newValue) async {
+                                                safeSetState(() => _model
+                                                    .switchValue3 = newValue);
+                                              },
+                                              activeColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .btnText,
+                                              activeTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              inactiveTrackColor:
+                                                  const Color(0xFF4D4D4D),
+                                              inactiveThumbColor:
+                                                  const Color(0xFF737373),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      thickness: 0.5,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent4,
+                                    ),
+                                  ],
+                                ),
+                              ),
                           ],
                         ),
                       ),

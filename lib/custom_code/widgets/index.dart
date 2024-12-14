@@ -1,4 +1,5 @@
 export 'mapa_perzonalizado.dart' show MapaPerzonalizado;
+export 'custom_video_player_copy.dart' show CustomVideoPlayerCopy;
 export 'custom_video_player_miniture.dart' show CustomVideoPlayerMiniture;
 export 'mapa_personalizado2.dart' show MapaPersonalizado2;
 export 'mapa_personalizado_etiqueta.dart' show MapaPersonalizadoEtiqueta;

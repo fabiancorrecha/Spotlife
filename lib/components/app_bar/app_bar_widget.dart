@@ -1,10 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/components/tipo_de_post/tipo_de_post_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'app_bar_model.dart';
 export 'app_bar_model.dart';
 
@@ -71,46 +69,18 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'APP_BAR_COMP_Container_xaebcbie_ON_TAP');
-                        logFirebaseEvent('Container_bottom_sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: const SizedBox(
-                                  height: 225.0,
-                                  child: TipoDePostWidget(),
-                                ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
-                      child: Container(
-                        width: 40.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).fondoIcono,
-                          borderRadius: BorderRadius.circular(100.0),
-                        ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: Icon(
-                          FFIcons.kadd,
-                          color: FlutterFlowTheme.of(context).icono,
-                          size: 18.0,
-                        ),
+                    child: Container(
+                      width: 40.0,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).fondoIcono,
+                        borderRadius: BorderRadius.circular(100.0),
+                      ),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Icon(
+                        FFIcons.kadd,
+                        color: FlutterFlowTheme.of(context).icono,
+                        size: 18.0,
                       ),
                     ),
                   ),

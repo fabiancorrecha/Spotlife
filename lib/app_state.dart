@@ -105,6 +105,26 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _Post = prefs.getBool('ff_Post') ?? _Post;
     });
+    _safeInit(() {
+      _Coordenadas =
+          latLngFromString(prefs.getString('ff_Coordenadas')) ?? _Coordenadas;
+    });
+    _safeInit(() {
+      _Direccion = prefs.getString('ff_Direccion') ?? _Direccion;
+    });
+    _safeInit(() {
+      _Provincia = prefs.getString('ff_Provincia') ?? _Provincia;
+    });
+    _safeInit(() {
+      _imagenes = prefs.getStringList('ff_imagenes') ?? _imagenes;
+    });
+    _safeInit(() {
+      _selectedUser = prefs
+              .getStringList('ff_selectedUser')
+              ?.map((path) => path.ref)
+              .toList() ??
+          _selectedUser;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -479,6 +499,104 @@ class FFAppState extends ChangeNotifier {
   LatLng? get prueba => _prueba;
   set prueba(LatLng? value) {
     _prueba = value;
+  }
+
+  LatLng? _Coordenadas;
+  LatLng? get Coordenadas => _Coordenadas;
+  set Coordenadas(LatLng? value) {
+    _Coordenadas = value;
+    value != null
+        ? prefs.setString('ff_Coordenadas', value.serialize())
+        : prefs.remove('ff_Coordenadas');
+  }
+
+  String _Direccion = '';
+  String get Direccion => _Direccion;
+  set Direccion(String value) {
+    _Direccion = value;
+    prefs.setString('ff_Direccion', value);
+  }
+
+  String _Provincia = '';
+  String get Provincia => _Provincia;
+  set Provincia(String value) {
+    _Provincia = value;
+    prefs.setString('ff_Provincia', value);
+  }
+
+  List<String> _imagenes = [];
+  List<String> get imagenes => _imagenes;
+  set imagenes(List<String> value) {
+    _imagenes = value;
+    prefs.setStringList('ff_imagenes', value);
+  }
+
+  void addToImagenes(String value) {
+    imagenes.add(value);
+    prefs.setStringList('ff_imagenes', _imagenes);
+  }
+
+  void removeFromImagenes(String value) {
+    imagenes.remove(value);
+    prefs.setStringList('ff_imagenes', _imagenes);
+  }
+
+  void removeAtIndexFromImagenes(int index) {
+    imagenes.removeAt(index);
+    prefs.setStringList('ff_imagenes', _imagenes);
+  }
+
+  void updateImagenesAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    imagenes[index] = updateFn(_imagenes[index]);
+    prefs.setStringList('ff_imagenes', _imagenes);
+  }
+
+  void insertAtIndexInImagenes(int index, String value) {
+    imagenes.insert(index, value);
+    prefs.setStringList('ff_imagenes', _imagenes);
+  }
+
+  List<DocumentReference> _selectedUser = [];
+  List<DocumentReference> get selectedUser => _selectedUser;
+  set selectedUser(List<DocumentReference> value) {
+    _selectedUser = value;
+    prefs.setStringList('ff_selectedUser', value.map((x) => x.path).toList());
+  }
+
+  void addToSelectedUser(DocumentReference value) {
+    selectedUser.add(value);
+    prefs.setStringList(
+        'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
+  }
+
+  void removeFromSelectedUser(DocumentReference value) {
+    selectedUser.remove(value);
+    prefs.setStringList(
+        'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
+  }
+
+  void removeAtIndexFromSelectedUser(int index) {
+    selectedUser.removeAt(index);
+    prefs.setStringList(
+        'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
+  }
+
+  void updateSelectedUserAtIndex(
+    int index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    selectedUser[index] = updateFn(_selectedUser[index]);
+    prefs.setStringList(
+        'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
+  }
+
+  void insertAtIndexInSelectedUser(int index, DocumentReference value) {
+    selectedUser.insert(index, value);
+    prefs.setStringList(
+        'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

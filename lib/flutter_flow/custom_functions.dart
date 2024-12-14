@@ -797,3 +797,29 @@ LatLng converDoubleToLatLong(
 
   return LatLng(lat, long);
 }
+
+LatLng? newCustomFunction(String? cordenate) {
+  // convierteme unas coordenadas que estan en string a una en LatLng
+  if (cordenate == null) {
+    return null;
+  }
+
+  List<String> parts = cordenate.split(',');
+  if (parts.length != 2) {
+    return null;
+  }
+
+  double latitude = double.tryParse(parts[0]) ?? 0.0;
+  double longitude = double.tryParse(parts[1]) ?? 0.0;
+
+  return LatLng(latitude, longitude);
+}
+
+bool? returnSpace(String? texto) {
+  // necesitas crear una funcion que te devuelva true si el usuario esta escribiendo y false si el usuario esta enviando solo espacios vacios o no ha enviado ningun campo añade un argumento llamado text de tipo string
+  if (texto == null || texto.trim().isEmpty) {
+    return false;
+  } else {
+    return true;
+  }
+}

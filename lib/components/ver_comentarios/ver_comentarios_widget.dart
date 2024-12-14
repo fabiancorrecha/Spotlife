@@ -3,13 +3,16 @@ import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/menu_comentario/menu_comentario_widget.dart';
 import '/components/sin_comentarios/sin_comentarios_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'ver_comentarios_model.dart';
@@ -29,8 +32,11 @@ class VerComentariosWidget extends StatefulWidget {
   State<VerComentariosWidget> createState() => _VerComentariosWidgetState();
 }
 
-class _VerComentariosWidgetState extends State<VerComentariosWidget> {
+class _VerComentariosWidgetState extends State<VerComentariosWidget>
+    with TickerProviderStateMixin {
   late VerComentariosModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -43,8 +49,23 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
     super.initState();
     _model = createModel(context, () => VerComentariosModel());
 
-    _model.commentFieldTextController ??= TextEditingController();
-    _model.commentFieldFocusNode ??= FocusNode();
+    _model.textFieldComentarioTextController ??= TextEditingController();
+    _model.textFieldComentarioFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'iconButtonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 50.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(30.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -669,44 +690,157 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                           width: double.infinity,
                           height: 56.0,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).fondoIcono,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(100.0),
                           ),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Form(
                             key: _model.formKey,
                             autovalidateMode: AutovalidateMode.disabled,
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
+                                AuthUserStreamWidget(
+                                  builder: (context) => Container(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          const Duration(milliseconds: 500),
+                                      fadeOutDuration:
+                                          const Duration(milliseconds: 500),
+                                      imageUrl: valueOrDefault<String>(
+                                        currentUserPhoto,
+                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 0.0),
-                                    child: TextFormField(
-                                      controller:
-                                          _model.commentFieldTextController,
-                                      focusNode: _model.commentFieldFocusNode,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        '_model.commentFieldTextController',
-                                        const Duration(milliseconds: 300),
-                                        () => safeSetState(() {}),
-                                      ),
-                                      autofocus: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            FFLocalizations.of(context).getText(
-                                          'kqo18cr2' /* Enviar comentario... */,
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: SizedBox(
+                                      width: 200.0,
+                                      child: TextFormField(
+                                        controller: _model
+                                            .textFieldComentarioTextController,
+                                        focusNode:
+                                            _model.textFieldComentarioFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.textFieldComentarioTextController',
+                                          const Duration(milliseconds: 0),
+                                          () async {
+                                            logFirebaseEvent(
+                                                'VER_COMENTARIOS_TextFieldComentario_ON_T');
+                                            if (functions.returnSpace(_model
+                                                .textFieldComentarioTextController
+                                                .text)!) {
+                                              logFirebaseEvent(
+                                                  'TextFieldComentario_update_component_sta');
+                                              _model.botonSend = true;
+                                              safeSetState(() {});
+                                            } else {
+                                              logFirebaseEvent(
+                                                  'TextFieldComentario_update_component_sta');
+                                              _model.botonSend = false;
+                                              safeSetState(() {});
+                                            }
+                                          },
                                         ),
-                                        hintStyle: FlutterFlowTheme.of(context)
+                                        autofocus: false,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
+                                              ),
+                                          hintText: FFLocalizations.of(context)
+                                              .getText(
+                                            '5v1ingcx' /* Añade un comentario... */,
+                                          ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMediumFamily,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMediumFamily),
+                                              ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
                                               letterSpacing: 0.0,
                                               useGoogleFonts: GoogleFonts
                                                       .asMap()
@@ -715,256 +849,151 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget> {
                                                               context)
                                                           .bodyMediumFamily),
                                             ),
-                                        enabledBorder: const UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        focusedBorder: const UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        errorBorder: const UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        focusedErrorBorder:
-                                            const UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1.0,
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
+                                        maxLines: 8,
+                                        minLines: 1,
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        validator: _model
+                                            .textFieldComentarioTextControllerValidator
+                                            .asValidator(context),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
-                                          ),
-                                      keyboardType: TextInputType.multiline,
-                                      validator: _model
-                                          .commentFieldTextControllerValidator
-                                          .asValidator(context),
                                     ),
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: (_model.commentFieldTextController
-                                                  .text ==
-                                              '')
-                                      ? null
-                                      : () async {
-                                          logFirebaseEvent(
-                                              'VER_COMENTARIOS_COMP_ENVIAR_BTN_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Button_backend_call');
+                                if (_model.botonSend == true)
+                                  FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    icon: Icon(
+                                      Icons.send,
+                                      color: FlutterFlowTheme.of(context)
+                                          .fondoIcono,
+                                      size: 24.0,
+                                    ),
+                                    showLoadingIndicator: true,
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'VER_COMENTARIOS_COMP_send_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_backend_call');
 
-                                          var postCommentRecordReference =
-                                              PostCommentRecord.createDoc(
-                                                  widget.post!.reference);
-                                          await postCommentRecordReference
-                                              .set(createPostCommentRecordData(
-                                            textComment: _model
-                                                .commentFieldTextController
-                                                .text,
-                                            userCreator: currentUserReference,
-                                            post: widget.post?.reference,
-                                            dateCreation: getCurrentTimestamp,
-                                            lastEditTime: getCurrentTimestamp,
-                                          ));
-                                          _model.ultimoComentario =
-                                              PostCommentRecord.getDocumentFromData(
-                                                  createPostCommentRecordData(
-                                                    textComment: _model
-                                                        .commentFieldTextController
-                                                        .text,
-                                                    userCreator:
-                                                        currentUserReference,
-                                                    post:
-                                                        widget.post?.reference,
-                                                    dateCreation:
-                                                        getCurrentTimestamp,
-                                                    lastEditTime:
-                                                        getCurrentTimestamp,
-                                                  ),
-                                                  postCommentRecordReference);
-                                          logFirebaseEvent(
-                                              'Button_update_component_state');
-                                          _model
-                                              .addToComentariosDesdeComponente(
-                                                  _model.ultimoComentario!);
-                                          safeSetState(() {});
-                                          logFirebaseEvent(
-                                              'Button_backend_call');
+                                      var postCommentRecordReference =
+                                          PostCommentRecord.createDoc(
+                                              widget.post!.reference);
+                                      await postCommentRecordReference
+                                          .set(createPostCommentRecordData(
+                                        textComment: _model
+                                            .textFieldComentarioTextController
+                                            .text,
+                                        userCreator: currentUserReference,
+                                        post: widget.post?.reference,
+                                        dateCreation: getCurrentTimestamp,
+                                        lastEditTime: getCurrentTimestamp,
+                                      ));
+                                      _model.ultimoComentario =
+                                          PostCommentRecord.getDocumentFromData(
+                                              createPostCommentRecordData(
+                                                textComment: _model
+                                                    .textFieldComentarioTextController
+                                                    .text,
+                                                userCreator:
+                                                    currentUserReference,
+                                                post: widget.post?.reference,
+                                                dateCreation:
+                                                    getCurrentTimestamp,
+                                                lastEditTime:
+                                                    getCurrentTimestamp,
+                                              ),
+                                              postCommentRecordReference);
+                                      logFirebaseEvent(
+                                          'IconButton_backend_call');
 
-                                          var actividadRecordReference =
-                                              ActividadRecord.collection.doc();
-                                          await actividadRecordReference.set({
-                                            ...createActividadRecordData(
-                                              creadorActividad:
-                                                  currentUserReference,
-                                              recibeActividad:
-                                                  widget.postCreador,
-                                              sinLeer: true,
-                                              meGusta: false,
-                                              esComentario: true,
-                                              esSeguir: false,
-                                              nombreUsuarioCreador:
-                                                  currentUserDisplayName,
-                                              nombreUsuarioReceptor:
-                                                  containerUsersRecord
-                                                      .displayName,
-                                              fechaCreacion:
-                                                  getCurrentTimestamp,
-                                              postRelacionado:
-                                                  widget.post?.reference,
-                                              meGustaComentario: false,
-                                              imagenUsuario: currentUserPhoto,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'imagenPostList':
-                                                    widget.post?.postPhotolist,
-                                              },
-                                            ),
-                                          });
-                                          _model.nuevaActividad =
-                                              ActividadRecord
-                                                  .getDocumentFromData({
-                                            ...createActividadRecordData(
-                                              creadorActividad:
-                                                  currentUserReference,
-                                              recibeActividad:
-                                                  widget.postCreador,
-                                              sinLeer: true,
-                                              meGusta: false,
-                                              esComentario: true,
-                                              esSeguir: false,
-                                              nombreUsuarioCreador:
-                                                  currentUserDisplayName,
-                                              nombreUsuarioReceptor:
-                                                  containerUsersRecord
-                                                      .displayName,
-                                              fechaCreacion:
-                                                  getCurrentTimestamp,
-                                              postRelacionado:
-                                                  widget.post?.reference,
-                                              meGustaComentario: false,
-                                              imagenUsuario: currentUserPhoto,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'imagenPostList':
-                                                    widget.post?.postPhotolist,
-                                              },
-                                            ),
-                                          }, actividadRecordReference);
-                                          logFirebaseEvent(
-                                              'Button_trigger_push_notification');
-                                          triggerPushNotification(
-                                            notificationTitle:
-                                                '${valueOrDefault(currentUserDocument?.userName, '')} comento tu post',
-                                            notificationText: _model
-                                                .commentFieldTextController
-                                                .text,
-                                            notificationSound: 'default',
-                                            userRefs: [widget.postCreador!],
-                                            initialPageName: 'notificaciones',
-                                            parameterData: {},
-                                          );
-                                          logFirebaseEvent(
-                                              'Button_refresh_database_request');
-                                          safeSetState(() =>
-                                              _model.firestoreRequestCompleter =
-                                                  null);
-                                          await _model
-                                              .waitForFirestoreRequestCompleted();
-                                          logFirebaseEvent(
-                                              'Button_clear_text_fields_pin_codes');
-                                          safeSetState(() {
-                                            _model.commentFieldTextController
-                                                ?.clear();
-                                          });
-                                          logFirebaseEvent(
-                                              'Button_bottom_sheet');
-                                          Navigator.pop(
-                                              context,
-                                              _model
-                                                  .comentariosDesdeComponente);
-
-                                          safeSetState(() {});
-                                        },
-                                  text: FFLocalizations.of(context).getText(
-                                    'bg4ft6gr' /* Enviar */,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 80.0,
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color:
-                                        FlutterFlowTheme.of(context).fondoIcono,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          color: _model.commentFieldTextController
-                                                          .text ==
-                                                      ''
-                                              ? FlutterFlowTheme.of(context)
-                                                  .tertiary
-                                              : FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
+                                      var actividadRecordReference =
+                                          ActividadRecord.collection.doc();
+                                      await actividadRecordReference.set({
+                                        ...createActividadRecordData(
+                                          creadorActividad:
+                                              currentUserReference,
+                                          recibeActividad: widget.postCreador,
+                                          sinLeer: true,
+                                          meGusta: false,
+                                          esComentario: true,
+                                          esSeguir: false,
+                                          nombreUsuarioCreador:
+                                              currentUserDisplayName,
+                                          nombreUsuarioReceptor:
+                                              containerUsersRecord.displayName,
+                                          fechaCreacion: getCurrentTimestamp,
+                                          postRelacionado:
+                                              widget.post?.reference,
+                                          meGustaComentario: false,
+                                          imagenUsuario: currentUserPhoto,
                                         ),
-                                    elevation: 0.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(100.0),
-                                    disabledColor:
-                                        FlutterFlowTheme.of(context).fondoIcono,
-                                    hoverElevation: 0.0,
-                                  ),
-                                ),
+                                        ...mapToFirestore(
+                                          {
+                                            'imagenPostList':
+                                                widget.post?.postPhotolist,
+                                          },
+                                        ),
+                                      });
+                                      _model.nuevaActividad =
+                                          ActividadRecord.getDocumentFromData({
+                                        ...createActividadRecordData(
+                                          creadorActividad:
+                                              currentUserReference,
+                                          recibeActividad: widget.postCreador,
+                                          sinLeer: true,
+                                          meGusta: false,
+                                          esComentario: true,
+                                          esSeguir: false,
+                                          nombreUsuarioCreador:
+                                              currentUserDisplayName,
+                                          nombreUsuarioReceptor:
+                                              containerUsersRecord.displayName,
+                                          fechaCreacion: getCurrentTimestamp,
+                                          postRelacionado:
+                                              widget.post?.reference,
+                                          meGustaComentario: false,
+                                          imagenUsuario: currentUserPhoto,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'imagenPostList':
+                                                widget.post?.postPhotolist,
+                                          },
+                                        ),
+                                      }, actividadRecordReference);
+                                      logFirebaseEvent(
+                                          'IconButton_trigger_push_notification');
+                                      triggerPushNotification(
+                                        notificationTitle:
+                                            '${valueOrDefault(currentUserDocument?.userName, '')} comento tu post',
+                                        notificationText: _model
+                                            .textFieldComentarioTextController
+                                            .text,
+                                        notificationSound: 'default',
+                                        userRefs: [widget.postCreador!],
+                                        initialPageName: 'notificaciones',
+                                        parameterData: {},
+                                      );
+                                      logFirebaseEvent(
+                                          'IconButton_clear_text_fields_pin_codes');
+                                      safeSetState(() {
+                                        _model.textFieldComentarioTextController
+                                            ?.clear();
+                                      });
+                                      logFirebaseEvent(
+                                          'IconButton_bottom_sheet');
+                                      Navigator.pop(context);
+
+                                      safeSetState(() {});
+                                    },
+                                  ).animateOnPageLoad(animationsMap[
+                                      'iconButtonOnPageLoadAnimation']!),
                               ],
                             ),
                           ),

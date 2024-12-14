@@ -132,10 +132,11 @@ class UserPostsRecord extends FirestoreRecord {
   String get postPhoto => _postPhoto ?? '';
   bool hasPostPhoto() => _postPhoto != null;
 
-  // "ride" field.
-  DocumentReference? _ride;
-  DocumentReference? get ride => _ride;
-  bool hasRide() => _ride != null;
+  // "usuarioEtiquetado" field.
+  List<DocumentReference>? _usuarioEtiquetado;
+  List<DocumentReference> get usuarioEtiquetado =>
+      _usuarioEtiquetado ?? const [];
+  bool hasUsuarioEtiquetado() => _usuarioEtiquetado != null;
 
   void _initializeFields() {
     _postTitle = snapshotData['postTitle'] as String?;
@@ -153,7 +154,9 @@ class UserPostsRecord extends FirestoreRecord {
     _idCollection = snapshotData['id_collection'] as String?;
     _favoritoUser = getDataList(snapshotData['FavoritoUser']);
     _numeroFavorito = castToType<int>(snapshotData['numeroFavorito']);
-    _placeInfo = PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
+    _placeInfo = snapshotData['placeInfo'] is PlaceInfoStruct
+        ? snapshotData['placeInfo']
+        : PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
     _video = snapshotData['video'] as String?;
     _esVideo = snapshotData['esVideo'] as bool?;
     _esPublico = snapshotData['esPublico'] as bool?;
@@ -161,7 +164,7 @@ class UserPostsRecord extends FirestoreRecord {
     _esPrivado = snapshotData['esPrivado'] as bool?;
     _postPhotolist = getDataList(snapshotData['PostPhotolist']);
     _postPhoto = snapshotData['postPhoto'] as String?;
-    _ride = snapshotData['ride'] as DocumentReference?;
+    _usuarioEtiquetado = getDataList(snapshotData['usuarioEtiquetado']);
   }
 
   static CollectionReference get collection =>
@@ -253,10 +256,12 @@ class UserPostsRecord extends FirestoreRecord {
             () => snapshot.data['PostPhotolist'].toList(),
           ),
           'postPhoto': snapshot.data['postPhoto'],
-          'ride': convertAlgoliaParam(
-            snapshot.data['ride'],
-            ParamType.DocumentReference,
-            false,
+          'usuarioEtiquetado': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['usuarioEtiquetado'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
           ),
         },
         UserPostsRecord.collection.doc(snapshot.objectID),
@@ -313,7 +318,6 @@ Map<String, dynamic> createUserPostsRecordData({
   bool? esAmigos,
   bool? esPrivado,
   String? postPhoto,
-  DocumentReference? ride,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -336,7 +340,6 @@ Map<String, dynamic> createUserPostsRecordData({
       'esAmigos': esAmigos,
       'esPrivado': esPrivado,
       'postPhoto': postPhoto,
-      'ride': ride,
     }.withoutNulls,
   );
 
@@ -375,7 +378,7 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.esPrivado == e2?.esPrivado &&
         listEquality.equals(e1?.postPhotolist, e2?.postPhotolist) &&
         e1?.postPhoto == e2?.postPhoto &&
-        e1?.ride == e2?.ride;
+        listEquality.equals(e1?.usuarioEtiquetado, e2?.usuarioEtiquetado);
   }
 
   @override
@@ -403,7 +406,7 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.esPrivado,
         e?.postPhotolist,
         e?.postPhoto,
-        e?.ride
+        e?.usuarioEtiquetado
       ]);
 
   @override

@@ -71,7 +71,10 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -234,7 +237,7 @@ class _IngresaConTelefonoWidgetState extends State<IngresaConTelefonoWidget> {
                                         decoration: InputDecoration(
                                           hintText: FFLocalizations.of(context)
                                               .getText(
-                                            '17b7cy81' /* Paísregión */,
+                                            '17b7cy81' /* País/región */,
                                           ),
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)

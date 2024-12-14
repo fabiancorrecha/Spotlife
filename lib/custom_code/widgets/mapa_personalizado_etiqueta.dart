@@ -16,6 +16,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import '/flutter_flow/lat_lng.dart' as ff;
 
 class MapaPersonalizadoEtiqueta extends StatefulWidget {
   const MapaPersonalizadoEtiqueta({
@@ -31,6 +32,7 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
     required this.iOSMapsKey,
     required this.webMapsKey,
     required this.addIcon,
+    this.dissmid,
   }) : super(key: key);
 
   final double? width;
@@ -39,12 +41,14 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
   final double? ubicacionInicialLng;
   final double? zoom;
   final List<UserPostsRecord>? listaPostMarcadores;
-  final void Function(gmap.LatLng ubication, String street, String city)
-      navigateToWithProfile; // Modificado
+  final void Function(ff.LatLng ubication, String street, String city)
+      navigateToWithProfile;
+  // Modificado
   final String? androidMapsKey;
   final String? iOSMapsKey;
   final String? webMapsKey;
   final Icon addIcon;
+  final Future Function()? dissmid;
 
   @override
   _MapaPersonalizadoEtiquetaState createState() =>
@@ -60,10 +64,17 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
   late gmap.CameraPosition initialCameraPosition;
 
   gmap.LatLng? selectedLocation;
+  String? selectedStreet;
+  String? selectedCity;
   bool isSearching = false;
   bool showMore = false;
   bool noResultsFound = false;
   List<Map<String, dynamic>> searchResults = [];
+
+  // Función de conversión integrada
+  ff.LatLng convertToCustomLatLng(gmap.LatLng googleLatLng) {
+    return ff.LatLng(googleLatLng.latitude, googleLatLng.longitude);
+  }
 
   // Estilo del mapa...
   static const String _mapStyle = '''
@@ -384,6 +395,42 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     }
   }
 
+  Future<Uint8List?> _createCustomMarkerFromUrl() async {
+    try {
+      // Descargar la imagen desde la URL proporcionada
+      final response = await http.get(Uri.parse(
+          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/6fldnd6r99qs/spotlife_medio-ai-brush-removebg-ciarozkj_(1)_(1).png'));
+      if (response.statusCode == 200) {
+        final Uint8List imageData = response.bodyBytes;
+
+        // Crear el marcador usando Canvas
+        final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+        final Canvas canvas = Canvas(pictureRecorder);
+        final double size = 335.0; // Tamaño del marcador
+
+        // Dibujar la imagen
+        final ui.Image image = await decodeImageFromList(imageData);
+        canvas.drawImage(image, Offset.zero, Paint());
+
+        // Crear la imagen final
+        final ui.Image markerImage = await pictureRecorder
+            .endRecording()
+            .toImage(size.toInt(), size.toInt());
+        final ByteData? byteDataResult =
+            await markerImage.toByteData(format: ui.ImageByteFormat.png);
+
+        return byteDataResult!.buffer.asUint8List();
+      } else {
+        print(
+            "Error: No se pudo cargar la imagen desde la URL (Status Code: ${response.statusCode})");
+        return null; // Retorna null si no se puede cargar la imagen
+      }
+    } catch (e) {
+      print("Error al crear el marcador personalizado: $e");
+      return null; // Retorna null si ocurre un error
+    }
+  }
+
   @override
   void dispose() {
     searchController.removeListener(_onSearchChanged);
@@ -441,56 +488,137 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     });
   }
 
-  void _selectLocation(Map<String, dynamic> place) {
+  void _selectLocation(Map<String, dynamic> place) async {
     final location = place['location'];
     final selectedLatLng = gmap.LatLng(location['lat'], location['lng']);
-    final street = place['address'].split(',')[0]; // Obtiene la calle
-    final city = place['address']
-        .split(',')
-        .skip(1)
-        .join(', ')
-        .trim(); // Obtiene la ciudad
+    final street = place['address'].split(',')[0]; // Calle
+    final city = place['address'].split(',').skip(1).join(', '); // Ciudad
+
+    // Crear el marcador personalizado desde la URL
+    final Uint8List? customIcon = await _createCustomMarkerFromUrl();
 
     setState(() {
-      selectedLocation = selectedLatLng;
+      selectedLocation = selectedLatLng; // Guarda la ubicación seleccionada
+      selectedStreet = street; // Guarda la calle seleccionada
+      selectedCity = city; // Guarda la ciudad seleccionada
+
+      // Agregar el marcador personalizado o usar el marcador por defecto
       markers.add(gmap.Marker(
         markerId: gmap.MarkerId("selected_location"),
         position: selectedLatLng,
-        icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-            gmap.BitmapDescriptor.hueRed),
+        icon: customIcon != null
+            ? gmap.BitmapDescriptor.fromBytes(customIcon)
+            : gmap.BitmapDescriptor.defaultMarker,
       ));
     });
 
-    // Desactiva el focus y limpia la barra de búsqueda
+    // Llamar a navigateToWithProfile con los datos seleccionados
+    widget.navigateToWithProfile(
+      convertToCustomLatLng(selectedLatLng), // Convertir a ff.LatLng
+      street,
+      city,
+    );
+
+    // Desactiva el foco y limpia la barra de búsqueda
     searchController.clear();
     searchFocusNode.unfocus();
     setState(() {
       isSearching = false;
     });
-
-    // Llama a navigateToWithProfile con los nuevos parámetros
-    widget.navigateToWithProfile(selectedLatLng, street, city);
   }
 
   void _toggleMovableMarker() {
     setState(() {
       if (_movableMarker == null) {
+        // Crear el marcador móvil
         _movableMarker = gmap.Marker(
           markerId: gmap.MarkerId('movable_marker'),
           position: initialCameraPosition.target,
-          draggable: true,
-          onDragEnd: (newPosition) {
+          draggable: true, // Hacerlo arrastrable
+          onDragEnd: (newPosition) async {
+            // Actualizar la posición seleccionada
             setState(() {
               selectedLocation = newPosition;
             });
+
+            // Llamar a la API de Google Maps para obtener la dirección
+            final address = await _getAddressFromLatLng(newPosition);
+
+            // Actualizar la calle y ciudad o usar valores por defecto
+            setState(() {
+              selectedStreet = address['street'] ?? "Lugar elegido";
+              selectedCity = address['city'] ?? "Lugar elegido";
+            });
+
+            // Llamar a navigateToWithProfile si es necesario
+            // widget.navigateToWithProfile(
+            //   convertToCustomLatLng(newPosition), // Convertir a ff.LatLng
+            // selectedStreet ?? "Lugar elegido",
+            //   selectedCity ?? "Lugar elegido",
+            // );
+
+            print(
+                "Coordenadas: ${newPosition.latitude}, ${newPosition.longitude}");
+            print("Dirección: ${selectedStreet}, Ciudad: ${selectedCity}");
           },
           icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-              gmap.BitmapDescriptor.hueBlue),
+            gmap.BitmapDescriptor.hueBlue,
+          ),
         );
       } else {
+        // Eliminar el marcador móvil si ya está activo
         _movableMarker = null;
       }
     });
+  }
+
+  Future<Map<String, String>> _getAddressFromLatLng(
+      gmap.LatLng position) async {
+    final apiKey =
+        widget.androidMapsKey ?? widget.iOSMapsKey ?? widget.webMapsKey ?? '';
+
+    try {
+      // Llamada a la API de Google Maps para geocodificación inversa
+      final response = await http.get(
+        Uri.parse(
+          'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$apiKey',
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        if (data['results'] != null && data['results'].isNotEmpty) {
+          final result = data['results'][0];
+
+          // Obtener la calle
+          final street = result['address_components']?.firstWhere(
+            (component) => component['types'].contains('route'),
+            orElse: () => null,
+          )?['long_name'];
+
+          // Obtener la ciudad o provincia
+          final city = result['address_components']?.firstWhere(
+            (component) =>
+                component['types'].contains('administrative_area_level_2'),
+            orElse: () => null,
+          )?['long_name'];
+
+          return {
+            'street': street ?? "Lugar elegido",
+            'city': city ?? "Lugar elegido",
+          };
+        }
+      }
+    } catch (e) {
+      print("Error al obtener dirección: $e");
+    }
+
+    // Retornar valores por defecto si no se pudo obtener información
+    return {
+      'street': "Lugar elegido",
+      'city': "Lugar elegido",
+    };
   }
 
   Future<void> loadMarkers() async {
@@ -658,18 +786,37 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       right: 20,
       child: Column(
         children: [
-          TextField(
-            controller: searchController,
-            focusNode: searchFocusNode, // Asignamos el FocusNode
-            decoration: InputDecoration(
-              hintText: 'Buscar',
-              hintStyle: TextStyle(color: Colors.white70),
-              filled: true,
-              fillColor: Colors.black,
-              prefixIcon: Icon(Icons.search, color: Colors.white70),
-              // Dentro de _buildSearchBar()
-              suffixIcon:
-                  (searchController.text.isNotEmpty || searchFocusNode.hasFocus)
+          Stack(
+            children: [
+              // IconButton para cerrar
+              Positioned(
+                left: 16,
+                top: 0,
+                bottom: 0,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  padding: EdgeInsets.only(
+                      left: 16, right: 45), // Espaciado solicitado
+                  onPressed: () {
+                    if (widget.dissmid != null) {
+                      widget
+                          .dissmid!(); // Acción personalizada que recibe como argumento
+                    }
+                  },
+                ),
+              ),
+              // Barra de búsqueda
+              TextField(
+                controller: searchController,
+                focusNode: searchFocusNode, // Asignamos el FocusNode
+                decoration: InputDecoration(
+                  hintText: 'Buscar',
+                  hintStyle: TextStyle(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.black,
+                  prefixIcon: Icon(Icons.search, color: Colors.white70),
+                  suffixIcon: (searchController.text.isNotEmpty ||
+                          searchFocusNode.hasFocus)
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -692,14 +839,17 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
                           ),
                         )
                       : null,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            ),
-            style: TextStyle(color: Colors.white),
-            onChanged: (text) => setState(() => isSearching = text.isNotEmpty),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                ),
+                style: TextStyle(color: Colors.white),
+                onChanged: (text) =>
+                    setState(() => isSearching = text.isNotEmpty),
+              ),
+            ],
           ),
           if (isSearching) _buildSearchResults(),
         ],
@@ -789,35 +939,31 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
         child: Container(
           decoration: BoxDecoration(
             color: selectedLocation != null
-                ? Color(
-                    0xFFF4F176) // Color amarillo cuando hay ubicación seleccionada
-                : Colors.black, // Color negro completo por defecto
+                ? Color(0xFFF4F176) // Amarillo si hay ubicación seleccionada
+                : Colors.black, // Negro por defecto
             borderRadius: BorderRadius.circular(20),
           ),
           child: ElevatedButton(
             onPressed: selectedLocation != null
                 ? () {
-                    final street =
-                        "Default Street"; // Opcional: Reemplaza con un valor real si está disponible
-                    final city =
-                        "Default City"; // Opcional: Reemplaza con un valor real si está disponible
+                    // Convertir gmap.LatLng a ff.LatLng antes de usarlo
+                    final customLatLng =
+                        convertToCustomLatLng(selectedLocation!);
 
                     widget.navigateToWithProfile(
-                        selectedLocation!, street, city);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Ubicación etiquetada: (${selectedLocation!.latitude.toStringAsFixed(5)}, ${selectedLocation!.longitude.toStringAsFixed(5)})',
-                        ),
-                      ),
+                      convertToCustomLatLng(selectedLocation!),
+                      selectedStreet ?? "Lugar elegido",
+                      selectedCity ?? "Lugar elegido",
                     );
+                    // Usar customLatLng si se requiere más adelante
+                    print(
+                        "Ubicación convertida: ${customLatLng.latitude}, ${customLatLng.longitude}");
                   }
-                : null,
+                : null, // Desactiva si no hay ubicación seleccionada
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent, // Fondo transparente
-              shadowColor: Colors.transparent, // Sin sombra
-              elevation: 3, // Sin elevación
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 3,
               padding: EdgeInsets.symmetric(vertical: 15),
             ),
             child: Text(

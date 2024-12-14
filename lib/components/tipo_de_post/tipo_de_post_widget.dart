@@ -40,8 +40,12 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       logFirebaseEvent('tipoDePost_backend_call');
       _model.apiResulth5l = await GoogleMapsLocationConverterCall.call(
-        lat: functions.converLatLongToDouble(currentUserLocationValue).first,
-        lng: functions.converLatLongToDouble(currentUserLocationValue).last,
+        lat: functions
+            .converLatLongToDouble(currentUserLocationValue)
+            .firstOrNull,
+        lng: functions
+            .converLatLongToDouble(currentUserLocationValue)
+            .lastOrNull,
       );
 
       if ((_model.apiResulth5l?.succeeded ?? true)) {
