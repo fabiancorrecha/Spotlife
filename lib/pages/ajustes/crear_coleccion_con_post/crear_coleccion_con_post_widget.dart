@@ -125,7 +125,10 @@ class _CrearColeccionConPostWidgetState
         final crearColeccionConPostUserPostsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -514,7 +517,11 @@ class _CrearColeccionConPostWidgetState
                                                               '') ||
                                                       (crearColeccionConPostUserPostsRecord
                                                                   .postPhotolist
-                                                                  .first !=
+                                                                  .firstOrNull !=
+                                                              null &&
+                                                          crearColeccionConPostUserPostsRecord
+                                                                  .postPhotolist
+                                                                  .firstOrNull !=
                                                               ''),
                                                   child: ClipRRect(
                                                     borderRadius:
@@ -527,7 +534,7 @@ class _CrearColeccionConPostWidgetState
                                                               .uploadedFileUrl
                                                           : crearColeccionConPostUserPostsRecord
                                                               .postPhotolist
-                                                              .first,
+                                                              .firstOrNull!,
                                                       width: 96.0,
                                                       height: 76.0,
                                                       fit: BoxFit.cover,
@@ -1096,7 +1103,7 @@ class _CrearColeccionConPostWidgetState
                             imagen: _model.uploadedFileUrl != ''
                                 ? _model.uploadedFileUrl
                                 : crearColeccionConPostUserPostsRecord
-                                    .postPhotolist.first,
+                                    .postPhotolist.firstOrNull,
                             coleccionFavoritos: widget.esColeccionFavorito,
                             coleccionPublica: _model.varPublico,
                             coleccionPrivada: _model.varPrivado,
@@ -1127,7 +1134,7 @@ class _CrearColeccionConPostWidgetState
                                     imagen: _model.uploadedFileUrl != ''
                                         ? _model.uploadedFileUrl
                                         : crearColeccionConPostUserPostsRecord
-                                            .postPhotolist.first,
+                                            .postPhotolist.firstOrNull,
                                     coleccionFavoritos:
                                         widget.esColeccionFavorito,
                                     coleccionPublica: _model.varPublico,

@@ -130,6 +130,7 @@ class _EtiquetarUbicacionWidgetState extends State<EtiquetarUbicacionWidget> {
                         city: city,
                         latLng: ubication,
                       );
+                      FFAppState().Coordenadas = ubication;
                       FFAppState().update(() {});
                       logFirebaseEvent(
                           'MapaPersonalizadoEtiqueta_bottom_sheet');

@@ -5,6 +5,10 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "esPublico",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "postUser",
           "order": "ASCENDING"
         },
@@ -29,6 +33,20 @@
         {
           "fieldPath": "modified_at",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "postUser",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timePosted",
+          "order": "DESCENDING"
         }
       ]
     },

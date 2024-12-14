@@ -15,6 +15,7 @@ import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -655,8 +656,10 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                     .post!.collections.isNotEmpty)
                                               StreamBuilder<CollectionsRecord>(
                                                 stream: CollectionsRecord
-                                                    .getDocument(widget.post!
-                                                        .collections.first),
+                                                    .getDocument(widget
+                                                        .post!
+                                                        .collections
+                                                        .firstOrNull!),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {

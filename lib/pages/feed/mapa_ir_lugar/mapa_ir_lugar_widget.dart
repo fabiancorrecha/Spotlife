@@ -90,7 +90,10 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
         final mapaIrLugarUserPostsRecord = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -122,7 +125,7 @@ class _MapaIrLugarWidgetState extends State<MapaIrLugarWidget> {
                               webGoogleMapsApiKey:
                                   'AIzaSyDO0cp7qjh7_-POR7Azm1RGktAjU4Wa0uo',
                               userImage: mapaIrLugarUserPostsRecord
-                                  .postPhotolist.first,
+                                  .postPhotolist.firstOrNull!,
                               startCoordinate: currentUserLocationValue!,
                               endCoordinate:
                                   mapaIrLugarUserPostsRecord.placeInfo.latLng!,

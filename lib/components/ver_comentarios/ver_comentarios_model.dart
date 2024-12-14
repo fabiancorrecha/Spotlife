@@ -22,17 +22,20 @@ class VerComentariosModel extends FlutterFlowModel<VerComentariosWidget> {
       comentariosDesdeComponente[index] =
           updateFn(comentariosDesdeComponente[index]);
 
+  bool botonSend = false;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
   Completer<List<PostCommentRecord>>? firestoreRequestCompleter;
-  // State field(s) for commentField widget.
-  FocusNode? commentFieldFocusNode;
-  TextEditingController? commentFieldTextController;
-  String? Function(BuildContext, String?)? commentFieldTextControllerValidator;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  // State field(s) for TextFieldComentario widget.
+  FocusNode? textFieldComentarioFocusNode;
+  TextEditingController? textFieldComentarioTextController;
+  String? Function(BuildContext, String?)?
+      textFieldComentarioTextControllerValidator;
+  // Stores action output result for [Backend Call - Create Document] action in IconButton widget.
   PostCommentRecord? ultimoComentario;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  // Stores action output result for [Backend Call - Create Document] action in IconButton widget.
   ActividadRecord? nuevaActividad;
 
   @override
@@ -40,8 +43,8 @@ class VerComentariosModel extends FlutterFlowModel<VerComentariosWidget> {
 
   @override
   void dispose() {
-    commentFieldFocusNode?.dispose();
-    commentFieldTextController?.dispose();
+    textFieldComentarioFocusNode?.dispose();
+    textFieldComentarioTextController?.dispose();
   }
 
   /// Additional helper methods.

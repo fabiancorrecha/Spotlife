@@ -132,6 +132,12 @@ class UserPostsRecord extends FirestoreRecord {
   String get postPhoto => _postPhoto ?? '';
   bool hasPostPhoto() => _postPhoto != null;
 
+  // "usuarioEtiquetado" field.
+  List<DocumentReference>? _usuarioEtiquetado;
+  List<DocumentReference> get usuarioEtiquetado =>
+      _usuarioEtiquetado ?? const [];
+  bool hasUsuarioEtiquetado() => _usuarioEtiquetado != null;
+
   void _initializeFields() {
     _postTitle = snapshotData['postTitle'] as String?;
     _postDescription = snapshotData['postDescription'] as String?;
@@ -148,7 +154,9 @@ class UserPostsRecord extends FirestoreRecord {
     _idCollection = snapshotData['id_collection'] as String?;
     _favoritoUser = getDataList(snapshotData['FavoritoUser']);
     _numeroFavorito = castToType<int>(snapshotData['numeroFavorito']);
-    _placeInfo = PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
+    _placeInfo = snapshotData['placeInfo'] is PlaceInfoStruct
+        ? snapshotData['placeInfo']
+        : PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
     _video = snapshotData['video'] as String?;
     _esVideo = snapshotData['esVideo'] as bool?;
     _esPublico = snapshotData['esPublico'] as bool?;
@@ -156,6 +164,7 @@ class UserPostsRecord extends FirestoreRecord {
     _esPrivado = snapshotData['esPrivado'] as bool?;
     _postPhotolist = getDataList(snapshotData['PostPhotolist']);
     _postPhoto = snapshotData['postPhoto'] as String?;
+    _usuarioEtiquetado = getDataList(snapshotData['usuarioEtiquetado']);
   }
 
   static CollectionReference get collection =>
@@ -247,6 +256,13 @@ class UserPostsRecord extends FirestoreRecord {
             () => snapshot.data['PostPhotolist'].toList(),
           ),
           'postPhoto': snapshot.data['postPhoto'],
+          'usuarioEtiquetado': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['usuarioEtiquetado'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
         },
         UserPostsRecord.collection.doc(snapshot.objectID),
       );
@@ -361,7 +377,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.esAmigos == e2?.esAmigos &&
         e1?.esPrivado == e2?.esPrivado &&
         listEquality.equals(e1?.postPhotolist, e2?.postPhotolist) &&
-        e1?.postPhoto == e2?.postPhoto;
+        e1?.postPhoto == e2?.postPhoto &&
+        listEquality.equals(e1?.usuarioEtiquetado, e2?.usuarioEtiquetado);
   }
 
   @override
@@ -388,7 +405,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.esAmigos,
         e?.esPrivado,
         e?.postPhotolist,
-        e?.postPhoto
+        e?.postPhoto,
+        e?.usuarioEtiquetado
       ]);
 
   @override

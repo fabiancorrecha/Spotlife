@@ -89,7 +89,9 @@ class CollectionsRecord extends FirestoreRecord {
     _coleccionPublica = snapshotData['coleccionPublica'] as bool?;
     _coleccionPrivada = snapshotData['coleccionPrivada'] as bool?;
     _coleccionAmigos = snapshotData['coleccionAmigos'] as bool?;
-    _placeInfo = PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
+    _placeInfo = snapshotData['placeInfo'] is PlaceInfoStruct
+        ? snapshotData['placeInfo']
+        : PlaceInfoStruct.maybeFromMap(snapshotData['placeInfo']);
   }
 
   static CollectionReference get collection =>

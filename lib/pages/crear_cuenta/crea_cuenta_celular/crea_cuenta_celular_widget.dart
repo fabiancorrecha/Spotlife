@@ -52,7 +52,10 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -189,7 +192,7 @@ class _CreaCuentaCelularWidgetState extends State<CreaCuentaCelularWidget> {
                                     decoration: InputDecoration(
                                       hintText:
                                           FFLocalizations.of(context).getText(
-                                        'ute5ep75' /* Paísregión */,
+                                        'ute5ep75' /* País/región */,
                                       ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
