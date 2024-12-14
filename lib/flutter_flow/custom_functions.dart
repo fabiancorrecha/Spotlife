@@ -814,3 +814,12 @@ LatLng? newCustomFunction(String? cordenate) {
 
   return LatLng(latitude, longitude);
 }
+
+bool? returnSpace(String? texto) {
+  // necesitas crear una funcion que te devuelva true si el usuario esta escribiendo y false si el usuario esta enviando solo espacios vacios o no ha enviado ningun campo añade un argumento llamado text de tipo string
+  if (texto == null || texto.trim().isEmpty) {
+    return false;
+  } else {
+    return true;
+  }
+}

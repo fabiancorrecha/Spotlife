@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'crear_post_widget.dart' show CrearPostWidget;
@@ -98,6 +99,8 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   FocusNode? descripcionFocusNode;
   TextEditingController? descripcionTextController;
   String? Function(BuildContext, String?)? descripcionTextControllerValidator;
+  // State field(s) for UbicacionActual widget.
+  bool? ubicacionActualValue;
   // State field(s) for Publico widget.
   bool? publicoValue;
   // State field(s) for MejoresAmigos widget.
@@ -124,6 +127,14 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   bool? switchValue5;
   // State field(s) for Switch widget.
   bool? switchValue6;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApi;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiVideo;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiImagen;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiImagenCurrent;
 
   @override
   void initState(BuildContext context) {

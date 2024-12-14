@@ -42,7 +42,10 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -233,7 +236,7 @@ class _CuentaAjustePaginaWidgetState extends State<CuentaAjustePaginaWidget> {
                       updateCallback: () => safeSetState(() {}),
                       child: BotonQuintoWidget(
                         texto: FFLocalizations.of(context).getText(
-                          'rha6ba9z' /* Cambiar a cuenta ProEmpresa */,
+                          'rha6ba9z' /* Cambiar a cuenta Pro/Empresa */,
                         ),
                         accion: () async {
                           logFirebaseEvent(

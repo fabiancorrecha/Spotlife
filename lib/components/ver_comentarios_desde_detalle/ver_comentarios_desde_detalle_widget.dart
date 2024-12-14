@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/menu_comentario/menu_comentario_widget.dart';
 import '/components/sin_comentarios/sin_comentarios_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -110,23 +109,8 @@ class _VerComentariosDesdeDetalleWidgetState
                 padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FlutterFlowIconButton(
-                      borderColor: const Color(0x000F1316),
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 40.0,
-                      fillColor: const Color(0x005E6367),
-                      icon: const Icon(
-                        Icons.close_rounded,
-                        color: Color(0x00925192),
-                        size: 24.0,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
-                    ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
@@ -138,39 +122,6 @@ class _VerComentariosDesdeDetalleWidgetState
                           borderRadius: BorderRadius.circular(4.0),
                         ),
                       ),
-                    ),
-                    FlutterFlowIconButton(
-                      borderColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 40.0,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      icon: Icon(
-                        Icons.close_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        logFirebaseEvent(
-                            'VER_COMENTARIOS_DESDE_DETALLE_close_roun');
-                        logFirebaseEvent('IconButton_update_app_state');
-                        FFAppState().verCajaComentariosActualizados = true;
-                        safeSetState(() {});
-                        logFirebaseEvent('IconButton_refresh_database_request');
-                        safeSetState(
-                            () => _model.firestoreRequestCompleter = null);
-                        await _model.waitForFirestoreRequestCompleted();
-                        logFirebaseEvent(
-                            'IconButton_clear_text_fields_pin_codes');
-                        safeSetState(() {
-                          _model.commentFieldTextController?.clear();
-                        });
-                        logFirebaseEvent('IconButton_bottom_sheet');
-                        Navigator.pop(
-                            context, _model.verComentariosDesdeComponente);
-                      },
                     ),
                   ],
                 ),

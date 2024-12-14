@@ -646,6 +646,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Feed
   {
+    'ggw9sxpz': {
+      'es': 'Posteo',
+      'en': '',
+    },
     '0h32jrss': {
       'es': 'Home',
       'en': 'home',
@@ -1036,6 +1040,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wlyzvf4s': {
       'es': 'Ubicación',
+      'en': '',
+    },
+    'ki2j8gdg': {
+      'es': 'Usar ubicación Actual',
       'en': '',
     },
     '1vy8nyqw': {
@@ -2029,13 +2037,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': ' Likes',
       'en': 'Likes',
     },
-    'kqo18cr2': {
-      'es': 'Enviar comentario...',
-      'en': 'Send comment...',
-    },
-    'bg4ft6gr': {
-      'es': 'Enviar',
-      'en': 'Send',
+    '5v1ingcx': {
+      'es': 'Añade un comentario...',
+      'en': '',
     },
   },
   // menuPostAjeno
@@ -2424,29 +2428,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // menuPostPropio
   {
-    'va772b0m': {
-      'es': 'Compartir',
-      'en': 'Share',
+    '3r0g3tc9': {
+      'es': 'Editar Post',
+      'en': '',
     },
-    'bocvi98t': {
-      'es': 'Link',
-      'en': 'Link',
-    },
-    's9v3jt8u': {
-      'es': 'Reportar',
-      'en': 'report',
-    },
-    'auci19vx': {
-      'es': 'Editar este post',
-      'en': 'Edit this post',
-    },
-    '5c6cj9od': {
-      'es': 'Eliminar este post',
-      'en': 'Delete this post',
-    },
-    'p0uji3e2': {
-      'es': 'Cancelar',
-      'en': 'Cancel',
+    '9ceyhb8a': {
+      'es': 'Eliminar Post',
+      'en': '',
     },
   },
   // menuOtroPerfil
@@ -3386,7 +3374,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'hjx0bq2t': {
-      'es': 'Recuerda seleccionar una ubicacion ',
+      'es': 'Recuerda seleccionar una ubicación ',
       'en': '',
     },
     'c4gf8d07': {
@@ -3410,6 +3398,89 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'asarl4zo': {
       'es': 'Buscar...',
+      'en': '',
+    },
+  },
+  // AlertaDePrivacidad
+  {
+    'zia9qi48': {
+      'es': '¡Recordatorio!',
+      'en': '',
+    },
+    'gkah5sfz': {
+      'es': 'Recuerda seleccionar un tipo de privacidad',
+      'en': '',
+    },
+    'nowtgtph': {
+      'es': 'Cerrar',
+      'en': '',
+    },
+  },
+  // AlertaDobleUbicacion
+  {
+    'tih7mc56': {
+      'es': '¡Recordatorio!',
+      'en': '',
+    },
+    'l6u3nwok': {
+      'es': 'No puedes tener 2 ubicaciónes seleccionadas',
+      'en': '',
+    },
+    'b1c5u6cc': {
+      'es': 'Cerrar',
+      'en': '',
+    },
+  },
+  // PostPublicado
+  {
+    '9oso0msj': {
+      'es': 'Post 1 publicado',
+      'en': '',
+    },
+  },
+  // PostDesing
+  {
+    'vcg455cz': {
+      'es': '210',
+      'en': '',
+    },
+    'e98co92y': {
+      'es': 'likes',
+      'en': '',
+    },
+    'prjupi3c': {
+      'es': '15',
+      'en': '',
+    },
+    'eh435xm4': {
+      'es': 'Comentarios',
+      'en': '',
+    },
+    'ifwt5nal': {
+      'es': 'Mas',
+      'en': '',
+    },
+    'wtkz9lj1': {
+      'es': 'Añade un comentario...',
+      'en': '',
+    },
+  },
+  // AlertaEliminarPost
+  {
+    't432q0ex': {
+      'es': '¿Desea eliminar este post?',
+      'en': '',
+    },
+    'v49jt7il': {
+      'es': 'Esta acción no se puede deshacer.',
+      'en': '',
+    },
+    'cyi91sw1': {
+      'es': 'Eliminar',
+      'en': '',
+    },
+    'uvhc18kk': {
+      'es': 'Cancelar',
       'en': '',
     },
   },

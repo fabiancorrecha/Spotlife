@@ -87,7 +87,7 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 83.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 16.0, 0.0),
               child: Container(
                 decoration: const BoxDecoration(),
                 child: Padding(
@@ -151,229 +151,225 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: 150.0,
-                              decoration: const BoxDecoration(),
-                              child: StreamBuilder<List<CollectionsRecord>>(
-                                stream: queryCollectionsRecord(
-                                  queryBuilder: (collectionsRecord) =>
-                                      collectionsRecord
-                                          .where(
-                                            'createdBy',
-                                            isEqualTo: currentUserReference,
-                                          )
-                                          .where(
-                                            'coleccionFavoritos',
-                                            isEqualTo: true,
-                                          )
-                                          .orderBy('modified_at'),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 12.0,
-                                        height: 12.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                          ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 150.0,
+                            decoration: const BoxDecoration(),
+                            child: StreamBuilder<List<CollectionsRecord>>(
+                              stream: queryCollectionsRecord(
+                                queryBuilder: (collectionsRecord) =>
+                                    collectionsRecord
+                                        .where(
+                                          'createdBy',
+                                          isEqualTo: currentUserReference,
+                                        )
+                                        .where(
+                                          'coleccionFavoritos',
+                                          isEqualTo: true,
+                                        )
+                                        .orderBy('modified_at'),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 12.0,
+                                      height: 12.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<CollectionsRecord>
+                                    listViewCollectionsRecordList =
+                                    snapshot.data!;
+
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount:
+                                      listViewCollectionsRecordList.length,
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewCollectionsRecord =
+                                        listViewCollectionsRecordList[
+                                            listViewIndex];
+                                    return Container(
+                                      decoration: const BoxDecoration(),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                if (listViewCollectionsRecord
+                                                    .postuUserList
+                                                    .contains(widget.post))
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'FAVORITO_A_COLECCION_ContainerRelleno_ON');
+                                                      logFirebaseEvent(
+                                                          'ContainerRelleno_backend_call');
+
+                                                      await listViewCollectionsRecord
+                                                          .reference
+                                                          .update({
+                                                        ...mapToFirestore(
+                                                          {
+                                                            'postuUserList':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              widget.post
+                                                            ]),
+                                                          },
+                                                        ),
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      decoration:
+                                                          const BoxDecoration(),
+                                                      child: Stack(
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        children: [
+                                                          Container(
+                                                            width: 20.0,
+                                                            height: 20.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                            ),
+                                                          ),
+                                                          Icon(
+                                                            Icons.check_box,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            size: 32.0,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                if (!listViewCollectionsRecord
+                                                    .postuUserList
+                                                    .contains(widget.post))
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'FAVORITO_A_COLECCION_IconSinRelleno_ON_T');
+                                                      logFirebaseEvent(
+                                                          'IconSinRelleno_backend_call');
+
+                                                      await listViewCollectionsRecord
+                                                          .reference
+                                                          .update({
+                                                        ...mapToFirestore(
+                                                          {
+                                                            'postuUserList':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              widget.post
+                                                            ]),
+                                                          },
+                                                        ),
+                                                      });
+                                                    },
+                                                    child: Icon(
+                                                      Icons.crop_square,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 32.0,
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                listViewCollectionsRecord
+                                                    .nombre,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     );
-                                  }
-                                  List<CollectionsRecord>
-                                      listViewCollectionsRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount:
-                                        listViewCollectionsRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewCollectionsRecord =
-                                          listViewCollectionsRecordList[
-                                              listViewIndex];
-                                      return Container(
-                                        decoration: const BoxDecoration(),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Stack(
-                                                children: [
-                                                  if (listViewCollectionsRecord
-                                                      .postuUserList
-                                                      .contains(widget.post))
-                                                    InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'FAVORITO_A_COLECCION_ContainerRelleno_ON');
-                                                        logFirebaseEvent(
-                                                            'ContainerRelleno_backend_call');
-
-                                                        await listViewCollectionsRecord
-                                                            .reference
-                                                            .update({
-                                                          ...mapToFirestore(
-                                                            {
-                                                              'postuUserList':
-                                                                  FieldValue
-                                                                      .arrayRemove([
-                                                                widget.post
-                                                              ]),
-                                                            },
-                                                          ),
-                                                        });
-                                                      },
-                                                      child: Container(
-                                                        decoration:
-                                                            const BoxDecoration(),
-                                                        child: Stack(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          children: [
-                                                            Container(
-                                                              width: 20.0,
-                                                              height: 20.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                              ),
-                                                            ),
-                                                            Icon(
-                                                              Icons.check_box,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              size: 32.0,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  if (!listViewCollectionsRecord
-                                                      .postuUserList
-                                                      .contains(widget.post))
-                                                    InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'FAVORITO_A_COLECCION_IconSinRelleno_ON_T');
-                                                        logFirebaseEvent(
-                                                            'IconSinRelleno_backend_call');
-
-                                                        await listViewCollectionsRecord
-                                                            .reference
-                                                            .update({
-                                                          ...mapToFirestore(
-                                                            {
-                                                              'postuUserList':
-                                                                  FieldValue
-                                                                      .arrayUnion([
-                                                                widget.post
-                                                              ]),
-                                                            },
-                                                          ),
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        Icons.crop_square,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 32.0,
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  listViewCollectionsRecord
-                                                      .nombre,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 32.0, 0.0, 0.0),
+                            child: wrapWithModel(
+                              model: _model.boton1Model,
+                              updateCallback: () => safeSetState(() {}),
+                              child: Boton1Widget(
+                                texto: 'Listo',
+                                desabilitado: false,
+                                accion: () async {
+                                  logFirebaseEvent(
+                                      'FAVORITO_A_COLECCION_Container_7x54u338_');
+                                  logFirebaseEvent('boton1_bottom_sheet');
+                                  Navigator.pop(context);
                                 },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 32.0, 0.0, 0.0),
-                              child: wrapWithModel(
-                                model: _model.boton1Model,
-                                updateCallback: () => safeSetState(() {}),
-                                child: Boton1Widget(
-                                  texto: 'Listo',
-                                  desabilitado: false,
-                                  accion: () async {
-                                    logFirebaseEvent(
-                                        'FAVORITO_A_COLECCION_Container_7x54u338_');
-                                    logFirebaseEvent('boton1_bottom_sheet');
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
