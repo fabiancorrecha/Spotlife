@@ -8,6 +8,3 @@ export 'mapa_perzonalizado_copy.dart' show MapaPerzonalizadoCopy;
 export 'route_view_live.dart' show RouteViewLive;
 export 'rounded_with_shadow.dart' show RoundedWithShadow;
 export 'custom_video_player.dart' show CustomVideoPlayer;
-export 'spot_carrousel.dart';
-export 'map_with_carrousel.dart' show MapWithCarrousel;
-export 'carrousel_map.dart' show CarrouselMap;
