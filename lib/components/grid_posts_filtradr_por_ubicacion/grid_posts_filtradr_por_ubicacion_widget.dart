@@ -74,7 +74,7 @@ class _GridPostsFiltradrPorUbicacionWidgetState
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) => userPostsRecord
             .where(
-              'placeInfo.localizacion',
+              'placeInfo.latLng',
               isEqualTo: widget.post?.placeInfo.latLng?.toGeoPoint(),
             )
             .orderBy('timePosted', descending: true),

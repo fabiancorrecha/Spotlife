@@ -228,7 +228,7 @@ class _CambiaraUnacuentaProfesionalIntroWidgetState
                           Expanded(
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'guwcfq8h' /* Con tu cuenta ProEmpresa en S... */,
+                                'guwcfq8h' /* Con tu cuenta Pro/Empresa en S... */,
                               ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)

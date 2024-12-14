@@ -13,6 +13,7 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -59,7 +60,7 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
       logFirebaseEvent('POST_IMAGEN_V2_COPY_postImagenV2Copy_ON_');
       logFirebaseEvent('postImagenV2Copy_firestore_query');
       _model.obtenerComentarios1 = await queryPostCommentRecordOnce(
-        parent: widget.post?.first.reference,
+        parent: widget.post?.firstOrNull?.reference,
       );
       logFirebaseEvent('postImagenV2Copy_update_component_state');
       _model.comentariosActuales =
@@ -627,7 +628,8 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                     CollectionsRecord>(
                                                   stream: CollectionsRecord
                                                       .getDocument(listPostItem
-                                                          .collections.first),
+                                                          .collections
+                                                          .firstOrNull!),
                                                   builder: (context, snapshot) {
                                                     // Customize what your widget looks like when it's loading.
                                                     if (!snapshot.hasData) {

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'info_dialogo_widget.dart' show InfoDialogoWidget;
+import 'post_publicado_widget.dart' show PostPublicadoWidget;
 import 'package:flutter/material.dart';
 
-class InfoDialogoModel extends FlutterFlowModel<InfoDialogoWidget> {
+class PostPublicadoModel extends FlutterFlowModel<PostPublicadoWidget> {
   @override
   void initState(BuildContext context) {}
 
