@@ -536,6 +536,8 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                               {
                                                 'likes': FieldValue.arrayUnion(
                                                     [currentUserReference]),
+                                                'numeroLikes':
+                                                    FieldValue.increment(1),
                                               },
                                             ),
                                           });
@@ -633,6 +635,8 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                               {
                                                 'likes': FieldValue.arrayRemove(
                                                     [currentUserReference]),
+                                                'numeroLikes':
+                                                    FieldValue.increment(-1),
                                               },
                                             ),
                                           });
@@ -870,9 +874,7 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                         child: Text(
-                          FFLocalizations.of(context).getText(
-                            'vcg455cz' /* 210 */,
-                          ),
+                          widget.post!.numeroLikes.toString(),
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -906,9 +908,7 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
                         child: Text(
-                          FFLocalizations.of(context).getText(
-                            'prjupi3c' /* 15 */,
-                          ),
+                          widget.post!.numComments.toString(),
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -1386,6 +1386,15 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                         lastEditTime: getCurrentTimestamp,
                                       ),
                                       postCommentRecordReference);
+                              logFirebaseEvent('IconButton_backend_call');
+
+                              await widget.post!.reference.update({
+                                ...mapToFirestore(
+                                  {
+                                    'numComments': FieldValue.increment(1),
+                                  },
+                                ),
+                              });
                               logFirebaseEvent('IconButton_backend_call');
 
                               var actividadRecordReference =

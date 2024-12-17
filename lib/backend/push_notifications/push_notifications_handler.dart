@@ -240,11 +240,8 @@ final parametersBuilderMap =
   },
   'EditarPost': (data) async => ParameterData(
         allParams: {
-          'post': await getDocumentParameter<UserPostsRecord>(
-              data, 'post', UserPostsRecord.fromSnapshot),
           'refPostUser': getParameter<DocumentReference>(data, 'refPostUser'),
-          'titulo': getParameter<String>(data, 'titulo'),
-          'descripcion': getParameter<String>(data, 'descripcion'),
+          'esVideo': getParameter<bool>(data, 'esVideo'),
         },
       ),
   'CrearColeccionSinPost': (data) async => ParameterData(
@@ -316,6 +313,7 @@ final parametersBuilderMap =
         },
       ),
   'testNewVideo': ParameterData.none(),
+  'testMapa': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

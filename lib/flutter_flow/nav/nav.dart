@@ -20,6 +20,8 @@ export '/backend/firebase_dynamic_links/firebase_dynamic_links.dart'
 
 const kTransitionInfoKey = '__transition_info__';
 
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
 
@@ -77,6 +79,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
         child:
@@ -551,27 +554,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'EditarPost',
               path: 'editarPost',
               requireAuth: true,
-              asyncParams: {
-                'post': getDoc(['userPosts'], UserPostsRecord.fromSnapshot),
-              },
               builder: (context, params) => EditarPostWidget(
-                post: params.getParam(
-                  'post',
-                  ParamType.Document,
-                ),
                 refPostUser: params.getParam(
                   'refPostUser',
                   ParamType.DocumentReference,
                   isList: false,
                   collectionNamePath: ['userPosts'],
                 ),
-                titulo: params.getParam(
-                  'titulo',
-                  ParamType.String,
-                ),
-                descripcion: params.getParam(
-                  'descripcion',
-                  ParamType.String,
+                esVideo: params.getParam(
+                  'esVideo',
+                  ParamType.bool,
                 ),
               ),
             ),
@@ -808,6 +800,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'testNewVideo',
               path: 'testNewVideo',
               builder: (context, params) => const TestNewVideoWidget(),
+            ),
+            FFRoute(
+              name: 'testMapa',
+              path: 'testMapa',
+              builder: (context, params) => const TestMapaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

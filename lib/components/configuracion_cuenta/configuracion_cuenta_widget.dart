@@ -262,7 +262,7 @@ class _ConfiguracionCuentaWidgetState extends State<ConfiguracionCuentaWidget> {
                         ).then((value) => safeSetState(() {}));
                       },
                       text: FFLocalizations.of(context).getText(
-                        'no6l5933' /* Continuar */,
+                        'yaa2vzi3' /* Continuar */,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,

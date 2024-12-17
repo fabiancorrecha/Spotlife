@@ -284,6 +284,13 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         return;
                                       }
                                     }
+
+                                    logFirebaseEvent(
+                                        'StackImagen_update_page_state');
+                                    _model.imagenes = _model.uploadedFileUrls1
+                                        .toList()
+                                        .cast<String>();
+                                    safeSetState(() {});
                                   },
                                   child: SizedBox(
                                     width: 230.0,
@@ -2645,6 +2652,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         esAmigos: _model.mejoresAmigosValue,
                                         esPrivado: _model.soloYoValue,
                                         esVideo: false,
+                                        ubicacionActual:
+                                            _model.ubicacionActualValue,
                                       ),
                                       ...mapToFirestore(
                                         {
@@ -2659,6 +2668,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     FFAppState().selectedUser = [];
                                     FFAppState().ubication = PlaceInfoStruct();
                                     FFAppState().Coordenadas = null;
+                                    safeSetState(() {});
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    _model.imagenes = [];
+                                    _model.video = null;
                                     safeSetState(() {});
                                     logFirebaseEvent('Button_alert_dialog');
                                     await showDialog(
@@ -2746,6 +2760,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         esAmigos: _model.mejoresAmigosValue,
                                         esPrivado: _model.soloYoValue,
                                         esVideo: true,
+                                        ubicacionActual:
+                                            _model.ubicacionActualValue,
                                       ),
                                       ...mapToFirestore(
                                         {
@@ -2758,6 +2774,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     FFAppState().selectedUser = [];
                                     FFAppState().ubication = PlaceInfoStruct();
                                     FFAppState().Coordenadas = null;
+                                    safeSetState(() {});
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    _model.imagenes = [];
+                                    _model.video = null;
                                     safeSetState(() {});
                                     logFirebaseEvent('Button_alert_dialog');
                                     await showDialog(
@@ -2880,6 +2901,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         esAmigos: _model.mejoresAmigosValue,
                                         esPrivado: _model.soloYoValue,
                                         esVideo: false,
+                                        ubicacionActual:
+                                            _model.ubicacionActualValue,
                                       ),
                                       ...mapToFirestore(
                                         {
@@ -2894,6 +2917,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     FFAppState().selectedUser = [];
                                     FFAppState().ubication = PlaceInfoStruct();
                                     FFAppState().Coordenadas = null;
+                                    safeSetState(() {});
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    _model.imagenes = [];
+                                    _model.video = null;
                                     safeSetState(() {});
                                     logFirebaseEvent('Button_alert_dialog');
                                     await showDialog(
@@ -2981,6 +3009,8 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                         esAmigos: _model.mejoresAmigosValue,
                                         esPrivado: _model.soloYoValue,
                                         esVideo: true,
+                                        ubicacionActual:
+                                            _model.ubicacionActualValue,
                                       ),
                                       ...mapToFirestore(
                                         {
@@ -2993,6 +3023,11 @@ class _CrearPostWidgetState extends State<CrearPostWidget>
                                     FFAppState().selectedUser = [];
                                     FFAppState().ubication = PlaceInfoStruct();
                                     FFAppState().Coordenadas = null;
+                                    safeSetState(() {});
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    _model.imagenes = [];
+                                    _model.video = null;
                                     safeSetState(() {});
                                     logFirebaseEvent('Button_alert_dialog');
                                     await showDialog(

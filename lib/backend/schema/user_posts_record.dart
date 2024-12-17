@@ -138,6 +138,11 @@ class UserPostsRecord extends FirestoreRecord {
       _usuarioEtiquetado ?? const [];
   bool hasUsuarioEtiquetado() => _usuarioEtiquetado != null;
 
+  // "UbicacionActual" field.
+  bool? _ubicacionActual;
+  bool get ubicacionActual => _ubicacionActual ?? false;
+  bool hasUbicacionActual() => _ubicacionActual != null;
+
   void _initializeFields() {
     _postTitle = snapshotData['postTitle'] as String?;
     _postDescription = snapshotData['postDescription'] as String?;
@@ -165,6 +170,7 @@ class UserPostsRecord extends FirestoreRecord {
     _postPhotolist = getDataList(snapshotData['PostPhotolist']);
     _postPhoto = snapshotData['postPhoto'] as String?;
     _usuarioEtiquetado = getDataList(snapshotData['usuarioEtiquetado']);
+    _ubicacionActual = snapshotData['UbicacionActual'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -263,6 +269,7 @@ class UserPostsRecord extends FirestoreRecord {
               true,
             ).toList(),
           ),
+          'UbicacionActual': snapshot.data['UbicacionActual'],
         },
         UserPostsRecord.collection.doc(snapshot.objectID),
       );
@@ -318,6 +325,7 @@ Map<String, dynamic> createUserPostsRecordData({
   bool? esAmigos,
   bool? esPrivado,
   String? postPhoto,
+  bool? ubicacionActual,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -340,6 +348,7 @@ Map<String, dynamic> createUserPostsRecordData({
       'esAmigos': esAmigos,
       'esPrivado': esPrivado,
       'postPhoto': postPhoto,
+      'UbicacionActual': ubicacionActual,
     }.withoutNulls,
   );
 
@@ -378,7 +387,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.esPrivado == e2?.esPrivado &&
         listEquality.equals(e1?.postPhotolist, e2?.postPhotolist) &&
         e1?.postPhoto == e2?.postPhoto &&
-        listEquality.equals(e1?.usuarioEtiquetado, e2?.usuarioEtiquetado);
+        listEquality.equals(e1?.usuarioEtiquetado, e2?.usuarioEtiquetado) &&
+        e1?.ubicacionActual == e2?.ubicacionActual;
   }
 
   @override
@@ -406,7 +416,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.esPrivado,
         e?.postPhotolist,
         e?.postPhoto,
-        e?.usuarioEtiquetado
+        e?.usuarioEtiquetado,
+        e?.ubicacionActual
       ]);
 
   @override

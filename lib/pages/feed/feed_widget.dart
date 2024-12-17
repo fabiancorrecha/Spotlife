@@ -85,7 +85,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               logFirebaseEvent('IconButton_navigate_to');
 
               context.pushNamed(
-                'mapaPrincipal',
+                'testMapa',
                 extra: <String, dynamic>{
                   kTransitionInfoKey: const TransitionInfo(
                     hasTransition: true,

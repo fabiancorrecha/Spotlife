@@ -912,6 +912,17 @@ class _VerComentariosWidgetState extends State<VerComentariosWidget>
                                       logFirebaseEvent(
                                           'IconButton_backend_call');
 
+                                      await widget.post!.reference.update({
+                                        ...mapToFirestore(
+                                          {
+                                            'numComments':
+                                                FieldValue.increment(1),
+                                          },
+                                        ),
+                                      });
+                                      logFirebaseEvent(
+                                          'IconButton_backend_call');
+
                                       var actividadRecordReference =
                                           ActividadRecord.collection.doc();
                                       await actividadRecordReference.set({

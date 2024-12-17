@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'editar_post_widget.dart' show EditarPostWidget;
@@ -21,22 +22,68 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
       listaColeccionesSeleccionadas[index] =
           updateFn(listaColeccionesSeleccionadas[index]);
 
+  String? video;
+
+  List<String> imageList = [];
+  void addToImageList(String item) => imageList.add(item);
+  void removeFromImageList(String item) => imageList.remove(item);
+  void removeAtIndexFromImageList(int index) => imageList.removeAt(index);
+  void insertAtIndexInImageList(int index, String item) =>
+      imageList.insert(index, item);
+  void updateImageListAtIndex(int index, Function(String) updateFn) =>
+      imageList[index] = updateFn(imageList[index]);
+
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue1;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue2;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue3;
+  final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - Read Document] action in EditarPost widget.
+  UserPostsRecord? readPostUser;
+  bool isDataUploading1 = false;
+  List<FFUploadedFile> uploadedLocalFiles1 = [];
+  List<String> uploadedFileUrls1 = [];
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
+  bool isDataUploading3 = false;
+  FFUploadedFile uploadedLocalFile3 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl3 = '';
+
+  // State field(s) for Titulo widget.
+  FocusNode? tituloFocusNode;
+  TextEditingController? tituloTextController;
+  String? Function(BuildContext, String?)? tituloTextControllerValidator;
+  String? _tituloTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        '0yfu6kmm' /* Este campo es obligatorio */,
+      );
+    }
+
+    if (val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'xgt7dsq9' /* Tu titulo debe tener minimo */,
+      );
+    }
+
+    return null;
+  }
+
+  // State field(s) for Descripcion widget.
+  FocusNode? descripcionFocusNode;
+  TextEditingController? descripcionTextController;
+  String? Function(BuildContext, String?)? descripcionTextControllerValidator;
+  // State field(s) for UbicacionActual widget.
+  bool? ubicacionActualValue;
+  // State field(s) for Publico widget.
+  bool? publicoValue;
+  // State field(s) for MejoresAmigos widget.
+  bool? mejoresAmigosValue;
+  // State field(s) for SoloYo widget.
+  bool? soloYoValue;
   // State field(s) for CheckboxPublico widget.
   Map<CollectionsRecord, bool> checkboxPublicoValueMap = {};
   List<CollectionsRecord> get checkboxPublicoCheckedItems =>
@@ -51,16 +98,32 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
   bool? switchValue2;
   // State field(s) for Switch widget.
   bool? switchValue3;
+  // State field(s) for Switch widget.
+  bool? switchValue4;
+  // State field(s) for Switch widget.
+  bool? switchValue5;
+  // State field(s) for Switch widget.
+  bool? switchValue6;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApi;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiVideo;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiImagen;
+  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
+  ApiCallResponse? requestApiImagenCurrent;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    tituloTextControllerValidator = _tituloTextControllerValidator;
+  }
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    tituloFocusNode?.dispose();
+    tituloTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    descripcionFocusNode?.dispose();
+    descripcionTextController?.dispose();
   }
 }

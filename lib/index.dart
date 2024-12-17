@@ -145,3 +145,4 @@ export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
 export '/pages/vista_postlist/vista_postlist_widget.dart'
     show VistaPostlistWidget;
 export '/test_new_video/test_new_video_widget.dart' show TestNewVideoWidget;
+export '/test_mapa/test_mapa_widget.dart' show TestMapaWidget;

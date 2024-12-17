@@ -1159,71 +1159,107 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditarPost
   {
-    'ypyzkwh0': {
-      'es': 'Editar Post',
-      'en': '',
+    'ddlc905b': {
+      'es': 'Editar spot',
+      'en': 'New spot',
     },
-    'smvocg4s': {
+    '1nmrtrrd': {
       'es': 'Titulo',
       'en': '',
     },
-    'mf1wpjwf': {
+    '00n2c0fp': {
       'es': 'Titulo',
       'en': '',
     },
-    'bgraccv5': {
+    '3zwquw33': {
       'es': 'Descripción',
       'en': '',
     },
-    'c7uptc1z': {
+    '7l4cds7f': {
       'es': 'Descripción',
       'en': '',
     },
-    'e0wl6wr2': {
+    'lzqwo2io': {
       'es': 'Ubicación',
       'en': '',
     },
-    'h5nste0h': {
+    'hujg5m4l': {
+      'es': 'Usar ubicación Actual',
+      'en': '',
+    },
+    '3lwoedk3': {
       'es': 'Etiqueta la ubicación',
       'en': '',
     },
-    '85u22a8t': {
+    '7jkznf64': {
       'es': 'Privacidad del spot',
       'en': '',
     },
-    's5z0ydrg': {
+    'rlqra5rw': {
       'es': 'Público',
       'en': '',
     },
-    '9qxxmxx4': {
+    'phidborg': {
       'es': 'Mejores amigos',
       'en': '',
     },
-    'lnwp5zng': {
+    'piql31h3': {
       'es': 'Spot secreto (solo yo)',
       'en': '',
     },
-    '8vsagv44': {
+    '0nkn2ba6': {
       'es': 'Colección',
-      'en': '',
+      'en': 'My collections in Bio',
     },
-    'wstfwl3i': {
+    'jh5ihsxf': {
       'es': 'Crear una nueva colección',
       'en': '',
     },
-    'gyvhisu2': {
+    'ycka0qsf': {
+      'es': 'Facebook',
+      'en': 'Facebook',
+    },
+    '42qyo305': {
+      'es': 'Instagram',
+      'en': 'instagram',
+    },
+    '26a6gl91': {
+      'es': 'Twitter',
+      'en': 'Twitter',
+    },
+    'rfbihi05': {
       'es': 'Facebook',
       'en': '',
     },
-    'kdwh7qd6': {
+    '4lrjxjc2': {
       'es': 'Instagram',
       'en': '',
     },
-    'p3xducn7': {
+    '0ayeb4gr': {
       'es': 'Twitter',
       'en': '',
     },
-    '7dvmzr5r': {
+    '0yfu6kmm': {
+      'es': 'Este campo es obligatorio',
+      'en': '',
+    },
+    'xgt7dsq9': {
+      'es': 'Tu titulo debe tener minimo',
+      'en': '',
+    },
+    'humgjb0y': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'epntjqws': {
+      'es': 'Field is required',
+      'en': '',
+    },
+    'tbrbobao': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'ylruw17f': {
       'es': 'Publicar',
       'en': '',
     },
@@ -1716,7 +1752,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Buscar',
       'en': '',
     },
-    'zevz43os': {
+    'vo0bet6x': {
       'es': 'Home',
       'en': '',
     },
@@ -1789,7 +1825,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Medallas Activas',
       'en': '',
     },
-    'fthrtj3q': {
+    'xm01l8wu': {
       'es': 'Home',
       'en': '',
     },
@@ -1934,6 +1970,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // testNewVideo
   {
     'axqhf19c': {
+      'es': 'Home',
+      'en': '',
+    },
+  },
+  // testMapa
+  {
+    'c4qxngnt': {
       'es': 'Home',
       'en': '',
     },
@@ -3017,7 +3060,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Este campo es obligatorio',
       'en': '',
     },
-    '76bnyjd1': {
+    'rjdo3jr0': {
       'es': 'Please choose an option from the dropdown',
       'en': '',
     },
@@ -3025,7 +3068,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Este campo es obligatorio',
       'en': '',
     },
-    'uvrzu1c2': {
+    'q6fue602': {
       'es': 'Please choose an option from the dropdown',
       'en': '',
     },
@@ -3274,7 +3317,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Verificar tu perfil en Spotlife te brinda múltiples beneficios:\n\nAcceso a Comunidad y Eventos:Obtendras beneficios, invitaciones a eventos y viajes organizados por Spotlife.\n\nCredibilidad y Confianza: Un perfil verificado indica a los demás usuarios que tu contenido es auténtico y confiable.\n\nInteracciones Reales: Conecta con una comunidad genuina que valora la autenticidad y el contenido de calidad.\n\nReconocimiento: Destaca en la plataforma como un usuario de referencia, atrayendo más seguidores interesados en tus spots.',
       'en': '',
     },
-    'r3iv2el5': {
+    'yaa2vzi3': {
       'es': 'Continuar',
       'en': '',
     },
@@ -3440,16 +3483,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PostDesing
   {
-    'vcg455cz': {
-      'es': '210',
-      'en': '',
-    },
     'e98co92y': {
       'es': 'likes',
-      'en': '',
-    },
-    'prjupi3c': {
-      'es': '15',
       'en': '',
     },
     'eh435xm4': {
