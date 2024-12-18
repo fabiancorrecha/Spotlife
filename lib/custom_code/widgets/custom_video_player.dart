@@ -129,7 +129,7 @@ class _CustomFlickControlsState extends State<CustomFlickControls> {
         ),
         // Duración del video con la nueva estética usando FlickLeftDuration
         Positioned(
-          top: 30,
+          top: 50,
           right: 20,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -147,13 +147,15 @@ class _CustomFlickControlsState extends State<CustomFlickControls> {
         // Controles de sonido y pantalla completa en la parte inferior derecha
         Positioned(
           bottom:
-              60, // Movemos los controles más arriba para dar espacio a la barra de progreso
+              70, // Movemos los controles más arriba para dar espacio a la barra de progreso
           right: 20,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               // Botón de sonido (mute/unmute) con iconos personalizados
               Container(
+                width: 30,
+                height: 30,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color:
@@ -184,6 +186,8 @@ class _CustomFlickControlsState extends State<CustomFlickControls> {
               SizedBox(height: 15), // Espacio entre los botones
               // Botón de pantalla completa con la lógica de toggle entre fullscreen y closeScreem
               Container(
+                width: 30,
+                height: 30,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color:
@@ -216,28 +220,29 @@ class _CustomFlickControlsState extends State<CustomFlickControls> {
             ],
           ),
         ),
-        // Barra de progreso ubicada en la parte inferior con padding en todos los lados
-        Positioned(
-          bottom: 0, // Ubicamos la barra de progreso en la parte inferior
-          left: 0,
-          right: 0,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-                30, 0, 30, 30), // Añadir padding izquierdo, derecho y inferior
-            child: FlickShowControlsAction(
-              child: FlickVideoProgressBar(
-                flickProgressBarSettings: FlickProgressBarSettings(
-                  height: 5,
-                  handleRadius: 5,
-                  handleColor: Colors.white,
-                  backgroundColor: Colors.grey.withOpacity(0.5),
-                  bufferedColor: Colors.white.withOpacity(0.7),
-                  playedColor: Color(0xFFF4F176),
+        // Barra de progreso ubicada en la parte inferior (solo si está en pantalla completa)
+        if (isFullscreen)
+          Positioned(
+            bottom: 0, // Ubicamos la barra de progreso en la parte inferior
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 30,
+                  30), // Añadir padding izquierdo, derecho y inferior
+              child: FlickShowControlsAction(
+                child: FlickVideoProgressBar(
+                  flickProgressBarSettings: FlickProgressBarSettings(
+                    height: 5,
+                    handleRadius: 5,
+                    handleColor: Colors.white,
+                    backgroundColor: Colors.grey.withOpacity(0.5),
+                    bufferedColor: Colors.white.withOpacity(0.7),
+                    playedColor: Color(0xFFF4F176),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

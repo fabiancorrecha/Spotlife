@@ -14,6 +14,7 @@ import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -92,7 +93,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
         List<UserPostsRecord> vistaPostlistUserPostsRecordList = snapshot.data!;
 
         return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -648,7 +652,7 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                           CollectionsRecord>(
                                                                         stream: CollectionsRecord.getDocument(listPostItem
                                                                             .collections
-                                                                            .first),
+                                                                            .firstOrNull!),
                                                                         builder:
                                                                             (context,
                                                                                 snapshot) {
@@ -758,7 +762,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                 (context) {
                                                                               return WebViewAware(
                                                                                 child: GestureDetector(
-                                                                                  onTap: () => FocusScope.of(context).unfocus(),
+                                                                                  onTap: () {
+                                                                                    FocusScope.of(context).unfocus();
+                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                  },
                                                                                   child: Padding(
                                                                                     padding: MediaQuery.viewInsetsOf(context),
                                                                                     child: SizedBox(
@@ -800,7 +807,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                 (context) {
                                                                               return WebViewAware(
                                                                                 child: GestureDetector(
-                                                                                  onTap: () => FocusScope.of(context).unfocus(),
+                                                                                  onTap: () {
+                                                                                    FocusScope.of(context).unfocus();
+                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                  },
                                                                                   child: Padding(
                                                                                     padding: MediaQuery.viewInsetsOf(context),
                                                                                     child: SizedBox(
@@ -1214,7 +1224,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                             builder: (context) {
                                                                                               return WebViewAware(
                                                                                                 child: GestureDetector(
-                                                                                                  onTap: () => FocusScope.of(context).unfocus(),
+                                                                                                  onTap: () {
+                                                                                                    FocusScope.of(context).unfocus();
+                                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                  },
                                                                                                   child: Padding(
                                                                                                     padding: MediaQuery.viewInsetsOf(context),
                                                                                                     child: SizedBox(
@@ -1298,7 +1311,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                                         builder: (context) {
                                                                                                           return WebViewAware(
                                                                                                             child: GestureDetector(
-                                                                                                              onTap: () => FocusScope.of(context).unfocus(),
+                                                                                                              onTap: () {
+                                                                                                                FocusScope.of(context).unfocus();
+                                                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                              },
                                                                                                               child: Padding(
                                                                                                                 padding: MediaQuery.viewInsetsOf(context),
                                                                                                                 child: SizedBox(
@@ -1363,7 +1379,10 @@ class _VistaPostlistWidgetState extends State<VistaPostlistWidget> {
                                                                                                         builder: (context) {
                                                                                                           return WebViewAware(
                                                                                                             child: GestureDetector(
-                                                                                                              onTap: () => FocusScope.of(context).unfocus(),
+                                                                                                              onTap: () {
+                                                                                                                FocusScope.of(context).unfocus();
+                                                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                              },
                                                                                                               child: Padding(
                                                                                                                 padding: MediaQuery.viewInsetsOf(context),
                                                                                                                 child: SizedBox(

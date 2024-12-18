@@ -13,6 +13,9 @@ class FFIcons {
   static const String _pageIconFamily = 'PageIcon';
   static const String _iconPinFamily = 'IconPin';
   static const String _iconosMetaEnergiaFamily = 'IconosMetaEnergia';
+  static const String _iconPinSpotlife2Family = 'IconPinSpotlife2';
+  static const String _chatbubbleFamily = 'Chatbubble';
+  static const String _penAndDeleteFamily = 'PenAndDelete';
 
   // SpotfileIcons
   static const IconData kcollection =
@@ -121,4 +124,22 @@ class FFIcons {
   // IconosMetaEnergia
   static const IconData kframe =
       IconData(0xe900, fontFamily: _iconosMetaEnergiaFamily);
+
+  // IconPinSpotlife2
+  static const IconData kstar =
+      IconData(0xe901, fontFamily: _iconPinSpotlife2Family);
+  static const IconData kchat =
+      IconData(0xe904, fontFamily: _iconPinSpotlife2Family);
+  static const IconData kshare2 =
+      IconData(0xe905, fontFamily: _iconPinSpotlife2Family);
+
+  // chatbubble
+  static const IconData kbubble2 =
+      IconData(0xe96e, fontFamily: _chatbubbleFamily);
+
+  // pen-and-delete
+  static const IconData kdelete =
+      IconData(0xe900, fontFamily: _penAndDeleteFamily);
+  static const IconData kpen =
+      IconData(0xe901, fontFamily: _penAndDeleteFamily);
 }

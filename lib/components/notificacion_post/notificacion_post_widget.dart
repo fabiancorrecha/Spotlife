@@ -198,7 +198,7 @@ class _NotificacionPostWidgetState extends State<NotificacionPostWidget> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5.0),
                         child: Image.network(
-                          imageUserPostsRecord.postPhotolist.first,
+                          imageUserPostsRecord.postPhotolist.firstOrNull!,
                           width: 40.0,
                           height: 40.0,
                           fit: BoxFit.cover,

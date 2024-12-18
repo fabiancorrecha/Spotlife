@@ -11,11 +11,10 @@ export 'filtrar_spots_model.dart';
 class FiltrarSpotsWidget extends StatefulWidget {
   const FiltrarSpotsWidget({
     super.key,
-    this.post,
+    required this.filterSpots,
   });
 
-  final List<DocumentReference>? post;
-
+  final void Function(bool isGlobal) filterSpots;
   @override
   State<FiltrarSpotsWidget> createState() => _FiltrarSpotsWidgetState();
 }
@@ -322,6 +321,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.globalValue = false;
                                   });
+                                  widget.filterSpots(false);
                                 }
                               },
                               side: BorderSide(
@@ -404,6 +404,7 @@ class _FiltrarSpotsWidgetState extends State<FiltrarSpotsWidget> {
                                   safeSetState(() {
                                     _model.globalValue = true;
                                   });
+                                  widget.filterSpots(true);
                                 }
                               },
                               side: BorderSide(
