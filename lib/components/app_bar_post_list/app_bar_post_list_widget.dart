@@ -92,7 +92,7 @@ class _AppBarPostListWidgetState extends State<AppBarPostListWidget> {
               shape: BoxShape.circle,
             ),
             child: Image.network(
-              widget.userPost!.postPhotolist.first,
+              widget.userPost!.postPhotolist.firstOrNull!,
               fit: BoxFit.cover,
             ),
           ),

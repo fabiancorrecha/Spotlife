@@ -145,7 +145,3 @@ export '/pages/mapa_principa_respaldo/mapa_principa_respaldo_widget.dart'
 export '/pages/vista_postlist/vista_postlist_widget.dart'
     show VistaPostlistWidget;
 export '/test_new_video/test_new_video_widget.dart' show TestNewVideoWidget;
-export '/pages/crear_post/etiquetar_ubicacion/etiquetar_ubicacion_widget.dart'
-    show EtiquetarUbicacionWidget;
-export '/pages/crear_post/etiquetar_personas/etiquetar_personas_widget.dart'
-    show EtiquetarPersonasWidget;

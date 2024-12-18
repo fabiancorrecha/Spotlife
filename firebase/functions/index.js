@@ -232,47 +232,4 @@ function getCharForIndex(charIdx) {
 exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
   let firestore = admin.firestore();
   let userRef = firestore.doc("users/" + user.uid);
-  await firestore
-    .collectionGroup("postComment")
-    .where("userCreator", "==", userRef)
-    .get()
-    .then(async (querySnapshot) => {
-      for (var doc of querySnapshot.docs) {
-        console.log(`Deleting document ${doc.id} from collection postComment`);
-        await doc.ref.delete();
-      }
-    });
-  await firestore
-    .collection("userPosts")
-    .where("postUser", "==", userRef)
-    .get()
-    .then(async (querySnapshot) => {
-      for (var doc of querySnapshot.docs) {
-        console.log(`Deleting document ${doc.id} from collection userPosts`);
-        await doc.ref.delete();
-      }
-    });
-  await firestore.collection("users").doc(user.uid).delete();
-  await firestore
-    .collection("userStories")
-    .where("user", "==", userRef)
-    .get()
-    .then(async (querySnapshot) => {
-      for (var doc of querySnapshot.docs) {
-        console.log(`Deleting document ${doc.id} from collection userStories`);
-        await doc.ref.delete();
-      }
-    });
-  await firestore
-    .collection("storyComments")
-    .where("commentUser", "==", userRef)
-    .get()
-    .then(async (querySnapshot) => {
-      for (var doc of querySnapshot.docs) {
-        console.log(
-          `Deleting document ${doc.id} from collection storyComments`,
-        );
-        await doc.ref.delete();
-      }
-    });
 });
