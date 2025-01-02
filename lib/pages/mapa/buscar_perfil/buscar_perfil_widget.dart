@@ -1,13 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/components/menu02/menu02_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/tarjeta_lista01/tarjeta_lista01_widget.dart';
 import '/components/usuarios_recomendados/usuarios_recomendados_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -372,13 +374,731 @@ class _BuscarPerfilWidgetState extends State<BuscarPerfilWidget>
                                           final listadoUsuariosItem =
                                               listadoUsuarios[
                                                   listadoUsuariosIndex];
-                                          return TarjetaLista01Widget(
-                                            key: Key(
-                                                'Key4et_${listadoUsuariosIndex}_of_${listadoUsuarios.length}'),
-                                            mostrarBoton: true,
-                                            seguido:
-                                                listadoUsuariosItem.reference,
-                                            textoBtn: 'Siguiendo',
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 16.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 66.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'BUSCAR_PERFIL_PAGE_Row_gqky2rxf_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Row_navigate_to');
+
+                                                        context.pushNamed(
+                                                          'otroPerfil',
+                                                          queryParameters: {
+                                                            'perfilAjeno':
+                                                                serializeParam(
+                                                              listadoUsuariosItem
+                                                                  .reference,
+                                                              ParamType
+                                                                  .DocumentReference,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                            child: Container(
+                                                              width: 40.0,
+                                                              height: 40.0,
+                                                              clipBehavior: Clip
+                                                                  .antiAlias,
+                                                              decoration:
+                                                                  const BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                              ),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                fadeInDuration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                fadeOutDuration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                imageUrl:
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  listadoUsuariosItem
+                                                                      .photoUrl,
+                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                                                ),
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        listadoUsuariosItem
+                                                                            .displayName,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              letterSpacing: 0.0,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        listadoUsuariosItem
+                                                                            .userName,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              letterSpacing: 0.0,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  if (listadoUsuariosItem
+                                                          .cuentaPrivada ==
+                                                      false)
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      child:
+                                                          AuthUserStreamWidget(
+                                                        builder: (context) =>
+                                                            StreamBuilder<
+                                                                List<
+                                                                    ActividadRecord>>(
+                                                          stream:
+                                                              queryActividadRecord(
+                                                            queryBuilder:
+                                                                (actividadRecord) =>
+                                                                    actividadRecord
+                                                                        .where(
+                                                                          'creadorActividad',
+                                                                          isEqualTo:
+                                                                              currentUserReference,
+                                                                        )
+                                                                        .where(
+                                                                          'recibeActividad',
+                                                                          isEqualTo:
+                                                                              listadoUsuariosItem.reference,
+                                                                        )
+                                                                        .where(
+                                                                          'esSeguir',
+                                                                          isEqualTo:
+                                                                              true,
+                                                                        )
+                                                                        .where(
+                                                                          'sinLeer',
+                                                                          isEqualTo:
+                                                                              true,
+                                                                        ),
+                                                            singleRecord: true,
+                                                          ),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 12.0,
+                                                                  height: 12.0,
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    valueColor:
+                                                                        AlwaysStoppedAnimation<
+                                                                            Color>(
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            List<ActividadRecord>
+                                                                cuentaPublicaActividadRecordList =
+                                                                snapshot.data!;
+                                                            final cuentaPublicaActividadRecord =
+                                                                cuentaPublicaActividadRecordList
+                                                                        .isNotEmpty
+                                                                    ? cuentaPublicaActividadRecordList
+                                                                        .first
+                                                                    : null;
+
+                                                            return FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'BUSCAR_PERFIL_PAGE_CuentaPublica_ON_TAP');
+                                                                if (!(currentUserDocument
+                                                                            ?.listaSeguidos
+                                                                            .toList() ??
+                                                                        [])
+                                                                    .contains(
+                                                                        listadoUsuariosItem
+                                                                            .reference)) {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+
+                                                                  await currentUserReference!
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'listaSeguidos':
+                                                                            FieldValue.arrayUnion([
+                                                                          listadoUsuariosItem
+                                                                              .reference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+
+                                                                  await currentUserReference!
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'listaSeguidos':
+                                                                            FieldValue.arrayRemove([
+                                                                          listadoUsuariosItem
+                                                                              .reference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                }
+
+                                                                if ((currentUserDocument
+                                                                            ?.listaSeguidos
+                                                                            .toList() ??
+                                                                        [])
+                                                                    .contains(
+                                                                        listadoUsuariosItem
+                                                                            .reference)) {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+
+                                                                  await listadoUsuariosItem
+                                                                      .reference
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'listaSeguidores':
+                                                                            FieldValue.arrayUnion([
+                                                                          currentUserReference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+
+                                                                  await ActividadRecord
+                                                                      .collection
+                                                                      .doc()
+                                                                      .set(
+                                                                          createActividadRecordData(
+                                                                        creadorActividad:
+                                                                            currentUserReference,
+                                                                        recibeActividad:
+                                                                            listadoUsuariosItem.reference,
+                                                                        sinLeer:
+                                                                            true,
+                                                                        meGusta:
+                                                                            false,
+                                                                        esComentario:
+                                                                            false,
+                                                                        esSeguir:
+                                                                            true,
+                                                                        nombreUsuarioCreador:
+                                                                            currentUserDisplayName,
+                                                                        nombreUsuarioReceptor:
+                                                                            listadoUsuariosItem.displayName,
+                                                                        fechaCreacion:
+                                                                            getCurrentTimestamp,
+                                                                        postRelacionado:
+                                                                            null,
+                                                                        meGustaComentario:
+                                                                            false,
+                                                                        imagenUsuario:
+                                                                            currentUserPhoto,
+                                                                        imagenPost:
+                                                                            null,
+                                                                      ));
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_trigger_push_notification');
+                                                                  triggerPushNotification(
+                                                                    notificationTitle:
+                                                                        '${valueOrDefault(currentUserDocument?.userName, '')} te sigue',
+                                                                    notificationText:
+                                                                        'Ver mas...',
+                                                                    notificationSound:
+                                                                        'default',
+                                                                    userRefs: [
+                                                                      listadoUsuariosItem
+                                                                          .reference
+                                                                    ],
+                                                                    initialPageName:
+                                                                        'notificaciones',
+                                                                    parameterData: {},
+                                                                  );
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+
+                                                                  await listadoUsuariosItem
+                                                                      .reference
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'listaSeguidores':
+                                                                            FieldValue.arrayRemove([
+                                                                          currentUserReference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPublica_backend_call');
+                                                                  await cuentaPublicaActividadRecord!
+                                                                      .reference
+                                                                      .delete();
+                                                                }
+                                                              },
+                                                              text: (currentUserDocument
+                                                                              ?.listaSeguidos
+                                                                              .toList() ??
+                                                                          [])
+                                                                      .contains(
+                                                                          listadoUsuariosItem
+                                                                              .reference)
+                                                                  ? 'Siguiendo'
+                                                                  : 'Seguir',
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 93.0,
+                                                                height: 28.0,
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                iconPadding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: (currentUserDocument?.listaSeguidos.toList() ??
+                                                                            [])
+                                                                        .contains(listadoUsuariosItem
+                                                                            .reference)
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .fondoIcono
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                    ),
+                                                                elevation: 2.0,
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4.0),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  if (listadoUsuariosItem
+                                                          .cuentaPrivada ==
+                                                      true)
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      child:
+                                                          AuthUserStreamWidget(
+                                                        builder: (context) =>
+                                                            StreamBuilder<
+                                                                List<
+                                                                    ActividadRecord>>(
+                                                          stream:
+                                                              queryActividadRecord(
+                                                            queryBuilder:
+                                                                (actividadRecord) =>
+                                                                    actividadRecord
+                                                                        .where(
+                                                                          'creadorActividad',
+                                                                          isEqualTo:
+                                                                              currentUserReference,
+                                                                        )
+                                                                        .where(
+                                                                          'recibeActividad',
+                                                                          isEqualTo:
+                                                                              listadoUsuariosItem.reference,
+                                                                        )
+                                                                        .where(
+                                                                          'esSeguir',
+                                                                          isEqualTo:
+                                                                              true,
+                                                                        )
+                                                                        .where(
+                                                                          'sinLeer',
+                                                                          isEqualTo:
+                                                                              true,
+                                                                        ),
+                                                            singleRecord: true,
+                                                          ),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 12.0,
+                                                                  height: 12.0,
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    valueColor:
+                                                                        AlwaysStoppedAnimation<
+                                                                            Color>(
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            List<ActividadRecord>
+                                                                cuentaPrivadaActividadRecordList =
+                                                                snapshot.data!;
+                                                            final cuentaPrivadaActividadRecord =
+                                                                cuentaPrivadaActividadRecordList
+                                                                        .isNotEmpty
+                                                                    ? cuentaPrivadaActividadRecordList
+                                                                        .first
+                                                                    : null;
+
+                                                            return FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'BUSCAR_PERFIL_PAGE_CuentaPrivada_ON_TAP');
+                                                                if (!(currentUserDocument
+                                                                            ?.listadeUsuarioenEspera
+                                                                            .toList() ??
+                                                                        [])
+                                                                    .contains(
+                                                                        listadoUsuariosItem
+                                                                            .reference)) {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPrivada_backend_call');
+
+                                                                  await currentUserReference!
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'ListadeUsuarioenEspera':
+                                                                            FieldValue.arrayUnion([
+                                                                          listadoUsuariosItem
+                                                                              .reference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPrivada_backend_call');
+
+                                                                  await ActividadRecord
+                                                                      .collection
+                                                                      .doc()
+                                                                      .set(
+                                                                          createActividadRecordData(
+                                                                        creadorActividad:
+                                                                            currentUserReference,
+                                                                        recibeActividad:
+                                                                            listadoUsuariosItem.reference,
+                                                                        sinLeer:
+                                                                            true,
+                                                                        meGusta:
+                                                                            false,
+                                                                        esComentario:
+                                                                            false,
+                                                                        esSeguir:
+                                                                            true,
+                                                                        nombreUsuarioCreador:
+                                                                            currentUserDisplayName,
+                                                                        nombreUsuarioReceptor:
+                                                                            listadoUsuariosItem.displayName,
+                                                                        fechaCreacion:
+                                                                            getCurrentTimestamp,
+                                                                        postRelacionado:
+                                                                            null,
+                                                                        meGustaComentario:
+                                                                            false,
+                                                                        imagenUsuario:
+                                                                            currentUserPhoto,
+                                                                        imagenPost:
+                                                                            null,
+                                                                      ));
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPrivada_trigger_push_notification');
+                                                                  triggerPushNotification(
+                                                                    notificationTitle:
+                                                                        '${valueOrDefault(currentUserDocument?.userName, '')} te sigue',
+                                                                    notificationText:
+                                                                        'Ver mas...',
+                                                                    notificationSound:
+                                                                        'default',
+                                                                    userRefs: [
+                                                                      listadoUsuariosItem
+                                                                          .reference
+                                                                    ],
+                                                                    initialPageName:
+                                                                        'notificaciones',
+                                                                    parameterData: {},
+                                                                  );
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPrivada_backend_call');
+
+                                                                  await currentUserReference!
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'ListadeUsuarioenEspera':
+                                                                            FieldValue.arrayRemove([
+                                                                          listadoUsuariosItem
+                                                                              .reference
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                  logFirebaseEvent(
+                                                                      'CuentaPrivada_backend_call');
+                                                                  await cuentaPrivadaActividadRecord!
+                                                                      .reference
+                                                                      .delete();
+                                                                }
+
+                                                                logFirebaseEvent(
+                                                                    'CuentaPrivada_navigate_to');
+                                                                if (Navigator.of(
+                                                                        context)
+                                                                    .canPop()) {
+                                                                  context.pop();
+                                                                }
+                                                                context
+                                                                    .pushNamed(
+                                                                  'otroPerfil',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'perfilAjeno':
+                                                                        serializeParam(
+                                                                      listadoUsuariosItem
+                                                                          .reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              text: () {
+                                                                if ((currentUserDocument
+                                                                            ?.listadeUsuarioenEspera
+                                                                            .toList() ??
+                                                                        [])
+                                                                    .contains(
+                                                                        listadoUsuariosItem
+                                                                            .reference)) {
+                                                                  return 'Pendiente';
+                                                                } else if ((currentUserDocument
+                                                                            ?.listaSeguidos
+                                                                            .toList() ??
+                                                                        [])
+                                                                    .contains(
+                                                                        listadoUsuariosItem
+                                                                            .reference)) {
+                                                                  return 'Siguiendo';
+                                                                } else {
+                                                                  return 'Seguir';
+                                                                }
+                                                              }(),
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 93.0,
+                                                                height: 28.0,
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                iconPadding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: (currentUserDocument?.listaSeguidos.toList() ??
+                                                                            [])
+                                                                        .contains(listadoUsuariosItem
+                                                                            .reference)
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .fondoIcono
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                    ),
+                                                                elevation: 2.0,
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4.0),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                ],
+                                              ),
+                                            ),
                                           );
                                         },
                                       );

@@ -1,6 +1,6 @@
 import '/backend/backend.dart';
 import '/components/app_bar4/app_bar4_widget.dart';
-import '/components/post_imagen_v2/post_imagen_v2_widget.dart';
+import '/components/post_desing_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -70,13 +70,13 @@ class _DetallePostWidgetState extends State<DetallePostWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      wrapWithModel(
-                        model: _model.postImagenV2Model,
-                        updateCallback: () => safeSetState(() {}),
-                        child: PostImagenV2Widget(
-                          post: widget.post,
-                          verIconoCompartir: true,
-                          verComentarios: true,
+                      Expanded(
+                        child: wrapWithModel(
+                          model: _model.postDesingModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: PostDesingWidget(
+                            post: widget.post!,
+                          ),
                         ),
                       ),
                     ],

@@ -1,15 +1,15 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/app_bar7_usuario/app_bar7_usuario_widget.dart';
+import '/components/menu_otro_perfil/menu_otro_perfil_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
+import '/components/nav_bar_perfil_ajeno/nav_bar_perfil_ajeno_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'otro_perfil_mapa_model.dart';
 export 'otro_perfil_mapa_model.dart';
 
@@ -75,387 +75,256 @@ class _OtroPerfilMapaWidgetState extends State<OtroPerfilMapaWidget> {
       );
     }
 
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              wrapWithModel(
-                model: _model.appBar7UsuarioModel,
-                updateCallback: () => safeSetState(() {}),
-                child: AppBar7UsuarioWidget(
-                  usuario: widget.usuario,
+    return StreamBuilder<List<UserPostsRecord>>(
+      stream: queryUserPostsRecord(
+        queryBuilder: (userPostsRecord) => userPostsRecord
+            .where(
+              'postUser',
+              isEqualTo: widget.usuario,
+            )
+            .whereArrayContainsAny('collections',
+                widget.colecccion?.map((e) => e.reference).toList()),
+      ),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 12.0,
+                height: 12.0,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primaryBackground,
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Stack(
+            ),
+          );
+        }
+        List<UserPostsRecord> otroPerfilMapaUserPostsRecordList =
+            snapshot.data!;
+
+        return GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 54.0, 0.0, 32.0),
+              child: StreamBuilder<UsersRecord>(
+                stream: UsersRecord.getDocument(widget.usuario!),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 12.0,
+                        height: 12.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primaryBackground,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  final columnUsersRecord = snapshot.data!;
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 4.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('ButtonSeguir pressed ...');
-                              },
-                              text: FFLocalizations.of(context).getText(
-                                'soca7s95' /* Seguir */,
+                                16.0, 0.0, 16.0, 0.0),
+                            child: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              elevation: 0.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
                               ),
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 35.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
-                                elevation: 2.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Icon(
+                                  Icons.chevron_left,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 30.0,
                                 ),
-                                borderRadius: BorderRadius.circular(80.0),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 4.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('ButtonSiguiendo pressed ...');
-                              },
-                              text: FFLocalizations.of(context).getText(
-                                '951vu24q' /* Siguiendo */,
+                          Container(
+                            width: 40.0,
+                            height: 40.0,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CachedNetworkImage(
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeOutDuration: const Duration(milliseconds: 500),
+                              imageUrl: valueOrDefault<String>(
+                                columnUsersRecord.photoUrl,
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
                               ),
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 35.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).fondoIcono,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 16.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 28.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    icon: Icon(
+                                      Icons.keyboard_control,
+                                      color: FlutterFlowTheme.of(context).icono,
+                                      size: 24.0,
                                     ),
-                                elevation: 2.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(80.0),
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'OTRO_PERFIL_MAPA_keyboard_control_ICN_ON');
+                                      logFirebaseEvent(
+                                          'IconButton_bottom_sheet');
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                        barrierColor: const Color(0x331A1A1A),
+                                        context: context,
+                                        builder: (context) {
+                                          return WebViewAware(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: SizedBox(
+                                                  height: 225.0,
+                                                  child: MenuOtroPerfilWidget(
+                                                    user: widget.usuario,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    StreamBuilder<List<ChatsRecord>>(
-                      stream: queryChatsRecord(
-                        queryBuilder: (chatsRecord) =>
-                            chatsRecord.where(Filter.or(
-                          Filter(
-                            'user_a',
-                            isEqualTo: currentUserReference,
-                          ),
-                          Filter(
-                            'user_b',
-                            isEqualTo: widget.usuario,
-                          ),
-                          Filter(
-                            'user_a',
-                            isEqualTo: widget.usuario,
-                          ),
-                          Filter(
-                            'user_b',
-                            isEqualTo: currentUserReference,
-                          ),
-                        )),
-                        singleRecord: true,
+                      wrapWithModel(
+                        model: _model.navBarPerfilAjenoModel,
+                        updateCallback: () => safeSetState(() {}),
+                        child: NavBarPerfilAjenoWidget(
+                          tab: 1,
+                          otroUsuario: widget.usuario,
+                        ),
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 12.0,
-                              height: 12.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        List<ChatsRecord> buttonChatsRecordList =
-                            snapshot.data!;
-                        final buttonChatsRecord =
-                            buttonChatsRecordList.isNotEmpty
-                                ? buttonChatsRecordList.first
-                                : null;
-
-                        return FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'OTRO_PERFIL_MAPA_ENVIAR_MENSAJE_BTN_ON_T');
-                            var shouldSetState = false;
-                            if (buttonChatsRecord != null) {
-                              logFirebaseEvent('Button_navigate_to');
-
-                              context.goNamed(
-                                'ChatPage',
-                                queryParameters: {
-                                  'receiveChat': serializeParam(
-                                    buttonChatsRecord.reference,
-                                    ParamType.DocumentReference,
-                                  ),
-                                }.withoutNulls,
-                              );
-
-                              if (shouldSetState) safeSetState(() {});
-                              return;
-                            } else {
-                              logFirebaseEvent('Button_backend_call');
-                              _model.readUsuario =
-                                  await UsersRecord.getDocumentOnce(
-                                      widget.usuario!);
-                              shouldSetState = true;
-                              logFirebaseEvent('Button_backend_call');
-
-                              var chatsRecordReference =
-                                  ChatsRecord.collection.doc();
-                              await chatsRecordReference.set({
-                                ...createChatsRecordData(
-                                  timeStamp: getCurrentTimestamp,
-                                  userA: currentUserReference,
-                                  userB: widget.usuario,
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'userIds': functions.generateListOfUsers(
-                                        currentUserReference!,
-                                        widget.usuario!),
-                                    'userNames': functions.generateListOfNames(
-                                        currentUserDisplayName,
-                                        _model.readUsuario!.displayName),
-                                  },
-                                ),
-                              });
-                              _model.refChats =
-                                  ChatsRecord.getDocumentFromData({
-                                ...createChatsRecordData(
-                                  timeStamp: getCurrentTimestamp,
-                                  userA: currentUserReference,
-                                  userB: widget.usuario,
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'userIds': functions.generateListOfUsers(
-                                        currentUserReference!,
-                                        widget.usuario!),
-                                    'userNames': functions.generateListOfNames(
-                                        currentUserDisplayName,
-                                        _model.readUsuario!.displayName),
-                                  },
-                                ),
-                              }, chatsRecordReference);
-                              shouldSetState = true;
-                              logFirebaseEvent('Button_navigate_to');
-
-                              context.goNamed(
-                                'ChatPage',
-                                queryParameters: {
-                                  'receiveChat': serializeParam(
-                                    _model.refChats?.reference,
-                                    ParamType.DocumentReference,
-                                  ),
-                                }.withoutNulls,
-                              );
-
-                              if (shouldSetState) safeSetState(() {});
-                              return;
-                            }
-
-                            if (shouldSetState) safeSetState(() {});
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'eqcg9rl7' /* Enviar mensaje */,
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
-                          options: FFButtonOptions(
-                            width: 150.0,
-                            height: 35.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).fondoIcono,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleSmallFamily,
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleSmallFamily),
-                                ),
-                            elevation: 2.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(80.0),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              wrapWithModel(
-                model: _model.navBar2Model,
-                updateCallback: () => safeSetState(() {}),
-                child: NavBar2Widget(
-                  tab: 1,
-                  otroUsuario: widget.usuario,
-                ),
-              ),
-              Expanded(
-                child: StreamBuilder<List<UserPostsRecord>>(
-                  stream: queryUserPostsRecord(
-                    queryBuilder: (userPostsRecord) => userPostsRecord
-                        .where(
-                          'postUser',
-                          isEqualTo: widget.usuario,
-                        )
-                        .whereArrayContainsAny(
-                            'collections',
-                            widget.colecccion
-                                ?.map((e) => e.reference)
-                                .toList()),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 12.0,
-                          height: 12.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primaryBackground,
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: custom_widgets.MapaPersonalizado2(
+                              width: double.infinity,
+                              height: double.infinity,
+                              ubicacionInicialLat: functions.obtenerLatLng(
+                                  currentUserLocationValue!, true),
+                              ubicacionInicialLng: functions.obtenerLatLng(
+                                  currentUserLocationValue!, false),
+                              zoom: 16.0,
+                              listaPostMarcadores:
+                                  otroPerfilMapaUserPostsRecordList,
+                              usuarioAutenticado: widget.usuario,
+                              navigateTo: (bycreate) async {
+                                logFirebaseEvent(
+                                    'OTRO_PERFIL_MAPA_Container_v3x1d8lp_CALL');
+                                if (bycreate == widget.usuario) {
+                                  logFirebaseEvent(
+                                      'MapaPersonalizado2_navigate_to');
+
+                                  context.pushNamed(
+                                    'otroPerfil',
+                                    queryParameters: {
+                                      'perfilAjeno': serializeParam(
+                                        bycreate,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                } else {
+                                  logFirebaseEvent(
+                                      'MapaPersonalizado2_navigate_to');
+
+                                  context.pushNamed(
+                                    'perfilPropio',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
+                                }
+                              },
                             ),
                           ),
                         ),
-                      );
-                    }
-                    List<UserPostsRecord> containerUserPostsRecordList =
-                        snapshot.data!;
-
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: custom_widgets.MapaPersonalizado2(
-                          width: double.infinity,
-                          height: double.infinity,
-                          ubicacionInicialLat: functions.obtenerLatLng(
-                              currentUserLocationValue!, true),
-                          ubicacionInicialLng: functions.obtenerLatLng(
-                              currentUserLocationValue!, false),
-                          zoom: 16.0,
-                          listaPostMarcadores: containerUserPostsRecordList,
-                          usuarioAutenticado: widget.usuario,
-                          navigateTo: (bycreate) async {
-                            logFirebaseEvent(
-                                'OTRO_PERFIL_MAPA_Container_v3x1d8lp_CALL');
-                            if (bycreate == widget.usuario) {
-                              logFirebaseEvent(
-                                  'MapaPersonalizado2_navigate_to');
-
-                              context.pushNamed(
-                                'otroPerfil',
-                                queryParameters: {
-                                  'perfilAjeno': serializeParam(
-                                    bycreate,
-                                    ParamType.DocumentReference,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            } else {
-                              logFirebaseEvent(
-                                  'MapaPersonalizado2_navigate_to');
-
-                              context.pushNamed(
-                                'perfilPropio',
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 0),
-                                  ),
-                                },
-                              );
-                            }
-                          },
+                      wrapWithModel(
+                        model: _model.navBar1Model,
+                        updateCallback: () => safeSetState(() {}),
+                        child: const NavBar1Widget(
+                          tabActiva: 0,
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ],
+                  );
+                },
               ),
-              wrapWithModel(
-                model: _model.navBar1Model,
-                updateCallback: () => safeSetState(() {}),
-                child: const NavBar1Widget(
-                  tabActiva: 0,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

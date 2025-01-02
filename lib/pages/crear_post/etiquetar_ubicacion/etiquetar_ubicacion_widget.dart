@@ -120,6 +120,7 @@ class _EtiquetarUbicacionWidgetState extends State<EtiquetarUbicacionWidget> {
                       color: FlutterFlowTheme.of(context).btnText,
                       size: 30.0,
                     ),
+                    usuarioAutenticado: currentUserReference,
                     navigateToWithProfile: (ubication, street, city) async {
                       logFirebaseEvent(
                           'ETIQUETAR_UBICACION_Container_hhp9pz2i_C');

@@ -125,6 +125,20 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _selectedUser;
     });
+    _safeInit(() {
+      _refColeccion = prefs
+              .getStringList('ff_refColeccion')
+              ?.map((path) => path.ref)
+              .toList() ??
+          _refColeccion;
+    });
+    _safeInit(() {
+      _BestFrend = prefs
+              .getStringList('ff_BestFrend')
+              ?.map((path) => path.ref)
+              .toList() ??
+          _BestFrend;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -597,6 +611,81 @@ class FFAppState extends ChangeNotifier {
     selectedUser.insert(index, value);
     prefs.setStringList(
         'ff_selectedUser', _selectedUser.map((x) => x.path).toList());
+  }
+
+  List<DocumentReference> _refColeccion = [];
+  List<DocumentReference> get refColeccion => _refColeccion;
+  set refColeccion(List<DocumentReference> value) {
+    _refColeccion = value;
+    prefs.setStringList('ff_refColeccion', value.map((x) => x.path).toList());
+  }
+
+  void addToRefColeccion(DocumentReference value) {
+    refColeccion.add(value);
+    prefs.setStringList(
+        'ff_refColeccion', _refColeccion.map((x) => x.path).toList());
+  }
+
+  void removeFromRefColeccion(DocumentReference value) {
+    refColeccion.remove(value);
+    prefs.setStringList(
+        'ff_refColeccion', _refColeccion.map((x) => x.path).toList());
+  }
+
+  void removeAtIndexFromRefColeccion(int index) {
+    refColeccion.removeAt(index);
+    prefs.setStringList(
+        'ff_refColeccion', _refColeccion.map((x) => x.path).toList());
+  }
+
+  void updateRefColeccionAtIndex(
+    int index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    refColeccion[index] = updateFn(_refColeccion[index]);
+    prefs.setStringList(
+        'ff_refColeccion', _refColeccion.map((x) => x.path).toList());
+  }
+
+  void insertAtIndexInRefColeccion(int index, DocumentReference value) {
+    refColeccion.insert(index, value);
+    prefs.setStringList(
+        'ff_refColeccion', _refColeccion.map((x) => x.path).toList());
+  }
+
+  List<DocumentReference> _BestFrend = [];
+  List<DocumentReference> get BestFrend => _BestFrend;
+  set BestFrend(List<DocumentReference> value) {
+    _BestFrend = value;
+    prefs.setStringList('ff_BestFrend', value.map((x) => x.path).toList());
+  }
+
+  void addToBestFrend(DocumentReference value) {
+    BestFrend.add(value);
+    prefs.setStringList('ff_BestFrend', _BestFrend.map((x) => x.path).toList());
+  }
+
+  void removeFromBestFrend(DocumentReference value) {
+    BestFrend.remove(value);
+    prefs.setStringList('ff_BestFrend', _BestFrend.map((x) => x.path).toList());
+  }
+
+  void removeAtIndexFromBestFrend(int index) {
+    BestFrend.removeAt(index);
+    prefs.setStringList('ff_BestFrend', _BestFrend.map((x) => x.path).toList());
+  }
+
+  void updateBestFrendAtIndex(
+    int index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    BestFrend[index] = updateFn(_BestFrend[index]);
+    prefs.setStringList('ff_BestFrend', _BestFrend.map((x) => x.path).toList());
+  }
+
+  void insertAtIndexInBestFrend(int index, DocumentReference value) {
+    BestFrend.insert(index, value);
+    prefs.setStringList('ff_BestFrend', _BestFrend.map((x) => x.path).toList());
   }
 
   final _postUsuariosManager = StreamRequestManager<List<UserPostsRecord>>();

@@ -1,6 +1,6 @@
 import '/components/boton_add/boton_add_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
+import '/components/nav_bar_perfil_propio/nav_bar_perfil_propio_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'miperfil_mapa_widget.dart' show MiperfilMapaWidget;
 import 'package:flutter/material.dart';
@@ -14,8 +14,8 @@ class MiperfilMapaModel extends FlutterFlowModel<MiperfilMapaWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Model for navBar2 component.
-  late NavBar2Model navBar2Model;
+  // Model for navBarPerfilPropio component.
+  late NavBarPerfilPropioModel navBarPerfilPropioModel;
   // Model for botonAdd component.
   late BotonAddModel botonAddModel;
   // Model for navBar1 component.
@@ -23,14 +23,15 @@ class MiperfilMapaModel extends FlutterFlowModel<MiperfilMapaWidget> {
 
   @override
   void initState(BuildContext context) {
-    navBar2Model = createModel(context, () => NavBar2Model());
+    navBarPerfilPropioModel =
+        createModel(context, () => NavBarPerfilPropioModel());
     botonAddModel = createModel(context, () => BotonAddModel());
     navBar1Model = createModel(context, () => NavBar1Model());
   }
 
   @override
   void dispose() {
-    navBar2Model.dispose();
+    navBarPerfilPropioModel.dispose();
     botonAddModel.dispose();
     navBar1Model.dispose();
   }

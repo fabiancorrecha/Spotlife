@@ -1,9 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/app_bar7_usuario/app_bar7_usuario_widget.dart';
+import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/components/detalles_de_coleccion/detalles_de_coleccion_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -30,6 +29,7 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
   late MiperfilColecionesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -98,18 +98,56 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        wrapWithModel(
-                          model: _model.appBar7UsuarioModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: AppBar7UsuarioWidget(
-                            usuario: currentUserReference,
-                          ),
-                        ),
-                        wrapWithModel(
-                          model: _model.navBar2Model,
-                          updateCallback: () => safeSetState(() {}),
-                          child: const NavBar2Widget(
-                            tab: 2,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 10.0, 0.0, 10.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FlutterFlowIconButton(
+                                borderRadius: 28.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                icon: Icon(
+                                  Icons.chevron_left,
+                                  color: FlutterFlowTheme.of(context).icono,
+                                  size: 24.0,
+                                ),
+                                showLoadingIndicator: true,
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'MIPERFIL_COLECIONES_chevron_left_ICN_ON_');
+                                  logFirebaseEvent('IconButton_navigate_back');
+                                  context.safePop();
+                                },
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 24.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '3oyehtyd' /* Colecciónes */,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
@@ -320,15 +358,22 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
+                                    FlutterFlowIconButton(
+                                      borderRadius: 8.0,
+                                      buttonSize: 40.0,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      icon: Icon(
+                                        FFIcons.kgroup161,
+                                        color:
+                                            FlutterFlowTheme.of(context).icono,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () async {
                                         logFirebaseEvent(
-                                            'MIPERFIL_COLECIONES_Icon_4gb70cp6_ON_TAP');
-                                        logFirebaseEvent('Icon_navigate_to');
+                                            'MIPERFIL_COLECIONES_group161_ICN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_navigate_to');
 
                                         context.pushNamed(
                                           'CrearColeccionSinPost',
@@ -341,12 +386,6 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                           }.withoutNulls,
                                         );
                                       },
-                                      child: Icon(
-                                        FFIcons.kadd,
-                                        color:
-                                            FlutterFlowTheme.of(context).icono,
-                                        size: 32.0,
-                                      ),
                                     ),
                                   ],
                                 ),
@@ -361,6 +400,11 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                 final general =
                                     miperfilColecionesCollectionsRecordList
                                         .toList();
+                                if (general.isEmpty) {
+                                  return const Center(
+                                    child: ComponenteVacioWidget(),
+                                  );
+                                }
 
                                 return GridView.builder(
                                   padding: EdgeInsets.zero,
@@ -461,6 +505,12 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                         onTap: () async {
                                                           logFirebaseEvent(
                                                               'MIPERFIL_COLECIONES_Stack_323czkeq_ON_TA');
+                                                          currentUserLocationValue =
+                                                              await getCurrentUserLocation(
+                                                                  defaultLocation:
+                                                                      const LatLng(
+                                                                          0.0,
+                                                                          0.0));
                                                           logFirebaseEvent(
                                                               'Stack_navigate_to');
 
@@ -490,6 +540,14 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                                     .reference,
                                                                 ParamType
                                                                     .DocumentReference,
+                                                              ),
+                                                              'ubicationCollection':
+                                                                  serializeParam(
+                                                                generalItem
+                                                                        .placeInfo
+                                                                        .latLng ?? currentUserLocationValue,
+                                                                ParamType
+                                                                    .LatLng,
                                                               ),
                                                             }.withoutNulls,
                                                             extra: <String,
@@ -680,7 +738,6 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                                             await showModalBottomSheet(
                                                                               isScrollControlled: true,
                                                                               backgroundColor: Colors.transparent,
-                                                                              enableDrag: false,
                                                                               context: context,
                                                                               builder: (context) {
                                                                                 return WebViewAware(
@@ -884,6 +941,11 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                     onTap: () async {
                                                       logFirebaseEvent(
                                                           'MIPERFIL_COLECIONES_Container_ed4qosdj_O');
+                                                      currentUserLocationValue =
+                                                          await getCurrentUserLocation(
+                                                              defaultLocation:
+                                                                  const LatLng(0.0,
+                                                                      0.0));
                                                       logFirebaseEvent(
                                                           'Container_navigate_to');
 
@@ -912,6 +974,13 @@ class _MiperfilColecionesWidgetState extends State<MiperfilColecionesWidget> {
                                                                 .reference,
                                                             ParamType
                                                                 .DocumentReference,
+                                                          ),
+                                                          'ubicationCollection':
+                                                              serializeParam(
+                                                            searchCollectionItem
+                                                                    .placeInfo
+                                                                    .latLng ?? currentUserLocationValue,
+                                                            ParamType.LatLng,
                                                           ),
                                                         }.withoutNulls,
                                                         extra: <String,

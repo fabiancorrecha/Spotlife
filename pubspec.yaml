@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.181+182
+version: 1.0.191+192
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -123,6 +123,7 @@ dependencies:
   label_marker: ^1.0.1
   location: 5.0.0
   lottie: 2.7.0
+  mask_text_input_formatter: 2.9.0
   mime_type: 1.0.0
   package_info_plus: 8.0.2
   package_info_plus_platform_interface: 3.0.1
@@ -296,6 +297,33 @@ flutter:
     - family: PenAndDelete
       fonts:
         - asset: assets/fonts/pen-and-delete.ttf
+    - family: Unfollowing
+      fonts:
+        - asset: assets/fonts/Unfollowing.ttf
+    - family: Feed
+      fonts:
+        - asset: assets/fonts/feed.ttf
+    - family: AddMessage
+      fonts:
+        - asset: assets/fonts/addMessage.ttf
+    - family: Setting
+      fonts:
+        - asset: assets/fonts/setting.ttf
+    - family: Navbar
+      fonts:
+        - asset: assets/fonts/navbar.ttf
+    - family: Star
+      fonts:
+        - asset: assets/fonts/star.ttf
+    - family: IconUserBlock
+      fonts:
+        - asset: assets/fonts/IconUserBlock.ttf
+    - family: Send
+      fonts:
+        - asset: assets/fonts/Send.ttf
+    - family: CameraAndVideo
+      fonts:
+        - asset: assets/fonts/CameraAndVideo.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

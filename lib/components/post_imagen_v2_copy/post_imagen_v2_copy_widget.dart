@@ -44,6 +44,8 @@ class PostImagenV2CopyWidget extends StatefulWidget {
 class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
   late PostImagenV2CopyModel _model;
 
+  LatLng? currentUserLocationValue;
+
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -682,6 +684,12 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                             onTap: () async {
                                                               logFirebaseEvent(
                                                                   'POST_IMAGEN_V2_COPY_IconColeccion_ON_TAP');
+                                                              currentUserLocationValue =
+                                                                  await getCurrentUserLocation(
+                                                                      defaultLocation:
+                                                                          const LatLng(
+                                                                              0.0,
+                                                                              0.0));
                                                               logFirebaseEvent(
                                                                   'IconColeccion_navigate_to');
 
@@ -714,6 +722,14 @@ class _PostImagenV2CopyWidgetState extends State<PostImagenV2CopyWidget> {
                                                                         .reference,
                                                                     ParamType
                                                                         .DocumentReference,
+                                                                  ),
+                                                                  'ubicationCollection':
+                                                                      serializeParam(
+                                                                    containerCollectionsRecord
+                                                                            .placeInfo
+                                                                            .latLng ?? currentUserLocationValue,
+                                                                    ParamType
+                                                                        .LatLng,
                                                                   ),
                                                                 }.withoutNulls,
                                                                 extra: <String,

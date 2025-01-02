@@ -1,5 +1,5 @@
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
+import '/components/nav_bar_perfil_propio/nav_bar_perfil_propio_widget.dart';
 import '/components/post_grid_usuario/post_grid_usuario_widget.dart';
 import '/components/tarjeta_mi_perfil/tarjeta_mi_perfil_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -14,8 +14,8 @@ class PerfilPropioModel extends FlutterFlowModel<PerfilPropioWidget> {
   TutorialCoachMark? perfilPropioController;
   // Model for tarjetaMiPerfil component.
   late TarjetaMiPerfilModel tarjetaMiPerfilModel;
-  // Model for navBar2 component.
-  late NavBar2Model navBar2Model;
+  // Model for navBarPerfilPropio component.
+  late NavBarPerfilPropioModel navBarPerfilPropioModel;
   // Model for postGridUsuario component.
   late PostGridUsuarioModel postGridUsuarioModel;
   // Model for navBar1 component.
@@ -24,7 +24,8 @@ class PerfilPropioModel extends FlutterFlowModel<PerfilPropioWidget> {
   @override
   void initState(BuildContext context) {
     tarjetaMiPerfilModel = createModel(context, () => TarjetaMiPerfilModel());
-    navBar2Model = createModel(context, () => NavBar2Model());
+    navBarPerfilPropioModel =
+        createModel(context, () => NavBarPerfilPropioModel());
     postGridUsuarioModel = createModel(context, () => PostGridUsuarioModel());
     navBar1Model = createModel(context, () => NavBar1Model());
   }
@@ -33,7 +34,7 @@ class PerfilPropioModel extends FlutterFlowModel<PerfilPropioWidget> {
   void dispose() {
     perfilPropioController?.finish();
     tarjetaMiPerfilModel.dispose();
-    navBar2Model.dispose();
+    navBarPerfilPropioModel.dispose();
     postGridUsuarioModel.dispose();
     navBar1Model.dispose();
   }

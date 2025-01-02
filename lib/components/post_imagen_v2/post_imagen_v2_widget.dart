@@ -47,6 +47,7 @@ class PostImagenV2Widget extends StatefulWidget {
 class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
   late PostImagenV2Model _model;
 
+  LatLng? currentUserLocationValue;
   bool expandableListenerRegistered = false;
 
   @override
@@ -710,6 +711,12 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                           onTap: () async {
                                                             logFirebaseEvent(
                                                                 'POST_IMAGEN_V2_COMP_IconColeccion_ON_TAP');
+                                                            currentUserLocationValue =
+                                                                await getCurrentUserLocation(
+                                                                    defaultLocation:
+                                                                        const LatLng(
+                                                                            0.0,
+                                                                            0.0));
                                                             logFirebaseEvent(
                                                                 'IconColeccion_navigate_to');
 
@@ -741,6 +748,14 @@ class _PostImagenV2WidgetState extends State<PostImagenV2Widget> {
                                                                       .reference,
                                                                   ParamType
                                                                       .DocumentReference,
+                                                                ),
+                                                                'ubicationCollection':
+                                                                    serializeParam(
+                                                                  containerCollectionsRecord
+                                                                          .placeInfo
+                                                                          .latLng ?? currentUserLocationValue,
+                                                                  ParamType
+                                                                      .LatLng,
                                                                 ),
                                                               }.withoutNulls,
                                                               extra: <String,

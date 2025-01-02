@@ -676,16 +676,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'home',
     },
   },
-  // seguidoresYSeguidos
+  // seguidores
   {
-    'f28uqetd': {
-      'es': 'Seguidos',
-      'en': 'followed',
-    },
-    'pdl9i1w2': {
-      'es': 'Seguidores',
-      'en': 'Followers',
-    },
     'ukqq11k2': {
       'es': 'Home',
       'en': 'home',
@@ -707,10 +699,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // perfilPropio
   {
-    'ut3nex3h': {
-      'es': 'Editar perfil',
-      'en': 'Edit profile',
-    },
     'vzln35jl': {
       'es': 'Home',
       'en': 'home',
@@ -725,6 +713,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // miperfilColeciones
   {
+    '3oyehtyd': {
+      'es': 'Colecciónes',
+      'en': '',
+    },
     'w0vrhxbj': {
       'es': 'Buscar',
       'en': '',
@@ -752,8 +744,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'home',
     },
   },
-  // ajustes_Favoritos
+  // favoritos
   {
+    '7kouip33': {
+      'es': 'Post',
+      'en': '',
+    },
+    'ye0x904b': {
+      'es': 'Colecciónes',
+      'en': '',
+    },
     'mqty1e43': {
       'es': 'Home',
       'en': 'home',
@@ -827,10 +827,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Bloqueaste este usuario',
       'en': 'You blocked this user',
     },
-    't3mj9plw': {
-      'es': 'Enviar mensaje',
-      'en': '',
-    },
     'tszhui7f': {
       'es': 'Home',
       'en': 'home',
@@ -865,18 +861,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // otroPerfilMapa
   {
-    'soca7s95': {
-      'es': 'Seguir',
-      'en': 'Continue',
-    },
-    '951vu24q': {
-      'es': 'Siguiendo',
-      'en': 'Following',
-    },
-    'eqcg9rl7': {
-      'es': 'Enviar mensaje',
-      'en': '',
-    },
     'fik63qen': {
       'es': 'seguidores',
       'en': 'home',
@@ -884,6 +868,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // otroPerfilColecciones
   {
+    's285evos': {
+      'es': 'Colecciones',
+      'en': '',
+    },
     '272nhnnn': {
       'es': 'Buscar',
       'en': '',
@@ -968,18 +956,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '6leulu8q': {
       'es': 'Buscar',
       'en': 'Look for',
-    },
-    '2a74di3l': {
-      'es': 'Playa',
-      'en': '',
-    },
-    '6uax31vq': {
-      'es': 'Option 2',
-      'en': '',
-    },
-    'l5mg0sas': {
-      'es': 'Option 3',
-      'en': '',
     },
     'e1prln4b': {
       'es': 'Lugares Recomendados ',
@@ -1938,30 +1914,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // VistaPostlist
   {
-    'fj1744c1': {
-      'es': ' likes',
-      'en': '',
-    },
-    'kaaia5vd': {
-      'es': ' likes',
-      'en': '',
-    },
-    't4vjpy1r': {
-      'es': 'Mas',
-      'en': '',
-    },
-    'yu7dg2s6': {
-      'es': 'Añade un comentario...',
-      'en': '',
-    },
-    '510ljajz': {
-      'es': ' Likes',
-      'en': '',
-    },
-    'zlo0i1ma': {
-      'es': ' Likes',
-      'en': '',
-    },
     'go4t0xcu': {
       'es': 'Home',
       'en': '',
@@ -1979,6 +1931,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'c4qxngnt': {
       'es': 'Home',
       'en': '',
+    },
+  },
+  // seguidos
+  {
+    'l27o12ch': {
+      'es': 'Home',
+      'en': 'home',
     },
   },
   // crearCuentaOptions
@@ -2087,25 +2046,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // menuPostAjeno
   {
-    'd0ebyn63': {
-      'es': 'Compartir',
-      'en': 'Share',
+    'uud10czl': {
+      'es': 'Dejar de Seguir',
+      'en': '',
     },
-    'hiixsb80': {
-      'es': 'Link',
-      'en': 'Link',
-    },
-    'no2rf96f': {
-      'es': 'Reportar',
-      'en': 'report',
-    },
-    '38js2rx4': {
-      'es': 'Ocultar este post',
-      'en': 'Hide this post',
-    },
-    'zuu7ey3d': {
-      'es': 'Dejar de seguir',
-      'en': 'Stop following',
+    'omwxttq2': {
+      'es': 'Reportar Post',
+      'en': '',
     },
   },
   // menuReportar
@@ -2176,59 +2123,103 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // tarjetaMiPerfil
   {
-    'yfhnpjhs': {
-      'es': ' Spots',
+    'b0or8n5o': {
+      'es': 'Posts',
       'en': 'Spots',
     },
-    '6tk4hj49': {
-      'es': 'Seguidos y \nseguidores',
-      'en': 'followed and\nfollowers',
+    'j7frdsd7': {
+      'es': 'Seguidores',
+      'en': 'Spots',
+    },
+    'y0rvaqcv': {
+      'es': 'Seguidos',
+      'en': 'Spots',
     },
   },
   // tarjetaMiPerfilEditar
   {
-    'cz0m9vrd': {
-      'es': 'Cancelar',
-      'en': 'Cancel',
-    },
     '3ctvj8yb': {
-      'es': 'Listo',
+      'es': 'Guardar',
       'en': 'Ready',
     },
     'hz20652y': {
       'es': 'Cambia tu foto de perfil',
       'en': 'Change your profile picture',
     },
-    'vxc56h4i': {
-      'es': 'Nombre de usuario',
+    '8ywfwi25': {
+      'es': 'Nombre de Usuario',
+      'en': '',
+    },
+    'uz9i8z92': {
+      'es': '',
       'en': 'Username',
     },
-    'iy2zk87y': {
+    '67c82ryx': {
+      'es': 'Nombre de Usuario',
+      'en': '',
+    },
+    'wvcyqoy7': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'n2zha0fm': {
+      'es': '',
+      'en': 'Username',
+    },
+    'stq6o58e': {
+      'es': 'Descripción',
+      'en': '',
+    },
+    'x47d8s28': {
       'es': 'Correo',
+      'en': '',
+    },
+    'iy2zk87y': {
+      'es': '',
       'en': 'Mail',
+    },
+    'uaodj5mf': {
+      'es': 'Correo',
+      'en': '',
     },
     'kch8k2f5': {
       'es': 'Actualmente no puedes editar tu email',
       'en': '',
     },
-    'pxh7kou3': {
-      'es': 'Celular',
+    '0ft49k6a': {
+      'es': 'Teléfono',
+      'en': '',
+    },
+    'p0pf3ehk': {
+      'es': '',
       'en': 'Cell phone',
     },
-    'xs68b662': {
-      'es': 'Descripcion',
-      'en': 'Description',
+    'qu4g25lq': {
+      'es': 'Teléfono',
+      'en': '',
     },
-    '06uy5etf': {
+    'omtf5lq8': {
       'es': 'Url',
+      'en': '',
+    },
+    '8msqi3em': {
+      'es': '',
       'en': 'url',
     },
-    'd9gextza': {
+    '27r6qyxd': {
+      'es': 'Url',
+      'en': '',
+    },
+    'ic82agx0': {
       'es': 'Fecha de nacimiento',
       'en': '',
     },
-    'w9z7r2bq': {
-      'es': 'Genero',
+    'accn0y0k': {
+      'es': '',
+      'en': 'url',
+    },
+    'x1m36pou': {
+      'es': 'Fecha de nacimiento',
       'en': '',
     },
     'aifi2xvk': {
@@ -2278,7 +2269,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Ajustes',
       'en': 'Settings',
     },
-    'zaqmd7y3': {
+    'bts9i8ys': {
       'es': 'Configuración',
       'en': 'Setting',
     },
@@ -2399,17 +2390,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // tarjetaOtroPerfil
   {
-    'h1dpym1e': {
-      'es': ' Spots',
+    'mvkdi9wi': {
+      'es': 'Posts',
       'en': 'Spots',
     },
-    'enpxvzz6': {
+    'm6pbxs80': {
       'es': 'Seguidores',
-      'en': 'Followers',
+      'en': 'Spots',
     },
-    'j4j0qz28': {
+    'kovcaxh3': {
       'es': 'Seguidos',
-      'en': 'followed',
+      'en': 'Spots',
     },
   },
   // appBar2
@@ -2483,24 +2474,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // menuOtroPerfil
   {
     '1vkq4vte': {
-      'es': 'Compartir',
+      'es': 'Compartir Perfil',
       'en': 'Share',
     },
-    '4ao8fyuh': {
-      'es': 'Link',
+    'jwis9vxr': {
+      'es': 'Reportar Perfil',
       'en': 'Link',
     },
-    '7gsarsmz': {
+    'm2g5zrs2': {
       'es': 'Desbloquear usuario',
       'en': 'Unlock user',
     },
-    's1z4tfqm': {
+    'qhl1xplg': {
       'es': 'Bloquear usuario',
       'en': 'Block user',
-    },
-    'uayag73c': {
-      'es': 'Cancelar',
-      'en': 'Cancel',
     },
   },
   // cuenta_old
@@ -2723,7 +2710,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // detallesDeColeccion
   {
-    'hrjwc1id': {
+    '5qh8pv3n': {
       'es': 'Editar colección',
       'en': 'Edit collection',
     },
@@ -3517,6 +3504,32 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'uvhc18kk': {
       'es': 'Cancelar',
       'en': '',
+    },
+  },
+  // AlertaDeshacer
+  {
+    'yh9alrae': {
+      'es': '¿Desea descartar los cambios?',
+      'en': '',
+    },
+    'a9t5u7yc': {
+      'es': 'Esta acción no se puede deshacer.',
+      'en': '',
+    },
+    '39p70wuh': {
+      'es': 'Descartar',
+      'en': '',
+    },
+    'puf61vi3': {
+      'es': 'Cancelar',
+      'en': '',
+    },
+  },
+  // ListaMejoresAmigos
+  {
+    '7auf6ktj': {
+      'es': 'Lista de mejores amigos',
+      'en': 'Add payment method',
     },
   },
   // Miscellaneous

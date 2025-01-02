@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom widgets
+
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmap;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -33,6 +35,7 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
     required this.webMapsKey,
     required this.addIcon,
     this.dissmid,
+    this.usuarioAutenticado,
   }) : super(key: key);
 
   final double? width;
@@ -49,6 +52,7 @@ class MapaPersonalizadoEtiqueta extends StatefulWidget {
   final String? webMapsKey;
   final Icon addIcon;
   final Future Function()? dissmid;
+  final DocumentReference? usuarioAutenticado;
 
   @override
   _MapaPersonalizadoEtiquetaState createState() =>
@@ -74,6 +78,70 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
   // Función de conversión integrada
   ff.LatLng convertToCustomLatLng(gmap.LatLng googleLatLng) {
     return ff.LatLng(googleLatLng.latitude, googleLatLng.longitude);
+  }
+
+  // funcion para Icono movible
+
+  Future<Uint8List> _createUserMarkerIcon(String? photoUrl, double size) async {
+    try {
+      final ui.Image image = await _loadImage(
+        photoUrl ??
+            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+      );
+
+      final ui.PictureRecorder recorder = ui.PictureRecorder();
+      final Canvas canvas = Canvas(recorder);
+
+      // Fondo blanco
+      final Paint circlePaint = Paint()..color = Colors.white;
+      canvas.drawCircle(
+        Offset(size / 2, size / 2),
+        size / 2,
+        circlePaint,
+      );
+
+      // Borde violeta
+      final Paint borderPaint = Paint()
+        ..color = const Color.fromARGB(255, 89, 19, 210)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 6.0; // Ancho del borde
+      canvas.drawCircle(
+        Offset(size / 2, size / 2),
+        size / 2 -
+            2.0, // Ajusta el radio para que el borde esté dentro del círculo blanco
+        borderPaint,
+      );
+
+      // Imagen del usuario
+      final double imageSize = size * 0.7; // Imagen dentro del círculo
+      final Rect rect = Rect.fromLTWH(
+        (size - imageSize) / 2,
+        (size - imageSize) / 2,
+        imageSize,
+        imageSize,
+      );
+      final RRect rrect =
+          RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
+
+      // Recortar y dibujar la imagen
+      canvas.clipRRect(rrect);
+      canvas.drawImageRect(
+        image,
+        Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
+        rect,
+        Paint(),
+      );
+
+      final ui.Image markerImage =
+          await recorder.endRecording().toImage(size.toInt(), size.toInt());
+      final ByteData? byteData =
+          await markerImage.toByteData(format: ui.ImageByteFormat.png);
+
+      return byteData!.buffer.asUint8List();
+    } catch (e) {
+      print('Error creando ícono del marcador: $e');
+      rethrow;
+    }
   }
 
   // Estilo del mapa...
@@ -512,13 +580,6 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
       ));
     });
 
-    // Llamar a navigateToWithProfile con los datos seleccionados
-    widget.navigateToWithProfile(
-      convertToCustomLatLng(selectedLatLng), // Convertir a ff.LatLng
-      street,
-      city,
-    );
-
     // Desactiva el foco y limpia la barra de búsqueda
     searchController.clear();
     searchFocusNode.unfocus();
@@ -527,49 +588,70 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     });
   }
 
-  void _toggleMovableMarker() {
-    setState(() {
-      if (_movableMarker == null) {
-        // Crear el marcador móvil
-        _movableMarker = gmap.Marker(
-          markerId: gmap.MarkerId('movable_marker'),
-          position: initialCameraPosition.target,
-          draggable: true, // Hacerlo arrastrable
-          onDragEnd: (newPosition) async {
-            // Actualizar la posición seleccionada
-            setState(() {
-              selectedLocation = newPosition;
-            });
+// marker movible
 
-            // Llamar a la API de Google Maps para obtener la dirección
-            final address = await _getAddressFromLatLng(newPosition);
+  void _toggleMovableMarker() async {
+    if (_movableMarker == null) {
+      // Verifica si usuarioAutenticado es válido
+      if (widget.usuarioAutenticado != null) {
+        try {
+          final userDoc = await widget.usuarioAutenticado!.get();
+          final Map<String, dynamic>? userData =
+              userDoc.data() as Map<String, dynamic>?;
+          String? userPhotoUrl = userData?['photo_url'];
 
-            // Actualizar la calle y ciudad o usar valores por defecto
-            setState(() {
-              selectedStreet = address['street'] ?? "Lugar elegido";
-              selectedCity = address['city'] ?? "Lugar elegido";
-            });
+          // Usa la URL predeterminada si userPhotoUrl es nula o está vacía
+          if (userPhotoUrl == null || userPhotoUrl.isEmpty) {
+            userPhotoUrl =
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png';
+          }
 
-            // Llamar a navigateToWithProfile si es necesario
-            // widget.navigateToWithProfile(
-            //   convertToCustomLatLng(newPosition), // Convertir a ff.LatLng
-            // selectedStreet ?? "Lugar elegido",
-            //   selectedCity ?? "Lugar elegido",
-            // );
+          print('URL de la foto del usuario: $userPhotoUrl');
 
-            print(
-                "Coordenadas: ${newPosition.latitude}, ${newPosition.longitude}");
-            print("Dirección: ${selectedStreet}, Ciudad: ${selectedCity}");
-          },
-          icon: gmap.BitmapDescriptor.defaultMarkerWithHue(
-            gmap.BitmapDescriptor.hueBlue,
-          ),
-        );
+          // Genera el ícono del marcador personalizado
+          final Uint8List customIcon = await _createUserMarkerIcon(
+            userPhotoUrl,
+            120.0, // Tamaño del marcador móvil
+          );
+
+          setState(() {
+            // Crea el marcador móvil
+            _movableMarker = gmap.Marker(
+              markerId: gmap.MarkerId('movable_marker'),
+              position: initialCameraPosition.target, // Posición inicial
+              draggable: true,
+              onDragEnd: (newPosition) async {
+                setState(() {
+                  selectedLocation = newPosition;
+                });
+                final address = await _getAddressFromLatLng(newPosition);
+                setState(() {
+                  selectedStreet = address['street'] ?? "Lugar elegido";
+                  selectedCity = address['city'] ?? "Lugar elegido";
+                });
+              },
+              icon: gmap.BitmapDescriptor.fromBytes(customIcon),
+            );
+
+            // Agrega el marcador móvil al conjunto de marcadores
+            markers.add(_movableMarker!);
+          });
+
+          print('Marcador móvil creado y agregado.');
+        } catch (e) {
+          print('Error generando marcador personalizado: $e');
+        }
       } else {
-        // Eliminar el marcador móvil si ya está activo
-        _movableMarker = null;
+        print('Referencia del usuario autenticado no proporcionada.');
       }
-    });
+    } else {
+      setState(() {
+        // Elimina el marcador móvil del conjunto de marcadores
+        markers.remove(_movableMarker);
+        _movableMarker = null;
+      });
+      print('Marcador móvil eliminado.');
+    }
   }
 
   Future<Map<String, String>> _getAddressFromLatLng(
@@ -736,6 +818,18 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
     );
     return completer.future;
   }
+  // reutilizar imagenes ya cargadas (Cache)
+
+  Map<String, ui.Image> _imageCache = {};
+
+  Future<ui.Image> _loadCachedImage(String url) async {
+    if (_imageCache.containsKey(url)) {
+      return _imageCache[url]!;
+    }
+    final ui.Image image = await _loadImage(url);
+    _imageCache[url] = image;
+    return image;
+  }
 
 //
   @override
@@ -757,9 +851,7 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
               _controller.complete(controller);
               controller.setMapStyle(_mapStyle);
             },
-            markers: _movableMarker != null
-                ? {...markers, _movableMarker!}
-                : markers,
+            markers: markers,
           ),
         ),
         if (isSearching)
@@ -946,18 +1038,14 @@ class _MapaPersonalizadoEtiquetaState extends State<MapaPersonalizadoEtiqueta> {
           child: ElevatedButton(
             onPressed: selectedLocation != null
                 ? () {
-                    // Convertir gmap.LatLng a ff.LatLng antes de usarlo
-                    final customLatLng =
-                        convertToCustomLatLng(selectedLocation!);
-
                     widget.navigateToWithProfile(
                       convertToCustomLatLng(selectedLocation!),
                       selectedStreet ?? "Lugar elegido",
                       selectedCity ?? "Lugar elegido",
                     );
-                    // Usar customLatLng si se requiere más adelante
+
                     print(
-                        "Ubicación convertida: ${customLatLng.latitude}, ${customLatLng.longitude}");
+                        "Ubicación convertida: ${selectedLocation!.latitude}, ${selectedLocation!.longitude}");
                   }
                 : null, // Desactiva si no hay ubicación seleccionada
             style: ElevatedButton.styleFrom(

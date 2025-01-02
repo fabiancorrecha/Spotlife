@@ -305,6 +305,21 @@ class _FavoritoAColeccionWidgetState extends State<FavoritoAColeccionWidget> {
                                                           },
                                                         ),
                                                       });
+                                                      logFirebaseEvent(
+                                                          'IconSinRelleno_backend_call');
+
+                                                      await widget.post!
+                                                          .update({
+                                                        ...mapToFirestore(
+                                                          {
+                                                            'FavoritoUser':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              currentUserReference
+                                                            ]),
+                                                          },
+                                                        ),
+                                                      });
                                                     },
                                                     child: Icon(
                                                       Icons.crop_square,

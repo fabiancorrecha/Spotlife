@@ -33,6 +33,8 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
   void updateImageListAtIndex(int index, Function(String) updateFn) =>
       imageList[index] = updateFn(imageList[index]);
 
+  bool selectedMedia = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -107,11 +109,7 @@ class EditarPostModel extends FlutterFlowModel<EditarPostWidget> {
   // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
   ApiCallResponse? requestApi;
   // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
-  ApiCallResponse? requestApiVideo;
-  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
   ApiCallResponse? requestApiImagen;
-  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
-  ApiCallResponse? requestApiImagenCurrent;
 
   @override
   void initState(BuildContext context) {

@@ -115,6 +115,109 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'DETALLES_DE_COLECCION_Container_7zy2ibz8');
+                              if (containerCollectionsRecord
+                                  .coleccionFavoritos) {
+                                logFirebaseEvent('Container_backend_call');
+
+                                await containerCollectionsRecord.reference
+                                    .update(createCollectionsRecordData(
+                                  coleccionFavoritos: false,
+                                ));
+                                logFirebaseEvent('Container_show_snack_bar');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Removido de colecciónes favoritas',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .customColor3,
+                                  ),
+                                );
+                                logFirebaseEvent('Container_bottom_sheet');
+                                Navigator.pop(context);
+                              } else {
+                                logFirebaseEvent('Container_backend_call');
+
+                                await containerCollectionsRecord.reference
+                                    .update(createCollectionsRecordData(
+                                  coleccionFavoritos: true,
+                                ));
+                                logFirebaseEvent('Container_show_snack_bar');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Añadido a colecciónes favoritas',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 2000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
+                                logFirebaseEvent('Container_bottom_sheet');
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 45.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    containerCollectionsRecord
+                                                .coleccionFavoritos ==
+                                            true
+                                        ? 'Remover de lista de favoritos'
+                                        : 'Añadir como colección favorita',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 8.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'DETALLES_DE_COLECCION_Container_esn1905c');
                               logFirebaseEvent('Container_navigate_to');
 
                               context.pushNamed(
@@ -144,10 +247,14 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 50.0,
+                              height: 45.0,
                               decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).fondoIcono,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -155,7 +262,7 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'hrjwc1id' /* Editar colección */,
+                                      '5qh8pv3n' /* Editar colección */,
                                     ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
@@ -181,10 +288,14 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                               0.0, 0.0, 0.0, 8.0),
                           child: Container(
                             width: double.infinity,
-                            height: 50.0,
+                            height: 45.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).fondoIcono,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
                             ),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -277,10 +388,14 @@ class _DetallesDeColeccionWidgetState extends State<DetallesDeColeccionWidget> {
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 50.0,
+                              height: 45.0,
                               decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).fondoIcono,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
                               ),
                               child: InkWell(
                                 splashColor: Colors.transparent,

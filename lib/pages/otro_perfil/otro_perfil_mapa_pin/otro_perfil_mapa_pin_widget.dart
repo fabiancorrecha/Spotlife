@@ -3,7 +3,7 @@ import '/backend/backend.dart';
 import '/components/app_bar2/app_bar2_widget.dart';
 import '/components/componente_vacio/componente_vacio_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/post_imagen_v2/post_imagen_v2_widget.dart';
+import '/components/post_desing_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -130,11 +130,13 @@ class _OtroPerfilMapaPinWidgetState extends State<OtroPerfilMapaPinWidget> {
                               final listViewUserPostsRecord = _model
                                   .listViewPagingController!
                                   .itemList![listViewIndex];
-                              return PostImagenV2Widget(
-                                key: Key(
-                                    'Keyawi_${listViewIndex}_of_${_model.listViewPagingController!.itemList!.length}'),
-                                post: listViewUserPostsRecord,
-                                verIconoCompartir: false,
+                              return SizedBox(
+                                width: double.infinity,
+                                child: PostDesingWidget(
+                                  key: Key(
+                                      'Keyb7t_${listViewIndex}_of_${_model.listViewPagingController!.itemList!.length}'),
+                                  post: listViewUserPostsRecord,
+                                ),
                               );
                             },
                           ),

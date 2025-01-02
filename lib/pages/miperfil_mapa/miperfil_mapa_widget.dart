@@ -1,15 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/ajustes_usuario_principal/ajustes_usuario_principal_widget.dart';
 import '/components/boton_add/boton_add_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
+import '/components/nav_bar_perfil_propio/nav_bar_perfil_propio_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'miperfil_mapa_model.dart';
 export 'miperfil_mapa_model.dart';
 
@@ -108,37 +110,29 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                     width: double.infinity,
                     height: 73.0,
                     decoration: const BoxDecoration(),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'MIPERFIL_MAPA_PAGE_Card_u7pz02ca_ON_TAP');
-                              logFirebaseEvent('Card_navigate_back');
-                              context.pop();
-                            },
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: FlutterFlowTheme.of(context).fondoIcono,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.arrow_back_rounded,
-                                  color: FlutterFlowTheme.of(context).icono,
-                                  size: 30.0,
-                                ),
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Icon(
+                                Icons.chevron_left,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 30.0,
                               ),
                             ),
                           ),
@@ -162,25 +156,90 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 0.0, 0.0),
-                          child: AuthUserStreamWidget(
-                            builder: (context) => Text(
-                              currentUserDisplayName,
-                              maxLines: 1,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 16.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color:
+                                      FlutterFlowTheme.of(context).fondoIcono,
+                                  elevation: 0.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
                                   ),
+                                  child: FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 28.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).fondoIcono,
+                                    icon: Icon(
+                                      FFIcons.kbubble2,
+                                      color: FlutterFlowTheme.of(context).icono,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'MIPERFIL_MAPA_PAGE_bubble2_ICN_ON_TAP');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_to');
+
+                                      context.pushNamed('TodosLosChats');
+                                    },
+                                  ),
+                                ),
+                                FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 28.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).fondoIcono,
+                                  icon: Icon(
+                                    FFIcons.ksettings,
+                                    color: FlutterFlowTheme.of(context).icono,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'MIPERFIL_MAPA_PAGE_settings_ICN_ON_TAP');
+                                    logFirebaseEvent('IconButton_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                      barrierColor: const Color(0x331A1A1A),
+                                      isDismissible: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return WebViewAware(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: const SizedBox(
+                                                height: 667.0,
+                                                child:
+                                                    AjustesUsuarioPrincipalWidget(),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -188,9 +247,9 @@ class _MiperfilMapaWidgetState extends State<MiperfilMapaWidget> {
                     ),
                   ),
                   wrapWithModel(
-                    model: _model.navBar2Model,
+                    model: _model.navBarPerfilPropioModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: const NavBar2Widget(
+                    child: const NavBarPerfilPropioWidget(
                       tab: 1,
                     ),
                   ),

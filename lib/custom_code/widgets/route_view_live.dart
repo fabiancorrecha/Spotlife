@@ -614,41 +614,45 @@ class _RouteViewLiveState extends State<RouteViewLive> {
     ];
   }
 
+  //marker
   Future<Uint8List> _createCustomMarkerIcon(String imageUrl) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final double size = 135;
-    final double margin = 5.0;
+    final double size = 120; // Tamaño del marcador
 
-    Paint shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.25)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3);
-    Path shadowPath = Path()
-      ..moveTo(size / 2, margin + 4 + 3)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4 + 3),
-          radius: Radius.circular(20), clockwise: false)
-      ..quadraticBezierTo(size, size / 2 + 3, size / 2, size * 1.3 + 3)
-      ..quadraticBezierTo(0, size / 2 + 3, size / 2, size * 0.2 + 4 + 3)
-      ..close();
-    canvas.drawPath(shadowPath, shadowPaint);
+    // Fondo blanco
+    Paint backgroundPaint = Paint()..color = Colors.white;
+    canvas.drawCircle(
+      Offset(size / 2, size / 2),
+      size / 2,
+      backgroundPaint,
+    );
 
-    Paint paint = Paint()..color = const Color.fromARGB(255, 16, 16, 16);
-    Path path = Path()
-      ..moveTo(size / 2, margin + 4)
-      ..arcToPoint(Offset(size / 2, size * 0.2 + 4),
-          radius: Radius.circular(50), clockwise: false)
-      ..quadraticBezierTo(size, size / 2, size / 2, size * 1.3)
-      ..quadraticBezierTo(0, size / 2, size / 2, size * 0.2 + 4)
-      ..close();
-    canvas.drawPath(path, paint);
+    // Borde violeta
+    Paint borderPaint = Paint()
+      ..color = const Color.fromARGB(255, 89, 19, 210)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 6.0; // Ancho del borde
+    canvas.drawCircle(
+      Offset(size / 2, size / 2),
+      size / 2 - 2.0, // Ajuste para que el borde esté dentro del marcador
+      borderPaint,
+    );
 
+    // Cargar imagen del usuario
     final ui.Image image = await _loadImage(imageUrl);
-    final double imageSize = (size * 0.6 * 0.85) - margin * 2;
-    final double imageX = (size - imageSize) / 2;
-    final double imageY = (size * 1.3 - imageSize) / 2;
-    final Rect rect = Rect.fromLTWH(imageX, imageY, imageSize, imageSize);
+    final double imageSize =
+        size * 0.7; // Tamaño de la imagen (70% del marcador)
+    final Rect rect = Rect.fromLTWH(
+      (size - imageSize) / 2, // Coordenada X centrada
+      (size - imageSize) / 2, // Coordenada Y centrada
+      imageSize,
+      imageSize,
+    );
     final RRect rrect =
         RRect.fromRectAndRadius(rect, Radius.circular(imageSize / 2));
+
+    // Recortar y dibujar la imagen
     canvas.clipRRect(rrect);
     canvas.drawImageRect(
       image,
@@ -657,11 +661,13 @@ class _RouteViewLiveState extends State<RouteViewLive> {
       Paint(),
     );
 
+    // Generar el marcador como imagen
     final ui.Image markerAsImage = await pictureRecorder
         .endRecording()
-        .toImage(size.toInt(), (size * 1.3).toInt());
+        .toImage(size.toInt(), size.toInt());
     final ByteData? byteData =
         await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
+
     return byteData!.buffer.asUint8List();
   }
 

@@ -1,9 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/app_bar7_colecciones/app_bar7_colecciones_widget.dart';
 import '/components/detalles_de_coleccion/detalles_de_coleccion_widget.dart';
 import '/components/nav_bar1/nav_bar1_widget.dart';
-import '/components/nav_bar2/nav_bar2_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -38,6 +36,7 @@ class _OtroPerfilColeccionesWidgetState
   late OtroPerfilColeccionesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -127,23 +126,50 @@ class _OtroPerfilColeccionesWidgetState
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      wrapWithModel(
-                        model: _model.appBar7ColeccionesModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: AppBar7ColeccionesWidget(
-                          usuario: widget.usuario!,
-                        ),
-                      ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                        child: wrapWithModel(
-                          model: _model.navBar2Model,
-                          updateCallback: () => safeSetState(() {}),
-                          child: NavBar2Widget(
-                            tab: 2,
-                            otroUsuario: widget.usuario,
-                          ),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderRadius: 28.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              icon: Icon(
+                                Icons.chevron_left,
+                                color: FlutterFlowTheme.of(context).icono,
+                                size: 24.0,
+                              ),
+                              showLoadingIndicator: true,
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'OTRO_PERFIL_COLECCIONES_chevron_left_ICN');
+                                logFirebaseEvent('IconButton_navigate_back');
+                                context.safePop();
+                              },
+                            ),
+                            Expanded(
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  's285evos' /* Colecciones */,
+                                ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Padding(
@@ -464,6 +490,11 @@ class _OtroPerfilColeccionesWidgetState
                                                       onTap: () async {
                                                         logFirebaseEvent(
                                                             'OTRO_PERFIL_COLECCIONES_Stack_k5stl9bm_O');
+                                                        currentUserLocationValue =
+                                                            await getCurrentUserLocation(
+                                                                defaultLocation:
+                                                                    const LatLng(0.0,
+                                                                        0.0));
                                                         logFirebaseEvent(
                                                             'Stack_navigate_to');
 
@@ -493,6 +524,13 @@ class _OtroPerfilColeccionesWidgetState
                                                                   .reference,
                                                               ParamType
                                                                   .DocumentReference,
+                                                            ),
+                                                            'ubicationCollection':
+                                                                serializeParam(
+                                                              generalItem
+                                                                      .placeInfo
+                                                                      .latLng ?? currentUserLocationValue,
+                                                              ParamType.LatLng,
                                                             ),
                                                           }.withoutNulls,
                                                           extra: <String,
@@ -900,6 +938,11 @@ class _OtroPerfilColeccionesWidgetState
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'OTRO_PERFIL_COLECCIONES_Container_3nzein');
+                                                    currentUserLocationValue =
+                                                        await getCurrentUserLocation(
+                                                            defaultLocation:
+                                                                const LatLng(
+                                                                    0.0, 0.0));
                                                     logFirebaseEvent(
                                                         'Container_navigate_to');
 
@@ -928,6 +971,13 @@ class _OtroPerfilColeccionesWidgetState
                                                               .reference,
                                                           ParamType
                                                               .DocumentReference,
+                                                        ),
+                                                        'ubicationCollection':
+                                                            serializeParam(
+                                                          searchCollectionItem
+                                                                  .placeInfo
+                                                                  .latLng ?? currentUserLocationValue,
+                                                          ParamType.LatLng,
                                                         ),
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{

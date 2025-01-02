@@ -352,32 +352,18 @@ class _MapaPrincipalWidgetState extends State<MapaPrincipalWidget> {
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'MAPA_PRINCIPAL_PAGE_add_ICN_ON_TAP');
-                                logFirebaseEvent('IconButton_bottom_sheet');
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  enableDrag: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return WebViewAware(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          FocusScope.of(context).unfocus();
-                                          FocusManager.instance.primaryFocus
-                                              ?.unfocus();
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: const SizedBox(
-                                            height: 225.0,
-                                            child: TipoDePostWidget(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                logFirebaseEvent('IconButton_navigate_to');
+
+                                context.pushNamed(
+                                  'CrearPost',
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
+                                    ),
                                   },
-                                ).then((value) => safeSetState(() {}));
+                                );
                               },
                             ),
                           ),

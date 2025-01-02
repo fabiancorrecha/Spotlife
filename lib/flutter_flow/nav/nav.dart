@@ -245,10 +245,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'seguidoresYSeguidos',
-              path: 'seguidoresYSeguidos',
+              name: 'seguidores',
+              path: 'seguidores',
               requireAuth: true,
-              builder: (context, params) => SeguidoresYSeguidosWidget(
+              builder: (context, params) => SeguidoresWidget(
                 usuario: params.getParam(
                   'usuario',
                   ParamType.DocumentReference,
@@ -284,6 +284,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ParamType.DocumentReference,
                   isList: false,
                   collectionNamePath: ['collections'],
+                ),
+                ubicationCollection: params.getParam(
+                  'ubicationCollection',
+                  ParamType.LatLng,
                 ),
               ),
             ),
@@ -332,10 +336,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => const MiPerfilEditarPerfilWidget(),
             ),
             FFRoute(
-              name: 'ajustes_Favoritos',
-              path: 'ajustesFavoritos',
+              name: 'favoritos',
+              path: 'favoritos',
               requireAuth: true,
-              builder: (context, params) => const AjustesFavoritosWidget(),
+              builder: (context, params) => const FavoritosWidget(),
             ),
             FFRoute(
               name: 'CrearColeccionConPost',
@@ -490,10 +494,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'crearPost',
               requireAuth: true,
               builder: (context, params) => CrearPostWidget(
-                esImagen: params.getParam(
-                  'esImagen',
-                  ParamType.bool,
-                ),
                 selectedUser: params.getParam<DocumentReference>(
                   'selectedUser',
                   ParamType.DocumentReference,
@@ -794,6 +794,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'verCometarios',
                   ParamType.bool,
                 ),
+                index: params.getParam(
+                  'index',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['userPosts'],
+                ),
               ),
             ),
             FFRoute(
@@ -805,6 +811,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'testMapa',
               path: 'testMapa',
               builder: (context, params) => const TestMapaWidget(),
+            ),
+            FFRoute(
+              name: 'seguidos',
+              path: 'seguidos',
+              requireAuth: true,
+              builder: (context, params) => SeguidosWidget(
+                usuario: params.getParam(
+                  'usuario',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

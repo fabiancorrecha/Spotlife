@@ -38,8 +38,8 @@ export '/pages/feed/lista_post_filtrados_ubicacion/lista_post_filtrados_ubicacio
     show ListaPostFiltradosUbicacionWidget;
 export '/pages/feed/mapa_ir_lugar/mapa_ir_lugar_widget.dart'
     show MapaIrLugarWidget;
-export '/pages/perfil_propio/seguidores_y_seguidos/seguidores_y_seguidos_widget.dart'
-    show SeguidoresYSeguidosWidget;
+export '/pages/perfil_propio/seguidores/seguidores_widget.dart'
+    show SeguidoresWidget;
 export '/pages/miperfil_detalle_coleccion/miperfil_detalle_coleccion_widget.dart'
     show MiperfilDetalleColeccionWidget;
 export '/pages/miperfil_mapa_pin2/miperfil_mapa_pin2_widget.dart'
@@ -53,8 +53,7 @@ export '/pages/perfil_propio/mi_perfil_mapa_pin3/mi_perfil_mapa_pin3_widget.dart
     show MiPerfilMapaPin3Widget;
 export '/pages/perfil_propio/mi_perfil_editar_perfil/mi_perfil_editar_perfil_widget.dart'
     show MiPerfilEditarPerfilWidget;
-export '/pages/ajustes/ajustes_favoritos/ajustes_favoritos_widget.dart'
-    show AjustesFavoritosWidget;
+export '/pages/ajustes/favoritos/favoritos_widget.dart' show FavoritosWidget;
 export '/pages/ajustes/crear_coleccion_con_post/crear_coleccion_con_post_widget.dart'
     show CrearColeccionConPostWidget;
 export '/pages/ajustes/ajuste_mejores_amigos/ajuste_mejores_amigos_widget.dart'
@@ -146,3 +145,4 @@ export '/pages/vista_postlist/vista_postlist_widget.dart'
     show VistaPostlistWidget;
 export '/test_new_video/test_new_video_widget.dart' show TestNewVideoWidget;
 export '/test_mapa/test_mapa_widget.dart' show TestMapaWidget;
+export '/pages/perfil_propio/seguidos/seguidos_widget.dart' show SeguidosWidget;

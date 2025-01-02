@@ -63,6 +63,8 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
 
   String? descripcion;
 
+  bool selectedMedia = true;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -130,11 +132,7 @@ class CrearPostModel extends FlutterFlowModel<CrearPostWidget> {
   // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
   ApiCallResponse? requestApi;
   // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
-  ApiCallResponse? requestApiVideo;
-  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
   ApiCallResponse? requestApiImagen;
-  // Stores action output result for [Backend Call - API (Google Maps Location Converter)] action in Button widget.
-  ApiCallResponse? requestApiImagenCurrent;
 
   @override
   void initState(BuildContext context) {

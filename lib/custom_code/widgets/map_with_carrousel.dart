@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+//import 'index.dart'; // Imports other custom widgets
+
 import 'package:collection/equality.dart';
 
 //import '../flutter_flow/custom_icons.dart';
@@ -46,7 +48,7 @@ class MapWithCarrousel extends StatefulWidget {
   final LatLng userLocation;
   final double zoom;
   final List<UserPostsRecord>? listaPostMarcadores; // todo remove me
-  final void Function(SpotDetail post) onMarkerTap;
+  final void Function() onMarkerTap;
   final void Function() onMapTap;
   final void Function(ff.LatLng ubication) navigateTo;
   final DocumentReference? usuarioAutenticado;
@@ -178,7 +180,7 @@ class _MapWithCarrousel extends State<MapWithCarrousel> {
       showCards = true;
       selectedSpot = spot;
     });
-    widget.onMarkerTap(spot);
+    widget.onMarkerTap();
   }
 
   void _onMapTap() {
@@ -1053,7 +1055,65 @@ class CustomMarker extends StatelessWidget {
     );
   }
 
-  toBitmapDescriptor({required Duration waitToRender}) {}
+  Future<gmap.BitmapDescriptor> toBitmapDescriptor({
+    required Duration waitToRender,
+  }) async {
+    // Simula un tiempo de espera para renderizar si es necesario
+    await Future.delayed(waitToRender);
+
+    // Renderiza el widget como imagen
+    final pictureRecorder = ui.PictureRecorder();
+    final canvas = Canvas(pictureRecorder);
+    final size = Size(60, 60); // Tamaño del marcador
+    final painter = CustomMarkerPainter(imageUrl, isUser, isActive);
+    painter.paint(canvas, size);
+
+    final image = await pictureRecorder.endRecording().toImage(
+          size.width.toInt(),
+          size.height.toInt(),
+        );
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+    return gmap.BitmapDescriptor.fromBytes(byteData!.buffer.asUint8List());
+  }
+}
+
+class CustomMarkerPainter extends CustomPainter {
+  final String imageUrl;
+  final bool isUser;
+  final bool isActive;
+
+  CustomMarkerPainter(this.imageUrl, this.isUser, this.isActive);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Fondo del marcador
+    final paint = Paint();
+    paint.color = isActive ? Colors.blueAccent : Colors.grey;
+    canvas.drawCircle(
+        Offset(size.width / 2, size.height / 2), size.width / 2, paint);
+
+    // Opcional: borde si es un usuario autenticado
+    if (isUser) {
+      final borderPaint = Paint()
+        ..color = Colors.white
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 3;
+      canvas.drawCircle(Offset(size.width / 2, size.height / 2),
+          size.width / 2 - 1, borderPaint);
+    }
+
+    // Imagen en el centro
+    final imagePaint = Paint();
+    // Aquí deberías usar una imagen precargada o renderizarla de la URL (esto requiere ajustes extra)
+    // Para simplificar, usa un color temporal en lugar de la imagen
+    paint.color = Colors.black12; // Simulación de una imagen
+    canvas.drawCircle(
+        Offset(size.width / 2, size.height / 2), size.width / 4, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
 ////

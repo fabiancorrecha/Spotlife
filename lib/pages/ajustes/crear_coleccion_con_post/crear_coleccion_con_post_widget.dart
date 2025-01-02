@@ -1158,13 +1158,21 @@ class _CrearColeccionConPostWidgetState
                             logFirebaseEvent('boton1_backend_call');
 
                             await _model.nuevaColeccion!.reference.update({
-                              ...createCollectionsRecordData(
-                                imagen: '',
-                              ),
                               ...mapToFirestore(
                                 {
                                   'postuUserList':
                                       FieldValue.arrayUnion([widget.post]),
+                                },
+                              ),
+                            });
+                            logFirebaseEvent('boton1_backend_call');
+
+                            await crearColeccionConPostUserPostsRecord.reference
+                                .update({
+                              ...mapToFirestore(
+                                {
+                                  'collections': FieldValue.arrayUnion(
+                                      [_model.nuevaColeccion?.reference]),
                                 },
                               ),
                             });

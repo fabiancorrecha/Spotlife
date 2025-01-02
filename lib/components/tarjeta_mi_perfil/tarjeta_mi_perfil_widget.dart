@@ -2,7 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/ajustes_usuario_principal/ajustes_usuario_principal_widget.dart';
 import '/components/seccion_cambiar_foto/seccion_cambiar_foto_widget.dart';
-import '/components/tipo_de_post/tipo_de_post_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(widget.usuario!),
+      stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -70,7 +70,8 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
         final stackUsersRecord = snapshot.data!;
 
         return SizedBox(
-          height: 254.0,
+          width: double.infinity,
+          height: 309.0,
           child: Stack(
             children: [
               Container(
@@ -103,13 +104,13 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                 height: double.infinity,
                 decoration: const BoxDecoration(),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 94.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                         child: AuthUserStreamWidget(
                           builder: (context) => InkWell(
                             splashColor: Colors.transparent,
@@ -163,25 +164,21 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 0.0),
-                              child: Text(
-                                stackUsersRecord.displayName,
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily),
-                                    ),
-                              ),
+                            child: Text(
+                              stackUsersRecord.displayName,
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .titleSmallFamily,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .titleSmallFamily),
+                                  ),
                             ),
                           ),
                         ],
@@ -228,7 +225,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 16.0),
+                                    0.0, 4.0, 0.0, 10.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -251,8 +248,9 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodySmallFamily,
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .tertiary,
                                           letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w300,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
@@ -277,17 +275,18 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 2.0, 0.0),
                                 child: Container(
+                                  width: 50.0,
                                   height: 100.0,
                                   constraints: const BoxConstraints(
                                     maxHeight: 40.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0x7F232323),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     borderRadius: BorderRadius.circular(80.0),
                                   ),
-                                  child: Row(
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       FutureBuilder<int>(
                                         future: queryUserPostsRecordCount(
@@ -347,7 +346,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'yfhnpjhs' /*  Spots */,
+                                          'b0or8n5o' /* Posts */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodySmall
@@ -372,7 +371,7 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 0.0, 0.0, 0.0),
+                                    0.0, 0.0, 2.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -380,11 +379,11 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     logFirebaseEvent(
-                                        'TARJETA_MI_PERFIL_Container_q99i7v5z_ON_');
+                                        'TARJETA_MI_PERFIL_Container_wpp5jq98_ON_');
                                     logFirebaseEvent('Container_navigate_to');
 
                                     context.pushNamed(
-                                      'seguidoresYSeguidos',
+                                      'seguidores',
                                       queryParameters: {
                                         'usuario': serializeParam(
                                           widget.usuario,
@@ -394,24 +393,219 @@ class _TarjetaMiPerfilWidgetState extends State<TarjetaMiPerfilWidget> {
                                     );
                                   },
                                   child: Container(
+                                    width: 50.0,
                                     height: 100.0,
                                     constraints: const BoxConstraints(
                                       maxHeight: 40.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: const Color(0x7F232323),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                       borderRadius: BorderRadius.circular(80.0),
                                     ),
-                                    child: Row(
+                                    child: Column(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
                                       children: [
+                                        AuthUserStreamWidget(
+                                          builder: (context) =>
+                                              FutureBuilder<int>(
+                                            future: queryUserPostsRecordCount(
+                                              queryBuilder: (userPostsRecord) =>
+                                                  userPostsRecord.where(
+                                                'postUser',
+                                                isEqualTo: currentUserReference,
+                                              ),
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 12.0,
+                                                    height: 12.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              int textCount = snapshot.data!;
+
+                                              return Text(
+                                                valueOrDefault<String>(
+                                                  formatNumber(
+                                                    (currentUserDocument
+                                                                ?.listaSeguidores
+                                                                .toList() ??
+                                                            [])
+                                                        .length,
+                                                    formatType:
+                                                        FormatType.compact,
+                                                  ),
+                                                  '0',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                              );
+                                            },
+                                          ),
+                                        ),
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            '6tk4hj49' /* Seguidos y 
-seguidores */
-                                            ,
+                                            'j7frdsd7' /* Seguidores */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmallFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmallFamily),
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 2.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'TARJETA_MI_PERFIL_Container_vrnb7ug0_ON_');
+                                    logFirebaseEvent('Container_navigate_to');
+
+                                    context.pushNamed(
+                                      'seguidos',
+                                      queryParameters: {
+                                        'usuario': serializeParam(
+                                          currentUserReference,
+                                          ParamType.DocumentReference,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 50.0,
+                                    height: 100.0,
+                                    constraints: const BoxConstraints(
+                                      maxHeight: 40.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(80.0),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        AuthUserStreamWidget(
+                                          builder: (context) =>
+                                              FutureBuilder<int>(
+                                            future: queryUserPostsRecordCount(
+                                              queryBuilder: (userPostsRecord) =>
+                                                  userPostsRecord.where(
+                                                'postUser',
+                                                isEqualTo: currentUserReference,
+                                              ),
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 12.0,
+                                                    height: 12.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              int textCount = snapshot.data!;
+
+                                              return Text(
+                                                valueOrDefault<String>(
+                                                  formatNumber(
+                                                    (currentUserDocument
+                                                                ?.listaSeguidos
+                                                                .toList() ??
+                                                            [])
+                                                        .length,
+                                                    formatType:
+                                                        FormatType.compact,
+                                                  ),
+                                                  '0',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'y0rvaqcv' /* Seguidos */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
@@ -444,62 +638,48 @@ seguidores */
               Align(
                 alignment: const AlignmentDirectional(1.0, -1.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 16.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'TARJETA_MI_PERFIL_Card_29xhk66m_ON_TAP');
-                          logFirebaseEvent('Card_bottom_sheet');
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return WebViewAware(
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: const SizedBox(
-                                    height: 225.0,
-                                    child: TipoDePostWidget(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.of(context).fondoIcono,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
+                      Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 28.0,
+                          buttonSize: 40.0,
+                          fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                          icon: Icon(
+                            FFIcons.kbubble2,
+                            color: FlutterFlowTheme.of(context).icono,
+                            size: 24.0,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Icon(
-                              FFIcons.kadd,
-                              color: FlutterFlowTheme.of(context).icono,
-                              size: 18.0,
-                            ),
-                          ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'TARJETA_MI_PERFIL_bubble2_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_navigate_to');
+
+                            context.pushNamed('TodosLosChats');
+                          },
                         ),
                       ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
+                      FlutterFlowIconButton(
+                        borderRadius: 28.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                        icon: Icon(
+                          FFIcons.ksettings,
+                          color: FlutterFlowTheme.of(context).icono,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
                           logFirebaseEvent(
-                              'TARJETA_MI_PERFIL_Icon_ftbewd8z_ON_TAP');
-                          logFirebaseEvent('Icon_bottom_sheet');
+                              'TARJETA_MI_PERFIL_settings_ICN_ON_TAP');
+                          logFirebaseEvent('IconButton_bottom_sheet');
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor:
@@ -520,13 +700,30 @@ seguidores */
                             },
                           ).then((value) => safeSetState(() {}));
                         },
-                        child: Icon(
-                          Icons.menu_rounded,
-                          color: FlutterFlowTheme.of(context).icono,
-                          size: 32.0,
-                        ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(-0.89, -0.63),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderRadius: 28.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).fondoIcono,
+                    icon: Icon(
+                      Icons.chevron_left_sharp,
+                      color: FlutterFlowTheme.of(context).icono,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'TARJETA_MI_PERFIL_chevron_left_sharp_ICN');
+                      logFirebaseEvent('IconButton_navigate_back');
+                      context.safePop();
+                    },
                   ),
                 ),
               ),

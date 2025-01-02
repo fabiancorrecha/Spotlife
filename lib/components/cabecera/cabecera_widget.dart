@@ -130,7 +130,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                                   context.pop();
                                 }
                                 context.pushNamed(
-                                  'ajustes_Favoritos',
+                                  'favoritos',
                                   extra: <String, dynamic>{
                                     kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
@@ -165,7 +165,7 @@ class _CabeceraWidgetState extends State<CabeceraWidget> {
                                   context.pop();
                                 }
                                 context.pushNamed(
-                                  'ajustes_Favoritos',
+                                  'favoritos',
                                   extra: <String, dynamic>{
                                     kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,

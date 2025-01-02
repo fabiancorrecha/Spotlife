@@ -208,7 +208,7 @@ class _AjustesUsuarioPrincipalCopyWidgetState
                               'AJUSTES_USUARIO_PRINCIPAL_COPY_Container');
                           logFirebaseEvent('boton3_navigate_to');
 
-                          context.pushNamed('ajustes_Favoritos');
+                          context.pushNamed('favoritos');
                         },
                       ),
                     ),

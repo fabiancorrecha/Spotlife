@@ -132,13 +132,13 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                 children: [
                   if (widget.tabActiva != 1)
                     Icon(
-                      FFIcons.kcollection,
+                      FFIcons.kfeed,
                       color: FlutterFlowTheme.of(context).icono,
                       size: 40.0,
                     ),
                   if (widget.tabActiva == 1)
                     Image.asset(
-                      'assets/images/coleccion.png',
+                      'assets/images/feedColor.png',
                       width: 40.0,
                       height: 40.0,
                       fit: BoxFit.contain,
@@ -170,7 +170,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
               },
               child: Stack(
                 children: [
-                  if (widget.tabActiva == 3)
+                  if (widget.tabActiva != 2)
                     Container(
                       width: 40.0,
                       height: 40.0,
@@ -189,25 +189,34 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
-                        child: Container(
-                          width: 100.0,
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                FlutterFlowTheme.of(context).primary,
-                                FlutterFlowTheme.of(context).secondary
-                              ],
-                              stops: const [0.0, 1.0],
-                              begin: const AlignmentDirectional(0.0, -1.0),
-                              end: const AlignmentDirectional(0, 1.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: CachedNetworkImageProvider(
+                                  valueOrDefault<String>(
+                                    currentUserPhoto,
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                  ),
+                                ),
+                              ),
+                              gradient: LinearGradient(
+                                colors: [
+                                  FlutterFlowTheme.of(context).primary,
+                                  FlutterFlowTheme.of(context).secondary
+                                ],
+                                stops: const [0.0, 1.0],
+                                begin: const AlignmentDirectional(0.0, -1.0),
+                                end: const AlignmentDirectional(0, 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(100.0),
                             ),
-                            borderRadius: BorderRadius.circular(100.0),
-                          ),
-                          child: Visibility(
-                            visible: currentUserPhoto != '',
-                            child: AuthUserStreamWidget(
-                              builder: (context) => Container(
+                            child: Visibility(
+                              visible: currentUserPhoto != '',
+                              child: Container(
                                 width: 40.0,
                                 height: 40.0,
                                 clipBehavior: Clip.antiAlias,
@@ -227,7 +236,7 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                         ),
                       ),
                     ),
-                  if (widget.tabActiva != 3)
+                  if (widget.tabActiva == 2)
                     AuthUserStreamWidget(
                       builder: (context) => Container(
                         width: 40.0,

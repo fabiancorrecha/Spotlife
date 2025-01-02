@@ -17,14 +17,24 @@ class PostDesingModel extends FlutterFlowModel<PostDesingWidget> {
 
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for PageView widget.
-  PageController? pageViewController;
+  // State field(s) for PageViewOnlyListImage widget.
+  PageController? pageViewOnlyListImageController;
 
-  int get pageViewCurrentIndex => pageViewController != null &&
-          pageViewController!.hasClients &&
-          pageViewController!.page != null
-      ? pageViewController!.page!.round()
-      : 0;
+  int get pageViewOnlyListImageCurrentIndex =>
+      pageViewOnlyListImageController != null &&
+              pageViewOnlyListImageController!.hasClients &&
+              pageViewOnlyListImageController!.page != null
+          ? pageViewOnlyListImageController!.page!.round()
+          : 0;
+  // State field(s) for PageViewVideoAndImage widget.
+  PageController? pageViewVideoAndImageController;
+
+  int get pageViewVideoAndImageCurrentIndex =>
+      pageViewVideoAndImageController != null &&
+              pageViewVideoAndImageController!.hasClients &&
+              pageViewVideoAndImageController!.page != null
+          ? pageViewVideoAndImageController!.page!.round()
+          : 0;
   // Stores action output result for [Backend Call - Create Document] action in ToggleIcon widget.
   ActividadRecord? actividad;
   // State field(s) for Expandable widget.

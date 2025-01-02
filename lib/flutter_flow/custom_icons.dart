@@ -16,6 +16,15 @@ class FFIcons {
   static const String _iconPinSpotlife2Family = 'IconPinSpotlife2';
   static const String _chatbubbleFamily = 'Chatbubble';
   static const String _penAndDeleteFamily = 'PenAndDelete';
+  static const String _unfollowingFamily = 'Unfollowing';
+  static const String _feedFamily = 'Feed';
+  static const String _addMessageFamily = 'AddMessage';
+  static const String _settingFamily = 'Setting';
+  static const String _navbarFamily = 'Navbar';
+  static const String _starFamily = 'Star';
+  static const String _iconUserBlockFamily = 'IconUserBlock';
+  static const String _sendFamily = 'Send';
+  static const String _cameraAndVideoFamily = 'CameraAndVideo';
 
   // SpotfileIcons
   static const IconData kcollection =
@@ -142,4 +151,43 @@ class FFIcons {
       IconData(0xe900, fontFamily: _penAndDeleteFamily);
   static const IconData kpen =
       IconData(0xe901, fontFamily: _penAndDeleteFamily);
+
+  // Unfollowing
+  static const IconData kuserMenos =
+      IconData(0xe900, fontFamily: _unfollowingFamily);
+
+  // feed
+  static const IconData kfeed = IconData(0xe900, fontFamily: _feedFamily);
+
+  // addMessage
+  static const IconData kaddMessageSvgrepoCom =
+      IconData(0xe900, fontFamily: _addMessageFamily);
+
+  // setting
+
+  // navbar
+  static const IconData kiconPoaps =
+      IconData(0xe900, fontFamily: _navbarFamily);
+  static const IconData kiconStar = IconData(0xe901, fontFamily: _navbarFamily);
+  static const IconData kiconCollection =
+      IconData(0xe902, fontFamily: _navbarFamily);
+  static const IconData kiconMap = IconData(0xe903, fontFamily: _navbarFamily);
+
+  // star
+  static const IconData kstarAltSvgrepoCom =
+      IconData(0xe900, fontFamily: _starFamily);
+
+  // IconUserBlock
+  static const IconData kiconUserBlock =
+      IconData(0xe900, fontFamily: _iconUserBlockFamily);
+
+  // Send
+  static const IconData ksendSvgrepoCom1 =
+      IconData(0xe900, fontFamily: _sendFamily);
+
+  // CameraAndVideo
+  static const IconData kcamera =
+      IconData(0xe90f, fontFamily: _cameraAndVideoFamily);
+  static const IconData kfilm =
+      IconData(0xe913, fontFamily: _cameraAndVideoFamily);
 }

@@ -823,3 +823,45 @@ bool? returnSpace(String? texto) {
     return true;
   }
 }
+
+List<UserPostsRecord>? filterHiddenPosts(
+  List<UserPostsRecord>? posts,
+  DocumentReference? userId,
+) {
+  //     // Filtrar posts que NO contengan el userId en el campo 'hiddenBy' Asegúrate de que el campo 'hiddenBy' exista y sea una lista Si no tiene 'hiddenBy', el post se muestra
+  if (posts == null || userId == null) {
+    return null;
+  }
+
+  return posts
+      .where((post) => post.hiddenBy == null || !post.hiddenBy.contains(userId))
+      .toList();
+}
+
+List<UserPostsRecord>? sortItem(
+  List<UserPostsRecord>? userPostList,
+  DocumentReference? refuserPost,
+) {
+  //  retorname una lista ordenada donde el primer item de la lista siempre sea el item pasado en refuserPost
+  if (userPostList == null || refuserPost == null) {
+    return null;
+  }
+
+  List<UserPostsRecord> sortedList = List.from(userPostList);
+  sortedList.removeWhere((post) => post.reference == refuserPost);
+  sortedList.insert(
+      0, userPostList.firstWhere((post) => post.reference == refuserPost));
+  return sortedList;
+}
+
+List<UserPostsRecord>? bestFriend(
+  List<UserPostsRecord>? post,
+  DocumentReference? userId,
+) {
+  // filtrar post que contengan el userId en el campo BestFriend Asegúrate de que el campo 'BestFriend' exista y sea una lista Si no tiene 'BestFriend', el post no se muestra
+  if (post == null || userId == null) {
+    return null;
+  }
+
+  return post.where((p) => p.bestFriend.contains(userId)).toList();
+}

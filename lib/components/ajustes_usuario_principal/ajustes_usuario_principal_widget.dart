@@ -132,11 +132,11 @@ class _AjustesUsuarioPrincipalWidgetState
                           color: FlutterFlowTheme.of(context).icono,
                         ),
                         texto: FFLocalizations.of(context).getText(
-                          'zaqmd7y3' /* Configuración */,
+                          'bts9i8ys' /* Configuración */,
                         ),
                         accion: () async {
                           logFirebaseEvent(
-                              'AJUSTES_USUARIO_PRINCIPAL_Container_a7q1');
+                              'AJUSTES_USUARIO_PRINCIPAL_Container_2xt7');
                           logFirebaseEvent('boton3_bottom_sheet');
                           await showModalBottomSheet(
                             isScrollControlled: true,
@@ -178,7 +178,7 @@ class _AjustesUsuarioPrincipalWidgetState
                               'AJUSTES_USUARIO_PRINCIPAL_Container_02w3');
                           logFirebaseEvent('boton3_navigate_to');
 
-                          context.pushNamed('ajustes_Favoritos');
+                          context.pushNamed('favoritos');
                         },
                       ),
                     ),

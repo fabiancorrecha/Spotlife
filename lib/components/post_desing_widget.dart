@@ -138,221 +138,420 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
-                  child: Stack(
-                    children: [
-                      if ((widget.post?.esVideo == false) &&
-                          (widget.post?.postPhotolist.length == 1))
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(0.0),
-                          child: CachedNetworkImage(
-                            fadeInDuration: const Duration(milliseconds: 500),
-                            fadeOutDuration: const Duration(milliseconds: 500),
-                            imageUrl: widget.post!.postPhotolist.firstOrNull!,
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.cover,
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    child: Stack(
+                      children: [
+                        if (((widget.post?.postPhotolist.length == 1) &&
+                                (containerUserPostsRecord.video == '')) ||
+                            ((widget.post?.video != null &&
+                                    widget.post?.video != '') &&
+                                (containerUserPostsRecord
+                                        .postPhotolist.isEmpty)))
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if ((widget.post?.postPhotolist.length == 1) &&
+                                  (containerUserPostsRecord.video == ''))
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(0.0),
+                                  child: CachedNetworkImage(
+                                    fadeInDuration: const Duration(milliseconds: 500),
+                                    fadeOutDuration:
+                                        const Duration(milliseconds: 500),
+                                    imageUrl: widget
+                                        .post!.postPhotolist.firstOrNull!,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              if ((widget.post?.video != null &&
+                                      widget.post?.video != '') &&
+                                  (containerUserPostsRecord
+                                          .postPhotolist.isEmpty))
+                                SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: double.infinity,
+                                  child: custom_widgets.CustomVideoPlayer(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: double.infinity,
+                                    videoPath: widget.post!.video,
+                                    soundOn: Icon(
+                                      Icons.volume_up,
+                                      color:
+                                          FlutterFlowTheme.of(context).btnText,
+                                      size: 15.0,
+                                    ),
+                                    soundOff: Icon(
+                                      Icons.volume_mute,
+                                      color:
+                                          FlutterFlowTheme.of(context).btnText,
+                                      size: 15.0,
+                                    ),
+                                    fullscreen: Icon(
+                                      Icons.fullscreen_sharp,
+                                      color:
+                                          FlutterFlowTheme.of(context).btnText,
+                                      size: 15.0,
+                                    ),
+                                    closeScreem: Icon(
+                                      Icons.fullscreen_exit,
+                                      color:
+                                          FlutterFlowTheme.of(context).btnText,
+                                      size: 15.0,
+                                    ),
+                                    buttonSize: 30.0,
+                                  ),
+                                ),
+                            ].divide(const SizedBox(width: 0.0)),
                           ),
-                        ),
-                      if (widget.post?.esVideo == true)
-                        SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.CustomVideoPlayer(
-                            width: double.infinity,
-                            height: double.infinity,
-                            videoPath: widget.post!.video,
-                            soundOn: Icon(
-                              Icons.volume_up,
-                              color: FlutterFlowTheme.of(context).btnText,
-                              size: 15.0,
-                            ),
-                            soundOff: Icon(
-                              Icons.volume_mute,
-                              color: FlutterFlowTheme.of(context).btnText,
-                              size: 15.0,
-                            ),
-                            fullscreen: Icon(
-                              Icons.fullscreen_sharp,
-                              color: FlutterFlowTheme.of(context).btnText,
-                              size: 15.0,
-                            ),
-                            closeScreem: Icon(
-                              Icons.fullscreen_exit,
-                              color: FlutterFlowTheme.of(context).btnText,
-                              size: 15.0,
-                            ),
-                            buttonSize: 30.0,
-                          ),
-                        ),
-                      if ((widget.post?.esVideo == false) &&
-                          (widget.post!.postPhotolist.length > 1))
-                        Builder(
-                          builder: (context) {
-                            final imagenes =
-                                widget.post?.postPhotolist.toList() ?? [];
+                        if ((widget.post!.postPhotolist.length > 1) &&
+                            (containerUserPostsRecord.video == ''))
+                          Builder(
+                            builder: (context) {
+                              final listImage = containerUserPostsRecord
+                                  .postPhotolist
+                                  .toList();
 
-                            return SizedBox(
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: Stack(
-                                children: [
-                                  PageView.builder(
-                                    controller: _model.pageViewController ??=
-                                        PageController(
-                                            initialPage: max(0,
-                                                min(0, imagenes.length - 1))),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: imagenes.length,
-                                    itemBuilder: (context, imagenesIndex) {
-                                      final imagenesItem =
-                                          imagenes[imagenesIndex];
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: CachedNetworkImage(
-                                                fadeInDuration:
-                                                    const Duration(milliseconds: 500),
-                                                fadeOutDuration:
-                                                    const Duration(milliseconds: 500),
-                                                imageUrl: imagenesItem,
-                                                width: double.infinity,
-                                                height: 530.0,
-                                                fit: BoxFit.cover,
+                              return SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: Stack(
+                                  children: [
+                                    PageView.builder(
+                                      controller: _model
+                                              .pageViewOnlyListImageController ??=
+                                          PageController(
+                                              initialPage: max(
+                                                  0,
+                                                  min(0,
+                                                      listImage.length - 1))),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: listImage.length,
+                                      itemBuilder: (context, listImageIndex) {
+                                        final listImageItem =
+                                            listImage[listImageIndex];
+                                        return Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  fadeOutDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  imageUrl: listImageItem,
+                                                  width: double.infinity,
+                                                  height: 530.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    Align(
+                                      alignment: const AlignmentDirectional(0.0, 1.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
+                                        child: smooth_page_indicator
+                                            .SmoothPageIndicator(
+                                          controller: _model
+                                                  .pageViewOnlyListImageController ??=
+                                              PageController(
+                                                  initialPage: max(
+                                                      0,
+                                                      min(
+                                                          0,
+                                                          listImage.length -
+                                                              1))),
+                                          count: listImage.length,
+                                          axisDirection: Axis.horizontal,
+                                          onDotClicked: (i) async {
+                                            await _model
+                                                .pageViewOnlyListImageController!
+                                                .animateToPage(
+                                              i,
+                                              duration:
+                                                  const Duration(milliseconds: 500),
+                                              curve: Curves.ease,
+                                            );
+                                            safeSetState(() {});
+                                          },
+                                          effect:
+                                              smooth_page_indicator.SlideEffect(
+                                            spacing: 6.0,
+                                            radius: 8.0,
+                                            dotWidth: 6.0,
+                                            dotHeight: 6.0,
+                                            dotColor: const Color(0xFFFAF7FA),
+                                            activeDotColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .btnText,
+                                            paintStyle: PaintingStyle.fill,
                                           ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(0.0, 1.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: smooth_page_indicator
-                                          .SmoothPageIndicator(
-                                        controller: _model
-                                                .pageViewController ??=
-                                            PageController(
-                                                initialPage: max(
-                                                    0,
-                                                    min(0,
-                                                        imagenes.length - 1))),
-                                        count: imagenes.length,
-                                        axisDirection: Axis.horizontal,
-                                        onDotClicked: (i) async {
-                                          await _model.pageViewController!
-                                              .animateToPage(
-                                            i,
-                                            duration:
-                                                const Duration(milliseconds: 500),
-                                            curve: Curves.ease,
-                                          );
-                                          safeSetState(() {});
-                                        },
-                                        effect:
-                                            smooth_page_indicator.SlideEffect(
-                                          spacing: 6.0,
-                                          radius: 8.0,
-                                          dotWidth: 6.0,
-                                          dotHeight: 6.0,
-                                          dotColor: const Color(0xFFFAF7FA),
-                                          activeDotColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .btnText,
-                                          paintStyle: PaintingStyle.fill,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            17.0, 17.0, 17.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: StreamBuilder<UsersRecord>(
-                                stream: UsersRecord.getDocument(
-                                    widget.post!.postUser!),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 12.0,
-                                        height: 12.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        if ((widget.post!.postPhotolist.isNotEmpty) &&
+                            (containerUserPostsRecord.video != ''))
+                          SizedBox(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: Stack(
+                              children: [
+                                PageView(
+                                  controller:
+                                      _model.pageViewVideoAndImageController ??=
+                                          PageController(initialPage: 0),
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Builder(
+                                      builder: (context) {
+                                        final imageList2 =
+                                            containerUserPostsRecord
+                                                .postPhotolist
+                                                .toList();
+
+                                        return Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children:
+                                              List.generate(imageList2.length,
+                                                  (imageList2Index) {
+                                            final imageList2Item =
+                                                imageList2[imageList2Index];
+                                            return Expanded(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  fadeOutDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  imageUrl: imageList2Item,
+                                                  width: double.infinity,
+                                                  height: 530.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        );
+                                      },
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: double.infinity,
+                                            child: custom_widgets
+                                                .CustomVideoPlayer(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: double.infinity,
+                                              videoPath:
+                                                  containerUserPostsRecord
+                                                      .video,
+                                              soundOn: Icon(
+                                                Icons.volume_up,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .btnText,
+                                                size: 15.0,
+                                              ),
+                                              soundOff: Icon(
+                                                Icons.volume_mute,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .btnText,
+                                                size: 15.0,
+                                              ),
+                                              fullscreen: Icon(
+                                                Icons.fullscreen_sharp,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .btnText,
+                                                size: 15.0,
+                                              ),
+                                              closeScreem: Icon(
+                                                Icons.fullscreen_exit,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .btnText,
+                                                size: 15.0,
+                                              ),
+                                              buttonSize: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 1.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: smooth_page_indicator
+                                        .SmoothPageIndicator(
+                                      controller: _model
+                                              .pageViewVideoAndImageController ??=
+                                          PageController(initialPage: 0),
+                                      count: 2,
+                                      axisDirection: Axis.horizontal,
+                                      onDotClicked: (i) async {
+                                        await _model
+                                            .pageViewVideoAndImageController!
+                                            .animateToPage(
+                                          i,
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.ease,
+                                        );
+                                        safeSetState(() {});
+                                      },
+                                      effect: smooth_page_indicator.SlideEffect(
+                                        spacing: 6.0,
+                                        radius: 8.0,
+                                        dotWidth: 6.0,
+                                        dotHeight: 6.0,
+                                        dotColor: const Color(0xFFFAF7FA),
+                                        activeDotColor:
                                             FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .btnText,
+                                        paintStyle: PaintingStyle.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              17.0, 17.0, 17.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      widget.post!.postUser!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 12.0,
+                                          height: 12.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
+                                      );
+                                    }
 
-                                  final rowUsersRecord = snapshot.data!;
+                                    final rowUsersRecord = snapshot.data!;
 
-                                  return Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: CachedNetworkImage(
-                                          fadeInDuration:
-                                              const Duration(milliseconds: 500),
-                                          fadeOutDuration:
-                                              const Duration(milliseconds: 500),
-                                          imageUrl: valueOrDefault<String>(
-                                            rowUsersRecord.photoUrl,
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'POST_DESING_COMP_Row_qu01fnou_ON_TAP');
+                                        if (currentUserReference ==
+                                            columnUsersRecord.reference) {
+                                          logFirebaseEvent('Row_navigate_to');
+
+                                          context.pushNamed('perfilPropio');
+                                        } else {
+                                          logFirebaseEvent('Row_navigate_to');
+
+                                          context.pushNamed(
+                                            'otroPerfil',
+                                            queryParameters: {
+                                              'perfilAjeno': serializeParam(
+                                                containerUserPostsRecord
+                                                    .postUser,
+                                                ParamType.DocumentReference,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  const Duration(milliseconds: 500),
+                                              fadeOutDuration:
+                                                  const Duration(milliseconds: 500),
+                                              imageUrl: valueOrDefault<String>(
+                                                rowUsersRecord.photoUrl,
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/m2l2qjmyfq9y/avatar_perfil_redondo.png',
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 0.0, 0.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 5.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        rowUsersRecord
-                                                            .displayName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 0.0, 0.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 5.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            rowUsersRecord
+                                                                .displayName,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyMedium
                                                                 .override(
                                                                   fontFamily: FlutterFlowTheme.of(
@@ -371,34 +570,36 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                                                           FlutterFlowTheme.of(context)
                                                                               .bodyMediumFamily),
                                                                 ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                8.0, 0.0),
-                                                    child: Icon(
-                                                      FFIcons.kpin,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 14.0,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      '${widget.post?.placeInfo.address}, ${widget.post?.placeInfo.city}',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    8.0,
+                                                                    0.0),
+                                                        child: Icon(
+                                                          FFIcons.kpin,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          size: 14.0,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          '${widget.post?.placeInfo.address}, ${widget.post?.placeInfo.city}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily: FlutterFlowTheme.of(
@@ -416,262 +617,430 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                                                         FlutterFlowTheme.of(context)
                                                                             .bodyMediumFamily),
                                                               ),
-                                                    ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  );
+                                    );
+                                  },
+                                ),
+                              ),
+                              FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                icon: Icon(
+                                  Icons.keyboard_control,
+                                  color: FlutterFlowTheme.of(context).btnText,
+                                  size: 24.0,
+                                ),
+                                showLoadingIndicator: true,
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'POST_DESING_keyboard_control_ICN_ON_TAP');
+                                  if (currentUserReference ==
+                                      columnUsersRecord.reference) {
+                                    logFirebaseEvent('IconButton_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return WebViewAware(
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: SizedBox(
+                                              height: 196.0,
+                                              child: MenuPostPropioWidget(
+                                                post: containerUserPostsRecord
+                                                    .reference,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  } else {
+                                    logFirebaseEvent('IconButton_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return WebViewAware(
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: SizedBox(
+                                              height: MediaQuery.sizeOf(context)
+                                                      .height *
+                                                  0.5,
+                                              child: MenuPostAjenoWidget(
+                                                link: 'hhyhyh',
+                                                post: containerUserPostsRecord
+                                                    .reference,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  }
                                 },
                               ),
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.keyboard_control,
-                                color: FlutterFlowTheme.of(context).btnText,
-                                size: 24.0,
-                              ),
-                              showLoadingIndicator: true,
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'POST_DESING_keyboard_control_ICN_ON_TAP');
-                                if (currentUserReference ==
-                                    columnUsersRecord.reference) {
-                                  logFirebaseEvent('IconButton_bottom_sheet');
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return WebViewAware(
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: SizedBox(
-                                            height: 196.0,
-                                            child: MenuPostPropioWidget(
-                                              post: containerUserPostsRecord
-                                                  .reference,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
-                                } else {
-                                  logFirebaseEvent('IconButton_bottom_sheet');
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return WebViewAware(
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: SizedBox(
-                                            height: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                0.5,
-                                            child: MenuPostAjenoWidget(
-                                              link: 'hhyhyh',
-                                              post: containerUserPostsRecord
-                                                  .reference,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
-                                }
-                              },
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              17.0, 17.0, 17.0, 25.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 8.0, 0.0),
-                                    child: ToggleIcon(
-                                      onPressed: () async {
-                                        safeSetState(
-                                            () => _model.like = !_model.like!);
-                                        logFirebaseEvent(
-                                            'POST_DESING_ToggleIcon_ldhj6um1_ON_TOGGL');
-                                        if (_model.like!) {
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, 1.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                17.0, 17.0, 17.0, 25.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 8.0, 0.0),
+                                      child: ToggleIcon(
+                                        onPressed: () async {
+                                          safeSetState(() =>
+                                              _model.like = !_model.like!);
                                           logFirebaseEvent(
-                                              'ToggleIcon_update_component_state');
-                                          _model.like = true;
-                                          safeSetState(() {});
-                                          logFirebaseEvent(
-                                              'ToggleIcon_backend_call');
+                                              'POST_DESING_ToggleIcon_7p3y5uvz_ON_TOGGL');
+                                          if (_model.like!) {
+                                            logFirebaseEvent(
+                                                'ToggleIcon_update_component_state');
+                                            _model.like = true;
+                                            safeSetState(() {});
+                                            logFirebaseEvent(
+                                                'ToggleIcon_backend_call');
 
-                                          await containerUserPostsRecord
-                                              .reference
-                                              .update({
-                                            ...mapToFirestore(
-                                              {
-                                                'likes': FieldValue.arrayUnion(
-                                                    [currentUserReference]),
-                                                'numeroLikes':
-                                                    FieldValue.increment(1),
-                                              },
-                                            ),
-                                          });
-                                          logFirebaseEvent(
-                                              'ToggleIcon_backend_call');
+                                            await containerUserPostsRecord
+                                                .reference
+                                                .update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'likes':
+                                                      FieldValue.arrayUnion([
+                                                    currentUserReference
+                                                  ]),
+                                                  'numeroLikes':
+                                                      FieldValue.increment(1),
+                                                },
+                                              ),
+                                            });
+                                            logFirebaseEvent(
+                                                'ToggleIcon_backend_call');
 
-                                          var actividadRecordReference =
-                                              ActividadRecord.collection.doc();
-                                          await actividadRecordReference.set({
-                                            ...createActividadRecordData(
-                                              creadorActividad:
-                                                  currentUserReference,
-                                              recibeActividad:
-                                                  columnUsersRecord.reference,
-                                              sinLeer: true,
-                                              meGusta: true,
-                                              esComentario: false,
-                                              esSeguir: false,
-                                              nombreUsuarioCreador:
-                                                  currentUserDisplayName,
-                                              nombreUsuarioReceptor:
-                                                  columnUsersRecord.displayName,
-                                              fechaCreacion:
-                                                  getCurrentTimestamp,
-                                              postRelacionado:
-                                                  containerUserPostsRecord
-                                                      .reference,
-                                              meGustaComentario: false,
-                                              imagenUsuario: currentUserPhoto,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'imagenPostList':
+                                            var actividadRecordReference =
+                                                ActividadRecord.collection
+                                                    .doc();
+                                            await actividadRecordReference.set({
+                                              ...createActividadRecordData(
+                                                creadorActividad:
+                                                    currentUserReference,
+                                                recibeActividad:
+                                                    columnUsersRecord.reference,
+                                                sinLeer: true,
+                                                meGusta: true,
+                                                esComentario: false,
+                                                esSeguir: false,
+                                                nombreUsuarioCreador:
+                                                    currentUserDisplayName,
+                                                nombreUsuarioReceptor:
+                                                    columnUsersRecord
+                                                        .displayName,
+                                                fechaCreacion:
+                                                    getCurrentTimestamp,
+                                                postRelacionado:
                                                     containerUserPostsRecord
-                                                        .postPhotolist,
-                                              },
-                                            ),
-                                          });
-                                          _model.actividad = ActividadRecord
-                                              .getDocumentFromData({
-                                            ...createActividadRecordData(
-                                              creadorActividad:
-                                                  currentUserReference,
-                                              recibeActividad:
-                                                  columnUsersRecord.reference,
-                                              sinLeer: true,
-                                              meGusta: true,
-                                              esComentario: false,
-                                              esSeguir: false,
-                                              nombreUsuarioCreador:
-                                                  currentUserDisplayName,
-                                              nombreUsuarioReceptor:
-                                                  columnUsersRecord.displayName,
-                                              fechaCreacion:
-                                                  getCurrentTimestamp,
-                                              postRelacionado:
-                                                  containerUserPostsRecord
-                                                      .reference,
-                                              meGustaComentario: false,
-                                              imagenUsuario: currentUserPhoto,
-                                            ),
-                                            ...mapToFirestore(
-                                              {
-                                                'imagenPostList':
+                                                        .reference,
+                                                meGustaComentario: false,
+                                                imagenUsuario: currentUserPhoto,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'imagenPostList':
+                                                      containerUserPostsRecord
+                                                          .postPhotolist,
+                                                },
+                                              ),
+                                            });
+                                            _model.actividad = ActividadRecord
+                                                .getDocumentFromData({
+                                              ...createActividadRecordData(
+                                                creadorActividad:
+                                                    currentUserReference,
+                                                recibeActividad:
+                                                    columnUsersRecord.reference,
+                                                sinLeer: true,
+                                                meGusta: true,
+                                                esComentario: false,
+                                                esSeguir: false,
+                                                nombreUsuarioCreador:
+                                                    currentUserDisplayName,
+                                                nombreUsuarioReceptor:
+                                                    columnUsersRecord
+                                                        .displayName,
+                                                fechaCreacion:
+                                                    getCurrentTimestamp,
+                                                postRelacionado:
                                                     containerUserPostsRecord
-                                                        .postPhotolist,
-                                              },
-                                            ),
-                                          }, actividadRecordReference);
-                                          logFirebaseEvent(
-                                              'ToggleIcon_trigger_push_notification');
-                                          triggerPushNotification(
-                                            notificationTitle:
-                                                'A ${valueOrDefault(currentUserDocument?.userName, '')}le gusto tu post',
-                                            notificationText: 'Ver mas...',
-                                            notificationSound: 'default',
-                                            userRefs: [
-                                              columnUsersRecord.reference
-                                            ],
-                                            initialPageName: 'notificaciones',
-                                            parameterData: {},
-                                          );
-                                        } else {
-                                          logFirebaseEvent(
-                                              'ToggleIcon_update_component_state');
-                                          _model.like = false;
+                                                        .reference,
+                                                meGustaComentario: false,
+                                                imagenUsuario: currentUserPhoto,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'imagenPostList':
+                                                      containerUserPostsRecord
+                                                          .postPhotolist,
+                                                },
+                                              ),
+                                            }, actividadRecordReference);
+                                            logFirebaseEvent(
+                                                'ToggleIcon_trigger_push_notification');
+                                            triggerPushNotification(
+                                              notificationTitle:
+                                                  'A ${valueOrDefault(currentUserDocument?.userName, '')}le gusto tu post',
+                                              notificationText: 'Ver mas...',
+                                              notificationSound: 'default',
+                                              userRefs: [
+                                                columnUsersRecord.reference
+                                              ],
+                                              initialPageName: 'notificaciones',
+                                              parameterData: {},
+                                            );
+                                          } else {
+                                            logFirebaseEvent(
+                                                'ToggleIcon_update_component_state');
+                                            _model.like = false;
+                                            safeSetState(() {});
+                                            logFirebaseEvent(
+                                                'ToggleIcon_backend_call');
+
+                                            await containerUserPostsRecord
+                                                .reference
+                                                .update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'likes':
+                                                      FieldValue.arrayRemove([
+                                                    currentUserReference
+                                                  ]),
+                                                  'numeroLikes':
+                                                      FieldValue.increment(-1),
+                                                },
+                                              ),
+                                            });
+                                            logFirebaseEvent(
+                                                'ToggleIcon_backend_call');
+                                            await _model.actividad!.reference
+                                                .delete();
+                                          }
+
                                           safeSetState(() {});
-                                          logFirebaseEvent(
-                                              'ToggleIcon_backend_call');
-
-                                          await containerUserPostsRecord
-                                              .reference
-                                              .update({
-                                            ...mapToFirestore(
-                                              {
-                                                'likes': FieldValue.arrayRemove(
-                                                    [currentUserReference]),
-                                                'numeroLikes':
-                                                    FieldValue.increment(-1),
-                                              },
-                                            ),
-                                          });
-                                          logFirebaseEvent(
-                                              'ToggleIcon_backend_call');
-                                          await _model.actividad!.reference
-                                              .delete();
-                                        }
-
-                                        safeSetState(() {});
-                                      },
-                                      value: _model.like!,
-                                      onIcon: Icon(
-                                        FFIcons.kheart,
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        size: 24.0,
-                                      ),
-                                      offIcon: Icon(
-                                        FFIcons.kheartLines,
-                                        color: FlutterFlowTheme.of(context)
-                                            .btnText,
-                                        size: 24.0,
+                                        },
+                                        value: _model.like!,
+                                        onIcon: Icon(
+                                          FFIcons.kheart,
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          size: 24.0,
+                                        ),
+                                        offIcon: Icon(
+                                          FFIcons.kheartLines,
+                                          color: FlutterFlowTheme.of(context)
+                                              .btnText,
+                                          size: 24.0,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 8.0, 0.0),
-                                    child: FlutterFlowIconButton(
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 8.0, 0.0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 8.0,
+                                        buttonSize: 40.0,
+                                        icon: Icon(
+                                          FFIcons.kbubble2,
+                                          color: FlutterFlowTheme.of(context)
+                                              .btnText,
+                                          size: 24.0,
+                                        ),
+                                        showLoadingIndicator: true,
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'POST_DESING_COMP_bubble2_ICN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'IconButton_bottom_sheet');
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            context: context,
+                                            builder: (context) {
+                                              return WebViewAware(
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child: SizedBox(
+                                                    height: MediaQuery.sizeOf(
+                                                                context)
+                                                            .height *
+                                                        0.5,
+                                                    child: VerComentariosWidget(
+                                                      post: widget.post,
+                                                      postCreador:
+                                                          currentUserReference,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ).then(
+                                              (value) => safeSetState(() {}));
+                                        },
+                                      ),
+                                    ),
+                                    FlutterFlowIconButton(
                                       borderColor: Colors.transparent,
                                       borderRadius: 8.0,
                                       buttonSize: 40.0,
                                       icon: Icon(
-                                        FFIcons.kbubble2,
+                                        FFIcons.kshare2,
+                                        color: FlutterFlowTheme.of(context)
+                                            .btnText,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () {
+                                        print('IconButton pressed ...');
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 8.0, 0.0),
+                                      child: ToggleIcon(
+                                        onPressed: () async {
+                                          safeSetState(() => _model.favorite =
+                                              !_model.favorite!);
+                                          logFirebaseEvent(
+                                              'POST_DESING_ToggleIcon_gnb9aj4r_ON_TOGGL');
+                                          if (_model.favorite!) {
+                                            logFirebaseEvent(
+                                                'ToggleIcon_haptic_feedback');
+                                            HapticFeedback.lightImpact();
+                                            logFirebaseEvent(
+                                                'ToggleIcon_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return WebViewAware(
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: SizedBox(
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.6,
+                                                      child:
+                                                          FavoritoAColeccionWidget(
+                                                        post:
+                                                            containerUserPostsRecord
+                                                                .reference,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          } else {
+                                            logFirebaseEvent(
+                                                'ToggleIcon_haptic_feedback');
+                                            HapticFeedback.lightImpact();
+                                            logFirebaseEvent(
+                                                'ToggleIcon_bottom_sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return WebViewAware(
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: SizedBox(
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.6,
+                                                      child:
+                                                          FavoritoAColeccionWidget(
+                                                        post:
+                                                            containerUserPostsRecord
+                                                                .reference,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          }
+                                        },
+                                        value: _model.favorite!,
+                                        onIcon: Icon(
+                                          FFIcons.kframe168,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 24.0,
+                                        ),
+                                        offIcon: Icon(
+                                          FFIcons.kstarLines,
+                                          color: FlutterFlowTheme.of(context)
+                                              .btnText,
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                    ),
+                                    FlutterFlowIconButton(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: 8.0,
+                                      buttonSize: 40.0,
+                                      icon: Icon(
+                                        FFIcons.kcompass,
                                         color: FlutterFlowTheme.of(context)
                                             .btnText,
                                         size: 24.0,
@@ -679,185 +1048,30 @@ class _PostDesingWidgetState extends State<PostDesingWidget>
                                       showLoadingIndicator: true,
                                       onPressed: () async {
                                         logFirebaseEvent(
-                                            'POST_DESING_COMP_bubble2_ICN_ON_TAP');
+                                            'POST_DESING_COMP_compass_ICN_ON_TAP');
                                         logFirebaseEvent(
-                                            'IconButton_bottom_sheet');
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return WebViewAware(
-                                              child: Padding(
-                                                padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                child: SizedBox(
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          0.5,
-                                                  child: VerComentariosWidget(
-                                                    post: widget.post,
-                                                    postCreador:
-                                                        currentUserReference,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ).then((value) => safeSetState(() {}));
-                                      },
-                                    ),
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    icon: Icon(
-                                      FFIcons.kshare2,
-                                      color:
-                                          FlutterFlowTheme.of(context).btnText,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 8.0, 0.0),
-                                    child: ToggleIcon(
-                                      onPressed: () async {
-                                        safeSetState(() => _model.favorite =
-                                            !_model.favorite!);
-                                        logFirebaseEvent(
-                                            'POST_DESING_ToggleIcon_0y5iv8bg_ON_TOGGL');
-                                        if (_model.favorite!) {
-                                          logFirebaseEvent(
-                                              'ToggleIcon_haptic_feedback');
-                                          HapticFeedback.lightImpact();
-                                          logFirebaseEvent(
-                                              'ToggleIcon_bottom_sheet');
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: SizedBox(
-                                                    height: MediaQuery.sizeOf(
-                                                                context)
-                                                            .height *
-                                                        0.6,
-                                                    child:
-                                                        FavoritoAColeccionWidget(
-                                                      post:
-                                                          containerUserPostsRecord
-                                                              .reference,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        } else {
-                                          logFirebaseEvent(
-                                              'ToggleIcon_haptic_feedback');
-                                          HapticFeedback.lightImpact();
-                                          logFirebaseEvent(
-                                              'ToggleIcon_bottom_sheet');
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: SizedBox(
-                                                    height: MediaQuery.sizeOf(
-                                                                context)
-                                                            .height *
-                                                        0.6,
-                                                    child:
-                                                        FavoritoAColeccionWidget(
-                                                      post:
-                                                          containerUserPostsRecord
-                                                              .reference,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        }
-                                      },
-                                      value: _model.favorite!,
-                                      onIcon: Icon(
-                                        FFIcons.kframe168,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        size: 24.0,
-                                      ),
-                                      offIcon: Icon(
-                                        FFIcons.kstarLines,
-                                        color: FlutterFlowTheme.of(context)
-                                            .btnText,
-                                        size: 24.0,
-                                      ),
-                                    ),
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    icon: Icon(
-                                      FFIcons.kcompass,
-                                      color:
-                                          FlutterFlowTheme.of(context).btnText,
-                                      size: 24.0,
-                                    ),
-                                    showLoadingIndicator: true,
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'POST_DESING_COMP_compass_ICN_ON_TAP');
-                                      logFirebaseEvent(
-                                          'IconButton_navigate_to');
+                                            'IconButton_navigate_to');
 
-                                      context.pushNamed(
-                                        'mapa_ir_lugar',
-                                        queryParameters: {
-                                          'userPost': serializeParam(
-                                            containerUserPostsRecord.reference,
-                                            ParamType.DocumentReference,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        context.pushNamed(
+                                          'mapa_ir_lugar',
+                                          queryParameters: {
+                                            'userPost': serializeParam(
+                                              containerUserPostsRecord
+                                                  .reference,
+                                              ParamType.DocumentReference,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

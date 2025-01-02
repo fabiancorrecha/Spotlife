@@ -22,12 +22,14 @@ class MiperfilDetalleColeccionWidget extends StatefulWidget {
     this.esFavorito,
     required this.usuario,
     required this.refColeccion,
+    required this.ubicationCollection,
   });
 
   final CollectionsRecord? coleccion;
   final bool? esFavorito;
   final DocumentReference? usuario;
   final DocumentReference? refColeccion;
+  final LatLng? ubicationCollection;
 
   @override
   State<MiperfilDetalleColeccionWidget> createState() =>
@@ -39,7 +41,6 @@ class _MiperfilDetalleColeccionWidgetState
   late MiperfilDetalleColeccionModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -61,8 +62,6 @@ class _MiperfilDetalleColeccionWidgetState
       safeSetState(() {});
     });
 
-    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -76,22 +75,6 @@ class _MiperfilDetalleColeccionWidgetState
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 12.0,
-            height: 12.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                FlutterFlowTheme.of(context).primaryBackground,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
 
     return GestureDetector(
       onTap: () {
@@ -280,9 +263,9 @@ class _MiperfilDetalleColeccionWidgetState
                                 width: double.infinity,
                                 height: double.infinity,
                                 ubicacionInicialLat: functions.obtenerLatLng(
-                                    currentUserLocationValue!, true),
+                                    widget.ubicationCollection!, true),
                                 ubicacionInicialLng: functions.obtenerLatLng(
-                                    currentUserLocationValue!, false),
+                                    widget.ubicationCollection!, false),
                                 zoom: 16.0,
                                 listaPostMarcadores:
                                     containerUserPostsRecordList,

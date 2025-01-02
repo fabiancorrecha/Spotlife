@@ -157,71 +157,47 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent(
-                                'TIPO_DE_POST_Container_la1z65l5_ON_TAP');
-                            logFirebaseEvent('Container_navigate_to');
-
-                            context.pushNamed(
-                              'CrearPost',
-                              queryParameters: {
-                                'esImagen': serializeParam(
-                                  true,
-                                  ParamType.bool,
-                                ),
-                              }.withoutNulls,
-                            );
-
-                            logFirebaseEvent('Container_bottom_sheet');
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).fondoIcono,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Icon(
-                                  Icons.photo_outlined,
-                                  color: FlutterFlowTheme.of(context).icono,
-                                  size: 24.0,
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'bob6imh5' /* Imagen */,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
-                                          ),
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).fondoIcono,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.photo_outlined,
+                                color: FlutterFlowTheme.of(context).icono,
+                                size: 24.0,
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'bob6imh5' /* Imagen */,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                         InkWell(
@@ -234,15 +210,7 @@ class _TipoDePostWidgetState extends State<TipoDePostWidget> {
                                 'TIPO_DE_POST_Container_nffogf3v_ON_TAP');
                             logFirebaseEvent('Container_navigate_to');
 
-                            context.pushNamed(
-                              'CrearPost',
-                              queryParameters: {
-                                'esImagen': serializeParam(
-                                  false,
-                                  ParamType.bool,
-                                ),
-                              }.withoutNulls,
-                            );
+                            context.pushNamed('CrearPost');
 
                             logFirebaseEvent('Container_bottom_sheet');
                             Navigator.pop(context);

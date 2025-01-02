@@ -143,6 +143,16 @@ class UserPostsRecord extends FirestoreRecord {
   bool get ubicacionActual => _ubicacionActual ?? false;
   bool hasUbicacionActual() => _ubicacionActual != null;
 
+  // "hiddenBy" field.
+  List<DocumentReference>? _hiddenBy;
+  List<DocumentReference> get hiddenBy => _hiddenBy ?? const [];
+  bool hasHiddenBy() => _hiddenBy != null;
+
+  // "BestFriend" field.
+  List<DocumentReference>? _bestFriend;
+  List<DocumentReference> get bestFriend => _bestFriend ?? const [];
+  bool hasBestFriend() => _bestFriend != null;
+
   void _initializeFields() {
     _postTitle = snapshotData['postTitle'] as String?;
     _postDescription = snapshotData['postDescription'] as String?;
@@ -171,6 +181,8 @@ class UserPostsRecord extends FirestoreRecord {
     _postPhoto = snapshotData['postPhoto'] as String?;
     _usuarioEtiquetado = getDataList(snapshotData['usuarioEtiquetado']);
     _ubicacionActual = snapshotData['UbicacionActual'] as bool?;
+    _hiddenBy = getDataList(snapshotData['hiddenBy']);
+    _bestFriend = getDataList(snapshotData['BestFriend']);
   }
 
   static CollectionReference get collection =>
@@ -270,6 +282,20 @@ class UserPostsRecord extends FirestoreRecord {
             ).toList(),
           ),
           'UbicacionActual': snapshot.data['UbicacionActual'],
+          'hiddenBy': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['hiddenBy'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
+          'BestFriend': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['BestFriend'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
         },
         UserPostsRecord.collection.doc(snapshot.objectID),
       );
@@ -388,7 +414,9 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         listEquality.equals(e1?.postPhotolist, e2?.postPhotolist) &&
         e1?.postPhoto == e2?.postPhoto &&
         listEquality.equals(e1?.usuarioEtiquetado, e2?.usuarioEtiquetado) &&
-        e1?.ubicacionActual == e2?.ubicacionActual;
+        e1?.ubicacionActual == e2?.ubicacionActual &&
+        listEquality.equals(e1?.hiddenBy, e2?.hiddenBy) &&
+        listEquality.equals(e1?.bestFriend, e2?.bestFriend);
   }
 
   @override
@@ -417,7 +445,9 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.postPhotolist,
         e?.postPhoto,
         e?.usuarioEtiquetado,
-        e?.ubicacionActual
+        e?.ubicacionActual,
+        e?.hiddenBy,
+        e?.bestFriend
       ]);
 
   @override

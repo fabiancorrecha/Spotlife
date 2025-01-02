@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/componente_vacio/componente_vacio_widget.dart';
+import '/components/nav_bar1/nav_bar1_widget.dart';
 import '/components/post_desing_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -85,7 +86,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               logFirebaseEvent('IconButton_navigate_to');
 
               context.pushNamed(
-                'testMapa',
+                'mapaPrincipal',
                 extra: <String, dynamic>{
                   kTransitionInfoKey: const TransitionInfo(
                     hasTransition: true,
@@ -113,74 +114,138 @@ class _FeedWidgetState extends State<FeedWidget> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
+        body: Stack(
           children: [
-            Expanded(
-              child: AuthUserStreamWidget(
-                builder: (context) => StreamBuilder<List<UserPostsRecord>>(
-                  stream: queryUserPostsRecord(
-                    queryBuilder: (userPostsRecord) => userPostsRecord
-                        .where(
-                          'esPublico',
-                          isEqualTo: true,
-                        )
-                        .whereIn(
-                            'postUser',
-                            functions.usuariosConcatenados(
-                                (currentUserDocument?.listaSeguidos.toList() ??
-                                        [])
-                                    .toList(),
-                                currentUserReference,
-                                (currentUserDocument?.listaBloqueados
-                                            .toList() ??
-                                        [])
-                                    .toList()))
-                        .orderBy('timePosted', descending: true),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 12.0,
-                          height: 12.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primaryBackground,
-                            ),
-                          ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: AuthUserStreamWidget(
+                      builder: (context) =>
+                          StreamBuilder<List<UserPostsRecord>>(
+                        stream: queryUserPostsRecord(
+                          queryBuilder: (userPostsRecord) => userPostsRecord
+                              .where(
+                                'esPublico',
+                                isEqualTo: true,
+                              )
+                              .whereIn(
+                                  'postUser',
+                                  functions.usuariosConcatenados(
+                                      (currentUserDocument?.listaSeguidos
+                                                  .toList() ??
+                                              [])
+                                          .toList(),
+                                      currentUserReference,
+                                      (currentUserDocument?.listaBloqueados
+                                                  .toList() ??
+                                              [])
+                                          .toList()))
+                              .orderBy('timePosted', descending: true),
                         ),
-                      );
-                    }
-                    List<UserPostsRecord> listViewUserPostsRecordList =
-                        snapshot.data!;
-                    if (listViewUserPostsRecordList.isEmpty) {
-                      return const Center(
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: ComponenteVacioWidget(),
-                        ),
-                      );
-                    }
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 12.0,
+                                height: 12.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<UserPostsRecord> containerUserPostsRecordList =
+                              snapshot.data!;
 
-                    return ListView.separated(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewUserPostsRecordList.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewUserPostsRecord =
-                            listViewUserPostsRecordList[listViewIndex];
-                        return PostDesingWidget(
-                          key: Key(
-                              'Key376_${listViewIndex}_of_${listViewUserPostsRecordList.length}'),
-                          post: listViewUserPostsRecord,
-                        );
-                      },
-                    );
-                  },
+                          return Container(
+                            decoration: const BoxDecoration(),
+                            child: Builder(
+                              builder: (context) {
+                                final containerVar = functions
+                                        .filterHiddenPosts(
+                                            containerUserPostsRecordList
+                                                .toList(),
+                                            currentUserReference)
+                                        ?.toList() ??
+                                    [];
+                                if (containerVar.isEmpty) {
+                                  return const Center(
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      child: ComponenteVacioWidget(),
+                                    ),
+                                  );
+                                }
+
+                                return ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: containerVar.length,
+                                  separatorBuilder: (_, __) =>
+                                      const SizedBox(height: 10.0),
+                                  itemBuilder: (context, containerVarIndex) {
+                                    final containerVarItem =
+                                        containerVar[containerVarIndex];
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'FEED_PAGE_Container_376x0275_ON_TAP');
+                                        logFirebaseEvent(
+                                            'PostDesing_navigate_to');
+
+                                        context.pushNamed(
+                                          'detallePost',
+                                          pathParameters: {
+                                            'post': serializeParam(
+                                              containerVarItem,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'post': containerVarItem,
+                                          },
+                                        );
+                                      },
+                                      child: PostDesingWidget(
+                                        key: Key(
+                                            'Key376_${containerVarIndex}_of_${containerVar.length}'),
+                                        post: containerVarItem,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.96),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                child: wrapWithModel(
+                  model: _model.navBar1Model,
+                  updateCallback: () => safeSetState(() {}),
+                  child: const NavBar1Widget(
+                    tabActiva: 1,
+                  ),
                 ),
               ),
             ),

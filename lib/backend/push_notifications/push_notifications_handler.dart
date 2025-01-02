@@ -151,7 +151,7 @@ final parametersBuilderMap =
           'userPost': getParameter<DocumentReference>(data, 'userPost'),
         },
       ),
-  'seguidoresYSeguidos': (data) async => ParameterData(
+  'seguidores': (data) async => ParameterData(
         allParams: {
           'usuario': getParameter<DocumentReference>(data, 'usuario'),
         },
@@ -163,6 +163,8 @@ final parametersBuilderMap =
           'esFavorito': getParameter<bool>(data, 'esFavorito'),
           'usuario': getParameter<DocumentReference>(data, 'usuario'),
           'refColeccion': getParameter<DocumentReference>(data, 'refColeccion'),
+          'ubicationCollection':
+              getParameter<LatLng>(data, 'ubicationCollection'),
         },
       ),
   'miperfilMapaPin2': (data) async => ParameterData(
@@ -176,7 +178,7 @@ final parametersBuilderMap =
   'miperfilColeciones': ParameterData.none(),
   'miPerfilMapaPin3': ParameterData.none(),
   'miPerfilEditarPerfil': ParameterData.none(),
-  'ajustes_Favoritos': ParameterData.none(),
+  'favoritos': ParameterData.none(),
   'CrearColeccionConPost': (data) async => ParameterData(
         allParams: {
           'post': getParameter<DocumentReference>(data, 'post'),
@@ -213,7 +215,6 @@ final parametersBuilderMap =
   'buscarLugares': ParameterData.none(),
   'CrearPost': (data) async => ParameterData(
         allParams: {
-          'esImagen': getParameter<bool>(data, 'esImagen'),
           'latLng': getParameter<LatLng>(data, 'latLng'),
           'street': getParameter<String>(data, 'street'),
           'city': getParameter<String>(data, 'city'),
@@ -310,10 +311,16 @@ final parametersBuilderMap =
         allParams: {
           'user': getParameter<DocumentReference>(data, 'user'),
           'verCometarios': getParameter<bool>(data, 'verCometarios'),
+          'index': getParameter<DocumentReference>(data, 'index'),
         },
       ),
   'testNewVideo': ParameterData.none(),
   'testMapa': ParameterData.none(),
+  'seguidos': (data) async => ParameterData(
+        allParams: {
+          'usuario': getParameter<DocumentReference>(data, 'usuario'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

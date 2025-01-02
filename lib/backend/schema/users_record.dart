@@ -174,6 +174,16 @@ class UsersRecord extends FirestoreRecord {
   bool get suscripcionActiva => _suscripcionActiva ?? false;
   bool hasSuscripcionActiva() => _suscripcionActiva != null;
 
+  // "FechaNacimiento" field.
+  String? _fechaNacimiento;
+  String get fechaNacimiento => _fechaNacimiento ?? '';
+  bool hasFechaNacimiento() => _fechaNacimiento != null;
+
+  // "hiddenPosts" field.
+  List<DocumentReference>? _hiddenPosts;
+  List<DocumentReference> get hiddenPosts => _hiddenPosts ?? const [];
+  bool hasHiddenPosts() => _hiddenPosts != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -209,6 +219,8 @@ class UsersRecord extends FirestoreRecord {
     _fechaUltimaSesion = snapshotData['FechaUltimaSesion'] as DateTime?;
     _misIntereses = getDataList(snapshotData['MisIntereses']);
     _suscripcionActiva = snapshotData['SuscripcionActiva'] as bool?;
+    _fechaNacimiento = snapshotData['FechaNacimiento'] as String?;
+    _hiddenPosts = getDataList(snapshotData['hiddenPosts']);
   }
 
   static CollectionReference get collection =>
@@ -337,6 +349,14 @@ class UsersRecord extends FirestoreRecord {
             ).toList(),
           ),
           'SuscripcionActiva': snapshot.data['SuscripcionActiva'],
+          'FechaNacimiento': snapshot.data['FechaNacimiento'],
+          'hiddenPosts': safeGet(
+            () => convertAlgoliaParam<DocumentReference>(
+              snapshot.data['hiddenPosts'],
+              ParamType.DocumentReference,
+              true,
+            ).toList(),
+          ),
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -396,6 +416,7 @@ Map<String, dynamic> createUsersRecordData({
   String? estatusDeSesion,
   DateTime? fechaUltimaSesion,
   bool? suscripcionActiva,
+  String? fechaNacimiento,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -422,6 +443,7 @@ Map<String, dynamic> createUsersRecordData({
       'EstatusDeSesion': estatusDeSesion,
       'FechaUltimaSesion': fechaUltimaSesion,
       'SuscripcionActiva': suscripcionActiva,
+      'FechaNacimiento': fechaNacimiento,
     }.withoutNulls,
   );
 
@@ -465,7 +487,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.estatusDeSesion == e2?.estatusDeSesion &&
         e1?.fechaUltimaSesion == e2?.fechaUltimaSesion &&
         listEquality.equals(e1?.misIntereses, e2?.misIntereses) &&
-        e1?.suscripcionActiva == e2?.suscripcionActiva;
+        e1?.suscripcionActiva == e2?.suscripcionActiva &&
+        e1?.fechaNacimiento == e2?.fechaNacimiento &&
+        listEquality.equals(e1?.hiddenPosts, e2?.hiddenPosts);
   }
 
   @override
@@ -500,7 +524,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.estatusDeSesion,
         e?.fechaUltimaSesion,
         e?.misIntereses,
-        e?.suscripcionActiva
+        e?.suscripcionActiva,
+        e?.fechaNacimiento,
+        e?.hiddenPosts
       ]);
 
   @override

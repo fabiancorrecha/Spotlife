@@ -5,6 +5,7 @@ import '/backend/firebase_storage/storage.dart';
 import '/banner_de_alertas/alerta_de_imagenes_y_videos_vacios/alerta_de_imagenes_y_videos_vacios_widget.dart';
 import '/banner_de_alertas/alerta_de_privacidad/alerta_de_privacidad_widget.dart';
 import '/banner_de_alertas/alerta_de_ubicacion/alerta_de_ubicacion_widget.dart';
+import '/banner_de_alertas/alerta_deshacer/alerta_deshacer_widget.dart';
 import '/banner_de_alertas/alerta_doble_ubicacion/alerta_doble_ubicacion_widget.dart';
 import '/banner_de_alertas/post_publicado/post_publicado_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -66,6 +67,10 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
       logFirebaseEvent('EditarPost_update_page_state');
       _model.listaColeccionesSeleccionadas =
           _model.readPostUser!.collections.toList().cast<DocumentReference>();
+      _model.video = _model.readPostUser?.video;
+      _model.imageList =
+          _model.readPostUser!.postPhotolist.toList().cast<String>();
+      _model.selectedMedia = true;
       safeSetState(() {});
     });
 
@@ -195,25 +200,63 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 100.0,
-                                            buttonSize: 60.0,
-                                            icon: Icon(
-                                              Icons.chevron_left,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .btnText,
-                                              size: 30.0,
+                                          Builder(
+                                            builder: (context) =>
+                                                FlutterFlowIconButton(
+                                              borderColor: Colors.transparent,
+                                              borderRadius: 100.0,
+                                              buttonSize: 60.0,
+                                              icon: Icon(
+                                                Icons.chevron_left,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .btnText,
+                                                size: 30.0,
+                                              ),
+                                              showLoadingIndicator: true,
+                                              onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'EDITAR_POST_PAGE_chevron_left_ICN_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'IconButton_alert_dialog');
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (dialogContext) {
+                                                    return Dialog(
+                                                      elevation: 0,
+                                                      insetPadding:
+                                                          EdgeInsets.zero,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                      child: WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            FocusScope.of(
+                                                                    dialogContext)
+                                                                .unfocus();
+                                                            FocusManager
+                                                                .instance
+                                                                .primaryFocus
+                                                                ?.unfocus();
+                                                          },
+                                                          child:
+                                                              AlertaDeshacerWidget(
+                                                            refUserPost: widget
+                                                                .refPostUser!,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
                                             ),
-                                            showLoadingIndicator: true,
-                                            onPressed: () async {
-                                              logFirebaseEvent(
-                                                  'EDITAR_POST_PAGE_chevron_left_ICN_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'IconButton_navigate_back');
-                                              context.safePop();
-                                            },
                                           ),
                                         ],
                                       ),
@@ -226,363 +269,208 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  if (widget.esVideo == false)
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        logFirebaseEvent(
-                                            'EDITAR_POST_PAGE_StackImagen_ON_TAP');
-                                        logFirebaseEvent(
-                                            'StackImagen_upload_media_to_firebase');
-                                        final selectedMedia = await selectMedia(
-                                          imageQuality: 50,
-                                          mediaSource: MediaSource.photoGallery,
-                                          multiImage: true,
-                                        );
-                                        if (selectedMedia != null &&
-                                            selectedMedia.every((m) =>
-                                                validateFileFormat(
-                                                    m.storagePath, context))) {
-                                          safeSetState(() =>
-                                              _model.isDataUploading1 = true);
-                                          var selectedUploadedFiles =
-                                              <FFUploadedFile>[];
-
-                                          var downloadUrls = <String>[];
-                                          try {
-                                            selectedUploadedFiles =
-                                                selectedMedia
-                                                    .map((m) => FFUploadedFile(
-                                                          name: m.storagePath
-                                                              .split('/')
-                                                              .last,
-                                                          bytes: m.bytes,
-                                                          height: m.dimensions
-                                                              ?.height,
-                                                          width: m.dimensions
-                                                              ?.width,
-                                                          blurHash: m.blurHash,
-                                                        ))
-                                                    .toList();
-
-                                            downloadUrls = (await Future.wait(
-                                              selectedMedia.map(
-                                                (m) async => await uploadData(
-                                                    m.storagePath, m.bytes),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 12.0, 16.0, 12.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 20.0, 0.0),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: valueOrDefault<Color>(
+                                              _model.selectedMedia == true
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primary
+                                                  : FlutterFlowTheme.of(context)
+                                                      .fondoIcono,
+                                              FlutterFlowTheme.of(context)
+                                                  .fondoIcono,
+                                            ),
+                                            borderRadius: 8.0,
+                                            borderWidth: 0.5,
+                                            buttonSize: 40.0,
+                                            fillColor: valueOrDefault<Color>(
+                                              _model.selectedMedia == true
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primary
+                                                  : FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                            ),
+                                            icon: Icon(
+                                              FFIcons.kcamera,
+                                              color: valueOrDefault<Color>(
+                                                _model.selectedMedia == true
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .fondoIcono
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
                                               ),
-                                            ))
-                                                .where((u) => u != null)
-                                                .map((u) => u!)
-                                                .toList();
-                                          } finally {
-                                            _model.isDataUploading1 = false;
-                                          }
-                                          if (selectedUploadedFiles.length ==
-                                                  selectedMedia.length &&
-                                              downloadUrls.length ==
-                                                  selectedMedia.length) {
-                                            safeSetState(() {
-                                              _model.uploadedLocalFiles1 =
-                                                  selectedUploadedFiles;
-                                              _model.uploadedFileUrls1 =
-                                                  downloadUrls;
-                                            });
-                                          } else {
-                                            safeSetState(() {});
-                                            return;
-                                          }
-                                        }
-
-                                        logFirebaseEvent(
-                                            'StackImagen_backend_call');
-
-                                        await editarPostUserPostsRecord
-                                            .reference
-                                            .update({
-                                          ...mapToFirestore(
-                                            {
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'EDITAR_POST_PAGE_camera_ICN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'IconButton_update_page_state');
+                                              _model.selectedMedia = true;
+                                              safeSetState(() {});
                                             },
                                           ),
-                                        });
-                                      },
-                                      child: SizedBox(
-                                        width: 230.0,
-                                        height: 170.0,
-                                        child: Stack(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          children: [
-                                            Container(
-                                              width: 216.0,
-                                              height: 300.0,
-                                              decoration: BoxDecoration(
-                                                color: FlutterFlowTheme.of(
-                                                        context)
+                                        ),
+                                        FlutterFlowIconButton(
+                                          borderColor: valueOrDefault<Color>(
+                                            _model.selectedMedia == false
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primary
+                                                : FlutterFlowTheme.of(context)
+                                                    .fondoIcono,
+                                            FlutterFlowTheme.of(context)
+                                                .fondoIcono,
+                                          ),
+                                          borderRadius: 8.0,
+                                          borderWidth: 0.5,
+                                          buttonSize: 40.0,
+                                          fillColor: valueOrDefault<Color>(
+                                            _model.selectedMedia == false
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primary
+                                                : FlutterFlowTheme.of(context)
                                                     .primaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0),
-                                                border: Border.all(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  width: 0.0,
-                                                ),
-                                              ),
-                                              child: Builder(
-                                                builder: (context) {
-                                                  final imagenCarrusel =
-                                                      editarPostUserPostsRecord
-                                                          .postPhotolist
-                                                          .sortedList(
-                                                              keyOf: (e) =>
-                                                                  'Descendente',
-                                                              desc: true)
-                                                          .toList();
-
-                                                  return SingleChildScrollView(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: Row(
-                                                      key: const ValueKey(
-                                                          'Descendente'),
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: List.generate(
-                                                          imagenCarrusel
-                                                              .length,
-                                                          (imagenCarruselIndex) {
-                                                        final imagenCarruselItem =
-                                                            imagenCarrusel[
-                                                                imagenCarruselIndex];
-                                                        return Container(
-                                                          width: 190.0,
-                                                          height: 297.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20.0),
-                                                          ),
-                                                          child: Stack(
-                                                            children: [
-                                                              Padding(
-                                                                padding: const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        4.0,
-                                                                        0.0),
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          20.0),
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    fadeInDuration:
-                                                                        const Duration(
-                                                                            milliseconds: 500),
-                                                                    fadeOutDuration:
-                                                                        const Duration(
-                                                                            milliseconds: 500),
-                                                                    imageUrl:
-                                                                        imagenCarruselItem,
-                                                                    width: double
-                                                                        .infinity,
-                                                                    height: double
-                                                                        .infinity,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.84,
-                                                                        -0.96),
-                                                                child:
-                                                                    FlutterFlowIconButton(
-                                                                  borderRadius:
-                                                                      8.0,
-                                                                  buttonSize:
-                                                                      40.0,
-                                                                  icon: Icon(
-                                                                    FFIcons
-                                                                        .kdelete,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .error,
-                                                                    size:
-                                                                        18.0,
-                                                                  ),
-                                                                  onPressed:
-                                                                      () async {
-                                                                    logFirebaseEvent(
-                                                                        'EDITAR_POST_PAGE_delete_ICN_ON_TAP');
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_backend_call');
-
-                                                                    await editarPostUserPostsRecord
-                                                                        .reference
-                                                                        .update({
-                                                                      ...mapToFirestore(
-                                                                        {
-                                                                          'PostPhotolist':
-                                                                              FieldValue.arrayRemove([
-                                                                            imagenCarruselItem
-                                                                          ]),
-                                                                        },
-                                                                      ),
-                                                                    });
-                                                                  },
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        -0.97,
-                                                                        -0.99),
-                                                                child:
-                                                                    FlutterFlowIconButton(
-                                                                  borderColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  borderRadius:
-                                                                      8.0,
-                                                                  buttonSize:
-                                                                      40.0,
-                                                                  icon: Icon(
-                                                                    FFIcons
-                                                                        .kgroup161,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondary,
-                                                                    size:
-                                                                        18.0,
-                                                                  ),
-                                                                  onPressed:
-                                                                      () async {
-                                                                    logFirebaseEvent(
-                                                                        'EDITAR_POST_PAGE_group161_ICN_ON_TAP');
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_upload_media_to_firebase');
-                                                                    final selectedMedia =
-                                                                        await selectMedia(
-                                                                      mediaSource:
-                                                                          MediaSource.photoGallery,
-                                                                      multiImage:
-                                                                          false,
-                                                                    );
-                                                                    if (selectedMedia !=
-                                                                            null &&
-                                                                        selectedMedia.every((m) => validateFileFormat(
-                                                                            m.storagePath,
-                                                                            context))) {
-                                                                      safeSetState(() =>
-                                                                          _model.isDataUploading2 =
-                                                                              true);
-                                                                      var selectedUploadedFiles =
-                                                                          <FFUploadedFile>[];
-
-                                                                      var downloadUrls =
-                                                                          <String>[];
-                                                                      try {
-                                                                        selectedUploadedFiles = selectedMedia
-                                                                            .map((m) => FFUploadedFile(
-                                                                                  name: m.storagePath.split('/').last,
-                                                                                  bytes: m.bytes,
-                                                                                  height: m.dimensions?.height,
-                                                                                  width: m.dimensions?.width,
-                                                                                  blurHash: m.blurHash,
-                                                                                ))
-                                                                            .toList();
-
-                                                                        downloadUrls = (await Future.wait(
-                                                                          selectedMedia.map(
-                                                                            (m) async => await uploadData(m.storagePath, m.bytes),
-                                                                          ),
-                                                                        ))
-                                                                            .where((u) => u != null)
-                                                                            .map((u) => u!)
-                                                                            .toList();
-                                                                      } finally {
-                                                                        _model.isDataUploading2 =
-                                                                            false;
-                                                                      }
-                                                                      if (selectedUploadedFiles.length == selectedMedia.length &&
-                                                                          downloadUrls.length ==
-                                                                              selectedMedia.length) {
-                                                                        safeSetState(
-                                                                            () {
-                                                                          _model.uploadedLocalFile2 =
-                                                                              selectedUploadedFiles.first;
-                                                                          _model.uploadedFileUrl2 =
-                                                                              downloadUrls.first;
-                                                                        });
-                                                                      } else {
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        return;
-                                                                      }
-                                                                    }
-
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_backend_call');
-
-                                                                    await editarPostUserPostsRecord
-                                                                        .reference
-                                                                        .update({
-                                                                      ...mapToFirestore(
-                                                                        {
-                                                                          'PostPhotolist':
-                                                                              FieldValue.arrayUnion([
-                                                                            _model.uploadedFileUrl2
-                                                                          ]),
-                                                                        },
-                                                                      ),
-                                                                    });
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_show_snack_bar');
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Imagen añadida',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color: FlutterFlowTheme.of(context).primaryText,
-                                                                          ),
-                                                                        ),
-                                                                        duration:
-                                                                            const Duration(milliseconds: 2000),
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).secondary,
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      }),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
+                                            FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
+                                          icon: Icon(
+                                            FFIcons.kfilm,
+                                            color: valueOrDefault<Color>(
+                                              _model.selectedMedia == false
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .fondoIcono
+                                                  : FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
                                             ),
-                                            if (editarPostUserPostsRecord
-                                                    .postPhotolist.isEmpty)
+                                            size: 24.0,
+                                          ),
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EDITAR_POST_PAGE_film_ICN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'IconButton_update_page_state');
+                                            _model.selectedMedia = false;
+                                            safeSetState(() {});
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (_model.selectedMedia == true)
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'EDITAR_POST_PAGE_StackImagen_ON_TAP');
+                                          logFirebaseEvent(
+                                              'StackImagen_upload_media_to_firebase');
+                                          final selectedMedia =
+                                              await selectMedia(
+                                            imageQuality: 50,
+                                            mediaSource:
+                                                MediaSource.photoGallery,
+                                            multiImage: true,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            safeSetState(() =>
+                                                _model.isDataUploading1 = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              selectedUploadedFiles =
+                                                  selectedMedia
+                                                      .map(
+                                                          (m) => FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                      .toList();
+
+                                              downloadUrls = (await Future.wait(
+                                                selectedMedia.map(
+                                                  (m) async => await uploadData(
+                                                      m.storagePath, m.bytes),
+                                                ),
+                                              ))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
+                                            } finally {
+                                              _model.isDataUploading1 = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                    selectedMedia.length &&
+                                                downloadUrls.length ==
+                                                    selectedMedia.length) {
+                                              safeSetState(() {
+                                                _model.uploadedLocalFiles1 =
+                                                    selectedUploadedFiles;
+                                                _model.uploadedFileUrls1 =
+                                                    downloadUrls;
+                                              });
+                                            } else {
+                                              safeSetState(() {});
+                                              return;
+                                            }
+                                          }
+
+                                          logFirebaseEvent(
+                                              'StackImagen_update_page_state');
+                                          _model.imageList = _model
+                                              .uploadedFileUrls1
+                                              .toList()
+                                              .cast<String>();
+                                          safeSetState(() {});
+                                        },
+                                        child: SizedBox(
+                                          width: 230.0,
+                                          height: 170.0,
+                                          child: Stack(
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            children: [
                                               Container(
                                                 width: 216.0,
                                                 height: 300.0,
@@ -592,25 +480,262 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                       .primaryBackground,
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          20.0),
+                                                          8.0),
                                                   border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .icono,
-                                                    width: 2.0,
+                                                    color: FlutterFlowTheme
+                                                            .of(context)
+                                                        .primaryBackground,
+                                                    width: 0.0,
                                                   ),
                                                 ),
-                                                child: const Icon(
-                                                  FFIcons.kadd,
-                                                  color: Color(0xFFD8D8D8),
-                                                  size: 35.0,
+                                                child: Builder(
+                                                  builder: (context) {
+                                                    final imagenCarrusel = _model
+                                                        .imageList
+                                                        .sortedList(
+                                                            keyOf: (e) =>
+                                                                'Descendent',
+                                                            desc: true)
+                                                        .toList();
+
+                                                    return SingleChildScrollView(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      child: Row(
+                                                        key: const ValueKey(
+                                                            'Descendente'),
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: List.generate(
+                                                            imagenCarrusel
+                                                                .length,
+                                                            (imagenCarruselIndex) {
+                                                          final imagenCarruselItem =
+                                                              imagenCarrusel[
+                                                                  imagenCarruselIndex];
+                                                          return Container(
+                                                            width: 190.0,
+                                                            height: 297.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20.0),
+                                                            ),
+                                                            child: Stack(
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20.0),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      fadeInDuration:
+                                                                          const Duration(milliseconds: 500),
+                                                                      fadeOutDuration:
+                                                                          const Duration(milliseconds: 500),
+                                                                      imageUrl:
+                                                                          imagenCarruselItem,
+                                                                      width: double
+                                                                          .infinity,
+                                                                      height:
+                                                                          double.infinity,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          0.84,
+                                                                          -0.96),
+                                                                  child:
+                                                                      FlutterFlowIconButton(
+                                                                    borderRadius:
+                                                                        8.0,
+                                                                    buttonSize:
+                                                                        40.0,
+                                                                    icon:
+                                                                        Icon(
+                                                                      FFIcons
+                                                                          .kdelete,
+                                                                      color: FlutterFlowTheme.of(context)
+                                                                          .error,
+                                                                      size:
+                                                                          18.0,
+                                                                    ),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'EDITAR_POST_PAGE_delete_ICN_ON_TAP');
+                                                                      logFirebaseEvent(
+                                                                          'IconButton_update_page_state');
+                                                                      _model.removeFromImageList(
+                                                                          imagenCarruselItem);
+                                                                      safeSetState(
+                                                                          () {});
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          -0.97,
+                                                                          -0.99),
+                                                                  child:
+                                                                      FlutterFlowIconButton(
+                                                                    borderColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    borderRadius:
+                                                                        8.0,
+                                                                    buttonSize:
+                                                                        40.0,
+                                                                    icon:
+                                                                        Icon(
+                                                                      FFIcons
+                                                                          .kgroup161,
+                                                                      color: FlutterFlowTheme.of(context)
+                                                                          .secondary,
+                                                                      size:
+                                                                          18.0,
+                                                                    ),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'EDITAR_POST_PAGE_group161_ICN_ON_TAP');
+                                                                      logFirebaseEvent(
+                                                                          'IconButton_upload_media_to_firebase');
+                                                                      final selectedMedia =
+                                                                          await selectMedia(
+                                                                        mediaSource:
+                                                                            MediaSource.photoGallery,
+                                                                        multiImage:
+                                                                            false,
+                                                                      );
+                                                                      if (selectedMedia !=
+                                                                              null &&
+                                                                          selectedMedia.every((m) =>
+                                                                              validateFileFormat(m.storagePath, context))) {
+                                                                        safeSetState(() =>
+                                                                            _model.isDataUploading2 = true);
+                                                                        var selectedUploadedFiles =
+                                                                            <FFUploadedFile>[];
+
+                                                                        var downloadUrls =
+                                                                            <String>[];
+                                                                        try {
+                                                                          selectedUploadedFiles = selectedMedia
+                                                                              .map((m) => FFUploadedFile(
+                                                                                    name: m.storagePath.split('/').last,
+                                                                                    bytes: m.bytes,
+                                                                                    height: m.dimensions?.height,
+                                                                                    width: m.dimensions?.width,
+                                                                                    blurHash: m.blurHash,
+                                                                                  ))
+                                                                              .toList();
+
+                                                                          downloadUrls = (await Future.wait(
+                                                                            selectedMedia.map(
+                                                                              (m) async => await uploadData(m.storagePath, m.bytes),
+                                                                            ),
+                                                                          ))
+                                                                              .where((u) => u != null)
+                                                                              .map((u) => u!)
+                                                                              .toList();
+                                                                        } finally {
+                                                                          _model.isDataUploading2 =
+                                                                              false;
+                                                                        }
+                                                                        if (selectedUploadedFiles.length == selectedMedia.length &&
+                                                                            downloadUrls.length == selectedMedia.length) {
+                                                                          safeSetState(() {
+                                                                            _model.uploadedLocalFile2 = selectedUploadedFiles.first;
+                                                                            _model.uploadedFileUrl2 = downloadUrls.first;
+                                                                          });
+                                                                        } else {
+                                                                          safeSetState(() {});
+                                                                          return;
+                                                                        }
+                                                                      }
+
+                                                                      logFirebaseEvent(
+                                                                          'IconButton_update_page_state');
+                                                                      _model.addToImageList(
+                                                                          _model.uploadedFileUrl2);
+                                                                      safeSetState(
+                                                                          () {});
+                                                                      logFirebaseEvent(
+                                                                          'IconButton_show_snack_bar');
+                                                                      ScaffoldMessenger.of(context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Imagen añadida',
+                                                                            style: TextStyle(
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              const Duration(milliseconds: 2000),
+                                                                          backgroundColor:
+                                                                              FlutterFlowTheme.of(context).secondary,
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ),
-                                          ],
+                                              if (_model.imageList.isEmpty)
+                                                Container(
+                                                  width: 216.0,
+                                                  height: 300.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .icono,
+                                                      width: 2.0,
+                                                    ),
+                                                  ),
+                                                  child: const Icon(
+                                                    FFIcons.kadd,
+                                                    color: Color(0xFFD8D8D8),
+                                                    size: 35.0,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  if (widget.esVideo == true)
+                                  if (_model.selectedMedia == false)
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 72.0, 0.0, 0.0),
@@ -690,14 +815,6 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                             }
                                           }
 
-                                          logFirebaseEvent(
-                                              'StackVideo_backend_call');
-
-                                          await editarPostUserPostsRecord
-                                              .reference
-                                              .update(createUserPostsRecordData(
-                                            video: _model.uploadedFileUrl3,
-                                          ));
                                           logFirebaseEvent(
                                               'StackVideo_update_page_state');
                                           _model.video =
@@ -1530,7 +1647,8 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                 ),
                                                 child: Checkbox(
                                                   value: _model.publicoValue ??=
-                                                      true,
+                                                      editarPostUserPostsRecord
+                                                          .esPublico,
                                                   onChanged: (newValue) async {
                                                     safeSetState(() =>
                                                         _model.publicoValue =
@@ -1631,7 +1749,8 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                 child: Checkbox(
                                                   value: _model
                                                           .mejoresAmigosValue ??=
-                                                      false,
+                                                      editarPostUserPostsRecord
+                                                          .esAmigos,
                                                   onChanged: (newValue) async {
                                                     safeSetState(() => _model
                                                             .mejoresAmigosValue =
@@ -1731,7 +1850,8 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                                 ),
                                                 child: Checkbox(
                                                   value: _model.soloYoValue ??=
-                                                      false,
+                                                      editarPostUserPostsRecord
+                                                          .esPrivado,
                                                   onChanged: (newValue) async {
                                                     safeSetState(() =>
                                                         _model.soloYoValue =
@@ -2681,234 +2801,111 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
-                                if (((editarPostUserPostsRecord
-                                            .postPhotolist.isNotEmpty) !=
-                                        null) ||
-                                    (editarPostUserPostsRecord.video !=
-                                            '')) {
+                                if (((_model.imageList.isNotEmpty) != null) ||
+                                    (_model.video != null &&
+                                        _model.video != '')) {
                                   if ((FFAppState().Coordenadas != null) &&
                                       (_model.ubicacionActualValue == false)) {
                                     if ((_model.publicoValue == true) ||
                                         (_model.mejoresAmigosValue == true) ||
                                         (_model.soloYoValue == true)) {
-                                      if (widget.esVideo) {
-                                        logFirebaseEvent('Button_backend_call');
-                                        _model.requestApi =
-                                            await GoogleMapsLocationConverterCall
-                                                .call(
-                                          lat: functions.obtenerLatLng(
-                                              FFAppState().Coordenadas!, true),
-                                          lng: functions.obtenerLatLng(
-                                              FFAppState().Coordenadas!, false),
-                                        );
+                                      logFirebaseEvent('Button_backend_call');
+                                      _model.requestApi =
+                                          await GoogleMapsLocationConverterCall
+                                              .call(
+                                        lat: functions.obtenerLatLng(
+                                            FFAppState().Coordenadas!, true),
+                                        lng: functions.obtenerLatLng(
+                                            FFAppState().Coordenadas!, false),
+                                      );
 
-                                        shouldSetState = true;
-                                        logFirebaseEvent('Button_backend_call');
+                                      shouldSetState = true;
+                                      logFirebaseEvent('Button_backend_call');
 
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloTextController.text,
-                                            postDescription: _model
-                                                .descripcionTextController.text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              PlaceInfoStruct(
-                                                address:
-                                                    GoogleMapsLocationConverterCall
-                                                        .longAddress(
-                                                  (_model.requestApi
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                city:
-                                                    GoogleMapsLocationConverterCall
-                                                        .city(
-                                                  (_model.requestApi
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                country:
-                                                    GoogleMapsLocationConverterCall
-                                                        .country(
-                                                  (_model.requestApi
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                latLng: FFAppState()
-                                                    .ubication
-                                                    .latLng,
+                                      await editarPostUserPostsRecord.reference
+                                          .update({
+                                        ...createUserPostsRecordData(
+                                          postTitle:
+                                              _model.tituloTextController.text,
+                                          postDescription:
+                                              editarPostUserPostsRecord
+                                                  .postDescription,
+                                          postUser: currentUserReference,
+                                          placeInfo: updatePlaceInfoStruct(
+                                            PlaceInfoStruct(
+                                              address:
+                                                  GoogleMapsLocationConverterCall
+                                                      .longAddress(
+                                                (_model.requestApi?.jsonBody ??
+                                                    ''),
                                               ),
-                                              clearUnsetFields: false,
-                                              create: true,
+                                              city:
+                                                  GoogleMapsLocationConverterCall
+                                                      .city(
+                                                (_model.requestApi?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              country:
+                                                  GoogleMapsLocationConverterCall
+                                                      .country(
+                                                (_model.requestApi?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              latLng:
+                                                  FFAppState().ubication.latLng,
                                             ),
-                                            esPublico: _model.publicoValue,
-                                            esAmigos: _model.mejoresAmigosValue,
-                                            esPrivado: _model.soloYoValue,
-                                            esVideo: false,
+                                            clearUnsetFields: false,
                                           ),
-                                          ...mapToFirestore(
-                                            {
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
-                                              'usuarioEtiquetado':
-                                                  FFAppState().selectedUser,
-                                            },
-                                          ),
-                                        });
-                                        logFirebaseEvent(
-                                            'Button_update_app_state');
-                                        FFAppState().selectedUser = [];
-                                        FFAppState().ubication =
-                                            PlaceInfoStruct();
-                                        FFAppState().Coordenadas = null;
-                                        safeSetState(() {});
-                                        logFirebaseEvent('Button_alert_dialog');
-                                        await showDialog(
-                                          context: context,
-                                          builder: (dialogContext) {
-                                            return Dialog(
-                                              elevation: 0,
-                                              insetPadding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              child: WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: const PostPublicadoWidget(),
-                                                ),
-                                              ),
-                                            );
+                                          esPublico: _model.publicoValue,
+                                          esAmigos: _model.mejoresAmigosValue,
+                                          esPrivado: _model.soloYoValue,
+                                          ubicacionActual:
+                                              _model.ubicacionActualValue,
+                                          video: _model.video,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'PostPhotolist': _model.imageList,
                                           },
-                                        );
-
-                                        if (shouldSetState) {
-                                          safeSetState(() {});
-                                        }
-                                        return;
-                                      } else {
-                                        logFirebaseEvent('Button_backend_call');
-                                        _model.requestApiVideo =
-                                            await GoogleMapsLocationConverterCall
-                                                .call(
-                                          lat: functions.obtenerLatLng(
-                                              FFAppState().Coordenadas!, true),
-                                          lng: functions.obtenerLatLng(
-                                              FFAppState().Coordenadas!, false),
-                                        );
-
-                                        shouldSetState = true;
-                                        logFirebaseEvent('Button_backend_call');
-
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloTextController.text,
-                                            postDescription: _model
-                                                .descripcionTextController.text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            video: _model.uploadedFileUrl3,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              PlaceInfoStruct(
-                                                address:
-                                                    GoogleMapsLocationConverterCall
-                                                        .longAddress(
-                                                  (_model.requestApiVideo
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                city:
-                                                    GoogleMapsLocationConverterCall
-                                                        .city(
-                                                  (_model.requestApiVideo
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                country:
-                                                    GoogleMapsLocationConverterCall
-                                                        .country(
-                                                  (_model.requestApiVideo
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                latLng: FFAppState()
-                                                    .ubication
-                                                    .latLng,
+                                        ),
+                                      });
+                                      logFirebaseEvent(
+                                          'Button_update_app_state');
+                                      FFAppState().selectedUser = [];
+                                      FFAppState().ubication =
+                                          PlaceInfoStruct();
+                                      FFAppState().Coordenadas = null;
+                                      safeSetState(() {});
+                                      logFirebaseEvent('Button_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (dialogContext) {
+                                          return Dialog(
+                                            elevation: 0,
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor: Colors.transparent,
+                                            alignment: const AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            child: WebViewAware(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: const PostPublicadoWidget(),
                                               ),
-                                              clearUnsetFields: false,
-                                              create: true,
                                             ),
-                                            esPublico: _model.publicoValue,
-                                            esAmigos: _model.mejoresAmigosValue,
-                                            esPrivado: _model.soloYoValue,
-                                            esVideo: true,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'usuarioEtiquetado':
-                                                  FFAppState().selectedUser,
-                                            },
-                                          ),
-                                        });
-                                        logFirebaseEvent(
-                                            'Button_update_app_state');
-                                        FFAppState().selectedUser = [];
-                                        FFAppState().ubication =
-                                            PlaceInfoStruct();
-                                        FFAppState().Coordenadas = null;
-                                        safeSetState(() {});
-                                        logFirebaseEvent('Button_alert_dialog');
-                                        await showDialog(
-                                          context: context,
-                                          builder: (dialogContext) {
-                                            return Dialog(
-                                              elevation: 0,
-                                              insetPadding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              child: WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: const PostPublicadoWidget(),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
+                                          );
+                                        },
+                                      );
 
-                                        if (shouldSetState) {
-                                          safeSetState(() {});
-                                        }
-                                        return;
-                                      }
+                                      if (shouldSetState) safeSetState(() {});
+                                      return;
                                     } else {
                                       logFirebaseEvent('Button_alert_dialog');
                                       await showDialog(
@@ -2947,224 +2944,106 @@ class _EditarPostWidgetState extends State<EditarPostWidget>
                                     if ((_model.publicoValue == true) ||
                                         (_model.mejoresAmigosValue == true) ||
                                         (_model.soloYoValue == true)) {
-                                      if (widget.esVideo) {
-                                        logFirebaseEvent('Button_backend_call');
-                                        _model.requestApiImagen =
-                                            await GoogleMapsLocationConverterCall
-                                                .call(
-                                          lat: functions.obtenerLatLng(
-                                              currentUserLocationValue!, true),
-                                          lng: functions.obtenerLatLng(
-                                              currentUserLocationValue!, false),
-                                        );
+                                      logFirebaseEvent('Button_backend_call');
+                                      _model.requestApiImagen =
+                                          await GoogleMapsLocationConverterCall
+                                              .call(
+                                        lat: functions.obtenerLatLng(
+                                            currentUserLocationValue!, true),
+                                        lng: functions.obtenerLatLng(
+                                            currentUserLocationValue!, false),
+                                      );
 
-                                        shouldSetState = true;
-                                        logFirebaseEvent('Button_backend_call');
+                                      shouldSetState = true;
+                                      logFirebaseEvent('Button_backend_call');
 
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloTextController.text,
-                                            postDescription: _model
-                                                .descripcionTextController.text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              PlaceInfoStruct(
-                                                address:
-                                                    GoogleMapsLocationConverterCall
-                                                        .longAddress(
-                                                  (_model.requestApiImagen
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                city:
-                                                    GoogleMapsLocationConverterCall
-                                                        .city(
-                                                  (_model.requestApiImagen
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                country:
-                                                    GoogleMapsLocationConverterCall
-                                                        .country(
-                                                  (_model.requestApiImagen
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                latLng: FFAppState()
-                                                    .ubication
-                                                    .latLng,
+                                      await editarPostUserPostsRecord.reference
+                                          .update({
+                                        ...createUserPostsRecordData(
+                                          postTitle:
+                                              _model.tituloTextController.text,
+                                          postDescription:
+                                              editarPostUserPostsRecord
+                                                  .postDescription,
+                                          postUser: currentUserReference,
+                                          placeInfo: updatePlaceInfoStruct(
+                                            PlaceInfoStruct(
+                                              address:
+                                                  GoogleMapsLocationConverterCall
+                                                      .longAddress(
+                                                (_model.requestApiImagen
+                                                        ?.jsonBody ??
+                                                    ''),
                                               ),
-                                              clearUnsetFields: false,
-                                              create: true,
+                                              city:
+                                                  GoogleMapsLocationConverterCall
+                                                      .city(
+                                                (_model.requestApiImagen
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              country:
+                                                  GoogleMapsLocationConverterCall
+                                                      .country(
+                                                (_model.requestApiImagen
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              latLng:
+                                                  FFAppState().ubication.latLng,
                                             ),
-                                            esPublico: _model.publicoValue,
-                                            esAmigos: _model.mejoresAmigosValue,
-                                            esPrivado: _model.soloYoValue,
-                                            esVideo: false,
+                                            clearUnsetFields: false,
                                           ),
-                                          ...mapToFirestore(
-                                            {
-                                              'PostPhotolist':
-                                                  _model.uploadedFileUrls1,
-                                              'usuarioEtiquetado':
-                                                  FFAppState().selectedUser,
-                                            },
-                                          ),
-                                        });
-                                        logFirebaseEvent(
-                                            'Button_update_app_state');
-                                        FFAppState().selectedUser = [];
-                                        FFAppState().ubication =
-                                            PlaceInfoStruct();
-                                        FFAppState().Coordenadas = null;
-                                        safeSetState(() {});
-                                        logFirebaseEvent('Button_alert_dialog');
-                                        await showDialog(
-                                          context: context,
-                                          builder: (dialogContext) {
-                                            return Dialog(
-                                              elevation: 0,
-                                              insetPadding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              child: WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: const PostPublicadoWidget(),
-                                                ),
-                                              ),
-                                            );
+                                          esPublico: _model.publicoValue,
+                                          esAmigos: _model.mejoresAmigosValue,
+                                          esPrivado: _model.soloYoValue,
+                                          ubicacionActual:
+                                              _model.ubicacionActualValue,
+                                          video: _model.video,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'PostPhotolist': _model.imageList,
                                           },
-                                        );
-
-                                        if (shouldSetState) {
-                                          safeSetState(() {});
-                                        }
-                                        return;
-                                      } else {
-                                        logFirebaseEvent('Button_backend_call');
-                                        _model.requestApiImagenCurrent =
-                                            await GoogleMapsLocationConverterCall
-                                                .call(
-                                          lat: functions.obtenerLatLng(
-                                              currentUserLocationValue!, true),
-                                          lng: functions.obtenerLatLng(
-                                              currentUserLocationValue!, false),
-                                        );
-
-                                        shouldSetState = true;
-                                        logFirebaseEvent('Button_backend_call');
-
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set({
-                                          ...createUserPostsRecordData(
-                                            postTitle: _model
-                                                .tituloTextController.text,
-                                            postDescription: _model
-                                                .descripcionTextController.text,
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            video: _model.uploadedFileUrl3,
-                                            placeInfo: updatePlaceInfoStruct(
-                                              PlaceInfoStruct(
-                                                address:
-                                                    GoogleMapsLocationConverterCall
-                                                        .longAddress(
-                                                  (_model.requestApiImagenCurrent
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                city:
-                                                    GoogleMapsLocationConverterCall
-                                                        .city(
-                                                  (_model.requestApiImagenCurrent
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                country:
-                                                    GoogleMapsLocationConverterCall
-                                                        .country(
-                                                  (_model.requestApiImagenCurrent
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                latLng: FFAppState()
-                                                    .ubication
-                                                    .latLng,
+                                        ),
+                                      });
+                                      logFirebaseEvent(
+                                          'Button_update_app_state');
+                                      FFAppState().selectedUser = [];
+                                      FFAppState().ubication =
+                                          PlaceInfoStruct();
+                                      FFAppState().Coordenadas = null;
+                                      safeSetState(() {});
+                                      logFirebaseEvent('Button_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (dialogContext) {
+                                          return Dialog(
+                                            elevation: 0,
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor: Colors.transparent,
+                                            alignment: const AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            child: WebViewAware(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: const PostPublicadoWidget(),
                                               ),
-                                              clearUnsetFields: false,
-                                              create: true,
                                             ),
-                                            esPublico: _model.publicoValue,
-                                            esAmigos: _model.mejoresAmigosValue,
-                                            esPrivado: _model.soloYoValue,
-                                            esVideo: true,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'usuarioEtiquetado':
-                                                  FFAppState().selectedUser,
-                                            },
-                                          ),
-                                        });
-                                        logFirebaseEvent(
-                                            'Button_update_app_state');
-                                        FFAppState().selectedUser = [];
-                                        FFAppState().ubication =
-                                            PlaceInfoStruct();
-                                        FFAppState().Coordenadas = null;
-                                        safeSetState(() {});
-                                        logFirebaseEvent('Button_alert_dialog');
-                                        await showDialog(
-                                          context: context,
-                                          builder: (dialogContext) {
-                                            return Dialog(
-                                              elevation: 0,
-                                              insetPadding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              child: WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: const PostPublicadoWidget(),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
+                                          );
+                                        },
+                                      );
 
-                                        if (shouldSetState) {
-                                          safeSetState(() {});
-                                        }
-                                        return;
-                                      }
+                                      if (shouldSetState) safeSetState(() {});
+                                      return;
                                     } else {
                                       logFirebaseEvent('Button_alert_dialog');
                                       await showDialog(

@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'tarjeta_mi_perfil_editar_widget.dart' show TarjetaMiPerfilEditarWidget;
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class TarjetaMiPerfilEditarModel
     extends FlutterFlowModel<TarjetaMiPerfilEditarWidget> {
@@ -25,22 +26,10 @@ class TarjetaMiPerfilEditarModel
   FocusNode? nombreUsarioFocusNode;
   TextEditingController? nombreUsarioTextController;
   String? Function(BuildContext, String?)? nombreUsarioTextControllerValidator;
-  String? _nombreUsarioTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'aifi2xvk' /* Este campo es requerido */,
-      );
-    }
-
-    if (!RegExp(kTextValidatorUsernameRegex).hasMatch(val)) {
-      return FFLocalizations.of(context).getText(
-        'ok9zwr48' /* Error en el formato del campo */,
-      );
-    }
-    return null;
-  }
-
+  // State field(s) for descripcion widget.
+  FocusNode? descripcionFocusNode;
+  TextEditingController? descripcionTextController;
+  String? Function(BuildContext, String?)? descripcionTextControllerValidator;
   // State field(s) for Email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
@@ -49,33 +38,27 @@ class TarjetaMiPerfilEditarModel
   FocusNode? celularFocusNode;
   TextEditingController? celularTextController;
   String? Function(BuildContext, String?)? celularTextControllerValidator;
-  // State field(s) for descripcion widget.
-  FocusNode? descripcionFocusNode;
-  TextEditingController? descripcionTextController;
-  String? Function(BuildContext, String?)? descripcionTextControllerValidator;
   // State field(s) for url widget.
   FocusNode? urlFocusNode;
   TextEditingController? urlTextController;
   String? Function(BuildContext, String?)? urlTextControllerValidator;
-  // State field(s) for FechadeNacimiento widget.
-  FocusNode? fechadeNacimientoFocusNode;
-  TextEditingController? fechadeNacimientoTextController;
+  // State field(s) for fechaNacimiento widget.
+  FocusNode? fechaNacimientoFocusNode;
+  TextEditingController? fechaNacimientoTextController;
+  final fechaNacimientoMask = MaskTextInputFormatter(mask: '##/##/####');
   String? Function(BuildContext, String?)?
-      fechadeNacimientoTextControllerValidator;
-  // State field(s) for Genero widget.
-  FocusNode? generoFocusNode;
-  TextEditingController? generoTextController;
-  String? Function(BuildContext, String?)? generoTextControllerValidator;
+      fechaNacimientoTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {
-    nombreUsarioTextControllerValidator = _nombreUsarioTextControllerValidator;
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
     nombreUsarioFocusNode?.dispose();
     nombreUsarioTextController?.dispose();
+
+    descripcionFocusNode?.dispose();
+    descripcionTextController?.dispose();
 
     emailFocusNode?.dispose();
     emailTextController?.dispose();
@@ -83,16 +66,10 @@ class TarjetaMiPerfilEditarModel
     celularFocusNode?.dispose();
     celularTextController?.dispose();
 
-    descripcionFocusNode?.dispose();
-    descripcionTextController?.dispose();
-
     urlFocusNode?.dispose();
     urlTextController?.dispose();
 
-    fechadeNacimientoFocusNode?.dispose();
-    fechadeNacimientoTextController?.dispose();
-
-    generoFocusNode?.dispose();
-    generoTextController?.dispose();
+    fechaNacimientoFocusNode?.dispose();
+    fechaNacimientoTextController?.dispose();
   }
 }

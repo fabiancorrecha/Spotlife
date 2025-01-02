@@ -1080,7 +1080,18 @@ class _CrearColeccionSinPostWidgetState
                         modifiedAt: getCurrentTimestamp,
                         descripcion:
                             _model.descripcionColeccionTextController.text,
-                        imagen: _model.uploadedFileUrl,
+                        imagen: valueOrDefault<String>(
+                          () {
+                            if (_model.uploadedFileUrl != '') {
+                              return _model.uploadedFileUrl;
+                            } else if (widget.image!.isNotEmpty) {
+                              return widget.image?.firstOrNull;
+                            } else {
+                              return widget.image?.firstOrNull;
+                            }
+                          }(),
+                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/6vkresagm5pw/spotlife_medio.png',
+                        ),
                         coleccionFavoritos: widget.esColeccionFavorito,
                         coleccionPublica: _model.varPublico,
                         coleccionPrivada: _model.varPrivado,
@@ -1107,7 +1118,18 @@ class _CrearColeccionSinPostWidgetState
                                 modifiedAt: getCurrentTimestamp,
                                 descripcion: _model
                                     .descripcionColeccionTextController.text,
-                                imagen: _model.uploadedFileUrl,
+                                imagen: valueOrDefault<String>(
+                                  () {
+                                    if (_model.uploadedFileUrl != '') {
+                                      return _model.uploadedFileUrl;
+                                    } else if (widget.image!.isNotEmpty) {
+                                      return widget.image?.firstOrNull;
+                                    } else {
+                                      return widget.image?.firstOrNull;
+                                    }
+                                  }(),
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/spolifeapp-15z0hb/assets/6vkresagm5pw/spotlife_medio.png',
+                                ),
                                 coleccionFavoritos: widget.esColeccionFavorito,
                                 coleccionPublica: _model.varPublico,
                                 coleccionPrivada: _model.varPrivado,
@@ -1126,6 +1148,10 @@ class _CrearColeccionSinPostWidgetState
                               ),
                               collectionsRecordReference);
                       shouldSetState = true;
+                      logFirebaseEvent('boton1_update_app_state');
+                      FFAppState()
+                          .addToRefColeccion(_model.nuevaColeccion!.reference);
+                      FFAppState().update(() {});
                       logFirebaseEvent('boton1_navigate_back');
                       context.pop();
                       if (shouldSetState) safeSetState(() {});

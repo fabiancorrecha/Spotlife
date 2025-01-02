@@ -129,23 +129,12 @@ class _TestMapaWidgetState extends State<TestMapaWidget> {
 
                           context.pushNamed('Feed');
                         },
-                        onMarkerTap: (post) async {
+                        onMarkerTap: () async {
                           logFirebaseEvent(
                               'TEST_MAPA_Container_q6ook30l_CALLBACK');
-                          logFirebaseEvent('MapWithCarrousel_navigate_to');
-
-                          context.pushNamed(
-                            'detallePost',
-                            pathParameters: {
-                              'post': serializeParam(
-                                post,
-                                ParamType.Document,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'post': post,
-                            },
-                          );
+                          logFirebaseEvent('MapWithCarrousel_update_app_state');
+                          FFAppState().Provincia = 't5exto';
+                          safeSetState(() {});
                         },
                       ),
                     ),

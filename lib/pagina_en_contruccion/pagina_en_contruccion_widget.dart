@@ -53,7 +53,7 @@ class _PaginaEnContruccionWidgetState extends State<PaginaEnContruccionWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 16.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class _PaginaEnContruccionWidgetState extends State<PaginaEnContruccionWidget> {
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Icon(
-                            Icons.arrow_back_rounded,
+                            Icons.chevron_left,
                             color: FlutterFlowTheme.of(context).icono,
                             size: 30.0,
                           ),
