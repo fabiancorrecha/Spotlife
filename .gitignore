@@ -7,3 +7,8 @@ dist/
 
 # Ignorar archivos del entorno
 .env
+
+# Ignorar archivos de compilación de Dart y Flutter
+.dart_tool/
+build/
+
