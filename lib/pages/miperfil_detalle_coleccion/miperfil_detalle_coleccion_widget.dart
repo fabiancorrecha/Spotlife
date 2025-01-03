@@ -1,3 +1,4 @@
+//Anadir mapa detalle coleccion  y añadir un argumento llamado ubicationCollection el cual es de tipo LatLng 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:spotlifeapp/custom_code/utils/maps.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';

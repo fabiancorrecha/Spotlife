@@ -1,3 +1,4 @@
+//Añadir otro perfil mapa a la app
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:spotlifeapp/custom_code/utils/maps.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
