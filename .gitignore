@@ -1,0 +1,9 @@
+# Ignorar APKs
+build/app/outputs/flutter-apk/*.apk
+
+# Ignorar carpetas generadas automáticamente
+build/
+dist/
+
+# Ignorar archivos del entorno
+.env

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "es.spotlife.app-mergeDebugResources-55:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\flash\\.gradle\\caches\\transforms-3\\85ac24779eee90597d0a9c9d41da5793\\transformed\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

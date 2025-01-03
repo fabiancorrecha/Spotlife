@@ -1,0 +1,1 @@
+ C:\\Users\\flash\\Downloads\\Spotlife\\.dart_tool\\flutter_build\\90a3b7e578aa69642e99e5a6494e57b7\\native_assets.yaml: 

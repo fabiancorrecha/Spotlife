@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "es.spotlife.app-merged_res-57:/drawable_launch_background.xml.flat",
+        "source": "es.spotlife.app-main-49:/drawable/launch_background.xml"
+    },
+    {
+        "merged": "es.spotlife.app-merged_res-57:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "es.spotlife.app-main-49:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "es.spotlife.app-merged_res-57:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "es.spotlife.app-main-49:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "es.spotlife.app-merged_res-57:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "es.spotlife.app-main-49:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "es.spotlife.app-merged_res-57:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "es.spotlife.app-main-49:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "es.spotlife.app-merged_res-57:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "es.spotlife.app-main-49:/mipmap-hdpi/ic_launcher.png"
+    }
+]
